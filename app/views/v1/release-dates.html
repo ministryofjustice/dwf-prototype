@@ -1,56 +1,49 @@
 {% extends "./template.html" %}
 {% set releaseDatesActive = true %}
 {% block content %}
-    <!-- Release dates -->
-    <div class="govuk-grid-row">
-        <div class="govuk-grid-column-one-half">
-            <h2 class="govuk-heading-l">
-                Release dates
-            </h2>
-            <p class="govuk-body">Latest calculation: 10 July 2021 at HMP Leeds</p>
-            <div class="govuk-button-group">
-                <button class="govuk-button" data-module="govuk-button">
-                    Calculate new release dates
-                </button>
-                <button class="govuk-button govuk-button--secondary" data-module="govuk-button">
-                    Print notification slip
-                </button>
-            </div>
-<nav class="moj-sub-navigation" aria-label="Sub navigation">
-
-  <ul class="moj-sub-navigation__list">
-    <li class="moj-sub-navigation__item">
-      <a class="moj-sub-navigation__link" aria-current="page" href="#1">Latest release dates</a>
-    </li>
-
-    <li class="moj-sub-navigation__item">
-      <a class="moj-sub-navigation__link" href="#2">Calculation history</a>
-    </li>
-  </ul>
-
-</nav>
-
-
-
-
-            <div class="custom-card">
-                <div class="custom-card-main">
-                    <!-- SLED -->
-                    <h3 class="govuk-heading-s">Sentence and licence expiry date (SLED)</h3>
-                    <p class="govuk-body">Tuesday, 19 February 2036</p>
-                    <!-- CRD -->
-                    <h3 class="govuk-heading-s">Conditional release date (CRD)</h3>
-                    <p class="govuk-body ">Sunday, 19 February 2034</p>
-                    <p class="govuk-body govuk-hint govuk-!-font-size-16" data-qa="CRD-weekend-adjustment">Friday, 17 February 2034 when adjusted to a working day</p>
-                    <!-- PED -->
-                    <h3 class="govuk-heading-s">Parole eligibility date (PED)</h3>
-                    <p class="govuk-body ">Friday, 21 April 2028</p>
-                    <!-- ERSED -->
-                    <h3 class="govuk-heading-s">Early removal scheme eligibility date (ERSED)</h3>
-                    <p class="govuk-body ">Wednesday, 21 April 2027</p>
-                </div>
+<!-- Release dates -->
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+        <h2 class="govuk-heading-l">
+            Release dates
+        </h2>
+        <p class="govuk-body">Latest calculation: 10 July 2021 at HMP Leeds</p>
+        <div class="govuk-button-group">
+            <button class="govuk-button" data-module="govuk-button">
+                Calculate new release dates
+            </button>
+            <button class="govuk-button govuk-button--secondary" data-module="govuk-button">
+                Print notification slip
+            </button>
+        </div>
+        <nav class="moj-sub-navigation" aria-label="Sub navigation">
+            <ul class="moj-sub-navigation__list">
+                <li class="moj-sub-navigation__item">
+                    <a class="moj-sub-navigation__link" aria-current="page" href="#1">Latest release dates</a>
+                </li>
+                <li class="moj-sub-navigation__item">
+                    <a class="moj-sub-navigation__link" href="#2">Calculation history</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="custom-card">
+            <div class="custom-card-main">
+                <!-- SLED -->
+                <h3 class="govuk-heading-s">Sentence and licence expiry date (SLED)</h3>
+                <p class="govuk-body">Tuesday, 19 February 2036</p>
+                <!-- CRD -->
+                <h3 class="govuk-heading-s">Conditional release date (CRD)</h3>
+                <p class="govuk-body ">Sunday, 19 February 2034</p>
+                <p class="govuk-body govuk-hint govuk-!-font-size-16" data-qa="CRD-weekend-adjustment">Friday, 17 February 2034 when adjusted to a working day</p>
+                <!-- PED -->
+                <h3 class="govuk-heading-s">Parole eligibility date (PED)</h3>
+                <p class="govuk-body ">Friday, 21 April 2028</p>
+                <!-- ERSED -->
+                <h3 class="govuk-heading-s">Early removal scheme eligibility date (ERSED)</h3>
+                <p class="govuk-body ">Wednesday, 21 April 2027</p>
             </div>
         </div>
     </div>
+</div>
 </div>
 {% endblock %}
