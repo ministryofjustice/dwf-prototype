@@ -32,7 +32,7 @@
 {% include "includes/head.html" %}
 {% endblock %}
 {% block pageTitle %}
-Digital Prison Services
+Court cases and release dates
 {% endblock %}
 {% block header %}
 <header class="dps-header" role="banner">
@@ -45,7 +45,7 @@ Digital Prison Services
                 </svg>
                 HMPPS
             </a>
-            <a class="dps-header__link dps-header__title__service-name" href="/">Digital Warrant Folder</a>
+            <a class="dps-header__link dps-header__title__service-name" href="/">{{serviceName}}</a>
         </div>
     </div>
 </header>
@@ -78,6 +78,20 @@ Digital Prison Services
                                 <p class="govuk-body govuk-!-font-size-24 hmpps-profile-prisoner-number" aria-label="Prisoner Number">
                                     G6123VU
                                 </p>
+<!--                                 <div class="info__links">
+                                    <div class="">
+                                        <h3 class="govuk-heading-s">Category</h3>
+                                        <a href="https://dev.offender-categorisation.service.justice.gov.uk/1102484" aria-label="View category" class="govuk-link govuk-link--inverse">C</a>
+                                    </div>
+                                    <div class="">
+                                        <h3 class="govuk-heading-s">CSRA</h3>
+                                        <a href="https://digital-dev.prison.service.justice.gov.uk/prisoner/G6123VU/csra-history" aria-label="View CSRA history" class="govuk-link govuk-link--inverse">High</a>
+                                    </div>
+                                    <div class="remove-column-gutter-right">
+                                        <h3 class="govuk-heading-s">Incentive level</h3>
+                                        <a href="https://digital-dev.prison.service.justice.gov.uk/prisoner/G6123VU/incentive-level-details" aria-label="View incentive level details" class="govuk-link govuk-link--inverse">Basic</a>
+                                    </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

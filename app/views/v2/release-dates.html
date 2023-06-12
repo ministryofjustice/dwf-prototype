@@ -1,0 +1,163 @@
+{% extends "./template.html" %}
+{% set releaseDatesActive = true %}
+{% block content %}
+<!-- Release dates -->
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">
+            Release dates
+        </h1>
+    </div>
+</div>
+<div class="govuk-grid-row">
+<!--     <div class="govuk-grid-column-full">
+        <div class="action-list">
+        <div class="action-button">
+            <a href="" class="govuk-link--no-visited-state">Calculate release dates</a>
+        </div>
+                <div class="action-button">
+            <a href="" class="govuk-link--no-visited-state">Enter approved dates</a>
+        </div>
+                        <div class="action-button">
+            <a href="" class="govuk-link--no-visited-state">Print notification slip</a>
+        </div>
+        </div>
+                <div class="govuk-button-group govuk-!-margin-bottom-6 govuk-!-margin-top-2">
+            <button class="govuk-button" data-module="govuk-button">
+                Add court case
+            </button>
+            <button class="govuk-button govuk-button--secondary" data-module="govuk-button">
+                Secondary button
+            </button>
+                        <button class="govuk-button govuk-button--secondary" data-module="govuk-button">
+                Secondary button
+            </button>
+        </div>
+                <div class="govuk-button-group govuk-!-margin-bottom-6 govuk-!-margin-top-2">
+            <button class="govuk-button" data-module="govuk-button">
+                Calculate release dates
+            </button>
+            <button class="govuk-button govuk-button--secondary" data-module="govuk-button">
+                Enter approved dates
+            </button>
+            <button class="govuk-button govuk-button--secondary" data-module="govuk-button">
+                Print notification slip
+            </button>
+        </div>
+    </div> -->
+ <!--    </div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third">
+        <nav class="moj-side-navigation" aria-label="Side navigation">
+            <ul class="moj-side-navigation__list">
+                <li class="moj-side-navigation__item moj-side-navigation__item--active">
+                    <a href="#release-dates" aria-current="location">Release dates</a>
+                </li>
+                <li class="moj-side-navigation__item">
+                    <a href="#calculation-history">Calculation history</a>
+                </li>
+                <li class="moj-side-navigation__item">
+                    <a href="#3">Nav item 3</a>
+                </li>
+            </ul>
+        </nav>
+    </div> -->
+    <div class="govuk-grid-column-two-thirds">
+        <div class="govuk-summary-card">
+            <div class="govuk-summary-card__title-wrapper">
+                <h2 class="govuk-summary-card__title govuk-!-font-size-24">Release dates <p class="govuk-body govuk-!-margin-bottom-0 govuk-!-margin-top-1">Latest calculation: <a href="">10 July 2021 at HMP Leeds</a></p>
+                </h2>
+            </div>
+            <div class="govuk-summary-card__content" id="release-dates">
+                <dl class="govuk-summary-list release-dates-list">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key release-dates-key govuk-!-font-size-24">
+                            SLED
+                            <p class="govuk-!-font-size-16 govuk-hint">Sentence and licence expiry date</p>
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            Tuesday, 19 February 2036
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key release-dates-key govuk-!-font-size-24">
+                            CRD
+                            <p class="govuk-!-font-size-16 govuk-hint">Conditional release date</p>
+                        </dt>
+                        <dd class="govuk-summary-list__value govuk-!-padding-top-4">
+                            Sunday, 19 February 2034
+                            <p class="govuk-!-font-size-16 govuk-hint govuk-!-margin-top-2">Friday, 17 February 2034 when adjusted to a working day</p>
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key release-dates-key govuk-!-font-size-24">
+                            PED
+                            <p class="govuk-!-font-size-16 govuk-hint">Parole eligibility date</p>
+                        </dt>
+                        <dd class="govuk-summary-list__value govuk-!-padding-top-4">
+                            Friday, 21 April 2028
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key release-dates-key govuk-!-font-size-24">
+                            ERSED
+                            <p class="govuk-!-font-size-16 govuk-hint">Early removal scheme eligibility date</p>
+                        </dt>
+                        <dd class="govuk-summary-list__value govuk-!-padding-top-4">
+                            Wednesday, 21 April 2027
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+        <div class="govuk-summary-card" id="calculation-history">
+            <div class="govuk-summary-card__title-wrapper">
+                <h2 class="govuk-summary-card__title govuk-!-font-size-24">Calculation history</h2>
+            </div>
+            <div class="govuk-summary-card__content">
+                <table class="govuk-table">
+                    <thead class="govuk-table__head">
+                        <tr class="govuk-table__row">
+                            <th scope="col" class="govuk-table__header">Calculation date</th>
+                            <th scope="col" class="govuk-table__header">Reason</th>
+                            <th scope="col" class="govuk-table__header">Establishment</th>
+                        </tr>
+                    </thead>
+                    <tbody class="govuk-table__body">
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell"><a href="">20 March 2020</a></td>
+                            <td class="govuk-table__cell">Transfer</td>
+                            <td class="govuk-table__cell">HMP Hull</td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell"><a href="">19 February 2020</a></td>
+                            <td class="govuk-table__cell">Transfer</td>
+                            <td class="govuk-table__cell">HMP Leeds</td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell"><a href="">27 January 2020</a></td>
+                            <td class="govuk-table__cell">Adjustment added</td>
+                            <td class="govuk-table__cell">HMP Leeds</td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell"><a href="">9 January 2020</a></td>
+                            <td class="govuk-table__cell" data-sort-value="8850">Initial calculation</td>
+                            <td class="govuk-table__cell">HMP Leeds</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+                    <div class="govuk-grid-column-one-third">
+        <div class="actions">
+            <h3 class="govuk-heading-m">Actions</h3>
+            <ul class="govuk-list">
+                <li><a href="" class="govuk-link--no-visited-state">Calculate release dates</a></li>
+                <li><a href="" class="govuk-link--no-visited-state">Enter approved dates</a></li>
+                <li><a href="" class="govuk-link--no-visited-state">Print notification slip</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    {% endblock %}
