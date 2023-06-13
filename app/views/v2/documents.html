@@ -10,6 +10,15 @@
     </div>
 </div>
 <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <div class="action-button-group">
+            <a href="add-documents/document-type"><button class="govuk-button" data-module="govuk-button">
+                    Add documents
+                </button></a>
+        </div>
+    </div>
+</div>
+<div class="govuk-grid-row">
     <div class="govuk-grid-column-one-third">
         <div class="moj-filter">
             <div class="moj-filter__header">
@@ -33,20 +42,20 @@
                     <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Type</h3>
                     <ul class="moj-filter-tags">
                         <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span> Warrant</a></li>
+                        <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span> Trial record sheet</a></li>
+                        <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span> Indictment</a></li>
                     </ul>
                     <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Dates</h3>
                     <ul class="moj-filter-tags">
-                        <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span> From 13/06/22 to 13/06/23</a></li>
+                        <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span> From 23/10/21 to 13/06/23</a></li>
                     </ul>
                 </div>
                 <div class="moj-filter__options">
                     <div class="govuk-form-group">
-                        <label class="govuk-label govuk-label--m" for="keywords">
-                            Keywords
+                        <label class="govuk-label govuk-label--m" for="court-name">
+                            Court name
                         </label>
-                        <div id="filter-keyword-hint" class="govuk-hint govuk-!-font-size-16">
-                            Such as court name, document name, court case number or date</div>
-                        <input class="govuk-input govuk-!-margin-top-4" id="keywords" name="keywords" type="text">
+                        <input class="govuk-input govuk-!-margin-top-4" id="court-name" name="court-name" type="text" value="Leeds Crown Court">
                     </div>
                     <div class="govuk-form-group">
                         <fieldset class="govuk-fieldset">
@@ -64,6 +73,12 @@
                                     <input class="govuk-checkboxes__input" id="type-2" name="type" type="checkbox" value="2" checked>
                                     <label class="govuk-label govuk-checkboxes__label" for="type-2">
                                         Trial record sheet
+                                    </label>
+                                </div>
+                                <div class="govuk-checkboxes__item">
+                                    <input class="govuk-checkboxes__input" id="type-2" name="type" type="checkbox" value="2" checked>
+                                    <label class="govuk-label govuk-checkboxes__label" for="type-2">
+                                        Indictment
                                     </label>
                                 </div>
                                 <div class="govuk-checkboxes__item">
@@ -86,7 +101,7 @@
                             Date from
                         </label>
                         <div id="endDate-hint" class="govuk-hint">
-                            For example, 31/3/2023.
+                            For example, 31/3/2023
                         </div>
                         <div class="hmpps-datepicker-input__wrapper">
                             <div class="govuk-form-group">
@@ -211,10 +226,10 @@
                     </div>
                     <div class="govuk-form-group hmpps-datepicker" data-module="hmpps-datepicker">
                         <label class="govuk-label govuk-label--m" for="startDate">
-                            Date from
+                            Date to
                         </label>
                         <div id="startDate-hint" class="govuk-hint">
-                            For example, 31/3/2023.
+                            For example, 31/3/2023
                         </div>
                         <div class="hmpps-datepicker-input__wrapper">
                             <div class="govuk-form-group">
@@ -340,58 +355,17 @@
                     <button class="govuk-button govuk-!-margin-top-4 govuk-!-margin-bottom-2" data-module="govuk-button" data-test-id="submit-button">
                         Apply filters
                     </button>
-                                            <div class="moj-filter__heading-action govuk-!-margin-top-5 govuk-!-margin-left-4">
-                            <p><a class="govuk-link govuk-link--no-visited-state" href="">Clear filters</a></p>
-                        </div>
+                    <div class="moj-filter__heading-action govuk-!-margin-top-5 govuk-!-margin-left-4">
+                        <p><a class="govuk-link govuk-link--no-visited-state" href="">Clear filters</a></p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="govuk-grid-column-two-thirds">
-        <!-- <table class="govuk-table" data-module="moj-sortable-table">
-            <tbody class="govuk-table__body">
-                <tr class="govuk-table__row">
-                    <td class="govuk-table__cell"><a href="">Custodial warrant</a></td>
-                    <td class="govuk-table__cell">20 March 2020</td>
-                    <td class="govuk-table__cell">Leeds Magistrates Court</td>
-                    <td class="govuk-table__cell">D20200320</td>
-                    <td class="govuk-table__cell">HMP Leeds</td>
-                    <td class="govuk-table__cell"><a class="dwf-text-colour-red" href="">Delete</a>
-                    </td>
-                </tr>
-                <tr class="govuk-table__row">
-                    <td class="govuk-table__cell"><a href="">Custodial warrant</a></td>
-                    <td class="govuk-table__cell">4 August 2020</td>
-                    <td class="govuk-table__cell">Leeds Crown Court</td>
-                    <td class="govuk-table__cell">D20200804</td>
-                    <td class="govuk-table__cell">HMP Leeds</td>
-                    <td class="govuk-table__cell"><a class="dwf-text-colour-red" href="">Delete</a>
-                    </td>
-                </tr>
-                <tr class="govuk-table__row">
-                    <td class="govuk-table__cell"><a href="">Trial record sheet</a></td>
-                    <td class="govuk-table__cell">4 August 2020</td>
-                    <td class="govuk-table__cell">Leeds Crown Court</td>
-                    <td class="govuk-table__cell">D20200804</td>
-                    <td class="govuk-table__cell" data-sort-value="1874">HMP Leeds</td>
-                    <td class="govuk-table__cell"><a class="dwf-text-colour-red" href="">Delete</a>
-                    </td>
-                </tr>
-                <tr class="govuk-table__row">
-                    <td class="govuk-table__cell"><a href="">Custodial warrant</a></td>
-                    <td class="govuk-table__cell" data-sort-value="8850">15 May 2021</td>
-                    <td class="govuk-table__cell">Sheffield Crown Court</td>
-                    <td class="govuk-table__cell">G20210515</td>
-                    <td class="govuk-table__cell" data-sort-value="1953">HMP Sheffield</td>
-                    <td class="govuk-table__cell"><a class="dwf-text-colour-red" href="">Delete</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table> -->
-
-<p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-3">4 documents</p>
-<ul class="govuk-list documents-list">
-<!-- <div class="govuk-form-group govuk-!-margin-top-4">
+        <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-3">6 documents</p>
+        <ul class="govuk-list documents-list">
+            <!-- <div class="govuk-form-group govuk-!-margin-top-4">
   <label class="govuk-label sort-options-label" for="sort">
     Sort by
   </label>
@@ -400,91 +374,133 @@
     <option value="updated" selected>Date added (oldest)</option>
   </select>
 </div> -->
-    <!-- Document 1 -->
-    <li class="documents-list-item">
-        <h3 class="govuk-heading-s"><a href="">Custodial warrant</a></h3>
-                    <table class="govuk-table documennt-table">
-        <tbody class="govuk-table__body">
-                    <tr class="govuk-table__row govuk-body-s">
-                        <th scope="row" class="govuk-table__header document-table-header">Court case number</th>
-                        <td class="govuk-table__cell document-table-cell"><a href="">D20200320</a></td>
-                    </tr>
-                    <tr class="govuk-table__row govuk-body-s">
-                        <th scope="row" class="govuk-table__header document-table-header">Court name</th>
-                        <td class="govuk-table__cell document-table-cell">Leeds Crown Court</td>
-                    </tr>
-                    <tr class="govuk-table__row govuk-body-s">
-                        <th scope="row" class="govuk-table__header document-table-header">Court date</th>
-                        <td class="govuk-table__cell document-table-cell">20 March 2020</td>
-                    </tr>
-        </tbody>
-    </table>
-    </li>
-    <!-- Document 2 -->
-    <li class="documents-list-item">
-        <h3 class="govuk-heading-s"><a href="">Custodial warrant</a></h3>
-                    <table class="govuk-table documennt-table">
-        <tbody class="govuk-table__body">
-                    <tr class="govuk-table__row govuk-body-s">
-                        <th scope="row" class="govuk-table__header document-table-header">Court case number</th>
-                        <td class="govuk-table__cell document-table-cell"><a href="">D20200320</a></td>
-                    </tr>
-                    <tr class="govuk-table__row govuk-body-s">
-                        <th scope="row" class="govuk-table__header document-table-header">Court name</th>
-                        <td class="govuk-table__cell document-table-cell">Leeds Crown Court</td>
-                    </tr>
-                    <tr class="govuk-table__row govuk-body-s">
-                        <th scope="row" class="govuk-table__header document-table-header">Court date</th>
-                        <td class="govuk-table__cell document-table-cell">20 March 2020</td>
-                    </tr>
-        </tbody>
-    </table>
-    </li>
-    <!-- Document 3 -->
-    <li class="documents-list-item">
-        <h3 class="govuk-heading-s"><a href="">Custodial warrant</a></h3>
-                    <table class="govuk-table documennt-table">
-        <tbody class="govuk-table__body">
-                    <tr class="govuk-table__row govuk-body-s">
-                        <th scope="row" class="govuk-table__header document-table-header">Court case number</th>
-                        <td class="govuk-table__cell document-table-cell"><a href="">D20200320</a></td>
-                    </tr>
-                    <tr class="govuk-table__row govuk-body-s">
-                        <th scope="row" class="govuk-table__header document-table-header">Court name</th>
-                        <td class="govuk-table__cell document-table-cell">Leeds Crown Court</td>
-                    </tr>
-                    <tr class="govuk-table__row govuk-body-s">
-                        <th scope="row" class="govuk-table__header document-table-header">Court date</th>
-                        <td class="govuk-table__cell document-table-cell">20 March 2020</td>
-                    </tr>
-        </tbody>
-    </table>
-    </li>
-    <!-- Document 3 -->
-    <li class="documents-list-item">
-        <h3 class="govuk-heading-s"><a href="">Custodial warrant</a></h3>
-                    <table class="govuk-table documennt-table">
-        <tbody class="govuk-table__body">
-                    <tr class="govuk-table__row govuk-body-s">
-                        <th scope="row" class="govuk-table__header document-table-header">Court case number</th>
-                        <td class="govuk-table__cell document-table-cell"><a href="">D20200320</a></td>
-                    </tr>
-                    <tr class="govuk-table__row govuk-body-s">
-                        <th scope="row" class="govuk-table__header document-table-header">Court name</th>
-                        <td class="govuk-table__cell document-table-cell">Leeds Crown Court</td>
-                    </tr>
-                    <tr class="govuk-table__row govuk-body-s">
-                        <th scope="row" class="govuk-table__header document-table-header">Court date</th>
-                        <td class="govuk-table__cell document-table-cell">20 March 2020</td>
-                    </tr>
-        </tbody>
-    </table>
-    </li>
-</ul>
-
-
-
-
+            <!-- Document 1 -->
+            <li class="documents-list-item">
+                <h3 class="govuk-heading-s document-title"><a href="{{ asset_path }}documents/order-of-imprisonment-court-case-1.pdf" class="govuk-link--no-visited-state" target="_blank">Order for imprisonment</a></h3>
+                <a href="" class="govuk-link remove-link govuk-link--no-visited-state">Remove</a>
+                <table class="govuk-table documennt-table">
+                    <tbody class="govuk-table__body">
+                        <tr class="govuk-table__row">
+                            <th scope="row" class="govuk-table__header document-table-header">Court case number</th>
+                            <td class="govuk-table__cell document-table-cell"><a href="">T20220101</a></td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                            <th scope="row" class="govuk-table__header document-table-header">Court name</th>
+                            <td class="govuk-table__cell document-table-cell">Leeds Crown Court</td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                            <th scope="row" class="govuk-table__header document-table-header">Court date</th>
+                            <td class="govuk-table__cell document-table-cell">1 July 2022</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </li>
+            <!-- Document 2 -->
+            <li class="documents-list-item">
+                <h3 class="govuk-heading-s document-title govuk-link--no-visited-state"><a href="{{ asset_path }}documents/order-of-imprisonment-court-case-2.pdf" class="govuk-link--no-visited-state" target="_blank">Order for imprisonment</a></h3>
+                <a href="" class="govuk-link remove-link govuk-link--no-visited-state">Remove</a>
+                <table class="govuk-table documennt-table">
+                    <tbody class="govuk-table__body">
+                        <tr class="govuk-table__row">
+                            <th scope="row" class="govuk-table__header document-table-header">Court case number</th>
+                            <td class="govuk-table__cell document-table-cell"><a href="">T20220102</a></td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                            <th scope="row" class="govuk-table__header document-table-header">Court name</th>
+                            <td class="govuk-table__cell document-table-cell">Leeds Crown Court</td>
+                        </tr>
+                        <tr class="govuk-table__row ">
+                            <th scope="row" class="govuk-table__header document-table-header">Court date</th>
+                            <td class="govuk-table__cell document-table-cell">1 July 2022</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </li>
+            <!-- Document 3 -->
+            <li class="documents-list-item">
+                <h3 class="govuk-heading-s document-title govuk-link--no-visited-state"><a href="{{ asset_path }}documents/indictment-court-case-1.pdf" class="govuk-link--no-visited-state" target="_blank">Indictment</a></h3>
+                <a href="" class="govuk-link remove-link govuk-link--no-visited-state">Remove</a>
+                <table class="govuk-table documennt-table">
+                    <tbody class="govuk-table__body">
+                        <tr class="govuk-table__row">
+                            <th scope="row" class="govuk-table__header document-table-header">Court case number</th>
+                            <td class="govuk-table__cell document-table-cell"><a href="">T20220101</a></td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                            <th scope="row" class="govuk-table__header document-table-header">Court name</th>
+                            <td class="govuk-table__cell document-table-cell">Leeds Crown Court</td>
+                        </tr>
+                        <tr class="govuk-table__row ">
+                            <th scope="row" class="govuk-table__header document-table-header">Court date</th>
+                            <td class="govuk-table__cell document-table-cell">1 July 2022</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </li>
+            <!-- Document 4 -->
+            <li class="documents-list-item">
+                <h3 class="govuk-heading-s document-title govuk-link--no-visited-state"><a href="{{ asset_path }}documents/indictment-court-case-2.pdf" class="govuk-link--no-visited-state" target="_blank">Indictment</a></h3>
+                <a href="" class="govuk-link remove-link govuk-link--no-visited-state">Remove</a>
+                <table class="govuk-table documennt-table">
+                    <tbody class="govuk-table__body">
+                        <tr class="govuk-table__row">
+                            <th scope="row" class="govuk-table__header document-table-header">Court case number</th>
+                            <td class="govuk-table__cell document-table-cell"><a href="">T20220102</a></td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                            <th scope="row" class="govuk-table__header document-table-header">Court name</th>
+                            <td class="govuk-table__cell document-table-cell">Leeds Crown Court</td>
+                        </tr>
+                        <tr class="govuk-table__row ">
+                            <th scope="row" class="govuk-table__header document-table-header">Court date</th>
+                            <td class="govuk-table__cell document-table-cell">1 July 2022</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </li>
+            <!-- Document 4 -->
+            <li class="documents-list-item">
+                <h3 class="govuk-heading-s document-title govuk-link--no-visited-state"><a href="{{ asset_path }}documents/trial-record-sheet-court-case-1.pdf" class="govuk-link--no-visited-state" target="_blank">Trial record sheet</a></h3>
+                <a href="" class="govuk-link remove-link govuk-link--no-visited-state">Remove</a>
+                <table class="govuk-table documennt-table">
+                    <tbody class="govuk-table__body">
+                        <tr class="govuk-table__row">
+                            <th scope="row" class="govuk-table__header document-table-header">Court case number</th>
+                            <td class="govuk-table__cell document-table-cell"><a href="">T20220101</a></td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                            <th scope="row" class="govuk-table__header document-table-header">Court name</th>
+                            <td class="govuk-table__cell document-table-cell">Leeds Crown Court</td>
+                        </tr>
+                        <tr class="govuk-table__row ">
+                            <th scope="row" class="govuk-table__header document-table-header">Court date</th>
+                            <td class="govuk-table__cell document-table-cell">23 October 2021</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </li>
+            <!-- Document 5 -->
+            <li class="documents-list-item">
+                <h3 class="govuk-heading-s document-title govuk-link--no-visited-state"><a href="{{ asset_path }}documents/trial-record-sheet-court-case-2.pdf" class="govuk-link--no-visited-state" target="_blank">Trial record sheet</a></h3>
+                <a href="" class="govuk-link remove-link govuk-link--no-visited-state">Remove</a>
+                <table class="govuk-table documennt-table">
+                    <tbody class="govuk-table__body">
+                        <tr class="govuk-table__row">
+                            <th scope="row" class="govuk-table__header document-table-header">Court case number</th>
+                            <td class="govuk-table__cell document-table-cell"><a href="">T20220102</a></td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                            <th scope="row" class="govuk-table__header document-table-header">Court name</th>
+                            <td class="govuk-table__cell document-table-cell">Leeds Crown Court</td>
+                        </tr>
+                        <tr class="govuk-table__row ">
+                            <th scope="row" class="govuk-table__header document-table-header">Court date</th>
+                            <td class="govuk-table__cell document-table-cell">31 March 2022</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </li>
+        </ul>
     </div>
 </div>
 {% endblock %}
