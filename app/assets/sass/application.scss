@@ -1123,3 +1123,20 @@ section {
   border-top: 1px solid $govuk-border-colour;
   padding-top: 30px
 }
+
+.moj-timeline {
+  overflow: visible;
+  margin-left: 5px;
+}
+
+.moj-timeline__item:last-child {
+  &:after {
+    background-color: govuk-colour("blue");
+    content: "";
+    height: 5px;
+    left: -5px;
+    position: absolute;
+    bottom: -10px;
+    width: 15px;
+  }
+}
