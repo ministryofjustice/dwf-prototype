@@ -1126,7 +1126,7 @@ section {
 
 .moj-timeline {
   overflow: visible;
-  margin-left: 5px;
+  margin-left: 5px; 
 }
 
 .moj-timeline__item:last-child {
@@ -1139,4 +1139,101 @@ section {
     bottom: -10px;
     width: 15px;
   }
+}
+
+.to-do-item {
+  width: 100%;
+  background: govuk-colour("light-grey");
+  border-left: 10px solid govuk-colour("mid-grey") !important;
+  display: inline-block;
+  padding: 20px 15px 0px 15px;
+  margin-bottom: 10px;
+}
+
+.to-do-item-overdue {
+  border-left: 10px solid govuk-colour("red") !important;
+}
+
+.to-do-item-urgent {
+  border-left: 10px solid govuk-colour("orange") !important;
+}
+
+.to-do-item-text{
+  display: inline-block;
+  float: left;
+}
+
+.to-do-item-badge{
+  display: inline-block;
+  float: right;
+}
+
+.moj-badge--orange {
+  border-color: govuk-colour("orange");
+  color: govuk-colour("orange");
+}
+
+.to-do-hint {
+  font-size: 16px;
+  margin-top: 0px !important;
+  color: govuk-colour("dark-grey");
+}
+
+.to-do-hint-overdue {
+  color: govuk-colour("red") !important;
+}
+
+.highlights {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.highlight-card {
+  background-color: $govuk-brand-colour;
+  padding: 20px;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.highlight-card:hover {
+  background-color: #195f9c;
+}
+
+.highlight-card-headline {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 0;
+  color:  govuk-colour("white");
+}
+
+.highlight-card-text {
+  font-size: 19px;
+  text-decoration: underline;
+  margin-bottom: 10px;
+  color:  govuk-colour("white");
+}
+
+.govuk-notification-banner {
+  border: 5px solid govuk-colour("red");
+  background-color: govuk-colour("red");
+}
+
+.govuk-notification-banner__content > * {
+max-width: 100%;
+}
+
+#alert {
+  display: none;
+}
+
+.release-date-highlight {
+  background-color: govuk-colour("light-grey");
+  display: block;
+  padding: 15px ;
+}
+
+.release-date-highlight > .govuk-summary-list {
+  margin-bottom: 0;
 }
