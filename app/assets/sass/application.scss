@@ -341,6 +341,49 @@ padding-left: 20px;
 
 .sentence-table-header {
   width: 30%;
+  margin-top: 10px;
+}
+
+.document-table-header, .document-table-cell {
+  border: none;
+  padding: 5px 5px 5px 0;
+}
+
+.document-table-header {
+  width: 30%;
+}
+
+.documennt-table {
+  margin-bottom: 10px;
+}
+
+.documents-list-item {
+  padding: 15px 0 10px 0;
+  border-bottom: 1px solid #b1b4b6;
+}
+
+.documents-list-item:first-of-type {
+  border-top: 1px solid #b1b4b6;
+}
+
+.document-title {
+  display: inline-block;
+}
+
+.remove-link {
+  color: $govuk-error-colour !important;
+  float: right;
+}
+
+.sort-options-label {
+  margin-bottom: 15px;
+  font-size: 16px;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.sort-options-select {
+  font-size: 16px;
 }
 
 .calc-timeline-summary-list-padding-fix {
@@ -379,8 +422,18 @@ padding-left: 20px;
 
 .actions {
   border: 1px solid #b1b4b6;
-  border-bottom: 4px solid #b1b4b6;
-  padding-top: 15px;
+  padding: 15px;
+}
+
+.actions ul {
+  padding: 0; 
+  margin: 0; 
+}
+
+.actions li {
+  list-style-type: none; 
+  padding: 0; 
+  margin-bottom: 10px; 
 }
 
 .hmpps-profile-banner {
@@ -573,28 +626,614 @@ padding-left: 20px;
   border-bottom: none !important;
 }
 
-.wrapper {
-  margin-left: -15px;
-}
-
 .govuk-width-container {
     max-width: 1170px;
+    margin-right: 15px;
+    margin-left:15px
 }
 
-@media (min-width: 1170px){
-.govuk-width-container {
-margin-right: auto;
-margin-left: auto;
-max-width: 1170px;
-}
+@supports (margin: max(calc(0px))) {
+    .govuk-width-container {
+        margin-right: max(15px, calc(15px + env(safe-area-inset-right)));
+        margin-left:max(15px, calc(15px + env(safe-area-inset-left)))
+    }
 }
 
 @media (min-width: 40.0625em) {
+    .govuk-width-container {
+        margin-right: 30px;
+        margin-left:30px
+    }
+
     @supports (margin: max(calc(0px))) {
         .govuk-width-container {
             margin-right: max(30px, calc(15px + env(safe-area-inset-right)));
-            margin-left: max(30px, calc(15px + env(safe-area-inset-left)));
+            margin-left:max(30px, calc(15px + env(safe-area-inset-left)))
         }
     }
 }
 
+@media (min-width: 1230px) {
+    .govuk-width-container {
+        margin-right: auto;
+        margin-left:auto
+    }
+
+    @supports (margin: max(calc(0px))) {
+        .govuk-width-container {
+            margin-right: auto;
+            margin-left:auto
+        }
+    }
+}
+
+.dwf-text-colour-red, .dwf-text-colour-red:visited {
+  color: govuk-colour('red') !important;
+}
+
+.hmpps-status-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 15px;
+    list-style-type: none;
+    padding-left: 0;
+    margin-top:0
+}
+
+.hmpps-status-list li {
+    display: inline-grid;
+    align-content: center;
+    height: 70px;
+    padding: 0 15px;
+    background-color: #f3f2f1;
+    border-left:8px solid #b1b4b6
+}
+
+.hmpps-status-list li p {
+    font-size: 19px;
+    line-height: 26.48px;
+    font-weight: 700;
+    color: #0b0c0c;
+    margin:0
+}
+
+.hmpps-status-list li p + p {
+    font-size: 16px;
+    line-height: 22.03px;
+    font-weight: 300;
+    color:#505a5f
+}
+
+section {
+  margin-bottom: 40px;
+}
+
+.card {
+  border: 1px solid #bfc1c3;
+}
+
+.card-main {
+  padding: 0
+}
+
+.card-main:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.release-dates-key {
+  width: 50%;
+}
+
+.release-dates-list {
+  margin-bottom: 0;
+}
+
+.govuk-summary-list__row:last-child {
+  border-bottom: 0;
+}
+
+.moj-side-navigation {
+  font-size: 19px;
+}
+
+
+.action-list {
+  margin-bottom: 50px;
+}
+
+.action-button {
+  border: 1px solid #b1b4b6;
+  padding: 15px;
+  margin: 10px 10px 50px 10px;
+  border-bottom: 4px solid #b1b4b6;
+  display: block;
+  width: calc(33.333333% - 20px);
+  float: left;
+}
+
+.action-button:active, .action-button:hover {
+  border: 1px solid #505a5f;
+  border-bottom: 4px solid #505a5f;
+}
+
+.action-button a {
+  font-size: 24px;
+  font-weight: bold;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.action-list:first-child {
+  margin-left: -10px;
+}
+
+.hmpps-side-filter {
+    background-color: #f3f2f1;
+    padding:30px 15px
+}
+
+.hmpps-side-filter__header {
+    font-size: 24px;
+    font-weight: bold;
+    margin:0 0 20px 0
+}
+
+.hmpps-side-filter fieldset {
+    margin-bottom:10px
+}
+
+.hmpps-side-filter label {
+    display: block;
+    font-size: 19px;
+    font-weight: bold;
+    margin-bottom:10px
+}
+
+.hmpps-side-filter label .hmpps-side-filter__alert-count {
+    white-space: nowrap;
+    display:inline-block
+}
+
+.hmpps-side-filter .govuk-checkboxes__label:before {
+    background-color:#fff
+}
+
+.hmpps-side-filter .govuk-checkboxes__label {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight:300
+}
+
+.hmpps-side-filter .govuk-checkboxes--small .govuk-checkboxes__label {
+    padding:10px 15px 0 1px
+}
+
+.hmpps-side-filter > .govuk-button {
+    margin-bottom:24px
+}
+
+.hmpps-side-filter__reset-button {
+    font-size: 16px;
+    color: #1d70b8;
+    text-decoration: underline;
+    text-underline-offset: .1em;
+    cursor: pointer;
+    padding: 0;
+    border:none
+}
+
+.hmpps-side-filter__reset-button:hover {
+    color:#003078
+}
+
+.hmpps-side-filter__reset-button:focus, .hmpps-side-filter__reset-button:active {
+    outline: 3px solid rgba(0, 0, 0, 0);
+    color: #0b0c0c;
+    background-color: #fd0;
+    box-shadow: 0 -2px #fd0, 0 4px #0b0c0c;
+    text-decoration: none;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break:clone
+}
+
+.hmpps-side-filter .govuk-error-message {
+    font-size: 16px;
+    font-weight:700
+}
+
+.hmpps-side-filter .govuk-select {
+    min-width:100%
+}
+
+.hmpps-datepicker {
+    position:relative
+}
+
+.hmpps-datepicker__dialog {
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, .15);
+    background-color: #fff;
+    clear: both;
+    display: none;
+    padding: 8px;
+    outline: 1px solid #b1b4b6;
+    outline-offset: -1px;
+    position: static;
+    top: 0;
+    transition: background-color .2s, outline-color .2s;
+    width: 280px;
+    z-index:2
+}
+
+.hmpps-datepicker__dialog__header {
+    position: relative;
+    text-align: center;
+    margin-bottom:5px
+}
+
+.hmpps-datepicker__dialog__header > :nth-child(1) {
+    position: absolute;
+    left: 5px;
+    top:-2px
+}
+
+.hmpps-datepicker__dialog__header > :nth-child(1) > :nth-child(2) {
+    margin-left:4px
+}
+
+.hmpps-datepicker__dialog__header > :nth-child(3) {
+    position: absolute;
+    right: 5px;
+    top:-2px
+}
+
+.hmpps-datepicker__dialog__header > :nth-child(3) > :nth-child(1) {
+    margin-right:4px
+}
+
+.hmpps-datepicker__dialog__title {
+    font-size: 16px;
+    padding: 8px 0;
+    margin:0 !important
+}
+
+.hmpps-datepicker__dialog__navbuttons button {
+    background-color: rgba(0, 0, 0, 0);
+    color: #0b0c0c !important;
+    min-height: 40px;
+    margin: 0;
+    padding: 4px 4px 0 4px;
+    min-width: 32px;
+    border: none;
+    display: inline-block;
+    cursor: pointer;
+    outline:none
+}
+
+.hmpps-datepicker__dialog__navbuttons button .hmpps-datepicker-icon {
+    height: 32px;
+    padding: 0;
+    position: static;
+    width:24px
+}
+
+.hmpps-datepicker__dialog__navbuttons button:hover {
+    background-color:rgba(255, 221, 0, .5)
+}
+
+.hmpps-datepicker__dialog__navbuttons button:focus {
+    background-color: #fd0;
+    border-bottom:4px solid #0b0c0c
+}
+
+.hmpps-datepicker__dialog__table {
+    border-collapse:collapse
+}
+
+.hmpps-datepicker__dialog__table tbody:focus-within {
+    outline:2px solid #fd0
+}
+
+.hmpps-datepicker__dialog__table td {
+    border: 0;
+    margin: 0;
+    outline: 0;
+    padding:0
+}
+
+.hmpps-datepicker__dialog__table th {
+    font-size: 16px;
+    color:#0b0c0c
+}
+
+.hmpps-datepicker__dialog__table button {
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    color: #0b0c0c;
+    min-height: 40px;
+    margin: 0;
+    padding: 0;
+    min-width: 40px;
+    font-size:16px
+}
+
+.hmpps-datepicker__dialog__table button:hover {
+    outline: 3px solid rgba(0, 0, 0, 0);
+    color: #0b0c0c;
+    background-color: rgba(255, 221, 0, .5);
+    box-shadow: none;
+    text-decoration: none;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    cursor:pointer
+}
+
+.hmpps-datepicker__dialog__table button:focus {
+    outline: 3px solid rgba(0, 0, 0, 0);
+    color: #0b0c0c;
+    background-color: #fd0;
+    border-bottom: 4px solid #0b0c0c;
+    padding-top: 4px;
+    text-decoration: none;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break:clone
+}
+
+.hmpps-datepicker__dialog__table button[disabled=true] {
+    background-color: #f3f2f1;
+    color:#0b0c0c
+}
+
+.hmpps-datepicker__dialog__table button.hmpps-datepicker__current {
+    outline: 2px solid #0b0c0c !important;
+    outline-offset: -2px
+}
+
+.hmpps-datepicker__dialog__table button.hmpps-datepicker__current[tabindex="-1"] {
+    background: rgba(0, 0, 0, 0);
+    color: currentColor
+}
+
+.hmpps-datepicker__dialog__table button.hmpps-datepicker__current[tabindex="-1"]:hover {
+    background-color: rgba(255, 221, 0, .5);
+    cursor:pointer
+}
+
+.hmpps-datepicker__dialog__table button.hmpps-datepicker__today {
+    font-weight:700
+}
+
+.hmpps-datepicker__dialog__table button.hmpps-datepicker__today::after {
+    background-color: currentColor;
+    border-radius: 4px;
+    content: "";
+    height: 4px;
+    margin-top: -1px;
+    margin-left: 1px;
+    position: absolute;
+    width:4px
+}
+
+.hmpps-datepicker__dialog__table button.hmpps-datepicker-selected:not(:focus) {
+    background-color: #0b0c0c;
+    color:#fff
+}
+
+.hmpps-datepicker__dialog__table-caption {
+    font-size: 14px;
+    caption-side: bottom;
+    line-height: 2;
+    margin-top:8px
+}
+
+.hmpps-datepicker__dialog__buttongroup {
+    display: grid;
+    grid-gap: 0 8px;
+    margin-right: 0;
+    overflow: visible;
+    grid-template-columns:1fr 1fr
+}
+
+.hmpps-datepicker__dialog__buttongroup > * {
+    margin-left: 0;
+    margin-right: 0;
+    width:auto !important
+}
+
+.hmpps-datepicker__dialog__buttongroup .govuk-button {
+    margin-bottom:0
+}
+
+.hmpps-datepicker .govuk-label--m {
+    margin-bottom:5px
+}
+
+.hmpps-datepicker .govuk-hint {
+    margin-bottom:10px
+}
+
+.hmpps-datepicker-input__wrapper {
+    display: flex;
+    margin-bottom: 24px;
+    overflow:visible
+}
+
+.hmpps-datepicker-input__wrapper .govukInput {
+    float: left;
+    margin-bottom: 0;
+    margin-right: -48px;
+    padding-right:56px
+}
+
+.hmpps-datepicker-input__wrapper .hmpps-datepicker-icon {
+    height: 24px;
+    width:32px
+}
+
+.hmpps-datepicker-input__wrapper .govuk-form-group {
+    width:100%
+}
+
+@media (min-width: 768px) {
+    .hmpps-datepicker__dialog {
+        position: absolute;
+        width:auto
+    }
+}
+
+.hmpps-datepicker-button {
+    background-color: #0b0c0c;
+    fill: #fff;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 40px;
+    padding-top: 6px;
+    border: none;
+    border-bottom: 4px solid #0b0c0c;
+    outline: none;
+    cursor:pointer
+}
+
+.hmpps-datepicker-button:hover {
+    background-color: #b1b4b6;
+    fill: #0b0c0c;
+    border-bottom:4px solid #b1b4b6
+}
+
+.hmpps-datepicker-button:focus {
+    background-color: #fd0;
+    fill: #0b0c0c;
+    border-bottom:4px solid #0b0c0c
+}
+
+@media (max-width: 768px) {
+    .hmpps-datepicker-button {
+        bottom:unset
+    }
+}
+
+.action-button-group {
+  margin-bottom: 25px;
+}
+
+.sentence-list, .court-cases-list {
+  border-top: 1px solid $govuk-border-colour;
+  padding-top: 30px
+}
+
+.moj-timeline {
+  overflow: visible;
+  margin-left: 5px; 
+}
+
+.moj-timeline__item:last-child {
+  &:after {
+    background-color: govuk-colour("blue");
+    content: "";
+    height: 5px;
+    left: -5px;
+    position: absolute;
+    bottom: -10px;
+    width: 15px;
+  }
+}
+
+.to-do-item {
+  width: 100%;
+  background: govuk-colour("light-grey");
+  border-left: 10px solid govuk-colour("mid-grey") !important;
+  display: inline-block;
+  padding: 20px 15px 0px 15px;
+  margin-bottom: 10px;
+}
+
+.to-do-item-overdue {
+  border-left: 10px solid govuk-colour("red") !important;
+}
+
+.to-do-item-urgent {
+  border-left: 10px solid govuk-colour("orange") !important;
+}
+
+.to-do-item-text{
+  display: inline-block;
+  float: left;
+}
+
+.to-do-item-badge{
+  display: inline-block;
+  float: right;
+}
+
+.moj-badge--orange {
+  border-color: govuk-colour("orange");
+  color: govuk-colour("orange");
+}
+
+.to-do-hint {
+  font-size: 16px;
+  margin-top: 0px !important;
+  color: govuk-colour("dark-grey");
+}
+
+.to-do-hint-overdue {
+  color: govuk-colour("red") !important;
+}
+
+.highlights {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.highlight-card {
+  background-color: $govuk-brand-colour;
+  padding: 20px;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.highlight-card:hover {
+  background-color: #195f9c;
+}
+
+.highlight-card-headline {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 0;
+  color:  govuk-colour("white");
+}
+
+.highlight-card-text {
+  font-size: 19px;
+  text-decoration: underline;
+  margin-bottom: 10px;
+  color:  govuk-colour("white");
+}
+
+.govuk-notification-banner {
+  border: 5px solid govuk-colour("red");
+  background-color: govuk-colour("red");
+}
+
+.govuk-notification-banner__content > * {
+max-width: 100%;
+}
+
+#alert {
+  display: none;
+}
+
+.release-date-highlight {
+  background-color: govuk-colour("light-grey");
+  display: block;
+  padding: 15px ;
+}
+
+.release-date-highlight > .govuk-summary-list {
+  margin-bottom: 0;
+}

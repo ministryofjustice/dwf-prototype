@@ -20,3 +20,8 @@ $('#unselect-all').click(function(event) {
     } 
 }); 
 
+
+
+accessibleAutocomplete.enhanceSelectElement({
+  selectElement: document.querySelector('.enhance-autcomplete')
+})

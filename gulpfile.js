@@ -24,6 +24,7 @@ gulp.task('generate-assets', gulp.series(
     'copy-assets',
     'sass-documentation',
     'copy-assets-documentation',
+    'copy-autocomplete',
     'sass-v6',
     'copy-assets-v6'
   )
