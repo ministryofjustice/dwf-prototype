@@ -110,42 +110,49 @@ Court cases and release dates
                                             {% else %}
                                         <li class="govuk-heading-s">
                                             {% endif %}
-                                            <a href="/v2/overview" class="govuk-link govuk-link--no-visited-state govuk-link--no-underline">Overview</a>
+                                            <a href="/v3/overview" class="govuk-link govuk-link--no-visited-state govuk-link--no-underline">Overview</a>
                                         </li>
                                         {% if releaseDatesActive %}
                                         <li class="govuk-heading-s hmpps-profile-tab-link-selected">
                                             {% else %}
                                         <li class="govuk-heading-s">
                                             {% endif %}
-                                            <a href="/v2/release-dates" class="govuk-link govuk-link--no-visited-state govuk-link--no-underline">Release dates</a>
+                                            <a href="/v3/release-dates" class="govuk-link govuk-link--no-visited-state govuk-link--no-underline">Release dates</a>
+                                        </li>
+                                        {% if calculationActive %}
+                                        <li class="govuk-heading-s hmpps-profile-tab-link-selected">
+                                            {% else %}
+                                        <li class="govuk-heading-s">
+                                            {% endif %}
+                                            <a href="/v3/calculations" class="govuk-link govuk-link--no-visited-state govuk-link--no-underline">Calculations</a>
                                         </li>
                                         {% if courtCasesActive %}
                                         <li class="govuk-heading-s hmpps-profile-tab-link-selected">
                                             {% else %}
                                         <li class="govuk-heading-s">
                                             {% endif %}
-                                            <a href="/v2/court-cases" class="govuk-link govuk-link--no-visited-state govuk-link--no-underline">Court cases</a>
+                                            <a href="/v3/court-cases" class="govuk-link govuk-link--no-visited-state govuk-link--no-underline">Court cases</a>
                                         </li>
                                         {% if adjustmentsActive %}
                                         <li class="govuk-heading-s hmpps-profile-tab-link-selected">
                                             {% else %}
                                         <li class="govuk-heading-s">
                                             {% endif %}
-                                            <a href="/v2/adjustments" class="govuk-link govuk-link--no-visited-state govuk-link--no-underline">Adjustments</a>
+                                            <a href="/v3/adjustments" class="govuk-link govuk-link--no-visited-state govuk-link--no-underline">Adjustments</a>
                                         </li>
                                         {% if documentsActive %}
                                         <li class="govuk-heading-s hmpps-profile-tab-link-selected">
                                             {% else %}
                                         <li class="govuk-heading-s">
                                             {% endif %}
-                                            <a href="/v2/documents" class="govuk-link govuk-link--no-visited-state govuk-link--no-underline">Documents</a>
+                                            <a href="/v3/documents" class="govuk-link govuk-link--no-visited-state govuk-link--no-underline">Documents</a>
                                         </li>
                                         {% if timelineActive %}
                                         <li class="govuk-heading-s hmpps-profile-tab-link-selected">
                                             {% else %}
                                         <li class="govuk-heading-s">
                                             {% endif %}
-                                            <a href="/v2/timeline" class="govuk-link govuk-link--no-visited-state govuk-link--no-underline">Timeline</a>
+                                            <a href="/v3/timeline" class="govuk-link govuk-link--no-visited-state govuk-link--no-underline">Timeline</a>
                                         </li>
                                     </ul>
                                 </div>
