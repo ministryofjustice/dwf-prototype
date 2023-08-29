@@ -1,0 +1,64 @@
+{% extends "../template.html" %}
+{% block content %}
+<!-- Back link -->
+<a href="next-court-date-select" class="govuk-back-link govuk-!-margin-top-0">Back</a>
+<!-- What is the confirmed date -->
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" action="check-answers">
+            <fieldset class="govuk-fieldset" role="group" aria-describedby="passport-issued-hint">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    <h1 class="govuk-fieldset__heading">
+                        <span class="govuk-caption-l">Add a court case</span>
+                        Enter the next court date and time
+                    </h1>
+                </legend>
+                <div class="govuk-form-group">
+                    <label class="govuk-label govuk-label--s" for="next-court-date">
+                        Next court date
+                    </label>
+                    <div class="govuk-date-input" id="next-court-date">
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="next-court-date-day">
+                                    Day
+                                </label>
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="next-court-date-day" name="next-court-date-day" type="text" inputmode="numeric">
+                            </div>
+                        </div>
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="next-court-date-month">
+                                    Month
+                                </label>
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="next-court-date-month" name="next-court-date-month" type="text" inputmode="numeric">
+                            </div>
+                        </div>
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="next-court-date-year">
+                                    Year
+                                </label>
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="next-court-date-year" name="next-court-date-year" type="text" inputmode="numeric">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="govuk-form-group">
+                    <label class="govuk-label govuk-label--s" for="next-court-time">
+                        Next court time (optional)
+                    </label>
+                    <input class="govuk-input govuk-input--width-4" id="next-court-time" name="next-court-time" type="time">
+                    <select class="govuk-select am-pm-select govuk-!-margin-left-1" id="next-court-time-period" name="next-court-time-period">
+                        <option value="am" selected>am</option>
+                        <option value="pm">pm</option>
+                    </select>
+                </div>
+            </fieldset>
+            <button class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

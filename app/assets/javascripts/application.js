@@ -10,6 +10,10 @@ $(document).ready(function () {
   window.MOJFrontend.initAll()
 })
 
+// Import accessible autocomplete
+<script type="text/javascript" src="assets/javascripts/accessible-autocomplete.min.js"></script>
+
+
 // Check all checkboxes
 $('#unselect-all').click(function(event) {   
     if(this.checked) {

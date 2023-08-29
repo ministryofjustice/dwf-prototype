@@ -1050,3 +1050,14 @@ max-width: 100%;
 .release-date-highlight > .govuk-summary-list {
   margin-bottom: 0;
 }
+
+.am-pm-select {
+    min-width: 50px !important;
+}
+
+.hmpps-profile-banner .hmpps-profile-banner-bottom-2 {
+    background-color: #1d70b8;
+    border-bottom: none;
+    overflow: auto;
+    padding-top: 80px;
+}

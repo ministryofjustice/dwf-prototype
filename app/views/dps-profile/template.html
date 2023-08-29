@@ -32,7 +32,7 @@
 {% include "includes/head.html" %}
 {% endblock %}
 {% block pageTitle %}
-Court cases and release dates
+Digital Prison Services
 {% endblock %}
 {% block header %}
 <header class="dps-header" role="banner">
@@ -45,7 +45,7 @@ Court cases and release dates
                 </svg>
                 HMPPS
             </a>
-            <a class="dps-header__link dps-header__title__service-name" href="/">Court cases and release dates</a>
+            <a class="dps-header__link dps-header__title__service-name" href="/">Digital Prison Services</a>
         </div>
     </div>
 </header>
@@ -78,7 +78,7 @@ Court cases and release dates
                                 <p class="govuk-body govuk-!-font-size-24 hmpps-profile-prisoner-number" aria-label="Prisoner Number">
                                     A8837DY
                                 </p>
-                                <!--                                 <div class="info__links">
+                                <div class="info__links">
                                     <div class="">
                                         <h3 class="govuk-heading-s">Category</h3>
                                         <a href="https://dev.offender-categorisation.service.justice.gov.uk/1102484" aria-label="View category" class="govuk-link govuk-link--inverse">C</a>
@@ -91,68 +91,41 @@ Court cases and release dates
                                         <h3 class="govuk-heading-s">Incentive level</h3>
                                         <a href="https://digital-dev.prison.service.justice.gov.uk/prisoner/G6123VU/incentive-level-details" aria-label="View incentive level details" class="govuk-link govuk-link--inverse">Basic</a>
                                     </div>
-                                </div> -->
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="govuk-grid-row">
-                        <div class="govuk-grid-column-full hmpps-profile-banner-bottom govuk-!-padding-top-9 govuk-!-margin-bottom-6">
+                        <div class="govuk-grid-column-full hmpps-profile-banner-bottom">
                             <div class="govuk-grid-row">
-                                <div class="govuk-grid-column-full">
-                                    <hr>
-                                </div>
+                                <ul class="alerts-list">
+                                    <li class="alert-status alert-status--security">Arsonist</li>
+                                    <li class="alert-status alert-status--security">Concerted indiscipline</li>
+                                    <li class="alert-status alert-status--security">Controlled unlock</li>
+                                    <li class="alert-status alert-status--security">Gang member</li>
+                                    <li class="alert-status alert-status--ex-armed-forces">Veteran</li>
+                                </ul>
                             </div>
                             <nav class="govuk-grid-row">
                                 <div class="govuk-grid-column-full">
                                     <ul class="hmpps-profile-tab-links">
-                                        {% if overviewActive %}
-                                        <li class="govuk-heading-s hmpps-profile-tab-link-selected">
-                                            {% else %}
                                         <li class="govuk-heading-s">
-                                            {% endif %}
-                                            <a href="/v3/overview" class="govuk-link govuk-link--no-visited-state govuk-link--no-underline">Overview</a>
+                                            <a href="/prisoner/G6123VU" class="govuk-link govuk-link--no-visited-state govuk-link--no-underline" data-qa="Overview">Overview</a>
                                         </li>
-                                        {% if releaseDatesActive %}
-                                        <li class="govuk-heading-s hmpps-profile-tab-link-selected">
-                                            {% else %}
                                         <li class="govuk-heading-s">
-                                            {% endif %}
-                                            <a href="/v3/release-dates" class="govuk-link govuk-link--no-visited-state govuk-link--no-underline">Release dates</a>
+                                            <a href="/prisoner/G6123VU/personal" class="govuk-link govuk-link--no-visited-state govuk-link--no-underline" data-qa="Personal">Personal</a>
                                         </li>
-                                        {% if calculationsActive %}
-                                        <li class="govuk-heading-s hmpps-profile-tab-link-selected">
-                                            {% else %}
                                         <li class="govuk-heading-s">
-                                            {% endif %}
-                                            <a href="/v3/calculations" class="govuk-link govuk-link--no-visited-state govuk-link--no-underline">Calculations</a>
+                                            <a href="/prisoner/G6123VU/case-notes" class="govuk-link govuk-link--no-visited-state govuk-link--no-underline" data-qa="Case notes">Case notes</a>
                                         </li>
-                                        {% if courtCasesActive %}
-                                        <li class="govuk-heading-s hmpps-profile-tab-link-selected">
-                                            {% else %}
                                         <li class="govuk-heading-s">
-                                            {% endif %}
-                                            <a href="/v3/court-cases" class="govuk-link govuk-link--no-visited-state govuk-link--no-underline">Court cases</a>
+                                            <a href="/prisoner/G6123VU/alerts/active" class="govuk-link govuk-link--no-visited-state govuk-link--no-underline" data-qa="Alerts">Alerts</a>
                                         </li>
-                                        {% if adjustmentsActive %}
-                                        <li class="govuk-heading-s hmpps-profile-tab-link-selected">
-                                            {% else %}
-                                        <li class="govuk-heading-s">
-                                            {% endif %}
-                                            <a href="/v3/adjustments" class="govuk-link govuk-link--no-visited-state govuk-link--no-underline">Adjustments</a>
+                                        <li class="govuk-heading-s hmpps-profile-tab-link-selected" data-qa="active-tab">
+                                            <span data-qa="Offences">Court cases and release dates</span>
                                         </li>
-                                        {% if documentsActive %}
-                                        <li class="govuk-heading-s hmpps-profile-tab-link-selected">
-                                            {% else %}
                                         <li class="govuk-heading-s">
-                                            {% endif %}
-                                            <a href="/v3/documents" class="govuk-link govuk-link--no-visited-state govuk-link--no-underline">Documents</a>
-                                        </li>
-                                        {% if timelineActive %}
-                                        <li class="govuk-heading-s hmpps-profile-tab-link-selected">
-                                            {% else %}
-                                        <li class="govuk-heading-s">
-                                            {% endif %}
-                                            <a href="/v3/timeline" class="govuk-link govuk-link--no-visited-state govuk-link--no-underline">Timeline</a>
+                                            <a href="/prisoner/G6123VU/work-and-skills" class="govuk-link govuk-link--no-visited-state govuk-link--no-underline" data-qa="Work and skills">Work and skills</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -222,20 +195,6 @@ Court cases and release dates
 {% block bodyEnd %}
 {% block scripts %}
 {% include "includes/scripts.html" %}
-<script>
-window.onload = function() {
-    // Loops through dom and finds all elements with card--clickable class
-    document.querySelectorAll('.card--clickable').forEach(card => {
-        // Check if card has a link within it
-        if (card.querySelector('a') !== null) {
-            // Clicks the link within the heading to navigate to desired page
-            card.addEventListener('click', () => {
-                card.querySelector('a').click()
-            })
-        }
-    })
-}
-</script>
 {% block pageScripts %}{% endblock %}
 {% endblock %}
 <!-- GOV.UK Prototype Kit {{releaseVersion}} -->
