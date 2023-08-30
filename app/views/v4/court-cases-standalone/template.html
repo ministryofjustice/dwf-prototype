@@ -64,6 +64,15 @@ Court cases and release dates
             </ol>
         </div>
         {% endblock %}
+        {% block title %}
+        <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-heading-xl govuk-!-margin-top-4 govuk-!-margin-bottom-7">
+            Joe Bloggs's court cases
+        </h2>
+    </div>
+</div>
+{% endblock %}
         {% block banner %}
         <div class="govuk-grid-row">
             <div class="govuk-grid-column-full">
@@ -72,10 +81,10 @@ Court cases and release dates
                         <div class="dwf-header-left">
                             <img class="dwf-header-profile-img" src="/public/images/prisoner.jpeg" alt="Alzbeta Krausova">
                         </div>
-                        <div class="govuk-grid-column-one-half">
-                            <h1 class="govuk-heading-l govuk-!-margin-bottom-1">Alzeta Krausova</h1>
-                            <p class="govuk-body-l govuk-!-margin-bottom-1">A123456</p>
-                            <p class="govuk-body-l">On remand</p>
+                        <div class="govuk-grid-column-one-quarter">
+                            <p class="govuk-body govuk-!-margin-bottom-1"><a class="govuk-link--no-visited-state" href="">Joe Bloggs</a></p>
+                            <p class="govuk-!-margin-bottom-1">A123456</p>
+                            <p class="">On remand</p>
                         </div>
                         <div class="govuk-grid-column-one-third govuk-!-padding-0">
                             <ul class="dwf-header-info">

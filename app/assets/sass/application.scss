@@ -1056,21 +1056,21 @@ max-width: 100%;
 }
 
 .dwf-header {
-    margin: 0px 0px 80px 0px;
+    margin: 0px 0px 30px 0px;
     position: relative;
     height: 175px;
-    border-bottom: 5px solid #1d70b8;
 }
 
 .dwf-header-inner {
     background-color: #f3f2f1 !important;
     width: 100%;
-    padding: 30px;
-    height: 100%;
+    padding: 20px;
+    height: 170px;
 }
 
 .dwf-header-profile-img {
-    width: 150px;
+    width: 100px;
+    height: 130px;
 }
 
 .dwf-header-left {
@@ -1082,7 +1082,6 @@ max-width: 100%;
 .dwf-header-info {
     padding: 0 !important;
     margin: 0;
-    float: right;
 }
 
 .dwf-header-info ul {
@@ -1093,4 +1092,12 @@ max-width: 100%;
     display: inline-block;
     margin-right: 25px;
     color: #0b0c0c;
+}
+
+.autocomplete__option {
+  @include govuk-font(19);
+}
+
+.dwf-confirm-offence-key {
+    width: 25% !important;
 }

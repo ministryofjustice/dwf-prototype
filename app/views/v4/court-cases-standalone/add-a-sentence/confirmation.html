@@ -7,13 +7,13 @@
     <div class="govuk-grid-column-two-thirds">
         <div class="govuk-panel govuk-panel--confirmation govuk-!-padding-0">
             <h1 class="govuk-panel__title-l">
-                Court case successfully added
+                Offence successfully added
             </h1>
         </div>
-        <form class="form" action="../add-a-sentence/count-number">
+        <form class="form" action="../court-cases-standalone-2">
             <div class="govuk-summary-card govuk-!-margin-top-4">
                 <div class="govuk-summary-card__title-wrapper">
-                    <h2 class="govuk-summary-card__title">Court case <span class="govuk-body">{{ data['court-case-ref'] }}</span></h2>
+                    <h2 class="govuk-summary-card__title">Court case {{ data['court-case-ref'] }}</h2>
                 </div>
                 <div class="govuk-summary-card__content">
                     <dl class="govuk-summary-list">
@@ -68,9 +68,33 @@
                     </dl>
                 </div>
             </div>
-            <button class="govuk-button" data-module="govuk-button">
-                Add sentences
-            </button>
+            <h2 class="govuk-heading-m">Offences</h2>
+            <div class="govuk-!-margin-bottom-6 app-possible-prison-record" style="display: flex;">
+                <div class="govuk-grid-column-full govuk-!-margin-top-4">
+                    <h3 class="govuk-body-s govuk-!-margin-bottom-0">Count {{ data['count-number'] }}</h3>
+                    <h4 class="govuk-heading-s govuk-!-margin-bottom-1">
+                        {{ data['offence-name'] }}
+                    </h4>
+                    <p class="govuk-body-s">Committed on {{ data['offence-start-date-day'] }}/{{ data['offence-start-date-month'] }}/{{ data['offence-start-date-year'] }}</p>
+                    <table class="govuk-table govuk-!-margin-right-4 govuk-!-margin-bottom-6 govuk-!-margin-bottom-0">
+                        <tbody class="govuk-table__body">
+                            <tr class="govuk-table__row govuk-body-s">
+                                <th scope="row" class="govuk-table__header sentence-table-header">Outcome</th>
+                                <td class="govuk-table__cell">{{ data['outcome'] }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="govuk-button-group">
+  <button class="govuk-button" data-module="govuk-button">
+    Finish and save
+  </button>
+  <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="count-number">
+    Add another offence
+  </button>
+</div>
             <p class="govuk-body"><a href="../court-cases-standalone-1">Return to court cases</a></p>
         </form>
     </div>
