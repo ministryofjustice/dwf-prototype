@@ -1055,9 +1055,42 @@ max-width: 100%;
     min-width: 50px !important;
 }
 
-.hmpps-profile-banner .hmpps-profile-banner-bottom-2 {
-    background-color: #1d70b8;
-    border-bottom: none;
-    overflow: auto;
-    padding-top: 80px;
+.dwf-header {
+    margin: 0px 0px 80px 0px;
+    position: relative;
+    height: 175px;
+    border-bottom: 5px solid #1d70b8;
+}
+
+.dwf-header-inner {
+    background-color: #f3f2f1 !important;
+    width: 100%;
+    padding: 30px;
+    height: 100%;
+}
+
+.dwf-header-profile-img {
+    width: 150px;
+}
+
+.dwf-header-left {
+    display: inline-block;
+    float: left;
+    margin-right: 15px;
+}
+
+.dwf-header-info {
+    padding: 0 !important;
+    margin: 0;
+    float: right;
+}
+
+.dwf-header-info ul {
+    list-style: none;
+}
+
+.dwf-header-info li {
+    display: inline-block;
+    margin-right: 25px;
+    color: #0b0c0c;
 }
