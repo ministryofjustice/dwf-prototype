@@ -371,9 +371,11 @@
                         <!-- Court case 1 -->
             <div class="govuk-summary-card">
                 <div class="govuk-summary-card__title-wrapper">
-                    <h2 class="govuk-summary-card__title">Court case {{ data['court-case-ref'] }}</h2></a>
+                    <h2 class="govuk-summary-card__title">Court case {{ data['court-case-ref'] }} <strong class="govuk-tag govuk-tag--orange govuk-!-margin-left-2">
+          Incomplete
+        </strong></h2></a>
                     <ul class="govuk-summary-card__actions">
-                        <li class="govuk-summary-card__action govuk-body"> <a class="govuk-link" href="#">
+                        <li class="govuk-summary-card__action govuk-body"> <a class="govuk-link" href="add-a-court-case/check-answers">
                                 Update
                             </a>
                         </li>
@@ -440,23 +442,23 @@
                             <dd class="govuk-summary-list__value">
                                 <a href="{{ asset_path }}documents/order-of-imprisonment-court-case-1.pdf" class="govuk-link--no-visited-state" target="_blank"><svg class="moj-timeline__document-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 20" width="20" height="16">
                                         <path d="M9 7V1.5L14.5 7H9zM2 0C.9 0 0 .9 0 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6l-6-6H2z"></path>
-                                    </svg> Order for imprisonment</a>
+                                    </svg> Remand warrant</a>
                                 <br>
-                                <a href="{{ asset_path }}documents/trial-record-sheet-court-case-1.pdf" class="govuk-link--no-visited-state" target="_blank"><svg class="moj-timeline__document-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 20" width="20" height="16">
+                                <!-- <a href="{{ asset_path }}documents/trial-record-sheet-court-case-1.pdf" class="govuk-link--no-visited-state" target="_blank"><svg class="moj-timeline__document-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 20" width="20" height="16">
                                         <path d="M9 7V1.5L14.5 7H9zM2 0C.9 0 0 .9 0 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6l-6-6H2z"></path>
                                     </svg> Trial record sheet</a>
                                 <br>
                                 <a href="{{ asset_path }}documents/indictment-court-case-1.pdf" class="govuk-link--no-visited-state" target="_blank"><svg class="moj-timeline__document-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 20" width="20" height="16">
                                         <path d="M9 7V1.5L14.5 7H9zM2 0C.9 0 0 .9 0 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6l-6-6H2z"></path>
-                                    </svg> Indictment</a>
+                                    </svg> Indictment</a> -->
                             </dd>
                         </div>
                         <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key">
-                                Sentences
+                                Offences
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                2 <a href="" class="govuk-!-margin-left-2">View sentences</a>
+                            <a href="add-an-offence/count-number">Enter offence information</a>
                             </dd>
                         </div>
                     </dl>

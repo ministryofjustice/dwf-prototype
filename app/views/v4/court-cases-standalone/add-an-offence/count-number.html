@@ -1,25 +1,28 @@
 {% extends "../template.html" %}
 {% block content %}
 <!-- Back link -->
-<a href=".offence-date" class="govuk-back-link govuk-!-margin-top-0">Back</a>
+<a href="../court-cases-standalone-1" class="govuk-back-link govuk-!-margin-top-0">Back</a>
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="/offence-code-known" method="post">
+        <form class="form" action="offence-date">
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset" role="group">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add a sentence to court case A123456</span>
-                            Enter the offence code
+                            <span class="govuk-caption-l">Add an offence to court case {{ data['court-case-ref'] }}</span>
+                            Enter the count number
                         </h1>
                     </legend>
-                    <input class="govuk-input govuk-input--width-10" id="offence-code" name="offence-code" type="text">
+                    <div id="count-number-hint" class="govuk-hint">
+                        As it appears on the warrant
+                    </div>
+                    <input class="govuk-input govuk-input--width-10" id="court-case-ref" name="count-number" type="text">
                     <div class="govuk-checkboxes govuk-!-margin-top-6" data-module="govuk-checkboxes">
                         <div class="govuk-checkboxes__item">
-                            <input class="govuk-checkboxes__input" id="None" name="offence-code" type="checkbox" value="None">
+                            <input class="govuk-checkboxes__input" id="no-count-number" name="count-number" type="checkbox" value="None">
                             <label class="govuk-label govuk-checkboxes__label" for="no-court-case-ref">
-                                There is no offence code
+                                I don't know the count number
                             </label>
                         </div>
                     </div>

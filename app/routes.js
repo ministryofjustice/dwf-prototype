@@ -31,8 +31,8 @@ console.log(offenceCodeKnown)
   // Check whether the variable matches a condition
   if (offenceCodeKnown.includes('None')){
     // Send user to next page
-    res.redirect('/v4/court-cases-standalone/add-a-sentence/offence-name')
-  } else res.redirect('/v4/court-cases-standalone/add-a-sentence/confirm-offence')
+    res.redirect('/v4/court-cases-standalone/add-an-offence/offence-name')
+  } else res.redirect('/v4/court-cases-standalone/add-an-offence/confirm-offence')
 
 })
 

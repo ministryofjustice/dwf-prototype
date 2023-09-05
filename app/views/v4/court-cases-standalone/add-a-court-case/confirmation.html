@@ -5,12 +5,22 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <div class="govuk-panel govuk-panel--confirmation govuk-!-padding-0">
+        <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
+
+  <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+    <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
+  </svg>
+
+  <div class="moj-banner__message">Court {{ data['court-case-ref'] }} case added</div>
+
+</div>
+
+<!--         <div class="govuk-panel govuk-panel--confirmation govuk-!-padding-0">
             <h1 class="govuk-panel__title-l">
-                Court case successfully added
+                Court case case added 
             </h1>
-        </div>
-        <form class="form" action="../add-a-sentence/count-number">
+        </div> -->
+        <form class="form" action="../add-an-offence/count-number">
             <div class="govuk-summary-card govuk-!-margin-top-4">
                 <div class="govuk-summary-card__title-wrapper">
                     <h2 class="govuk-summary-card__title">Court case <span class="govuk-body">{{ data['court-case-ref'] }}</span></h2>
@@ -69,9 +79,9 @@
                 </div>
             </div>
             <button class="govuk-button" data-module="govuk-button">
-                Add sentences
+                Continue to add offences
             </button>
-            <p class="govuk-body"><a href="../court-cases-standalone-1">Return to court cases</a></p>
+            <p class="govuk-body"><a href="../court-cases-standalone-1">Save and return to court cases</a></p>
         </form>
     </div>
 </div>
