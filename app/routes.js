@@ -41,7 +41,7 @@ console.log(offenceCodeKnown)
 router.get('/create-court-case', function(req, res) {
   delete req.session.data.courtCaseIndex
   delete req.session.data.courtCase
-  res.redirect('/v4/court-cases-standalone/add-a-court-case/court-case-reference-number')
+  res.redirect('/v5/court-cases-standalone/add-a-court-case/court-case-reference-number')
 })
 
 router.post('/persist-court-case', function (req, res) {
@@ -52,20 +52,20 @@ router.post('/persist-court-case', function (req, res) {
     req.session.data.courtCaseIndex = req.session.data.courtCases.length -1
   }
 
-  res.redirect('/v4/court-cases-standalone/add-a-court-case/confirmation')
+  res.redirect('/v5/court-cases-standalone/add-a-court-case/confirmation')
 })
 
 router.get('/update-court-case', function(req, res) {
   const index = req.query.index
   req.session.data.courtCase = req.session.data.courtCases[index]
   req.session.data.courtCaseIndex = index
-  res.redirect('/v4/court-cases-standalone/add-a-court-case/check-answers')
+  res.redirect('/v5/court-cases-standalone/add-a-court-case/check-answers')
 })
 
 router.get('/delete-court-case', function(req, res) {
   const index = req.query.index
   req.session.data.courtCases.splice(index, 1)
-  res.redirect('/v4/court-cases-standalone/court-cases-standalone')
+  res.redirect('/v5/court-cases-standalone/court-cases-standalone')
 })
 
 

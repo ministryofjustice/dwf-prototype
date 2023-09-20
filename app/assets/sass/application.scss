@@ -922,16 +922,12 @@ section {
     }
 }
 
-.action-button-group {
-  margin-bottom: 25px;
+.court-cases-list {
+  border-bottom: 1px solid $govuk-border-colour;
+  margin-bottom: 30px
 }
 
-.sentence-list, .court-cases-list {
-  border-top: 1px solid $govuk-border-colour;
-  padding-top: 30px
-}
-
-.sentence-list, .court-cases-list {
+.sentence-list {
   border-top: 1px solid $govuk-border-colour;
   padding-top: 30px
 }
@@ -1153,3 +1149,14 @@ padding: 10px;
     margin-bottom: 0;
 }
 
+#filter-accordian {
+    border-bottom: none;
+}
+
+.moj-filter__options {
+    padding-bottom: 0;
+}
+
+.sort-select {
+    margin-top: -5px;
+}
