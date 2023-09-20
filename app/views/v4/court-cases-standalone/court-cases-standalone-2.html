@@ -379,7 +379,7 @@
                         <!-- Court case 1 -->
                         <div class="govuk-summary-card">
                             <div class="govuk-summary-card__title-wrapper">
-                                <h2 class="govuk-summary-card__title">Court case {{ data['court-case-ref'] }}</h2></a>
+                                <h2 class="govuk-summary-card__title">Court case {{ data['courtCase']['court-case-ref'] }}</h2></a>
                                 <ul class="govuk-summary-card__actions">
                                     <li class="govuk-summary-card__action govuk-body"> <a class="govuk-link" href="#">
                                             Update
@@ -398,7 +398,7 @@
                                             Type of case
                                         </dt>
                                         <dd class="govuk-summary-list__value">
-                                            {{ data['type-of-case'] }}
+                                            {{ data['courtCase']['type-of-case'] }}
                                         </dd>
                                     </div>
                                     <div class="govuk-summary-list__row">
@@ -406,7 +406,7 @@
                                             Court name
                                         </dt>
                                         <dd class="govuk-summary-list__value">
-                                            {{ data['court-name'] }}
+                                            {{ data['courtCase']['court-name'] }}
                                         </dd>
                                     </div>
                                     <div class="govuk-summary-list__row">
@@ -414,7 +414,7 @@
                                             Warrant date
                                         </dt>
                                         <dd class="govuk-summary-list__value">
-                                            {{ data['warrant-date-day'] }}/{{ data['warrant-date-month'] }}/{{ data['warrant-date-year'] }}
+                                            {{ data['courtCase']['warrant-date-day'] }}/{{ data['courtCase']['warrant-date-month'] }}/{{ data['courtCase']['warrant-date-year'] }}
                                         </dd>
                                     </div>
                                     <div class="govuk-summary-list__row">
@@ -422,7 +422,7 @@
                                             Overall case outcome
                                         </dt>
                                         <dd class="govuk-summary-list__value">
-                                            {{ data['overall-case-outcome'] }}
+                                            {{ data['courtCase']['overall-case-outcome'] }}
                                         </dd>
                                     </div>
                                     <div class="govuk-summary-list__row">
@@ -430,7 +430,7 @@
                                             Next court date
                                         </dt>
                                         <dd class="govuk-summary-list__value">
-                                            {{ data['next-court-date-day'] }}/{{ data['next-court-date-month'] }}/{{ data['next-court-date-year'] }}
+                                            {{ data['courtCase']['next-court-date-day'] }}/{{ data['courtCase']['next-court-date-month'] }}/{{ data['courtCase']['next-court-date-year'] }}
                                         </dd>
                                     </div>
                                     <div class="govuk-summary-list__row">
@@ -438,7 +438,7 @@
                                             Next court date
                                         </dt>
                                         <dd class="govuk-summary-list__value">
-                                            {{ data['next-court-date-day'] }}/{{ data['next-court-date-month'] }}/{{ data['next-court-date-year'] }} at {{ data['next-court-time'] }} {{ data['next-court-time-period'] }}
+                                            {{ data['courtCase']['next-court-date-day'] }}/{{ data['courtCase']['next-court-date-month'] }}/{{ data['courtCase']['next-court-date-year'] }} at {{ data['courtCase']['next-court-time'] }} {{ data['courtCase']['next-court-time-period'] }}
                                         </dd>
                                     </div>
                                     <div class="govuk-summary-list__row">

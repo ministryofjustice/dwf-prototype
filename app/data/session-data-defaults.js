@@ -18,6 +18,17 @@ Example usage:
 */
 
 module.exports = {
+    courtCases:[]
+    // ,courtCase: {
+    //     'court-case-ref': '123',
+    //     'court-name': 'Birmingham Court',
+    //     'warrant-date-day': '12',
+    //     'warrant-date-month': '9',
+    //     'warrant-date-year': '2023',
+    //     'type-of-case': "Remand",
+    //     'overall-case-outcome': "Remand before conviction",
+    //     'next-court-date-set': "No"
+    // } Example of what is stored in the session for submitting a court case
 
   // Insert values here
 

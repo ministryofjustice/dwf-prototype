@@ -14,7 +14,7 @@
         <form class="form" action="../court-cases-standalone-2">
             <div class="govuk-summary-card govuk-!-margin-top-4">
                 <div class="govuk-summary-card__title-wrapper">
-                    <h2 class="govuk-summary-card__title">Court case {{ data['court-case-ref'] }}</h2>
+                    <h2 class="govuk-summary-card__title">Court case {{ data['courtCase']['court-case-ref'] }}</h2>
                 </div>
                 <div class="govuk-summary-card__content">
                     <dl class="govuk-summary-list">
@@ -23,7 +23,7 @@
                                 Type of case
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                {{ data['type-of-case'] }}
+                                {{ data['courtCase']['type-of-case'] }}
                             </dd>
                         </div>
                         <div class="govuk-summary-list__row">
@@ -31,7 +31,7 @@
                                 Court name
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                {{ data['court-name'] }}
+                                {{ data['courtCase']['court-name'] }}
                             </dd>
                         </div>
                         <div class="govuk-summary-list__row" style="border-bottom: 1px solid #b1b4b6;">
@@ -39,7 +39,7 @@
                                 Warrant date
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                {{ data['warrant-date-day'] }}/{{ data['warrant-date-month'] }}/{{ data['warrant-date-year'] }}
+                                {{ data['courtCase']['warrant-date-day'] }}/{{ data['courtCase']['warrant-date-month'] }}/{{ data['courtCase']['warrant-date-year'] }}
                             </dd>
                         </div>
                     </dl>
@@ -83,7 +83,7 @@
                     Add another offence
                 </button>
             </div>
-            <p class="govuk-body"><a href="../court-cases-standalone-1">Return to court cases</a></p>
+            <p class="govuk-body"><a href="../court-cases-standalone">Return to court cases</a></p>
         </form>
     </div>
 </div>
