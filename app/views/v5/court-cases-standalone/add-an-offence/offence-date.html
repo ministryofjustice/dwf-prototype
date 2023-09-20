@@ -1,0 +1,190 @@
+{% extends "../template.html" %}
+{% block content %}
+<!-- Back link -->
+<a href="count-number" class="govuk-back-link govuk-!-margin-top-0">Back</a>
+<!-- What is the confirmed date -->
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" action="offence-code">
+            <fieldset class="govuk-fieldset" role="group" aria-describedby="passport-issued-hint">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    <h1 class="govuk-fieldset__heading">
+                        <span class="govuk-caption-l">Add an offence</span>
+                        Enter the offence date
+                    </h1>
+                </legend>
+                <div class="govuk-form-group">
+                    <label class="govuk-label govuk-label--s" for="offence-start-date">
+                        Offence start date
+                    </label>
+                    <div class="govuk-date-input" id="offence-start-date">
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="offence-start-date-day">
+                                    Day
+                                </label>
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="offence-start-date-day" name="offence-start-date-day" type="text" inputmode="numeric">
+                            </div>
+                        </div>
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="offence-start-date-month">
+                                    Month
+                                </label>
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="offence-start-date-month" name="offence-start-date-month" type="text" inputmode="numeric">
+                            </div>
+                        </div>
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="offence-start-date-year">
+                                    Year
+                                </label>
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="offence-start-date-year" name="offence-start-date-year" type="text" inputmode="numeric">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="govuk-form-group">
+                    <label class="govuk-label govuk-label--s" for="offence-start-date">
+                        Offence end date (optional)
+                    </label>
+                    <div id="event-name-hint" class="govuk-hint">
+                        This only applies to offences occuring over multiple days
+                    </div>
+                    <div class="govuk-date-input" id="offence-end-date">
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="offence-end-date-day">
+                                    Day
+                                </label>
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="offence-end-date-day" name="offence-end-date-day" type="text" inputmode="numeric">
+                            </div>
+                        </div>
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="offence-end-date-month">
+                                    Month
+                                </label>
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="offence-end-date-month" name="offence-end-date-month" type="text" inputmode="numeric">
+                            </div>
+                        </div>
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="offence-end-date-year">
+                                    Year
+                                </label>
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="offence-end-date-year" name="offence-end-date-year" type="text" inputmode="numeric">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <button class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+    <div class="govuk-grid-column-one-third">
+        <!-- <div class="govuk-summary-card">
+            <div class="govuk-summary-card__title-wrapper">
+                <h2 class="govuk-summary-card__title offences-summary-title">Summary</h2>
+            </div>
+            <div class="offences-summary-card">
+                <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
+                    <div class="govuk-summary-list__row offences-summary-card-court-details-row">
+                        <dt class="govuk-summary-list__key">
+                            Court case
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data['court-case-ref'] }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row offences-summary-card-court-details-row">
+                        <dt class="govuk-summary-list__key">
+                            Court name
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data['court-name'] }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Warrant date
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data['warrant-date-day'] }}/{{ data['warrant-date-month'] }}/{{ data['warrant-date-year'] }}
+                        </dd>
+                    </div>
+                </dl>
+                <dl class="offences-summary-card-content">
+                    <h3 class="govuk-heading-s">Offences (1)</h3>
+                    <div class="offences-summary-card-row">
+                        <dt class="offences-summary-card-key govuk-body">
+                            Robbery
+                        </dt>
+                        <dd class="offences-summary-card-value govuk-body-s">committed 14/04/20</dd>
+                    </div>
+                                        <div class="offences-summary-card-row">
+                        <dt class="offences-summary-card-key govuk-body">
+                            Riding a horse furiously in the street
+                        </dt>
+                        <dd class="offences-summary-card-value govuk-body-s">committed 14/04/20</dd>
+                    </div>
+                </dl>
+            </div> -->
+        <div class="offence-summary" style="border-top: 2px solid #1d70b8;">
+            <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content govuk-!-margin-top-4">
+                <div class="govuk-summary-list__row offences-summary-card-court-details-row">
+                    <dt class="govuk-summary-list__key">
+                        Court case
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['court-case-ref'] }}
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row offences-summary-card-court-details-row">
+                    <dt class="govuk-summary-list__key">
+                        Court name
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['court-name'] }}
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Warrant date
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['warrant-date-day'] }}/{{ data['warrant-date-month'] }}/{{ data['warrant-date-year'] }}
+                    </dd>
+                </div>
+            </dl>
+                      <h3 class="govuk-heading-s">Offences added (2)</h3>
+                    <details class="govuk-details" data-module="govuk-details">
+  <summary class="govuk-details__summary">
+    <span class="govuk-details__summary-text">
+      Show offences
+    </span>
+  </summary>
+  <div class="govuk-details__text">
+                                <dl class="offences-summary-card-content">
+                    <div class="offences-summary-card-row">
+                        <dt class="offences-summary-card-key govuk-body">
+                            Robbery
+                        </dt>
+                        <dd class="offences-summary-card-value govuk-body-s">committed 14/04/20</dd>
+                    </div>
+                                        <div class="offences-summary-card-row">
+                        <dt class="offences-summary-card-key govuk-body">
+                            Riding a horse furiously in the street
+                        </dt>
+                        <dd class="offences-summary-card-value govuk-body-s">committed 14/04/20</dd>
+                    </div>
+                </dl>
+  </div>
+</details>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
