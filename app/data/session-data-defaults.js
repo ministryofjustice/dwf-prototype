@@ -27,7 +27,8 @@ module.exports = {
     //     'warrant-date-year': '2023',
     //     'type-of-case': "Remand",
     //     'overall-case-outcome': "Remand before conviction",
-    //     'next-court-date-set': "No"
+    //     'next-court-date-set': "No",
+    //      offences: []
     // } Example of what is stored in the session for submitting a court case
 
   // Insert values here
