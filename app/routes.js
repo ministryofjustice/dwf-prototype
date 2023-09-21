@@ -71,6 +71,11 @@ router.get('/delete-court-case', function(req, res) {
 router.get('/create-offence', function(req, res) {
   delete req.session.data.offenceIndex
   delete  req.session.data.offence
+  const courtIndex = req.query.courtIndex
+  if(courtIndex !== undefined) {
+    req.session.data.courtCase = req.session.data.courtCases[courtIndex]
+    req.session.data.courtCaseIndex = courtIndex
+  }
   res.redirect('/v5/court-cases-standalone/add-an-offence/offence-date')
 })
 
