@@ -139,7 +139,7 @@
                         Court case
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['court-case-ref'] }}
+                        {{ data['courtCase']['court-case-ref'] }}
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row offences-summary-card-court-details-row">
@@ -147,7 +147,7 @@
                         Court name
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['court-name'] }}
+                        {{ data['courtCase']['court-name'] }}
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row">
@@ -155,7 +155,7 @@
                         Warrant date
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['warrant-date-day'] }}/{{ data['warrant-date-month'] }}/{{ data['warrant-date-year'] }}
+                        {{ data['courtCase']['warrant-date-day'] }}/{{ data['courtCase']['warrant-date-month'] }}/{{ data['courtCase']['warrant-date-year'] }}
                     </dd>
                 </div>
             </dl>
