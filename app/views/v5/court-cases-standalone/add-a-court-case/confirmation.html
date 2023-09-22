@@ -6,16 +6,12 @@
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
         <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
-
-  <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
-    <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
-  </svg>
-
-  <div class="moj-banner__message">Court {{ data['court-case-ref'] }} case saved.</div>
-
-</div>
-
-<!--         <div class="govuk-panel govuk-panel--confirmation govuk-!-padding-0">
+            <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+                <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
+            </svg>
+            <div class="moj-banner__message">Court {{ data['court-case-ref'] }} case saved.</div>
+        </div>
+        <!--         <div class="govuk-panel govuk-panel--confirmation govuk-!-padding-0">
             <h1 class="govuk-panel__title-l">
                 Court case case added 
             </h1>
@@ -23,16 +19,16 @@
         <form class="form" action="../add-an-offence/count-number">
             <div class="govuk-summary-card govuk-!-margin-top-4">
                 <div class="govuk-summary-card__title-wrapper">
-                    <h2 class="govuk-summary-card__title">Court case <span class="govuk-body">{{ data['court-case-ref'] }}</span></h2>
+                    <h2 class="govuk-summary-card__title">Court case <span class="govuk-body">{{ data['courtCase']['court-case-ref'] }}</span></h2>
                 </div>
                 <div class="govuk-summary-card__content">
                     <dl class="govuk-summary-list">
                         <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key">
-                                Type of case
+                                Warrant date
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                {{ data['type-of-case'] }}
+                                {{ data['courtCase']['warrant-date-day'] }}/{{ data['courtCase']['warrant-date-month'] }}/{{ data['courtCase']['warrant-date-year'] }}
                             </dd>
                         </div>
                         <div class="govuk-summary-list__row">
@@ -40,15 +36,15 @@
                                 Court name
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                {{ data['court-name'] }}
+                                {{ data['courtCase']['court-name'] }}
                             </dd>
                         </div>
                         <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key">
-                                Warrant date
+                                Type of case
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                {{ data['warrant-date-day'] }}/{{ data['warrant-date-month'] }}/{{ data['warrant-date-year'] }}
+                                {{ data['courtCase']['type-of-case'] }}
                             </dd>
                         </div>
                         <div class="govuk-summary-list__row">
@@ -56,7 +52,16 @@
                                 Overall case outcome
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                {{ data['overall-case-outcome'] }}
+                                {{ data['courtCase']['overall-case-outcome'] }}
+                            </dd>
+                        </div>
+                        {% if (data['courtCase']['next-court-date-set'] == 'Yes') %}
+                                            <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Next hearing type
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                {{ data['courtCase']['next-hearing-type-set'] }}
                             </dd>
                         </div>
                         <div class="govuk-summary-list__row">
@@ -64,7 +69,7 @@
                                 Next court date
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                {{ data['next-court-date-day'] }}/{{ data['next-court-date-month'] }}/{{ data['next-court-date-year'] }}
+                                {{ data['courtCase']['next-court-date-day'] }}/{{ data['courtCase']['next-court-date-month'] }}/{{ data['courtCase']['next-court-date-year'] }}
                             </dd>
                         </div>
                         <div class="govuk-summary-list__row">
@@ -72,9 +77,19 @@
                                 Next court date
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                {{ data['next-court-date-day'] }}/{{ data['next-court-date-month'] }}/{{ data['next-court-date-year'] }} at {{ data['next-court-time'] }} {{ data['next-court-time-period'] }}
+                                {{ data['courtCase']['next-court-date-day'] }}/{{ data['courtCase']['next-court-date-month'] }}/{{ data['courtCase']['next-court-date-year'] }} at {{ data['courtCase']['next-court-time'] }} {{ data['courtCase']['next-court-time-period'] }}
                             </dd>
                         </div>
+                        {% else %}
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Next court date
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                {{ data['courtCase']['next-court-date-set'] }}
+                            </dd>
+                        </div>
+                        {% endif %}
                     </dl>
                 </div>
             </div>
@@ -82,7 +97,7 @@
             <button class="govuk-button" data-module="govuk-button">
                 Add a court apperance
             </button>
-            <p class="govuk-body"><a href="../court-cases-standalone">Save and return to Joe Bloggs's court cases</a></p>
+            <p class="govuk-body"><a href="../court-cases-standalone">Back to Joe Bloggs's court cases</a></p>
         </form>
     </div>
 </div>
