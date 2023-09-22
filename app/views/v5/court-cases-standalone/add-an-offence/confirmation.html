@@ -11,10 +11,10 @@
             </svg>
             <div class="moj-banner__message">Count {{ data['count-number'] }} successfully added </div>
         </div>
-        <form class="form" action="../court-cases-standalone-2">
+        <form class="form" action="../court-cases-standalone">
             <div class="govuk-summary-card govuk-!-margin-top-4">
                 <div class="govuk-summary-card__title-wrapper">
-                    <h2 class="govuk-summary-card__title">Court case {{ data['court-case-ref'] }}</h2>
+                    <h2 class="govuk-summary-card__title">Court case {{ data['courtCase']['court-case-ref'] }}</h2>
                 </div>
                 <div class="govuk-summary-card__content">
                     <dl class="govuk-summary-list">
@@ -23,7 +23,7 @@
                                 Type of case
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                {{ data['type-of-case'] }}
+                                {{ data['courtCase']['type-of-case'] }}
                             </dd>
                         </div>
                         <div class="govuk-summary-list__row">
@@ -31,7 +31,7 @@
                                 Court name
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                {{ data['court-name'] }}
+                                {{ data['courtCase']['court-name'] }}
                             </dd>
                         </div>
                         <div class="govuk-summary-list__row" style="border-bottom: 1px solid #b1b4b6;">
@@ -39,51 +39,57 @@
                                 Warrant date
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                {{ data['warrant-date-day'] }}/{{ data['warrant-date-month'] }}/{{ data['warrant-date-year'] }}
+                                {{ data['courtCase']['warrant-date-day'] }}/{{ data['courtCase']['warrant-date-month'] }}/{{ data['courtCase']['warrant-date-year'] }}
                             </dd>
                         </div>
                     </dl>
                 </div>
                 <div class="govuk-!-padding-4">
                     <h2 class="govuk-heading-m">Offences</h2>
+
+                    {% for offence in data.courtCases[data.courtCaseIndex].offences %}
+
                     <div class="govuk-!-margin-bottom-4 app-possible-prison-record" style="display: flex;">
                         <div class="govuk-grid-column-full govuk-!-margin-top-4">
-                            <span class="govuk-body-s" style="display:inline-block;">Count {{ data['count-number'] }}</span><ul class="govuk-summary-card__actions govuk-!-margin-top-0" style="display:inline-block; float: right;">
+                            <span class="govuk-body-s" style="display:inline-block;">Count {{ loop.index }}</span><ul class="govuk-summary-card__actions govuk-!-margin-top-0" style="display:inline-block; float: right;">
                         <li class="govuk-summary-card__action govuk-body"> <a class="govuk-link" href="#">
                                 Update
                             </a>
                         </li>
-                        <li class="govuk-summary-card__action govuk-body"> <a class="govuk-link dwf-text-colour-red" href="#">
+                        <li class="govuk-summary-card__action govuk-body"> <a class="govuk-link dwf-text-colour-red" href="/delete-offence?index={{loop.index0}}">
                                 Delete
                             </a>
                         </li>
                     </ul>
                             <h4 class="govuk-heading-s govuk-!-margin-bottom-1">
-                                {{ data['offence-name'] }}
+                                {{ offence['offence-name'] }}
                             </h4>
-                            <p class="govuk-body-s">Committed on {{ data['offence-start-date-day'] }}/{{ data['offence-start-date-month'] }}/{{ data['offence-start-date-year'] }}</p>
+                            <p class="govuk-body-s">Committed on {{ offence['offence-start-date-day'] }}/{{ offence['offence-start-date-month'] }}/{{ offence['offence-start-date-year'] }}</p>
                             <table class="govuk-table govuk-!-margin-right-4 govuk-!-margin-bottom-6 govuk-!-margin-bottom-0">
                                 <tbody class="govuk-table__body">
                                     <tr class="govuk-table__row govuk-body-s">
                                         <th scope="row" class="govuk-table__header sentence-table-header">Outcome</th>
-                                        <td class="govuk-table__cell">{{ data['outcome'] }}
+                                        <td class="govuk-table__cell">{{ offence['outcome'] }}
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
+
+                    {% endfor %}
+
                 </div>
             </div>
             <div class="govuk-button-group">
                 <button class="govuk-button" data-module="govuk-button">
                     Finish and save
                 </button>
-                <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="count-number">
+                <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="/create-offence">
                     Add another offence
                 </button>
             </div>
-            <p class="govuk-body"><a href="../court-cases-standalone-1">Return to court cases</a></p>
+            <p class="govuk-body"><a href="../court-cases-standalone">Return to court cases</a></p>
         </form>
     </div>
 </div>
