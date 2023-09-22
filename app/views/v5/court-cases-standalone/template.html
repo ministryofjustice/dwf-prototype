@@ -115,8 +115,8 @@ Court cases and release dates
                         </div>
                             <p class="govuk-heading-s govuk-!-margin-bottom-1"><a class="govuk-link--no-visited-state" href="https://prisoner-dev.digital.prison.service.justice.gov.uk/prisoner/G6123VU" target="_blank">Joe Bloggs</a></p>
                             <p class="govuk-!-margin-bottom-1">A123456</p>
-                            {% if onRemand == true %}<p class="">On remand</p>
-                            {% elif onRemand == false %}<p class=""></p>{% endif %}
+                            {% if status == "On remand" %}<p class="govuk-body">On remand</p>
+                            {% else %}<p class="govuk-body">No status</p>{% endif %}
                         </div>
                         <div class="govuk-grid-column-one-third govuk-!-padding-0">
                             <ul class="dwf-header-info">

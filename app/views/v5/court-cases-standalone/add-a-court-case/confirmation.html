@@ -1,4 +1,7 @@
 {% extends "../template.html" %}
+{% if (data['courtCase']['type-of-case'] == 'Remand') %}
+{% set status = "On remand" %}
+{% endif %}
 {% block content %}
 <!-- Back link -->
 <a href="check-answers" class="govuk-back-link govuk-!-margin-top-0">Back</a>
@@ -56,7 +59,7 @@
                             </dd>
                         </div>
                         {% if (data['courtCase']['next-court-date-set'] == 'Yes') %}
-                                            <div class="govuk-summary-list__row">
+                        <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key">
                                 Next hearing type
                             </dt>
