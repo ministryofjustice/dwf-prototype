@@ -14,7 +14,6 @@ router.post('/next-court-date-select', function (req, res) {
 
   // Make a variable and give it the value 
   var nextCourtDateSelect = req.session.data['courtCase']['next-court-date-set']
-console.log(nextCourtDateSelect)
   // Check whether the variable matches a condition
   if (nextCourtDateSelect == "Yes"){
     // Send user to next page
