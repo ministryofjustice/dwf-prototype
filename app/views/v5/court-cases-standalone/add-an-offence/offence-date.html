@@ -85,53 +85,6 @@
         </form>
     </div>
     <div class="govuk-grid-column-one-third">
-        <!-- <div class="govuk-summary-card">
-            <div class="govuk-summary-card__title-wrapper">
-                <h2 class="govuk-summary-card__title offences-summary-title">Summary</h2>
-            </div>
-            <div class="offences-summary-card">
-                <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
-                    <div class="govuk-summary-list__row offences-summary-card-court-details-row">
-                        <dt class="govuk-summary-list__key">
-                            Court case
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            {{ data['court-case-ref'] }}
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row offences-summary-card-court-details-row">
-                        <dt class="govuk-summary-list__key">
-                            Court name
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            {{ data['court-name'] }}
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Warrant date
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            {{ data['warrant-date-day'] }}/{{ data['warrant-date-month'] }}/{{ data['warrant-date-year'] }}
-                        </dd>
-                    </div>
-                </dl>
-                <dl class="offences-summary-card-content">
-                    <h3 class="govuk-heading-s">Offences (1)</h3>
-                    <div class="offences-summary-card-row">
-                        <dt class="offences-summary-card-key govuk-body">
-                            Robbery
-                        </dt>
-                        <dd class="offences-summary-card-value govuk-body-s">committed 14/04/20</dd>
-                    </div>
-                                        <div class="offences-summary-card-row">
-                        <dt class="offences-summary-card-key govuk-body">
-                            Riding a horse furiously in the street
-                        </dt>
-                        <dd class="offences-summary-card-value govuk-body-s">committed 14/04/20</dd>
-                    </div>
-                </dl>
-            </div> -->
         <div class="offence-summary" style="border-top: 2px solid #1d70b8;">
             <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content govuk-!-margin-top-4">
                 <h2 class="govuk-heading-m">Summary</h2>
@@ -168,25 +121,25 @@
                     </dd>
                 </div>
             </dl>
-                    <details class="govuk-details" data-module="govuk-details">
-  <summary class="govuk-details__summary">
-    <span class="govuk-details__summary-text">
-      Show offences
-    </span>
-  </summary>
-  <div class="govuk-details__text">
-                                <dl class="offences-summary-card-content">
-                                    {% for offence in data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex].offences %}
-                    <div class="offences-summary-card-row">
-                        <dt class="offences-summary-card-key govuk-!-font-weight-bold">
-                            {{ offence['offence-name'] }}
-                        </dt>
-                        <dd class="offences-summary-card-value govuk-body-s">Committed on {{ offence['offence-start-date-day'] }}/{{ offence['offence-start-date-month'] }}/{{ offence['offence-start-date-year'] }}</dd>
-                    </div>
-                    {% endfor %}
-                </dl>
-  </div>
-</details>
+            <details class="govuk-details" data-module="govuk-details">
+                <summary class="govuk-details__summary">
+                    <span class="govuk-details__summary-text">
+                        Show offences
+                    </span>
+                </summary>
+                <div class="govuk-details__text">
+                    <dl class="offences-summary-card-content">
+                        {% for offence in data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex].offences %}
+                        <div class="offences-summary-card-row">
+                            <dt class="offences-summary-card-key govuk-!-font-weight-bold">
+                                {{ offence['offence-name'] }}
+                            </dt>
+                            <dd class="offences-summary-card-value govuk-body-s">Committed on {{ offence['offence-start-date-day'] }}/{{ offence['offence-start-date-month'] }}/{{ offence['offence-start-date-year'] }}</dd>
+                        </div>
+                        {% endfor %}
+                    </dl>
+                </div>
+            </details>
         </div>
     </div>
 </div>

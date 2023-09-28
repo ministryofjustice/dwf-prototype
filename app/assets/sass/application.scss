@@ -1167,3 +1167,11 @@ padding: 10px;
 .govuk-summary-list__key {
     width: 42%;
 }
+
+.offence-list-reveal {
+    border-top: hidden;
+}
+
+.autocomplete__hint, .autocomplete__input {
+    width:80% !important;
+}
