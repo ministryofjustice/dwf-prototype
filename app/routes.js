@@ -19,10 +19,19 @@ router.post('/next-court-date-select', function (req, res) {
     // Send user to next page
     res.redirect('/v5/court-cases-standalone/add-a-court-case/next-hearing-type-select')
   } else res.redirect('/v5/court-cases-standalone/add-a-court-case/check-answers')
-
 })
 
+// Next court date route for add first appearance
+router.post('/add-a-first-court-appearance/next-court-date-select', function (req, res) {
 
+  // Make a variable and give it the value 
+  var nextCourtDateSelect = req.session.data['appearance']['next-court-date-set']
+  // Check whether the variable matches a condition
+  if (nextCourtDateSelect == "Yes"){
+    // Send user to next page
+    res.redirect('/v5/court-cases-standalone/add-a-first-court-appearance/next-hearing-type-select')
+  } else res.redirect('/v5/court-cases-standalone/add-a-first-court-appearance/check-answers')
+})
 
 // Offence code route
 router.post('/offence-code-known', function (req, res) {
@@ -36,6 +45,8 @@ console.log(offenceCodeKnown)
   } else res.redirect('/v5/court-cases-standalone/add-an-offence/confirm-offence')
 
 })
+
+//Add court case
 
 router.get('/create-court-case', function(req, res) {
   delete req.session.data.courtCaseIndex
@@ -66,6 +77,29 @@ router.get('/delete-court-case', function(req, res) {
   req.session.data.courtCases.splice(index, 1)
   res.redirect('/v5/court-cases-standalone/court-cases-standalone')
 })
+
+//Add court appearance
+
+router.get('/create-appearance', function(req, res) {
+  delete req.session.data.appearanceIndex
+  delete  req.session.data.appearance
+  res.redirect('/v5/court-cases-standalone/add-a-first-court-appearance/overall-case-outcome')
+})
+
+
+
+router.post('/persist-appearance', function (req, res) {
+  if(req.session.data.appearanceIndex !== undefined) {
+    req.session.data.appearance[req.session.data.appearanceIndex] = req.session.data.appearance
+  } else {
+    req.session.data.appearances.push({...req.session.data.appearance, offences: []})
+    req.session.data.appearanceIndex = req.session.data.appearances.length -1
+  }
+
+  res.redirect('/v5/court-cases-standalone/add-an-offence/offence-date')
+})
+
+//Add offences
 
 router.get('/create-offence', function(req, res) {
   delete req.session.data.offenceIndex
@@ -100,5 +134,6 @@ router.get('/delete-offence', function(req, res) {
   req.session.data.courtCases[req.session.data.courtCaseIndex].offences.splice(index, 1)
   res.redirect('/v5/court-cases-standalone/add-an-offence/confirmation')
 })
+
 
 

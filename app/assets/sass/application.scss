@@ -10,7 +10,10 @@
 @import "components/dps";
 
 // DPS header
-@import "components/header-bar";
+@import "components/dps-header";
+
+//Service name header
+@import "components/service-header";
 
 // Hero banner (masthead)
 @import "components/masthead";
@@ -1159,4 +1162,8 @@ padding: 10px;
 
 .sort-select {
     margin-top: -5px;
+}
+
+.govuk-summary-list__key {
+    width: 42%;
 }
