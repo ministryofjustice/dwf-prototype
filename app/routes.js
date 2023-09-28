@@ -58,7 +58,7 @@ router.post('/persist-court-case', function (req, res) {
   if(req.session.data.courtCaseIndex !== undefined) {
     req.session.data.courtCases[req.session.data.courtCaseIndex] = req.session.data.courtCase
   } else {
-    req.session.data.courtCases.push({...req.session.data.courtCase, offences: []})
+    req.session.data.courtCases.push({...req.session.data.courtCase, appearances: []})
     req.session.data.courtCaseIndex = req.session.data.courtCases.length -1
   }
 
@@ -83,6 +83,11 @@ router.get('/delete-court-case', function(req, res) {
 router.get('/create-appearance', function(req, res) {
   delete req.session.data.appearanceIndex
   delete  req.session.data.appearance
+  const courtIndex = req.query.courtIndex
+  if(courtIndex !== undefined) {
+    req.session.data.courtCase = req.session.data.courtCases[courtIndex]
+    req.session.data.courtCaseIndex = courtIndex
+  }
   res.redirect('/v5/court-cases-standalone/add-a-first-court-appearance/overall-case-outcome')
 })
 
@@ -90,10 +95,10 @@ router.get('/create-appearance', function(req, res) {
 
 router.post('/persist-appearance', function (req, res) {
   if(req.session.data.appearanceIndex !== undefined) {
-    req.session.data.appearance[req.session.data.appearanceIndex] = req.session.data.appearance
+    req.session.data.courtCases[req.session.data.courtCaseIndex].appearance[req.session.data.appearanceIndex] = req.session.data.appearance
   } else {
-    req.session.data.appearances.push({...req.session.data.appearance, offences: []})
-    req.session.data.appearanceIndex = req.session.data.appearances.length -1
+    req.session.data.courtCases[req.session.data.courtCaseIndex].appearances.push({...req.session.data.appearance, offences: []})
+    req.session.data.appearanceIndex = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances.length -1
   }
 
   res.redirect('/v5/court-cases-standalone/add-an-offence/offence-date')
@@ -104,34 +109,34 @@ router.post('/persist-appearance', function (req, res) {
 router.get('/create-offence', function(req, res) {
   delete req.session.data.offenceIndex
   delete  req.session.data.offence
-  const courtIndex = req.query.courtIndex
-  if(courtIndex !== undefined) {
-    req.session.data.courtCase = req.session.data.courtCases[courtIndex]
-    req.session.data.courtCaseIndex = courtIndex
+  const appearanceIndex = req.query.appearanceIndex
+  if(appearanceIndex !== undefined) {
+    req.session.data.appearanceIndex = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[appearanceIndex]
+    req.session.data.appearanceIndex = appearanceIndex
   }
   res.redirect('/v5/court-cases-standalone/add-an-offence/offence-date')
 })
 
 router.post('/persist-offence', function(req, res) {
   if(req.session.data.offenceIndex !== undefined) {
-    req.session.data.courtCases[req.session.data.courtCaseIndex].offences[req.session.data.offenceIndex] = req.session.data.offence
+    req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[req.session.data.appearanceIndex].offences[req.session.data.offenceIndex] = req.session.data.offence
   } else {
-    req.session.data.courtCases[req.session.data.courtCaseIndex].offences.push(req.session.data.offence)
-    req.session.data.offenceIndex = req.session.data.courtCases[req.session.data.courtCaseIndex].offences.length - 1
+    req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[req.session.data.appearanceIndex].offences.push(req.session.data.offence)
+    req.session.data.offenceIndex = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[req.session.data.appearanceIndex].offences.length - 1
   }
   res.redirect('/v5/court-cases-standalone/add-an-offence/confirmation')
 })
 
 router.get('/update-offence', function(req, res) {
   const index = req.query.index
-  req.session.data.offence = req.session.data.courtCases[req.session.data.courtCaseIndex].offences[index]
+  req.session.data.offence = req.session.data.courtCases[req.session.data.courtCaseIndex].appearance[req.session.data.appearanceIndex].offences[index]
   req.session.data.offenceIndex = index
   res.redirect('/v5/court-cases-standalone/add-a-court-case/check-answers')
 })
 
 router.get('/delete-offence', function(req, res) {
   const index = req.query.index
-  req.session.data.courtCases[req.session.data.courtCaseIndex].offences.splice(index, 1)
+  req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[req.session.data.appearanceIndex].offences.splice(index, 1)
   res.redirect('/v5/court-cases-standalone/add-an-offence/confirmation')
 })
 
