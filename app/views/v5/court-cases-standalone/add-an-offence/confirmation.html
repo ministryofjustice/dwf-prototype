@@ -9,7 +9,7 @@
             <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
                 <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
             </svg>
-            <div class="moj-banner__message">Count {{ data['count-number'] }} successfully added </div>
+            <div class="moj-banner__message">Offence successfully added </div>
         </div>
         <form class="form" action="../court-cases-standalone">
             <div class="govuk-summary-card govuk-!-margin-top-4">
@@ -46,21 +46,21 @@
                 </div>
                 <div class="govuk-!-padding-4">
                     <h2 class="govuk-heading-m">Offences</h2>
-
-                    {% for offence in data.courtCases[data.courtCaseIndex].offences %}
-
+                    {% for offence in data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex].offences %}
                     <div class="govuk-!-margin-bottom-4 app-possible-prison-record" style="display: flex;">
                         <div class="govuk-grid-column-full govuk-!-margin-top-4">
-                            <span class="govuk-body-s" style="display:inline-block;">Count {{ loop.index }}</span><ul class="govuk-summary-card__actions govuk-!-margin-top-0" style="display:inline-block; float: right;">
-                        <li class="govuk-summary-card__action govuk-body"> <a class="govuk-link" href="#">
-                                Update
-                            </a>
-                        </li>
-                        <li class="govuk-summary-card__action govuk-body"> <a class="govuk-link dwf-text-colour-red" href="/delete-offence?index={{loop.index0}}">
-                                Delete
-                            </a>
-                        </li>
-                    </ul>
+                            <span class="govuk-body-s" style="display:inline-block;">
+                                <!-- Count {{ loop.index }} --></span>
+                            <ul class="govuk-summary-card__actions govuk-!-margin-top-0" style="display:inline-block; float: right;">
+                                <li class="govuk-summary-card__action govuk-body"> <a class="govuk-link" href="#">
+                                        Update
+                                    </a>
+                                </li>
+                                <li class="govuk-summary-card__action govuk-body"> <a class="govuk-link dwf-text-colour-red" href="/delete-offence?index={{loop.index0}}">
+                                        Delete
+                                    </a>
+                                </li>
+                            </ul>
                             <h4 class="govuk-heading-s govuk-!-margin-bottom-1">
                                 {{ offence['offence-name'] }}
                             </h4>
@@ -76,9 +76,7 @@
                             </table>
                         </div>
                     </div>
-
                     {% endfor %}
-
                 </div>
             </div>
             <div class="govuk-button-group">

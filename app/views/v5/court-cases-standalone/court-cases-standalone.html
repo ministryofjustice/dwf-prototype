@@ -382,8 +382,8 @@
                             <dd class="govuk-summary-list__value">
                                 {{ courtCase['warrant-date-day'] }}/{{ courtCase['warrant-date-month'] }}/{{ courtCase['warrant-date-year'] }}
                             </dd>
-                        </div> 
-                                                <div class="govuk-summary-list__row">
+                        </div>
+                        <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key">
                                 Last court name
                             </dt>
@@ -404,16 +404,16 @@
                                 Overall case outcome
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                {{ courtCase['overall-case-outcome'] }}
+                                {{ appearance['overall-case-outcome'] }}
                             </dd>
                         </div>
-                        {% if (data['courtCase']['next-court-date-set'] == 'Yes') %}
+                        {% if (data['appearance']['next-court-date-set'] == 'Yes') %}
                         <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key">
                                 Next hearing type
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                {{ data['courtCase']['next-hearing-type-set'] }}
+                                {{ data['appearance']['next-hearing-type'] }}
                             </dd>
                         </div>
                         <div class="govuk-summary-list__row">
@@ -421,7 +421,7 @@
                                 Next court date
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                {{ data['courtCase']['next-court-date-day'] }}/{{ data['courtCase']['next-court-date-month'] }}/{{ data['courtCase']['next-court-date-year'] }} at {{ data['courtCase']['next-court-time'] }} {{ data['courtCase']['next-court-time-period'] }}
+                                {{ data['appearance']['next-court-date-day'] }}/{{ data['appearance']['next-court-date-month'] }}/{{ data['appearance']['next-court-date-year'] }} at {{ data['appearance']['next-court-time'] }} {{ data['appearance']['next-court-time-period'] }}
                             </dd>
                         </div>
                         {% else %}
@@ -434,7 +434,7 @@
                             </dd>
                         </div>
                         {% endif %}
-                        <div class="govuk-summary-list__row">
+<!--                         <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key">
                                 Court documents
                             </dt>
@@ -442,7 +442,7 @@
                                 <a href="{{ asset_path }}documents/remand-warrant-joe-bloggs.pdf" class="govuk-link--no-visited-state" target="_blank"><svg class="moj-timeline__document-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 20" width="20" height="16">
                                         <path d="M9 7V1.5L14.5 7H9zM2 0C.9 0 0 .9 0 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6l-6-6H2z"></path>
                                     </svg> Remand warrant</a>
-                                <br>
+                                <br> -->
                                 <!-- <a href="{{ asset_path }}documents/trial-record-sheet-court-case-1.pdf" class="govuk-link--no-visited-state" target="_blank"><svg class="moj-timeline__document-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 20" width="20" height="16">
                                                         <path d="M9 7V1.5L14.5 7H9zM2 0C.9 0 0 .9 0 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6l-6-6H2z"></path>
                                                     </svg> Trial record sheet</a>
@@ -450,17 +450,28 @@
                                                 <a href="{{ asset_path }}documents/indictment-court-case-1.pdf" class="govuk-link--no-visited-state" target="_blank"><svg class="moj-timeline__document-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 20" width="20" height="16">
                                                         <path d="M9 7V1.5L14.5 7H9zM2 0C.9 0 0 .9 0 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6l-6-6H2z"></path>
                                                     </svg> Indictment</a> -->
-                            </dd>
-                        </div>
-                        <div class="govuk-summary-list__row">
-                            <dt class="govuk-summary-list__key">
-                                Offences
-                            </dt>
-                            <dd class="govuk-summary-list__value">
-                                <a href="/create-offence?courtIndex={{loop.index0}}">Enter offence information</a>
-                            </dd>
-                        </div>
+<!--                             </dd>
+                        </div> -->
                     </dl>
+                    <hr class="govuk-section-break govuk-section-break--visible">
+                    <table class="govuk-table govuk-!-margin-top-6">
+  <caption class="govuk-table__caption govuk-table__caption--m">Appearances</caption>
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header" width="35%">Court case number</th>
+      <th scope="col" class="govuk-table__header">Court name</th>
+      <th scope="col" class="govuk-table__header">Warrant date</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    <tr class="govuk-table__row">
+      <td class="govuk-table__cell"><a href="">{{ courtCase['court-case-ref'] }}</a></td>
+      <td class="govuk-table__cell">{{ courtCase['court-name'] }}</td>
+      <td class="govuk-table__cell">{{ courtCase['warrant-date-day'] }}/{{ courtCase['warrant-date-month'] }}/{{ courtCase['warrant-date-year'] }}</td>
+    </tr>
+  </tbody>
+</table>
+
                 </div>
             </div>
             {% endfor %}
