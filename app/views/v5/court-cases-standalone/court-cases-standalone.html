@@ -358,7 +358,7 @@
             {% for courtCase in data.courtCases %}
             <div class="govuk-summary-card">
                 <div class="govuk-summary-card__title-wrapper">
-                    <h2 class="govuk-summary-card__title">Court case 1</h2>
+                    <h2 class="govuk-summary-card__title">Court case {{ courtCase['court-case-num'] }}</h2>
                     <ul class="govuk-summary-card__actions">
                         <li class="govuk-summary-card__action"> <a class="govuk-link govuk-link--no-visited-state" href="#">
           Add a court appearance<span class="govuk-visually-hidden"> to court case 1</span>
