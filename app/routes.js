@@ -58,7 +58,13 @@ router.post('/persist-court-case', function (req, res) {
   if(req.session.data.courtCaseIndex !== undefined) {
     req.session.data.courtCases[req.session.data.courtCaseIndex] = req.session.data.courtCase
   } else {
-    req.session.data.courtCases.push({...req.session.data.courtCase, appearances: []})
+    req.session.data.courtCases.push({...req.session.data.courtCase, appearances: [ {
+        'warrant-date-day': req.session.data.courtCase['warrant-date-day'],
+        'warrant-date-month': req.session.data.courtCase['warrant-date-month'],
+        'warrant-date-year': req.session.data.courtCase['warrant-date-year'],
+        'court-name': req.session.data.courtCase['court-name'],
+        offences: []
+      }]})
     req.session.data.courtCaseIndex = req.session.data.courtCases.length -1
   }
 
@@ -82,7 +88,7 @@ router.get('/delete-court-case', function(req, res) {
 
 router.get('/create-appearance', function(req, res) {
   delete req.session.data.appearanceIndex
-  delete  req.session.data.appearance
+  delete req.session.data.appearance
   const courtIndex = req.query.courtIndex
   if(courtIndex !== undefined) {
     req.session.data.courtCase = req.session.data.courtCases[courtIndex]
@@ -96,6 +102,9 @@ router.get('/create-appearance', function(req, res) {
 router.post('/persist-appearance', function (req, res) {
   if(req.session.data.appearanceIndex !== undefined) {
     req.session.data.courtCases[req.session.data.courtCaseIndex].appearance[req.session.data.appearanceIndex] = req.session.data.appearance
+  } else if(req.session.data.courtCases[req.session.data.courtCaseIndex].appearances.length === 1) {
+    req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[0] = {...req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[0], ...req.session.data.appearance}
+    req.session.data.appearanceIndex = 0
   } else {
     req.session.data.courtCases[req.session.data.courtCaseIndex].appearances.push({...req.session.data.appearance, offences: []})
     req.session.data.appearanceIndex = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances.length -1

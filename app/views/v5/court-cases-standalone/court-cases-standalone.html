@@ -408,16 +408,16 @@
                                 Overall case outcome
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                {{ appearance['overall-case-outcome'] }}
+                                {{ courtCase.appearances[0]['overall-case-outcome'] }}
                             </dd>
                         </div>
-                        {% if (data['appearance']['next-court-date-set'] == 'Yes') %}
+                        {% if (courtCase.appearances[0]['next-court-date-set'] == 'Yes') %}
                         <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key">
                                 Next hearing type
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                {{ data['appearance']['next-hearing-type'] }}
+                                {{ courtCase.appearances[0]['next-hearing-type'] }}
                             </dd>
                         </div>
                         <div class="govuk-summary-list__row">
@@ -425,7 +425,7 @@
                                 Next court date
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                {{ data['appearance']['next-court-date-day'] }}/{{ data['appearance']['next-court-date-month'] }}/{{ data['appearance']['next-court-date-year'] }} at {{ data['appearance']['next-court-time'] }} {{ data['appearance']['next-court-time-period'] }}
+                                {{ courtCase.appearances[0]['next-court-date-day'] }}/{{ courtCase.appearances[0]['next-court-date-month'] }}/{{ courtCase.appearances[0]['next-court-date-year'] }} at {{ courtCase.appearances[0]['next-court-time'] }} {{ courtCase.appearances[0]['next-court-time-period'] }}
                             </dd>
                         </div>
                         {% else %}
@@ -434,7 +434,7 @@
                                 Next court date
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                {{ data['courtCase']['next-court-date-set'] }}
+                                {{ courtCase.appearances[0]['next-court-date-set'] }}
                             </dd>
                         </div>
                         {% endif %}
@@ -468,48 +468,50 @@
                             </tr>
                         </thead>
                         <tbody class="govuk-table__body">
+                            {% for appearance in courtCase.appearances %}
                             <tr class="govuk-table__row">
                                 <td class="govuk-table__cell"><a href="">{{ courtCase['court-case-ref'] }}</a></td>
-                                <td class="govuk-table__cell">{{ courtCase['court-name'] }}</td>
-                                <td class="govuk-table__cell">{{ courtCase['warrant-date-day'] }}/{{ courtCase['warrant-date-month'] }}/{{ courtCase['warrant-date-year'] }}</td>
+                                <td class="govuk-table__cell">{{ appearance['court-name'] }}</td>
+                                <td class="govuk-table__cell">{{ appearance['warrant-date-day'] }}/{{ appearance['warrant-date-month'] }}/{{ appearance['warrant-date-year'] }}</td>
                             </tr>
                             <tr class="govuk-table__row offence-list-reveal">
                               <td class="govuk-table__cell" colspan="3">
 
-<details class="govuk-details" data-module="govuk-details">
-  <summary class="govuk-details__summary">
-    <span class="govuk-details__summary-text">
-      View offences
-    </span>
-  </summary>
-  <div class="govuk-details__text">
-    {% for offence in data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex].offences %}
-                    <div class="govuk-!-margin-bottom-4 app-possible-prison-record" style="display: flex;">
-                        <div class="govuk-grid-column-full govuk-!-margin-top-4">
-                            <span class="govuk-body-s" style="display:inline-block;">
-                                <!-- Count {{ loop.index }} --></span>
-                            <h4 class="govuk-heading-s govuk-!-margin-bottom-1">
-                                {{ offence['offence-name'] }}
-                            </h4>
-                            <p class="govuk-body-s">Committed on {{ offence['offence-start-date-day'] }}/{{ offence['offence-start-date-month'] }}/{{ offence['offence-start-date-year'] }}</p>
-                            <table class="govuk-table govuk-!-margin-right-4 govuk-!-margin-bottom-6 govuk-!-margin-bottom-0">
-                                <tbody class="govuk-table__body">
-                                    <tr class="govuk-table__row govuk-body-s">
-                                        <th scope="row" class="govuk-table__header sentence-table-header">Outcome</th>
-                                        <td class="govuk-table__cell">{{ offence['outcome'] }}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    {% endfor %}
-  </div>
-</details>
+                        <details class="govuk-details" data-module="govuk-details">
+                          <summary class="govuk-details__summary">
+                            <span class="govuk-details__summary-text">
+                              View offences
+                            </span>
+                          </summary>
+                          <div class="govuk-details__text">
+                            {% for offence in appearance.offences %}
+                                <div class="govuk-!-margin-bottom-4 app-possible-prison-record" style="display: flex;">
+                                    <div class="govuk-grid-column-full govuk-!-margin-top-4">
+                                        <span class="govuk-body-s" style="display:inline-block;">
+                                            <!-- Count {{ loop.index }} --></span>
+                                        <h4 class="govuk-heading-s govuk-!-margin-bottom-1">
+                                            {{ offence['offence-name'] }}
+                                        </h4>
+                                        <p class="govuk-body-s">Committed on {{ offence['offence-start-date-day'] }}/{{ offence['offence-start-date-month'] }}/{{ offence['offence-start-date-year'] }}</p>
+                                        <table class="govuk-table govuk-!-margin-right-4 govuk-!-margin-bottom-6 govuk-!-margin-bottom-0">
+                                            <tbody class="govuk-table__body">
+                                                <tr class="govuk-table__row govuk-body-s">
+                                                    <th scope="row" class="govuk-table__header sentence-table-header">Outcome</th>
+                                                    <td class="govuk-table__cell">{{ offence['outcome'] }}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                          </div>
+                        </details>
 
 
                               </td>
                             </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>

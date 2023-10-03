@@ -29,6 +29,10 @@ module.exports = {
             "appearances": [
                 {
                     "overall-case-outcome": "Remand before conviction",
+                    "warrant-date-day": "12",
+                    "warrant-date-month": "9",
+                    "warrant-date-year": "2023",
+                    "court-name": "Aldershot and Farnham County Court",
                     "next-court-date-set": "Yes",
                     "next-hearing-type": "Court appearance",
                     "next-court-date-day": "5",
