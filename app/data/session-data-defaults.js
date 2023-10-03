@@ -18,7 +18,42 @@ Example usage:
 */
 
 module.exports = {
-    courtCases:[]
+    courtCases:[
+        {
+            "court-case-ref": "1234",
+            "warrant-date-day": "12",
+            "warrant-date-month": "9",
+            "warrant-date-year": "2023",
+            "court-name": "Aldershot and Farnham County Court",
+            "type-of-case": "Adult",
+            "appearances": [
+                {
+                    "overall-case-outcome": "Remand before conviction",
+                    "next-court-date-set": "Yes",
+                    "next-hearing-type": "Court appearance",
+                    "next-court-date-day": "5",
+                    "next-court-date-month": "10",
+                    "next-court-date-year": "2023",
+                    "next-court-time": "13:00",
+                    "offences": [
+                        {
+                            "offence-start-date-day": "24",
+                            "offence-start-date-month": "8",
+                            "offence-start-date-year": "2023",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "45462"
+                            ],
+                            "offence-name": "Kidnap",
+                            "outcome": "Remand before conviction"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
     // ,courtCase: {
     //     'court-case-ref': '123',
     //     'court-name': 'Birmingham Court',
