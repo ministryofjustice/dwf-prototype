@@ -51,7 +51,7 @@
           Add a court appearance<span class="govuk-visually-hidden"> to court case 1</span>
         </a>
       </li>
-                        <li class="govuk-summary-card__action"> <a class="govuk-link govuk-link--no-visited-state" href="/update-court-case?index={{loop.index0}}">
+                        <li class="govuk-summary-card__action"> <a class="govuk-link govuk-link--no-visited-state" href="/v5/update-court-case?index={{loop.index0}}">
                                 Update
                             </a>
                         </li>
@@ -206,7 +206,7 @@
             {% else %}
             <div class="court-cases-list">
                 <p class="govuk-body">There are no court cases recorded for Joe Bloggs.</p>
-                <p class="gouk-body"><a href="/create-court-case">Record a court case now</a>
+                <p class="gouk-body"><a href="/v5/create-court-case">Record a court case now</a>
                 </p>
             </div>
             {% endif %}
