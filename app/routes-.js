@@ -10,54 +10,51 @@ const router = govukPrototypeKit.requests.setupRouter()
 
 
 // Next court date route
-router.post('/:prototypeVersion/next-court-date-select', function (req, res) {
-  const prototypeVersion = req.params.prototypeVersion
+router.post('/next-court-date-select', function (req, res) {
+
   // Make a variable and give it the value 
   var nextCourtDateSelect = req.session.data['courtCase']['next-court-date-set']
   // Check whether the variable matches a condition
   if (nextCourtDateSelect == "Yes"){
     // Send user to next page
-    res.redirect(`/${prototypeVersion}/court-cases-standalone/add-a-court-case/next-hearing-type-select`)
-  } else res.redirect(`/${prototypeVersion}/court-cases-standalone/add-a-court-case/check-answers`)
+    res.redirect('/v5/court-cases-standalone/add-a-court-case/next-hearing-type-select')
+  } else res.redirect('/v5/court-cases-standalone/add-a-court-case/check-answers')
 })
 
 // Next court date route for add first appearance
-router.post('/:prototypeVersion/add-a-first-court-appearance/next-court-date-select', function (req, res) {
-  const prototypeVersion = req.params.prototypeVersion
+router.post('/add-a-first-court-appearance/next-court-date-select', function (req, res) {
+
   // Make a variable and give it the value 
   var nextCourtDateSelect = req.session.data['appearance']['next-court-date-set']
   // Check whether the variable matches a condition
   if (nextCourtDateSelect == "Yes"){
     // Send user to next page
-    res.redirect(`/${prototypeVersion}/court-cases-standalone/add-a-first-court-appearance/next-hearing-type-select`)
-  } else res.redirect(`/${prototypeVersion}/court-cases-standalone/add-a-first-court-appearance/check-answers`)
+    res.redirect('/v5/court-cases-standalone/add-a-first-court-appearance/next-hearing-type-select')
+  } else res.redirect('/v5/court-cases-standalone/add-a-first-court-appearance/check-answers')
 })
 
 // Offence code route
-router.post('/:prototypeVersion/offence-code-known', function (req, res) {
-  const prototypeVersion = req.params.prototypeVersion
+router.post('/offence-code-known', function (req, res) {
 // Make a variable and give it the value 
   var offenceCodeKnown = req.session.data.offence['offence-code']
 console.log(offenceCodeKnown)
   // Check whether the variable matches a condition
   if (offenceCodeKnown.includes('None')){
     // Send user to next page
-    res.redirect(`/${prototypeVersion}/court-cases-standalone/add-an-offence/offence-name`)
-  } else res.redirect(`/${prototypeVersion}/court-cases-standalone/add-an-offence/confirm-offence`)
+    res.redirect('/v5/court-cases-standalone/add-an-offence/offence-name')
+  } else res.redirect('/v5/court-cases-standalone/add-an-offence/confirm-offence')
 
 })
 
 //Add court case
 
-router.get('/:prototypeVersion/create-court-case', function(req, res) {
-  const prototypeVersion = req.params.prototypeVersion
+router.get('/create-court-case', function(req, res) {
   delete req.session.data.courtCaseIndex
   delete req.session.data.courtCase
-  res.redirect(`/${prototypeVersion}/court-cases-standalone/add-a-court-case/court-case-reference-number`)
+  res.redirect('/v5/court-cases-standalone/add-a-court-case/court-case-reference-number')
 })
 
-router.post('/:prototypeVersion/persist-court-case', function (req, res) {
-  const prototypeVersion = req.params.prototypeVersion
+router.post('/persist-court-case', function (req, res) {
   if(req.session.data.courtCaseIndex !== undefined) {
     req.session.data.courtCases[req.session.data.courtCaseIndex] = req.session.data.courtCase
   } else {
@@ -66,33 +63,30 @@ router.post('/:prototypeVersion/persist-court-case', function (req, res) {
         'warrant-date-month': req.session.data.courtCase['warrant-date-month'],
         'warrant-date-year': req.session.data.courtCase['warrant-date-year'],
         'court-name': req.session.data.courtCase['court-name'],
-        'court-case-num': req.session.data.courtCases.length -1,
         offences: []
       }]})
     req.session.data.courtCaseIndex = req.session.data.courtCases.length -1
   }
-  res.redirect(`/${prototypeVersion}/court-cases-standalone/add-a-court-case/confirmation`)
+
+  res.redirect('/v5/court-cases-standalone/add-a-court-case/confirmation')
 })
 
-router.get('/:prototypeVersion/update-court-case', function(req, res) {
-  const prototypeVersion = req.params.prototypeVersion
+router.get('/update-court-case', function(req, res) {
   const index = req.query.index
   req.session.data.courtCase = req.session.data.courtCases[index]
   req.session.data.courtCaseIndex = index
-  res.redirect(`/${prototypeVersion}/court-cases-standalone/add-a-court-case/check-answers`)
+  res.redirect('/v5/court-cases-standalone/add-a-court-case/check-answers')
 })
 
-router.get('/:prototypeVersion/delete-court-case', function(req, res) {
-  const prototypeVersion = req.params.prototypeVersion
+router.get('/delete-court-case', function(req, res) {
   const index = req.query.index
   req.session.data.courtCases.splice(index, 1)
-  res.redirect(`/${prototypeVersion}/court-cases-standalone/court-cases-standalone`)
+  res.redirect('/v5/court-cases-standalone/court-cases-standalone')
 })
 
 //Add court appearance
 
-router.get('/:prototypeVersion/create-appearance', function(req, res) {
-  const prototypeVersion = req.params.prototypeVersion
+router.get('/create-appearance', function(req, res) {
   delete req.session.data.appearanceIndex
   delete req.session.data.appearance
   const courtIndex = req.query.courtIndex
@@ -100,13 +94,12 @@ router.get('/:prototypeVersion/create-appearance', function(req, res) {
     req.session.data.courtCase = req.session.data.courtCases[courtIndex]
     req.session.data.courtCaseIndex = courtIndex
   }
-  res.redirect(`/${prototypeVersion}/court-cases-standalone/add-a-first-court-appearance/overall-case-outcome`)
+  res.redirect('/v5/court-cases-standalone/add-a-first-court-appearance/overall-case-outcome')
 })
 
 
 
-router.post('/:prototypeVersion/persist-appearance', function (req, res) {
-  const prototypeVersion = req.params.prototypeVersion
+router.post('/persist-appearance', function (req, res) {
   if(req.session.data.appearanceIndex !== undefined) {
     req.session.data.courtCases[req.session.data.courtCaseIndex].appearance[req.session.data.appearanceIndex] = req.session.data.appearance
   } else if(req.session.data.courtCases[req.session.data.courtCaseIndex].appearances.length === 1) {
@@ -117,13 +110,12 @@ router.post('/:prototypeVersion/persist-appearance', function (req, res) {
     req.session.data.appearanceIndex = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances.length -1
   }
 
-  res.redirect(`/${prototypeVersion}/court-cases-standalone/add-an-offence/offence-date`)
+  res.redirect('/v5/court-cases-standalone/add-an-offence/offence-date')
 })
 
 //Add offences
 
-router.get('/:prototypeVersion/create-offence', function(req, res) {
-  const prototypeVersion = req.params.prototypeVersion
+router.get('/create-offence', function(req, res) {
   delete req.session.data.offenceIndex
   delete  req.session.data.offence
   const appearanceIndex = req.query.appearanceIndex
@@ -131,33 +123,31 @@ router.get('/:prototypeVersion/create-offence', function(req, res) {
     req.session.data.appearanceIndex = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[appearanceIndex]
     req.session.data.appearanceIndex = appearanceIndex
   }
-  res.redirect(`/${prototypeVersion}/court-cases-standalone/add-an-offence/offence-date`)
+  res.redirect('/v5/court-cases-standalone/add-an-offence/offence-date')
 })
 
-router.post('/:prototypeVersion/persist-offence', function(req, res) {
-  const prototypeVersion = req.params.prototypeVersion
+router.post('/persist-offence', function(req, res) {
   if(req.session.data.offenceIndex !== undefined) {
     req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[req.session.data.appearanceIndex].offences[req.session.data.offenceIndex] = req.session.data.offence
   } else {
     req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[req.session.data.appearanceIndex].offences.push(req.session.data.offence)
     req.session.data.offenceIndex = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[req.session.data.appearanceIndex].offences.length - 1
   }
-  res.redirect(`/${prototypeVersion}/court-cases-standalone/add-an-offence/confirmation`)
+  res.redirect('/v5/court-cases-standalone/add-an-offence/confirmation')
 })
 
-router.get('/:prototypeVersion/update-offence', function(req, res) {
-  const prototypeVersion = req.params.prototypeVersion
+router.get('/update-offence', function(req, res) {
   const index = req.query.index
   req.session.data.offence = req.session.data.courtCases[req.session.data.courtCaseIndex].appearance[req.session.data.appearanceIndex].offences[index]
   req.session.data.offenceIndex = index
-  res.redirect(`/${prototypeVersion}/court-cases-standalone/add-a-court-case/check-answers`)
+  res.redirect('/v5/court-cases-standalone/add-a-court-case/check-answers')
 })
 
-router.get('/:prototypeVersion/delete-offence', function(req, res) {
-  const prototypeVersion = req.params.prototypeVersion
+router.get('/delete-offence', function(req, res) {
   const index = req.query.index
   req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[req.session.data.appearanceIndex].offences.splice(index, 1)
-  res.redirect(`/${prototypeVersion}/court-cases-standalone/add-an-offence/confirmation`)
+  res.redirect('/v5/court-cases-standalone/add-an-offence/confirmation')
 })
+
 
 
