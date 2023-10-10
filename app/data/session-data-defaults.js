@@ -94,6 +94,18 @@ module.exports = {
                             ],
                             "offence-name": "Murder - victim one year of age or older",
                             "outcome": "Remand before conviction"
+                        },
+                        {
+                            "offence-start-date-day": "10",
+                            "offence-start-date-month": "9",
+                            "offence-start-date-year": "2023",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "PU86003"
+                            ],
+                            "offence-name": "Affray"
                         }
                     ]
                 }

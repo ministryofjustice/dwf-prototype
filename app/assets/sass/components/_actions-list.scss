@@ -10,7 +10,9 @@
 }
 
 .actions-list-header {
-  padding: 10px;
+  padding: 10px 20px;
+  margin-bottom: 0;
+  background-color: #f3f2f1;
 }
 
 .actions-list-list {
@@ -20,15 +22,19 @@
 }
 
 .actions-list-list li {
-  padding: 15px 15px 15px 10px;
+  padding: 15px 20px 15px 20px;
   margin-bottom: 0px;
   border-bottom: 1px solid #b1b4b6;
   width: 100%;
   display: block;
+  font-weight: bold;
+}
+
+.actions-list-list li a:visited {
+  color: #1d70b8 !important;
 }
 
 .actions-list-list li:hover {
-  background-color: #f3f2f1;
   cursor: pointer;
 }
 
