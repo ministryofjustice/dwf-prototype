@@ -5,32 +5,58 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="next-court-date-select">
-            <div class="govuk-form-group">
+        <form class="form" action="/v6/outcome-select" method="post">
+            <div class="govuk-form-group"> 
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add a court appearance to court case 3</span>
+                            <span class="govuk-caption-l">Add a court appearance to court case {{ data.courtCases.length }}</span>
                             Select the outcome
                         </h1>
                     </legend>
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="overall-case-outcome" name="appearance[overall-case-outcome]" type="radio" value="Remand before conviction">
+                            <input class="govuk-radios__input" id="overall-case-outcome" name="appearance[overall-case-outcome]" type="radio" value="Remand in Custody (Bail Refused)">
                             <label class="govuk-label govuk-radios__label" for="overall-case-outcome">
-                                Remand before conviction
+                                Remand in Custody (Bail Refused)
                             </label>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="overall-case-outcome-2" name="appearance[overall-case-outcome]" type="radio" value="Remand after conviction">
+                            <input class="govuk-radios__input" id="overall-case-outcome-2" name="appearance[overall-case-outcome]" type="radio" value="Commit/Transfer/Send to Crown Court for Trial in Custody">
                             <label class="govuk-label govuk-radios__label" for="overall-case-outcome-2">
-                                Remand after conviction
+                                Commit/Transfer/Send to Crown Court for Trial in Custody
                             </label>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="overall-case-outcome-3" name="appearance[overall-case-outcome]" type="radio" value="Discontinued">
+                            <input class="govuk-radios__input" id="overall-case-outcome-3" name="appearance[overall-case-outcome]" type="radio" value="Commit to Crown Court for Trial (Summary / Either Way Offences)">
                             <label class="govuk-label govuk-radios__label" for="overall-case-outcome-3">
-                                Discontinued
+                                Commit to Crown Court for Trial (Summary / Either Way Offences)
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="overall-case-outcome-4" name="appearance[overall-case-outcome]" type="radio" value="Recall to Prison">
+                            <label class="govuk-label govuk-radios__label" for="overall-case-outcome-4">
+                                Recall to Prison
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="overall-case-outcome-3
+                        5" name="appearance[overall-case-outcome]" type="radio" value="entence Postponed">
+                            <label class="govuk-label govuk-radios__label" for="overall-case-outcome-5">
+                                Sentence Postponed
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="overall-case-outcome-6" name="appearance[overall-case-outcome]" type="radio" value="Commit to Crown Court for Sentence in Custody">
+                            <label class="govuk-label govuk-radios__label" for="overall-case-outcome-6">
+                                Commit to Crown Court for Sentence in Custody
+                            </label>
+                        </div>
+                        <div class="govuk-radios__divider">or</div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="overall-case-outcome-6" name="appearance[overall-case-outcome]" type="radio" value="lookup-another-outcome">
+                            <label class="govuk-label govuk-radios__label" for="overall-case-outcome-6">
+                                Lookup a different outcome
                             </label>
                         </div>
                     </div>

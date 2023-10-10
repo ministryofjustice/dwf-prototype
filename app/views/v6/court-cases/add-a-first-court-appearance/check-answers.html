@@ -6,7 +6,7 @@
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">
-            <span class="govuk-caption-l">Add a court appearance to court case 3</span>
+            <span class="govuk-caption-l">Add a court appearance to court case {{ data.courtCases.length }}</span>
             Check your answers
         </h1>
         <form class="form" action="/v6/persist-appearance" method="post">
