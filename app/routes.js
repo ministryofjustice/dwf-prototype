@@ -22,15 +22,16 @@ router.post('/:prototypeVersion/next-court-date-select', function (req, res) {
 })
 
 // Next court date route for add first appearance
-router.post('/:prototypeVersion/add-a-first-court-appearance/next-court-date-select', function (req, res) {
+router.post('/:prototypeVersion/:appearancePath/next-court-date-select', function (req, res) {
   const prototypeVersion = req.params.prototypeVersion
+  const appearancePath = req.params.appearancePath
   // Make a variable and give it the value 
   var nextCourtDateSelect = req.session.data['appearance']['next-court-date-set']
   // Check whether the variable matches a condition
   if (nextCourtDateSelect == "Yes"){
     // Send user to next page
-    res.redirect(`/${prototypeVersion}/court-cases/add-a-first-court-appearance/next-hearing-type-select`)
-  } else res.redirect(`/${prototypeVersion}/court-cases/add-a-first-court-appearance/check-answers`)
+    res.redirect(`/${prototypeVersion}/court-cases/${appearancePath}/next-hearing-type-select`)
+  } else res.redirect(`/${prototypeVersion}/court-cases/${appearancePath}/check-answers`)
 })
 
 // Offence code route
@@ -113,7 +114,11 @@ router.get('/:prototypeVersion/create-appearance', function(req, res) {
     req.session.data.courtCase = req.session.data.courtCases[courtIndex]
     req.session.data.courtCaseIndex = courtIndex
   }
-  res.redirect(`/${prototypeVersion}/court-cases/add-a-first-court-appearance/overall-case-outcome`)
+  if(req.session.data.courtCase.appearances.length === 0) {
+    return res.redirect(`/${prototypeVersion}/court-cases/add-a-first-court-appearance/overall-case-outcome`)
+  } else {
+    return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`)
+  }
 })
 
 
@@ -122,7 +127,7 @@ router.post('/:prototypeVersion/persist-appearance', function (req, res) {
   const prototypeVersion = req.params.prototypeVersion
   if(req.session.data.appearanceIndex !== undefined) {
     req.session.data.courtCases[req.session.data.courtCaseIndex].appearance[req.session.data.appearanceIndex] = req.session.data.appearance
-  } else if(req.session.data.courtCases[req.session.data.courtCaseIndex].appearances.length === 1) {
+  } else if(req.query.isFirst) {
     req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[0] = {...req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[0], ...req.session.data.appearance}
     req.session.data.appearanceIndex = 0
   } else {
