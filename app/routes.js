@@ -86,14 +86,16 @@ router.post('/:prototypeVersion/persist-court-case', function (req, res) {
   if(req.session.data.courtCaseIndex !== undefined) {
     req.session.data.courtCases[req.session.data.courtCaseIndex] = req.session.data.courtCase
   } else {
-    req.session.data.courtCases.push({...req.session.data.courtCase, appearances: [ {
-        'warrant-date-day': req.session.data.courtCase['warrant-date-day'],
-        'warrant-date-month': req.session.data.courtCase['warrant-date-month'],
-        'warrant-date-year': req.session.data.courtCase['warrant-date-year'],
-        'court-name': req.session.data.courtCase['court-name'],
-        'court-case-num': req.session.data.courtCases.length -1,
-        offences: []
-      }]})
+    const courtCase = {...req.session.data.courtCase, appearances: [ {
+      'warrant-date-day': req.session.data.courtCase['warrant-date-day'],
+      'warrant-date-month': req.session.data.courtCase['warrant-date-month'],
+      'warrant-date-year': req.session.data.courtCase['warrant-date-year'],
+      'court-name': req.session.data.courtCase['court-name'],
+      'court-case-num': req.session.data.courtCases.length -1,
+      offences: []
+    }]}
+    req.session.data.courtCases.push(courtCase)
+    req.session.data.courtCase = courtCase
     req.session.data.courtCaseIndex = req.session.data.courtCases.length -1
   }
   res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/confirmation`)
