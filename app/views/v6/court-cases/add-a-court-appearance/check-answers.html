@@ -10,52 +10,46 @@
             Check your answers
         </h1>
         <form class="form" action="/v6/persist-appearance" method="post">
-<!--             <h2 class="govuk-heading-m">Court case</h2>
             <dl class="govuk-summary-list">
-                <div class="govuk-summary-list__row">
+                                <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Court case reference number
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['courtCase']['court-case-ref'] }}
+                        {{ data['appearance']['court-case-ref'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="overall-case-outcome">
+                            Change<span class="govuk-visually-hidden"> overall case outcome</span>
+                        </a>
                     </dd>
                 </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Warrant date
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        {{ data['courtCase']['warrant-date-day'] }}/{{ data['courtCase']['warrant-date-month'] }}/{{ data['courtCase']['warrant-date-year'] }}
-                    </dd>
-                    <dd class="govuk-summary-list__actions">
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
+                                              <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Court name
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['courtCase']['court-name'] }}
+                        {{ data['appearance']['court-name'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="overall-case-outcome">
+                            Change<span class="govuk-visually-hidden"> overall case outcome</span>
+                        </a>
                     </dd>
                 </div>
-                <div class="govuk-summary-list__row">
+                                                              <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
-                        Type of case
+                        Warrant date
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['courtCase']['type-of-case'] }}
+                        {{ data['appearance']['warrant-date'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="overall-case-outcome">
+                            Change<span class="govuk-visually-hidden"> overall case outcome</span>
+                        </a>
                     </dd>
                 </div>
-            </dl> -->
-
-<!-- <h2 class="govuk-heading-m">Court appearance</h2> -->
-            <dl class="govuk-summary-list">
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Overall case outcome

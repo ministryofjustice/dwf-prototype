@@ -47,7 +47,7 @@ console.log(offenceCodeKnown)
   } else res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirm-offence`)
 })
 
-//Lookup outcome route
+//Lookup outcome routes
 router.post('/:prototypeVersion/outcome-select', function (req, res) {
   const prototypeVersion = req.params.prototypeVersion
 // Make a variable and give it the value 
@@ -58,6 +58,18 @@ console.log(outcome)
     // Send user to next page
     res.redirect(`/${prototypeVersion}/court-cases/add-a-first-court-appearance/lookup-outcome`)
   } else res.redirect(`/${prototypeVersion}/court-cases/add-a-first-court-appearance/next-court-date-select`)
+})
+
+router.post('/:prototypeVersion/outcome-select-2', function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion
+// Make a variable and give it the value 
+  var outcome = req.session.data.appearance['overall-case-outcome']
+console.log(outcome)
+  // Check whether the variable matches a condition
+  if (outcome.includes('lookup-another-outcome')){
+    // Send user to next page
+    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/lookup-outcome`)
+  } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/next-court-date-select`)
 })
 
 //Add court case
@@ -117,11 +129,9 @@ router.get('/:prototypeVersion/create-appearance', function(req, res) {
   if(req.session.data.courtCase.appearances.length === 0) {
     return res.redirect(`/${prototypeVersion}/court-cases/add-a-first-court-appearance/overall-case-outcome`)
   } else {
-    return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`)
+    return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-case-reference-number-select`)
   }
 })
-
-
 
 router.post('/:prototypeVersion/persist-appearance', function (req, res) {
   const prototypeVersion = req.params.prototypeVersion
