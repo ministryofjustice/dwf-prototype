@@ -131,7 +131,7 @@ router.get('/:prototypeVersion/create-appearance', function(req, res) {
   if(req.session.data.courtCase.appearances.length === 0) {
     return res.redirect(`/${prototypeVersion}/court-cases/add-a-first-court-appearance/overall-case-outcome`)
   } else {
-    return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-case-reference-number-select`)
+    return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`)
   }
 })
 
