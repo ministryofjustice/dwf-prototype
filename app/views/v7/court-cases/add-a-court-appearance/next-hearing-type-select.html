@@ -1,0 +1,39 @@
+{% extends "../template.html" %}
+{% block content %}
+<!-- Back link -->
+<a href="overall-case-outcome" class="govuk-back-link govuk-!-margin-top-0">Back</a>
+<!-- What is the confirmed date -->
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" action="next-court-date" method="post">
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Add an appearance to court case {{ data.courtCaseIndex | int + 1 }}</span>
+                            Select the next hearing type
+                        </h1>
+                    </legend>
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="next-hearing-type" name="appearance[next-hearing-type]" type="radio" value="Court appearance">
+                            <label class="govuk-label govuk-radios__label" for="next-hearing-type-1">
+                                Court appearance
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="next-hearing-type-2" name="appearance[next-hearing-type]" type="radio" value="Video link">
+                            <label class="govuk-label govuk-radios__label" for="next-hearing-type-2">
+                                Video link
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <button class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

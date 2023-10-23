@@ -13,7 +13,7 @@ const router = govukPrototypeKit.requests.setupRouter()
 router.post('/:prototypeVersion/next-court-date-select', function (req, res) {
   const prototypeVersion = req.params.prototypeVersion
   // Make a variable and give it the value 
-  var nextCourtDateSelect = req.session.data['courtCase']['next-court-date-set']
+  var nextCourtDateSelect = req.session.data['appearance']['next-court-date-set']
   // Check whether the variable matches a condition
   if (nextCourtDateSelect == "Yes"){
     // Send user to next page
@@ -70,6 +70,18 @@ console.log(outcome)
     // Send user to next page
     res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/lookup-outcome`)
   } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/next-court-date-select`)
+})
+
+router.post('/:prototypeVersion/outcome-select-3', function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion
+// Make a variable and give it the value 
+  var outcome = req.session.data.appearance['overall-case-outcome']
+console.log(outcome)
+  // Check whether the variable matches a condition
+  if (outcome.includes('lookup-another-outcome')){
+    // Send user to next page
+    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/lookup-outcome`)
+  } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/next-court-date-select`)
 })
 
 //Add court case
@@ -131,12 +143,13 @@ router.get('/:prototypeVersion/create-appearance', function(req, res) {
   if(req.session.data.courtCase.appearances.length === 0) {
     return res.redirect(`/${prototypeVersion}/court-cases/add-a-first-court-appearance/overall-case-outcome`)
   } else {
-    return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`)
+    return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-case-reference-number`)
   }
 })
 
 router.post('/:prototypeVersion/persist-appearance', function (req, res) {
   const prototypeVersion = req.params.prototypeVersion
+  var displaySuccess = 0
   if(req.session.data.appearanceIndex !== undefined) {
     req.session.data.courtCases[req.session.data.courtCaseIndex].appearance[req.session.data.appearanceIndex] = req.session.data.appearance
   } else if(req.query.isFirst) {
@@ -146,8 +159,9 @@ router.post('/:prototypeVersion/persist-appearance', function (req, res) {
     req.session.data.courtCases[req.session.data.courtCaseIndex].appearances.push({...req.session.data.appearance, offences: []})
     req.session.data.appearanceIndex = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances.length -1
   }
-
-  res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-date`)
+  displaySuccess = 1
+  req.session.data.appearanceSuccess = displaySuccess
+  res.redirect(`/${prototypeVersion}/court-cases/`)
 })
 
 //Add offences

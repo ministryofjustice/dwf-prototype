@@ -32,9 +32,10 @@
 {% include "includes/head.html" %}
 {% endblock %}
 {% block pageTitle %}
-{{ serviceName }}
+Court cases and release dates
 {% endblock %}
 {% block header %}
+{% from "govuk/components/tag/macro.njk" import govukTag %}
 <header class="connect-dps-common-header govuk-!-display-none-print" role="banner">
     <div class="connect-dps-common-header__container">
         <div class="connect-dps-common-header__title">
@@ -54,14 +55,116 @@
                 Digital Prison Services
             </a>
         </div>
+        <nav aria-label="Account navigation">
+            <ul class="connect-dps-common-header__navigation">
+                <li class="connect-dps-common-header__navigation__item">
+                    <img class="connect-dps-common-header__link__icon govuk-!-padding-right-3" src="https://frontend-components-dev.hmpps.service.justice.gov.uk/assets/images/location.svg" aria-hidden="true" alt="">
+                    <a data-qa="changeCaseLoad" class="connect-dps-common-header__link" href="https://digital-dev.prison.service.justice.gov.uk/change-caseload" data-test="change-case-load-link" referrerpolicy="no-referrer-when-downgrade">
+                        <span data-qa="header-active-case-load">Kirkham (HMP)</span>
+                    </a>
+                </li>
+                <li class="connect-dps-common-header__navigation__item">
+                    <a data-qa="manageDetails" class="connect-dps-common-header__link" href="https://sign-in-dev.hmpps.service.justice.gov.uk/auth/account-details" data-test="manage-account-link" referrerpolicy="no-referrer-when-downgrade">
+                        <span data-qa="header-user-name">C. User</span>
+                        <span class="connect-dps-common-header__link__sub-text">Manage your details</span>
+                    </a>
+                </li>
+                <li class="connect-dps-common-header__navigation__item">
+                    <a data-qa="signOut" class="connect-dps-common-header__link" href="/sign-out">Sign out</a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </header>
+<div class="service-header">
+    <div class="service-header__container">
+        <a href="../../court-cases"><span class="service-header__service-name">Court cases and release dates</span></a>
+    </div>
+</div>
 {% endblock %}
 {% set mainClasses = mainClasses | default("govuk-main-wrapper--auto-spacing") %}
 {% block main %}
-{% block beforeContent %}
-{% endblock %}
-{% block content %}{% endblock %}
+<main class="govuk-main-wrapper-govuk-body">
+    <div class="govuk-width-container">
+        <!-- Breadcrumbs -->
+        <!-- {% block breadcrumbs %} -->
+        <!--         <div class="govuk-breadcrumbs">
+            <ol class="govuk-breadcrumbs__list">
+                <li class="govuk-breadcrumbs__list-item">
+                    <a class="govuk-breadcrumbs__link" href="#">Back to search</a>
+                </li>
+            </ol>
+        </div>
+        {% endblock %} -->
+        <!--         {% block title %}
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                <h2 class="govuk-heading-xl govuk-!-margin-top-4 govuk-!-margin-bottom-7">
+                    Joe Bloggs's court cases
+                </h2>
+            </div>
+        </div>
+        {% endblock %} -->
+        {% block banner %}
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+                <div class="dwf-header govuk-!-margin-top-6 govuk-!-margin-bottom-4">
+                    <div class="dwf-header-inner">
+                        <div class="govuk-grid-column-one-third govuk-!-padding-left-0">
+                            <div class="dwf-header-left">
+                                <img class="dwf-header-profile-img" src="/public/images/prisoner.jpeg" alt="Joe Bloggs">
+                            </div>
+                            <p class="govuk-heading-s govuk-!-margin-bottom-1"><a class="govuk-link--no-visited-state" href="https://prisoner-dev.digital.prison.service.justice.gov.uk/prisoner/G6123VU" target="_blank">Joe Bloggs</a></p>
+                            <ul class="govuk-list">
+                                <li>A123456</li>
+                            </ul>
+                        </div>
+                        <div class="govuk-grid-column-two-thirds govuk-!-padding-0">
+                            <ul class="dwf-header-info">
+                                <li><span class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-padding-0">Date of birth</span><span class="govuk-body">24/05/1996</span></li>
+                                <li><span class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-padding-0">PNC number</span><span class="govuk-body">123456</span></li>
+                                <li><span class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-padding-0">Status</span>{% if status == "On remand" %}
+                                    <span class="govuk-body">On remand</span>
+                                    {% else %}
+                                    <span class="govuk-body">No status</span>
+                                    {% endif %}</li>
+                                <li><span class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-padding-0">Establishment</span><span class="govuk-body">HMP Bedford</span></li>
+                                <li><span class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-padding-0">Cell number</span><span class="govuk-body">01-234</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+        {% block nav %}
+        <nav class="moj-sub-navigation" aria-label="Sub navigation">
+            <ul class="moj-sub-navigation__list">
+                <li class="moj-sub-navigation__item">
+                    <a class="moj-sub-navigation__link" href="#1">Dashboard</a>
+                </li>
+                <li class="moj-sub-navigation__item">
+                    <a class="moj-sub-navigation__link" href="#3">Release dates</a>
+                </li>
+                <li class="moj-sub-navigation__item">
+                    <a class="moj-sub-navigation__link" aria-current="page" href="#2">Court cases</a>
+                </li>
+                <li class="moj-sub-navigation__item">
+                    <a class="moj-sub-navigation__link" href="#3">Adjustments</a>
+                </li>
+                <li class="moj-sub-navigation__item">
+                    <a class="moj-sub-navigation__link" href="#3">Documents</a>
+                </li>
+                <li class="moj-sub-navigation__item">
+                    <a class="moj-sub-navigation__link" href="#3">Timeline</a>
+                </li>
+            </ul>
+        </nav>
+        {% endblock %}
+        {% block content %}
+        {% endblock %}
+    </div>
+</main>
 {% endblock %}
 {% if useAutoStoreData %}
 {% block footer %}
@@ -93,7 +196,7 @@
                         </a>
                     </li>
                     <li class="govuk-footer__inline-list-item">
-                        <a class="govuk-footer__link" href="manage-prototype/clear-data">
+                        <a class="govuk-footer__link" href="/manage-prototype/clear-data">
                             Clear data
                         </a>
                     </li>
@@ -118,20 +221,6 @@
 {% block bodyEnd %}
 {% block scripts %}
 {% include "includes/scripts.html" %}
-<script>
-window.onload = function() {
-    // Loops through dom and finds all elements with card--clickable class
-    document.querySelectorAll('.card--clickable').forEach(card => {
-        // Check if card has a link within it
-        if (card.querySelector('a') !== null) {
-            // Clicks the link within the heading to navigate to desired page
-            card.addEventListener('click', () => {
-                card.querySelector('a').click()
-            })
-        }
-    })
-}
-</script>
 {% block pageScripts %}{% endblock %}
 {% endblock %}
 <!-- GOV.UK Prototype Kit {{releaseVersion}} -->

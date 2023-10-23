@@ -20,16 +20,9 @@ Example usage:
 module.exports = {
     courtCases:[
         {
-            "court-case-num": "1",
-            "court-case-ref": "T20231234",
-            "warrant-date-day": "12",
-            "warrant-date-month": "9",
-            "warrant-date-year": "2023",
-            "court-name": "Aldershot and Farnham County Court",
-            "type-of-case": "Adult",
-            "overall-case-outcome": "Remand before conviction",
             "appearances": [
                 {
+                    "court-case-ref": "T20231234",
                     "overall-case-outcome": "Remand before conviction",
                     "next-court-date-set": "Yes",
                     "next-hearing-type": "Court appearance",
@@ -60,16 +53,9 @@ module.exports = {
             ]
         },
         {
-            "court-case-num": "2",
-            "court-case-ref": "D20239876",
-            "warrant-date-day": "12",
-            "warrant-date-month": "9",
-            "warrant-date-year": "2023",
-            "court-name": "Uxbridge MC",
-            "type-of-case": "Adult",
-            "overall-case-outcome": "Remand before conviction",
             "appearances": [
                 {
+                    "court-case-ref": "D20239876",
                     "overall-case-outcome": "Remand before conviction",
                     "next-court-date-set": "No",
                     "warrant-date-day": "12",
