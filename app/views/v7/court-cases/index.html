@@ -106,6 +106,14 @@
                                     {{ lastAppearance['next-hearing-type'] }} on {{ lastAppearance['next-court-date-day'] }}/{{ lastAppearance['next-court-date-month'] }}/{{ lastAppearance['next-court-date-year'] }} at {{ lastAppearance['next-court-time'] }} {{ lastAppearance['next-court-time-period'] }}
                                 </dd>
                             </div>
+                                                        <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Next hearing location
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                    {{ lastAppearance['next-court-name'] }}
+                                </dd>
+                            </div>
                             {% else %}
                             <div class="govuk-summary-list__row">
                                 <dt class="govuk-summary-list__key">
