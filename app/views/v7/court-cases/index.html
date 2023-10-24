@@ -49,6 +49,7 @@
             <div class="govuk-grid-column-full govuk-!-margin-top-1">
                 {% if data.courtCases | length %}
                 {% for courtCase in data.courtCases %}
+                {% set lastAppearance = courtCase.appearances | last %}
                 <div class="govuk-summary-card">
                     <div class="govuk-summary-card__title-wrapper">
                         <h2 class="govuk-summary-card__title">Court case {{ loop.index }}</h2>
@@ -70,9 +71,7 @@
                                     Reference numbers
                                 </dt>
                                 <dd class="govuk-summary-list__value">
-                                    {% for appearance in courtCase.appearances -%}
-                                    {{ comma() }} {{ appearance['court-case-ref'] }}
-                                    {%- endfor %}
+                                    {{ courtCase.appearances | join(", ","court-case-ref") }}
                                 </dd>
                             </div>
                             <div class="govuk-summary-list__row">
@@ -80,7 +79,7 @@
                                     Most recent warrant date
                                 </dt>
                                 <dd class="govuk-summary-list__value">
-                                    {{ courtCase.appearances[loop.index -1]['warrant-date-day'] }}/{{ courtCase.appearances[loop.index -1]['warrant-date-month'] }}/{{ courtCase.appearances[loop.index -1]['warrant-date-year'] }}
+                                    {{ lastAppearance['warrant-date-day'] }}/{{ lastAppearance['warrant-date-month'] }}/{{ lastAppearance['warrant-date-year'] }}
                                 </dd>
                             </div>
                             <div class="govuk-summary-list__row">
@@ -88,7 +87,7 @@
                                     Most recent court name
                                 </dt>
                                 <dd class="govuk-summary-list__value">
-                                    {{ courtCase.appearances[loop.index -1]['court-name'] }}
+                                    {{ lastAppearance['court-name'] }}
                                 </dd>
                             </div>
                             <div class="govuk-summary-list__row">
@@ -105,7 +104,7 @@
                                     Next hearing type and date
                                 </dt>
                                 <dd class="govuk-summary-list__value">
-                                    {{ courtCase.appearances[loop.index -1]['next-hearing-type'] }} on {{ courtCase.appearances[loop.index -1]['next-court-date-day'] }}/{{ courtCase.appearances[loop.index -1]['next-court-date-month'] }}/{{ courtCase.appearances[loop.index -1]['next-court-date-year'] }} at {{ courtCase.appearances[loop.index -1]['next-court-time'] }} {{ courtCase.appearances[loop.index -1]['next-court-time-period'] }}
+                                    {{ lastAppearance['next-hearing-type'] }} on {{ lastAppearance['next-court-date-day'] }}/{{ lastAppearance['next-court-date-month'] }}/{{ lastAppearance['next-court-date-year'] }} at {{ lastAppearance['next-court-time'] }} {{ lastAppearance['next-court-time-period'] }}
                                 </dd>
                             </div>
                             {% else %}
