@@ -164,6 +164,13 @@ router.post('/:prototypeVersion/persist-appearance', function (req, res) {
   res.redirect(`/${prototypeVersion}/court-cases/`)
 })
 
+router.get('/:prototypeVersion/close-success-message', function(req, res){
+  const prototypeVersion = req.params.prototypeVersion
+  var displaySuccess = 0
+  req.session.data.appearanceSuccess = displaySuccess
+  res.redirect(`/${prototypeVersion}/court-cases/`)
+})
+
 //Add offences
 
 router.get('/:prototypeVersion/create-offence', function(req, res) {
