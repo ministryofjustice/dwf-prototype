@@ -97,7 +97,7 @@
                                     {{ courtCase.appearances[0]['overall-case-outcome'] }}
                                 </dd>
                             </div>
-                            {% if (courtCase.appearances[loop.index0]['next-court-date-set'] == 'Yes') %}
+                            {% if (lastAppearance['next-court-date-set'] == 'Yes') %}
                             <div class="govuk-summary-list__row">
                                 <dt class="govuk-summary-list__key">
                                     Next hearing type and date
