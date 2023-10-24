@@ -27,7 +27,7 @@ router.post('/:prototypeVersion/next-hearing-court-select', function (req, res) 
   // Make a variable and give it the value 
   var nextCourtDateSelect = req.session.data['appearance']['next-hearing-court-select']
   // Check whether the variable matches a condition
-  if (nextCourtDateSelect == "Yes"){
+  if (nextCourtDateSelect == "No"){
     // Send user to next page
     res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/next-court-name`)
   } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers`)
