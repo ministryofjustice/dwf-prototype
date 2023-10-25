@@ -21,7 +21,7 @@ router.post('/:prototypeVersion/next-court-date-select', function (req, res) {
   } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/check-answers`)
 })
 
-// Next court name route
+// Next court name routes
 router.post('/:prototypeVersion/next-hearing-court-select', function (req, res) {
   const prototypeVersion = req.params.prototypeVersion
   // Make a variable and give it the value 
@@ -31,6 +31,19 @@ router.post('/:prototypeVersion/next-hearing-court-select', function (req, res) 
     // Send user to next page
     res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/next-court-name`)
   } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers`)
+})
+
+router.post('/:prototypeVersion/next-hearing-court-select-2', function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion
+  // Make a variable and give it the value 
+  var nextCourtDateSelect = req.session.data['appearance']['next-hearing-court-select']
+  // Check whether the variable matches a condition
+  if (nextCourtDateSelect == "No"){
+    // Send user to next page
+    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/next-court-name`)
+  } else 
+  req.session.data['appearance']['next-court-name'] = req.session.data['appearance']['court-name']
+  res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/check-answers-2`)
 })
 
 // Next court date route for add first appearance
@@ -134,7 +147,6 @@ router.post('/:prototypeVersion/persist-court-case', function (req, res) {
     req.session.data.courtCases.push(courtCase)
     req.session.data.courtCase = courtCase
     req.session.data.courtCaseIndex = req.session.data.courtCases.length -1
-    req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[0] = {...req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[0], ...req.session.data.appearance}
     req.session.data.appearanceIndex = 0
   }
   res.redirect(`/${prototypeVersion}/create-offence`)
@@ -186,6 +198,16 @@ router.post('/:prototypeVersion/persist-appearance', function (req, res) {
     req.session.data.courtCases[req.session.data.courtCaseIndex].appearances.push({...req.session.data.appearance, offences: []})
     req.session.data.appearanceIndex = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances.length -1
   }
+  displaySuccess = 1
+  req.session.data.appearanceSuccess = displaySuccess
+  res.redirect(`/${prototypeVersion}/court-cases/`)
+})
+
+router.post('/:prototypeVersion/persist-appearance-2', function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion
+  var displaySuccess = 0
+    req.session.data.courtCases[req.session.data.courtCaseIndex].appearances.push({...req.session.data.appearance, offences: []})
+    req.session.data.appearanceIndex = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances.length -1
   displaySuccess = 1
   req.session.data.appearanceSuccess = displaySuccess
   res.redirect(`/${prototypeVersion}/court-cases/`)
