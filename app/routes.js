@@ -137,6 +137,7 @@ router.post('/:prototypeVersion/persist-court-case', function (req, res) {
     const courtCase = {...req.session.data.courtCase,
     'court-case-num': req.session.data.courtCases.length -1,
      appearances: [ {
+      'court-case-reference-number': req.session.data.appearance['court-case-reference-number'],
       'warrant-date-day': req.session.data.appearance['warrant-date-day'],
       'warrant-date-month': req.session.data.appearance['warrant-date-month'],
       'warrant-date-year': req.session.data.appearance['warrant-date-year'],
@@ -206,8 +207,8 @@ router.post('/:prototypeVersion/persist-appearance', function (req, res) {
 router.post('/:prototypeVersion/persist-appearance-2', function (req, res) {
   const prototypeVersion = req.params.prototypeVersion
   var displaySuccess = 0
-    req.session.data.courtCases[req.session.data.courtCaseIndex].appearances.push({...req.session.data.appearance, offences: []})
-    req.session.data.appearanceIndex = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances.length -1
+    req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[0] = {...req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[0], ...req.session.data.appearance}
+    req.session.data.appearanceIndex = 0
   displaySuccess = 1
   req.session.data.appearanceSuccess = displaySuccess
   res.redirect(`/${prototypeVersion}/court-cases/`)
