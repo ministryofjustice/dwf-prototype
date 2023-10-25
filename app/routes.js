@@ -105,7 +105,7 @@ console.log(outcome)
   if (outcome.includes('lookup-another-outcome')){
     // Send user to next page
     res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/lookup-outcome`)
-  } else res.redirect(`/${prototypeVersion}/persist-offence`)
+  } else res.redirect(307, `/${prototypeVersion}/persist-offence`)
 })
 
 //Add court case
