@@ -5,12 +5,12 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="check-answers-1">
+        <form class="form" action="/v7/persist-offence">
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset" role="group">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add a court case</span>
+                            <span class="govuk-caption-l">Add an offence to court case {{ data['appearance']['court-case-ref'] }}</span>
                             Look up an outcome
                         </h1>
                     </legend>

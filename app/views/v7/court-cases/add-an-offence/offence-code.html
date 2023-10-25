@@ -5,12 +5,12 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="/v6/offence-code-known" method="post">
+        <form class="form" action="/v7/offence-code-known" method="post">
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset" role="group">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add an offence to court case {{ data['court-case-ref'] }}</span>
+                            <span class="govuk-caption-l">Add an offence to court case {{ data['appearance']['court-case-ref'] }}</span>
                             Enter the offence code
                         </h1>
                     </legend>
@@ -39,7 +39,7 @@
                         Court case
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['courtCase']['court-case-ref'] }}
+                        {{ data['appearance']['court-case-ref'] }}
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row offences-summary-card-court-details-row">
@@ -47,7 +47,7 @@
                         Court name
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['courtCase']['court-name'] }}
+                        {{ data['appearance']['court-name'] }}
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row offences-summary-card-court-details-row">
@@ -55,7 +55,7 @@
                         Warrant date
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['courtCase']['warrant-date-day'] }}/{{ data['courtCase']['warrant-date-month'] }}/{{ data['courtCase']['warrant-date-year'] }}
+                        {{ data['appearance']['warrant-date-day'] }}/{{ data['appearance']['warrant-date-month'] }}/{{ data['appearance']['warrant-date-year'] }}
                     </dd>
                 </div>
                 <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-2">Offences</h2>

@@ -6,10 +6,10 @@
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">
-            <span class="govuk-caption-l">Add a court case</span>
+            <span class="govuk-caption-l">Add an appearance to court case {{ data.courtCaseIndex | int + 1 }}</span>
             Check your answers
         </h1>
-        <form class="form" action="/v7/persist-court-case" method="post">
+        <form class="form" action="/v7/persist-appearance" method="post">
             <dl class="govuk-summary-list">
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
@@ -100,6 +100,19 @@
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link" href="next-court-date">
                             Change<span class="govuk-visually-hidden"> next court time</span>
+                        </a>
+                    </dd>
+                </div>
+                                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Next court name
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['next-court-name'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="next-court-date-select">
+                            Change<span class="govuk-visually-hidden"> next court name set</span>
                         </a>
                     </dd>
                 </div>

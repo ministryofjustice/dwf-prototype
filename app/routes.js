@@ -93,11 +93,22 @@ console.log(outcome)
   if (outcome.includes('lookup-another-outcome')){
     // Send user to next page
     res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/lookup-outcome`)
-  } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/next-court-date-select`)
+  } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/check-answers-1`)
+})
+
+router.post('/:prototypeVersion/outcome-select-4', function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion
+// Make a variable and give it the value 
+  var outcome = req.session.data.offence['outcome']
+console.log(outcome)
+  // Check whether the variable matches a condition
+  if (outcome.includes('lookup-another-outcome')){
+    // Send user to next page
+    res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/lookup-outcome`)
+  } else res.redirect(`/${prototypeVersion}/persist-offence`)
 })
 
 //Add court case
-
 router.get('/:prototypeVersion/create-court-case', function(req, res) {
   const prototypeVersion = req.params.prototypeVersion
   delete req.session.data.courtCaseIndex
@@ -110,19 +121,23 @@ router.post('/:prototypeVersion/persist-court-case', function (req, res) {
   if(req.session.data.courtCaseIndex !== undefined) {
     req.session.data.courtCases[req.session.data.courtCaseIndex] = req.session.data.courtCase
   } else {
-    const courtCase = {...req.session.data.courtCase, appearances: [ {
-      'warrant-date-day': req.session.data.courtCase['warrant-date-day'],
-      'warrant-date-month': req.session.data.courtCase['warrant-date-month'],
-      'warrant-date-year': req.session.data.courtCase['warrant-date-year'],
-      'court-name': req.session.data.courtCase['court-name'],
-      'court-case-num': req.session.data.courtCases.length -1,
+    const courtCase = {...req.session.data.courtCase,
+    'court-case-num': req.session.data.courtCases.length -1,
+     appearances: [ {
+      'warrant-date-day': req.session.data.appearance['warrant-date-day'],
+      'warrant-date-month': req.session.data.appearance['warrant-date-month'],
+      'warrant-date-year': req.session.data.appearance['warrant-date-year'],
+      'court-name': req.session.data.appearance['court-name'],
+      'overall-case-outcome': req.session.data.appearance['overall-case-outcome'],
       offences: []
     }]}
     req.session.data.courtCases.push(courtCase)
     req.session.data.courtCase = courtCase
     req.session.data.courtCaseIndex = req.session.data.courtCases.length -1
+    req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[0] = {...req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[0], ...req.session.data.appearance}
+    req.session.data.appearanceIndex = 0
   }
-  res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/confirmation`)
+  res.redirect(`/${prototypeVersion}/create-offence`)
 })
 
 router.get('/:prototypeVersion/update-court-case', function(req, res) {
@@ -194,7 +209,7 @@ router.get('/:prototypeVersion/create-offence', function(req, res) {
     req.session.data.appearanceIndex = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[appearanceIndex]
     req.session.data.appearanceIndex = appearanceIndex
   }
-  res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-date`)
+  res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-code`)
 })
 
 router.post('/:prototypeVersion/persist-offence', function(req, res) {
@@ -205,7 +220,7 @@ router.post('/:prototypeVersion/persist-offence', function(req, res) {
     req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[req.session.data.appearanceIndex].offences.push(req.session.data.offence)
     req.session.data.offenceIndex = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[req.session.data.appearanceIndex].offences.length - 1
   }
-  res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirmation`)
+  res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/check-answers`)
 })
 
 router.get('/:prototypeVersion/update-offence', function(req, res) {

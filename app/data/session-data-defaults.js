@@ -34,6 +34,7 @@ module.exports = {
                     "next-court-date-month": "10",
                     "next-court-date-year": "2023",
                     "next-court-time": "13:00",
+                    "next-court-name": "Aldershot and Farnham County Court",
                     "offences": [
                         {
                             "offence-start-date-day": "24",
@@ -91,7 +92,8 @@ module.exports = {
                             "offence-code": [
                                 "PU86003"
                             ],
-                            "offence-name": "Affray"
+                            "offence-name": "Affray",
+                            "outcome": "Remand before conviction"
                         }
                     ]
                 }
