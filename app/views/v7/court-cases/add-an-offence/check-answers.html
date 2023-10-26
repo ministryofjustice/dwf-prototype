@@ -1,23 +1,17 @@
 {% extends "../template.html" %}
 {% block content %}
-<!-- Back link -->
-<a href="check-answers" class="govuk-back-link govuk-!-margin-top-0">Back</a>
-<!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
+<!--         <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
             <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
                 <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
             </svg>
             <div class="moj-banner__message">Offence successfully added </div>
-        </div>
+        </div> -->
+        <h1 class="govuk-heading-l">You have added {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex].offences | length }} offences</h1>
         <form class="form" action="../add-a-court-case/next-court-date-select">
-            <div class="govuk-summary-card govuk-!-margin-top-4">
-                <div class="govuk-summary-card__title-wrapper">
-                    <h2 class="govuk-summary-card__title">Court case {{ data.courtCases.length }}</h2>
-                </div>
-                <div class="govuk-summary-card__content">
-                    <dl class="govuk-summary-list">
+            <h2 class="govuk-heading-m">Appearance details</h2>
+                    <dl class="govuk-summary-list govuk-summary-list--no-border">
                         <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key">
                                 Court name
@@ -26,7 +20,7 @@
                                 {{ data['appearance']['court-name'] }}
                             </dd>
                         </div>
-                        <div class="govuk-summary-list__row" style="border-bottom: 1px solid #b1b4b6;">
+                        <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key">
                                 Warrant date
                             </dt>
@@ -35,43 +29,43 @@
                             </dd>
                         </div>
                     </dl>
-                </div>
-                <div class="govuk-!-padding-4">
-                    <h2 class="govuk-heading-m">Offences</h2>
-                    {% for offence in data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex].offences %}
-                    <div class="govuk-!-margin-bottom-4 app-possible-prison-record" style="display: flex;">
-                        <div class="govuk-grid-column-full govuk-!-margin-top-4">
-                            <span class="govuk-body-s" style="display:inline-block;">
-                                <!-- Count {{ loop.index }} --></span>
-                            <ul class="govuk-summary-card__actions govuk-!-margin-top-0" style="display:inline-block; float: right;">
-                                <li class="govuk-summary-card__action govuk-body"> <a class="govuk-link" href="#">
-                                        Update
-                                    </a>
-                                </li>
-                                <li class="govuk-summary-card__action govuk-body"> <a class="govuk-link dwf-text-colour-red" href="/delete-offence?index={{loop.index0}}">
-                                        Delete
-                                    </a>
-                                </li>
-                            </ul>
-                            <h4 class="govuk-heading-s govuk-!-margin-bottom-1">
-                                {{ offence['offence-name'] }}
-                            </h4>
-                            <p class="govuk-body-s">Committed on {{ offence['offence-start-date-day'] }}/{{ offence['offence-start-date-month'] }}/{{ offence['offence-start-date-year'] }}</p>
-                            <table class="govuk-table govuk-!-margin-right-4 govuk-!-margin-bottom-6 govuk-!-margin-bottom-0">
-                                <tbody class="govuk-table__body">
-                                    <tr class="govuk-table__row govuk-body-s">
-                                        <th scope="row" class="govuk-table__header sentence-table-header">Outcome</th>
-                                        <td class="govuk-table__cell">{{ offence['outcome'] }}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-            <div class="govuk-button-group">
+                    <h2 class="govuk-heading-m">Offences added</h2>
+{% for offence in data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex].offences %}
+<div class="offence-card">
+    <div class="offence-card-offence-details">
+    <h4 class="govuk-heading-s">{{ offence['offence-name'] }}</h4>
+    <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-font-size-16">
+        <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Commited on
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{ offence['offence-start-date-day'] }}/{{ offence['offence-start-date-month'] }}/{{ offence['offence-start-date-year'] }}
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Outcome
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{ offence['outcome'] }}
+        </dd>
+    </div>
+    </dl>
+    </div>
+    <div class="offence-card-actions">
+        <ul class="offence-card-actions-list">
+            <li class="offence-card-action-link"><a href="">Edit</a></li>
+            <li class="offence-card-action-link"><a href="">Delete</a></li>
+        </ul>
+    </div>
+</div>
+{% endfor %}
+
+
+
+
+            <div class="govuk-button-group govuk-!-margin-top-8">
                                 <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="/v7/create-offence">
                     Add another offence
                 </button>

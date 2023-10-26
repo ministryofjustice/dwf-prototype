@@ -18,6 +18,12 @@
 //Actions list
 @import "components/actions-list";
 
+//Offence summary
+@import "components/offence-summary";
+
+//Offence card
+@import "components/offence-card";
+
 //Content top
 @import "components/content-top";
 
@@ -1126,6 +1132,11 @@ max-width: 100%;
 
 .offences-summary-card-court-details-row dt {
     width: 50%;
+}
+
+.offences-summary-card-offence-details-row dt {
+    width: 50%;
+    margin-bottom: 20px;
 }
 
 .offences-summary-card-key {

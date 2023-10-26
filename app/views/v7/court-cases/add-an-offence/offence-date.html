@@ -85,9 +85,9 @@
         </form>
     </div>
     <div class="govuk-grid-column-one-third">
-        <div class="offence-summary" style="border-top: 2px solid #1d70b8;">
-            <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content govuk-!-margin-top-4">
-                <h2 class="govuk-heading-m">Appearance</h2>
+        <div class="offence-summary">
+            <h2 class="govuk-heading-m govuk-!-margin-top-4">Appearance details</h2>
+            <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
                 <div class="govuk-summary-list__row offences-summary-card-court-details-row">
                     <dt class="govuk-summary-list__key">
                         Court case
@@ -112,8 +112,11 @@
                         {{ data['appearance']['warrant-date-day'] }}/{{ data['appearance']['warrant-date-month'] }}/{{ data['appearance']['warrant-date-year'] }}
                     </dd>
                 </div>
-                <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-2">Offences</h2>
-                <div class="govuk-summary-list__row">
+            </dl>
+            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+            <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-2">Offences</h2>
+            <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
+                <div class="govuk-summary-list__row offences-summary-card-offence-details-row">
                     <dt class="govuk-summary-list__key">
                         Offences added
                     </dt>
