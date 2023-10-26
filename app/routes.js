@@ -249,16 +249,16 @@ router.post('/:prototypeVersion/persist-offence', function(req, res) {
 router.get('/:prototypeVersion/update-offence', function(req, res) {
   const prototypeVersion = req.params.prototypeVersion
   const index = req.query.index
-  req.session.data.offence = req.session.data.courtCases[req.session.data.courtCaseIndex].appearance[req.session.data.appearanceIndex].offences[index]
+  req.session.data.offence = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[req.session.data.appearanceIndex].offences[index]
   req.session.data.offenceIndex = index
-  res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/check-answers`)
+  res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-code`)
 })
 
 router.get('/:prototypeVersion/delete-offence', function(req, res) {
   const prototypeVersion = req.params.prototypeVersion
   const index = req.query.index
   req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[req.session.data.appearanceIndex].offences.splice(index, 1)
-  res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirmation`)
+  res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/check-answers`)
 })
 
 
