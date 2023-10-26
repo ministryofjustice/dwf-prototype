@@ -8,7 +8,9 @@
             </svg>
             <div class="moj-banner__message">Offence successfully added </div>
         </div> -->
-        <h1 class="govuk-heading-l">You have added {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex].offences | length }} offences</h1>
+        <h1 class="govuk-heading-l">
+        <span class="govuk-caption-l">Add offences to court case {{ data['appearance']['court-case-ref'] }}</span>
+    You have added {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex].offences | length }} offences</h1>
         <form class="form" action="../add-a-court-case/next-court-date-select">
             <h2 class="govuk-heading-m">Appearance details</h2>
             <dl class="govuk-summary-list govuk-summary-list--no-border">
@@ -34,7 +36,7 @@
             <div class="offence-card">
                 <div class="offence-card-offence-details">
                     <h4 class="govuk-heading-s">{{ offence['offence-name'] }}</h4>
-                    <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-font-size-16">
+                    <dl class="govuk-summary-list govuk-summary-list--no-border">
                         <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key">
                                 Commited on
@@ -55,7 +57,7 @@
                 </div>
                 <div class="offence-card-actions">
                     <ul class="offence-card-actions-list">
-                        <li class="offence-card-action-link"><a href="/v7/update-offence">Edit</a></li>
+                        <li class="offence-card-action-link"><a href="/v7/update-offence?index={{loop.index0}}">Edit</a></li>
                         <li class="offence-card-action-link"><a href="/v7/delete-offence">Delete</a></li>
                     </ul>
                 </div>

@@ -106,7 +106,7 @@ console.log(outcome)
   if (outcome.includes('lookup-another-outcome')){
     // Send user to next page
     res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/lookup-outcome`)
-  } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/check-answers-1`)
+  } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/outcome-apply-all`)
 })
 
 router.post('/:prototypeVersion/outcome-select-4', function (req, res) {
@@ -119,6 +119,20 @@ console.log(outcome)
     // Send user to next page
     res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/lookup-outcome`)
   } else res.redirect(307, `/${prototypeVersion}/persist-offence`)
+})
+
+// Overall case outcome applies all offences
+router.post('/:prototypeVersion/case-outcome-apply', function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion
+  const courtCaseIndex = req.session.data.courtCaseIndex
+  const appearanceIndex = req.session.data.appearanceIndex
+// Make a variable and give it the value 
+  var overallCaseOutcomeApply = req.session.data.appearance['overall-case-outcome-apply-all']
+console.log("Overall case outcome applies: " + overallCaseOutcomeApply)
+  if (overallCaseOutcomeApply == 'Yes'){
+    req.session.data.offence['outcome'] = req.session.data.appearance['overall-case-outcome']
+    res.redirect(307, `/${prototypeVersion}/persist-offence`)
+  } else res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/outcome`)
 })
 
 //Add court case
