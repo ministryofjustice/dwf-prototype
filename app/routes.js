@@ -8,7 +8,6 @@ const router = govukPrototypeKit.requests.setupRouter()
 
 // Add your routes here
 
-
 // Next court date route
 router.post('/:prototypeVersion/next-court-date-select', function (req, res) {
   const prototypeVersion = req.params.prototypeVersion

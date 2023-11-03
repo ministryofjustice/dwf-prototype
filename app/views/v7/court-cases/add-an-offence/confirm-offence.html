@@ -8,7 +8,7 @@
         <form class="form" action="offence-date" method="post">
             <div class="govuk-form-group">
                 <h1 class="govuk-heading-l">
-                    <span class="govuk-caption-l">Add an offence to court case {{ data['appearance']['court-case-ref'] }}</span>
+                    <span class="govuk-caption-l">Add an offence to case {{ data['appearance']['court-case-ref'] }}</span>
                     Confirm the offence
                 </h1>
                 <dl class="govuk-summary-list govuk-summary-list--no-border">
@@ -44,7 +44,7 @@
             <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
                 <div class="govuk-summary-list__row offences-summary-card-court-details-row">
                     <dt class="govuk-summary-list__key">
-                        Court case
+                        Case reference number
                     </dt>
                     <dd class="govuk-summary-list__value">
                         {{ data['appearance']['court-case-ref'] }}

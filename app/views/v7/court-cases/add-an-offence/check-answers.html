@@ -9,10 +9,8 @@
             <div class="moj-banner__message">Offence successfully added </div>
         </div> -->
         <h1 class="govuk-heading-l">
-        <span class="govuk-caption-l">Add offences to court case {{ data['appearance']['court-case-ref'] }}</span>
-    You have added {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex].offences | length }} offences</h1>
+    You have added {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex].offences | length }} offences to case {{ data['appearance']['court-case-ref'] }}</h1>
         <form class="form" action="../add-a-court-case/next-court-date-select">
-            <h2 class="govuk-heading-m">Appearance details</h2>
             <dl class="govuk-summary-list govuk-summary-list--no-border">
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">

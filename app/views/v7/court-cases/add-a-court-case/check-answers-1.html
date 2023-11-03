@@ -14,14 +14,14 @@
             <dl class="govuk-summary-list">
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
-                        Court case reference number
+                        Case reference number
                     </dt>
                     <dd class="govuk-summary-list__value">
                         {{ data['appearance']['court-case-ref'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link" href="court-case-reference-number">
-                            Change<span class="govuk-visually-hidden"> court case reference number</span>
+                            Edit<span class="govuk-visually-hidden"> court case reference number</span>
                         </a>
                     </dd>
                 </div>
@@ -34,7 +34,7 @@
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link" href="court-name">
-                            Change<span class="govuk-visually-hidden"> court name</span>
+                            Edit<span class="govuk-visually-hidden"> court name</span>
                         </a>
                     </dd>
                 </div>
@@ -47,7 +47,7 @@
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link" href="warrant-date">
-                            Change<span class="govuk-visually-hidden"> warrant date</span>
+                            Edit<span class="govuk-visually-hidden"> warrant date</span>
                         </a>
                     </dd>
                 </div>
@@ -60,7 +60,20 @@
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link" href="overall-case-outcome">
-                            Change<span class="govuk-visually-hidden"> overall case outcome</span>
+                            Edit<span class="govuk-visually-hidden"> overall case outcome</span>
+                        </a>
+                    </dd>
+                </div>
+                                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Does the overall outcome apply to all offences?
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['overall-case-outcome-apply-all'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="outcome-apply-all">
+                            Edit<span class="govuk-visually-hidden"> overall case apply to all offences</span>
                         </a>
                     </dd>
                 </div>

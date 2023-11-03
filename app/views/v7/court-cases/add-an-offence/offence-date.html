@@ -9,8 +9,8 @@
             <fieldset class="govuk-fieldset" role="group" aria-describedby="passport-issued-hint">
                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                     <h1 class="govuk-fieldset__heading">
-                        <span class="govuk-caption-l">Add an offence</span>
-                        Enter the offence date
+                        <span class="govuk-caption-l">Add an offence to case {{ data['appearance']['court-case-ref'] }}</span>
+                        Enter the offence dates
                     </h1>
                 </legend>
                 <div class="govuk-form-group">
@@ -49,7 +49,7 @@
                         Offence end date (optional)
                     </label>
                     <div id="event-name-hint" class="govuk-hint">
-                        This only applies to offences occuring over multiple days
+                        This only applies to offences that occur over multiple days.
                     </div>
                     <div class="govuk-date-input" id="offence-end-date">
                         <div class="govuk-date-input__item">
@@ -90,7 +90,7 @@
             <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
                 <div class="govuk-summary-list__row offences-summary-card-court-details-row">
                     <dt class="govuk-summary-list__key">
-                        Court case
+                        Case reference number
                     </dt>
                     <dd class="govuk-summary-list__value">
                         {{ data['appearance']['court-case-ref'] }}
