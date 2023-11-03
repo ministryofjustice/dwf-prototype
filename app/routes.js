@@ -17,7 +17,7 @@ router.post('/:prototypeVersion/next-court-date-select', function (req, res) {
   if (nextCourtDateSelect == "Yes"){
     // Send user to next page
     res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/next-hearing-type-select`)
-  } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/check-answers`)
+  } else res.redirect(307, `/${prototypeVersion}/persist-appearance-2`)
 })
 
 // Next court name routes
@@ -55,7 +55,7 @@ router.post('/:prototypeVersion/:appearancePath/next-court-date-select', functio
   if (nextCourtDateSelect == "Yes"){
     // Send user to next page
     res.redirect(`/${prototypeVersion}/court-cases/${appearancePath}/next-hearing-type-select`)
-  } else res.redirect(`/${prototypeVersion}/court-cases/${appearancePath}/check-answers`)
+  } else res.redirect(307, `/${prototypeVersion}/persist-appearance`)
 })
 
 // Offence code route
