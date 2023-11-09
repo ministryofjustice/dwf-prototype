@@ -125,11 +125,11 @@ router.post('/:prototypeVersion/case-outcome-apply', function (req, res) {
   const prototypeVersion = req.params.prototypeVersion
   const courtCaseIndex = req.session.data.courtCaseIndex
   const appearanceIndex = req.session.data.appearanceIndex
-// Make a variable and give it the value 
   var overallCaseOutcomeApply = req.session.data.appearance['overall-case-outcome-apply-all']
 console.log("Overall case outcome applies: " + overallCaseOutcomeApply)
   if (overallCaseOutcomeApply == 'Yes'){
     req.session.data.offence['outcome'] = req.session.data.appearance['overall-case-outcome']
+    req.session.data.appearance['overall-case-outcome-apply-all'] = overallCaseOutcomeApply
     res.redirect(307, `/${prototypeVersion}/persist-offence`)
   } else res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/outcome`)
 })
