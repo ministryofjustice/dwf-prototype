@@ -93,6 +93,8 @@ console.log(outcome)
   if (outcome.includes('lookup-another-outcome')){
     // Send user to next page
     res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/lookup-outcome`)
+  } else if (prototypeVersion == 'v8'){
+    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/review-offences`)
   } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/next-court-date-select`)
 })
 
@@ -118,6 +120,28 @@ console.log(outcome)
     // Send user to next page
     res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/lookup-outcome`)
   } else res.redirect(307, `/${prototypeVersion}/persist-offence`)
+})
+
+router.post('/:prototypeVersion/new-court-case-ref', function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion
+  const courtCaseIndex = req.session.data.courtCaseIndex
+  var caseRefSelect = req.session.data.appearance['case-ref-select']
+console.log("Case ref select:" + caseRefSelect)
+  if (caseRefSelect.includes('Yes')){
+   req.session.data.appearance['court-case-ref'] = req.session.data.courtCases[courtCaseIndex].appearances.at(-1)['court-case-ref']
+    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/warrant-date`)
+  } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-case-reference-number`)
+})
+
+router.post('/:prototypeVersion/new-court-name', function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion
+  const courtCaseIndex = req.session.data.courtCaseIndex
+  var caseRefSelect = req.session.data.appearance['court-name-select']
+console.log("Case ref select:" + caseRefSelect)
+  if (caseRefSelect.includes('Yes')){
+   req.session.data.appearance['court-name'] = req.session.data.courtCases[courtCaseIndex].appearances.at(-1)['court-name']
+    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`)
+  } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-name`)
 })
 
 // Overall case outcome applies all offences
@@ -182,9 +206,7 @@ router.get('/:prototypeVersion/delete-court-case', function(req, res) {
   res.redirect(`/${prototypeVersion}/court-cases/court-cases-standalone`)
 })
 
-
-
-//Add a first court appearance
+//Add an appearance
 router.get('/:prototypeVersion/create-appearance', function(req, res) {
   const prototypeVersion = req.params.prototypeVersion
   delete req.session.data.appearanceIndex
@@ -194,8 +216,8 @@ router.get('/:prototypeVersion/create-appearance', function(req, res) {
     req.session.data.courtCase = req.session.data.courtCases[courtIndex]
     req.session.data.courtCaseIndex = courtIndex
   }
-  if(req.session.data.courtCase.appearances.length === 0) {
-    return res.redirect(`/${prototypeVersion}/court-cases/add-a-first-court-appearance/overall-case-outcome`)
+  if(prototypeVersion == 'v8') {
+    return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-case-reference-number-select`)
   } else {
     return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-case-reference-number`)
   }
