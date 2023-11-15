@@ -144,6 +144,17 @@ console.log("Case ref select:" + caseRefSelect)
   } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-name`)
 })
 
+router.post('/:prototypeVersion/change-offences-select', function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion
+  const courtCaseIndex = req.session.data.courtCaseIndex
+  var changeOffences = req.session.data.appearance['change-offences']
+console.log("Change offences:" + changeOffences)
+  if (changeOffences.includes('Yes')){
+   req.session.data.appearance['court-case-ref'] = req.session.data.courtCases[courtCaseIndex].appearances.at(-1)['court-case-ref']
+    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/change-offences`)
+  } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/next-court-date-select`)
+})
+
 // Overall case outcome applies all offences
 router.post('/:prototypeVersion/case-outcome-apply', function (req, res) {
   const prototypeVersion = req.params.prototypeVersion
@@ -285,6 +296,8 @@ router.post('/:prototypeVersion/persist-offence', function(req, res) {
 router.get('/:prototypeVersion/update-offence', function(req, res) {
   const prototypeVersion = req.params.prototypeVersion
   const index = req.query.index
+  const route = req.query.route
+  console.log('Edit route:' + route)
   req.session.data.offence = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[req.session.data.appearanceIndex].offences[index]
   req.session.data.offenceIndex = index
   res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-code`)
