@@ -12,7 +12,7 @@
             <span class="govuk-caption-l">Add an appearance to court case {{ data.courtCaseIndex | int + 1 }}</span>
             Review offence details for this appearance</h1>
         <h2 class="govuk-heading-m govuk-!-margin-bottom-6">Offences</h2>
-        {% for offence in data.courtCases[data.courtCaseIndex].appearances[0].offences %}
+        {% for offence in data.appearance.offences %}
         <div class="offence-card">
             <div class="offence-card-offence-details">
                 <h4 class="govuk-heading-s">{{ offence['offence-name'] }}</h4>

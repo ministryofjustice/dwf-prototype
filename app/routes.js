@@ -227,6 +227,9 @@ router.get('/:prototypeVersion/create-appearance', function(req, res) {
     req.session.data.courtCase = req.session.data.courtCases[courtIndex]
     req.session.data.courtCaseIndex = courtIndex
   }
+  req.session.data.appearance = {
+    offences: req.session.data.courtCase.appearances.at(-1).offences
+  }
   if(prototypeVersion == 'v8') {
     return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-case-reference-number-select`)
   } else {
@@ -243,7 +246,7 @@ router.post('/:prototypeVersion/persist-appearance', function (req, res) {
     req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[0] = {...req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[0], ...req.session.data.appearance}
     req.session.data.appearanceIndex = 0
   } else {
-    req.session.data.courtCases[req.session.data.courtCaseIndex].appearances.push({...req.session.data.appearance, offences: []})
+    req.session.data.courtCases[req.session.data.courtCaseIndex].appearances.push(req.session.data.appearance)
     req.session.data.appearanceIndex = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances.length -1
   }
   displaySuccess = 1
@@ -284,19 +287,26 @@ router.get('/:prototypeVersion/create-offence', function(req, res) {
 
 router.post('/:prototypeVersion/persist-offence', function(req, res) {
   const prototypeVersion = req.params.prototypeVersion
+  const route = req.session.data.route
   if(req.session.data.offenceIndex !== undefined) {
     req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[req.session.data.appearanceIndex].offences[req.session.data.offenceIndex] = req.session.data.offence
   } else {
     req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[req.session.data.appearanceIndex].offences.push(req.session.data.offence)
     req.session.data.offenceIndex = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[req.session.data.appearanceIndex].offences.length - 1
   }
-  res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/check-answers`)
+  if(route == "repeat-remand") {
+    req.session.data.changeMade = 1
+    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/change-offences`)
+} else
+    res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/check-answers`)
 })
 
 router.get('/:prototypeVersion/update-offence', function(req, res) {
   const prototypeVersion = req.params.prototypeVersion
   const index = req.query.index
+  req.session.data.appearanceIndex = 0
   const route = req.query.route
+  req.session.data.route = route
   console.log('Edit route:' + route)
   req.session.data.offence = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[req.session.data.appearanceIndex].offences[index]
   req.session.data.offenceIndex = index
