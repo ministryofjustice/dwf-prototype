@@ -243,6 +243,7 @@ router.post('/:prototypeVersion/persist-appearance', function (req, res) {
   } else {
     req.session.data.courtCases[req.session.data.courtCaseIndex].appearances.push(req.session.data.appearance)
     req.session.data.appearanceIndex = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances.length -1
+    console.log('Appearance index: ' + req.session.data.appearanceIndex)
   }
   displaySuccess = 1
   req.session.data.appearanceSuccess = displaySuccess
@@ -289,6 +290,7 @@ router.post('/:prototypeVersion/persist-offence', function(req, res) {
 router.get('/:prototypeVersion/update-offence', function(req, res) {
   const prototypeVersion = req.params.prototypeVersion
   const index = req.query.index
+  console.log('Appearance index: ' +  req.session.data.appearanceIndex)
   const route = req.query.route
   req.session.data.route = route
   console.log('Edit route:' + route)
