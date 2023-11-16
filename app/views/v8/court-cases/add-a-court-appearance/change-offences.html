@@ -7,7 +7,7 @@
             <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
                 <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
             </svg>
-            <div class="moj-banner__message">Changes successfully made<span class="govuk-!-text-align-right" style="display: inline-flex; float: right;"><a class="govuk-link--no-visited-state" href="/v7/close-success-message">Close</a></span></div>
+            <div class="moj-banner__message">Changes successfully made<span class="govuk-!-text-align-right" style="display: inline-flex; float: right;"><a class="govuk-link--no-visited-state" href="/v8/close-success-message">Close</a></span></div>
         </div>
         {% endif %}
         <h1 class="govuk-heading-l">
@@ -40,14 +40,14 @@
            <div class="offence-card-actions">
                     <ul class="offence-card-actions-list">
                         <li class="offence-card-action-link"><a href="/v8/update-offence?index={{loop.index0}}&route=repeat-remand">Edit</a></li>
-                        <li class="offence-card-action-link"><a href="/v8/delete-offence">Delete</a></li>
+                        <li class="offence-card-action-link"><a href="/v8/delete-offence?index={{loop.index0}}&route=repeat-remand">Delete</a></li>
                     </ul>
                 </div>
         </div>
         {% endfor %}
         <form class="form govuk-!-margin-top-7" action="next-court-date-select">
             <div class="govuk-button-group">
-            <button class="govuk-button govuk-button--secondary" data-module="govuk-button">
+            <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="/v8/create-offence">
                 Add another
             </button>
             <button class="govuk-button" data-module="govuk-button">

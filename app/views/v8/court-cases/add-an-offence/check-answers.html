@@ -9,7 +9,7 @@
             <div class="moj-banner__message">Offence successfully added </div>
         </div> -->
         <h1 class="govuk-heading-l">
-    You have added {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex].offences | length }} offences to case {{ data['appearance']['court-case-ref'] }}</h1>
+    You have added {{ data['appearance'].offences | length }} offences to case {{ data['appearance']['court-case-ref'] }}</h1>
         <form class="form" action="../add-a-court-case/next-court-date-select">
             <dl class="govuk-summary-list govuk-summary-list--no-border">
                 <div class="govuk-summary-list__row">
@@ -30,7 +30,7 @@
                 </div>
             </dl>
             <h2 class="govuk-heading-m govuk-!-margin-bottom-6">Offences added</h2>
-            {% for offence in data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex].offences %}
+            {% for offence in data['appearance'].offences %}
             <div class="offence-card">
                 <div class="offence-card-offence-details">
                     <h4 class="govuk-heading-s">{{ offence['offence-name'] }}</h4>
@@ -55,14 +55,14 @@
                 </div>
                 <div class="offence-card-actions">
                     <ul class="offence-card-actions-list">
-                        <li class="offence-card-action-link"><a href="/v7/update-offence?index={{loop.index0}}">Edit</a></li>
-                        <li class="offence-card-action-link"><a href="/v7/delete-offence">Delete</a></li>
+                        <li class="offence-card-action-link"><a href="/v8/update-offence?index={{loop.index0}}">Edit</a></li>
+                        <li class="offence-card-action-link"><a href="/v8/delete-offence?index={{loop.index0}}">Delete</a></li>
                     </ul>
                 </div>
             </div>
             {% endfor %}
             <div class="govuk-button-group govuk-!-margin-top-8">
-                <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="/v7/create-offence">
+                <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="/v8/create-offence">
                     Add another offence
                 </button>
                 <button class="govuk-button" data-module="govuk-button">
