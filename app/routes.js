@@ -17,7 +17,7 @@ router.post('/:prototypeVersion/next-court-date-select', function (req, res) {
   if (nextCourtDateSelect == "Yes"){
     // Send user to next page
     res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/next-hearing-type-select`)
-  } else res.redirect(307, `/${prototypeVersion}/persist-appearance-2`)
+  } else res.redirect(307, `/${prototypeVersion}/persist-appearance`)
 })
 
 // Next court name routes
@@ -150,7 +150,6 @@ router.post('/:prototypeVersion/change-offences-select', function (req, res) {
   var changeOffences = req.session.data.appearance['change-offences']
 console.log("Change offences:" + changeOffences)
   if (changeOffences.includes('Yes')){
-   req.session.data.appearance['court-case-ref'] = req.session.data.courtCases[courtCaseIndex].appearances.at(-1)['court-case-ref']
     res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/change-offences`)
   } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/next-court-date-select`)
 })
@@ -183,21 +182,17 @@ router.post('/:prototypeVersion/persist-court-case', function (req, res) {
   if(req.session.data.courtCaseIndex !== undefined) {
     req.session.data.courtCases[req.session.data.courtCaseIndex] = req.session.data.courtCase
   } else {
+    const appearance = {
+      ...req.session.data.appearance,
+      offences: []
+    }
     const courtCase = {...req.session.data.courtCase,
     'court-case-num': req.session.data.courtCases.length -1,
-     appearances: [ {
-      'court-case-reference-number': req.session.data.appearance['court-case-reference-number'],
-      'warrant-date-day': req.session.data.appearance['warrant-date-day'],
-      'warrant-date-month': req.session.data.appearance['warrant-date-month'],
-      'warrant-date-year': req.session.data.appearance['warrant-date-year'],
-      'court-name': req.session.data.appearance['court-name'],
-      'overall-case-outcome': req.session.data.appearance['overall-case-outcome'],
-      offences: []
-    }]}
+     appearances: []}
     req.session.data.courtCases.push(courtCase)
     req.session.data.courtCase = courtCase
     req.session.data.courtCaseIndex = req.session.data.courtCases.length -1
-    req.session.data.appearanceIndex = 0
+    req.session.data.appearance = appearance
   }
   res.redirect(`/${prototypeVersion}/create-offence`)
 })
@@ -255,16 +250,6 @@ router.post('/:prototypeVersion/persist-appearance', function (req, res) {
   res.redirect(`/${prototypeVersion}/court-cases/`)
 })
 
-router.post('/:prototypeVersion/persist-appearance-2', function (req, res) {
-  const prototypeVersion = req.params.prototypeVersion
-  var displaySuccess = 0
-    req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[0] = {...req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[0], ...req.session.data.appearance}
-    req.session.data.appearanceIndex = 0
-  displaySuccess = 1
-  req.session.data.appearanceSuccess = displaySuccess
-  res.redirect(`/${prototypeVersion}/court-cases/`)
-})
-
 router.get('/:prototypeVersion/close-success-message', function(req, res){
   const prototypeVersion = req.params.prototypeVersion
   var displaySuccess = 0
@@ -280,7 +265,7 @@ router.get('/:prototypeVersion/create-offence', function(req, res) {
   delete  req.session.data.offence
   const appearanceIndex = req.query.appearanceIndex
   if(appearanceIndex !== undefined) {
-    req.session.data.appearanceIndex = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[appearanceIndex]
+    req.session.data.appearance = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[appearanceIndex]
     req.session.data.appearanceIndex = appearanceIndex
   }
   res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-code`)
@@ -290,10 +275,10 @@ router.post('/:prototypeVersion/persist-offence', function(req, res) {
   const prototypeVersion = req.params.prototypeVersion
   const route = req.session.data.route
   if(req.session.data.offenceIndex !== undefined) {
-    req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[req.session.data.appearanceIndex].offences[req.session.data.offenceIndex] = req.session.data.offence
+    req.session.data.appearance.offences[req.session.data.offenceIndex] = req.session.data.offence
   } else {
-    req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[req.session.data.appearanceIndex].offences.push(req.session.data.offence)
-    req.session.data.offenceIndex = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[req.session.data.appearanceIndex].offences.length - 1
+    req.session.data.appearance.offences.push(req.session.data.offence)
+    req.session.data.offenceIndex = req.session.data.appearance.offences.length - 1
   }
   if(route == "repeat-remand") {
     req.session.data.changeMade = 1
@@ -309,7 +294,7 @@ router.get('/:prototypeVersion/update-offence', function(req, res) {
   const route = req.query.route
   req.session.data.route = route
   console.log('Edit route:' + route)
-  req.session.data.offence = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[req.session.data.appearanceIndex].offences[index]
+  req.session.data.offence = req.session.data.appearance.offences[index]
   req.session.data.offenceIndex = index
   res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-code`)
 })
@@ -317,7 +302,7 @@ router.get('/:prototypeVersion/update-offence', function(req, res) {
 router.get('/:prototypeVersion/delete-offence', function(req, res) {
   const prototypeVersion = req.params.prototypeVersion
   const index = req.query.index
-  req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[req.session.data.appearanceIndex].offences.splice(index, 1)
+  req.session.data.appearance.offences.splice(index, 1)
   res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/check-answers`)
 })
 

@@ -75,7 +75,7 @@
                         Offences added
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex].offences | length }}
+                        {{ data.appearance.offences | length }}
                     </dd>
                 </div>
             </dl>
@@ -87,7 +87,7 @@
                 </summary>
                 <div class="govuk-details__text">
                     <dl class="offences-summary-card-content">
-                        {% for offence in data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex].offences %}
+                        {% for offence in data.appearance.offences %}
                         <div class="offences-summary-card-row">
                             <dt class="offences-summary-card-key govuk-!-font-weight-bold">
                                 {{ offence['offence-name'] }}

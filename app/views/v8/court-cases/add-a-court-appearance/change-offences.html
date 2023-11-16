@@ -40,14 +40,14 @@
            <div class="offence-card-actions">
                     <ul class="offence-card-actions-list">
                         <li class="offence-card-action-link"><a href="/v8/update-offence?index={{loop.index0}}&route=repeat-remand">Edit</a></li>
-                        <li class="offence-card-action-link"><a href="/v8/delete-offence">Delete</a></li>
+                        <li class="offence-card-action-link"><a href="/v8/delete-offence?index={{loop.index0}}&route=repeat-remand">Delete</a></li>
                     </ul>
                 </div>
         </div>
         {% endfor %}
         <form class="form govuk-!-margin-top-7" action="next-court-date-select">
             <div class="govuk-button-group">
-            <button class="govuk-button govuk-button--secondary" data-module="govuk-button">
+            <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="/v8/create-offence">
                 Add another
             </button>
             <button class="govuk-button" data-module="govuk-button">
