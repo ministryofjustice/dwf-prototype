@@ -285,7 +285,7 @@ router.post('/:prototypeVersion/persist-offence', function(req, res) {
         req.session.data.appearance.offences.push(req.session.data.offence)
         req.session.data.offenceIndex = req.session.data.appearance.offences.length - 1
     }
-    if (route.includes('repeat-remand')) {
+    if (route == 'repeat-remand') {
         req.session.data.changeMade = 1
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/change-offences`)
     } else
