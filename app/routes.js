@@ -94,7 +94,7 @@ router.post('/:prototypeVersion/outcome-select-2', function(req, res) {
         // Send user to next page
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/lookup-outcome`)
     } else if (prototypeVersion == 'v8') {
-        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/review-offences`)
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/outcome-apply-all`)
     } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/next-court-date-select`)
 })
 
@@ -160,12 +160,16 @@ router.post('/:prototypeVersion/case-outcome-apply', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     const courtCaseIndex = req.session.data.courtCaseIndex
     const appearanceIndex = req.session.data.appearanceIndex
+    const route = req.query.route
     var overallCaseOutcomeApply = 'No'
     overallCaseOutcomeApply = req.session.data.appearance['overall-case-outcome-apply-all']
     console.log("Overall case outcome applies: " + overallCaseOutcomeApply)
     if (overallCaseOutcomeApply == 'Yes') {
         req.session.data.offence['outcome'] = req.session.data.appearance['overall-case-outcome']
         req.session.data.appearance['overall-case-outcome-apply-all'] = overallCaseOutcomeApply
+        if (route == 'repeat-remand') {
+          res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/review-offences`)
+        }
         res.redirect(307, `/${prototypeVersion}/persist-offence`)
     } else res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/outcome`)
 })

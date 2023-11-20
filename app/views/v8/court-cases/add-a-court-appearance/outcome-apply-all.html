@@ -1,35 +1,33 @@
 {% extends "../template.html" %}
 {% block content %}
 <!-- Back link -->
-<!-- <a href="../court-cases-standalone" class="govuk-back-link govuk-!-margin-top-0">Back</a> -->
+<a href="type-of-case" class="govuk-back-link govuk-!-margin-top-0">Back</a>
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-                <form class="form" action="/v8/new-court-name" method="post">
+        <form class="form" action="/v8/case-outcome-apply?route=repeat-remand" method="post">
             <div class="govuk-form-group"> 
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add an appearance to court case {{ data.courtCaseIndex | int + 1 }}</span>
-                            Was this appearance at the court listed on the last warrant?
+                            <span class="govuk-caption-l">Add a court case</span>
+                            Does this outcome apply to all offences on the warrant?
                         </h1>
                     </legend>
-                    <p class="govuk-body-l">
-                            {{ data.courtCase.appearances.at(appearanceIndex)['next-court-name'] }}
-                        </p>
+                    <p class="govuk-body-l">{{ data['appearance']['overall-case-outcome'] }}</p>
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="court-name-select" name="appearance[court-name-select]" type="radio" value="Yes">
-                            <label class="govuk-label govuk-radios__label" for="court-name-select">
+                            <input class="govuk-radios__input" id="overall-case-outcome-apply-all" name="appearance[overall-case-outcome-apply-all]" type="radio" value="Yes">
+                            <label class="govuk-label govuk-radios__label" for="overall-case-outcome">
                                 Yes
                             </label>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="court-name-select-2" name="appearance[court-name-select]" type="radio" value="No">
-                            <label class="govuk-label govuk-radios__label" for="court-name-select-2">
+                            <input class="govuk-radios__input" id="overall-case-outcome-apply-all-2" name="appearance[overall-case-outcome-apply-all]" type="radio" value="No">
+                            <label class="govuk-label govuk-radios__label" for="overall-case-outcome-apply-all-2">
                                 No
                             </label>
-                        </div>
+                        </div>  
                     </div>
                 </fieldset>
             </div>
