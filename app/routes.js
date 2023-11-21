@@ -165,7 +165,6 @@ router.post('/:prototypeVersion/case-outcome-apply', function(req, res) {
     overallCaseOutcomeApply = req.session.data.appearance['overall-case-outcome-apply-all']
     console.log("Overall case outcome applies: " + overallCaseOutcomeApply)
     if (overallCaseOutcomeApply == 'Yes') {
-        req.session.data.offence['outcome'] = req.session.data.appearance['overall-case-outcome']
         req.session.data.appearance['overall-case-outcome-apply-all'] = overallCaseOutcomeApply
         req.session.data.appearance.offences = req.session.data.appearance.offences
         .map(offence => {
