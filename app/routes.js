@@ -173,9 +173,9 @@ router.post('/:prototypeVersion/case-outcome-apply', function(req, res) {
             return offence
         })
         if (route == 'repeat-remand') {
-          res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/review-offences`)
+          return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/review-offences`)
         }
-        res.redirect(307, `/${prototypeVersion}/persist-offence`)
+        return res.redirect(307, `/${prototypeVersion}/persist-offence`)
     } else res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/outcome`)
 })
 
