@@ -167,10 +167,15 @@ router.post('/:prototypeVersion/case-outcome-apply', function(req, res) {
     if (overallCaseOutcomeApply == 'Yes') {
         req.session.data.offence['outcome'] = req.session.data.appearance['overall-case-outcome']
         req.session.data.appearance['overall-case-outcome-apply-all'] = overallCaseOutcomeApply
+        req.session.data.appearance.offences = req.session.data.appearance.offences
+        .map(offence => {
+            offence.outcome = req.session.data.appearance['overall-case-outcome']
+            return offence
+        })
         if (route == 'repeat-remand') {
-          res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/review-offences`)
+          return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/review-offences`)
         }
-        res.redirect(307, `/${prototypeVersion}/persist-offence`)
+        return res.redirect(307, `/${prototypeVersion}/persist-offence`)
     } else res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/outcome`)
 })
 
@@ -228,8 +233,13 @@ router.get('/:prototypeVersion/create-appearance', function(req, res) {
         req.session.data.courtCase = req.session.data.courtCases[courtIndex]
         req.session.data.courtCaseIndex = courtIndex
     }
+    const lastAppearance = req.session.data.courtCase.appearances.at(-1)
     req.session.data.appearance = {
-        offences: req.session.data.courtCase.appearances.at(-1).offences
+        offences: lastAppearance.offences,
+        'court-name': lastAppearance['next-court-name'],
+        'warrant-date-day': lastAppearance['next-court-date-day'],
+        'warrant-date-month': lastAppearance['next-court-date-month'],
+        'warrant-date-year': lastAppearance['next-court-date-year']
     }
     if (prototypeVersion == 'v8') {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-case-reference-number-select`)
@@ -275,6 +285,11 @@ router.get('/:prototypeVersion/create-offence', function(req, res) {
     if (appearanceIndex !== undefined) {
         req.session.data.appearance = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[appearanceIndex]
         req.session.data.appearanceIndex = appearanceIndex
+    }
+    if(req.session.data.appearance['overall-case-outcome-apply-all'] === 'Yes') {
+        req.session.data.offence = {
+            outcome: req.session.data.appearance['overall-case-outcome']
+        }
     }
     res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-code`)
 })
