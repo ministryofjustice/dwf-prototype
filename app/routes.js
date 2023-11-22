@@ -151,6 +151,8 @@ router.post('/:prototypeVersion/change-offences-select', function(req, res) {
     console.log("Change offences:" + changeOffences)
     if (changeOffences.includes('Yes')) {
         req.session.data.changeMade = 0
+        req.session.data.offenceDeleted = 0
+        req.session.data.offenceAdded = 0
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/change-offences`)
     } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/next-court-date-select`)
 })
@@ -262,7 +264,7 @@ router.post('/:prototypeVersion/persist-appearance', function(req, res) {
     }
     displaySuccess = 1
     req.session.data.appearanceSuccess = displaySuccess
-    res.redirect(`/${prototypeVersion}/court-cases/`)
+    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/confirmation`)
 })
 
 router.get('/:prototypeVersion/close-success-message', function(req, res) {
@@ -304,7 +306,6 @@ router.post('/:prototypeVersion/persist-offence', function(req, res) {
         req.session.data.offenceIndex = req.session.data.appearance.offences.length - 1
     }
     if (route == 'repeat-remand') {
-        req.session.data.changeMade = 1
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/change-offences`)
     } else
         res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/check-answers`)
@@ -319,6 +320,9 @@ router.get('/:prototypeVersion/update-offence', function(req, res) {
     console.log('Edit route:' + route)
     req.session.data.offence = req.session.data.appearance.offences[index]
     req.session.data.offenceIndex = index
+    req.session.data.changeMade = 1
+    req.session.data.offenceDeleted = 0
+    req.session.data.offenceAdded = 0
     res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-code`)
 })
 
@@ -335,6 +339,9 @@ router.get('/:prototypeVersion/add-an-offence-to-appearance', function(req, res)
     const prototypeVersion = req.params.prototypeVersion
     req.session.data.route = req.query.route
     console.log('Route: ' + req.session.data.route)
+    req.session.data.offenceAdded = 1
+    req.session.data.changeMade = 0
+    req.session.data.offenceDeleted = 0
     res.redirect(307, `/${prototypeVersion}/create-offence`)
 })
 
@@ -347,6 +354,7 @@ router.get('/:prototypeVersion/delete-offence', function(req, res) {
         if (route == "repeat-remand") {
             req.session.data.changeMade = 0
             req.session.data.offenceDeleted = 1
+            req.session.data.offenceAdded = 0
             res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/change-offences`)
         } else if (route != "repeat-remand") {
             res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/check-answers`)

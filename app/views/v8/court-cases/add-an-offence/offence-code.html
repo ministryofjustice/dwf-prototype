@@ -1,7 +1,5 @@
 {% extends "../template.html" %}
 {% block content %}
-<!-- Back link -->
-<a href=".offence-date" class="govuk-back-link govuk-!-margin-top-0">Back</a>
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
@@ -10,9 +8,12 @@
                 <fieldset class="govuk-fieldset" role="group">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add an offence to case {{ data['appearance']['court-case-ref'] }}</span>
+                        {% if data.route == 'repeat-remand' %}
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Add an appearance to court case {{ data.courtCaseIndex | int + 1 }}</span>
                             Enter the offence code
                         </h1>
+                        {% endif %}
                     </legend>
                     <input class="govuk-input govuk-input--width-10" id="offence-code" name="offence[offence-code]" type="text">
                     <div class="govuk-checkboxes govuk-!-margin-top-6" data-module="govuk-checkboxes">
