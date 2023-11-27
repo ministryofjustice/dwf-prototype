@@ -28,7 +28,7 @@
         {% endif %}
         <h1 class="govuk-heading-l">
             <span class="govuk-caption-l">Add an appearance to court case {{ data.courtCaseIndex | int + 1 }}</span>
-            Edit offence details for this appearance</h1>
+            Edit the offence details for this appearance</h1>
         <h2 class="govuk-heading-m govuk-!-margin-bottom-6">Offences ({{ data.appearance.offences | length }})</h2>
         {% for offence in data.appearance.offences %}
         <div class="offence-card">
@@ -63,10 +63,11 @@
         </div>
         {% endfor %}
         <form class="form govuk-!-margin-top-7" action="next-court-date-select">
+            <p><a class="govuk-link--no-visited-state" href="/v8/add-an-offence-to-appearance?route=repeat-remand">Add another offence</a></p>
             <div class="govuk-button-group">
-            <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="/v8/add-an-offence-to-appearance?route=repeat-remand" formmethod="post">
+            <!-- <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="" formmethod="post">
                 Add another
-            </button>
+            </button> -->
             <button class="govuk-button" data-module="govuk-button">
                 Finish and continue
             </button>

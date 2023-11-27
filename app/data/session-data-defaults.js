@@ -48,6 +48,19 @@ module.exports = {
                             ],
                             "offence-name": "Blackmail",
                             "outcome": "Remand before conviction"
+                        },
+                        {
+                            "offence-start-date-day": "24",
+                            "offence-start-date-month": "8",
+                            "offence-start-date-year": "2023",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "TH68071"
+                            ],
+                            "offence-name": "Blackmail",
+                            "outcome": "Remand before conviction"
                         }
                     ]
                 }
