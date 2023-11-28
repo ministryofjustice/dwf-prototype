@@ -169,12 +169,12 @@ router.post('/:prototypeVersion/case-outcome-apply', function(req, res) {
     if (overallCaseOutcomeApply == 'Yes') {
         req.session.data.appearance['overall-case-outcome-apply-all'] = overallCaseOutcomeApply
         req.session.data.appearance.offences = req.session.data.appearance.offences
-        .map(offence => {
-            offence.outcome = req.session.data.appearance['overall-case-outcome']
-            return offence
-        })
+            .map(offence => {
+                offence.outcome = req.session.data.appearance['overall-case-outcome']
+                return offence
+            })
         if (route == 'repeat-remand') {
-          return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/review-offences`)
+            return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/review-offences`)
         }
         return res.redirect(307, `/${prototypeVersion}/persist-offence`)
     } else res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/outcome`)
@@ -252,6 +252,7 @@ router.get('/:prototypeVersion/create-appearance', function(req, res) {
 router.post('/:prototypeVersion/persist-appearance', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     var displaySuccess = 0
+    const route = req.query.route
     if (req.session.data.appearanceIndex !== undefined) {
         req.session.data.courtCases[req.session.data.courtCaseIndex].appearance[req.session.data.appearanceIndex] = req.session.data.appearance
     } else if (req.query.isFirst) {
@@ -264,7 +265,12 @@ router.post('/:prototypeVersion/persist-appearance', function(req, res) {
     }
     displaySuccess = 1
     req.session.data.appearanceSuccess = displaySuccess
+if (route == "repeat-remand") {
     res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/confirmation`)
+  }
+  else if (route == "add-a-court-case") {
+    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/confirmation`)
+  }
 })
 
 router.get('/:prototypeVersion/close-success-message', function(req, res) {
@@ -287,7 +293,7 @@ router.get('/:prototypeVersion/create-offence', function(req, res) {
         req.session.data.appearance = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[appearanceIndex]
         req.session.data.appearanceIndex = appearanceIndex
     }
-    if(req.session.data.appearance['overall-case-outcome-apply-all'] === 'Yes') {
+    if (req.session.data.appearance['overall-case-outcome-apply-all'] === 'Yes') {
         req.session.data.offence = {
             outcome: req.session.data.appearance['overall-case-outcome']
         }
@@ -308,7 +314,10 @@ router.post('/:prototypeVersion/persist-offence', function(req, res) {
     if (route == 'repeat-remand') {
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/change-offences`)
     } else
-        res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/check-answers`)
+    req.session.data.changeMade = 0
+    req.session.data.offenceDeleted = 0
+    req.session.data.offenceAdded = 1
+    res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/check-answers`)
 })
 
 router.get('/:prototypeVersion/update-offence', function(req, res) {
@@ -330,8 +339,9 @@ router.get('/:prototypeVersion/update-offence', function(req, res) {
 router.get('/:prototypeVersion/confirm-delete', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     req.session.data.index = req.query.index
-    console.log('Offence index' + req.session.data.index)
+    req.session.data.route = req.query.route
     const route = req.session.data.route
+    console.log('Offence index' + req.session.data.index)
     res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirm-delete`)
 })
 
@@ -357,6 +367,9 @@ router.get('/:prototypeVersion/delete-offence', function(req, res) {
             req.session.data.offenceAdded = 0
             res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/change-offences`)
         } else if (route != "repeat-remand") {
+            req.session.data.changeMade = 0
+            req.session.data.offenceDeleted = 1
+            req.session.data.offenceAdded = 0
             res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/check-answers`)
         }
     } else if (req.session.data.confirmDeleteOffence == 'No') {

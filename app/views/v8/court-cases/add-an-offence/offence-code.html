@@ -7,10 +7,14 @@
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset" role="group">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                        <h1 class="govuk-fieldset__heading">
                         {% if data.route == 'repeat-remand' %}
                         <h1 class="govuk-fieldset__heading">
                             <span class="govuk-caption-l">Add an appearance to court case {{ data.courtCaseIndex | int + 1 }}</span>
+                            Enter the offence code
+                        </h1>
+                        {% else %}
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Add a court case</span>
                             Enter the offence code
                         </h1>
                         {% endif %}

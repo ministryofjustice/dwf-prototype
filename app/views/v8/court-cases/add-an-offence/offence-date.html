@@ -5,15 +5,19 @@
     <div class="govuk-grid-column-two-thirds">
         <form class="form" action="/v8/case-outcome-apply" method="post">
             <fieldset class="govuk-fieldset" role="group" aria-describedby="passport-issued-hint">
-                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                    <h1 class="govuk-fieldset__heading">
-                        {% if data.route == 'repeat-remand' %}
-                        <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add an appearance to court case {{ data.courtCaseIndex | int + 1 }}</span>
-                        Enter the offence dates
-                    </h1>
-                    {% endif %}
-                </legend>
+<legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+    {% if data.route == 'repeat-remand' %}
+    <h1 class="govuk-fieldset__heading">
+        <span class="govuk-caption-l">Add an appearance to court case {{ data.courtCaseIndex | int + 1 }}</span>
+        Enter the offence dates
+    </h1>
+    {% else %}
+    <h1 class="govuk-fieldset__heading">
+        <span class="govuk-caption-l">Add a court case</span>
+        Enter the offence dates
+    </h1>
+    {% endif %}
+</legend>
                 <div class="govuk-form-group">
                     <label class="govuk-label govuk-label--s" for="offence-start-date">
                         Offence start date
