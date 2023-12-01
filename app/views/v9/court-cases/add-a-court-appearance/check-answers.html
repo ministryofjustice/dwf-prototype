@@ -1,0 +1,165 @@
+{% extends "../template.html" %}
+{% block content %}
+<!-- What is the confirmed date -->
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+                {% if data.changeMade == 1 %}
+        <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
+            <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+                <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
+            </svg>
+            <div class="moj-banner__message">Changes successfully made</div>
+        </div>
+        {% endif %}
+        {% if data.offenceDeleted == 1 %}
+        <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
+            <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+                <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
+            </svg>
+            <div class="moj-banner__message">Offence deleted</div>
+        </div>
+        {% endif %}
+        {% if data.offenceAdded == 1 %}
+        <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
+            <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+                <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
+            </svg>
+            <div class="moj-banner__message">New offence added</div>
+        </div>
+        {% endif %}
+        <h1 class="govuk-heading-l">
+            <span class="govuk-caption-l">Add an appearance to court case {{ data.courtCaseIndex | int + 1 }}</span>
+            Check your answers
+        </h1>
+        <form class="form" action="/v8/persist-appearance?route=repeat-remand" method="post">
+            <dl class="govuk-summary-list">
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Court case reference number
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['court-case-ref'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="overall-case-outcome">
+                            Change<span class="govuk-visually-hidden"> overall case outcome</span>
+                        </a>
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Court name
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['court-name'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="overall-case-outcome">
+                            Change<span class="govuk-visually-hidden"> overall case outcome</span>
+                        </a>
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Warrant date
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['warrant-date-day'] }}/{{ data['appearance']['warrant-date-month'] }}/{{ data['appearance']['warrant-date-year'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="overall-case-outcome">
+                            Change<span class="govuk-visually-hidden"> overall case outcome</span>
+                        </a>
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Overall case outcome
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['overall-case-outcome'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="overall-case-outcome">
+                            Change<span class="govuk-visually-hidden"> overall case outcome</span>
+                        </a>
+                    </dd>
+                </div>
+                {% if (data['appearance']['next-court-date-set'] == 'Yes') %}
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Next hearing type
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['next-hearing-type'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="next-hearing-type-select">
+                            Change<span class="govuk-visually-hidden"> next court case</span>
+                        </a>
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Next court date
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['next-court-date-day'] }}/{{ data['appearance']['next-court-date-month'] }}/{{ data['appearance']['next-court-date-year'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="next-court-date">
+                            Change<span class="govuk-visually-hidden"> next court case</span>
+                        </a>
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Next court time
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['next-court-time'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="next-court-date">
+                            Change<span class="govuk-visually-hidden"> next court time</span>
+                        </a>
+                    </dd>
+                </div>
+                                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Next court name
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['next-court-name'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="next-court-date-select">
+                            Change<span class="govuk-visually-hidden"> next court name set</span>
+                        </a>
+                    </dd>
+                </div>
+                {% else %}
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Next court date
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['next-court-date-set'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="next-court-date-select">
+                            Change<span class="govuk-visually-hidden"> next court date set</span>
+                        </a>
+                    </dd>
+                </div>
+                {% endif %}
+            </dl>
+            <h2 class="govuk-heading-m">Now save this appearance</h2>
+            <p class="govuk-body">By saving this appearance you are confirming that the details you are providing match the details on the warrant.</p>
+            <button class="govuk-button" data-module="govuk-button">
+                Save and finish
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
