@@ -70,7 +70,7 @@
                                     Case references
                                 </dt>
                                 <dd class="govuk-summary-list__value">
-                                    {{ courtCase.appearances | join(", ","court-case-ref") }}
+                                    {{ courtCase.appearances | unique("court-case-ref") | join(", ") }}
                                 </dd>
                             </div>
                             <div class="govuk-summary-list__row">
