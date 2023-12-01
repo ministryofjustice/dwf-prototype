@@ -70,7 +70,7 @@
                                     Case references
                                 </dt>
                                 <dd class="govuk-summary-list__value">
-                                    {{ courtCase.appearances | join(", ","court-case-ref") }}
+                                    {{ courtCase.appearances | unique("court-case-ref") | join(", ") }}
                                 </dd>
                             </div>
                             <div class="govuk-summary-list__row">
@@ -81,62 +81,31 @@
                                     {{ lastAppearance['overall-case-outcome'] }}
                                 </dd>
                             </div>
-                            <!-- {% if (lastAppearance['next-court-date-set'] == 'Yes') %}
+                            {% if (lastAppearance['next-court-date-set'] == 'Yes') %}
                             <div class="govuk-summary-list__row">
                                 <dt class="govuk-summary-list__key">
                                     Next hearing
                                 </dt>
                                 <dd class="govuk-summary-list__value">
                                     <ul class="govuk-list">
+                                        <li>{{ lastAppearance['next-court-name'] }}</li>
                                         <li>{{ lastAppearance['next-hearing-type'] }}</li>
                                         <li>{{ lastAppearance['next-court-date-day'] }}/{{ lastAppearance['next-court-date-month'] }}/{{ lastAppearance['next-court-date-year'] }} at {{ lastAppearance['next-court-time'] }} {{ lastAppearance['next-court-time-period'] }}</li>
-                                        <li>{{ lastAppearance['next-court-name'] }}</li>
                                     </ul>
                                 </dd>
                             </div>
                             {% else %}
                             <div class="govuk-summary-list__row">
                                 <dt class="govuk-summary-list__key">
-                                    Next court date
+                                    Next hearing
                                 </dt>
                                 <dd class="govuk-summary-list__value">
                                     Date to be fixed
                                 </dd>
                             </div>
-                            {% endif %} -->
+                            {% endif %}
                         </dl>
-                        {% if (lastAppearance['next-court-date-set'] == 'Yes') %}
-                        <h3 class="govuk-heading-m govuk-!-margin-top-6">Next hearing</h3>
-                        <dl class="govuk-summary-list">
-                            <div class="govuk-summary-list__row">
-                                <dt class="govuk-summary-list__key">
-                                    Hearing type
-                                </dt>
-                                <dd class="govuk-summary-list__value">
-                                    {{ lastAppearance['next-hearing-type'] }}
-                                </dd>
-                            </div>
-                            <div class="govuk-summary-list__row">
-                                <dt class="govuk-summary-list__key">
-                                    Date
-                                </dt>
-                                <dd class="govuk-summary-list__value">
-                                    {{ lastAppearance['next-court-date-day'] }}/{{ lastAppearance['next-court-date-month'] }}/{{ lastAppearance['next-court-date-year'] }} at {{ lastAppearance['next-court-time'] }} {{ lastAppearance['next-court-time-period'] }}
-                                </dd>
-                            </div>
-                            <div class="govuk-summary-list__row">
-                                <dt class="govuk-summary-list__key">
-                                    Location
-                                </dt>
-                                <dd class="govuk-summary-list__value">
-                                    {{ lastAppearance['next-court-name'] }}
-                                </dd>
-                            </div>
-                        </dl>
-                        {% else %}
-                        <h3 class="govuk-heading-m govuk-!-margin-top-6">Next hearing</h3>
-                        <p class="govuk-body">There are no future hearings scheduled.</p>
-                        {% endif %}
+                        <hr class="govuk-section-break govuk-section-break--visible">
                         <table class="govuk-table govuk-!-margin-top-6">
                             <caption class="govuk-table__caption govuk-table__caption--m">Appearances
                                 {% if courtCase.appearances.length >= 5 %}
@@ -170,7 +139,7 @@
                         {% if courtCase.appearances.length >5 %}
                         <p class="govuk-body"><a href="" class="govuk-link--no-visited-state">Show all appearances</a></p>
                         {% endif %}
-                        <h2 class="govuk-heading-m govuk-!-margin-top-7">Offences <span class="govuk-body">({{ lastAppearance.offences.length }})</span></h2>
+                        <h2 class="govuk-heading-m govuk-!-margin-top-4">Offences <span class="govuk-body">({{ lastAppearance.offences.length }})</span></h2>
                         <details class="govuk-details offences-list" data-module="govuk-details">
                             <summary class="govuk-details__summary">
                                 <span class="govuk-details__summary-text">
