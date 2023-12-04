@@ -380,3 +380,10 @@ router.get('/:prototypeVersion/delete-offence', function(req, res) {
         }
     }
 })
+
+router.get('/:prototypeVersion/view-court-case-detail', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    const courtCaseIndex = Number(req.query.courtCaseIndex)+1
+    console.log('Court case index: ' + courtCaseIndex)
+    res.redirect(`/${prototypeVersion}/court-cases/court-case-detail`)
+})

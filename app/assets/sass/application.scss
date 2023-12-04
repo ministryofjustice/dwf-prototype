@@ -1199,3 +1199,15 @@ padding: 10px;
     margin-bottom: 40px
 }
 
+.appearance-timeline-key, .appearance-timeline-value {
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+.appearance-timeline-item {
+    padding-bottom: 0;
+}
+
+.appearance-timeline-item:last-of-type {
+    padding-bottom: 10px;
+}
