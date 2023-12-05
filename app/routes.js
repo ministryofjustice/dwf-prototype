@@ -387,3 +387,13 @@ router.get('/:prototypeVersion/view-court-case-detail', function(req, res) {
     console.log('Court case index: ' + courtCaseIndex)
     res.redirect(`/${prototypeVersion}/court-cases/court-case-detail`)
 })
+
+router.get('/:prototypeVersion/view-appearance-detail', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    const courtCaseIndex = req.session.data.courtCaseIndex
+    const appearanceIndex = Number(req.query.appearanceIndex)
+    console.log('Court case index: ' + courtCaseIndex)
+    res.redirect(`/${prototypeVersion}/court-cases/appearance-detail`)
+})
+
+

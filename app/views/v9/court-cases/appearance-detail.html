@@ -1,0 +1,124 @@
+{% extends "./template.html" %}
+{% block content %}
+<!-- Court cases detailed view -->
+{% set lastAppearance = data.courtCases[data.courtCaseIndex].appearances | last %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <a onclick="history.back()" class="govuk-back-link govuk-!-margin-top-0">Back</a>
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">Appearance details</h1>
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Case reference
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['court-case-ref'] }}
+                </dd>
+            </div>
+                        <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Warrant date
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['warrant-date-day'] }}/{{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['warrant-date-month'] }}/{{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['warrant-date-year'] }}
+                </dd>
+            </div>
+                        <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Location
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['court-name'] }}
+                </dd>
+            </div>
+                                    <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Hearing type
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['hearing-type'] }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Overall case outcome
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['overall-case-outcome'] }}
+                </dd>
+            </div>
+            {% if (data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['next-court-date-set'] != 'Yes') %}
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Next hearing
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    Date to be fixed
+                </dd>
+            </div>
+            {% endif %}
+        </dl>
+        {% if (data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['next-court-date-set'] == 'Yes') %}
+        <dl class="govuk-summary-list">
+            <h2 class="govuk-heading-m">Next hearing</h2>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Location
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['next-court-name'] }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Hearing type
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['next-hearing-type'] }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Date
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['next-court-date-day'] }}/{{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['next-court-date-month'] }}/{{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['next-court-date-year'] }} at {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['next-court-time'] }}
+                </dd>
+            </div>
+        </dl>
+        {% endif %}
+        <h2 class="govuk-heading-l">Offences <span class="govuk-body-l">({{data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex].offences.length}})</span></h2>
+        {% for offence in data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex].offences %}
+        <div class="offence-card">
+            <div class="offence-card-offence-details">
+                <h4 class="govuk-heading-s">{{ offence['offence-name'] }}</h4>
+                <dl class="govuk-summary-list govuk-summary-list--no-border">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Commited on
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ offence['offence-start-date-day'] }}/{{ offence['offence-start-date-month'] }}/{{ offence['offence-start-date-year'] }}
+                            {% if offence['offence-end-date-day'] > 0 %}
+                            to
+                            {{ offence['offence-end-date-day'] }}/{{ offence['offence-end-date-month'] }}/{{ offence['offence-end-date-year'] }}
+                            {% endif %}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Outcome
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ offence['outcome'] }}
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+        {% endfor %}
+{% endblock %}

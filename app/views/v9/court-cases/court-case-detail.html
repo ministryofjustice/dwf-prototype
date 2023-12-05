@@ -3,12 +3,31 @@
 <!-- Court cases detailed view -->
 {% set lastAppearance = data.courtCases[data.courtCaseIndex].appearances | last %}
 <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third">
+
+    <nav class="moj-side-navigation govuk-!-padding-top-0" aria-label="Side navigation">
+      <ul class="moj-side-navigation__list">
+        <li class="moj-side-navigation__item moj-side-navigation__item--active">
+          <a href="#1" aria-current="location">Case summary</a>
+        </li>
+
+        <li class="moj-side-navigation__item">
+          <a href="#2">Most recent apearance</a>
+        </li>
+
+        <li class="moj-side-navigation__item">
+          <a href="#3">Previous appearances</a>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-xl">Court case {{ data.courtCaseIndex | int + 1 }}</h1>
-        <h2 class="govuk-heading-l">
+        <h2 class="govuk-heading-l" id="1">
             Case summary
         </h2>
-        <dl class="govuk-summary-list govuk-summary-list--no-border">
+        <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Case references
@@ -37,7 +56,7 @@
             {% endif %}
         </dl>
         {% if (lastAppearance['next-court-date-set'] == 'Yes') %}
-        <dl class="govuk-summary-list govuk-summary-list--no-border">
+        <dl class="govuk-summary-list">
             <h2 class="govuk-heading-m">Next hearing</h2>
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
@@ -65,8 +84,8 @@
             </div>
         </dl>
         {% endif %}
-        <h2 class="govuk-heading-l">Most recent appearance</h2>
-        <dl class="govuk-summary-list govuk-summary-list--no-border">
+        <h2 class="govuk-heading-l" id="2">Most recent appearance</h2>
+      <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Case reference number
@@ -100,7 +119,7 @@
                 </dd>
             </div>
         </dl>
-        <h2 class="govuk-heading-l">Offences <span class="govuk-body-l">({{ lastAppearance.offences.length }})</span></h2>
+                <h2 class="govuk-heading-m">Offences<span class="govuk-body"> ({{ lastAppearance.offences.length }})</span></h2>
         {% for offence in lastAppearance.offences %}
         <div class="offence-card">
             <div class="offence-card-offence-details">
@@ -130,10 +149,10 @@
             </div>
         </div>
         {% endfor %}
-        <h2 class="govuk-heading-l govuk-!-margin-top-8">
-            Previous appearances <span class="govuk-body-l">({{ data.courtCases[data.courtCaseIndex].appearances.length -1 }})</span>
-        </h2>
-        <div class="govuk-tabs" data-module="govuk-tabs">
+  <h2 class="govuk-heading-l govuk-!-margin-top-8" id="3">
+          Previous appearances <span class="govuk-body-l">({{ data.courtCases[data.courtCaseIndex].appearances.length }})</span>
+          </h2>
+              <div class="govuk-tabs" data-module="govuk-tabs">
             <h2 class="govuk-tabs__title">
                 Contents
             </h2>
@@ -163,11 +182,11 @@
                     <tbody class="govuk-table__body">
                         {% for appearance in data.courtCases[data.courtCaseIndex].appearances | reverse %}
                         <tr class="govuk-table__row">
-                            <td class="govuk-table__cell"><a href="">{{ appearance['court-case-ref'] }}</a></td>
+                            <td class="govuk-table__cell">{{ appearance['court-case-ref'] }}</td>
                             <td class="govuk-table__cell">{{ appearance['court-name'] }}</td>
                             <td class="govuk-table__cell">{{ appearance['warrant-date-day'] }}/{{ appearance['warrant-date-month'] }}/{{ appearance['warrant-date-year'] }}</td>
                             <td class="govuk-table__cell">{{ appearance['overall-case-outcome'] }}</td>
-                            <td class="govuk-table__cell"><a href="">Edit</a></td>
+                            <td class="govuk-table__cell" width="16%"><a href="/v9/view-appearance-detail?appearanceIndex={{loop.index0}}">View and edit</a></td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -210,8 +229,11 @@
                                             Offences
                                         </dt>
                                         <dd class="govuk-summary-list__value appearance-timeline-value">
-                                            {{ appearance.offences.length }} <a href="" class="govuk-!-margin-left-1">View offences</a>
+                                            {{ appearance.offences.length }} 
                                         </dd>
+                                    </div>
+                                    <div class="govuk-summary-list__row govuk-!-font-size-16">
+                                        <a href="/v9/view-appearance-detail?appearanceIndex={{loop.index0}}">View and edit appearance details</a>
                                     </div>
                                 </dl>
                             </div>
@@ -222,14 +244,7 @@
             </div>
         </div>
     </div>
-    <div class="govuk-grid-column-one-third">
-        <div class="actions-list">
-            <ul class="govuk-list actions-list-list">
-                <span class="govuk-heading-m actions-list-header">Actions</span>
-                <li><a href="/v9/create-appearance?courtIndex={{loop.index0}}">Add an appearance</a></li>
-                <li><a href="">Record an appeal</a></li>
-            </ul>
-        </div>
+</div>
     </div>
 </div>
 {% endblock %}

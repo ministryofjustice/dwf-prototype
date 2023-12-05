@@ -126,11 +126,11 @@
                             <tbody class="govuk-table__body">
                                 {% for appearance in courtCase.appearances | reverse %}
                                 {% if loop.index <=5 %} <tr class="govuk-table__row">
-                                    <td class="govuk-table__cell"><a href="">{{ appearance['court-case-ref'] }}</a></td>
+                                    <td class="govuk-table__cell">{{ appearance['court-case-ref'] }}</td>
                                     <td class="govuk-table__cell">{{ appearance['court-name'] }}</td>
                                     <td class="govuk-table__cell">{{ appearance['warrant-date-day'] }}/{{ appearance['warrant-date-month'] }}/{{ appearance['warrant-date-year'] }}</td>
                                     <td class="govuk-table__cell">{{ appearance['overall-case-outcome'] }}</td>
-                                    <td class="govuk-table__cell"><a href="">Edit</a></td>
+                                    <td class="govuk-table__cell" width="16%"><a href="/v9/view-appearance-detail?appearanceIndex={{loop.index0}}">View and edit</a></td>
                                     </tr>
                                     {% endif %}
                                     {% endfor %}
