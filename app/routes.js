@@ -61,14 +61,25 @@ router.post('/:prototypeVersion/:appearancePath/next-court-date-select', functio
 // Offence code route
 router.post('/:prototypeVersion/offence-code-known', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
-    // Make a variable and give it the value 
-    var offenceCodeKnown = req.session.data.offence['offence-code']
+    const warrantType = req.session.data.appearance['warrant-type']
+    var offenceCodeKnown = req.session.data['offence-code-known']
     console.log(offenceCodeKnown)
     // Check whether the variable matches a condition
-    if (offenceCodeKnown.includes('None')) {
-        // Send user to next page
-        res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-name`)
-    } else res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirm-offence`)
+    if (offenceCodeKnown != null) {
+        if (offenceCodeKnown.includes('None')) {
+        if (warrantType == 'Sentencing') {
+            res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-name`)
+        } else if (warrantType == 'Remand') {
+            res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-name`)
+        }
+    }
+    } else {
+        if (warrantType == 'Sentencing') {
+            res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-offence`)
+        } else if (warrantType == 'Remand') {
+            res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirm-offence`)
+        }
+    }
 })
 
 //Lookup outcome routes
@@ -163,10 +174,11 @@ router.post('/:prototypeVersion/case-outcome-apply', function(req, res) {
     const courtCaseIndex = req.session.data.courtCaseIndex
     const appearanceIndex = req.session.data.appearanceIndex
     const route = req.query.route
+    const warrantType = req.session.data.warrantType
     var overallCaseOutcomeApply = 'No'
     overallCaseOutcomeApply = req.session.data.appearance['overall-case-outcome-apply-all']
     console.log("Overall case outcome applies: " + overallCaseOutcomeApply)
-    if (overallCaseOutcomeApply == 'Yes') {
+    if (overallCaseOutcomeApply == 'Yes' && warrantType != 'Sentencing') {
         req.session.data.appearance['overall-case-outcome-apply-all'] = overallCaseOutcomeApply
         req.session.data.appearance.offences = req.session.data.appearance.offences
             .map(offence => {
@@ -177,6 +189,16 @@ router.post('/:prototypeVersion/case-outcome-apply', function(req, res) {
             return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/review-offences`)
         }
         return res.redirect(307, `/${prototypeVersion}/persist-offence`)
+    } else if (overallCaseOutcomeApply == 'Yes' && warrantType == 'Sentencing') {
+        req.session.data.appearance['overall-case-outcome-apply-all'] = overallCaseOutcomeApply
+        req.session.data.appearance.sentences = req.session.data.appearance.sentences
+            .map(sentence => {
+                sentence.outcome = req.session.data.appearance['overall-case-outcome']
+                return sentence
+            })
+        return res.redirect(307, `/${prototypeVersion}/persist-sentence`)
+    } else if (warrantType == 'Sentencing') {
+        res.redirect(`/${prototypeVersion}/court-cases/add-an-sentence/outcome`)
     } else res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/outcome`)
 })
 
@@ -190,6 +212,7 @@ router.get('/:prototypeVersion/create-court-case', function(req, res) {
 
 router.post('/:prototypeVersion/persist-court-case', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
+    const warrantType = req.session.data.appearance['warrant-type']
     if (req.session.data.courtCaseIndex !== undefined) {
         req.session.data.courtCases[req.session.data.courtCaseIndex] = req.session.data.courtCase
     } else {
@@ -206,7 +229,15 @@ router.post('/:prototypeVersion/persist-court-case', function(req, res) {
         req.session.data.courtCaseIndex = req.session.data.courtCases.length - 1
         req.session.data.appearance = appearance
     }
-    res.redirect(`/${prototypeVersion}/create-offence`)
+    if (prototypeVersion == 'v9') {
+        if (warrantType == 'Sentencing') {
+            console.log('Redirecting to add sentence')
+            res.redirect(`/${prototypeVersion}/create-sentence`)
+        } else 
+        console.log('Redirecting to add offence')
+        res.redirect(`/${prototypeVersion}/create-offence`)
+    } else
+        res.redirect(`/${prototypeVersion}/create-offence`)
 })
 
 router.get('/:prototypeVersion/update-court-case', function(req, res) {
@@ -265,12 +296,11 @@ router.post('/:prototypeVersion/persist-appearance', function(req, res) {
     }
     displaySuccess = 1
     req.session.data.appearanceSuccess = displaySuccess
-if (route == "repeat-remand") {
-    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/confirmation`)
-  }
-  else if (route == "add-a-court-case") {
-    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/confirmation`)
-  }
+    if (route == "repeat-remand") {
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/confirmation`)
+    } else if (route == "add-a-court-case") {
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/confirmation`)
+    }
 })
 
 router.get('/:prototypeVersion/close-success-message', function(req, res) {
@@ -314,7 +344,7 @@ router.post('/:prototypeVersion/persist-offence', function(req, res) {
     if (route == 'repeat-remand') {
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/change-offences`)
     } else
-    req.session.data.changeMade = 0
+        req.session.data.changeMade = 0
     req.session.data.offenceDeleted = 0
     req.session.data.offenceAdded = 1
     res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/check-answers`)
@@ -381,9 +411,33 @@ router.get('/:prototypeVersion/delete-offence', function(req, res) {
     }
 })
 
+
+// Add sentences
+
+router.get('/:prototypeVersion/create-sentence', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    delete req.session.data.sentenceIndex
+    delete req.session.data.sentence
+    const appearanceIndex = req.query.appearanceIndex
+    const route = req.session.data.route
+    console.log('Route: ' + route)
+    if (appearanceIndex !== undefined) {
+        req.session.data.appearance = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[appearanceIndex]
+        req.session.data.appearanceIndex = appearanceIndex
+    }
+    if (req.session.data.appearance['overall-case-outcome-apply-all'] === 'Yes') {
+        req.session.data.sentence = {
+            outcome: req.session.data.appearance['overall-case-outcome']
+        }
+    }
+    res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-code`)
+})
+
+
+
 router.get('/:prototypeVersion/view-court-case-detail', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
-    const courtCaseIndex = Number(req.query.courtCaseIndex)+1
+    const courtCaseIndex = Number(req.query.courtCaseIndex) + 1
     console.log('Court case index: ' + courtCaseIndex)
     res.redirect(`/${prototypeVersion}/court-cases/court-case-detail`)
 })
@@ -396,4 +450,14 @@ router.get('/:prototypeVersion/view-appearance-detail', function(req, res) {
     res.redirect(`/${prototypeVersion}/court-cases/appearance-detail`)
 })
 
+router.get('/:prototypeVersion/warrant-type-select', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    const warrantType = req.session.data.appearance['warrant-type']
+    console.log('Warrant type: ' + warrantType)
+    if (warrantType == 'Remand') {
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/overall-case-outcome`)
+    } else if (warrantType == 'Sentencing') {
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/overall-case-outcome-sentencing`)
+    }
 
+})

@@ -19,10 +19,10 @@
                         </h1>
                         {% endif %}
                     </legend>
-                    <input class="govuk-input govuk-input--width-10" id="offence-code" name="offence[offence-code]" type="text">
+                    <input class="govuk-input govuk-input--width-10" id="offence-code" name="offence['offence-code']" type="text">
                     <div class="govuk-checkboxes govuk-!-margin-top-6" data-module="govuk-checkboxes">
                         <div class="govuk-checkboxes__item">
-                            <input class="govuk-checkboxes__input" id="no-offence-code" name="offence[offence-code]" type="checkbox" value="None">
+                            <input class="govuk-checkboxes__input" id="no-offence-code" name="offence-code-known" type="checkbox" value="None">
                             <label class="govuk-label govuk-checkboxes__label" for="no-offence-code">
                                 I do not have the offence code
                             </label>
