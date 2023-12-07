@@ -249,12 +249,13 @@ router.post('/:prototypeVersion/persist-court-case', function(req, res) {
     if (prototypeVersion == 'v9') {
         if (warrantType == 'Sentencing') {
             console.log('Redirecting to add sentence')
-            res.redirect(`/${prototypeVersion}/create-sentence`)
-        } else 
-        console.log('Redirecting to add offence')
-        res.redirect(`/${prototypeVersion}/create-offence`)
+            return res.redirect(`/${prototypeVersion}/create-sentence`)
+        } else {
+            console.log('Redirecting to add offence')
+            return res.redirect(`/${prototypeVersion}/create-offence`)
+        }
     } else
-        res.redirect(`/${prototypeVersion}/create-offence`)
+        return res.redirect(`/${prototypeVersion}/create-offence`)
 })
 
 router.get('/:prototypeVersion/update-court-case', function(req, res) {
@@ -457,16 +458,16 @@ router.post('/:prototypeVersion/persist-sentence', function(req, res) {
     if (req.session.data.sentenceIndex !== undefined) {
         req.session.data.appearance.sentences[req.session.data.sentenceIndex] = req.session.data.sentence
     } else {
-        req.session.data.appearance.sentence.push(req.session.data.sentence)
+        req.session.data.appearance.sentences.push(req.session.data.sentence)
         req.session.data.sentenceIndex = req.session.data.appearance.sentences.length - 1
     }
     if (route == 'repeat-remand') {
-        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/change-offences`)
-    } else
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/change-offences`)
+    }
     req.session.data.changeMade = 0
     req.session.data.sentneceDeleted = 0
     req.session.data.sentenceAdded = 1
-    res.redirect(`/${prototypeVersion}/court-cases/add-an-sentence/check-answers`)
+    return res.redirect(`/${prototypeVersion}/court-cases/add-an-sentence/check-answers`)
 })
 
 router.get('/:prototypeVersion/view-court-case-detail', function(req, res) {
