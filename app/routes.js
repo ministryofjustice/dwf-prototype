@@ -448,7 +448,7 @@ router.get('/:prototypeVersion/create-sentence', function(req, res) {
             outcome: req.session.data.appearance['overall-case-outcome']
         }
     }
-    res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-code`)
+    res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/count-number`)
 })
 
 router.post('/:prototypeVersion/persist-sentence', function(req, res) {
