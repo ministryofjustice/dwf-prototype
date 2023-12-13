@@ -28,8 +28,8 @@
         {% endif %}
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
-                <span class="govuk-caption-l">Add a court case</span>
-                You have added {{ data['appearance'].offences | length }} sentences to case {{ data['appearance']['court-case-ref'] }}
+                <span class="govuk-caption-l">Add sentences to a court case</span>
+                You have added {{ data['appearance'].sentences | length }} sentences to case {{ data['appearance']['court-case-ref'] }}
             </h1>
         </legend>
         <form class="form" action="../add-a-court-case/next-court-date-select">
@@ -61,7 +61,7 @@
             </dl>
             <h2 class="govuk-heading-m govuk-!-margin-bottom-6">Sentences added</h2>
             {% for sentence in data['appearance'].sentences %}
-            <div class="offence-card">
+            <div class="offence-card sentence-card">
                 <div class="offence-card-offence-details">
                     <h4 class="govuk-heading-s">{{ sentence['offence-name'] }}</h4>
                     <dl class="govuk-summary-list govuk-summary-list--no-border">
@@ -71,7 +71,7 @@
                             </dt>
                             <dd class="govuk-summary-list__value">
                                 {{ sentence['offence-start-date-day'] }}/{{ sentence['offence-start-date-month'] }}/{{ sentence['offence-start-date-year'] }}
-                                {% if sentence['offence-end-date-day'] is not null %}
+                                {% if sentence['offence-end-date-day'] > 0 %}
                                 to
                                 {{ sentence['offence-end-date-day'] }}/{{ sentence['offence-end-date-month'] }}/{{ sentence['offence-end-date-year'] }}
                                 {% endif %}
@@ -83,6 +83,22 @@
                             </dt>
                             <dd class="govuk-summary-list__value">
                                 {{ sentence['outcome'] }}
+                            </dd>
+                        </div>
+                                                <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Sentence type
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                {{ sentence['sentence-type'] }}
+                            </dd>
+                        </div>
+                                                                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Sentence length
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                {{ sentence['sentence-length-years'] }} years {{ sentence['sentence-length-months'] }} months {{ sentence['sentence-length-weeks'] }} weeks {{ sentence['sentence-length-days'] }} days
                             </dd>
                         </div>
                     </dl>
@@ -100,7 +116,7 @@
                     Add another sentence
                 </button>
                 <button class="govuk-button" data-module="govuk-button">
-                    Finish adding sentences and continue
+                    Finish and select consecutive sentences
                 </button>
             </div>
         </form>

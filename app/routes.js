@@ -467,7 +467,7 @@ router.post('/:prototypeVersion/persist-sentence', function(req, res) {
     req.session.data.changeMade = 0
     req.session.data.sentneceDeleted = 0
     req.session.data.sentenceAdded = 1
-    return res.redirect(`/${prototypeVersion}/court-cases/add-an-sentence/check-answers`)
+    return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers`)
 })
 
 router.get('/:prototypeVersion/view-court-case-detail', function(req, res) {
