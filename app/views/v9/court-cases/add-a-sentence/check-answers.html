@@ -64,7 +64,13 @@
             <div class="offence-card sentence-card">
                 <div class="offence-card-offence-details">
                     <span class="govuk-body-s">Count {{ sentence['count-number'] }}</span>
-                    <h4 class="govuk-heading-s">{{ sentence['offence-name'] }}</h4>
+
+                    <h4 class="govuk-heading-s">{{ sentence['offence-name'] }}
+                                        {% if sentence['terror-related'] == 'Yes' %}
+                    <br><strong class="govuk-tag govuk-!-margin-top-2">
+  Terror-related
+</strong>
+{% endif %}</h4>
                     <dl class="govuk-summary-list govuk-summary-list--no-border">
                         <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key">
