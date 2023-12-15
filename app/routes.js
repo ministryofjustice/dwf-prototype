@@ -500,7 +500,9 @@ router.get('/:prototypeVersion/warrant-type-select', function(req, res) {
 
 router.post('/:prototypeVersion/submitConsecutive', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
-    const consecutiveSentences = req.session.data.consecutiveSentences.map(sentenceIndex => req.session.data.appearance.sentences[sentenceIndex])
+    const consecutiveSentences = req.session.data.consecutiveSentences.map(sentenceIndex => {
+        const sentence = req.session.data.appearance.sentences[sentenceIndex]
+        return { sentenceIndex, ...sentence }})
     req.session.data.consecutiveSentences = consecutiveSentences
     if(consecutiveSentences.length) {
         const consecutiveSentenceIndex = 0
