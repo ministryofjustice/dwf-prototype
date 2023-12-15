@@ -9,35 +9,8 @@
             </h1>
         </legend>
         <form class="form" action="/v9/submitConsecutiveSentence" method="post">
-            <!--             <dl class="govuk-summary-list govuk-summary-list--no-border">
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Court name
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['court-name'] }}
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Warrant date
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['warrant-date-day'] }}/{{ data['appearance']['warrant-date-month'] }}/{{ data['appearance']['warrant-date-year'] }}
-                    </dd>
-                </div>
-                                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Warrant type
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['warrant-type'] }}
-                    </dd>
-                </div>
-            </dl> -->
-            <!-- <h2 class="govuk-heading-m govuk-!-margin-bottom-6">Sentences added</h2> -->
             <div class="govuk-!-margin-top-8">
-<div class="offence-card sentence-card">
+                <div class="offence-card sentence-card">
                     <div class="offence-card-offence-details">
                         <span class="govuk-body-s">Count {{ data.currentConsecutiveSentence['count-number'] }}</span>
                         <h4 class="govuk-heading-s">{{ data.currentConsecutiveSentence['offence-name'] }}
@@ -86,17 +59,16 @@
                         </dl>
                     </div>
                 </div>
-
-<hr class="govuk-section-break govuk-section-break--visible">
+                <hr class="govuk-section-break govuk-section-break--visible">
                 {% for sentence in data['appearance'].sentences %}
                 {% if sentence['count-number'] != data.currentConsecutiveSentence['count-number'] %}
                 <div class="offence-card sentence-card">
-                                        <div class="sentence-card-select">
+                    <div class="sentence-card-select">
                         <div class="govuk-form-group">
                             <div class="govuk-radios" data-module="govuk-checkboxes">
                                 <div class="govuk-radios__item">
-                                    <input class="govuk-radios__input" id="consecutive" name="consecutiveSentences[]" type="radio" value="{{ loop.index0 }}">
-                                    <label class="govuk-label govuk-radios__label " for="consecutive">
+                                    <input class="govuk-radios__input" id="consecutive-to" name="currentConsecutiveSentence[consecutive-to]" type="radio" value="{{ sentence['count-number'] }}">
+                                    <label class="govuk-label govuk-radios__label " for="consecutive-to">
                                         <span class="govuk-visually-hidden">Count {{ sentence['count-number'] }}</span>
                                     </label>
                                 </div>
@@ -148,7 +120,7 @@
                                     {{ sentence['sentence-length-years'] }} years {{ sentence['sentence-length-months'] }} months {{ sentence['sentence-length-weeks'] }} weeks {{ sentence['sentence-length-days'] }} days
                                 </dd>
                             </div>
-                                                        <div class="govuk-summary-list__row">
+                            <div class="govuk-summary-list__row">
                                 <dt class="govuk-summary-list__key">
                                     Consecutive
                                 </dt>

@@ -518,7 +518,10 @@ router.post('/:prototypeVersion/submitConsecutiveSentence', function(req, res) {
     const consecutiveSentences = req.session.data.consecutiveSentences
     let consecutiveSentenceIndex = req.session.data.consecutiveSentenceIndex
     const currentConsecutiveSentence = req.session.data.currentConsecutiveSentence
-    // store currentConsecutiveSentence somewhere
+    const consecutiveTo = req.session.data.currentConsecutiveSentence['consecutive-to']
+    console.log('Consecutive to: ' + consecutiveTo)
+    req.session.data.appearance.sentences[req.session.data.sentenceIndex]['consecutive-to'] = consecutiveTo
+    console.log('Sentence consecutiveTo: ' + req.session.data.appearance.sentences[req.session.data.sentenceIndex]['consecutive-to'])
     consecutiveSentenceIndex++
     if(consecutiveSentences.length > consecutiveSentenceIndex) {
         req.session.data.consecutiveSentenceIndex = consecutiveSentenceIndex
