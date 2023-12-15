@@ -9,6 +9,17 @@
 
 .sentence-card {
 	border-left: 4px solid #4c2c92 !important;
+	height: 100%;
+	display: table;
+}
+
+.sentence-card-select {
+    display: table-cell;
+	vertical-align: middle;
+}
+
+.sentence-card-select > .govuk-form-group {
+	margin-bottom: 0;
 }
 
 .offence-card dl {
