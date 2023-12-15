@@ -8,7 +8,7 @@
                 Select the consecutive sentences
             </h1>
         </legend>
-        <form class="form" action="/v9/consecutive" method="post">
+        <form class="form" action="/v9/submitConsecutive" method="post">
             <!--             <dl class="govuk-summary-list govuk-summary-list--no-border">
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
@@ -43,7 +43,7 @@
                         <div class="govuk-form-group">
                             <div class="govuk-checkboxes" data-module="govuk-checkboxes">
                                 <div class="govuk-checkboxes__item">
-                                    <input class="govuk-checkboxes__input" id="consecutive" name="consecutiveSentences[loop.index]" type="checkbox" value="{{data.appearance.sentences[loop.index0]}}">
+                                    <input class="govuk-checkboxes__input" id="consecutive" name="consecutiveSentences[]" type="checkbox" value="{{data.appearance.sentences[loop.index0]}}">
                                     <label class="govuk-label govuk-checkboxes__label " for="consecutive">
                                         <span class="govuk-visually-hidden">Count {{ sentence['count-number'] }}</span>
                                     </label>

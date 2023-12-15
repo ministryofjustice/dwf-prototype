@@ -5,7 +5,7 @@
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
                 <span class="govuk-caption-l">Add sentences to a court case</span>
-                Which sentence is [count-number] {{ sentence['count-number'] }} consecutive to?
+                Which sentence is {{ data.currentConsecutiveSentence['count-number'] }} consecutive to?
             </h1>
         </legend>
         <form class="form" action="../add-a-court-case/next-court-date-select">
@@ -37,7 +37,7 @@
             </dl> -->
             <!-- <h2 class="govuk-heading-m govuk-!-margin-bottom-6">Sentences added</h2> -->
             <div class="govuk-!-margin-top-8">
-                {% for sentence in data['appearance'].sentences %}
+                <!-- {% for sentence in data['appearance'].sentences %}
                 <div class="offence-card sentence-card">
                     <div class="offence-card-offence-details">
                         <span class="govuk-body-s">Count {{ sentence['count-number'] }}</span>
@@ -95,7 +95,7 @@
                         </dl>
                     </div>
                 </div>
-                {% endfor %}
+                {% endfor %} -->
             </div>
             <div class="govuk-button-group govuk-!-margin-top-8">
                 <button class="govuk-button" data-module="govuk-button">

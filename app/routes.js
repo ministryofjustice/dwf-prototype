@@ -498,11 +498,29 @@ router.get('/:prototypeVersion/warrant-type-select', function(req, res) {
 })
 
 
-router.get('/:prototypeVersion/consecutive', function(req, res) {
+router.get('/:prototypeVersion/submitConsecutive', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
-    const courtCaseIndex = req.session.data.courtCaseIndex
-    const appearanceIndex = Number(req.query.appearanceIndex)
     const consecutiveSentences = req.session.data.consecutiveSentences
-    console.log('Consecutive sentences:  %O', consecutiveSentences)
-    res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to`)
+    if(consecutiveSentences.length) {
+        const consecutiveSentenceIndex = 0
+        req.session.data.consecutiveSentenceIndex = consecutiveSentenceIndex
+        req.session.data.currentConsecutiveSentence = consecutiveSentences[consecutiveSentenceIndex]
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to`)
+    }
+    return res.redirect(`/${prototypeVersion}/<change for some other page>`)
+})
+
+router.get('/:prototypeVersion/submitConsecutiveSentence', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    const consecutiveSentences = req.session.data.consecutiveSentences
+    let consecutiveSentenceIndex = req.session.data.consecutiveSentenceIndex
+    const currentConsecutiveSentence = req.session.data.currentConsecutiveSentence
+    // store currentConsecutiveSentence somewhere
+    consecutiveSentenceIndex++
+    if(consecutiveSentences.length > consecutiveSentenceIndex) {
+        req.session.data.consecutiveSentenceIndex = consecutiveSentenceIndex
+        req.session.data.currentConsecutiveSentence = consecutiveSentences[consecutiveSentenceIndex]
+        return res.redirect(`/${prototypeVersion}/<select which sentence is consecutive to>`)
+    }
+    return res.redirect(`/${prototypeVersion}/<change for some other page>`)
 })
