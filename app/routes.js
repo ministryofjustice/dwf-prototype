@@ -500,7 +500,7 @@ router.get('/:prototypeVersion/warrant-type-select', function(req, res) {
 
 router.post('/:prototypeVersion/submitConsecutive', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
-    const consecutiveSentences = req.session.data.consecutiveSentences.map(sentenceIndex => req.session.data.appearance.sentences[sentenceIndex])
+    const consecutiveSentences = req.session.data.consecutiveSentences.map(sentenceIndex => {sentenceIndex, req.session.data.appearance.sentences[sentenceIndex]})
     req.session.data.consecutiveSentences = consecutiveSentences
     if(consecutiveSentences.length) {
         const consecutiveSentenceIndex = 0
@@ -523,5 +523,5 @@ router.post('/:prototypeVersion/submitConsecutiveSentence', function(req, res) {
         req.session.data.currentConsecutiveSentence = consecutiveSentences[consecutiveSentenceIndex]
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to`)
     }
-    return res.redirect(`/${prototypeVersion}/<change for some other page>`)
+    return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers-2`)
 })
