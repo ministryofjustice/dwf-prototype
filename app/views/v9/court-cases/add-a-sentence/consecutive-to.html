@@ -5,7 +5,7 @@
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
                 <span class="govuk-caption-l">Add sentences to a court case</span>
-                Which sentence is {{ data.currentConsecutiveSentence['count-number'] }} consecutive to?
+                Which sentence is Count {{ data.currentConsecutiveSentence['count-number'] }} consecutive to?
             </h1>
         </legend>
         <form class="form" action="/v9/submitConsecutiveSentence" method="post">
@@ -37,8 +37,72 @@
             </dl> -->
             <!-- <h2 class="govuk-heading-m govuk-!-margin-bottom-6">Sentences added</h2> -->
             <div class="govuk-!-margin-top-8">
-                <!-- {% for sentence in data['appearance'].sentences %}
+<div class="offence-card sentence-card">
+                    <div class="offence-card-offence-details">
+                        <span class="govuk-body-s">Count {{ data.currentConsecutiveSentence['count-number'] }}</span>
+                        <h4 class="govuk-heading-s">{{ data.currentConsecutiveSentence['offence-name'] }}
+                            {% if data.currentConsecutiveSentence['terror-related'] == 'Yes' %}
+                            <br><strong class="govuk-tag govuk-!-margin-top-2">
+                                Terror-related
+                            </strong>
+                            {% endif %}</h4>
+                        <dl class="govuk-summary-list govuk-summary-list--no-border">
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Commited on
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                    {{ data.currentConsecutiveSentence['offence-start-date-day'] }}/{{ data.currentConsecutiveSentence['offence-start-date-month'] }}/{{ data.currentConsecutiveSentence['offence-start-date-year'] }}
+                                    {% if data.currentConsecutiveSentence['offence-end-date-day'] > 0 %}
+                                    to
+                                    {{ data.currentConsecutiveSentence['offence-end-date-day'] }}/{{ data.currentConsecutiveSentence['offence-end-date-month'] }}/{{ data.currentConsecutiveSentence['offence-end-date-year'] }}
+                                    {% endif %}
+                                </dd>
+                            </div>
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Outcome
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                    {{ data.currentConsecutiveSentence['outcome'] }}
+                                </dd>
+                            </div>
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Sentence type
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                    {{ data.currentConsecutiveSentence['sentence-type'] }}
+                                </dd>
+                            </div>
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Sentence length
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                    {{ data.currentConsecutiveSentence['sentence-length-years'] }} years {{ data.currentConsecutiveSentence['sentence-length-months'] }} months {{ data.currentConsecutiveSentence['sentence-length-weeks'] }} weeks {{ data.currentConsecutiveSentence['sentence-length-days'] }} days
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+
+<hr class="govuk-section-break govuk-section-break--visible">
+                {% for sentence in data['appearance'].sentences %}
+                {% if sentence['count-number'] != data.currentConsecutiveSentence['count-number'] %}
                 <div class="offence-card sentence-card">
+                                        <div class="sentence-card-select">
+                        <div class="govuk-form-group">
+                            <div class="govuk-radios" data-module="govuk-checkboxes">
+                                <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="consecutive" name="consecutiveSentences[]" type="radio" value="{{ loop.index0 }}">
+                                    <label class="govuk-label govuk-radios__label " for="consecutive">
+                                        <span class="govuk-visually-hidden">Count {{ sentence['count-number'] }}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="offence-card-offence-details">
                         <span class="govuk-body-s">Count {{ sentence['count-number'] }}</span>
                         <h4 class="govuk-heading-s">{{ sentence['offence-name'] }}
@@ -95,7 +159,8 @@
                         </dl>
                     </div>
                 </div>
-                {% endfor %} -->
+                {% endif %}
+                {% endfor %}
             </div>
             <div class="govuk-button-group govuk-!-margin-top-8">
                 <button class="govuk-button" data-module="govuk-button">

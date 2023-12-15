@@ -525,5 +525,5 @@ router.post('/:prototypeVersion/submitConsecutiveSentence', function(req, res) {
         req.session.data.currentConsecutiveSentence = consecutiveSentences[consecutiveSentenceIndex]
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to`)
     }
-    return res.redirect(`/${prototypeVersion}/<change for some other page>`)
+    return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers-2`)
 })
