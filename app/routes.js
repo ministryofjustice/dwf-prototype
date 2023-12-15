@@ -496,3 +496,13 @@ router.get('/:prototypeVersion/warrant-type-select', function(req, res) {
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/overall-case-outcome-sentencing`)
     }
 })
+
+
+router.get('/:prototypeVersion/consecutive', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    const courtCaseIndex = req.session.data.courtCaseIndex
+    const appearanceIndex = Number(req.query.appearanceIndex)
+    const consecutiveSentences = req.session.data.consecutiveSentences
+    console.log('Consecutive sentences:  %O', consecutiveSentences)
+    res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to`)
+})
