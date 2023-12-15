@@ -43,7 +43,7 @@
                         <div class="govuk-form-group">
                             <div class="govuk-checkboxes" data-module="govuk-checkboxes">
                                 <div class="govuk-checkboxes__item">
-                                    <input class="govuk-checkboxes__input" id="consecutive" name="consecutiveSentences[]" type="checkbox" value="{{data.appearance.sentences[loop.index0]}}">
+                                    <input class="govuk-checkboxes__input" id="consecutive" name="consecutiveSentences[]" type="checkbox" value="{{ loop.index0 }}">
                                     <label class="govuk-label govuk-checkboxes__label " for="consecutive">
                                         <span class="govuk-visually-hidden">Count {{ sentence['count-number'] }}</span>
                                     </label>
