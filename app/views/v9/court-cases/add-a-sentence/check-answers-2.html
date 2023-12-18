@@ -37,7 +37,7 @@
             </dl>
             <h2 class="govuk-heading-m govuk-!-margin-bottom-6">Concurrent sentences</h2>
             {% for sentence in data['appearance'].sentences %}
-                {% if sentence['consecutive-to'] == null %}
+                {% if sentence['consecutive'] != 'Yes' %}
             <div class="offence-card sentence-card">
                 <div class="offence-card-offence-details">
                     <span class="govuk-body-s">Count {{ sentence['count-number'] }}</span>
@@ -96,8 +96,8 @@
             {% endif %}
             {% endfor %}
                       <h2 class="govuk-heading-m govuk-!-margin-bottom-6 govuk-!-margin-top-8">Consecutive sentences</h2>
-            {% for sentence in data['appearance'].sentences %}
-                {% if sentence['consecutive-to'] != null %}
+            {% for sentence in data['appearance'].consecutiveSentences %}
+                
             <div class="offence-card sentence-card">
                 <div class="offence-card-offence-details">
                     <span class="govuk-body-s">Count {{ sentence['count-number'] }}</span>
@@ -161,7 +161,7 @@
                     </ul>
                 </div>
             </div>
-            {% endif %}
+            
             {% endfor %}
             <div class="govuk-button-group govuk-!-margin-top-8">
                 <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="/v9/create-sentence">

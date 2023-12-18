@@ -516,12 +516,26 @@ router.post('/:prototypeVersion/submitConsecutive', function(req, res) {
 router.post('/:prototypeVersion/submitConsecutiveSentence', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     const consecutiveSentences = req.session.data.consecutiveSentences
+    const sentences = req.session.data.appearance.sentences
     let consecutiveSentenceIndex = req.session.data.consecutiveSentenceIndex
     const currentConsecutiveSentence = req.session.data.currentConsecutiveSentence
     const consecutiveTo = req.session.data.currentConsecutiveSentence['consecutive-to']
+    console.log('Current consecutive sentence: ' + currentConsecutiveSentence['count-number'])
     console.log('Consecutive to: ' + consecutiveTo)
-    req.session.data.appearance.sentences[req.session.data.sentenceIndex]['consecutive-to'] = consecutiveTo
-    console.log('Sentence consecutiveTo: ' + req.session.data.appearance.sentences[req.session.data.sentenceIndex]['consecutive-to'])
+    consecutiveSentences[consecutiveSentenceIndex]['consecutive-to'] = currentConsecutiveSentence['consecutive-to']
+    req.session.data.appearance.consecutiveSentences = consecutiveSentences
+    for (var i = sentences.length - 1; i >= 0; i--) {
+        if (sentences[i]['count-number'] == currentConsecutiveSentence['count-number']) {
+            sentences[i]['consecutive'] = 'Yes'
+        }
+        sentences[i]
+    }
+    req.session.data.appearance.sentences = sentences
+    console.log('consecutiveSentences[consecutiveSentenceIndex][consecutive-to]: ' + consecutiveSentences[consecutiveSentenceIndex]['consecutive-to'])
+    // const consecutiveTo = req.session.data.currentConsecutiveSentence['consecutive-to']
+    // console.log('Consecutive to: ' + consecutiveTo)
+    // req.session.data.appearance.sentences[consecutiveSentenceIndex]['consecutive-to'] = consecutiveTo
+    // console.log('Count ' + req.session.data.appearance.sentences[sentenceIndex]['count-number'] + ' consecutive to: ' + 'Count ' + req.session.data.appearance.sentences[sentenceIndex]['consecutive-to'])
     consecutiveSentenceIndex++
     if(consecutiveSentences.length > consecutiveSentenceIndex) {
         req.session.data.consecutiveSentenceIndex = consecutiveSentenceIndex
