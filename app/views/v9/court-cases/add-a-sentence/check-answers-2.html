@@ -8,7 +8,7 @@
                 Review sentences for court case {{ data['appearance']['court-case-ref'] }}
             </h1>
         </legend>
-        <form class="form" action="../add-a-court-case/next-court-date-select">
+        <form class="form" action="/v9/persist-appearance?route=add-a-court-case" method="post">
             <dl class="govuk-summary-list govuk-summary-list--no-border">
                                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
@@ -95,7 +95,8 @@
             </div>
             {% endif %}
             {% endfor %}
-                      <h2 class="govuk-heading-m govuk-!-margin-bottom-6 govuk-!-margin-top-8">Consecutive sentences</h2>
+            <div class="govuk-!-margin-top-8 govuk-!-margin-bottom-8" id="consecutive-sentences">
+                      <h2 class="govuk-heading-m govuk-!-margin-bottom-6">Consecutive sentences</h2>
             {% for sentence in data['appearance'].consecutiveSentences %}
                 
             <div class="offence-card sentence-card">
@@ -161,16 +162,13 @@
                     </ul>
                 </div>
             </div>
-            
             {% endfor %}
-            <div class="govuk-button-group govuk-!-margin-top-8">
-                <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="/v9/create-sentence">
-                    Add another sentence
-                </button>
-                <button class="govuk-button" data-module="govuk-button">
-                    Finish and continue
-                </button>
             </div>
+                        <h2 class="govuk-heading-m">Now save this court case</h2>
+            <p class="govuk-body">By saving this court case, you are confirming that the details you are providing match the details on the warrant.</p>
+            <button class="govuk-button" data-module="govuk-button">
+                Save and continue
+            </button>
         </form>
     </div>
 </div>
