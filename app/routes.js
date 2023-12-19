@@ -497,6 +497,17 @@ router.get('/:prototypeVersion/warrant-type-select', function(req, res) {
     }
 })
 
+router.get('/:prototypeVersion/consecutive-select', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    const consecutive = req.session.data.consecutiveSelect
+    console.log('Consecutive sentences: ' + consecutive)
+    if (consecutive == 'Yes') {
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/select-consecutive-sentences`)
+    } else if (consecutive == 'No') {
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/confirmation`)
+    }
+})
+
 
 router.post('/:prototypeVersion/submitConsecutive', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
@@ -527,6 +538,9 @@ router.post('/:prototypeVersion/submitConsecutiveSentence', function(req, res) {
     for (var i = sentences.length - 1; i >= 0; i--) {
         if (sentences[i]['count-number'] == currentConsecutiveSentence['count-number']) {
             sentences[i]['consecutive'] = 'Yes'
+        }
+        if (sentences[i]['count-number'] == consecutiveSentences[consecutiveSentenceIndex]['consecutive-to']){
+            sentences[i]['has-consecutive'] = 'Yes'
         }
         sentences[i]
     }

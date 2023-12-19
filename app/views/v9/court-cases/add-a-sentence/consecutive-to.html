@@ -62,6 +62,7 @@
                 <hr class="govuk-section-break govuk-section-break--visible">
                 {% for sentence in data['appearance'].sentences %}
                 {% if sentence['count-number'] != data.currentConsecutiveSentence['count-number'] %}
+                {% if sentence['has-consecutive'] != 'Yes' %}
                 <div class="offence-card sentence-card">
                     <div class="sentence-card-select">
                         <div class="govuk-form-group">
@@ -120,17 +121,10 @@
                                     {{ sentence['sentence-length-years'] }} years {{ sentence['sentence-length-months'] }} months {{ sentence['sentence-length-weeks'] }} weeks {{ sentence['sentence-length-days'] }} days
                                 </dd>
                             </div>
-                            <div class="govuk-summary-list__row">
-                                <dt class="govuk-summary-list__key">
-                                    Consecutive
-                                </dt>
-                                <dd class="govuk-summary-list__value">
-                                    {{ sentence['consecutive'] }}
-                                </dd>
-                            </div>
                         </dl>
                     </div>
                 </div>
+                {% endif %}
                 {% endif %}
                 {% endfor %}
             </div>

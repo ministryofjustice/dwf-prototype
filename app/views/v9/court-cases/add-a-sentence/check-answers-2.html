@@ -10,6 +10,14 @@
         </legend>
         <form class="form" action="../add-a-court-case/next-court-date-select">
             <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Case reference
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['court-case-ref'] }}
+                    </dd>
+                </div>
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Court name
@@ -24,14 +32,6 @@
                     </dt>
                     <dd class="govuk-summary-list__value">
                         {{ data['appearance']['warrant-date-day'] }}/{{ data['appearance']['warrant-date-month'] }}/{{ data['appearance']['warrant-date-year'] }}
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Warrant type
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['warrant-type'] }}
                     </dd>
                 </div>
             </dl>
