@@ -90,6 +90,19 @@
                         </a>
                     </dd>
                 </div>
+                                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Tagged bail
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['tagged-bail'] }} days
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="tagged-bail">
+                            Edit<span class="govuk-visually-hidden"> tagged-bail</span>
+                        </a>
+                    </dd>
+                </div>
             </dl>
             {% if data['appearance']['warrant-type'] == 'Sentencing' %}
             <h2 class="govuk-heading-m">Now add the sentences for this appearance</h2>
