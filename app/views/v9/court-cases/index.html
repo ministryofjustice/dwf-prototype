@@ -49,15 +49,16 @@
                 {% if data.courtCases | length %}
                 {% for courtCase in data.courtCases %}
                 {% set lastAppearance = courtCase.appearances | last %}
+                {% set courtCaseIndex = loop.index0 %}
                 <div class="govuk-summary-card">
                     <div class="govuk-summary-card__title-wrapper">
                         <h2 class="govuk-summary-card__title">{{ lastAppearance['court-case-ref'] }} <span class="govuk-body">at</span> {{ lastAppearance['court-name']}} </h2>
                         <ul class="govuk-summary-card__actions">
-                            <li class="govuk-summary-card__action"> <a class="govuk-link govuk-link--no-visited-state" href="/v9/create-appearance?courtIndex={{loop.index0}}">
+                            <li class="govuk-summary-card__action"> <a class="govuk-link govuk-link--no-visited-state" href="/v9/create-appearance?courtIndex={{courtCaseIndex}}">
                                     Add appearance<span class="govuk-visually-hidden"> to court case {{ loop.index }}</span>
                                 </a>
                             </li>
-                            <!--                             <li class="govuk-summary-card__action"> <a class="govuk-link govuk-link--no-visited-state" href="/v5/update-court-case?index={{loop.index0}}">
+                            <!--                             <li class="govuk-summary-card__action"> <a class="govuk-link govuk-link--no-visited-state" href="/v5/update-court-case?index={{courtCaseIndex}}">
                                     Edit
                                 </a>
                             </li> -->
@@ -130,7 +131,7 @@
                                     <td class="govuk-table__cell">{{ appearance['court-name'] }}</td>
                                     <td class="govuk-table__cell">{{ appearance['warrant-date-day'] }}/{{ appearance['warrant-date-month'] }}/{{ appearance['warrant-date-year'] }}</td>
                                     <td class="govuk-table__cell">{{ appearance['overall-case-outcome'] }}</td>
-                                    <td class="govuk-table__cell" width="16%"><a href="/v9/view-appearance-detail?appearanceIndex={{loop.index0}}">View and edit</a></td>
+                                    <td class="govuk-table__cell" width="16%"><a href="/v9/view-appearance-detail?appearanceIndex={{loop.index0}}&courtCaseIndex={{courtCaseIndex}}">View and edit</a></td>
                                     </tr>
                                     {% endif %}
                                     {% endfor %}
