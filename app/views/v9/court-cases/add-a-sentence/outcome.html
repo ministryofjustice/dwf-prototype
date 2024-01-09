@@ -3,66 +3,58 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="/v9/outcome-select-4" method="post">
+        <form class="form" action="sentence-type" method="post">
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                        {% if data.route == 'repeat-remand' %}
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add an appearance to court case {{ data.courtCaseIndex | int + 1 }}</span>
-                            Select the outcome for this offence
+                            <span class="govuk-caption-l">Add sentences to a court case</span>
+                            Select the sentence outcome
 
                         </h1>
-                        {% else %}
-                        <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add a court case</span>
-                            Select the outcome for this offence
-
-                        </h1>
-                        {% endif %}
                     </legend>
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="offence-outcome" name="offence[outcome]" type="radio" value="Remand in Custody (Bail Refused)">
-                            <label class="govuk-label govuk-radios__label" for="offence-outcome">
-                                Remand in Custody (Bail Refused)
+                            <input class="govuk-radios__input" id="sentence-outcome" name="sentence[outcome]" type="radio" value="Sentence outcome 1">
+                            <label class="govuk-label govuk-radios__label" for="sentence-outcome">
+                                Sentence outcome 1
                             </label>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="offence-outcome-2" name="offence[outcome]" type="radio" value="Commit/Transfer/Send to Crown Court for Trial in Custody">
-                            <label class="govuk-label govuk-radios__label" for="offence-outcome-2">
-                                Commit/Transfer/Send to Crown Court for Trial in Custody
+                            <input class="govuk-radios__input" id="sentence-outcome-2" name="sentence[outcome]" type="radio" value="Sentence outcome 2">
+                            <label class="govuk-label govuk-radios__label" for="sentence-outcome-2">
+                                Sentence outcome 2
                             </label>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="offence-outcome-3" name="offence[outcome]" type="radio" value="Commit to Crown Court for Trial (Summary / Either Way Offences)">
-                            <label class="govuk-label govuk-radios__label" for="offence-outcome-3">
-                                Commit to Crown Court for Trial (Summary / Either Way Offences)
+                            <input class="govuk-radios__input" id="sentence-outcome-3" name="sentence[outcome]" type="radio" value="Sentence outcome 3">
+                            <label class="govuk-label govuk-radios__label" for="sentence-outcome-3">
+                                Sentence outcome 3
                             </label>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="offence-outcome-4" name="offence[outcome]" type="radio" value="Recall to Prison">
-                            <label class="govuk-label govuk-radios__label" for="offence-outcome-4">
-                                Recall to Prison
+                            <input class="govuk-radios__input" id="sentence-outcome-4" name="sentence[outcome]" type="radio" value="Sentence outcome 4">
+                            <label class="govuk-label govuk-radios__label" for="sentence-outcome-4">
+                                Sentence outcome 4
                             </label>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="offence-outcome-3
-                        5" name="offence[outcome]" type="radio" value="Sentence Postponed">
-                            <label class="govuk-label govuk-radios__label" for="offence-outcome-5">
-                                Sentence Postponed
+                            <input class="govuk-radios__input" id="sentence-outcome-3
+                        5" name="sentence[outcome]" type="radio" value="Sentence outcome 5">
+                            <label class="govuk-label govuk-radios__label" for="sentence-outcome-5">
+                                Sentence outcome 5
                             </label>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="offence-outcome-6" name="offence[outcome]" type="radio" value="Commit to Crown Court for Sentence in Custody">
-                            <label class="govuk-label govuk-radios__label" for="offence-outcome-6">
-                                Commit to Crown Court for Sentence in Custody
+                            <input class="govuk-radios__input" id="sentence-outcome-6" name="sentence[outcome]" type="radio" value="Sentence outcome 6">
+                            <label class="govuk-label govuk-radios__label" for="sentence-outcome-6">
+                                Sentence outcome 6
                             </label>
                         </div>
                         <div class="govuk-radios__divider">or</div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="offence-outcome-6" name="offence[outcome]" type="radio" value="lookup-another-outcome">
-                            <label class="govuk-label govuk-radios__label" for="offence-outcome-6">
+                            <input class="govuk-radios__input" id="sentence-outcome-6" name="sentence[outcome]" type="radio" value="lookup-another-outcome">
+                            <label class="govuk-label govuk-radios__label" for="sentence-outcome-6">
                                 Look up a different outcome
                             </label>
                         </div>

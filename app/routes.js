@@ -202,7 +202,7 @@ router.post('/:prototypeVersion/case-outcome-apply', function(req, res) {
             })
         return res.redirect(307, `/${prototypeVersion}/court-cases/add-a-sentence/sentence-type`)
     } else if (warrantType == 'Sentencing') {
-        res.redirect(`/${prototypeVersion}/court-cases/add-an-sentence/outcome`)
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/outcome`)
     } else res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/outcome`)
 })
 
