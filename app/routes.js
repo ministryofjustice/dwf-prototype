@@ -113,12 +113,19 @@ router.post('/:prototypeVersion/outcome-select-3', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     // Make a variable and give it the value 
     var outcome = req.session.data.appearance['overall-case-outcome']
-    console.log(outcome)
+    const route = req.session.data.route
+    console.log('Outcome: ' + outcome)
+    console.log('Route: ' + route)
     // Check whether the variable matches a condition
     if (outcome.includes('lookup-another-outcome')) {
-        // Send user to next page
+        if (route == 'appearance') {
+            res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/lookup-outcome`)
+        } else
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/lookup-outcome`)
-    } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/outcome-apply-all`)
+    } else if (route == 'appearance'){
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/outcome-apply-all`)
+    } else
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/outcome-apply-all`)
 })
 
 router.post('/:prototypeVersion/outcome-select-4', function(req, res) {
@@ -151,7 +158,10 @@ router.post('/:prototypeVersion/new-court-name', function(req, res) {
     console.log("New court name:" + newCourtName)
     if (newCourtName.includes('Yes')) {
         req.session.data.appearance['court-name'] = req.session.data.courtCases[courtCaseIndex].appearances.at(-1)['court-name']
+        if (prototypeVersion == 'v9' | prototypeVersion == 'v8'){
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`)
+    } else
+    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/warrant-type`)
     } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-name`)
 })
 
@@ -493,10 +503,18 @@ router.get('/:prototypeVersion/warrant-type-select', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     req.session.data.warrantType = req.session.data.appearance['warrant-type']
     warrantType = req.session.data.warrantType
+    route = req.query.route
     console.log('Warrant type: ' + warrantType)
+    console.log('Route: ' + route)
     if (warrantType == 'Remand') {
+        if (route == 'appearance') {
+            res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`)
+        } else
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/overall-case-outcome`)
     } else if (warrantType == 'Sentencing') {
+        if (route == 'appearance') {
+            res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome-sentencing`)
+        } else
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/overall-case-outcome-sentencing`)
     }
 })

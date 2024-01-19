@@ -35,6 +35,7 @@
 Court cases and release dates
 {% endblock %}
 {% block header %}
+{% from "govuk/components/tag/macro.njk" import govukTag %}
 <header class="connect-dps-common-header govuk-!-display-none-print" role="banner">
     <div class="connect-dps-common-header__container">
         <div class="connect-dps-common-header__title">
@@ -75,57 +76,70 @@ Court cases and release dates
         </nav>
     </div>
 </header>
+<div class="service-header">
+    <div class="service-header__container">
+        <a href="../../court-cases/"><span class="service-header__service-name">Court cases and release dates</span></a>
+    </div>
+</div>
 {% endblock %}
 {% set mainClasses = mainClasses | default("govuk-main-wrapper--auto-spacing") %}
 {% block main %}
 <main class="govuk-main-wrapper-govuk-body">
     <div class="govuk-width-container">
-        {% block breadcrumbs %}
         <!-- Breadcrumbs -->
-        <div class="govuk-breadcrumbs">
+        <!-- {% block breadcrumbs %} -->
+        <!--         <div class="govuk-breadcrumbs">
             <ol class="govuk-breadcrumbs__list">
                 <li class="govuk-breadcrumbs__list-item">
-                    <a class="govuk-breadcrumbs__link" href="#">Back to search results</a>
+                    <a class="govuk-breadcrumbs__link" href="#">Back to search</a>
                 </li>
             </ol>
         </div>
-        {% endblock %}
+        {% endblock %} -->
+        <!--         {% block title %}
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                <h2 class="govuk-heading-xl govuk-!-margin-top-4 govuk-!-margin-bottom-7">
+                    Joe Bloggs's court cases
+                </h2>
+            </div>
+        </div>
+        {% endblock %} -->
         {% block banner %}
         <div class="govuk-grid-row">
             <div class="govuk-grid-column-full">
-                <div data-test="hmpps-profile-banner-partial" class="hmpps-profile-banner">
-                    <div class="govuk-grid-row">
-                        <div class="govuk-grid-column-full hmpps-profile-banner-top">
-                            <a href="/prisoner/G6123VU/image" class="hmpps-clickable-image" data-qa="prisoner-photo-link">
-                                <img class="hmpps-profile-photo" src="/public/images/female-prisoner.jpg" alt="Saunders, John">
-                            </a>
-                            <h2 class="govuk-heading-l hmpps-profile-prisoner-name">Charlotte Young</h2>
-                            <div class="info">
-                                <p class="govuk-body govuk-!-font-size-24 hmpps-profile-prisoner-number" aria-label="Prisoner Number">
-                                    A8837DY
-                                </p>
-                                <!--                                 <div class="info__links">
-                                    <div class="">
-                                        <h3 class="govuk-heading-s">Category</h3>
-                                        <a href="https://dev.offender-categorisation.service.justice.gov.uk/1102484" aria-label="View category" class="govuk-link govuk-link--inverse">C</a>
-                                    </div>
-                                    <div class="">
-                                        <h3 class="govuk-heading-s">CSRA</h3>
-                                        <a href="https://digital-dev.prison.service.justice.gov.uk/prisoner/G6123VU/csra-history" aria-label="View CSRA history" class="govuk-link govuk-link--inverse">High</a>
-                                    </div>
-                                    <div class="remove-column-gutter-right">
-                                        <h3 class="govuk-heading-s">Incentive level</h3>
-                                        <a href="https://digital-dev.prison.service.justice.gov.uk/prisoner/G6123VU/incentive-level-details" aria-label="View incentive level details" class="govuk-link govuk-link--inverse">Basic</a>
-                                    </div>
-                                </div> -->
+                <div class="dwf-header govuk-!-margin-top-6 govuk-!-margin-bottom-4">
+                    <div class="dwf-header-inner">
+                        <div class="govuk-grid-column-one-third govuk-!-padding-left-0">
+                            <div class="dwf-header-left">
+                                <img class="dwf-header-profile-img" src="/public/images/prisoner.jpeg" alt="Joe Bloggs">
                             </div>
+                            <p class="govuk-heading-s govuk-!-margin-bottom-1"><a class="govuk-link--no-visited-state" href="https://prisoner-dev.digital.prison.service.justice.gov.uk/prisoner/G6123VU" target="_blank">Daryl Evans</a></p>
+                            <ul class="govuk-list">
+                                <li>A9761DY</li>
+                            </ul>
+                        </div>
+                        <div class="govuk-grid-column-two-thirds govuk-!-padding-0">
+                            <ul class="dwf-header-info">
+                                <li><span class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-padding-0">Date of birth</span><span class="govuk-body">28/03/1981</span></li>
+                                <li><span class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-padding-0">Status</span>{% if status == "On remand" %}
+                                    <span class="govuk-body">On remand</span>
+                                    {% else %}
+                                    <span class="govuk-body">On remand</span>
+                                    {% endif %}</li>
+                                <li><span class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-padding-0">Establishment</span><span class="govuk-body">HMP Kirkham</span></li>
+                                <li><span class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-padding-0">Cell number</span><span class="govuk-body">01-234</span></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         {% endblock %}
-        {% block content %}{% endblock %}
+        {% block nav %}
+        {% endblock %}
+        {% block content %}
+        {% endblock %}
     </div>
 </main>
 {% endblock %}
@@ -184,20 +198,6 @@ Court cases and release dates
 {% block bodyEnd %}
 {% block scripts %}
 {% include "includes/scripts.html" %}
-<script>
-window.onload = function() {
-    // Loops through dom and finds all elements with card--clickable class
-    document.querySelectorAll('.card--clickable').forEach(card => {
-        // Check if card has a link within it
-        if (card.querySelector('a') !== null) {
-            // Clicks the link within the heading to navigate to desired page
-            card.addEventListener('click', () => {
-                card.querySelector('a').click()
-            })
-        }
-    })
-}
-</script>
 {% block pageScripts %}{% endblock %}
 {% endblock %}
 <!-- GOV.UK Prototype Kit {{releaseVersion}} -->

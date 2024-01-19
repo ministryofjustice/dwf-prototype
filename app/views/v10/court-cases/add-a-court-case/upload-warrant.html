@@ -1,11 +1,11 @@
-{% extends "../template.html" %}
+{% extends "../template-no-nav.html" %}
 {% block content %}
 <!-- Back link -->
 <a href="type-of-case" class="govuk-back-link govuk-!-margin-top-0">Back</a>
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="/v9/warrant-type-select" method="post">
+        <form class="form" action="/v10/warrant-type-select" method="post">
             <div class="govuk-form-group"> 
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
@@ -15,7 +15,7 @@
                         </h1>
                     </legend>
                     <div id="file-upload-1-hint" class="govuk-hint">
-    You can upload .pdf, .jpg, .doc or .docx files.
+    You can upload .PDF, .JPG or other files
   </div>
 
   <input class="govuk-file-upload" id="file-upload-1" name="file-upload-1" type="file" aria-describedby="file-upload-1-hint">

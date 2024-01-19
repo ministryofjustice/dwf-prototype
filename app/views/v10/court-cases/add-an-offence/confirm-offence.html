@@ -3,65 +3,46 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="sentence-length" method="post">
+        <form class="form" action="offence-date" method="post">
             <div class="govuk-form-group">
-                <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        {% if data.route == 'repeat-remand' %}
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add sentences to a court case</span>
-                            Select the sentence type
+                            <span class="govuk-caption-l">Add an appearance to court case {{ data.courtCaseIndex | int + 1 }}</span>
+                            Confirm the offence
                         </h1>
+                        {% else %}
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Add a court case</span>
+                            Confirm the offence
+                        </h1>
+                        {% endif %}
                     </legend>
-                    <div class="govuk-radios" data-module="govuk-radios">
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="sentence-type-1" name="sentence[sentence-type]" type="radio" value="SDS (Standard Determinate Sentence)">
-                            <label class="govuk-label govuk-radios__label" for="sentence-type-1">
-                                SDS (Standard Determinate Sentence)
-                            </label>
-                        </div>
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="sentence-type-2" name="sentence[sentence-type]" type="radio" value="EDS (Extended Determinate Sentence)">
-                            <label class="govuk-label govuk-radios__label" for="sentence-type-2">
-                                EDS (Extended Determinate Sentence)
-                            </label>
-                        </div>
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="sentence-type-3" name="sentence[sentence-type]" type="radio" value="SOPC (Special Custodial Sentence for Certain Offenders of Particular Concern)">
-                            <label class="govuk-label govuk-radios__label" for="sentence-type-3">
-                                SOPC (Special Custodial Sentence for Certain Offenders of Particular Concern)
-                            </label>
-                        </div>
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="sentence-type-4" name="sentence[sentence-type]" type="radio" value="DTO (Detention and Training Order)">
-                            <label class="govuk-label govuk-radios__label" for="sentence-type-4">
-                                DTO (Detention and Training Order)
-                            </label>
-                        </div>
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="sentence-type-5
-                        5" name="sentence[sentence-type]" type="radio" value="A/FINE">
-                            <label class="govuk-label govuk-radios__label" for="sentence-type-5">
-                                A/FINE
-                            </label>
-                        </div>
-                        <!--                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="sentence-type-6" name="sentence[sentence-type]" type="radio" value="Licence Recall">
-                            <label class="govuk-label govuk-radios__label" for="sentence-type-6">
-                                Licence Recall
-                            </label>
-                        </div> -->
-                        <!--                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="sentence-type-7" name="sentence[sentence-type]" type="radio" value="License Recall EDS and SOPC">
-                            <label class="govuk-label govuk-radios__label" for="sentence-type-7">
-                                License Recall EDS and SOPC
-                            </label>
-                        </div> -->
+                <dl class="govuk-summary-list govuk-summary-list--no-border">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key dwf-confirm-offence-key">
+                            Offence code
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data['offence']['offence-code'] }}
+                        </dd>
                     </div>
-                </fieldset>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key dwf-confirm-offence-key">
+                            Offence
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            Kidnap
+                        </dd>
+                    </div>
+                </dl>
             </div>
+            <input type="hidden" name="offence[offence-name]" value="Kidnap" />
             <button class="govuk-button" data-module="govuk-button">
-                Continue
+                Confirm and continue
             </button>
+            <p class="govuk-body"><a href="offence-code">Enter a different offence code</a></p>
+            <p class="govuk-body"><a href="offence-code">Look up an offence by name</a></p>
         </form>
     </div>
     <div class="govuk-grid-column-one-third">

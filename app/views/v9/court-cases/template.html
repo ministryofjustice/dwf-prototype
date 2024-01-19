@@ -136,6 +136,7 @@ Court cases and release dates
             </div>
         </div>
         {% endblock %}
+        {% if nav %}
         {% block nav %}
         <nav class="moj-sub-navigation" aria-label="Sub navigation">
             <ul class="moj-sub-navigation__list">
@@ -160,6 +161,7 @@ Court cases and release dates
             </ul>
         </nav>
         {% endblock %}
+        {% endif %}
         {% block content %}
         {% endblock %}
     </div>

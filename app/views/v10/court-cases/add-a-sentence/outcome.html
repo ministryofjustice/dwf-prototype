@@ -3,59 +3,61 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="sentence-length" method="post">
+        <form class="form" action="sentence-type" method="post">
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
                             <span class="govuk-caption-l">Add sentences to a court case</span>
-                            Select the sentence type
+                            Select the sentence outcome
+
                         </h1>
                     </legend>
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="sentence-type-1" name="sentence[sentence-type]" type="radio" value="SDS (Standard Determinate Sentence)">
-                            <label class="govuk-label govuk-radios__label" for="sentence-type-1">
-                                SDS (Standard Determinate Sentence)
+                            <input class="govuk-radios__input" id="sentence-outcome" name="sentence[outcome]" type="radio" value="Sentence outcome 1">
+                            <label class="govuk-label govuk-radios__label" for="sentence-outcome">
+                                Sentence outcome 1
                             </label>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="sentence-type-2" name="sentence[sentence-type]" type="radio" value="EDS (Extended Determinate Sentence)">
-                            <label class="govuk-label govuk-radios__label" for="sentence-type-2">
-                                EDS (Extended Determinate Sentence)
+                            <input class="govuk-radios__input" id="sentence-outcome-2" name="sentence[outcome]" type="radio" value="Sentence outcome 2">
+                            <label class="govuk-label govuk-radios__label" for="sentence-outcome-2">
+                                Sentence outcome 2
                             </label>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="sentence-type-3" name="sentence[sentence-type]" type="radio" value="SOPC (Special Custodial Sentence for Certain Offenders of Particular Concern)">
-                            <label class="govuk-label govuk-radios__label" for="sentence-type-3">
-                                SOPC (Special Custodial Sentence for Certain Offenders of Particular Concern)
+                            <input class="govuk-radios__input" id="sentence-outcome-3" name="sentence[outcome]" type="radio" value="Sentence outcome 3">
+                            <label class="govuk-label govuk-radios__label" for="sentence-outcome-3">
+                                Sentence outcome 3
                             </label>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="sentence-type-4" name="sentence[sentence-type]" type="radio" value="DTO (Detention and Training Order)">
-                            <label class="govuk-label govuk-radios__label" for="sentence-type-4">
-                                DTO (Detention and Training Order)
+                            <input class="govuk-radios__input" id="sentence-outcome-4" name="sentence[outcome]" type="radio" value="Sentence outcome 4">
+                            <label class="govuk-label govuk-radios__label" for="sentence-outcome-4">
+                                Sentence outcome 4
                             </label>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="sentence-type-5
-                        5" name="sentence[sentence-type]" type="radio" value="A/FINE">
-                            <label class="govuk-label govuk-radios__label" for="sentence-type-5">
-                                A/FINE
+                            <input class="govuk-radios__input" id="sentence-outcome-3
+                        5" name="sentence[outcome]" type="radio" value="Sentence outcome 5">
+                            <label class="govuk-label govuk-radios__label" for="sentence-outcome-5">
+                                Sentence outcome 5
                             </label>
                         </div>
-                        <!--                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="sentence-type-6" name="sentence[sentence-type]" type="radio" value="Licence Recall">
-                            <label class="govuk-label govuk-radios__label" for="sentence-type-6">
-                                Licence Recall
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="sentence-outcome-6" name="sentence[outcome]" type="radio" value="Sentence outcome 6">
+                            <label class="govuk-label govuk-radios__label" for="sentence-outcome-6">
+                                Sentence outcome 6
                             </label>
-                        </div> -->
-                        <!--                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="sentence-type-7" name="sentence[sentence-type]" type="radio" value="License Recall EDS and SOPC">
-                            <label class="govuk-label govuk-radios__label" for="sentence-type-7">
-                                License Recall EDS and SOPC
+                        </div>
+                        <div class="govuk-radios__divider">or</div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="sentence-outcome-6" name="sentence[outcome]" type="radio" value="lookup-another-outcome">
+                            <label class="govuk-label govuk-radios__label" for="sentence-outcome-6">
+                                Look up a different outcome
                             </label>
-                        </div> -->
+                        </div>
                     </div>
                 </fieldset>
             </div>

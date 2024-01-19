@@ -1,4 +1,4 @@
-{% extends "../template.html" %}
+{% extends "../template-no-nav.html" %}
 {% block content %}
 <!-- Back link -->
 <a href="next-court-date" class="govuk-back-link govuk-!-margin-top-0">Back</a>
@@ -6,22 +6,21 @@
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">
-            <span class="govuk-caption-l">Add a court case</span>
+            <span class="govuk-caption-l">AAdd a court case</span>
             Check your answers
         </h1>
-        <h2 class="govuk-heading-m">Appearance details</h2>
-        <form class="form" action="/v9/persist-court-case" method="post">
+        <form class="form" action="/v10/persist-appearance" method="post">
             <dl class="govuk-summary-list">
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
-                        Case reference
+                        Court case reference number
                     </dt>
                     <dd class="govuk-summary-list__value">
                         {{ data['appearance']['court-case-ref'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="court-case-reference-number">
-                            Edit<span class="govuk-visually-hidden"> case reference number</span>
+                        <a class="govuk-link" href="overall-case-outcome">
+                            Change<span class="govuk-visually-hidden"> overall case outcome</span>
                         </a>
                     </dd>
                 </div>
@@ -33,34 +32,8 @@
                         {{ data['appearance']['court-name'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="court-name">
-                            Edit<span class="govuk-visually-hidden"> court name</span>
-                        </a>
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Warrant type
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['warrant-type'] }}
-                    </dd>
-                    <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="warrant-date">
-                            Edit<span class="govuk-visually-hidden"> warrant date</span>
-                        </a>
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Uploaded warrant
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        <a href="{{ asset_path }}documents/order-of-imprisonment-court-case-1.pdf" class="govuk-link--no-visited-state" target="_blank">name-of-file.pdf (opens in new tab)</a>
-                    </dd>
-                    <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="upload-warrant">
-                            Edit<span class="govuk-visually-hidden"> uploaded warrant</span>
+                        <a class="govuk-link" href="overall-case-outcome">
+                            Change<span class="govuk-visually-hidden"> overall case outcome</span>
                         </a>
                     </dd>
                 </div>
@@ -72,8 +45,8 @@
                         {{ data['appearance']['warrant-date-day'] }}/{{ data['appearance']['warrant-date-month'] }}/{{ data['appearance']['warrant-date-year'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="warrant-date">
-                            Edit<span class="govuk-visually-hidden"> warrant date</span>
+                        <a class="govuk-link" href="overall-case-outcome">
+                            Change<span class="govuk-visually-hidden"> overall case outcome</span>
                         </a>
                     </dd>
                 </div>
@@ -86,46 +59,83 @@
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link" href="overall-case-outcome">
-                            Edit<span class="govuk-visually-hidden"> overall case outcome</span>
+                            Change<span class="govuk-visually-hidden"> overall case outcome</span>
+                        </a>
+                    </dd>
+                </div>
+                {% if (data['appearance']['next-court-date-set'] == 'Yes') %}
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Next hearing type
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['next-hearing-type'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="next-hearing-type-select">
+                            Change<span class="govuk-visually-hidden"> next court case</span>
                         </a>
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
-                        Does the overall outcome apply to all offences?
+                        Next court date
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['overall-case-outcome-apply-all'] }}
+                        {{ data['appearance']['next-court-date-day'] }}/{{ data['appearance']['next-court-date-month'] }}/{{ data['appearance']['next-court-date-year'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="outcome-apply-all">
-                            Edit<span class="govuk-visually-hidden"> overall case outcome applies to all offences</span>
+                        <a class="govuk-link" href="next-court-date">
+                            Change<span class="govuk-visually-hidden"> next court case</span>
                         </a>
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
-                        Tagged bail
+                        Next court time
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['tagged-bail'] }} days
+                        {{ data['appearance']['next-court-time'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="tagged-bail">
-                            Edit<span class="govuk-visually-hidden"> tagged-bail</span>
+                        <a class="govuk-link" href="next-court-date">
+                            Change<span class="govuk-visually-hidden"> next court time</span>
                         </a>
                     </dd>
                 </div>
+                                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Next court name
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['next-court-name'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="next-court-date-select">
+                            Change<span class="govuk-visually-hidden"> next court name set</span>
+                        </a>
+                    </dd>
+                </div>
+                {% else %}
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Next court date
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['next-court-date-set'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="next-court-date-select">
+                            Change<span class="govuk-visually-hidden"> next court date set</span>
+                        </a>
+                    </dd>
+                </div>
+                {% endif %}
             </dl>
-            {% if data['appearance']['warrant-type'] == 'Sentencing' %}
-            <h2 class="govuk-heading-m">Now add the sentences for this appearance</h2>
-            <p class="govuk-body">You will need to enter all of the sentence information from the warrant.</p>
-            {% else %}
-            <h2 class="govuk-heading-m">Now add the offences for this appearance</h2>
-            <p class="govuk-body">You will need to enter all of the offence information from the warrant.</p>
-            {% endif %}
+            <h2 class="govuk-heading-m">Now save this appearance</h2>
+            <p class="govuk-body">By saving this appearance you are confirming that the details you are providing match the details on the warrant.</p>
             <button class="govuk-button" data-module="govuk-button">
-                Confirm and continue
+                Save and continue
             </button>
         </form>
     </div>
