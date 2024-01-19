@@ -3,57 +3,52 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="/v9/sentence-length-select" method="post">
+        <form class="form" action="/v9/persist-sentence" method="post">
             <fieldset class="govuk-fieldset" role="group" aria-describedby="passport-issued-hint">
-                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                    <h1 class="govuk-fieldset__heading">
-                        <span class="govuk-caption-l">Add sentences to a court case</span>
-                        Enter the sentence length
-                    </h1>
-                </legend>
+<legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+    <h1 class="govuk-fieldset__heading">
+        <span class="govuk-caption-l">Add sentences to a court case</span>
+        Enter the licence period
+    </h1>
+</legend>
                 <div class="govuk-form-group">
-                    <div class="govuk-date-input" id="sentence-length">
+                    <div class="govuk-date-input" id="licence-period">
                         <div class="govuk-date-input__item">
                             <div class="govuk-form-group">
-                                <label class="govuk-label govuk-date-input__label" for="sentence-length-years">
+                                <label class="govuk-label govuk-date-input__label" for="licence-period-years">
                                     Years
                                 </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="sentence-length-years" name="sentence[sentence-length-years]" type="text" inputmode="numeric">
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="licence-period-years" name="sentence[licence-period-years]" type="text" inputmode="numeric">
                             </div>
                         </div>
                         <div class="govuk-date-input__item">
                             <div class="govuk-form-group">
-                                <label class="govuk-label govuk-date-input__label" for="sentence-length-months">
+                                <label class="govuk-label govuk-date-input__label" for="licence-period-months">
                                     Months
                                 </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="sentence-length-months" name="sentence[sentence-length-months]" type="text" inputmode="numeric">
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="licence-period-months" name="sentence[licence-period-months]" type="text" inputmode="numeric">
                             </div>
                         </div>
                         <div class="govuk-date-input__item">
                             <div class="govuk-form-group">
-                                <label class="govuk-label govuk-date-input__label" for="sentence-length-weeks">
+                                <label class="govuk-label govuk-date-input__label" for="licence-period-weeks">
                                     Weeks
                                 </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="sentence-length-weeks" name="sentence[sentence-length-weeks]" type="text" inputmode="numeric">
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="licence-period-weeks" name="sentence[licence-period-weeks]" type="text" inputmode="numeric">
                             </div>
                         </div>
-                        <div class="govuk-date-input__item">
+                                                <div class="govuk-date-input__item">
                             <div class="govuk-form-group">
-                                <label class="govuk-label govuk-date-input__label" for="sentence-length-days">
+                                <label class="govuk-label govuk-date-input__label" for="licence-period-days">
                                     Days
                                 </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="sentence-length-days" name="sentence[sentence-length-days]" type="text" inputmode="numeric">
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="licence-period-days" name="sentence[licence-period-days]" type="text" inputmode="numeric">
                             </div>
                         </div>
                     </div>
                 </div>
             </fieldset>
-            <p class="govuk-body"><a href="alternative-sentence-length">The sentence length is formatted differently</a></p>
-            {% if data.sentence['sentence-type'] == "SOPC (Special Custodial Sentence for Certain Offenders of Particular Concern)" %}
-            <div class="govuk-inset-text">
-                For SOPC sentences a manditory licence period of 12 months is automatically added to the sentence.
-            </div>
-            {% endif %}
+            <!-- <p class="govuk-body"><a href="alternative-sentence-length">The sentence length is formatted differently</a></p> -->
             <button class="govuk-button" data-module="govuk-button">
                 Continue
             </button>

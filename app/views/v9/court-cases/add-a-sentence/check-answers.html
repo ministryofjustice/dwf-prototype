@@ -50,7 +50,7 @@
                         {{ data['appearance']['warrant-date-day'] }}/{{ data['appearance']['warrant-date-month'] }}/{{ data['appearance']['warrant-date-year'] }}
                     </dd>
                 </div>
-                                <div class="govuk-summary-list__row">
+                <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Warrant type
                     </dt>
@@ -64,13 +64,12 @@
             <div class="offence-card sentence-card">
                 <div class="offence-card-offence-details">
                     <span class="govuk-body-s">Count {{ sentence['count-number'] }}</span>
-
                     <h4 class="govuk-heading-s">{{ sentence['offence-name'] }}
-                                        {% if sentence['terror-related'] == 'Yes' %}
-                    <br><strong class="govuk-tag govuk-!-margin-top-2">
-  Terror-related
-</strong>
-{% endif %}</h4>
+                        {% if sentence['terror-related'] == 'Yes' %}
+                        <br><strong class="govuk-tag govuk-!-margin-top-2">
+                            Terror-related
+                        </strong>
+                        {% endif %}</h4>
                     <dl class="govuk-summary-list govuk-summary-list--no-border">
                         <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key">
@@ -92,7 +91,7 @@
                                 {{ sentence['outcome'] }}
                             </dd>
                         </div>
-                                                <div class="govuk-summary-list__row">
+                        <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key">
                                 Sentence type
                             </dt>
@@ -100,7 +99,7 @@
                                 {{ sentence['sentence-type'] }}
                             </dd>
                         </div>
-                                                                        <div class="govuk-summary-list__row">
+                        <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key">
                                 Sentence length
                             </dt>
@@ -108,6 +107,16 @@
                                 {{ sentence['sentence-length-years'] }} years {{ sentence['sentence-length-months'] }} months {{ sentence['sentence-length-weeks'] }} weeks {{ sentence['sentence-length-days'] }} days
                             </dd>
                         </div>
+                        {% if sentence['licence-period-years'] %}
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Licence period
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                {{ sentence['licence-period-years'] }} years {{ sentence['licence-period-months'] }} months {{ sentence['licence-period-weeks'] }} weeks {{ sentence['licence-period-days'] }} days
+                            </dd>
+                        </div>
+                        {% endif %}
                     </dl>
                 </div>
                 <div class="offence-card-actions">

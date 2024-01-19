@@ -580,3 +580,19 @@ router.post('/:prototypeVersion/submitConsecutiveSentence', function(req, res) {
     }
     return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers-2`)
 })
+
+router.post('/:prototypeVersion/sentence-length-select', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    var sentenceType = req.session.data['sentence']['sentence-type']
+    if (sentenceType == "SOPC (Special Custodial Sentence for Certain Offenders of Particular Concern)"){
+        req.session.data['sentence']['licence-period-years'] = '1'
+        req.session.data['sentence']['licence-period-months'] = '0'
+        req.session.data['sentence']['licence-period-weeks'] = '0'
+        req.session.data['sentence']['licence-period-days'] = '0'
+    }
+    if (sentenceType == "EDS (Extended Determinate Sentence)") {
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/licence-period`)
+    } else
+        res.redirect(307, `/${prototypeVersion}/persist-sentence`)
+})
+

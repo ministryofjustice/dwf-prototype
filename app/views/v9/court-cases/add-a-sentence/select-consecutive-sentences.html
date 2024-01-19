@@ -96,6 +96,16 @@
                                     {{ sentence['sentence-length-years'] }} years {{ sentence['sentence-length-months'] }} months {{ sentence['sentence-length-weeks'] }} weeks {{ sentence['sentence-length-days'] }} days
                                 </dd>
                             </div>
+                            {% if sentence['licence-period-years'] %}
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Licence period
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                    {{ sentence['licence-period-years'] }} years {{ sentence['licence-period-months'] }} months {{ sentence['licence-period-weeks'] }} weeks {{ sentence['licence-period-days'] }} days
+                                </dd>
+                            </div>
+                            {% endif %}
                         </dl>
                     </div>
                 </div>
