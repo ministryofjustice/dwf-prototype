@@ -78,7 +78,7 @@ Court cases and release dates
 </header>
 <div class="service-header">
     <div class="service-header__container">
-        <a href="../../court-cases/"><span class="service-header__service-name">Court cases and release dates</span></a>
+        <a href="/{{data.version}}/court-cases/"><span class="service-header__service-name">Court cases and release dates</span></a>
     </div>
 </div>
 {% endblock %}
@@ -105,40 +105,21 @@ Court cases and release dates
             </div>
         </div>
         {% endblock %} -->
-        {% block banner %}
-        <div class="govuk-grid-row">
-            <div class="govuk-grid-column-full">
-                <div class="dwf-header govuk-!-margin-top-6 govuk-!-margin-bottom-4">
-                    <div class="dwf-header-inner">
-                        <div class="govuk-grid-column-one-third govuk-!-padding-left-0">
-                            <div class="dwf-header-left">
-                                <img class="dwf-header-profile-img" src="/public/images/prisoner.jpeg" alt="Joe Bloggs">
-                            </div>
-                            <p class="govuk-heading-s govuk-!-margin-bottom-1"><a class="govuk-link--no-visited-state" href="https://prisoner-dev.digital.prison.service.justice.gov.uk/prisoner/G6123VU" target="_blank">Daryl Evans</a></p>
-                            <ul class="govuk-list">
-                                <li>A9761DY</li>
-                            </ul>
-                        </div>
-                        <div class="govuk-grid-column-two-thirds govuk-!-padding-0">
-                            <ul class="dwf-header-info">
-                                <li><span class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-padding-0">Date of birth</span><span class="govuk-body">28/03/1981</span></li>
-                                <li><span class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-padding-0">Status</span>{% if status == "On remand" %}
-                                    <span class="govuk-body">On remand</span>
-                                    {% else %}
-                                    <span class="govuk-body">On remand</span>
-                                    {% endif %}</li>
-                                <li><span class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-padding-0">Establishment</span><span class="govuk-body">HMP Kirkham</span></li>
-                                <li><span class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-padding-0">Cell number</span><span class="govuk-body">01-234</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {% endblock %}
-        
-        {% if nav %}
+        <!-- Mini profile -->
+        {% from "hmpps/components/mini-profile/macro.njk" import miniProfile %}
+        {% set person = {
+        firstName: 'Daryl',
+        lastName: 'Evans',
+        prisonerNumber: 'A1234BC',
+        dateOfBirth: '1998-09-27',
+        status: 'Active In',
+        prisonName: 'HMP Prison',
+        cellLocation: 'A-1-1'
+        } %}
+        {{ miniProfile(person, '/public/images/prisoner.jpeg', '#') }}
+        <!-- Naigation -->
         {% block nav %}
+        {% if nav %}
         <nav class="moj-sub-navigation" aria-label="Sub navigation">
             <ul class="moj-sub-navigation__list">
                 <li class="moj-sub-navigation__item">
@@ -161,8 +142,13 @@ Court cases and release dates
                 </li>
             </ul>
         </nav>
-        {% endblock %}
+        {% else %}
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-one-half"><a href="../court-cases-standalone" class="govuk-back-link govuk-!-margin-top-0">Back</a></div>
+            <div class="govuk-grid-column-one-half govuk-!-text-align-right"><a href="/{{data.version}}/court-cases/" class="govuk-link govuk-body-s">Go to Court cases</a></div>
+        </div>
         {% endif %}
+        {% endblock %}
         {% block content %}
         {% endblock %}
     </div>
