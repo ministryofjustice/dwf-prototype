@@ -1226,3 +1226,11 @@ padding: 10px;
 .govuk-file-upload {
     width: 100%;
 }
+
+.govuk-checkboxes__label:before {
+  background-color: #ffffff;
+}
+
+.govuk-radios__label:before {
+    background-color: #ffffff;
+}
