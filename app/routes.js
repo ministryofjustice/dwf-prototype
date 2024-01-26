@@ -515,7 +515,7 @@ router.get('/:prototypeVersion/warrant-type-select', function(req, res) {
         if (route == 'appearance') {
             res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome-sentencing`)
         } else
-        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/overall-case-outcome-sentencing`)
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/tagged-bail`)
     }
 })
 
