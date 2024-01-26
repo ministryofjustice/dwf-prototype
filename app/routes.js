@@ -6,16 +6,11 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 
-// Add your routes here
-
 // Next court date route
 router.post('/:prototypeVersion/next-court-date-select', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
-    // Make a variable and give it the value 
     var nextCourtDateSelect = req.session.data['appearance']['next-court-date-set']
-    // Check whether the variable matches a condition
     if (nextCourtDateSelect == "Yes") {
-        // Send user to next page
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/next-hearing-type-select`)
     } else res.redirect(307, `/${prototypeVersion}/persist-appearance`)
 })
@@ -23,22 +18,16 @@ router.post('/:prototypeVersion/next-court-date-select', function(req, res) {
 // Next court name routes
 router.post('/:prototypeVersion/next-hearing-court-select', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
-    // Make a variable and give it the value 
     var nextCourtDateSelect = req.session.data['appearance']['next-hearing-court-select']
-    // Check whether the variable matches a condition
     if (nextCourtDateSelect == "No") {
-        // Send user to next page
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/next-court-name`)
     } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers`)
 })
 
 router.post('/:prototypeVersion/next-hearing-court-select-2', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
-    // Make a variable and give it the value 
     var nextCourtDateSelect = req.session.data['appearance']['next-hearing-court-select']
-    // Check whether the variable matches a condition
     if (nextCourtDateSelect == "No") {
-        // Send user to next page
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/next-court-name`)
     } else
         req.session.data['appearance']['next-court-name'] = req.session.data['appearance']['court-name']
@@ -49,11 +38,8 @@ router.post('/:prototypeVersion/next-hearing-court-select-2', function(req, res)
 router.post('/:prototypeVersion/:appearancePath/next-court-date-select', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     const appearancePath = req.params.appearancePath
-    // Make a variable and give it the value 
     var nextCourtDateSelect = req.session.data['appearance']['next-court-date-set']
-    // Check whether the variable matches a condition
     if (nextCourtDateSelect == "Yes") {
-        // Send user to next page
         res.redirect(`/${prototypeVersion}/court-cases/${appearancePath}/next-hearing-type-select`)
     } else res.redirect(307, `/${prototypeVersion}/persist-appearance`)
 })
@@ -64,7 +50,6 @@ router.post('/:prototypeVersion/offence-code-known', function(req, res) {
     const warrantType = req.session.data.warrantType
     var offenceCodeKnown = req.session.data['offence-code-known']
     console.log(offenceCodeKnown)
-    // Check whether the variable matches a condition
     if (offenceCodeKnown != null) {
         if (offenceCodeKnown.includes('None')) {
         if (warrantType == 'Sentencing') {
@@ -97,12 +82,9 @@ router.post('/:prototypeVersion/outcome-select', function(req, res) {
 
 router.post('/:prototypeVersion/outcome-select-2', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
-    // Make a variable and give it the value 
     var outcome = req.session.data.appearance['overall-case-outcome']
     console.log(outcome)
-    // Check whether the variable matches a condition
     if (outcome.includes('lookup-another-outcome')) {
-        // Send user to next page
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/lookup-outcome`)
     } else if (prototypeVersion == 'v8') {
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/outcome-apply-all`)
@@ -111,12 +93,10 @@ router.post('/:prototypeVersion/outcome-select-2', function(req, res) {
 
 router.post('/:prototypeVersion/outcome-select-3', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
-    // Make a variable and give it the value 
     var outcome = req.session.data.appearance['overall-case-outcome']
     const route = req.session.data.route
     console.log('Outcome: ' + outcome)
     console.log('Route: ' + route)
-    // Check whether the variable matches a condition
     if (outcome.includes('lookup-another-outcome')) {
         if (route == 'appearance') {
             res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/lookup-outcome`)
@@ -130,12 +110,9 @@ router.post('/:prototypeVersion/outcome-select-3', function(req, res) {
 
 router.post('/:prototypeVersion/outcome-select-4', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
-    // Make a variable and give it the value 
     var outcome = req.session.data.offence['outcome']
     console.log(outcome)
-    // Check whether the variable matches a condition
     if (outcome.includes('lookup-another-outcome')) {
-        // Send user to next page
         res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/lookup-outcome`)
     } else res.redirect(307, `/${prototypeVersion}/persist-offence`)
 })

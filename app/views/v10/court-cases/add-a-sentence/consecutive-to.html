@@ -8,7 +8,7 @@
                 Which sentence is Count {{ data.currentConsecutiveSentence['count-number'] }} consecutive to?
             </h1>
         </legend>
-        <form class="form" action="/v10/submitConsecutiveSentence" method="post">
+        <form class="form" action="/v9/submitConsecutiveSentence" method="post">
             <div class="govuk-!-margin-top-8">
                 <div class="offence-card sentence-card">
                     <div class="offence-card-offence-details">
@@ -56,6 +56,16 @@
                                     {{ data.currentConsecutiveSentence['sentence-length-years'] }} years {{ data.currentConsecutiveSentence['sentence-length-months'] }} months {{ data.currentConsecutiveSentence['sentence-length-weeks'] }} weeks {{ data.currentConsecutiveSentence['sentence-length-days'] }} days
                                 </dd>
                             </div>
+                            {% if sentence['licence-period-years'] %}
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Licence period
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                {{ sentence['licence-period-years'] }} years {{ sentence['licence-period-months'] }} months {{ sentence['licence-period-weeks'] }} weeks {{ sentence['licence-period-days'] }} days
+                            </dd>
+                        </div>
+                        {% endif %}
                         </dl>
                     </div>
                 </div>
@@ -124,6 +134,16 @@
                                     {{ sentence['sentence-length-years'] }} years {{ sentence['sentence-length-months'] }} months {{ sentence['sentence-length-weeks'] }} weeks {{ sentence['sentence-length-days'] }} days
                                 </dd>
                             </div>
+                            {% if sentence['licence-period-years'] %}
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Licence period
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                {{ sentence['licence-period-years'] }} years {{ sentence['licence-period-months'] }} months {{ sentence['licence-period-weeks'] }} weeks {{ sentence['licence-period-days'] }} days
+                            </dd>
+                        </div>
+                        {% endif %}
                         </dl>
                     </div>
                 </div>

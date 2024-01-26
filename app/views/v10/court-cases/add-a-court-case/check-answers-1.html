@@ -1,7 +1,5 @@
-{% extends "../template-no-nav.html" %}
+{% extends "../template.html" %}
 {% block content %}
-<!-- Back link -->
-<a href="next-court-date" class="govuk-back-link govuk-!-margin-top-0">Back</a>
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
@@ -10,18 +8,18 @@
             Check your answers
         </h1>
         <h2 class="govuk-heading-m">Appearance details</h2>
-        <form class="form" action="/v10/persist-court-case" method="post">
+        <form class="form" action="/v9/persist-court-case" method="post">
             <dl class="govuk-summary-list">
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
-                        Case reference number
+                        Case reference
                     </dt>
                     <dd class="govuk-summary-list__value">
                         {{ data['appearance']['court-case-ref'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link" href="court-case-reference-number">
-                            Edit<span class="govuk-visually-hidden"> court case reference number</span>
+                            Edit<span class="govuk-visually-hidden"> case reference number</span>
                         </a>
                     </dd>
                 </div>
@@ -56,11 +54,11 @@
                         Uploaded warrant
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        <a href="" class="govuk-link--no-visited-state">name-of-file.pdf</a>
+                        <a href="{{ asset_path }}documents/order-of-imprisonment-court-case-1.pdf" class="govuk-link--no-visited-state" target="_blank">order-of-imprisonment-court-case-1.pdf (opens in new tab)</a>
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="warrant-date">
-                            Edit<span class="govuk-visually-hidden"> warrant date</span>
+                        <a class="govuk-link" href="upload-warrant">
+                            Edit<span class="govuk-visually-hidden"> uploaded warrant</span>
                         </a>
                     </dd>
                 </div>
@@ -77,7 +75,7 @@
                         </a>
                     </dd>
                 </div>
-                <div class="govuk-summary-list__row">
+                <!-- <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Overall case outcome
                     </dt>
@@ -99,11 +97,11 @@
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link" href="outcome-apply-all">
-                            Edit<span class="govuk-visually-hidden"> overall case apply to all offences</span>
+                            Edit<span class="govuk-visually-hidden"> overall case outcome applies to all offences</span>
                         </a>
                     </dd>
-                </div>
-                                <div class="govuk-summary-list__row">
+                </div> -->
+                <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Tagged bail
                     </dt>

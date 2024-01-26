@@ -1,16 +1,13 @@
 {% extends "../template.html" %}
 {% block content %}
-<!-- Back link -->
-<a href="type-of-case" class="govuk-back-link govuk-!-margin-top-0">Back</a>
-<!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="/v10/warrant-type-select?route=appearance" method="post">
+        <form class="form" action="tagged-bail" method="post">
             <div class="govuk-form-group"> 
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add an appearance to court case {{ data.courtCaseIndex | int + 1 }}</span>
+                            <span class="govuk-caption-l">Add an appearance to a court case</span>
                             Upload the {{ data.appearance['warrant-type'] | lower}} warrant
                         </h1>
                     </legend>
