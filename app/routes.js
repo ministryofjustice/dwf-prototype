@@ -393,13 +393,31 @@ router.get('/:prototypeVersion/update-offence', function(req, res) {
     res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-code`)
 })
 
+router.get('/:prototypeVersion/update-sentence', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    const index = req.query.index
+    console.log('Appearance index: ' + req.session.data.appearanceIndex)
+    const route = req.query.route
+    req.session.data.route = route
+    console.log('Edit route:' + route)
+    req.session.data.sentence = req.session.data.appearance.sentences[index]
+    req.session.data.swentenceIndex = index
+    req.session.data.changeMade = 1
+    req.session.data.offenceDeleted = 0
+    req.session.data.offenceAdded = 0
+    res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/count-number`)
+})
 
 router.get('/:prototypeVersion/confirm-delete', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     req.session.data.index = req.query.index
     req.session.data.route = req.query.route
+    const warrantType = req.session.data.appearance['warrant-type']
     const route = req.session.data.route
     console.log('Offence index' + req.session.data.index)
+    if (warrantType == 'Sentencing'){
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-delete`)
+    } else
     res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirm-delete`)
 })
 
@@ -437,6 +455,21 @@ router.get('/:prototypeVersion/delete-offence', function(req, res) {
             res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/check-answers`)
         }
     }
+})
+
+router.get('/:prototypeVersion/delete-sentence', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    const index = req.query.index
+    const route = req.session.data.route
+    if (req.session.data.confirmDeleteSentence == 'Yes') {
+        req.session.data.appearance.sentences.splice(index, 1)
+            req.session.data.changeMade = 0
+            req.session.data.sentenceDeleted = 1
+            req.session.data.sentenceAdded = 0
+            res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers`)
+    } else if (req.session.data.confirmDeleteSentence == 'No') {
+            res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers`)
+}
 })
 
 
