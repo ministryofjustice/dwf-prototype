@@ -40,7 +40,7 @@
                         <span class="govuk-body govuk-!-font-weight-bold">Sort by:</span><span class="govuk-body govuk-!-margin-left-2">Most recent <span class="seperator">|</span> <a href="">Earliest</a></span>
                     </div>
                     <div>
-                        <span class="govuk-body">Showing <strong>{{ data.courtCases.length }}</strong> court cases</span>
+                        <span class="govuk-body">Showing <strong>{{ data.courtCases.length }}</strong> of <strong>{{ data.courtCases.length }}</strong> court cases</span>
                     </div>
                 </div>
             </div>
@@ -180,8 +180,8 @@
                                         </dl>
                                     </div>
                                 </div>
-                        {% endfor %}
-                        </div>
+                                {% endfor %}
+                            </div>
                         </details>
                         {% endif %}
                         {% if lastAppearance.sentences %}
@@ -198,134 +198,132 @@
                                 </span>
                             </summary>
                             <div class="govuk-details__text">
-            <h2 class="govuk-heading-s govuk-!-margin-bottom-6">Concurrent sentences</h2>
-            {% for sentence in data['appearance'].sentences %}
-                {% if sentence['consecutive'] != 'Yes' %}
-            <div class="offence-card sentence-card">
-                <div class="offence-card-offence-details">
-                    <span class="govuk-body-s">Count {{ sentence['count-number'] }}</span>
-                    <h4 class="govuk-heading-s">{{ sentence['offence-name'] }}
-                        {% if sentence['terror-related'] == 'Yes' %}
-                        <br><strong class="govuk-tag govuk-!-margin-top-2">
-                            Terror-related
-                        </strong>
-                        {% endif %}</h4>
-                    <dl class="govuk-summary-list govuk-summary-list--no-border">
-                        <div class="govuk-summary-list__row">
-                            <dt class="govuk-summary-list__key">
-                                Commited on
-                            </dt>
-                            <dd class="govuk-summary-list__value">
-                                {{ sentence['offence-start-date-day'] }}/{{ sentence['offence-start-date-month'] }}/{{ sentence['offence-start-date-year'] }}
-                                {% if sentence['offence-end-date-day'] > 0 %}
-                                to
-                                {{ sentence['offence-end-date-day'] }}/{{ sentence['offence-end-date-month'] }}/{{ sentence['offence-end-date-year'] }}
+                                <h2 class="govuk-heading-s govuk-!-margin-bottom-6">Concurrent sentences</h2>
+                                {% for sentence in data['appearance'].sentences %}
+                                {% if sentence['consecutive'] != 'Yes' %}
+                                <div class="offence-card sentence-card">
+                                    <div class="offence-card-offence-details">
+                                        <span class="govuk-body-s">Count {{ sentence['count-number'] }}</span>
+                                        <h4 class="govuk-heading-s">{{ sentence['offence-name'] }}
+                                            {% if sentence['terror-related'] == 'Yes' %}
+                                            <br><strong class="govuk-tag govuk-!-margin-top-2">
+                                                Terror-related
+                                            </strong>
+                                            {% endif %}</h4>
+                                        <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                            <div class="govuk-summary-list__row">
+                                                <dt class="govuk-summary-list__key">
+                                                    Commited on
+                                                </dt>
+                                                <dd class="govuk-summary-list__value">
+                                                    {{ sentence['offence-start-date-day'] }}/{{ sentence['offence-start-date-month'] }}/{{ sentence['offence-start-date-year'] }}
+                                                    {% if sentence['offence-end-date-day'] > 0 %}
+                                                    to
+                                                    {{ sentence['offence-end-date-day'] }}/{{ sentence['offence-end-date-month'] }}/{{ sentence['offence-end-date-year'] }}
+                                                    {% endif %}
+                                                </dd>
+                                            </div>
+                                            <div class="govuk-summary-list__row">
+                                                <dt class="govuk-summary-list__key">
+                                                    Outcome
+                                                </dt>
+                                                <dd class="govuk-summary-list__value">
+                                                    {{ sentence['outcome'] }}
+                                                </dd>
+                                            </div>
+                                            <div class="govuk-summary-list__row">
+                                                <dt class="govuk-summary-list__key">
+                                                    Sentence type
+                                                </dt>
+                                                <dd class="govuk-summary-list__value">
+                                                    {{ sentence['sentence-type'] }}
+                                                </dd>
+                                            </div>
+                                            <div class="govuk-summary-list__row">
+                                                <dt class="govuk-summary-list__key">
+                                                    Sentence length
+                                                </dt>
+                                                <dd class="govuk-summary-list__value">
+                                                    {{ sentence['sentence-length-years'] }} years {{ sentence['sentence-length-months'] }} months {{ sentence['sentence-length-weeks'] }} weeks {{ sentence['sentence-length-days'] }} days
+                                                </dd>
+                                            </div>
+                                            {% if sentence['licence-period-years'] %}
+                                            <div class="govuk-summary-list__row">
+                                                <dt class="govuk-summary-list__key">
+                                                    Licence period
+                                                </dt>
+                                                <dd class="govuk-summary-list__value">
+                                                    {{ sentence['licence-period-years'] }} years {{ sentence['licence-period-months'] }} months {{ sentence['licence-period-weeks'] }} weeks {{ sentence['licence-period-days'] }} days
+                                                </dd>
+                                            </div>
+                                            {% endif %}
+                                        </dl>
+                                    </div>
+                                </div>
                                 {% endif %}
-                            </dd>
-                        </div>
-                        <div class="govuk-summary-list__row">
-                            <dt class="govuk-summary-list__key">
-                                Outcome
-                            </dt>
-                            <dd class="govuk-summary-list__value">
-                                {{ sentence['outcome'] }}
-                            </dd>
-                        </div>
-                        <div class="govuk-summary-list__row">
-                            <dt class="govuk-summary-list__key">
-                                Sentence type
-                            </dt>
-                            <dd class="govuk-summary-list__value">
-                                {{ sentence['sentence-type'] }}
-                            </dd>
-                        </div>
-                        <div class="govuk-summary-list__row">
-                            <dt class="govuk-summary-list__key">
-                                Sentence length
-                            </dt>
-                            <dd class="govuk-summary-list__value">
-                                {{ sentence['sentence-length-years'] }} years {{ sentence['sentence-length-months'] }} months {{ sentence['sentence-length-weeks'] }} weeks {{ sentence['sentence-length-days'] }} days
-                            </dd>
-                        </div>
-                        {% if sentence['licence-period-years'] %}
-                        <div class="govuk-summary-list__row">
-                            <dt class="govuk-summary-list__key">
-                                Licence period
-                            </dt>
-                            <dd class="govuk-summary-list__value">
-                                {{ sentence['licence-period-years'] }} years {{ sentence['licence-period-months'] }} months {{ sentence['licence-period-weeks'] }} weeks {{ sentence['licence-period-days'] }} days
-                            </dd>
-                        </div>
-                        {% endif %}
-                    </dl>
-                </div>
-            </div>
-            {% endif %}
-            {% endfor %}
-            <div class="govuk-!-margin-top-6 govuk-!-margin-bottom-8" id="consecutive-sentences">
-                      <h2 class="govuk-heading-s govuk-!-margin-bottom-6">Consecutive sentences</h2>
-            {% for sentence in data['appearance'].consecutiveSentences %}
-                
-            <div class="offence-card sentence-card">
-                <div class="offence-card-offence-details">
-                    <span class="govuk-body-s">Count {{ sentence['count-number'] }}</span>
-                    <h4 class="govuk-heading-s">{{ sentence['offence-name'] }}
-                        {% if sentence['terror-related'] == 'Yes' %}
-                        <br><strong class="govuk-tag govuk-!-margin-top-2">
-                            Terror-related
-                        </strong>
-                        {% endif %}</h4>
-                    <dl class="govuk-summary-list govuk-summary-list--no-border">
-                        <div class="govuk-summary-list__row">
-                            <dt class="govuk-summary-list__key">
-                                Commited on
-                            </dt>
-                            <dd class="govuk-summary-list__value">
-                                {{ sentence['offence-start-date-day'] }}/{{ sentence['offence-start-date-month'] }}/{{ sentence['offence-start-date-year'] }}
-                                {% if sentence['offence-end-date-day'] > 0 %}
-                                to
-                                {{ sentence['offence-end-date-day'] }}/{{ sentence['offence-end-date-month'] }}/{{ sentence['offence-end-date-year'] }}
-                                {% endif %}
-                            </dd>
-                        </div>
-                        <div class="govuk-summary-list__row">
-                            <dt class="govuk-summary-list__key">
-                                Outcome
-                            </dt>
-                            <dd class="govuk-summary-list__value">
-                                {{ sentence['outcome'] }}
-                            </dd>
-                        </div>
-                        <div class="govuk-summary-list__row">
-                            <dt class="govuk-summary-list__key">
-                                Sentence type
-                            </dt>
-                            <dd class="govuk-summary-list__value">
-                                {{ sentence['sentence-type'] }}
-                            </dd>
-                        </div>
-                        <div class="govuk-summary-list__row">
-                            <dt class="govuk-summary-list__key">
-                                Sentence length
-                            </dt>
-                            <dd class="govuk-summary-list__value">
-                                {{ sentence['sentence-length-years'] }} years {{ sentence['sentence-length-months'] }} months {{ sentence['sentence-length-weeks'] }} weeks {{ sentence['sentence-length-days'] }} days
-                            </dd>
-                        </div>
-                                              <div class="govuk-summary-list__row">
-                            <dt class="govuk-summary-list__key">
-                                Consecutive to
-                            </dt>
-                            <dd class="govuk-summary-list__value">
-                               Count {{ sentence['consecutive-to'] }}
-                            </dd>
-                        </div>
-                    </dl>
-                </div>
-            </div>
-            {% endfor %}
-
-                        </div>
+                                {% endfor %}
+                                <div class="govuk-!-margin-top-6 govuk-!-margin-bottom-8" id="consecutive-sentences">
+                                    <h2 class="govuk-heading-s govuk-!-margin-bottom-6">Consecutive sentences</h2>
+                                    {% for sentence in data['appearance'].consecutiveSentences %}
+                                    <div class="offence-card sentence-card">
+                                        <div class="offence-card-offence-details">
+                                            <span class="govuk-body-s">Count {{ sentence['count-number'] }}</span>
+                                            <h4 class="govuk-heading-s">{{ sentence['offence-name'] }}
+                                                {% if sentence['terror-related'] == 'Yes' %}
+                                                <br><strong class="govuk-tag govuk-!-margin-top-2">
+                                                    Terror-related
+                                                </strong>
+                                                {% endif %}</h4>
+                                            <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                                <div class="govuk-summary-list__row">
+                                                    <dt class="govuk-summary-list__key">
+                                                        Commited on
+                                                    </dt>
+                                                    <dd class="govuk-summary-list__value">
+                                                        {{ sentence['offence-start-date-day'] }}/{{ sentence['offence-start-date-month'] }}/{{ sentence['offence-start-date-year'] }}
+                                                        {% if sentence['offence-end-date-day'] > 0 %}
+                                                        to
+                                                        {{ sentence['offence-end-date-day'] }}/{{ sentence['offence-end-date-month'] }}/{{ sentence['offence-end-date-year'] }}
+                                                        {% endif %}
+                                                    </dd>
+                                                </div>
+                                                <div class="govuk-summary-list__row">
+                                                    <dt class="govuk-summary-list__key">
+                                                        Outcome
+                                                    </dt>
+                                                    <dd class="govuk-summary-list__value">
+                                                        {{ sentence['outcome'] }}
+                                                    </dd>
+                                                </div>
+                                                <div class="govuk-summary-list__row">
+                                                    <dt class="govuk-summary-list__key">
+                                                        Sentence type
+                                                    </dt>
+                                                    <dd class="govuk-summary-list__value">
+                                                        {{ sentence['sentence-type'] }}
+                                                    </dd>
+                                                </div>
+                                                <div class="govuk-summary-list__row">
+                                                    <dt class="govuk-summary-list__key">
+                                                        Sentence length
+                                                    </dt>
+                                                    <dd class="govuk-summary-list__value">
+                                                        {{ sentence['sentence-length-years'] }} years {{ sentence['sentence-length-months'] }} months {{ sentence['sentence-length-weeks'] }} weeks {{ sentence['sentence-length-days'] }} days
+                                                    </dd>
+                                                </div>
+                                                <div class="govuk-summary-list__row">
+                                                    <dt class="govuk-summary-list__key">
+                                                        Consecutive to
+                                                    </dt>
+                                                    <dd class="govuk-summary-list__value">
+                                                        Count {{ sentence['consecutive-to'] }}
+                                                    </dd>
+                                                </div>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
                         </details>
                         {% endif %}
                         <p class="govuk-body"><a href="/v9/view-court-case-detail?courtCaseIndex={{loop.index0}}">View court case details</a></p>
@@ -333,12 +331,36 @@
                 </div>
                 {% endfor %}
                 {% else %}
-                    <p class="govuk-body">There are no court cases recorded for Daryl Evans.</p>
-                    <p class="gouk-body"><a href="/v9/create-court-case">Add a court case now</a>
-                    </p>
+                <p class="govuk-body">There are no court cases recorded for Daryl Evans.</p>
+                <p class="gouk-body"><a href="/v9/create-court-case">Add a court case now</a>
+                </p>
                 {% endif %}
             </div>
         </div>
+        <nav class="govuk-pagination" role="navigation" aria-label="Pagination">
+  <ul class="govuk-pagination__list">
+    <li class="govuk-pagination__item govuk-pagination__item--current">
+      <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 1" aria-current="page">
+        1
+      </a>
+    </li>
+    <li class="govuk-pagination__item">
+      <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 2">
+        2
+      </a>
+    </li>
+    <li class="govuk-pagination__item">
+      <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 3">
+        3
+      </a>
+    </li>
+  </ul>
+  <div class="govuk-pagination__next">
+    <a class="govuk-link govuk-pagination__link" href="#" rel="next"> <span class="govuk-pagination__link-title">Next<span class="govuk-visually-hidden"> page</span></span> <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+        <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
+      </svg></a>
+  </div>
+</nav>
     </div>
     <div class="govuk-grid-column-one-third">
         <div class="actions-list">
