@@ -3,21 +3,16 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="/v10/case-outcome-apply?route=repeat-remand" method="post">
+        <form class="form" action="/v9/case-outcome-apply?route=repeat-remand" method="post">
             <div class="govuk-form-group"> 
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add an appearance a court case</span>
-                            {% if data['appearance']['warrant-type'] == 'Sentencing' %}
-                            Does this outcome apply to all sentences on the warrant?
-                            {% else %}
+                            <span class="govuk-caption-l">Add a court case</span>
                             Does this outcome apply to all offences on the warrant?
-                            {% endif %}
                         </h1>
                     </legend>
-                    <p class="govuk-body-l">{{ data['appearance']['overall-case-outcome'] }}
-                    </p>
+                    <p class="govuk-body-l">{{ data['appearance']['overall-case-outcome'] }}</p>
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="overall-case-outcome-apply-all" name="appearance[overall-case-outcome-apply-all]" type="radio" value="Yes">

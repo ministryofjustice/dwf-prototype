@@ -9,7 +9,7 @@
             <div class="moj-banner__message">Offence successfully added </div>
         </div> -->
         <h1 class="govuk-heading-l">
-            <span class="govuk-caption-l">Add an appearance a court case</span>
+            <span class="govuk-caption-l">Add an appearance to court case {{ data.courtCaseIndex | int + 1 }}</span>
             Review the offence details for this appearance</h1>
         <h2 class="govuk-heading-m govuk-!-margin-bottom-6">Offences</h2>
         {% for offence in data.appearance.offences %}
@@ -43,7 +43,7 @@
                 </div> -->
         </div>
         {% endfor %}
-        <form class="form govuk-!-margin-top-7" action="/v10/change-offences-select" method="post">
+        <form class="form govuk-!-margin-top-7" action="/v9/change-offences-select" method="post">
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset" aria-describedby="add-another-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend govuk-fieldset__legend--m">

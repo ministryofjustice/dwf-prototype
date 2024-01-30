@@ -27,7 +27,7 @@
         </div>
         {% endif %}
         <h1 class="govuk-heading-l">
-            <span class="govuk-caption-l">Add an appearance a court case</span>
+            <span class="govuk-caption-l">Add an appearance to court case {{ data.courtCaseIndex | int + 1 }}</span>
             Edit the offence details for this appearance</h1>
         <h2 class="govuk-heading-m govuk-!-margin-bottom-6">Offences ({{ data.appearance.offences | length }})</h2>
         {% for offence in data.appearance.offences %}
@@ -55,15 +55,15 @@
             </div>
            <div class="offence-card-actions">
                     <ul class="offence-card-actions-list">
-                        <li class="offence-card-action-link"><a href="/v10/update-offence?index={{loop.index0}}&route=repeat-remand">Edit</a></li>
+                        <li class="offence-card-action-link"><a href="/v8/update-offence?index={{loop.index0}}&route=repeat-remand">Edit</a></li>
                         <li class="offence-card-action-link">
-                            <a href="/v10/confirm-delete?index={{loop.index0}}&route=repeat-remand">Delete</a></li>
+                            <a href="/v8/confirm-delete?index={{loop.index0}}&route=repeat-remand">Delete</a></li>
                     </ul>
                 </div>
         </div>
         {% endfor %}
         <form class="form govuk-!-margin-top-7" action="next-court-date-select">
-            <p><a class="govuk-link--no-visited-state" href="/v10/add-an-offence-to-appearance?route=repeat-remand">Add another offence</a></p>
+            <p><a class="govuk-link--no-visited-state" href="/v9/add-an-offence-to-appearance?route=repeat-remand">Add another offence</a></p>
             <div class="govuk-button-group">
             <!-- <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="" formmethod="post">
                 Add another
