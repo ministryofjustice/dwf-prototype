@@ -1,18 +1,20 @@
 {% extends "../template.html" %}
 {% block content %}
-<!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="warrant-date">
+        <form class="form" action="check-answers" method="post">
             <div class="govuk-form-group">
-                <fieldset class="govuk-fieldset" role="group">
+                <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
                             <span class="govuk-caption-l">Add an appearance to court case</span>
-                            Enter the case reference number
+                            How many days tagged bail?
                         </h1>
                     </legend>
-                    <input class="govuk-input govuk-input--width-20" id="court-case-ref" name="appearance[court-case-ref]" type="text">
+                    <label class="govuk-label" for="tagged-bail">
+                        Number of days
+                    </label>
+                    <input class="govuk-input govuk-input--width-3" id="tagged-bail" name="appearance[tagged-bail]" type="text">
                 </fieldset>
             </div>
             <button class="govuk-button" data-module="govuk-button">

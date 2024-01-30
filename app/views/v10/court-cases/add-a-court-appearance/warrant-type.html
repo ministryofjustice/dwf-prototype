@@ -2,29 +2,26 @@
 {% block content %}
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-                <form class="form" action="/v10/new-court-name" method="post">
+        <form class="form" action="upload-warrant?route=appearance" method="post">
             <div class="govuk-form-group"> 
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
                             <span class="govuk-caption-l">Add an appearance to court case</span>
-                            Was the appearance at this court?
+                            Select the type of warrant
                         </h1>
                     </legend>
-                    <p class="govuk-body-l">
-                            {{ data.courtCase.appearances.at(-1)['next-court-name'] }}
-                        </p>
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="court-name-select" name="appearance[court-name-select]" type="radio" value="Yes">
-                            <label class="govuk-label govuk-radios__label" for="court-name-select">
-                                Yes
+                            <input class="govuk-radios__input" id="warrant-type" name="appearance[warrant-type]" type="radio" value="Remand">
+                            <label class="govuk-label govuk-radios__label" for="warrant-type">
+                                Remand
                             </label>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="court-name-select-2" name="appearance[court-name-select]" type="radio" value="No">
-                            <label class="govuk-label govuk-radios__label" for="court-name-select-2">
-                                No
+                            <input class="govuk-radios__input" id="warrant-type-2" name="appearance[warrant-type]" type="radio" value="Sentencing">
+                            <label class="govuk-label govuk-radios__label" for="warrant-type-2">
+                                Sentencing
                             </label>
                         </div>
                     </div>

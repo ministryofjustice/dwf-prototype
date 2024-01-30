@@ -9,7 +9,7 @@
             <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
                 <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
             </svg>
-            <div class="moj-banner__message">New appearance added to court case {{ data.courtCaseIndex | int + 1 }}<span class="govuk-!-text-align-right" style="display: inline-flex; float: right;"><a class="govuk-link--no-visited-state" href="/v9/close-success-message">Close</a></span></div>
+            <div class="moj-banner__message">New appearance added to court case {{ data.courtCaseIndex | int + 1 }}<span class="govuk-!-text-align-right" style="display: inline-flex; float: right;"><a class="govuk-link--no-visited-state" href="/v10/close-success-message">Close</a></span></div>
         </div>
         {% endif %}
         <h1 class="govuk-heading-xl">Court cases</h1>
@@ -55,7 +55,7 @@
                     <div class="govuk-summary-card__title-wrapper">
                         <h2 class="govuk-summary-card__title">{{ lastAppearance['court-case-ref'] }} <span class="govuk-body">at</span> {{ lastAppearance['court-name']}} </h2>
                         <ul class="govuk-summary-card__actions">
-                            <li class="govuk-summary-card__action"> <a class="govuk-link govuk-link--no-visited-state" href="/v9/create-appearance?courtIndex={{courtCaseIndex}}">
+                            <li class="govuk-summary-card__action"> <a class="govuk-link govuk-link--no-visited-state" href="/v10/create-appearance?courtIndex={{courtCaseIndex}}">
                                     Add appearance<span class="govuk-visually-hidden"> to court case {{ loop.index }}</span>
                                 </a>
                             </li>
@@ -132,7 +132,7 @@
                                     <td class="govuk-table__cell">{{ appearance['court-name'] }}</td>
                                     <td class="govuk-table__cell">{{ appearance['warrant-date-day'] }}/{{ appearance['warrant-date-month'] }}/{{ appearance['warrant-date-year'] }}</td>
                                     <td class="govuk-table__cell">{{ appearance['overall-case-outcome'] }}</td>
-                                    <td class="govuk-table__cell" width="16%"><a href="/v9/view-appearance-detail?appearanceIndex={{loop.index0}}&courtCaseIndex={{courtCaseIndex}}">View and edit</a></td>
+                                    <td class="govuk-table__cell" width="16%"><a href="/v10/view-appearance-detail?appearanceIndex={{loop.index0}}&courtCaseIndex={{courtCaseIndex}}">View and edit</a></td>
                                     </tr>
                                     {% endif %}
                                     {% endfor %}
@@ -326,13 +326,13 @@
                                 </div>
                         </details>
                         {% endif %}
-                        <p class="govuk-body"><a href="/v9/view-court-case-detail?courtCaseIndex={{loop.index0}}">View court case details</a></p>
+                        <p class="govuk-body"><a href="/v10/view-court-case-detail?courtCaseIndex={{loop.index0}}">View court case details</a></p>
                     </div>
                 </div>
                 {% endfor %}
                 {% else %}
                 <p class="govuk-body">There are no court cases recorded for Daryl Evans.</p>
-                <p class="gouk-body"><a href="/v9/create-court-case">Add a court case now</a>
+                <p class="gouk-body"><a href="/v10/create-court-case">Add a court case now</a>
                 </p>
                 {% endif %}
             </div>
@@ -366,7 +366,7 @@
         <div class="actions-list">
             <ul class="govuk-list actions-list-list">
                 <span class="govuk-heading-m actions-list-header">Actions</span>
-                <li><a href="/v9/create-court-case">Add a new court case</a></li>
+                <li><a href="/v10/create-court-case">Add a new court case</a></li>
                 <li><a href="">Record an appeal</a></li>
             </ul>
         </div>

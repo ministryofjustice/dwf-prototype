@@ -288,7 +288,7 @@ router.get('/:prototypeVersion/create-appearance', function(req, res) {
 router.post('/:prototypeVersion/persist-appearance', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     var displaySuccess = 0
-    const route = req.query.route
+    const route = req.session.data.route
     if (req.session.data.appearanceIndex !== undefined) {
         req.session.data.courtCases[req.session.data.courtCaseIndex].appearance[req.session.data.appearanceIndex] = req.session.data.appearance
     } else if (req.query.isFirst) {
@@ -305,6 +305,8 @@ router.post('/:prototypeVersion/persist-appearance', function(req, res) {
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/confirmation`)
     } else if (route == "add-a-court-case") {
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/confirmation`)
+    } else if (route == "appearance") {
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/select-offences-for-sentencing`)
     }
 })
 
@@ -513,7 +515,7 @@ router.get('/:prototypeVersion/warrant-type-select', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     req.session.data.warrantType = req.session.data.appearance['warrant-type']
     warrantType = req.session.data.warrantType
-    route = req.query.route
+    const route = req.query.route
     console.log('Warrant type: ' + warrantType)
     console.log('Route: ' + route)
     if (warrantType == 'Remand') {
@@ -523,7 +525,7 @@ router.get('/:prototypeVersion/warrant-type-select', function(req, res) {
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/overall-case-outcome`)
     } else if (warrantType == 'Sentencing') {
         if (route == 'appearance') {
-            res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome-sentencing`)
+            res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/tagged-bail`)
         } else
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/tagged-bail`)
     }
