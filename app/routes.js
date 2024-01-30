@@ -610,16 +610,7 @@ router.post('/:prototypeVersion/sentence-length-select', function(req, res) {
 
 router.post('/:prototypeVersion/offence-to-sentence', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
-    const selectedOffences = req.session.data.selectedOffences.map(offenceIndex => {
-        const sentence = req.session.data.appearance.offences[offenceIndex]
-        return { offenceIndex, ...sentence }})
-    req.session.data.appearance.sentences = selectedOffences
-    if(selectedOffences.length) {
-        const offenceIndex = 0
-        req.session.data.offenceIndex = offenceIndex
-        req.session.data.currentSelectedOffence = selectedOffences[offenceIndex]
-        return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`)
-    }
-    return res.redirect(`/${prototypeVersion}/<change for some other page>`)
+    const selectedOffences = req.session.data.selectedOffences
+    console.log(req.session.data.selectedOffences)
 })
 
