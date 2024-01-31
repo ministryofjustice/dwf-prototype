@@ -7,7 +7,41 @@
             <span class="govuk-caption-l">Add an appearance to a court case</span>
             Add sentence information
         </h1>
-        <h2 class="govuk-heading-m">Sentences<span class="govuk-body"> ({{ data.appearance.sentences.length }})</span></h2>
+        {% if sentence['sentence-length'] == null %}
+        <h2 class="govuk-heading-m">Require sentence infomation<span class="govuk-body"> ({{ data.appearance.sentences.length }})</span></h2> 
+        {% for sentence in data.appearance.sentences %}
+        <div class="offence-card">
+            <div class="offence-card-offence-details">
+                <h4 class="govuk-heading-s">{{ sentence['offence-name'] }}</h4>
+                <dl class="govuk-summary-list govuk-summary-list--no-border">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Commited on
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ sentence['offence-start-date-day'] }}/{{ sentence['offence-start-date-month'] }}/{{ sentence['offence-start-date-year'] }}
+                            {% if sentence['offence-end-date-day'] > 0 %}
+                            to
+                            {{ sentence['offence-end-date-day'] }}/{{ sentence['offence-end-date-month'] }}/{{ sentence['offence-end-date-year'] }}
+                            {% endif %}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Outcome
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ sentence['outcome'] }}
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+        
+        {% endfor %}
+        {% endif %}
+        {% if sentence['sentence-length'] %}
+        <h2 class="govuk-heading-m">Sentences<span class="govuk-body"> ({{ data.appearance.sentences.length }})</span></h2> 
         {% for sentence in data.appearance.sentences %}
         <div class="offence-card">
             <div class="offence-card-offence-details">
@@ -37,6 +71,7 @@
             </div>
         </div>
         {% endfor %}
+        {% endif %}
         <form class="form" action="/v10/offence-to-sentence" method="post">
             <button class="govuk-button govuk-!-margin-top-6" data-module="govuk-button">
                 Confirm and continue

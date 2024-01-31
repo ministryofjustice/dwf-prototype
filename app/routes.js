@@ -302,7 +302,7 @@ router.post('/:prototypeVersion/persist-appearance', function(req, res) {
     displaySuccess = 1
     req.session.data.appearanceSuccess = displaySuccess
     if (route == "repeat-remand") {
-        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/confirmation`)
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers`)
     } else if (route == "add-a-court-case") {
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/confirmation`)
     } else if (route == "appearance") {
