@@ -3,26 +3,35 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="/v10/offence-code-known" method="post">
-            <div class="govuk-form-group">
-                <fieldset class="govuk-fieldset" role="group">
+        <form class="form" action="/v10/offence-name-same" method="post">
+
+            <div class="govuk-form-group"> 
+                <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                        <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add sentences to a court case</span>
-                            Enter the offence code
-                        </h1>
-                    </legend>
-                    <input class="govuk-input govuk-input--width-10" id="offence-code" name="sentence[offence-code]" type="text">
-                    <div class="govuk-checkboxes govuk-!-margin-top-6" data-module="govuk-checkboxes">
-                        <div class="govuk-checkboxes__item">
-                            <input class="govuk-checkboxes__input" id="no-offence-code" name="offence-code-known" type="checkbox" value="None">
-                            <label class="govuk-label govuk-checkboxes__label" for="no-offence-code">
-                                I do not have the offence code
+                    <h1 class="govuk-fieldset__heading">
+                        <span class="govuk-caption-l">Add sentences to a court case</span>
+                        Is the offence name the same?
+                    </h1>
+                </legend>
+                                 <p class="govuk-body-l">
+                            {{ data.sentence['offence-name'] }}
+                        </p>
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="offence-name-same" name="sentence[offence-name-same]" type="radio" value="Yes">
+                            <label class="govuk-label govuk-radios__label" for="offence-name-same">
+                                Yes
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="offence-name-same-2" name="sentence[offence-name-same]" type="radio" value="No">
+                            <label class="govuk-label govuk-radios__label" for="offence-name-same-2">
+                                No
                             </label>
                         </div>
                     </div>
                 </fieldset>
-            </div>
+            </div>            
             <button class="govuk-button" data-module="govuk-button">
                 Continue
             </button>

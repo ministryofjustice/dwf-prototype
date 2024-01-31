@@ -485,7 +485,12 @@ router.post('/:prototypeVersion/persist-sentence', function(req, res) {
     }
     if (route == 'repeat-remand') {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/change-offences`)
+    } else if (route == 'remand-to-sentence') {
+
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`)
     }
+
+
     req.session.data.changeMade = 0
     req.session.data.sentneceDeleted = 0
     req.session.data.sentenceAdded = 1
@@ -617,4 +622,43 @@ router.post('/:prototypeVersion/offence-to-sentence', function(req, res) {
         req.session.data['selected-for-sentencing'] = []
     }
     res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`)
+})
+
+router.get('/:prototypeVersion/add-sentence-information', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    const index = req.query.index
+    console.log('Appearance index: ' + req.session.data.appearanceIndex)
+    console.log('Sentence index: ' + index)
+    const route = req.query.route
+    req.session.data.route = route
+    console.log('Route:' + route)
+    req.session.data.sentence = req.session.data.appearance.sentences[index]
+    req.session.data.sentenceIndex = index
+    req.session.data.changeMade = 0
+    req.session.data.offenceDeleted = 0
+    req.session.data.offenceAdded = 0
+    req.session.sentenceAdded = 1
+    res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/count-number`)
+})
+
+router.post('/:prototypeVersion/offence-code-select', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    var route = req.session.data.route
+    console.log('Route: ' + route)
+    if (route == "remand-to-sentence") {
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-same-offence`)
+    } else
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-code`)
+})
+
+router.post('/:prototypeVersion/offence-name-same', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    var route = req.session.data.route
+    const offenceNameSame = req.session.data['sentence']['offence-name-same']
+    console.log('Route: ' + route)
+    console.log('Offence name same: ' + offenceNameSame)
+    if (offenceNameSame == "Yes") {
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/terror-related`)
+    } else
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-code`)
 })
