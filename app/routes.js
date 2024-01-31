@@ -610,7 +610,12 @@ router.post('/:prototypeVersion/sentence-length-select', function(req, res) {
 
 router.post('/:prototypeVersion/offence-to-sentence', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
-    const selectedOffences = req.session.data.selectedOffences
-    console.log(req.session.data.selectedOffences)
+    const offences = req.session.data.appearance.offences
+    for (var i = offences.length -1; i >= 0; i--) {
+    // const sentenced = offences[i]['sentenced']
+    console.log(offences[i]['sentenced'])
+    offences[i]
+}
+    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`)
 })
 
