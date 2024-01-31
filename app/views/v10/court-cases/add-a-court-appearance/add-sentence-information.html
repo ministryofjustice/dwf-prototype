@@ -7,38 +7,21 @@
             <span class="govuk-caption-l">Add an appearance to a court case</span>
             Add sentence information
         </h1>
-                        <h2 class="govuk-heading-m">Offences<span class="govuk-body"> ({{ data.appearance.offences.length }})</span></h2>
-        {% for offence in data.appearance.offences %}
-        {% if offence['sentenced'] == 'yes' %}
+        <h2 class="govuk-heading-m">Sentences<span class="govuk-body"> ({{ data.appearance.sentences.length }})</span></h2>
+        {% for sentence in data.appearance.offences %}
         <div class="offence-card">
-                                <div class="offence-card-select">
-                        <div class="govuk-form-group">
-                            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-                                <div class="govuk-checkboxes__item">
-                                    <input class="govuk-checkboxes__input" id="sentenced" name="selectedOffences[]" type="checkbox" value="{{ loop.index0 }}">
-                                    <label class="govuk-label govuk-checkboxes__label " for="sentenced">
-                                        <span class="govuk-visually-hidden">{{ offence['offence-name'] }} coimmitted on {{ offence['offence-start-date-day'] }}/{{ offence['offence-start-date-month'] }}/{{ offence['offence-start-date-year'] }}
-                            {% if offence['offence-end-date-day'] > 0 %}
-                            to
-                            {{ offence['offence-end-date-day'] }}/{{ offence['offence-end-date-month'] }}/{{ offence['offence-end-date-year'] }}
-                            {% endif %}</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
             <div class="offence-card-offence-details">
-                <h4 class="govuk-heading-s">{{ offence['offence-name'] }}</h4>
+                <h4 class="govuk-heading-s">{{ sentence['offence-name'] }}</h4>
                 <dl class="govuk-summary-list govuk-summary-list--no-border">
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Commited on
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{ offence['offence-start-date-day'] }}/{{ offence['offence-start-date-month'] }}/{{ offence['offence-start-date-year'] }}
-                            {% if offence['offence-end-date-day'] > 0 %}
+                            {{ sentence['offence-start-date-day'] }}/{{ sentence['offence-start-date-month'] }}/{{ sentence['offence-start-date-year'] }}
+                            {% if sentence['offence-end-date-day'] > 0 %}
                             to
-                            {{ offence['offence-end-date-day'] }}/{{ offence['offence-end-date-month'] }}/{{ offence['offence-end-date-year'] }}
+                            {{ sentence['offence-end-date-day'] }}/{{ sentence['offence-end-date-month'] }}/{{ sentence['offence-end-date-year'] }}
                             {% endif %}
                         </dd>
                     </div>
@@ -47,13 +30,12 @@
                             Outcome
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{ offence['outcome'] }}
+                            {{ sentence['outcome'] }}
                         </dd>
                     </div>
                 </dl>
             </div>
         </div>
-        {% endif %}
         {% endfor %}
         <form class="form" action="/v10/offence-to-sentence" method="post">
             <button class="govuk-button govuk-!-margin-top-6" data-module="govuk-button">
