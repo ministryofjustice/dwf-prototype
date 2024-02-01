@@ -8,7 +8,7 @@
             Add sentence information
         </h1>
         {% if sentence['sentence-type'] == null %}
-        <h2 class="govuk-heading-m">Sentence information required<span class="govuk-body"> ({{ data.appearance.sentences.length }})</span></h2> 
+        <h2 class="govuk-heading-m">Sentence information required<span class="govuk-body"> ({{ data.appearance.sentences | needsSentence | length }})</span></h2> 
         {% for sentence in data.appearance.sentences %}
         {% if sentence['sentence-type'] == null %}
         <div class="offence-card">
@@ -48,7 +48,7 @@
         {% endfor %}
         {% endif %}
         {% if data.sentence['sentence-type'] != null %}
-        <h2 class="govuk-heading-m govuk-!-margin-top-6">Sentences<span class="govuk-body"> ({{ data.appearance.sentences.length }})</span></h2> 
+        <h2 class="govuk-heading-m govuk-!-margin-top-6">Sentences<span class="govuk-body"> ({{ data.appearance.sentences | hasSentence | length }})</span></h2> 
         {% for sentence in data.appearance.sentences %}
         {% if sentence['sentence-type'] != null %}
           <div class="offence-card sentence-card">
