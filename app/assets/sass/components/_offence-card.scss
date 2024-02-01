@@ -13,6 +13,16 @@
 	display: table;
 }
 
+.offence-card-offence-name {
+	width: 75%;
+	display: inline-block;
+}
+
+.offence-card-edit-offence {
+	width: 25%;
+	display: inline-block;
+}
+
 .sentence-card-select, .offence-card-select {
     display: table-cell;
 	vertical-align: middle;
@@ -29,6 +39,14 @@
 .offence-card-offence-details {
 	width: 75%;
 	float: left;
+}
+
+.offence-card-offence-details-full {
+	width: 100%;
+}
+
+.offence-card-offence-details-key {
+	width: 25%;
 }
 
 .offence-card-actions {

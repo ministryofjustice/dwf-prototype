@@ -306,7 +306,7 @@ router.post('/:prototypeVersion/persist-appearance', function(req, res) {
     } else if (route == "add-a-court-case") {
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/confirmation`)
     } else if (route == "appearance") {
-        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/select-offences-for-sentencing`)
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`)
     }
 })
 
@@ -486,11 +486,9 @@ router.post('/:prototypeVersion/persist-sentence', function(req, res) {
     if (route == 'repeat-remand') {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/change-offences`)
     } else if (route == 'remand-to-sentence') {
-
+        delete req.session.data.appearance.offences[req.session.data.index]
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`)
     }
-
-
     req.session.data.changeMade = 0
     req.session.data.sentneceDeleted = 0
     req.session.data.sentenceAdded = 1
@@ -530,6 +528,7 @@ router.get('/:prototypeVersion/warrant-type-select', function(req, res) {
             res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/overall-case-outcome`)
     } else if (warrantType == 'Sentencing') {
         if (route == 'appearance') {
+            req.session.data.appearance.sentences = []
             res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/tagged-bail`)
         } else
             res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/tagged-bail`)
@@ -628,12 +627,14 @@ router.get('/:prototypeVersion/add-sentence-information', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     const index = req.query.index
     console.log('Appearance index: ' + req.session.data.appearanceIndex)
-    console.log('Sentence index: ' + index)
+    console.log('Offence index: ' + index)
     const route = req.query.route
     req.session.data.route = route
     console.log('Route:' + route)
-    req.session.data.sentence = req.session.data.appearance.sentences[index]
+    req.session.data.sentence = req.session.data.appearance.offences[index]
+    console.log('Offence: ' + req.session.data.sentence)
     req.session.data.sentenceIndex = index
+    console.log('Sentence index: ' + req.session.data.sentenceIndex)
     req.session.data.changeMade = 0
     req.session.data.offenceDeleted = 0
     req.session.data.offenceAdded = 0

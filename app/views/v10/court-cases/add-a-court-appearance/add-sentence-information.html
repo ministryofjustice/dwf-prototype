@@ -8,47 +8,58 @@
             Add sentence information
         </h1>
         {% if sentence['sentence-type'] == null %}
-        <h2 class="govuk-heading-m">Sentence information required<span class="govuk-body"> ({{ data.appearance.sentences | needsSentence | length }})</span></h2> 
-        {% for sentence in data.appearance.sentences %}
+        <h2 class="govuk-heading-m">Offences<span class="govuk-body"> ({{ data.appearance.offences.length }})</span></h2> 
+        {% for offence in data.appearance.offences %}
         {% if sentence['sentence-type'] == null %}
         <div class="offence-card">
-            <div class="offence-card-offence-details">
-                <h4 class="govuk-heading-s">{{ sentence['offence-name'] }}</h4>
+            <div class="offence-card-offence-details offence-card-offence-details-full">
+                <div>
+                <div class="offence-card-offence-name"><h4 class="govuk-heading-s">{{ offence['offence-name'] }}</h4></div><div class="govuk-!-text-align-right govuk-body-s offence-card-edit-offence"><a href="">Edit</a></div>
+                </div>
                 <dl class="govuk-summary-list govuk-summary-list--no-border">
                     <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
+                        <dt class="govuk-summary-list__key offence-card-offence-details-key">
                             Commited on
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{ sentence['offence-start-date-day'] }}/{{ sentence['offence-start-date-month'] }}/{{ sentence['offence-start-date-year'] }}
-                            {% if sentence['offence-end-date-day'] > 0 %}
+                            {{ offence['offence-start-date-day'] }}/{{ offence['offence-start-date-month'] }}/{{ offence['offence-start-date-year'] }}
+                            {% if offence['offence-end-date-day'] > 0 %}
                             to
-                            {{ sentence['offence-end-date-day'] }}/{{ sentence['offence-end-date-month'] }}/{{ sentence['offence-end-date-year'] }}
+                            {{ offence['offence-end-date-day'] }}/{{ offence['offence-end-date-month'] }}/{{ offence['offence-end-date-year'] }}
                             {% endif %}
                         </dd>
+                        <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="#">Edit<span class="govuk-visually-hidden"> name</span></a>
+    </dd>
                     </div>
                     <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
+                        <dt class="govuk-summary-list__key offence-card-offence-details-key">
                             Outcome
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{ sentence['outcome'] }}
+                            {{ offence['outcome'] }}
                         </dd>
+                        <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="#">Edit<span class="govuk-visually-hidden"> name</span></a>
+    </dd>
                     </div>
                 </dl>
-                <p class="govuk-body govuk-!-margin-top-6 govuk-!-margin-bottom-2"><a href="/v10/add-sentence-information?route=remand-to-sentence&index={{loop.index0}}">Add sentence information</a></p>
+                <ul class="govuk-list govuk-!-margin-top-4 govuk-!-margin-bottom-2">
+                    <li><a href="/v10/add-sentence-information?route=remand-to-sentence&index={{loop.index0}}">Add sentence information</a></li>
+                </ul>
             </div>
-            <div class="offence-card-actions">
+                <!-- <div class="offence-card-actions">
                     <ul class="offence-card-actions-list">
-                        <li class="offence-card-action-link"><a href="/v9/confirm-delete?index={{loop.index0}}&route=add-a-court-case">Delete</a></li>
+                        <li class="offence-card-action-link"><a href="/v10/update-sentence?index={{loop.index0}}">Edit</a></li>
+                        <li class="offence-card-action-link"><a href="/v10/confirm-delete?index={{loop.index0}}&route=add-a-court-case">Delete</a></li>
                     </ul>
-            </div>
+                </div> -->
         </div>
         {% endif %}
         {% endfor %}
         {% endif %}
         {% if data.sentence['sentence-type'] != null %}
-        <h2 class="govuk-heading-m govuk-!-margin-top-6">Sentences<span class="govuk-body"> ({{ data.appearance.sentences | hasSentence | length }})</span></h2> 
+        <h2 class="govuk-heading-m govuk-!-margin-top-6">Sentences<span class="govuk-body"> ({{ data.appearance.sentences.length }})</span></h2> 
         {% for sentence in data.appearance.sentences %}
         {% if sentence['sentence-type'] != null %}
           <div class="offence-card sentence-card">
@@ -111,8 +122,8 @@
                 </div>
                 <div class="offence-card-actions">
                     <ul class="offence-card-actions-list">
-                        <li class="offence-card-action-link"><a href="/v9/update-sentence?index={{loop.index0}}">Edit</a></li>
-                        <li class="offence-card-action-link"><a href="/v9/confirm-delete?index={{loop.index0}}&route=add-a-court-case">Delete</a></li>
+                        <li class="offence-card-action-link"><a href="/v10/update-sentence?index={{loop.index0}}">Edit</a></li>
+                        <li class="offence-card-action-link"><a href="/v10/confirm-delete?index={{loop.index0}}&route=add-a-court-case">Delete</a></li>
                     </ul>
                 </div>
             </div>
