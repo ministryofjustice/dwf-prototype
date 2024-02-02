@@ -486,7 +486,7 @@ router.post('/:prototypeVersion/persist-sentence', function(req, res) {
     if (route == 'repeat-remand') {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/change-offences`)
     } else if (route == 'remand-to-sentence') {
-        delete req.session.data.appearance.offences[req.session.data.index]
+        req.session.data.appearance.offences.splice(req.session.data.index, 1)
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`)
     }
     req.session.data.changeMade = 0
@@ -627,14 +627,11 @@ router.get('/:prototypeVersion/add-sentence-information', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     const index = req.query.index
     console.log('Appearance index: ' + req.session.data.appearanceIndex)
-    console.log('Offence index: ' + index)
+    console.log('Index: ' + index)
     const route = req.query.route
     req.session.data.route = route
     console.log('Route:' + route)
     req.session.data.sentence = req.session.data.appearance.offences[index]
-    console.log('Offence: ' + req.session.data.sentence)
-    req.session.data.sentenceIndex = index
-    console.log('Sentence index: ' + req.session.data.sentenceIndex)
     req.session.data.changeMade = 0
     req.session.data.offenceDeleted = 0
     req.session.data.offenceAdded = 0
