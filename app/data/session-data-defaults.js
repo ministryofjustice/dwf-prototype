@@ -46,7 +46,7 @@ module.exports = {
                             "offence-code": [
                                 "TH68071"
                             ],
-                            "offence-name": "TH68071 Blackmail",
+                            "offence-name": "TH68071 - Blackmail",
                             "outcome": "Remand before conviction"
                         },
                         {
@@ -59,7 +59,20 @@ module.exports = {
                             "offence-code": [
                                 "CL77001"
                             ],
-                            "offence-name": "CL77001 Use violence to secure entry to premises",
+                            "offence-name": "CL77001 - Use violence to secure entry to premises",
+                            "outcome": "Remand before conviction"
+                        },
+                        {
+                            "offence-start-date-day": "25",
+                            "offence-start-date-month": "8",
+                            "offence-start-date-year": "2023",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "CL77001"
+                            ],
+                            "offence-name": "TH68023 - Robbery",
                             "outcome": "Remand before conviction"
                         }
                     ]

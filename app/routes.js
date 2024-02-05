@@ -369,6 +369,9 @@ router.get('/:prototypeVersion/update-offence', function(req, res) {
     req.session.data.changeMade = 1
     req.session.data.offenceDeleted = 0
     req.session.data.offenceAdded = 0
+    if (prototypeVersion == 'v10') {
+       return res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/edit-an-offence`)
+    }
     res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-code`)
 })
 
@@ -479,6 +482,8 @@ router.post('/:prototypeVersion/persist-sentence', function(req, res) {
     console.log("Route: " + route)
     if (req.session.data.sentenceIndex !== undefined) {
         req.session.data.appearance.sentences[req.session.data.sentenceIndex] = req.session.data.sentence
+    } else if (route == "remand-to-sentence") {
+        req.session.data.appearance.sentences.push(req.session.data.sentence)
     } else {
         req.session.data.appearance.sentences.push(req.session.data.sentence)
         req.session.data.sentenceIndex = req.session.data.appearance.sentences.length - 1
