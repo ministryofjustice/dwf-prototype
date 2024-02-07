@@ -1,0 +1,27 @@
+{% extends "../template.html" %}
+{% block content %}
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" action="/v10/warrant-type-select?route=appearance" method="post">
+            <div class="govuk-form-group"> 
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Add an appearance to court case</span>
+                            Upload the {{ data.appearance['warrant-type'] | lower}} warrant
+                        </h1>
+                    </legend>
+                    <div id="file-upload-1-hint" class="govuk-hint">
+    You can upload .pdf, .jpg, .doc or .docx files.
+  </div>
+
+  <input class="govuk-file-upload" id="file-upload-1" name="file-upload-1" type="file" aria-describedby="file-upload-1-hint">
+</div>
+
+<button class="govuk-button" data-module="govuk-button">
+  Continue
+</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
