@@ -55,7 +55,7 @@
                     <div class="govuk-summary-card__title-wrapper">
                         <h2 class="govuk-summary-card__title">{{ lastAppearance['court-case-ref'] }} <span class="govuk-body">at</span> {{ lastAppearance['court-name']}} </h2>
                         <ul class="govuk-summary-card__actions">
-                            <li class="govuk-summary-card__action"> <a class="govuk-link govuk-link--no-visited-state" href="/v10/create-appearance?courtIndex={{courtCaseIndex}}">
+                            <li class="govuk-summary-card__action"> <a class="govuk-link govuk-link--no-visited-state" href="/v11/create-appearance?courtIndex={{courtCaseIndex}}">
                                     Add appearance<span class="govuk-visually-hidden"> to court case {{ loop.index }}</span>
                                 </a>
                             </li>
@@ -132,7 +132,7 @@
                                     <td class="govuk-table__cell">{{ appearance['court-name'] }}</td>
                                     <td class="govuk-table__cell">{{ appearance['warrant-date-day'] }}/{{ appearance['warrant-date-month'] }}/{{ appearance['warrant-date-year'] }}</td>
                                     <td class="govuk-table__cell">{{ appearance['overall-case-outcome'] }}</td>
-                                    <td class="govuk-table__cell" width="16%"><a href="/v10/view-appearance-detail?appearanceIndex={{loop.index0}}&courtCaseIndex={{courtCaseIndex}}">View and edit</a></td>
+                                    <td class="govuk-table__cell" width="16%"><a href="/v11/view-appearance-detail?appearanceIndex={{loop.index0}}&courtCaseIndex={{courtCaseIndex}}">View and edit</a></td>
                                     </tr>
                                     {% endif %}
                                     {% endfor %}
@@ -326,13 +326,13 @@
                                 </div>
                         </details>
                         {% endif %}
-                        <p class="govuk-body"><a href="/v10/view-court-case-detail?courtCaseIndex={{loop.index0}}">View court case details</a></p>
+                        <p class="govuk-body"><a href="/v11/view-court-case-detail?courtCaseIndex={{loop.index0}}">View court case details</a></p>
                     </div>
                 </div>
                 {% endfor %}
                 {% else %}
                 <p class="govuk-body">There are no court cases recorded for Daryl Evans.</p>
-                <p class="gouk-body"><a href="/v10/create-court-case">Add a court case now</a>
+                <p class="gouk-body"><a href="/v11/create-court-case">Add a court case now</a>
                 </p>
                 {% endif %}
             </div>
@@ -366,7 +366,7 @@
         <div class="actions-list">
             <ul class="govuk-list actions-list-list">
                 <span class="govuk-heading-m actions-list-header">Actions</span>
-                <li><a href="/v10/create-court-case">Add a new court case</a></li>
+                <li><a href="/v11/create-court-case">Add a new court case</a></li>
                 <li><a href="">Record an appeal</a></li>
             </ul>
         </div>

@@ -47,6 +47,10 @@
 	text-align: right;
 }
 
+.offence-card-offence-details > .govuk-summary-list > .govuk-summary-list__row > .govuk-summary-list__key {
+	width: 50% !important;
+}
+
 .offence-card-edit-offence-details-key {
 	width: 25% !important;
 }

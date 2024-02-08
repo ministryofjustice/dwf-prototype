@@ -614,7 +614,10 @@ router.post('/:prototypeVersion/sentence-length-select', function(req, res) {
     }
     if (sentenceType == "EDS (Extended Determinate Sentence)") {
         res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/licence-period`)
-    } else
+    } else if (prototypeVersion >= 'v11'){
+            res.redirect(`court-cases/add-a-sentence/consecutive-concurrent`)
+        } 
+        else
         res.redirect(307, `/${prototypeVersion}/persist-sentence`)
 })
 
@@ -665,3 +668,17 @@ router.post('/:prototypeVersion/offence-name-same', function(req, res) {
     } else
         res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-code`)
 })
+
+router.post('/:prototypeVersion/consecutive-concurrent-select', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    var route = req.session.data.route
+    const consecutive = req.session.data['sentence']['consecutive-concurrent']
+    console.log('Route: ' + route)
+    console.log('Consecutive sentence: ' + consecutive)
+    if (consecutive == "Consecutive") {
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to`)
+    } else
+        res.redirect(307, `/${prototypeVersion}/persist-sentence`)
+})
+
+

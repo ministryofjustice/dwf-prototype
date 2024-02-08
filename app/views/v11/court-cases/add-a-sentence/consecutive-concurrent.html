@@ -3,21 +3,29 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="/v11/offence-code-known" method="post">
+        <form class="form" action="/v11/consecutive-concurrent-select" method="post">
             <div class="govuk-form-group">
-                <fieldset class="govuk-fieldset" role="group">
+                <fieldset class="govuk-fieldset" aria-describedby="changedName-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
                             <span class="govuk-caption-l">Add sentences to a court case</span>
-                            Enter the offence code
+                            Is the sentence consecutive or concurrent?
                         </h1>
                     </legend>
-                    <input class="govuk-input govuk-input--width-10" id="offence-code" name="sentence[offence-code]" type="text">
-                    <div class="govuk-checkboxes govuk-!-margin-top-6" data-module="govuk-checkboxes">
-                        <div class="govuk-checkboxes__item">
-                            <input class="govuk-checkboxes__input" id="no-offence-code" name="offence-code-known" type="checkbox" value="None">
-                            <label class="govuk-label govuk-checkboxes__label" for="no-offence-code">
-                                I do not have the offence code
+                    <!--                     <p class="govuk-body-l">
+                            {{ data.sentence['offence-name'] }}
+                        </p> -->
+                    <div class="govuk-radios govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="consecutive-concurrent" name="sentence[consecutive-concurrent]" type="radio" value="Consecutive">
+                            <label class="govuk-label govuk-radios__label" for="consecutive-concurrent">
+                                Consecutive
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="consecutive-concurrent-2" name="sentence[consecutive-concurrent]" type="radio" value="Concurrent">
+                            <label class="govuk-label govuk-radios__label" for="consecutive-concurrent-2">
+                                Concurrent
                             </label>
                         </div>
                     </div>
