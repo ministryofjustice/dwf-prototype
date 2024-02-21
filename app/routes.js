@@ -233,7 +233,7 @@ router.post('/:prototypeVersion/persist-court-case', function(req, res) {
         req.session.data.courtCaseIndex = req.session.data.courtCases.length - 1
         req.session.data.appearance = appearance
     }
-    if (prototypeVersion == 'v9') {
+    if (prototypeVersion == 'v9' || prototypeVersion == 'v10' || prototypeVersion == 'v11') {
         if (warrantType == 'Sentencing') {
             console.log('Redirecting to add sentence')
             return res.redirect(`/${prototypeVersion}/create-sentence`)
@@ -494,6 +494,9 @@ router.post('/:prototypeVersion/persist-sentence', function(req, res) {
         req.session.data.appearance.offences.splice(req.session.data.index, 1)
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`)
     }
+    if (req.session.data['sentence']['forthwith'] == "Yes"){
+        req.session.data.forthwithSelected = "Yes"
+    }
     req.session.data.changeMade = 0
     req.session.data.sentneceDeleted = 0
     req.session.data.sentenceAdded = 1
@@ -521,8 +524,8 @@ router.get('/:prototypeVersion/view-appearance-detail', function(req, res) {
 
 router.get('/:prototypeVersion/warrant-type-select', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
-    req.session.data.warrantType = req.session.data.appearance['warrant-type']
-    warrantType = req.session.data.warrantType
+    warrantType = req.session.data.appearance['warrant-type']
+    req.session.data.warrantType = warrantType
     const route = req.query.route
     console.log('Warrant type: ' + warrantType)
     console.log('Route: ' + route)
@@ -672,13 +675,19 @@ router.post('/:prototypeVersion/offence-name-same', function(req, res) {
 router.post('/:prototypeVersion/consecutive-concurrent-select', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     var route = req.session.data.route
-    const consecutive = req.session.data['sentence']['consecutive-concurrent']
+    const consecConcur = req.session.data['sentence']['consecutive-concurrent']
+    const forthwith = req.session.data['sentence']['forthwith']
+    const forthwithSelected = req.session.data.forthwithSelected
     console.log('Route: ' + route)
-    console.log('Consecutive sentence: ' + consecutive)
-    if (consecutive == "Consecutive") {
+    console.log('Consecutive sentence: ' + consecConcur)
+    console.log('Forthwith selected: ' + forthwithSelected)
+    if (consecConcur == "Consecutive") {
         res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to`)
-    } else
+    } else if (consecConcur == "Concurrent" && forthwithSelected != 'Yes') {
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/forthwith`)
+    } else if (consecConcur == "Concurrent" && forthwithSelected == 'Yes') {
         res.redirect(307, `/${prototypeVersion}/persist-sentence`)
+    }
 })
 
 

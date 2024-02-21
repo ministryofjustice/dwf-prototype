@@ -123,6 +123,9 @@
                             </dt>
                             <dd class="govuk-summary-list__value">
                         {{ sentence['consecutive-concurrent'] }}
+                        {% if sentence['forthwith'] == 'Yes' %}
+                        (forthwith)
+                        {% endif %}
                         {% if sentence['consecutive-concurrent'] == 'Consecutive' %}
                         to count {{ sentence['consecutive-to'] }}
                         {% endif %}
