@@ -1,0 +1,96 @@
+{% extends "../template.html" %}
+{% block content %}
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" action="check-answers" method="post">
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Add sentences to a court case</span>
+                            Edit sentence details
+                        </h1>
+                    </legend>
+                    <div class="offence-card offence-card-edit sentence-card">
+                        <div class="offence-card-offence-details">
+                            <dl class="govuk-summary-list govuk-summary-list--no-border">
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key offence-card-edit-offence-details-key">
+                                    <span class="govuk-body-s">Count {{ data.appearance.sentences[data.index]['count-number'] }}</span>
+                                </dt>
+                                <dd class="govuk-summary-list__value offence-card-edit-offence-details-value">
+                                </dd>
+                                <dd class="govuk-summary-list__actions">
+                                    <a class="govuk-link" href="#">Edit<span class="govuk-visually-hidden"> count number</span></a>
+                                </dd>
+                            </div>
+                        </dl>
+                            <h4 class="govuk-heading-s offence-name govuk-!-margin-top-1">{{ data.appearance.sentences[data.index]['offence-name'] }}{% if data.appearance.sentences[data.index]['terror-related'] == 'Yes' %}
+                        <br><strong class="govuk-tag govuk-!-margin-top-2">
+                            Terror-related
+                        </strong>
+                        {% endif %}</h4>
+                            <div class="offence-name-edit govuk-!-margin-top-1"><a class="govuk-link" href="#">Edit<span class="govuk-visually-hidden"> offence name</span></a></div>
+                            <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                <div class="govuk-summary-list__row">
+                                    <dt class="govuk-summary-list__key offence-card-edit-offence-details-key">
+                                        Commited on
+                                    </dt>
+                                    <dd class="govuk-summary-list__value offence-card-edit-offence-details-value">
+                                        {{ data.appearance.sentences[data.index]['offence-start-date-day'] }}/{{ data.appearance.sentences[data.index]['offence-start-date-month'] }}/{{ data.appearance.sentences[data.index]['offence-start-date-year'] }}
+                                    </dd>
+                                    <dd class="govuk-summary-list__actions">
+                                        <a class="govuk-link" href="#">Edit<span class="govuk-visually-hidden"> date offence committed on</span></a>
+                                    </dd>
+                                </div>
+                                <div class="govuk-summary-list__row">
+                                    <dt class="govuk-summary-list__key offence-card-edit-offence-details-key">
+                                        Sentence type
+                                    </dt>
+                                    <dd class="govuk-summary-list__value offence-card-edit-offence-details-value">
+                                        {{ data.appearance.sentences[data.index]['sentence-type'] }}
+                                    </dd>
+                                    <dd class="govuk-summary-list__actions">
+                                        <a class="govuk-link" href="#">Edit<span class="govuk-visually-hidden"> sentence type</span></a>
+                                    </dd>
+                                </div>
+                                <div class="govuk-summary-list__row">
+                                    <dt class="govuk-summary-list__key offence-card-edit-offence-details-key">
+                                        Sentence length
+                                    </dt>
+                                    <dd class="govuk-summary-list__value offence-card-edit-offence-details-value">
+                                        {{ data.appearance.sentences[data.index]['sentence-length-years'] }} years {{ data.appearance.sentences[data.index]['sentence-length-months'] }} months {{ data.appearance.sentences[data.index]['sentence-length-weeks'] }} weeks {{ data.appearance.sentences[data.index]['sentence-length-days'] }} days
+                                    </dd>
+                                    <dd class="govuk-summary-list__actions">
+                                        <a class="govuk-link" href="#">Edit<span class="govuk-visually-hidden"> sentence type</span></a>
+                                    </dd>
+                                </div>
+                                <div class="govuk-summary-list__row">
+                                    <dt class="govuk-summary-list__key offence-card-edit-offence-details-key">
+                                        Consecutive or concurrent
+                                    </dt>
+                                    <dd class="govuk-summary-list__value offence-card-edit-offence-details-value">
+                                        {{ data.appearance.sentences[data.index]['consecutive-concurrent'] }}
+                                        {% if data.appearance.sentences[data.index]['forthwith'] == 'Yes' %}
+                                        (forthwith)
+                                        {% endif %}
+                                        {% if data.appearance.sentences[data.index]['consecutive-concurrent'] == 'Consecutive' %}
+                                        to count {{ data.appearance.sentences[data.index]['consecutive-to'] }}
+                                        {% endif %}
+                                    </dd>
+                                    <dd class="govuk-summary-list__actions">
+                                        <a class="govuk-link" href="#">Edit<span class="govuk-visually-hidden"> sentence type</span></a>
+                                    </dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <button class="govuk-button" data-module="govuk-button">
+                Accept changes
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

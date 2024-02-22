@@ -59,7 +59,10 @@
                     </dd>
                 </div>
             </dl>
-            <h2 class="govuk-heading-m govuk-!-margin-bottom-6">Sentences added</h2>
+            <h2 class="govuk-heading-m govuk-!-margin-bottom-6">Sentences <span class="govuk-body">({{ data['appearance'].sentences | length }})</span></h2>
+                            <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="/v11/create-sentence">
+                    Add a sentence
+                </button>
             {% for sentence in data['appearance'].sentences %}
             <div class="offence-card sentence-card">
                 <div class="offence-card-offence-details">
@@ -141,9 +144,6 @@
             </div>
             {% endfor %}
             <div class="govuk-button-group govuk-!-margin-top-8">
-                <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="/v11/create-sentence">
-                    Add another sentence
-                </button>
                 <button class="govuk-button" data-module="govuk-button">
                     Finish and continue
                 </button>

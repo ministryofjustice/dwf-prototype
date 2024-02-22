@@ -8,8 +8,8 @@
                 <fieldset class="govuk-fieldset" role="group">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add sentences to a court case</span>
-                            Enter the count number
+                            <span class="govuk-caption-l">Add a sentence</span>
+                            Enter the count number {% if data['appearance']['sentences'] == 0 %} for the first sentence {% endif %}
                         </h1>
                     </legend>
                     <div id="event-name-hint" class="govuk-hint">

@@ -369,7 +369,7 @@ router.get('/:prototypeVersion/update-offence', function(req, res) {
     req.session.data.changeMade = 1
     req.session.data.offenceDeleted = 0
     req.session.data.offenceAdded = 0
-    if (prototypeVersion == 'v10') {
+    if (prototypeVersion == 'v10' || prototypeVersion == 'v11') {
        return res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/edit-an-offence`)
     }
     res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-code`)
@@ -383,10 +383,13 @@ router.get('/:prototypeVersion/update-sentence', function(req, res) {
     req.session.data.route = route
     console.log('Edit route:' + route)
     req.session.data.sentence = req.session.data.appearance.sentences[index]
-    req.session.data.swentenceIndex = index
+    req.session.data.seentenceIndex = index
     req.session.data.changeMade = 1
-    req.session.data.offenceDeleted = 0
-    req.session.data.offenceAdded = 0
+    req.session.data.sentenceDeleted = 0
+    req.session.data.sentenceAdded = 0
+    if (prototypeVersion == 'v11') {
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/edit-a-sentence`)
+    }
     res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/count-number`)
 })
 
