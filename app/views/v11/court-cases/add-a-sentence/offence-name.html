@@ -16,7 +16,7 @@
                         Start typing the name of the offence from the warrant.
                     </div>
                     <div>
-                        <select id="offence-name" class="enhance-autcomplete" name="sentence[offence-name]" type="text" aria-describedby="search-hint" autocomplete="off">
+                        <select id="offence-name" class="enhance-autcomplete" name="sentence[offence-name]" type="text" aria-describedby="search-hint" autocomplete="off" value="{{ data.sentence['offence-name'] }}">
                             <!-- Offence list -->
                             <option></option>
                             <option value="AB06001  Obstruct person acting in execution of the regulations">AB06001 Obstruct person acting in execution of the regulations</option>
@@ -14944,7 +14944,7 @@
                         Case reference number
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['court-case-ref'] }}
+                        {{ data['appearance']['court-case-ref'] | join }}
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row offences-summary-card-court-details-row">

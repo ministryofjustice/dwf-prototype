@@ -29,7 +29,11 @@
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
                 <span class="govuk-caption-l">Add sentences to a court case</span>
-                You have added {{ data['appearance'].sentences | length }} sentences to case {{ data['appearance']['court-case-ref'] }}
+                {% if data.appearance.sentences.length == 0 %}
+                Add sentences to case {{ data['appearance']['court-case-ref'] | join }}
+                {% else %}
+                You have added {{ data['appearance'].sentences | length }} sentences to case {{ data['appearance']['court-case-ref'] | join }}
+                {% endif %}
             </h1>
         </legend>
         <form class="form" action="consecutive-sentences">
@@ -60,7 +64,7 @@
                 </div>
             </dl>
             <h2 class="govuk-heading-m govuk-!-margin-bottom-6">Sentences <span class="govuk-body">({{ data['appearance'].sentences | length }})</span></h2>
-                            <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="/v11/create-sentence">
+                            <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="/v11/create-sentence" method="post">
                     Add a sentence
                 </button>
             {% for sentence in data['appearance'].sentences %}
@@ -143,11 +147,13 @@
                 </div>
             </div>
             {% endfor %}
+            {% if data.appearance.sentences.length > 0 %}
             <div class="govuk-button-group govuk-!-margin-top-8">
                 <button class="govuk-button" data-module="govuk-button">
                     Finish and continue
                 </button>
             </div>
+            {% endif %}
         </form>
     </div>
 </div>

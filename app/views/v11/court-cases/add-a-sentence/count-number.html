@@ -3,7 +3,11 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="/v11/offence-code-select" method="post">
+            {% if data.edit == 'true' %}
+            <form class="form" action="/v11/persist-sentence?edit=true" method="post">
+                {% else %}
+                <form class="form" action="/v11/offence-code-select" method="post">
+                    {% endif %}
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset" role="group">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
@@ -15,7 +19,7 @@
                     <div id="event-name-hint" class="govuk-hint">
                         You must enter it exactly as it is written on the warrant.
                     </div>
-                    <input class="govuk-input govuk-input--width-5" id="count-number" name="sentence[count-number]" type="text">
+                    <input class="govuk-input govuk-input--width-5" id="count-number" name="sentence[count-number]" type="text" value="{{ data.sentence['count-number'] }}">
                 </fieldset>
             </div>
             <button class="govuk-button" data-module="govuk-button">
@@ -32,7 +36,7 @@
                         Case reference number
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['court-case-ref'] }}
+                        {{ data['appearance']['court-case-ref'] | join }}
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row offences-summary-card-court-details-row">

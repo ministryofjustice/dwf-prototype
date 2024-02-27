@@ -21,7 +21,7 @@
                                 <dd class="govuk-summary-list__value offence-card-edit-offence-details-value">
                                 </dd>
                                 <dd class="govuk-summary-list__actions">
-                                    <a class="govuk-link" href="#">Edit<span class="govuk-visually-hidden"> count number</span></a>
+                                    <a class="govuk-link" href="count-number?edit=true">Edit<span class="govuk-visually-hidden"> count number</span></a>
                                 </dd>
                             </div>
                         </dl>
@@ -30,7 +30,7 @@
                             Terror-related
                         </strong>
                         {% endif %}</h4>
-                            <div class="offence-name-edit govuk-!-margin-top-1"><a class="govuk-link" href="#">Edit<span class="govuk-visually-hidden"> offence name</span></a></div>
+                            <div class="offence-name-edit govuk-!-margin-top-1"><a class="govuk-link" href="offence-code?edit=true">Edit<span class="govuk-visually-hidden"> offence name</span></a></div>
                             <dl class="govuk-summary-list govuk-summary-list--no-border">
                                 <div class="govuk-summary-list__row">
                                     <dt class="govuk-summary-list__key offence-card-edit-offence-details-key">
@@ -40,7 +40,7 @@
                                         {{ data.appearance.sentences[data.index]['offence-start-date-day'] }}/{{ data.appearance.sentences[data.index]['offence-start-date-month'] }}/{{ data.appearance.sentences[data.index]['offence-start-date-year'] }}
                                     </dd>
                                     <dd class="govuk-summary-list__actions">
-                                        <a class="govuk-link" href="#">Edit<span class="govuk-visually-hidden"> date offence committed on</span></a>
+                                        <a class="govuk-link" href="offence-date?edit=true">Edit<span class="govuk-visually-hidden"> date offence committed on</span></a>
                                     </dd>
                                 </div>
                                 <div class="govuk-summary-list__row">
@@ -51,7 +51,7 @@
                                         {{ data.appearance.sentences[data.index]['sentence-type'] }}
                                     </dd>
                                     <dd class="govuk-summary-list__actions">
-                                        <a class="govuk-link" href="#">Edit<span class="govuk-visually-hidden"> sentence type</span></a>
+                                        <a class="govuk-link" href="sentence-type?edit=true">Edit<span class="govuk-visually-hidden"> sentence type</span></a>
                                     </dd>
                                 </div>
                                 <div class="govuk-summary-list__row">
@@ -62,7 +62,7 @@
                                         {{ data.appearance.sentences[data.index]['sentence-length-years'] }} years {{ data.appearance.sentences[data.index]['sentence-length-months'] }} months {{ data.appearance.sentences[data.index]['sentence-length-weeks'] }} weeks {{ data.appearance.sentences[data.index]['sentence-length-days'] }} days
                                     </dd>
                                     <dd class="govuk-summary-list__actions">
-                                        <a class="govuk-link" href="#">Edit<span class="govuk-visually-hidden"> sentence type</span></a>
+                                        <a class="govuk-link" href="sentence-length">Edit<span class="govuk-visually-hidden"> sentence length</span></a>
                                     </dd>
                                 </div>
                                 <div class="govuk-summary-list__row">
@@ -79,7 +79,7 @@
                                         {% endif %}
                                     </dd>
                                     <dd class="govuk-summary-list__actions">
-                                        <a class="govuk-link" href="#">Edit<span class="govuk-visually-hidden"> sentence type</span></a>
+                                        <a class="govuk-link" href="consecutive-concurrent">Edit<span class="govuk-visually-hidden"> consecutive or concurent</span></a>
                                     </dd>
                                 </div>
                             </dl>

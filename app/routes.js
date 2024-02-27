@@ -467,6 +467,7 @@ router.get('/:prototypeVersion/create-sentence', function(req, res) {
     const appearanceIndex = req.query.appearanceIndex
     const route = req.session.data.route
     console.log('Route: ' + route)
+    req.session.data.edit = 'false'
     if (appearanceIndex !== undefined) {
         req.session.data.appearance = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[appearanceIndex]
         req.session.data.appearanceIndex = appearanceIndex
@@ -476,13 +477,20 @@ router.get('/:prototypeVersion/create-sentence', function(req, res) {
             outcome: req.session.data.appearance['overall-case-outcome']
         }
     }
-    res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/count-number`)
+    return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/count-number`)
 })
 
 router.post('/:prototypeVersion/persist-sentence', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     const route = req.session.data.route
+    const edit = req.query.edit
+    console.log("Edit: " + edit)
     console.log("Route: " + route)
+    if (edit == 'true') {
+        console.log("Saving edits")
+        req.session.data.appearance.sentences[sentenceIndex].push(req.session.data.sentence)
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/edit-a-sentence`)
+    }
     if (req.session.data.sentenceIndex !== undefined) {
         req.session.data.appearance.sentences[req.session.data.sentenceIndex] = req.session.data.sentence
     } else if (route == "remand-to-sentence") {
@@ -501,7 +509,7 @@ router.post('/:prototypeVersion/persist-sentence', function(req, res) {
         req.session.data.forthwithSelected = "Yes"
     }
     req.session.data.changeMade = 0
-    req.session.data.sentneceDeleted = 0
+    req.session.data.sentenceDeleted = 0
     req.session.data.sentenceAdded = 1
     return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers`)
 })

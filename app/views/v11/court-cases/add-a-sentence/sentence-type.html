@@ -3,69 +3,73 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="sentence-length" method="post">
-            <div class="govuk-form-group">
-                <fieldset class="govuk-fieldset">
-                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                        <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add sentence information for count {{ data['sentence']['count-number'] }}</span>
-                            Select the sentence type
-                        </h1>
-                    </legend>
-                    <div class="govuk-radios" data-module="govuk-radios">
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="sentence-type-1" name="sentence[sentence-type]" type="radio" value="SDS (Standard Determinate Sentence)">
-                            <label class="govuk-label govuk-radios__label" for="sentence-type-1">
-                                SDS (Standard Determinate Sentence)
-                            </label>
-                        </div>
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="sentence-type-2" name="sentence[sentence-type]" type="radio" value="EDS (Extended Determinate Sentence)">
-                            <label class="govuk-label govuk-radios__label" for="sentence-type-2">
-                                EDS (Extended Determinate Sentence)
-                            </label>
-                        </div>
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="sentence-type-3" name="sentence[sentence-type]" type="radio" value="SOPC (Special Custodial Sentence for Certain Offenders of Particular Concern)">
-                            <label class="govuk-label govuk-radios__label" for="sentence-type-3">
-                                SOPC (Special Custodial Sentence for Certain Offenders of Particular Concern)
-                            </label>
-                            <div id="sopc-hint" class="govuk-hint govuk-radios__hint">
-          A manditory licence period of 12 months will automatically be added to the sentence
-        </div>
-                        </div>
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="sentence-type-4" name="sentence[sentence-type]" type="radio" value="DTO (Detention and Training Order)">
-                            <label class="govuk-label govuk-radios__label" for="sentence-type-4">
-                                DTO (Detention and Training Order)
-                            </label>
-                        </div>
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="sentence-type-5
-                        5" name="sentence[sentence-type]" type="radio" value="A/FINE">
-                            <label class="govuk-label govuk-radios__label" for="sentence-type-5">
-                                A/FINE
-                            </label>
-                        </div>
-                        <!--                         <div class="govuk-radios__item">
+        {% if data.edit == 'true' %}
+        <form class="form" action="edit-a-sentence" method="post">
+            {% else %}
+            <form class="form" action="sentence-length" method="post">
+                {% endif %}
+                <div class="govuk-form-group">
+                    <fieldset class="govuk-fieldset">
+                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                            <h1 class="govuk-fieldset__heading">
+                                <span class="govuk-caption-l">Add sentence information for count {{ data['sentence']['count-number'] }}</span>
+                                Select the sentence type
+                            </h1>
+                        </legend>
+                        <div class="govuk-radios" data-module="govuk-radios">
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="sentence-type-1" name="sentence[sentence-type]" type="radio" value="SDS (Standard Determinate Sentence)" {% if data.sentence['sentence-type']=='SDS (Standard Determinate Sentence)' %} checked {% endif %}>
+                                <label class="govuk-label govuk-radios__label" for="sentence-type-1">
+                                    SDS (Standard Determinate Sentence)
+                                </label>
+                            </div>
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="sentence-type-2" name="sentence[sentence-type]" type="radio" value="EDS (Extended Determinate Sentence)" {% if data.sentence['sentence-type']=='EDS (Extended Determinate Sentence)' %} checked {% endif %}>
+                                <label class="govuk-label govuk-radios__label" for="sentence-type-2">
+                                    EDS (Extended Determinate Sentence)
+                                </label>
+                            </div>
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="sentence-type-3" name="sentence[sentence-type]" type="radio" value="SOPC (Special Custodial Sentence for Certain Offenders of Particular Concern)" {% if data.sentence['sentence-type']=='SOPC (Special Custodial Sentence for Certain Offenders of Particular Concern)' %} checked {% endif %}>
+                                <label class="govuk-label govuk-radios__label" for="sentence-type-3">
+                                    SOPC (Special Custodial Sentence for Certain Offenders of Particular Concern)
+                                </label>
+                                <div id="sopc-hint" class="govuk-hint govuk-radios__hint">
+                                    A manditory licence period of 12 months will automatically be added to the sentence
+                                </div>
+                            </div>
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="sentence-type-4" name="sentence[sentence-type]" type="radio" value="DTO (Detention and Training Order)" {% if data.sentence['sentence-type']=='DTO (Detention and Training Order)' %} checked {% endif %}>
+                                <label class="govuk-label govuk-radios__label" for="sentence-type-4">
+                                    DTO (Detention and Training Order)
+                                </label>
+                            </div>
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="sentence-type-5
+                        5" name="sentence[sentence-type]" type="radio" value="A/FINE" {% if data.sentence['sentence-type']=='A/FINE' %} checked {% endif %}>
+                                <label class="govuk-label govuk-radios__label" for="sentence-type-5">
+                                    A/FINE
+                                </label>
+                            </div>
+                            <!--                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="sentence-type-6" name="sentence[sentence-type]" type="radio" value="Licence Recall">
                             <label class="govuk-label govuk-radios__label" for="sentence-type-6">
                                 Licence Recall
                             </label>
                         </div> -->
-                        <!--                         <div class="govuk-radios__item">
+                            <!--                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="sentence-type-7" name="sentence[sentence-type]" type="radio" value="License Recall EDS and SOPC">
                             <label class="govuk-label govuk-radios__label" for="sentence-type-7">
                                 License Recall EDS and SOPC
                             </label>
                         </div> -->
-                    </div>
-                </fieldset>
-            </div>
-            <button class="govuk-button" data-module="govuk-button">
-                Continue
-            </button>
-        </form>
+                        </div>
+                    </fieldset>
+                </div>
+                <button class="govuk-button" data-module="govuk-button">
+                    Continue
+                </button>
+            </form>
     </div>
     <div class="govuk-grid-column-one-third">
         <div class="offence-summary">
@@ -76,7 +80,7 @@
                         Case reference number
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['court-case-ref'] }}
+                        {{ data['appearance']['court-case-ref'] | join }}
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row offences-summary-card-court-details-row">

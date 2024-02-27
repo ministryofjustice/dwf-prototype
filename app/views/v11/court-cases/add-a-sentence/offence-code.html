@@ -12,7 +12,7 @@
                             Enter the offence code
                         </h1>
                     </legend>
-                    <input class="govuk-input govuk-input--width-10" id="offence-code" name="sentence[offence-code]" type="text">
+                    <input class="govuk-input govuk-input--width-10" id="offence-code" name="sentence[offence-code]" type="text" value="{{ data.sentence['offence-code'] }}">
                     <div class="govuk-checkboxes govuk-!-margin-top-6" data-module="govuk-checkboxes">
                         <div class="govuk-checkboxes__item">
                             <input class="govuk-checkboxes__input" id="no-offence-code" name="offence-code-known" type="checkbox" value="None">
@@ -37,7 +37,7 @@
                         Case reference number
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['court-case-ref'] }}
+                        {{ data['appearance']['court-case-ref'] | join }}
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row offences-summary-card-court-details-row">

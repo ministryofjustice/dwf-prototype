@@ -3,38 +3,43 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="/v11/consecutive-concurrent-select" method="post">
-            <div class="govuk-form-group">
-                <fieldset class="govuk-fieldset" aria-describedby="changedName-hint">
-                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                        <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add sentence information for count {{ data['sentence']['count-number'] }}</span>
-                            Is the sentence consecutive or concurrent?
-                        </h1>
-                    </legend>
-                    <!--                     <p class="govuk-body-l">
+        {% if data.edit == 'true' %}
+        <form class="form" action="edit-a-sentence" method="post">
+            {% else %}
+            <form class="form" action="/v11/consecutive-concurrent-select" method="post">
+                {% endif %}
+                <form class="form" action="/v11/consecutive-concurrent-select" method="post">
+                    <div class="govuk-form-group">
+                        <fieldset class="govuk-fieldset" aria-describedby="changedName-hint">
+                            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                                <h1 class="govuk-fieldset__heading">
+                                    <span class="govuk-caption-l">Add sentence information for count {{ data['sentence']['count-number'] }}</span>
+                                    Is the sentence consecutive or concurrent?
+                                </h1>
+                            </legend>
+                            <!--                     <p class="govuk-body-l">
                             {{ data.sentence['offence-name'] }}
                         </p> -->
-                    <div class="govuk-radios govuk-radios" data-module="govuk-radios">
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="consecutive-concurrent" name="sentence[consecutive-concurrent]" type="radio" value="Consecutive">
-                            <label class="govuk-label govuk-radios__label" for="consecutive-concurrent">
-                                Consecutive
-                            </label>
-                        </div>
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="consecutive-concurrent-2" name="sentence[consecutive-concurrent]" type="radio" value="Concurrent">
-                            <label class="govuk-label govuk-radios__label" for="consecutive-concurrent-2">
-                                Concurrent
-                            </label>
-                        </div>
+                            <div class="govuk-radios govuk-radios" data-module="govuk-radios">
+                                <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="consecutive-concurrent" name="sentence[consecutive-concurrent]" type="radio" value="Consecutive" {% if data.sentence['consecutive-concurrent']=='Consecutive' %} checked {% endif %}>
+                                    <label class="govuk-label govuk-radios__label" for="consecutive-concurrent">
+                                        Consecutive
+                                    </label>
+                                </div>
+                                <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="consecutive-concurrent-2" name="sentence[consecutive-concurrent]" type="radio" value="Concurrent" {% if data.sentence['consecutive-concurrent']=='Concurrent' %} checked {% endif %}>
+                                    <label class="govuk-label govuk-radios__label" for="consecutive-concurrent-2">
+                                        Concurrent
+                                    </label>
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
-                </fieldset>
-            </div>
-            <button class="govuk-button" data-module="govuk-button">
-                Continue
-            </button>
-        </form>
+                    <button class="govuk-button" data-module="govuk-button">
+                        Continue
+                    </button>
+                </form>
     </div>
     <div class="govuk-grid-column-one-third">
         <div class="offence-summary">
@@ -45,7 +50,7 @@
                         Case reference number
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['court-case-ref'] }}
+                        {{ data['appearance']['court-case-ref'] | join }}
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row offences-summary-card-court-details-row">
