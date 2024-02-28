@@ -18,7 +18,11 @@
                     <div>
                         <select id="offence-name" class="enhance-autcomplete" name="sentence[offence-name]" type="text" aria-describedby="search-hint" autocomplete="off" value="{{ data.sentence['offence-name'] }}">
                             <!-- Offence list -->
+                            {% if data.sentence['offence-name'] %}
+                            <option value="{{ data.sentence['offence-name'] }}">{{ data.sentence['offence-name'] }}</option>
+                            {% else %}
                             <option></option>
+                            {% endif %}
                             <option value="AB06001  Obstruct person acting in execution of the regulations">AB06001 Obstruct person acting in execution of the regulations</option>
                             <option value="AB13001  Fail to comply with an animal by-product requirement">AB13001 Fail to comply with an animal by-product requirement</option>
                             <option value="AB13002  Intentionally obstruct an authorised person">AB13002 Intentionally obstruct an authorised person</option>

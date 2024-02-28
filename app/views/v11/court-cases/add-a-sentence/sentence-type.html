@@ -4,7 +4,7 @@
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
         {% if data.edit == 'true' %}
-        <form class="form" action="edit-a-sentence" method="post">
+        <form class="form" action="/v11/persist-sentence?edit=true" method="post">
             {% else %}
             <form class="form" action="sentence-length" method="post">
                 {% endif %}

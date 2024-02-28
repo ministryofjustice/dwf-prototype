@@ -484,11 +484,12 @@ router.post('/:prototypeVersion/persist-sentence', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     const route = req.session.data.route
     const edit = req.query.edit
+    const sentenceIndex = req.query.sentenceIndex
     console.log("Edit: " + edit)
     console.log("Route: " + route)
     if (edit == 'true') {
         console.log("Saving edits")
-        req.session.data.appearance.sentences[sentenceIndex].push(req.session.data.sentence)
+        req.session.data.appearance.sentences[req.session.data.sentenceIndex] = req.session.data.sentence
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/edit-a-sentence`)
     }
     if (req.session.data.sentenceIndex !== undefined) {

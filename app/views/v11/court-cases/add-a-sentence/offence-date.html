@@ -7,7 +7,7 @@
         <form class="form" action="/v11/case-outcome-apply" method="post">
             {% else %}
             {% if data.edit == 'true' %}
-            <form class="form" action="edit-a-sentence" method="post">
+            <form class="form" action="/v11/persist-sentence?edit=true" method="post">
                 {% else %}
                 <form class="form" action="sentence-type" method="post">
                     {% endif %}
