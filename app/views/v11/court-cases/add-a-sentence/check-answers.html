@@ -127,7 +127,26 @@
                                 Sentence length
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                {{ sentence['sentence-length-years'] }} years {{ sentence['sentence-length-months'] }} months {{ sentence['sentence-length-weeks'] }} weeks {{ sentence['sentence-length-days'] }} days
+                               {% if sentence['sentence-length-years'] %}
+                               {{ sentence['sentence-length-years'] }} years
+                               {% else %}
+                               0 years
+                               {% endif %}
+                               {% if sentence['sentence-length-months'] %}
+                               {{ sentence['sentence-length-months'] }} years
+                               {% else %}
+                               0 months
+                               {% endif %}
+                               {% if sentence['sentence-length-weeks'] %}
+                               {{ sentence['sentence-length-weeks'] }} years
+                               {% else %}
+                               0 weeks
+                               {% endif %}
+                               {% if sentence['sentence-length-days'] %}
+                               {{ sentence['sentence-length-days'] }} years
+                               {% else %}
+                               0 days
+                               {% endif %}
                             </dd>
                         </div>
                         {% if sentence['licence-period-years'] %}
