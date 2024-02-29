@@ -79,6 +79,63 @@ module.exports = {
                 }
             ]
         },
+                {
+            "appearances": [
+                {
+                    "court-case-ref": "T20231234",
+                    "warrant-date-day": "12",
+                    "warrant-date-month": "9",
+                    "warrant-date-year": "2023",
+                    "court-name": "Leeds Crown Court",
+                    "next-court-date-day": "10",
+                    "next-court-date-month": "02",
+                    "next-court-date-year": "2024",
+                    "sentences": [
+                        {
+                            "count-number" : "1",
+                            "offence-start-date-day": "24",
+                            "offence-start-date-month": "8",
+                            "offence-start-date-year": "2023",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "TH68071"
+                            ],
+                            "offence-name": "TH68071 - Blackmail",
+                            "sentence-type": "SDS",
+                            "consecutive-concurrent": "Concurrent"
+                        },
+                        {
+                            "offence-start-date-day": "25",
+                            "offence-start-date-month": "8",
+                            "offence-start-date-year": "2023",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "CL77001"
+                            ],
+                            "offence-name": "CL77001 - Use violence to secure entry to premises",
+                            "outcome": "Remand before conviction"
+                        },
+                        {
+                            "offence-start-date-day": "25",
+                            "offence-start-date-month": "8",
+                            "offence-start-date-year": "2023",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "CL77001"
+                            ],
+                            "offence-name": "TH68023 - Robbery",
+                            "outcome": "Remand before conviction"
+                        }
+                    ]
+                }
+            ]
+        },
         {
             "appearances": [
                 {

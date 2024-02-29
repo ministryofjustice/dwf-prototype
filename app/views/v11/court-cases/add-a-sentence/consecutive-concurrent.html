@@ -8,7 +8,6 @@
             {% else %}
             <form class="form" action="/v11/consecutive-concurrent-select" method="post">
                 {% endif %}
-                <form class="form" action="/v11/consecutive-concurrent-select" method="post">
                     <div class="govuk-form-group">
                         <fieldset class="govuk-fieldset" aria-describedby="changedName-hint">
                             <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
@@ -33,6 +32,15 @@
                                         Concurrent
                                     </label>
                                 </div>
+                                {% if data.forthwithSelected != "Yes" %}
+                                    <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="consecutive-concurrent-3" name="sentence[consecutive-concurrent]" type="radio" value="Forthwith" {% if data.sentence['consecutive-concurrent']=='Forthwith' %} checked {% endif %}>
+                                    <label class="govuk-label govuk-radios__label" for="consecutive-concurrent-3">
+                                        Forthwith
+                                        <div class="govuk-hint">There can only be one forthwith sentence in a case</div>
+                                    </label>
+                                </div>
+                                {% endif %}
                             </div>
                         </fieldset>
                     </div>

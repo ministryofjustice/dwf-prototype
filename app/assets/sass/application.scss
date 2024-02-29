@@ -1234,3 +1234,13 @@ padding: 10px;
 .mini-profile {
     margin-top: 30px;
 }
+
+.review-list li {
+    border-bottom: 1px solid #b1b4b6;
+    padding-top: 5px;
+    padding-bottom: 15px;
+}
+
+.review-list li:last-of-type {
+    border-bottom: none;
+}

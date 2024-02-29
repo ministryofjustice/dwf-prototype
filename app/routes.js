@@ -688,15 +688,17 @@ router.post('/:prototypeVersion/consecutive-concurrent-select', function(req, re
     const prototypeVersion = req.params.prototypeVersion
     var route = req.session.data.route
     const consecConcur = req.session.data['sentence']['consecutive-concurrent']
-    const forthwith = req.session.data['sentence']['forthwith']
-    const forthwithSelected = req.session.data.forthwithSelected
+    var forthwithSelected = req.session.data.forthwithSelected
     console.log('Route: ' + route)
     console.log('Consecutive sentence: ' + consecConcur)
     console.log('Forthwith selected: ' + forthwithSelected)
     if (consecConcur == "Consecutive") {
         res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to`)
-    } else if (consecConcur == "Concurrent" && forthwithSelected != 'Yes') {
-        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/forthwith`)
+    } else if (consecConcur == "Forthwith" && forthwithSelected != 'Yes') {
+        forthwithSelected = "Yes"
+        req.session.data['sentence']['consecutive-concurrent'] = 'Forthwith'
+        req.session.data.forthwithSelected = forthwithSelected
+        res.redirect(307, `/${prototypeVersion}/persist-sentence`)
     } else if (consecConcur == "Concurrent" && forthwithSelected == 'Yes') {
         res.redirect(307, `/${prototypeVersion}/persist-sentence`)
     }

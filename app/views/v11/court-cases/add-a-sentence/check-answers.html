@@ -30,14 +30,30 @@
             <h1 class="govuk-fieldset__heading">
                 <span class="govuk-caption-l">Add sentences to a court case</span>
                 {% if data.appearance.sentences.length == 0 %}
-                Add sentences to case {{ data['appearance']['court-case-ref'] | join }}
+                {% if  data['appearance']['court-case-ref'] != "None" %}
+                Add sentences to case {{ data['appearance']['court-case-ref'] }}
                 {% else %}
-                You have added {{ data['appearance'].sentences | length }} sentences to case {{ data['appearance']['court-case-ref'] | join }}
+                Add sentences to court case
+                {% endif %}
+                {% else %}
+                {% if  data['appearance']['court-case-ref'] == ",None" %}
+                You have added {{ data['appearance'].sentences | length }} sentences
+                {% else %}
+                You have added {{ data['appearance'].sentences | length }} sentences to court case {{ data['appearance']['court-case-ref'] }}
+                {% endif %}
                 {% endif %}
             </h1>
         </legend>
-        <form class="form" action="consecutive-sentences">
+        <form class="form" action="../add-a-court-case/review">
             <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Case reference
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['court-case-ref'] | join }}
+                    </dd>
+                </div>
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Court name
@@ -150,7 +166,7 @@
             {% if data.appearance.sentences.length > 0 %}
             <div class="govuk-button-group govuk-!-margin-top-8">
                 <button class="govuk-button" data-module="govuk-button">
-                    Finish and continue
+                    Accept and continue
                 </button>
             </div>
             {% endif %}
