@@ -649,8 +649,10 @@ router.post('/:prototypeVersion/offence-to-sentence', function(req, res) {
 router.get('/:prototypeVersion/add-sentence-information', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     const index = req.query.index
+    const outcome = req.session.data['offence']['outcome']
     console.log('Appearance index: ' + req.session.data.appearanceIndex)
     console.log('Index: ' + index)
+    console.log('Outcome: ' + outcome)
     const route = req.query.route
     req.session.data.route = route
     console.log('Route:' + route)
@@ -658,8 +660,14 @@ router.get('/:prototypeVersion/add-sentence-information', function(req, res) {
     req.session.data.changeMade = 0
     req.session.data.offenceDeleted = 0
     req.session.data.offenceAdded = 0
-    req.session.sentenceAdded = 1
-    res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/count-number`)
+    if (outcome == "Imprisonment") {
+        req.session.data.changeMade = 0
+        req.session.sentenceAdded = 1
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/count-number`)
+    } else 
+    req.session.data.changeMade = 1
+    req.session.sentenceAdded = 0
+    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/change-offences`)
 })
 
 router.post('/:prototypeVersion/offence-code-select', function(req, res) {
