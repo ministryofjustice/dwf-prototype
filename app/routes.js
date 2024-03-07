@@ -49,9 +49,14 @@ router.post('/:prototypeVersion/offence-code-known', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     const warrantType = req.session.data.warrantType
     var offenceCodeKnown = req.session.data['offence-code-known']
+    const route = req.query.route
     console.log(offenceCodeKnown)
+    console.log("Route: " + route)
     if (offenceCodeKnown != null) {
         if (offenceCodeKnown.includes('None')) {
+            if(route == "remand-to-sentence") {
+                res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-name`)
+            }
             if (warrantType == 'Sentencing') {
                 res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-name`)
             } else if (warrantType == 'Remand') {
@@ -59,6 +64,9 @@ router.post('/:prototypeVersion/offence-code-known', function(req, res) {
             }
         }
     } else {
+        if(route == "remand-to-sentence") {
+                res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirm-offence`)
+            }
         if (warrantType == 'Sentencing') {
             res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-offence`)
         } else if (warrantType == 'Remand') {
@@ -278,7 +286,7 @@ router.get('/:prototypeVersion/create-appearance', function(req, res) {
         'warrant-date-month': lastAppearance['next-court-date-month'],
         'warrant-date-year': lastAppearance['next-court-date-year']
     }
-    if (prototypeVersion == 'v8') {
+    if (prototypeVersion == 'v8' || prototypeVersion == 'v9' || prototypeVersion == 'v10' || prototypeVersion == 'v11') {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-case-reference-number-select`)
     } else {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-case-reference-number`)
@@ -673,8 +681,10 @@ router.get('/:prototypeVersion/add-sentence-information', function(req, res) {
 router.post('/:prototypeVersion/offence-code-select', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     var route = req.session.data.route
+    const offence = req.session.data['sentence']['offence-name']
     console.log('Route: ' + route)
-    if (route == "remand-to-sentence") {
+    console.log('Offence name: ' + offence)
+    if (route == "remand-to-sentence" && offence != null) {
         res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-same-offence`)
     } else
         res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-code`)
