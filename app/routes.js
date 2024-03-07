@@ -380,6 +380,9 @@ router.get('/:prototypeVersion/update-offence', function(req, res) {
     if (prototypeVersion == 'v10' || prototypeVersion == 'v11') {
        return res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/edit-an-offence`)
     }
+    if (route == "remand-to-sentence"){
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`)
+    } else
     res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-code`)
 })
 

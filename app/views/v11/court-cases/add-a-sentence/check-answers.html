@@ -30,13 +30,13 @@
             <h1 class="govuk-fieldset__heading">
                 <span class="govuk-caption-l">Add sentences to a court case</span>
                 {% if data.appearance.sentences.length == 0 %}
-                {% if  data['appearance']['court-case-ref'] != "None" %}
+                {% if data['appearance']['court-case-ref'] != "None" %}
                 Add sentences to case {{ data['appearance']['court-case-ref'] }}
                 {% else %}
                 Add sentences to court case
                 {% endif %}
                 {% else %}
-                {% if  data['appearance']['court-case-ref'] == ",None" %}
+                {% if data['appearance']['court-case-ref'] == ",None" %}
                 You have added {{ data['appearance'].sentences | length }} sentences
                 {% else %}
                 You have added {{ data['appearance'].sentences | length }} sentences to court case {{ data['appearance']['court-case-ref'] }}
@@ -46,7 +46,7 @@
         </legend>
         <form class="form" action="../add-a-court-case/review">
             <dl class="govuk-summary-list govuk-summary-list--no-border">
-                                <div class="govuk-summary-list__row">
+                <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Case reference
                     </dt>
@@ -80,9 +80,9 @@
                 </div>
             </dl>
             <h2 class="govuk-heading-m govuk-!-margin-bottom-6">Sentences <span class="govuk-body">({{ data['appearance'].sentences | length }})</span></h2>
-                            <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="/v11/create-sentence" method="post">
-                    Add a sentence
-                </button>
+            <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="/v11/create-sentence" method="post">
+                Add a sentence
+            </button>
             {% for sentence in data['appearance'].sentences %}
             <div class="offence-card sentence-card">
                 <div class="offence-card-offence-details">
@@ -106,7 +106,7 @@
                                 {% endif %}
                             </dd>
                         </div>
-<!--                         <div class="govuk-summary-list__row">
+                        <!--                         <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key">
                                 Outcome
                             </dt>
@@ -127,26 +127,26 @@
                                 Sentence length
                             </dt>
                             <dd class="govuk-summary-list__value">
-                               {% if sentence['sentence-length-years'] %}
-                               {{ sentence['sentence-length-years'] }} years
-                               {% else %}
-                               0 years
-                               {% endif %}
-                               {% if sentence['sentence-length-months'] %}
-                               {{ sentence['sentence-length-months'] }} years
-                               {% else %}
-                               0 months
-                               {% endif %}
-                               {% if sentence['sentence-length-weeks'] %}
-                               {{ sentence['sentence-length-weeks'] }} years
-                               {% else %}
-                               0 weeks
-                               {% endif %}
-                               {% if sentence['sentence-length-days'] %}
-                               {{ sentence['sentence-length-days'] }} years
-                               {% else %}
-                               0 days
-                               {% endif %}
+                                {% if sentence['sentence-length-years'] %}
+                                {{ sentence['sentence-length-years'] }} years
+                                {% else %}
+                                0 years
+                                {% endif %}
+                                {% if sentence['sentence-length-months'] %}
+                                {{ sentence['sentence-length-months'] }} years
+                                {% else %}
+                                0 months
+                                {% endif %}
+                                {% if sentence['sentence-length-weeks'] %}
+                                {{ sentence['sentence-length-weeks'] }} years
+                                {% else %}
+                                0 weeks
+                                {% endif %}
+                                {% if sentence['sentence-length-days'] %}
+                                {{ sentence['sentence-length-days'] }} years
+                                {% else %}
+                                0 days
+                                {% endif %}
                             </dd>
                         </div>
                         {% if sentence['licence-period-years'] %}
@@ -164,14 +164,14 @@
                                 Consecutive or concurrent
                             </dt>
                             <dd class="govuk-summary-list__value">
-                        {{ sentence['consecutive-concurrent'] }}
-                        {% if sentence['forthwith'] == 'Yes' %}
-                        (forthwith)
-                        {% endif %}
-                        {% if sentence['consecutive-concurrent'] == 'Consecutive' %}
-                        to count {{ sentence['consecutive-to'] }}
-                        {% endif %}
-                    </dd>
+                                {{ sentence['consecutive-concurrent'] }}
+                                {% if sentence['forthwith'] == 'Yes' %}
+                                (forthwith)
+                                {% endif %}
+                                {% if sentence['consecutive-concurrent'] == 'Consecutive' %}
+                                to count {{ sentence['consecutive-to'] }}
+                                {% endif %}
+                            </dd>
                     </dl>
                 </div>
                 <div class="offence-card-actions">

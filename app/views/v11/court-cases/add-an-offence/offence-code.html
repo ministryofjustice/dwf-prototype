@@ -9,8 +9,13 @@
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         {% if data.route == 'repeat-remand' %}
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add an appearance to court case {{ data.courtCaseIndex | int + 1 }}</span>
+                            <span class="govuk-caption-l">Add an appearance to court case</span>
                             Enter the offence code
+                        </h1>
+                        {% elif data.route == 'remand-to-sentence' %}
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Add an appearance to court case</span>
+                            Enter the offence dates
                         </h1>
                         {% else %}
                         <h1 class="govuk-fieldset__heading">
