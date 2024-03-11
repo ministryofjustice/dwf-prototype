@@ -298,7 +298,7 @@ router.post('/:prototypeVersion/persist-appearance', function(req, res) {
     var displaySuccess = 0
     const route = req.session.data.route
     if (req.session.data.appearanceIndex !== undefined) {
-        req.session.data.courtCases[req.session.data.courtCaseIndex].appearance[req.session.data.appearanceIndex] = req.session.data.appearance
+        req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[req.session.data.appearanceIndex] = req.session.data.appearance
     } else if (req.query.isFirst) {
         req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[0] = { ...req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[0], ...req.session.data.appearance }
         req.session.data.appearanceIndex = 0
