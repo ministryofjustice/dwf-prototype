@@ -129,19 +129,19 @@
                 </div>
                 {% endif %}
             </dl>
-            <!-- {% if data['appearance']['warrant-type'] == 'Sentencing' %} -->
+            {% if data['appearance']['warrant-type'] == 'Sentencing' %}
             <h2 class="govuk-heading-m">Now add the sentences for this appearance</h2>
             <p class="govuk-body">You will need to enter all of the sentence information from the warrant.</p>
             <button class="govuk-button" data-module="govuk-button">
                 Confirm and add sentences
             </button>
-            <!-- {% else %}
+            {% else %}
             <h2 class="govuk-heading-m">Now add the offences for this appearance</h2>
             <p class="govuk-body">You will need to enter all of the offence information from the warrant.</p>
             {% endif %}
             <button class="govuk-button" data-module="govuk-button">
                 Confirm and add offences
-            </button> -->
+            </button>
         </form>
     </div>
 </div>
