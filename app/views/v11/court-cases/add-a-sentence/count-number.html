@@ -1,6 +1,5 @@
 {% extends "../template.html" %}
 {% block content %}
-<!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
             {% if data.edit == 'true' %}
@@ -36,7 +35,7 @@
                         Case reference number
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['court-case-ref'] | join }}
+                        {{ data['appearance']['court-case-ref'] }}
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row offences-summary-card-court-details-row">
