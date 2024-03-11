@@ -4,17 +4,18 @@
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">
-            <span class="govuk-caption-l">Add a court case</span>
-            Check your answers
+            <span class="govuk-caption-l">Add an appearance to a court case</span>
+            Review appearance information
         </h1>
-        <form class="form" action="/v11/persist-court-case" method="post">
+        <h2 class="govuk-heading-m">Appearance details</h2>
+        <form class="form" action="review" method="post">
             <dl class="govuk-summary-list">
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Case reference
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['court-case-ref'] | join }}
+                        {{ data['appearance']['court-case-ref'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link" href="court-case-reference-number">
@@ -113,7 +114,6 @@
                         </a>
                     </dd>
                 </div>
-                {% if data['appearance']['warrant-type'] == 'Sentencing' %}
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Overall sentence length
@@ -127,21 +127,10 @@
                         </a>
                     </dd>
                 </div>
-                {% endif %}
             </dl>
-            <!-- {% if data['appearance']['warrant-type'] == 'Sentencing' %} -->
-            <h2 class="govuk-heading-m">Now add the sentences for this appearance</h2>
-            <p class="govuk-body">You will need to enter all of the sentence information from the warrant.</p>
             <button class="govuk-button" data-module="govuk-button">
-                Confirm and add sentences
+                Accept and continue
             </button>
-            <!-- {% else %}
-            <h2 class="govuk-heading-m">Now add the offences for this appearance</h2>
-            <p class="govuk-body">You will need to enter all of the offence information from the warrant.</p>
-            {% endif %}
-            <button class="govuk-button" data-module="govuk-button">
-                Confirm and add offences
-            </button> -->
         </form>
     </div>
 </div>

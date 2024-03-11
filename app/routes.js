@@ -55,12 +55,12 @@ router.post('/:prototypeVersion/offence-code-known', function(req, res) {
     if (offenceCodeKnown != null) {
         if (offenceCodeKnown.includes('None')) {
             if(route == "remand-to-sentence") {
-                res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-name`)
+                return res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-name`)
             }
             if (warrantType == 'Sentencing') {
-                res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-name`)
+                return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-name`)
             } else if (warrantType == 'Remand') {
-                res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-name`)
+                return res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-name`)
             }
         }
     } else {
@@ -349,7 +349,16 @@ router.get('/:prototypeVersion/create-offence', function(req, res) {
 router.post('/:prototypeVersion/persist-offence', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     const route = req.session.data.route
+    const edit = req.session.data.edit
+    offenceIndex = req.session.data.offenceIndex
+    console.log("Offence index:" + offenceIndex)
     console.log("Route: " + route)
+    console.log("Edit: " + edit)
+    if (edit == 'true') {
+        console.log("Saving edits")
+        req.session.data.appearance.offences[req.session.data.offenceIndex] = req.session.data.offence
+        return res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/edit-an-offence`)
+    }
     if (req.session.data.offenceIndex !== undefined) {
         req.session.data.appearance.offences[req.session.data.offenceIndex] = req.session.data.offence
     } else {
@@ -412,6 +421,9 @@ router.get('/:prototypeVersion/confirm-delete', function(req, res) {
     const route = req.session.data.route
     console.log('Offence index' + req.session.data.index)
     if (warrantType == 'Sentencing') {
+        if (roure = 'remand-to-sentence') {
+            res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirm-delete`)
+        } else
         res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-delete`)
     } else
         res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirm-delete`)
@@ -438,6 +450,8 @@ router.get('/:prototypeVersion/delete-offence', function(req, res) {
             req.session.data.offenceDeleted = 1
             req.session.data.offenceAdded = 0
             res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/change-offences`)
+        } else if (route == 'remand-to-sentence') {
+            res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`)
         } else if (route != "repeat-remand") {
             req.session.data.changeMade = 0
             req.session.data.offenceDeleted = 1
@@ -447,7 +461,10 @@ router.get('/:prototypeVersion/delete-offence', function(req, res) {
     } else if (req.session.data.confirmDeleteOffence == 'No') {
         if (route == 'repeat-remand') {
             res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/change-offences`)
-        } else if (route != "repeat-remand") {
+        } else if (route == 'remand-to-sentence') {
+            res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`)
+        }
+        else if (route != "repeat-remand") {
             res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/check-answers`)
         }
     }
@@ -547,7 +564,7 @@ router.get('/:prototypeVersion/view-appearance-detail', function(req, res) {
 
 router.get('/:prototypeVersion/warrant-type-select', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
-    warrantType = req.session.data.appearance['warrant-type']
+    const warrantType = req.session.data.appearance['warrant-type']
     req.session.data.warrantType = warrantType
     const route = req.query.route
     console.log('Warrant type: ' + warrantType)
@@ -688,9 +705,9 @@ router.post('/:prototypeVersion/offence-code-select', function(req, res) {
     console.log('Route: ' + route)
     console.log('Offence name: ' + offence)
     if (route == "remand-to-sentence" && offence != null) {
-        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-same-offence`)
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-same-offence`)
     } else
-        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-code`)
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-code`)
 })
 
 router.post('/:prototypeVersion/offence-name-same', function(req, res) {
