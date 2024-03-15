@@ -1,35 +1,30 @@
 {% extends "../template.html" %}
 {% block content %}
-<!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="/v11/offence-code-known?route={{data.route}}" method="post">
+        <form class="form" action="/v12/persist-sentence" method="post">
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset" role="group">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                        {% if data.route == 'repeat-remand' %}
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add an appearance to court case</span>
-                            Enter the offence code
+                            <span class="govuk-caption-l">Add sentence information for count {{ data['sentence']['count-number'] }}</span>
+                            Is this sentence forthwith?
                         </h1>
-                        {% elif data.route == 'remand-to-sentence' %}
-                        <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add an appearance to court case</span>
-                            Enter the offence code
-                        </h1>
-                        {% else %}
-                        <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add a court case</span>
-                            Enter the offence code
-                        </h1>
-                        {% endif %}
                     </legend>
-                    <input class="govuk-input govuk-input--width-10" id="offence-code" name="offence['offence-code']" type="text">
-                    <div class="govuk-checkboxes govuk-!-margin-top-6" data-module="govuk-checkboxes">
-                        <div class="govuk-checkboxes__item">
-                            <input class="govuk-checkboxes__input" id="no-offence-code" name="offence-code-known" type="checkbox" value="None">
-                            <label class="govuk-label govuk-checkboxes__label" for="no-offence-code">
-                                I do not have the offence code
+                    <div id="forthwith-hint" class="govuk-hint">
+                        Only one forthwith sentence can be selected.
+                    </div>
+                    <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="forthwith-1" name="sentence[forthwith]" type="radio" value="Yes">
+                            <label class="govuk-label govuk-radios__label" for="forthwith-1">
+                                Yes
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="forthwith-2" name="sentence[forthwith]" type="radio" value="No">
+                            <label class="govuk-label govuk-radios__label" for="forthwith-2">
+                                No
                             </label>
                         </div>
                     </div>
@@ -40,7 +35,7 @@
             </button>
         </form>
     </div>
-        <div class="govuk-grid-column-one-third">
+    <div class="govuk-grid-column-one-third">
         <div class="offence-summary">
             <h2 class="govuk-heading-m govuk-!-margin-top-4">Appearance details</h2>
             <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
@@ -49,7 +44,7 @@
                         Case reference number
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['court-case-ref'] }}
+                        {{ data['appearance']['court-case-ref'] | join }}
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row offences-summary-card-court-details-row">
@@ -69,32 +64,32 @@
                     </dd>
                 </div>
             </dl>
-                <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-                <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-2">Offences</h2>
-                <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
+            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+            <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-2">Sentences</h2>
+            <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
                 <div class="govuk-summary-list__row offences-summary-card-offence-details-row">
                     <dt class="govuk-summary-list__key">
-                        Offences added
+                        Sentences added
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['appearance'].offences | length }}
+                        {{ data.appearance.sentences | length }}
                     </dd>
                 </div>
             </dl>
             <details class="govuk-details" data-module="govuk-details">
                 <summary class="govuk-details__summary">
                     <span class="govuk-details__summary-text">
-                        Show offences
+                        Show sentences
                     </span>
                 </summary>
                 <div class="govuk-details__text">
                     <dl class="offences-summary-card-content">
-                        {% for offence in data['appearance'].offences %}
+                        {% for sentence in data.appearance.sentences %}
                         <div class="offences-summary-card-row">
                             <dt class="offences-summary-card-key govuk-!-font-weight-bold">
-                                {{ offence['offence-name'] }}
+                                {{ sentence['offence-name'] }}
                             </dt>
-                            <dd class="offences-summary-card-value govuk-body-s">Committed on {{ offence['offence-start-date-day'] }}/{{ offence['offence-start-date-month'] }}/{{ offence['offence-start-date-year'] }}</dd>
+                            <dd class="offences-summary-card-value govuk-body-s">Committed on {{ sentence['offence-start-date-day'] }}/{{ sentence['offence-start-date-month'] }}/{{ sentence['offence-start-date-year'] }}</dd>
                         </div>
                         {% endfor %}
                     </dl>

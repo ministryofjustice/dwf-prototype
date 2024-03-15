@@ -1,65 +1,37 @@
-    {% extends "../template.html" %}
+{% extends "../template.html" %}
 {% block content %}
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-{% if data.edit == 'true' %}
-<form class="form" action="/v11/persist-sentence?edit=true" method="post">
-{% else %}
-<form class="form" action="/v11/sentence-length-select" method="post">
-{% endif %}
-            <fieldset class="govuk-fieldset" role="group" aria-describedby="passport-issued-hint">
-                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <form class="form" action="/v12/offence-name-same" method="post">
+
+            <div class="govuk-form-group"> 
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                     <h1 class="govuk-fieldset__heading">
-                        <span class="govuk-caption-l">Add sentence information for count {{ data['sentence']['count-number'] }}</span>
-                        Enter the sentence length
+                        <span class="govuk-caption-l">Add sentences to a court case</span>
+                        Is the offence name the same?
                     </h1>
                 </legend>
-                <div class="govuk-form-group">
-                    <div class="govuk-date-input" id="sentence-length">
-                        <div class="govuk-date-input__item">
-                            <div class="govuk-form-group">
-                                <label class="govuk-label govuk-date-input__label" for="sentence-length-years">
-                                    Years
-                                </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="sentence-length-years" name="sentence[sentence-length-years]" type="text" inputmode="numeric" value="{{ data.sentence['sentence-length-years'] }}">
-                            </div>
+                                 <p class="govuk-body-l">
+                            {{ data.sentence['offence-name'] }}
+                        </p>
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="offence-name-same" name="sentence[offence-name-same]" type="radio" value="Yes">
+                            <label class="govuk-label govuk-radios__label" for="offence-name-same">
+                                Yes
+                            </label>
                         </div>
-                        <div class="govuk-date-input__item">
-                            <div class="govuk-form-group">
-                                <label class="govuk-label govuk-date-input__label" for="sentence-length-months">
-                                    Months
-                                </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="sentence-length-months" name="sentence[sentence-length-months]" type="text" inputmode="numeric" value="{{ data.sentence['sentence-length-months'] }}">
-                            </div>
-                        </div>
-                        <div class="govuk-date-input__item">
-                            <div class="govuk-form-group">
-                                <label class="govuk-label govuk-date-input__label" for="sentence-length-weeks">
-                                    Weeks
-                                </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="sentence-length-weeks" name="sentence[sentence-length-weeks]" type="text" inputmode="numeric" value="{{ data.sentence['sentence-length-weeks'] }}">
-                            </div>
-                        </div>
-                        <div class="govuk-date-input__item">
-                            <div class="govuk-form-group">
-                                <label class="govuk-label govuk-date-input__label" for="sentence-length-days">
-                                    Days
-                                </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="sentence-length-days" name="sentence[sentence-length-days]" type="text" inputmode="numeric" value="{{ data.sentence['sentence-length-days'] }}">
-                            </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="offence-name-same-2" name="sentence[offence-name-same]" type="radio" value="No">
+                            <label class="govuk-label govuk-radios__label" for="offence-name-same-2">
+                                No
+                            </label>
                         </div>
                     </div>
-                </div>
-            </fieldset>
-            <div class="govuk-!-margin-bottom-6">
-            <p class="govuk-body"><a href="alternative-sentence-length">The sentence length is formatted differently</a></p>
-            </div>
-            {% if data.sentence['sentence-type'] == "SOPC (Special Custodial Sentence for Certain Offenders of Particular Concern)" %}
-            <div class="govuk-inset-text">
-                For SOPC sentences a manditory licence period of 12 months is automatically added to the sentence.
-            </div>
-            {% endif %}
+                </fieldset>
+            </div>            
             <button class="govuk-button" data-module="govuk-button">
                 Continue
             </button>
@@ -127,6 +99,5 @@
             </details>
         </div>
     </div>
-</div>
 </div>
 {% endblock %}

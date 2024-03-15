@@ -1,68 +1,41 @@
-    {% extends "../template.html" %}
+{% extends "../template.html" %}
 {% block content %}
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-{% if data.edit == 'true' %}
-<form class="form" action="/v11/persist-sentence?edit=true" method="post">
-{% else %}
-<form class="form" action="/v11/sentence-length-select" method="post">
-{% endif %}
-            <fieldset class="govuk-fieldset" role="group" aria-describedby="passport-issued-hint">
+        <form class="form" action="terror-related" method="post">
+            <div class="govuk-form-group">
                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                     <h1 class="govuk-fieldset__heading">
                         <span class="govuk-caption-l">Add sentence information for count {{ data['sentence']['count-number'] }}</span>
-                        Enter the sentence length
+                        Confirm the offence
                     </h1>
                 </legend>
-                <div class="govuk-form-group">
-                    <div class="govuk-date-input" id="sentence-length">
-                        <div class="govuk-date-input__item">
-                            <div class="govuk-form-group">
-                                <label class="govuk-label govuk-date-input__label" for="sentence-length-years">
-                                    Years
-                                </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="sentence-length-years" name="sentence[sentence-length-years]" type="text" inputmode="numeric" value="{{ data.sentence['sentence-length-years'] }}">
-                            </div>
-                        </div>
-                        <div class="govuk-date-input__item">
-                            <div class="govuk-form-group">
-                                <label class="govuk-label govuk-date-input__label" for="sentence-length-months">
-                                    Months
-                                </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="sentence-length-months" name="sentence[sentence-length-months]" type="text" inputmode="numeric" value="{{ data.sentence['sentence-length-months'] }}">
-                            </div>
-                        </div>
-                        <div class="govuk-date-input__item">
-                            <div class="govuk-form-group">
-                                <label class="govuk-label govuk-date-input__label" for="sentence-length-weeks">
-                                    Weeks
-                                </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="sentence-length-weeks" name="sentence[sentence-length-weeks]" type="text" inputmode="numeric" value="{{ data.sentence['sentence-length-weeks'] }}">
-                            </div>
-                        </div>
-                        <div class="govuk-date-input__item">
-                            <div class="govuk-form-group">
-                                <label class="govuk-label govuk-date-input__label" for="sentence-length-days">
-                                    Days
-                                </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="sentence-length-days" name="sentence[sentence-length-days]" type="text" inputmode="numeric" value="{{ data.sentence['sentence-length-days'] }}">
-                            </div>
-                        </div>
+                <dl class="govuk-summary-list govuk-summary-list--no-border">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key dwf-confirm-offence-key">
+                            Offence code
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data['sentence']['offence-code'] }}
+                        </dd>
                     </div>
-                </div>
-            </fieldset>
-            <div class="govuk-!-margin-bottom-6">
-            <p class="govuk-body"><a href="alternative-sentence-length">The sentence length is formatted differently</a></p>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key dwf-confirm-offence-key">
+                            Offence
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            Kidnap
+                        </dd>
+                    </div>
+                </dl>
             </div>
-            {% if data.sentence['sentence-type'] == "SOPC (Special Custodial Sentence for Certain Offenders of Particular Concern)" %}
-            <div class="govuk-inset-text">
-                For SOPC sentences a manditory licence period of 12 months is automatically added to the sentence.
-            </div>
-            {% endif %}
+            <input type="hidden" name="sentence[offence-name]" value="COML020 - Kidnap" />
             <button class="govuk-button" data-module="govuk-button">
-                Continue
+                Confirm and continue
             </button>
+            <p class="govuk-body"><a href="offence-code">Enter a different offence code</a></p>
+            <p class="govuk-body"><a href="offence-code">Look up an offence by name</a></p>
         </form>
     </div>
     <div class="govuk-grid-column-one-third">
@@ -74,7 +47,7 @@
                         Case reference number
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['court-case-ref'] }}
+                        {{ data['appearance']['court-case-ref'] | join }}
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row offences-summary-card-court-details-row">
@@ -127,6 +100,5 @@
             </details>
         </div>
     </div>
-</div>
 </div>
 {% endblock %}

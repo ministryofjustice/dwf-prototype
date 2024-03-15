@@ -3,44 +3,49 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="/v11/offence-code-known?route={{data.route}}" method="post">
+        <form class="form" action="offence-date" method="post">
             <div class="govuk-form-group">
-                <fieldset class="govuk-fieldset" role="group">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         {% if data.route == 'repeat-remand' %}
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add an appearance to court case</span>
-                            Enter the offence code
-                        </h1>
-                        {% elif data.route == 'remand-to-sentence' %}
-                        <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add an appearance to court case</span>
-                            Enter the offence code
+                            <span class="govuk-caption-l">Add an appearance to court case {{ data.courtCaseIndex | int + 1 }}</span>
+                            Confirm the offence
                         </h1>
                         {% else %}
                         <h1 class="govuk-fieldset__heading">
                             <span class="govuk-caption-l">Add a court case</span>
-                            Enter the offence code
+                            Confirm the offence
                         </h1>
                         {% endif %}
                     </legend>
-                    <input class="govuk-input govuk-input--width-10" id="offence-code" name="offence['offence-code']" type="text">
-                    <div class="govuk-checkboxes govuk-!-margin-top-6" data-module="govuk-checkboxes">
-                        <div class="govuk-checkboxes__item">
-                            <input class="govuk-checkboxes__input" id="no-offence-code" name="offence-code-known" type="checkbox" value="None">
-                            <label class="govuk-label govuk-checkboxes__label" for="no-offence-code">
-                                I do not have the offence code
-                            </label>
-                        </div>
+                <dl class="govuk-summary-list govuk-summary-list--no-border">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key dwf-confirm-offence-key">
+                            Offence code
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data['offence']['offence-code'] }}
+                        </dd>
                     </div>
-                </fieldset>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key dwf-confirm-offence-key">
+                            Offence
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            Kidnap
+                        </dd>
+                    </div>
+                </dl>
             </div>
+            <input type="hidden" name="offence[offence-name]" value="Kidnap" />
             <button class="govuk-button" data-module="govuk-button">
-                Continue
+                Confirm and continue
             </button>
+            <p class="govuk-body"><a href="offence-code">Enter a different offence code</a></p>
+            <p class="govuk-body"><a href="offence-code">Look up an offence by name</a></p>
         </form>
     </div>
-        <div class="govuk-grid-column-one-third">
+    <div class="govuk-grid-column-one-third">
         <div class="offence-summary">
             <h2 class="govuk-heading-m govuk-!-margin-top-4">Appearance details</h2>
             <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
@@ -69,15 +74,15 @@
                     </dd>
                 </div>
             </dl>
-                <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-                <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-2">Offences</h2>
-                <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
+            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+            <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-2">Offences</h2>
+            <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
                 <div class="govuk-summary-list__row offences-summary-card-offence-details-row">
                     <dt class="govuk-summary-list__key">
                         Offences added
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['appearance'].offences | length }}
+                        {{ data.appearance.offences | length }}
                     </dd>
                 </div>
             </dl>
@@ -89,7 +94,7 @@
                 </summary>
                 <div class="govuk-details__text">
                     <dl class="offences-summary-card-content">
-                        {% for offence in data['appearance'].offences %}
+                        {% for offence in data.appearance.offences %}
                         <div class="offences-summary-card-row">
                             <dt class="offences-summary-card-key govuk-!-font-weight-bold">
                                 {{ offence['offence-name'] }}

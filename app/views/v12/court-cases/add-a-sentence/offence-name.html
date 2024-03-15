@@ -3,40 +3,26 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        {% if data.route == 'remand-to-sentence' %}
-            {% if data.edit == 'true' %}
-                <form class="form" action="edit-an-offence">
-            {% else %}
-        <form class="form" action="offence-date">
-            {% endif %}
-            {% endif %}
+        <form class="form" action="terror-related">
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset" role="group">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                        {% if data.route == 'repeat-remand' %}
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add an appearance to court case</span>
-                            Look up an offence
+                            <span class="govuk-caption-l">Add sentence information for count {{ data['sentence']['count-number'] }}</span>
+                            Look up the offence
                         </h1>
-                        {% elif data.route == 'remand-to-sentence' %}
-                        <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add an appearance to court case</span>
-                            Look up an offence
-                        </h1>
-                        {% else %}
-                        <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add a court case</span>
-                            Look up an offence
-                        </h1>
-                        {% endif %}
                     </legend>
                     <div id="search-hint" class="govuk-hint">
                         Start typing the name of the offence from the warrant.
                     </div>
                     <div>
-                        <select id="offence-name" class="enhance-autcomplete" name="offence[offence-name]" type="text" aria-describedby="search-hint" autocomplete="off">
+                        <select id="offence-name" class="enhance-autcomplete" name="sentence[offence-name]" type="text" aria-describedby="search-hint" autocomplete="off" value="{{ data.sentence['offence-name'] }}">
                             <!-- Offence list -->
+                            {% if data.sentence['offence-name'] %}
+                            <option value="{{ data.sentence['offence-name'] }}">{{ data.sentence['offence-name'] }}</option>
+                            {% else %}
                             <option></option>
+                            {% endif %}
                             <option value="AB06001  Obstruct person acting in execution of the regulations">AB06001 Obstruct person acting in execution of the regulations</option>
                             <option value="AB13001  Fail to comply with an animal by-product requirement">AB13001 Fail to comply with an animal by-product requirement</option>
                             <option value="AB13002  Intentionally obstruct an authorised person">AB13002 Intentionally obstruct an authorised person</option>
@@ -5402,7 +5388,7 @@
                             <option value="GV06040  Card holder fail to notify / to surrender card where details of holder cease to be correct - tachograph cards">GV06040 Card holder fail to notify / to surrender card where details of holder cease to be correct - tachograph cards</option>
                             <option value="GV06041  Card holder fail to notify / to surrender card where details of holder cease to be correct - tachograph cards">GV06041 Card holder fail to notify / to surrender card where details of holder cease to be correct - tachograph cards</option>
                             <option value="GV06042  Fail to surrender tachograph card used without authority / falsified / applied for with intent to deceive">GV06042 Fail to surrender tachograph card used without authority / falsified / applied for with intent to deceive</option>
-                            <option value="GV11001  Use goods vehicle in Great Britain for international carriage without a Community licence">GV11001 Use goods vehicle in Great Britain for international carriage without a Community licence</option>
+                            <option value="Gv12001  Use goods vehicle in Great Britain for international carriage without a Community licence">Gv12001 Use goods vehicle in Great Britain for international carriage without a Community licence</option>
                             <option value="GV95002  Use a goods vehicle to carry goods for hire / reward on a road when the operators licence was restricted">GV95002 Use a goods vehicle to carry goods for hire / reward on a road when the operators licence was restricted</option>
                             <option value="GV95003  Goods vehicle - operator's licence - exceed number of vehicles">GV95003 Goods vehicle - operator's licence - exceed number of vehicles</option>
                             <option value="GV95004  Goods vehicle - operator's licence - unspecified vehicle exceed maximum weight">GV95004 Goods vehicle - operator's licence - unspecified vehicle exceed maximum weight</option>
@@ -8135,8 +8121,8 @@
                             <option value="MV09007  Fail to comply with a requirement made by/give assistance to an officer under any provision of the regulations">MV09007 Fail to comply with a requirement made by/give assistance to an officer under any provision of the regulations</option>
                             <option value="MV09008  Make/recklessly make a statement which is false in a material particular in giving information which is required">MV09008 Make/recklessly make a statement which is false in a material particular in giving information which is required</option>
                             <option value="MV09009  Purport to act as an officer of an enforcement authority under these regulations">MV09009 Purport to act as an officer of an enforcement authority under these regulations</option>
-                            <option value="MV11001  Remove / interfere with a vehicle immobilisation notice without authority">MV11001 Remove / interfere with a vehicle immobilisation notice without authority</option>
-                            <option value="MV11002  Remove / attempt to remove an immobilisation device fixed to a vehicle without authority">MV11002 Remove / attempt to remove an immobilisation device fixed to a vehicle without authority</option>
+                            <option value="Mv12001  Remove / interfere with a vehicle immobilisation notice without authority">Mv12001 Remove / interfere with a vehicle immobilisation notice without authority</option>
+                            <option value="Mv12002  Remove / attempt to remove an immobilisation device fixed to a vehicle without authority">Mv12002 Remove / attempt to remove an immobilisation device fixed to a vehicle without authority</option>
                             <option value="MV94001  Supply part-worn tyre or retreaded tyre which has not been properly repaired">MV94001 Supply part-worn tyre or retreaded tyre which has not been properly repaired</option>
                             <option value="MW15001  Dog microchip database operator fail to comply with a notice served by Welsh Ministers">MW15001 Dog microchip database operator fail to comply with a notice served by Welsh Ministers</option>
                             <option value="MW15002  Keeper of unmicrochipped dog transfer dog to new keeper - Wales">MW15002 Keeper of unmicrochipped dog transfer dog to new keeper - Wales</option>
@@ -14962,7 +14948,7 @@
                         Case reference number
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['court-case-ref'] }}
+                        {{ data['appearance']['court-case-ref'] | join }}
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row offences-summary-card-court-details-row">
@@ -14983,31 +14969,31 @@
                 </div>
             </dl>
             <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-            <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-2">Offences</h2>
+            <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-2">Sentences</h2>
             <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
                 <div class="govuk-summary-list__row offences-summary-card-offence-details-row">
                     <dt class="govuk-summary-list__key">
-                        Offences added
+                        Sentences added
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex].offences | length }}
+                        {{ data.appearance.sentences | length }}
                     </dd>
                 </div>
             </dl>
             <details class="govuk-details" data-module="govuk-details">
                 <summary class="govuk-details__summary">
                     <span class="govuk-details__summary-text">
-                        Show offences
+                        Show sentences
                     </span>
                 </summary>
                 <div class="govuk-details__text">
                     <dl class="offences-summary-card-content">
-                        {% for offence in data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex].offences %}
+                        {% for sentence in data.appearance.sentences %}
                         <div class="offences-summary-card-row">
                             <dt class="offences-summary-card-key govuk-!-font-weight-bold">
-                                {{ offence['offence-name'] }}
+                                {{ sentence['offence-name'] }}
                             </dt>
-                            <dd class="offences-summary-card-value govuk-body-s">Committed on {{ offence['offence-start-date-day'] }}/{{ offence['offence-start-date-month'] }}/{{ offence['offence-start-date-year'] }}</dd>
+                            <dd class="offences-summary-card-value govuk-body-s">Committed on {{ sentence['offence-start-date-day'] }}/{{ sentence['offence-start-date-month'] }}/{{ sentence['offence-start-date-year'] }}</dd>
                         </div>
                         {% endfor %}
                     </dl>

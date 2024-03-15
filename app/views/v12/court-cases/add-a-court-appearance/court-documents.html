@@ -1,0 +1,67 @@
+{% extends "../template.html" %}
+{% block content %}
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" action="/v12/court-documents-complete" method="post">
+            <div class="govuk-form-group"> 
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Add an appearance</span>
+                            Upload court documents
+                        </h1>
+                    </legend>
+                    <div id="file-upload-1-hint" class="govuk-hint govuk-!-margin-top-1 govuk-!-margin-bottom-5">
+    You can upload .pdf, .jpg, .doc or .docx files.
+  </div>
+
+    
+    <p class="govuk-body" aria-live="polite">0 files uploaded</p>
+    <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="document-type" method="post">Upload a document</button>
+    <p class="govuk-body govuk-!-display-none" id="refreshPageProgress"><a href="#" class="govuk-link">Refresh page to update file upload progress</a></p>
+
+    <dl class="govuk-summary-list govuk-summary-list--long-key">
+    {% if data.uploaded == 'true' %}
+          <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          <a class="govuk-link" href="#">{{data.appearance['document-type']}} 1</a>
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <strong class="govuk-tag govuk-tag--green">
+  uploaded
+</strong>
+
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#">
+            Delete<span class="govuk-visually-hidden"> {{data.appearance['document-type']}} 1</span>
+          </a>
+        </dd>
+      </div>
+      {% endif %}
+               <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          <a class="govuk-link" href="#">Other document 1</a>
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <strong class="govuk-tag govuk-tag--green">
+  uploaded
+</strong>
+
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#">
+            Delete<span class="govuk-visually-hidden"> other document 1</span>
+          </a>
+        </dd>
+      </div>
+      </dl>
+<div class="govuk-button-group">
+    <button class="govuk-button" data-module="govuk-button">
+  Finish and continue
+</button>
+</div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,30 +1,29 @@
 {% extends "../template.html" %}
 {% block content %}
-<!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-                <form class="form" action="/v11/new-court-case-ref" method="post">
+                <form class="form" action="/v12/new-court-name" method="post">
             <div class="govuk-form-group"> 
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add an appearance to court case</span>
-                            Did this appearance use the same case reference?
+                            <span class="govuk-caption-l">Add an appearance</span>
+                            Was the appearance at this court?
                         </h1>
                     </legend>
                     <p class="govuk-body-l">
-                            {{ data.courtCases[data.courtCaseIndex].appearances.at(-1)['court-case-ref'] }}
+                            {{ data.courtCase.appearances.at(-1)['next-court-name'] }}
                         </p>
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="case-ref-select" name="appearance[case-ref-select]" type="radio" value="Yes">
-                            <label class="govuk-label govuk-radios__label" for="case-ref-select">
+                            <input class="govuk-radios__input" id="court-name-select" name="appearance[court-name-select]" type="radio" value="Yes">
+                            <label class="govuk-label govuk-radios__label" for="court-name-select">
                                 Yes
                             </label>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="case-ref-select-2" name="appearance[case-ref-select]" type="radio" value="No">
-                            <label class="govuk-label govuk-radios__label" for="case-ref-select-2">
+                            <input class="govuk-radios__input" id="court-name-select-2" name="appearance[court-name-select]" type="radio" value="No">
+                            <label class="govuk-label govuk-radios__label" for="court-name-select-2">
                                 No
                             </label>
                         </div>
