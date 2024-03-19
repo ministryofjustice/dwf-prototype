@@ -32,6 +32,9 @@ spec:
           requests:
             cpu: 512Mi
             memory: 512Mi
+          limits:
+            cpu: 1G
+            memory: 1G
 
 ---
 apiVersion: v1
