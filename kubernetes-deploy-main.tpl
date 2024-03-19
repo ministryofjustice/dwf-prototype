@@ -28,6 +28,11 @@ spec:
                 key: password
         ports:
         - containerPort: 3000
+        resources:
+          requests:
+            cpu: 512Mi
+            memory: 512Mi
+
 ---
 apiVersion: v1
 kind: Service
