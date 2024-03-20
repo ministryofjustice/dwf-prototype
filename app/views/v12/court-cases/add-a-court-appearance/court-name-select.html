@@ -8,12 +8,10 @@
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
                             <span class="govuk-caption-l">Add an appearance</span>
-                            Was the appearance at this court?
+                            Was the appearance at {{ data.courtCase.appearances.at(-1)['next-court-name'] }}?
                         </h1>
                     </legend>
-                    <p class="govuk-body-l">
-                            {{ data.courtCase.appearances.at(-1)['next-court-name'] }}
-                        </p>
+                    <div class="govuk-hint">This was the court name for the previous appearance.</div>
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="court-name-select" name="appearance[court-name-select]" type="radio" value="Yes">

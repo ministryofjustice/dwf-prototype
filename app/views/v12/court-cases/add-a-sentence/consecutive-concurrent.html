@@ -33,6 +33,7 @@
                                     </label>
                                 </div>
                                 {% if data.forthwithSelected != "Yes" %}
+                                <div class="govuk-radios__divider">or</div>
                                     <div class="govuk-radios__item">
                                     <input class="govuk-radios__input" id="consecutive-concurrent-3" name="sentence[consecutive-concurrent]" type="radio" value="Forthwith" {% if data.sentence['consecutive-concurrent']=='Forthwith' %} checked {% endif %}>
                                     <label class="govuk-label govuk-radios__label" for="consecutive-concurrent-3">

@@ -9,12 +9,10 @@
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
                             <span class="govuk-caption-l">Add an appearance</span>
-                            Did this appearance use the same case reference?
+                            Is the case reference {{ data.courtCases[data.courtCaseIndex].appearances.at(-1)['court-case-ref'] }}?
                         </h1>
                     </legend>
-                    <p class="govuk-body-l">
-                            {{ data.courtCases[data.courtCaseIndex].appearances.at(-1)['court-case-ref'] }}
-                        </p>
+                    <div class="govuk-hint">This is the case reference used in the previous appearance.</div>
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="case-ref-select" name="appearance[case-ref-select]" type="radio" value="Yes">
