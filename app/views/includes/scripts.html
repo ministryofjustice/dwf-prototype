@@ -1,6 +1,7 @@
 <!-- Javascript -->
-{% for scriptUrl in extensionConfig.scripts %}
-<script src="{{scriptUrl.src}}" {% if scriptUrl.src == '/plugin-assets/govuk-frontend/dist/govuk/govuk-frontend.min.js' or scriptUrl.src == '/plugin-assets/govuk-frontend/dist/govuk-prototype-kit/init.js' %} type="module" {% endif %}></script>
+{% for script in extensionConfig.scripts %}
+<script src="{{script.src}}" {% if script.type %} type="{{ script.type }}" {% endif %}></script>
 {% endfor %}
 <script src="/public/javascripts/accessible-autocomplete.min.js"></script>
 <script src="/public/javascripts/date-picker.js"></script>
+<script> {{ extensionConfig | dump }}</script>
