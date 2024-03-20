@@ -107,6 +107,7 @@
 {% endif %}
 {% block bodyEnd %}
 {% block scripts %}
+{{ super() }}
 {% include "includes/scripts.html" %}
 <script>
 window.onload = function() {
@@ -121,8 +122,8 @@ window.onload = function() {
         }
     })
 }
+{{ extensionConfig | dump }}
 </script>
-{% block pageScripts %}{% endblock %}
 {% endblock %}
 <!-- GOV.UK Prototype Kit {{releaseVersion}} -->
 {% endblock %}
