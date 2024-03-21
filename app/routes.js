@@ -769,3 +769,25 @@ router.post('/:prototypeVersion/court-documents-complete', function(req, res) {
     console.log("Court documents complete: " + courtDocumentsComplete)
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`)
 })
+
+router.post('/:prototypeVersion/add-court-document', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    var documentIndex = req.session.data.appearance.documentIndex
+    if (req.session.data.appearance.documents == undefined){
+        const documents = []
+        req.session.data.appearance.documents = documents
+    }
+    if(documentIndex != undefined){
+        req.session.data.appearance.documents[documentIndex] = req.session.data.appearance['document-type'] + " " + (documentIndex + 1)
+        console.log("Document name: " + req.session.data.appearance.documents[documentIndex])
+        req.session.data.appearance.documentIndex = req.session.data.appearance.documents.length
+    } else {
+    documentIndex = req.session.data.appearance.documents.length
+    req.session.data.appearance.documents[documentIndex] = req.session.data.appearance['document-type'] + " " + (documentIndex + 1)
+    console.log("New document name: " + req.session.data.appearance.documents[documentIndex])
+    req.session.data.appearance.documentIndex = req.session.data.appearance.documents.length
+    }
+    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-documents`)
+})
+
+

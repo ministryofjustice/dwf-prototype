@@ -16,10 +16,9 @@
   </div>
 
     
-    <p class="govuk-body" aria-live="polite">0 files uploaded</p>
+    <p class="govuk-body" aria-live="polite">{{ data.appearance.documents.length }} files uploaded</p>
     <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="document-type" method="post">Upload a document</button>
     <p class="govuk-body govuk-!-display-none" id="refreshPageProgress"><a href="#" class="govuk-link">Refresh page to update file upload progress</a></p>
-
     <dl class="govuk-summary-list govuk-summary-list--long-key">
     {% if data.uploaded == 'true' %}
           <div class="govuk-summary-list__row">
