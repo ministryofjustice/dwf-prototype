@@ -6,14 +6,19 @@
         <form class="form" action="confirmation" method="post">
             <div class="govuk-form-group">
                 <h1 class="govuk-heading-l">
-                    Add an appearance
+                    Add court case
                 </h1>
-                <h2 class="govuk-heading-m">Enter information from a sentencing warrant</h2>
+                {% if data.appearance['warrant-type'] === 'Sentencing' %}
+                    <h2 class="govuk-heading-m">Enter information from a sentencing warrant</h2>
+
+                {% elif data.appearance['warrant-type'] === 'Remand' %}
+                    <h2 class="govuk-heading-m">Enter information from a remand warrant</h2>
+                    {% endif %}
                 <p class="govuk-body">You must enter information exactly as it is written on the warrant.</p>
                 <ul class="govuk-task-list govuk-!-margin-top-7">
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
-                            <a class="govuk-link govuk-task-list__link" href={% if data.appearanceDetailsComplete == 1 %}"check-answers"{% else %}"court-case-reference-number-select"{% endif %} aria-describedby="appearance-infromation-status">
+                            <a class="govuk-link govuk-task-list__link" href={% if data.appearanceDetailsComplete == 1 %}"check-answers"{% else %}"court-case-reference-number"{% endif %} aria-describedby="appearance-infromation-status">
                                 Appearance information
                             </a>
                         </div>
@@ -43,10 +48,11 @@
                             {% endif %}
                         </div>
                     </li>
+                    {% if data.appearance['warrant-type'] === 'Sentencing' %}
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
-                            <a class="govuk-link govuk-task-list__link" href="add-sentence-information" aria-describedby="offences-and-sentences-status">
-                                Offences and sentences
+                            <a class="govuk-link govuk-task-list__link" href="../add-a-sentence/count-number?route=new-court-case" aria-describedby="offences-and-sentences-status">
+                                Sentences
                             </a>
                         </div>
                         <div class="govuk-task-list__status" id="offences-and-sentences-status">
@@ -63,6 +69,7 @@
                             {% endif %}
                         </div>
                     </li>
+                    {% endif %}
                     <!-- <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
                             <a class="govuk-link govuk-task-list__link" href="#" aria-describedby="next-court-appearance-status">
@@ -76,7 +83,7 @@
                 </ul>
             </div>
             <h2 class="govuk-heading-m">
-                Finish adding an appearance
+                Finish adding court case
             </h2>
             <p class="govuk-body">Once every task has been completed, you must  save the information. You will not be able to return to this page, but can edit the details in the Court cases tab.</p>
             <div class="govuk-button-group">

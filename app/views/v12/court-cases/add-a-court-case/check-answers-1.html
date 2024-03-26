@@ -9,16 +9,42 @@
         </h1>
         <form class="form" action="/v12/persist-court-case" method="post">
             <dl class="govuk-summary-list">
+                                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Warrant type
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['warrant-type'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="warrant-date">
+                            Edit<span class="govuk-visually-hidden"> warrant date</span>
+                        </a>
+                    </dd>
+                </div>
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Case reference
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['court-case-ref'] | join }}
+                        {{ data['appearance']['court-case-ref'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link" href="court-case-reference-number">
                             Edit<span class="govuk-visually-hidden"> case reference number</span>
+                        </a>
+                    </dd>
+                </div>
+                                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Warrant date
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['warrant-date-day'] }}/{{ data['appearance']['warrant-date-month'] }}/{{ data['appearance']['warrant-date-year'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="warrant-date">
+                            Edit<span class="govuk-visually-hidden"> warrant date</span>
                         </a>
                     </dd>
                 </div>
@@ -35,71 +61,6 @@
                         </a>
                     </dd>
                 </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Warrant type
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['warrant-type'] }}
-                    </dd>
-                    <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="warrant-date">
-                            Edit<span class="govuk-visually-hidden"> warrant date</span>
-                        </a>
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Uploaded warrant
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        <a href="{{ asset_path }}documents/order-of-imprisonment-court-case-1.pdf" class="govuk-link--no-visited-state" target="_blank">order-of-imprisonment-court-case-1.pdf (opens in new tab)</a>
-                    </dd>
-                    <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="upload-warrant">
-                            Edit<span class="govuk-visually-hidden"> uploaded warrant</span>
-                        </a>
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Warrant date
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['warrant-date-day'] }}/{{ data['appearance']['warrant-date-month'] }}/{{ data['appearance']['warrant-date-year'] }}
-                    </dd>
-                    <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="warrant-date">
-                            Edit<span class="govuk-visually-hidden"> warrant date</span>
-                        </a>
-                    </dd>
-                </div>
-                <!-- <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Overall case outcome
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['overall-case-outcome'] }}
-                    </dd>
-                    <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="overall-case-outcome">
-                            Edit<span class="govuk-visually-hidden"> overall case outcome</span>
-                        </a>
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Does the overall outcome apply to all offences?
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['overall-case-outcome-apply-all'] }}
-                    </dd>
-                    <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="outcome-apply-all">
-                            Edit<span class="govuk-visually-hidden"> overall case outcome applies to all offences</span>
-                        </a>
-                    </dd>
-                </div> -->
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Tagged bail
@@ -129,19 +90,9 @@
                 </div>
                 {% endif %}
             </dl>
-            {% if data['appearance']['warrant-type'] == 'Sentencing' %}
-            <h2 class="govuk-heading-m">Now add the sentences for this appearance</h2>
-            <p class="govuk-body">You will need to enter all of the sentence information from the warrant.</p>
             <button class="govuk-button" data-module="govuk-button">
-                Confirm and add sentences
+                Accept and continue
             </button>
-            {% elif data['appearance']['warrant-type'] != 'Sentencing' %}
-            <h2 class="govuk-heading-m">Now add the offences for this appearance</h2>
-            <p class="govuk-body">You will need to enter all of the offence information from the warrant.</p>
-            <button class="govuk-button" data-module="govuk-button">
-                Confirm and add offences
-            </button>
-            {% endif %}
         </form>
     </div>
 </div>
