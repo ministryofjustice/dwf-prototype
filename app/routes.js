@@ -600,7 +600,12 @@ router.get('/:prototypeVersion/warrant-type-select', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     const warrantType = req.session.data.appearance['warrant-type']
     req.session.data.warrantType = warrantType
-    const route = req.query.route
+    var route = ''
+    if (req.session.data.route != undefined){
+        route = req.session.data.route
+    } else {
+        route = req.query.route
+    }
     console.log('Warrant type: ' + warrantType)
     console.log('Route: ' + route)
     if (warrantType == 'Remand') {
@@ -615,6 +620,10 @@ router.get('/:prototypeVersion/warrant-type-select', function(req, res) {
                 res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`)
             } else
                 res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/tagged-bail`)
+        } else if (prototypeVersion == 'v12') {
+            if (route == 'new-court-case') {
+                res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`)
+            }
         } else
             res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/tagged-bail`)
     }
@@ -781,7 +790,11 @@ router.post('/:prototypeVersion/consecutive-concurrent-select', function(req, re
 router.post('/:prototypeVersion/add-sentence-information-complete', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     var addSentenceInformationComplete = 1
+    const route = req.session.data.route
     req.session.data.addSentenceInformationComplete = addSentenceInformationComplete
+    if (route == 'new-court-case') {
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`)
+    } else
     res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`)
 })
 
