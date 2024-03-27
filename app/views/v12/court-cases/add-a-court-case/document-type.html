@@ -2,16 +2,16 @@
 {% block content %}
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="upload-document" method="post">
-            <div class="govuk-form-group">
+        <form class="form" action="/v12/add-court-document" method="post">
+            <div class="govuk-form-group"> 
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add an appearance</span>
-                            Add documents to this appearance
+                            <span class="govuk-caption-l">Add a court case</span>
+                            Select a document type
+
                         </h1>
                     </legend>
-                    <div class="govuk-hint">You can repeat this step to add more types of documents.</div>
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="document-type" name="appearance[document-type]" type="radio" value="Custodial warrant">
@@ -32,18 +32,10 @@
                             </label>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="document-type-4" type="radio" value="Other" data-aria-controls="conditional-document-type-4">
+                            <input class="govuk-radios__input" id="document-type-4" name="appearance[document-type-4t]" type="radio" value="Other">
                             <label class="govuk-label govuk-radios__label" for="document-type-4">
                                 Other
                             </label>
-                        </div>
-                        <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-document-type-4">
-                            <div class="govuk-form-group">
-                                <label class="govuk-label" for="document-type-4">
-                                    Document name
-                                </label>
-                                <input class="govuk-input govuk-!-width-one-third" id="document-type-4" name="appearance[document-type]">
-                            </div>
                         </div>
                     </div>
                 </fieldset>
