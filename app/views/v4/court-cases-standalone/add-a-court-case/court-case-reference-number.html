@@ -1,0 +1,34 @@
+{% extends "../template.html" %}
+{% block content %}
+<!-- Back link -->
+<a href="../court-cases-standalone" class="govuk-back-link govuk-!-margin-top-0">Back</a>
+<!-- What is the confirmed date -->
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" action="court-name">
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" role="group">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Add a court case</span>
+                            Enter the court case reference number
+                        </h1>
+                    </legend>
+                    <input class="govuk-input govuk-input--width-20" id="court-case-ref" name="courtCase[court-case-ref]" type="text">
+                    <div class="govuk-checkboxes govuk-!-margin-top-6" data-module="govuk-checkboxes">
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" id="no-court-case-ref" name="courtCase[court-case-ref]" type="checkbox" value="None">
+                            <label class="govuk-label govuk-checkboxes__label" for="no-court-case-ref">
+                                I do not know the court case number
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <button class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
