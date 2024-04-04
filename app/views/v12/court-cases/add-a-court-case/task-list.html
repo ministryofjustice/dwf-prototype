@@ -3,7 +3,7 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="confirmation" method="post">
+        <form class="form" action="/v12/persist-appearance" method="post">
             <div class="govuk-form-group">
                 <h1 class="govuk-heading-l">
                     Add court case
@@ -34,7 +34,7 @@
                     </li>
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
-                            <a class="govuk-link govuk-task-list__link" href="document-type" aria-describedby="court-documents-status">
+                            <a class="govuk-link govuk-task-list__link" {% if data.courtDocumentsComplete == 1 %}href="court-documents"{% else %} href="document-type" {% endif %} aria-describedby="court-documents-status">
                                 Court documents
                             </a>
                         </div>
@@ -73,13 +73,13 @@
                     {% if data.appearance['warrant-type'] === 'Remand' %}
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
-                            <a class="govuk-link govuk-task-list__link" href="/v12/create-offence?route=new-court-case" aria-describedby="offences-and-sentences-status">
+                            <a class="govuk-link govuk-task-list__link" href="../add-an-offence/check-answers?route=new-court-case" aria-describedby="offences-and-sentences-status">
                                 Offences
                             </a>
                         </div>
                         <div class="govuk-task-list__status" id="offences-and-sentences-status">
                             {% if data.appearanceDetailsComplete == 1 %}
-                             {% if data.addSentenceInformationComplete == 1 %}
+                             {% if data['appearance']['finished-adding-offences'] == 'yes' %}
                              Completed
                              {% else %}
                             <strong class="govuk-tag govuk-tag--blue">
@@ -92,16 +92,22 @@
                         </div>
                     </li>
                     {% endif %}
-                    <!-- <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                    <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
-                            <a class="govuk-link govuk-task-list__link" href="#" aria-describedby="next-court-appearance-status">
+                            <a class="govuk-link govuk-task-list__link" {% if data.nextCourtAppearanceComplete == "Yes" %} href="check-answers-2"{% else %} href="next-court-date-select" {% endif %} aria-describedby="next-court-appearance-status">
                                 Next court appearance
                             </a>
                         </div>
-                        <div class="govuk-task-list__status govuk-task-list__status--cannot-start-yet" id="next-court-appearance-status">
-                            Cannot yet start
+                        <div class="govuk-task-list__status" id="next-court-appearance-status">
+                            {% if data.nextCourtAppearanceComplete == "Yes" %}
+                            Completed
+                            {% else %}
+                            <strong class="govuk-tag govuk-tag--blue">
+                                Incomplete
+                            </strong>
+                            {% endif %}
                         </div>
-                    </li> -->
+                    </li>
                 </ul>
             </div>
             <h2 class="govuk-heading-m">
