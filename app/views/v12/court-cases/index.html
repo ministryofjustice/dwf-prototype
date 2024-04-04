@@ -9,7 +9,7 @@
             <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
                 <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
             </svg>
-            <div class="moj-banner__message">New appearance added to court case {{ data.courtCaseIndex | int + 1 }}<span class="govuk-!-text-align-right" style="display: inline-flex; float: right;"><a class="govuk-link--no-visited-state" href="/v12/close-success-message">Close</a></span></div>
+            <div class="moj-banner__message">New appearance added to court case<span class="govuk-!-text-align-right" style="display: inline-flex; float: right;"><a class="govuk-link--no-visited-state" href="/v12/close-success-message">Close</a></span></div>
         </div>
         {% endif %}
         <h1 class="govuk-heading-xl">Court cases</h1>
@@ -48,7 +48,7 @@
         <div class="govuk-grid-row">
             <div class="govuk-grid-column-full govuk-!-margin-top-1">
                 {% if data.courtCases | length %}
-                {% for courtCase in data.courtCases | reverse %}
+                {% for courtCase in data.courtCases %}
                 {% set lastAppearance = courtCase.appearances | last %}
                 {% set courtCaseIndex = loop.index0 %}
                 <div class="govuk-summary-card">
@@ -56,7 +56,7 @@
                         <h2 class="govuk-summary-card__title">{{ lastAppearance['court-case-ref'] }} <span class="govuk-body">at</span> {{ lastAppearance['court-name']}} </h2>
                         <ul class="govuk-summary-card__actions">
                             <li class="govuk-summary-card__action"> <a class="govuk-link govuk-link--no-visited-state" href="/v12/create-appearance?courtIndex={{courtCaseIndex}}">
-                                    Add appearance<span class="govuk-visually-hidden"> to court case {{ loop.index }}</span>
+                                    Add appearance<span class="govuk-visually-hidden"> to court case</span>
                                 </a>
                             </li>
                             <!--                             <li class="govuk-summary-card__action"> <a class="govuk-link govuk-link--no-visited-state" href="/v5/update-court-case?index={{courtCaseIndex}}">

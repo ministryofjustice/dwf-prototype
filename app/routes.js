@@ -269,6 +269,7 @@ router.post('/:prototypeVersion/persist-court-case', function(req, res) {
     } else if (prototypeVersion == 'v12') {
         req.session.data.appearanceDetailsComplete = 1
         console.log("Appearance details complete: " + req.session.data.appearanceDetailsComplete)
+        req.session.data.edit = 'false'
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`)
     } else
         return res.redirect(`/${prototypeVersion}/create-offence`)
@@ -611,8 +612,11 @@ router.get('/:prototypeVersion/warrant-type-select', function(req, res) {
     if (warrantType == 'Remand') {
         if (route == 'appearance') {
             res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`)
-        } else
+        } else if (route == "new-court-case") {
+            res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`)
+            } else {
             res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/overall-case-outcome`)
+        }
     } else if (warrantType == 'Sentencing') {
         if (route == 'appearance') {
             req.session.data.appearance.sentences = []
@@ -831,3 +835,19 @@ router.post('/:prototypeVersion/add-court-document', function(req, res) {
     } else
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-documents`)
 })
+
+router.post('/:prototypeVersion/tagged-bail-select', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    const warrantType = req.session.data.warrantType
+    const route = req.session.data.route
+    console.log("Route: " + route)
+    console.log("Warrant type: " + warrantType)
+    if (warrantType == "Remand") {
+        if(route == "new-court-case") {
+            res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/check-answers`)
+        }
+    } else if (warrantType == "Sentencing") {
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/overall-sentence-length`)
+}
+})
+
