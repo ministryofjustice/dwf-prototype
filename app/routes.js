@@ -822,12 +822,13 @@ router.post('/:prototypeVersion/add-court-document', function(req, res) {
         const documents = []
         req.session.data.appearance.documents = documents
     }
+    const documentPrefix = req.session.data.appearance['document-type'] !== 'Other' ? req.session.data.appearance['document-type'] : req.session.data.appearance['other-document-name']
     if(documentIndex != undefined){
-        req.session.data.appearance.documents[documentIndex] = req.session.data.appearance['document-type'] + " " + documentIndex
+        req.session.data.appearance.documents[documentIndex] = documentPrefix + " " + documentIndex
         console.log("Document name: " + req.session.data.appearance.documents[documentIndex])
     } else {
-    documentIndex = req.session.data.appearance.documents.filter(documentName => documentName.startsWith(req.session.data.appearance['document-type'])).length
-    req.session.data.appearance.documents.push(req.session.data.appearance['document-type'] + " " + (documentIndex + 1))
+    documentIndex = req.session.data.appearance.documents.filter(documentName => documentName.startsWith(documentPrefix)).length
+    req.session.data.appearance.documents.push(documentPrefix + " " + (documentIndex + 1))
     console.log("New document name: " + req.session.data.appearance.documents.at(-1))
     }
     if (route == "new-court-case") {
