@@ -18,7 +18,7 @@
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
                             <a class="govuk-link govuk-task-list__link" href={% if data.appearanceDetailsComplete == 1 %}"check-answers"{% else %}"court-case-reference-number-select"{% endif %} aria-describedby="appearance-infromation-status">
-                                Appearance information
+                                Add appearance information
                             </a>
                         </div>
                         <div class="govuk-task-list__status" id="appearance-infromation-status">
@@ -34,7 +34,7 @@
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
                             <a class="govuk-link govuk-task-list__link" href="document-type" aria-describedby="court-documents-status">
-                                Court documents
+                                Upload court documents
                             </a>
                         </div>
                         <div class="govuk-task-list__status" id="court-documents-status">
@@ -47,6 +47,25 @@
                             {% endif %}
                         </div>
                     </li>
+                    {% if data.appearance['warrant-type'] == "Remand" %}
+                    <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                        <div class="govuk-task-list__name-and-hint">
+                            <a class="govuk-link govuk-task-list__link" href="add-sentence-information" aria-describedby="court-documents-status">
+                                Review offences
+                            </a>
+                        </div>
+                        <div class="govuk-task-list__status" id="court-documents-status">
+                            {% if data.offencesComplete == 1 %}
+                                Completed
+                            {% else %}
+                            <strong class="govuk-tag govuk-tag--grey">
+                                Optional
+                            </strong>
+                            {% endif %}
+                        </div>
+                    </li>
+                    {% endif %}
+                    {% if data.appearance['warrant-type'] == "Sentencing" %}
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
                             <a class="govuk-link govuk-task-list__link" href="add-sentence-information" aria-describedby="offences-and-sentences-status">
@@ -67,16 +86,26 @@
                             {% endif %}
                         </div>
                     </li>
-                    <!-- <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                    {% endif %}
+                    {% if data.appearance['warrant-type'] == "Remand" %}
+                    <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
-                            <a class="govuk-link govuk-task-list__link" href="#" aria-describedby="next-court-appearance-status">
-                                Next court appearance
+                            <a class="govuk-link govuk-task-list__link" href="next-court-date-select" aria-describedby="next-court-appearance-status">
+                                Add next court appearance
                             </a>
                         </div>
-                        <div class="govuk-task-list__status govuk-task-list__status--cannot-start-yet" id="next-court-appearance-status">
-                            Cannot yet start
+                        <div class="govuk-task-list__status" id="next-court-appearance-status">
+                            {% if data.nextCourtAppearanceComplete == "Yes" %}
+                            Completed
+                            {% else %}
+                            <strong class="govuk-tag govuk-tag--grey">
+                                Optional
+                            </strong>
+                            {% endif %}
                         </div>
-                    </li> -->
+
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
             <h2 class="govuk-heading-m">

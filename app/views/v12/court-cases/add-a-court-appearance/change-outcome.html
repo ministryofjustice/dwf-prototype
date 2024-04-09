@@ -4,7 +4,7 @@ v12{% extends "../template.html" %}
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
         <form class="form" action="/v12/add-sentence-information?route=remand-to-sentence&index={{data.index}}" method="post">
-            <div class="govuk-form-group"> 
+            <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
@@ -13,27 +13,106 @@ v12{% extends "../template.html" %}
                         </h1>
                     </legend>
                     <p class="govuk-body-l">{{ data.appearance.offences[data.index]['offence-name'] }} committed on {{ data.appearance.offences[data.index]['offence-start-date-day'] }}/{{ data.appearance.offences[data.index]['offence-start-date-month'] }}/{{ data.appearance.offences[data.index]['offence-start-date-year'] }}<p class="govuk-body-l">
-                    <div class="govuk-radios" data-module="govuk-radios">
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="outcome" name="offence[outcome]" type="radio" value="Imprisonment">
-                            <label class="govuk-label govuk-radios__label" for="outcome">
-                                Imprisonment
-                            </label>
-                        </div>
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="outcome-2" name="offence[outcome]" type="radio" value="Outcome 2">
-                            <label class="govuk-label govuk-radios__label" for="outcome-2">
-                                Outcome 2
-                            </label>
-                        </div>
-                        <div class="govuk-radios__divider">or</div>
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="outcome-3" name="offence[outcome]" type="radio" value="Outcome 3">
-                            <label class="govuk-label govuk-radios__label" for="outcome-3">
-                                Outcome 3
-                            </label>
-                        </div>
-                    </div>
+                            <div class="govuk-radios" data-module="govuk-radios">
+                                <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="outcome" name="offence[outcome]" type="radio" value="Remanded in custody">
+                                    <label class="govuk-label govuk-radios__label" for="outcome">
+                                        Remanded in custody
+                                    </label>
+                                </div>
+                                <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="outcome-2" name="offence[outcome]" type="radio" value="Sent to Crown Court in custody for trial with bail direction">
+                                    <label class="govuk-label govuk-radios__label" for="outcome-2">
+                                        Sent to Crown Court in custody for trial with bail direction
+                                    </label>
+                                </div>
+                                <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="outcome-3" name="offence[outcome]" type="radio" value="Committed to Crown Court for sentence - in custody with bail direction">
+                                    <label class="govuk-label govuk-radios__label" for="outcome-3">
+                                        Committed to Crown Court for sentence - in custody with bail direction
+                                    </label>
+                                </div>
+                                <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="outcome-4" name="offence[outcome]" type="radio" value="Committed to Crown Court for sentence in custody">
+                                    <label class="govuk-label govuk-radios__label" for="outcome-4">
+                                        Committed to Crown Court for sentence in custody
+                                    </label>
+                                </div>
+                                <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="outcome-5
+                        5" name="offence[outcome]" type="radio" value="Adult remittal for sentence in custody">
+                                    <label class="govuk-label govuk-radios__label" for="outcome-5">
+                                        Adult remittal for sentence in custody
+                                    </label>
+                                </div>
+                                <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="outcome-6" name="offence[outcome]" type="radio" value="Sent to Crown Court for trial in custody">
+                                    <label class="govuk-label govuk-radios__label" for="outcome-6">
+                                        Sent to Crown Court for trial in custody
+                                    </label>
+                                </div>
+                                <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="outcome-7" name="offence[outcome]" type="radio" value="Committed to Crown Court for sentence in prison for restriction order">
+                                    <label class="govuk-label govuk-radios__label" for="outcome-7">
+                                        Committed to Crown Court for sentence in prison for restriction order
+                                    </label>
+                                </div>
+                                <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="outcome-8" name="offence[outcome]" type="radio" value="Committed to the Crown Court in custody for consideration of the question of bail in a charge of murder">
+                                    <label class="govuk-label govuk-radios__label" for="outcome-8">
+                                        Committed to the Crown Court in custody for consideration of the question of bail in a charge of murder
+                                    </label>
+                                </div>
+                                <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="outcome-9" name="offence[outcome]" type="radio" value="Prosecutor's notice of appeal received. Remanded in custody">
+                                    <label class="govuk-label govuk-radios__label" for="outcome-9">
+                                        Prosecutor's notice of appeal received. Remanded in custody
+                                    </label>
+                                </div>
+                                <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="outcome-10" name="offence[outcome]" type="radio" value="Recommended for deportation when detained">
+                                    <label class="govuk-label govuk-radios__label" for="outcome-10">
+                                        Recommended for deportation when detained
+                                    </label>
+                                </div>
+                                <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="outcome-11" name="offence[outcome]" type="radio" value="The court orders that the defendant be transferred to service custody">
+                                    <label class="govuk-label govuk-radios__label" for="outcome-11">
+                                        The court orders that the defendant be transferred to service custody
+                                    </label>
+                                </div>
+                                <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="outcome-12" name="offence[outcome]" type="radio" value="Remanded in custody pending receipt of Prosecutor's written notice of appeal">
+                                    <label class="govuk-label govuk-radios__label" for="outcome-12">
+                                        Remanded in custody pending receipt of Prosecutor's written notice of appeal
+                                    </label>
+                                </div>
+                                <div class="govuk-radios__divider">or</div>
+                                <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="outcome-13" name="offence[outcome]" type="radio" value="Dismissed">
+                                    <label class="govuk-label govuk-radios__label" for="outcome-13">
+                                        Dismissed
+                                    </label>
+                                </div>
+                                <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="outcome-14" name="offence[outcome]" type="radio" value="No separate penalty">
+                                    <label class="govuk-label govuk-radios__label" for="outcome-14">
+                                        No separate penalty
+                                    </label>
+                                </div>
+                                <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="outcome-15" name="offence[outcome]" type="radio" value="Not guilty">
+                                    <label class="govuk-label govuk-radios__label" for="outcome-15">
+                                        Not guilty
+                                    </label>
+                                </div>
+                                <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="outcome-16" name="offence[outcome]" type="radio" value="Other non-custodial outcome">
+                                    <label class="govuk-label govuk-radios__label" for="outcome-16">
+                                        Other non-custodial outcome
+                                    </label>
+                                </div>
+                            </div>
                 </fieldset>
             </div>
             <button class="govuk-button" data-module="govuk-button">

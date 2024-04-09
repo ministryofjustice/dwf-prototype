@@ -1,5 +1,5 @@
 {% extends "../template.html" %}
-{% set edit = 'false' %}
+
 {% block content %}
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
@@ -10,6 +10,19 @@
         </h1>
         <form class="form" action="/v12/persist-appearance" method="post">
             <dl class="govuk-summary-list">
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Warrant type
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['warrant-type'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="warrant-type?edit=true">
+                            Edit<span class="govuk-visually-hidden"> warrant type</span>
+                        </a>
+                    </dd>
+                </div>
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Case reference
@@ -49,6 +62,21 @@
                         </a>
                     </dd>
                 </div>
+                {% if data.appearance['warrant-type'] == "Remand" %}
+                                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Overall case outcome
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['overall-case-outcome'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="overall-case-outcome?edit=true">
+                            Edit<span class="govuk-visually-hidden"> overall case outcome</span>
+                        </a>
+                    </dd>
+                </div>
+                {% endif %}
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Tagged bail
@@ -62,6 +90,7 @@
                         </a>
                     </dd>
                 </div>
+                {% if data.appearance['warrant-type'] == "Sentencing" %}
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Overall sentence length
@@ -75,6 +104,7 @@
                         </a>
                     </dd>
                 </div>
+                {% endif %}
             </dl>
             <button class="govuk-button govuk-!-margin-top-2" data-module="govuk-button">
                 Accept and continue

@@ -6,15 +6,15 @@
         <form class="form" action="/v12/add-sentence-information-complete" method="post">
             <h1 class="govuk-heading-l">
                 <span class="govuk-caption-l">Add an appearance</span>
-                Offences and add sentences
+                Review offences {% if data.appearance['warrant-type'] == "Sentencing" %}and sentences}{% endif %}
             </h1>
             <p class="govuk-body">Review and update the offences that have been entered for this court case.</p>
             <h2 class="govuk-heading-m">Offences<span class="govuk-body"> ({{ data.appearance.offences.length }})</span></h2>
-            {% if data.appearance.offences < 1 %} <p class="govuk-body">Offences will show here</p>
+            {% if data.appearance.offences < 1 %} <p class="govuk-body">No offences.</p>
                 {% endif %}
-<!--                 <button class="govuk-button govuk-button--secondary govuk-!-margin-bottom-2" data-module="govuk-button" formaction="/v12/create-offence?route=remand-to-sentence" method="post">
+                <button class="govuk-button govuk-button--secondary govuk-!-margin-bottom-2" data-module="govuk-button" formaction="/v12/create-offence?route=remand-to-sentence&edit=false" method="post">
                     Add an offence
-                </button> -->
+                </button>
                 {% for offence in data.appearance.offences %}
                 {% if sentence['sentence-type'] == null %}
                 <div class="offence-card">
@@ -43,7 +43,7 @@
                             </div>
                         </dl>
                         <ul class="govuk-list govuk-!-margin-top-4 govuk-!-margin-bottom-2">
-                            <li><a href="change-outcome?index={{loop.index0}}">Update outcome</a></li>
+                            <li><a href="change-outcome?index={{loop.index0}}&edit=false">Update outcome</a></li>
                         </ul>
                     </div>
                     <div class="offence-card-actions">
@@ -54,11 +54,12 @@
                 </div>
                 {% endif %}
                 {% endfor %}
+                {% if data.appearance['warrant-type'] == "Sentencing" %}
                 <h2 class="govuk-heading-m govuk-!-margin-top-7">Sentences<span class="govuk-body">{% if data.appearance.sentences.length > 0 %} ({{ data.appearance.sentences.length }}) {% else %} (0){% endif %}</span></h2>
                     <button class="govuk-button govuk-button--secondary govuk-!-margin-bottom-2" data-module="govuk-button" formaction="/v12/create-sentence?route=remand-to-sentence" method="post">
                         Add a sentence
                     </button>
-                {% if data.appearance.sentences.length == 0 %}<p class="govuk-body govuk-!-margin-top-4">Add a sentence or update and offence outcome.</p>
+                {% if data.appearance.sentences.length == 0 %}<p class="govuk-body govuk-!-margin-top-4">No sentences. Add a sentence or update an offence outcome.</p>
                     {% endif %}
                     {% for sentence in data.appearance.sentences %}
                     {% if sentence['sentence-type'] != null %}
@@ -143,6 +144,7 @@
                     </div>
                     {% endif %}
                     {% endfor %}
+                    {% endif %}
                     <div class="govuk-button-group">
                         <button class="govuk-button govuk-!-margin-top-6" data-module="govuk-button">
                             Finish and continue

@@ -25,12 +25,16 @@
                             Offence
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data.sentence['offence-name'] %}
+                            {{ data.sentence['offence-name']}}
+                            {% else %}
                             Kidnap
+                            {% endif %}
                         </dd>
                     </div>
                 </dl>
             </div>
-            <input type="hidden" name="sentence[offence-name]" value="COML020 - Kidnap" />
+            <input type="hidden" name="sentence[offence-name]" value="{{ data.sentence['offence-name']}}" />
             <button class="govuk-button" data-module="govuk-button">
                 Confirm and continue
             </button>

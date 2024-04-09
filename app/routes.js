@@ -8,14 +8,34 @@ const router = govukPrototypeKit.requests.setupRouter()
 
 router.post('/:prototypeVersion/next-court-date-select', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
+    const warrantType = req.session.data.warrantType
+    const route = req.session.data.route
     var nextCourtDateSelect = req.session.data['appearance']['next-court-date-set']
     if (prototypeVersion == 'v12') {
-        console.log("Verson 12 - redirecting")
-        if (nextCourtDateSelect == "Yes") {
-            res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/next-hearing-type-select`)
+        if (route == "appearance") {
+            if (nextCourtDateSelect == "Yes") {
+                res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/next-hearing-type-select`)
+            } else {
+                if (warrantType == "Remand") {
+                    req.session.data.nextCourtAppearanceComplete = "Yes"
+                    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`)
+                } else if (warrantType == "Sentencing") {
+                    req.session.data.nextCourtAppearanceComplete = "Yes"
+                    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`)
+                }
+            }
         } else {
-            req.session.data.nextCourtAppearanceComplete = "Yes"
-            res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`)
+            if (nextCourtDateSelect == "Yes") {
+                res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/next-hearing-type-select`)
+            } else {
+                if (warrantType == "Remand") {
+                    req.session.data.nextCourtAppearanceComplete = "Yes"
+                    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`)
+                } else if (warrantType == "Sentencing") {
+                    req.session.data.nextCourtAppearanceComplete = "Yes"
+                    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`)
+                }
+            }
         }
     } else {
         if (nextCourtDateSelect == "Yes") {
@@ -29,7 +49,10 @@ router.post('/:prototypeVersion/next-hearing-court-select', function(req, res) {
     var nextCourtDateSelect = req.session.data['appearance']['next-hearing-court-select']
     if (nextCourtDateSelect == "No") {
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/next-court-name`)
-    } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers`)
+    } else {
+        console.log("Test")
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers`)
+    }
 })
 
 router.post('/:prototypeVersion/next-hearing-court-select-2', function(req, res) {
@@ -79,7 +102,7 @@ router.post('/:prototypeVersion/offence-code-known', function(req, res) {
     if (offenceCodeKnown != null) {
         if (offenceCodeKnown.includes('None')) {
             if (route == "remand-to-sentence") {
-                return res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-name`)
+                return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-name`)
             }
             if (warrantType == 'Sentencing') {
                 return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-name`)
@@ -94,7 +117,7 @@ router.post('/:prototypeVersion/offence-code-known', function(req, res) {
         }
     } else {
         if (route == "remand-to-sentence") {
-            return res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirm-offence`)
+            return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-offence`)
         }
         if (warrantType == 'Sentencing') {
             return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-offence`)
@@ -183,10 +206,10 @@ router.post('/:prototypeVersion/new-court-name', function(req, res) {
             res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`)
         } else if (prototypeVersion == 'v12') {
             if (warrantType == "Remand") {
-            res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`)
-        } else {
-            res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/tagged-bail`)
-        }
+                res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`)
+            } else {
+                res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/tagged-bail`)
+            }
         } else
             res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/warrant-type`)
     } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-name`)
@@ -345,6 +368,11 @@ router.get('/:prototypeVersion/create-appearance', function(req, res) {
     if (prototypeVersion == 'v8' || prototypeVersion == 'v9' || prototypeVersion == 'v10' || prototypeVersion == 'v11') {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-case-reference-number-select`)
     } else if (prototypeVersion == 'v12') {
+        req.session.data.appearanceDetailsComplete = 0
+        req.session.data.courtDocumentsComplete = 0
+        req.session.data.offencesComplete = 0
+        req.session.data.nextCourtAppearanceComplete = "No"
+        req.session.data.edit = "false"
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/warrant-type`)
     } else {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-case-reference-number`)
@@ -780,19 +808,8 @@ router.get('/:prototypeVersion/add-sentence-information', function(req, res) {
     } else
         req.session.data.changeMade = 1
     req.session.sentenceAdded = 0
-    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/change-offences`)
-})
-
-router.post('/:prototypeVersion/offence-code-select', function(req, res) {
-    const prototypeVersion = req.params.prototypeVersion
-    var route = req.session.data.route
-    const offence = req.session.data['sentence']['offence-name']
-    console.log('Route: ' + route)
-    console.log('Offence name: ' + offence)
-    if (route == "remand-to-sentence" && offence != null) {
-        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-same-offence`)
-    } else
-        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-code`)
+    req.session.data.appearance.offences[index]['outcome'] = outcome
+    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`)
 })
 
 router.post('/:prototypeVersion/offence-name-same', function(req, res) {
@@ -829,13 +846,26 @@ router.post('/:prototypeVersion/consecutive-concurrent-select', function(req, re
 
 router.post('/:prototypeVersion/add-sentence-information-complete', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
+    const warrantType = req.session.data.warrantType
     var addSentenceInformationComplete = 1
+    var offencesComplete = 1
     const route = req.session.data.route
-    req.session.data.addSentenceInformationComplete = addSentenceInformationComplete
     if (route == 'new-court-case') {
-        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`)
-    } else
-        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`)
+        if (warrantType == "Remand") {
+            req.session.data.offencesComplete = offencesComplete
+            return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`)
+        } else if (warrantType == "Sentencing") {
+            req.session.data.addSentenceInformationComplete = addSentenceInformationComplete
+            return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`)
+        }
+    } else {
+        if (warrantType == "Remand") {
+            req.session.data.offencesComplete = offencesComplete
+            return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`)
+        } else if (warrantType == "Sentencing") {}
+        req.session.data.addSentenceInformationComplete = addSentenceInformationComplete
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`)
+    }
 })
 
 router.post('/:prototypeVersion/court-documents-complete', function(req, res) {
