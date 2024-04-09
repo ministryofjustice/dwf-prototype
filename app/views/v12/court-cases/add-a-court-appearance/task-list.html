@@ -8,7 +8,11 @@
                 <h1 class="govuk-heading-l">
                     Add an appearance
                 </h1>
+                {% if data.appearance['warrant-type'] == "Remand" %}
+                <h2 class="govuk-heading-m">Enter information from a remand warrant</h2>
+                {% else %}
                 <h2 class="govuk-heading-m">Enter information from a sentencing warrant</h2>
+                {% endif %}
                 <p class="govuk-body">You must enter information exactly as it is written on the warrant.</p>
                 <ul class="govuk-task-list govuk-!-margin-top-7">
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">

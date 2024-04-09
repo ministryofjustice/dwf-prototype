@@ -30,16 +30,16 @@
             <h1 class="govuk-fieldset__heading">
                 <span class="govuk-caption-l">Add sentences to a court case</span>
                 {% if data.appearance.sentences.length == 0 %}
-                {% if data['appearance']['court-case-ref'] != "None" %}
-                Add sentences to case {{ data['appearance']['court-case-ref'] }}
+                {% if data['appearance']['court-case-ref'] | last != "None" %}
+                Add sentences to case {{ data['appearance']['court-case-ref'] | last }}
                 {% else %}
                 Add sentences to court case
                 {% endif %}
                 {% else %}
-                {% if data['appearance']['court-case-ref'] == ",None" %}
-                You have added {{ data['appearance'].sentences | length }} sentences
-                {% else %}
+                {% if data['appearance']['court-case-ref'] | last != "None" %}
                 You have added {{ data['appearance'].sentences | length }} sentences to court case {{ data['appearance']['court-case-ref'] }}
+                {% else %}
+                You have added {{ data['appearance'].sentences | length }} sentences
                 {% endif %}
                 {% endif %}
             </h1>
@@ -83,6 +83,9 @@
             <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="/v12/create-sentence" method="post">
                 Add a sentence
             </button>
+            {% if data['appearance'].sentences < 1 %}
+            <p class="govuk-body govuk-!-font-weight-bold">Sentences will appear here.</p>
+            {% endif %}
             {% for sentence in data['appearance'].sentences %}
             <div class="offence-card sentence-card">
                 <div class="offence-card-offence-details">

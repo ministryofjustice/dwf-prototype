@@ -3,7 +3,11 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
+        {% if data.edit == 'true' %}
+        <form class="form" action="check-answers" method="post">
+            {% else %}
         <form class="form" action="court-name-select">
+            {% endif %}
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset" role="group" aria-describedby="passport-issued-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
@@ -18,7 +22,7 @@
                                 <label class="govuk-label govuk-date-input__label" for="warrant-date-day">
                                     Day
                                 </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="warrant-date-day" name="appearance[warrant-date-day]" type="text" inputmode="numeric">
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="warrant-date-day" name="appearance[warrant-date-day]" type="text" inputmode="numeric" value="{{ data.appearance['warrant-date-day'] }}">
                             </div>
                         </div>
                         <div class="govuk-date-input__item">
@@ -26,7 +30,7 @@
                                 <label class="govuk-label govuk-date-input__label" for="warrant-date-month">
                                     Month
                                 </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="warrant-date-month" name="appearance[warrant-date-month]" type="text" inputmode="numeric">
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="warrant-date-month" name="appearance[warrant-date-month]" type="text" inputmode="numeric" value="{{ data.appearance['warrant-date-month'] }}">
                             </div>
                         </div>
                         <div class="govuk-date-input__item">
@@ -34,7 +38,7 @@
                                 <label class="govuk-label govuk-date-input__label" for="warrant-date-year">
                                     Year
                                 </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="warrant-date-year" name="appearance[warrant-date-year]" type="text" inputmode="numeric">
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="warrant-date-year" name="appearance[warrant-date-year]" type="text" inputmode="numeric" value="{{ data.appearance['warrant-date-year'] }}">
                             </div>
                         </div>
                     </div>

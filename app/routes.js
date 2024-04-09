@@ -174,6 +174,7 @@ router.post('/:prototypeVersion/new-court-case-ref', function(req, res) {
 router.post('/:prototypeVersion/new-court-name', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     const courtCaseIndex = req.session.data.courtCaseIndex
+    const warrantType = req.session.data.appearance['warrant-type']
     var newCourtName = req.session.data.appearance['court-name-select']
     console.log("New court name:" + newCourtName)
     if (newCourtName.includes('Yes')) {
@@ -181,7 +182,11 @@ router.post('/:prototypeVersion/new-court-name', function(req, res) {
         if (prototypeVersion == 'v9' | prototypeVersion == 'v8') {
             res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`)
         } else if (prototypeVersion == 'v12') {
+            if (warrantType == "Remand") {
+            res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`)
+        } else {
             res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/tagged-bail`)
+        }
         } else
             res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/warrant-type`)
     } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-name`)
@@ -488,7 +493,7 @@ router.get('/:prototypeVersion/confirm-delete', function(req, res) {
     const route = req.session.data.route
     console.log('Offence index' + req.session.data.index)
     if (warrantType == 'Sentencing') {
-        if (roure = 'remand-to-sentence') {
+        if (route == 'remand-to-sentence') {
             res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirm-delete`)
         } else
             res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-delete`)
@@ -642,7 +647,7 @@ router.get('/:prototypeVersion/warrant-type-select', function(req, res) {
     console.log('Route: ' + route)
     if (warrantType == 'Remand') {
         if (route == 'appearance') {
-            res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`)
+            res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`)
         } else if (route == "new-court-case") {
             res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`)
         } else {

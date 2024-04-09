@@ -4,10 +4,14 @@
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
         {% if data.edit == 'true' %}
-        <form class="form" action="/v12/persist-sentence?edit=true" method="post">
+            {% if data.sentence['consecutive-concurrent'] == "Consecutive" %}
+        <form class="form" action="/v12/consecutive-concurrent-select" method="post">
             {% else %}
-            <form class="form" action="/v12/consecutive-concurrent-select" method="post">
-                {% endif %}
+            <form class="form" action="/v12/persist-sentence?edit=true" method="post">
+            {% endif %}
+            {% else %}
+                <form class="form" action="/v12/consecutive-concurrent-select" method="post">
+        {% endif %}
                     <div class="govuk-form-group">
                         <fieldset class="govuk-fieldset" aria-describedby="changedName-hint">
                             <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
@@ -21,7 +25,7 @@
                         </p> -->
                             <div class="govuk-radios govuk-radios" data-module="govuk-radios">
                                 <div class="govuk-radios__item">
-                                    <input class="govuk-radios__input" id="consecutive-concurrent" name="sentence[consecutive-concurrent]" type="radio" value="Consecutive" {% if data.sentence['consecutive-concurrent']=='Consecutive' %} checked {% endif %}>
+                                    <input class="govuk-radios__input" id="consecutive-concurrent" name="sentence[consecutive-concurrent]" type="radio" value="Consecutive" {% if data.sentence['consecutive-concurrent']== 'Consecutive' %} checked {% endif %}>
                                     <label class="govuk-label govuk-radios__label" for="consecutive-concurrent">
                                         Consecutive
                                     </label>
@@ -34,7 +38,17 @@
                                 </div>
                                 {% if data.forthwithSelected != "Yes" %}
                                 <div class="govuk-radios__divider">or</div>
-                                    <div class="govuk-radios__item">
+                                <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="consecutive-concurrent-3" name="sentence[consecutive-concurrent]" type="radio" value="Forthwith" {% if data.sentence['consecutive-concurrent']=='Forthwith' %} checked {% endif %}>
+                                    <label class="govuk-label govuk-radios__label" for="consecutive-concurrent-3">
+                                        Forthwith
+                                        <div class="govuk-hint">There can only be one forthwith sentence in a case</div>
+                                    </label>
+                                </div>
+                                {% endif %}
+                                {% if data.sentence['consecutive-concurrent'] == "Forthwith" %}
+                                <div class="govuk-radios__divider">or</div>
+                                <div class="govuk-radios__item">
                                     <input class="govuk-radios__input" id="consecutive-concurrent-3" name="sentence[consecutive-concurrent]" type="radio" value="Forthwith" {% if data.sentence['consecutive-concurrent']=='Forthwith' %} checked {% endif %}>
                                     <label class="govuk-label govuk-radios__label" for="consecutive-concurrent-3">
                                         Forthwith
