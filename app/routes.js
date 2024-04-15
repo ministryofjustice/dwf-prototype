@@ -50,7 +50,6 @@ router.post('/:prototypeVersion/next-hearing-court-select', function(req, res) {
     if (nextCourtDateSelect == "No") {
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/next-court-name`)
     } else {
-        console.log("Test")
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers`)
     }
 })
@@ -498,12 +497,12 @@ router.get('/:prototypeVersion/update-offence', function(req, res) {
 router.get('/:prototypeVersion/update-sentence', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     const index = req.query.index
-    console.log('Appearance index: ' + req.session.data.appearanceIndex)
+    const warrantType = req.session.data.appearance['warrant-type']
     const route = req.query.route
     req.session.data.route = route
     console.log('Edit route:' + route)
     req.session.data.sentence = req.session.data.appearance.sentences[index]
-    req.session.data.seentenceIndex = index
+    req.session.data.sentenceIndex = index
     req.session.data.changeMade = 1
     req.session.data.sentenceDeleted = 0
     req.session.data.sentenceAdded = 0
@@ -860,11 +859,16 @@ router.post('/:prototypeVersion/add-sentence-information-complete', function(req
         }
     } else {
         if (warrantType == "Remand") {
-            req.session.data.offencesComplete = offencesComplete
+            if (req.session.data.appearance['finished-adding-offences'] == "yes") {
+                req.session.data.offencesComplete = offencesComplete
+            }
             return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`)
-        } else if (warrantType == "Sentencing") {}
-        req.session.data.addSentenceInformationComplete = addSentenceInformationComplete
-        return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`)
+        } else if (warrantType == "Sentencing") {
+            if (req.session.data.appearance['finished-adding-offences'] == "yes") {
+                req.session.data.addSentenceInformationComplete = addSentenceInformationComplete
+            }
+            return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`)
+        }
     }
 })
 

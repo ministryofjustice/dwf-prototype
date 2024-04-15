@@ -2,12 +2,20 @@
 {% block content %}
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
+        {% if data.route == "remand-to-sentence" %}
+        <form class="form" action="../add-a-court-appearance/add-sentence-information?edit=false" method="post">
+        {% else %}
         <form class="form" action="check-answers?edit=false" method="post">
+            {% endif %}
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
+                            {% if data.route == "remand-to-sentence" %}
+                            <span class="govuk-caption-l">Add an appearance</span>
+                            {% else %}
                             <span class="govuk-caption-l">Add sentences to a court case</span>
+                            {% endif %}
                             Edit sentence details
                         </h1>
                     </legend>
