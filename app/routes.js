@@ -50,7 +50,7 @@ router.post('/:prototypeVersion/next-hearing-court-select', function(req, res) {
     if (nextCourtDateSelect == "No") {
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/next-court-name`)
     } else {
-        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers`)
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers-next-appearance`)
     }
 })
 

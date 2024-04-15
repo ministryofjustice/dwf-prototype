@@ -3,7 +3,11 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="check-answers">
+        {% if data.edit == 'true' %}
+        <form class="form" action="check-answers-next-appearance" method="post">
+            {% else %}
+        <form class="form" action="check-answers-next-appearance">
+            {% endif %}
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset" role="group">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
@@ -17,7 +21,11 @@
                     </div>
                     <div>
                         <select id="court-name-select" class="enhance-autcomplete" name="appearance[next-court-name]" type="text" aria-describedby="search-hint">
+                            {% if data.appearance['next-court-name'] %}
+                            <option value="{{ data.apperance['next-court-name'] }}">{{ data.appearance['next-court-name'] }}</option>
+                            {% else %}
                             <option></option>
+                            {% endif %}
                             
 <option value="Aberdare County Court">Aberdare County Court</option>
 <option value="Aberdare MC">Aberdare MC</option>
