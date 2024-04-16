@@ -1,7 +1,5 @@
 {% extends "../template.html" %}
-
 {% block content %}
-<!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">
@@ -28,7 +26,7 @@
                         Next hearing date
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['next-court-date-day'] }} / {{ data['appearance']['next-court-date-month'] }} / {{ data['appearance']['next-court-date-year'] }} {% if data['appearance']['next-court-time'] is defined %} at {{ data['appearance']['next-court-time'] }}{% endif %}
+                        {{ data['appearance']['next-court-date-day'] }}/{{ data['appearance']['next-court-date-month'] }}/{{ data['appearance']['next-court-date-year'] }} {% if data['appearance']['next-court-time'] is defined %} at {{ data['appearance']['next-court-time'] }}{% endif %}
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link" href="next-court-date?edit=true">

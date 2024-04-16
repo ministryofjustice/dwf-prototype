@@ -45,7 +45,7 @@
                 {% endif %}
             </h1>
         </legend>
-        <form class="form" action="/v12/add-sentence-information-complete" method="post">
+        <form class="form" action="/v12/add-sentence-information-complete?route=new-court-case" method="post">
             <dl class="govuk-summary-list govuk-summary-list--no-border">
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
@@ -186,13 +186,32 @@
                 </div>
             </div>
             {% endfor %}
-            {% if data.appearance.sentences.length > 0 %}
-            <div class="govuk-button-group govuk-!-margin-top-8">
+            <div class="govuk-form-group govuk-!-margin-top-8">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                        Have you finished adding sentences?
+                    </legend>
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="finished-adding-sentences" name="appearance[finished-adding-sentences]" type="radio" value="yes">
+                            <label class="govuk-label govuk-radios__label" for="finished-adding-sentences">
+                                Yes, I’ve finished adding sentences
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="finished-adding-sentences-2" name="appearance[finished-adding-sentences]" type="radio" value="no">
+                            <label class="govuk-label govuk-radios__label" for="finished-adding-sentences-2">
+                                No, I’ll come back to it later
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="govuk-button-group">
                 <button class="govuk-button" data-module="govuk-button">
-                    Accept and continue
+                    Continue
                 </button>
             </div>
-            {% endif %}
         </form>
     </div>
 </div>

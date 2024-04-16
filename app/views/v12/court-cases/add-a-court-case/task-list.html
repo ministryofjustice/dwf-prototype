@@ -19,7 +19,7 @@
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
                             <a class="govuk-link govuk-task-list__link" href={% if data.appearanceDetailsComplete == 1 %}"check-answers"{% else %}"court-case-reference-number"{% endif %} aria-describedby="appearance-infromation-status">
-                                Appearance information
+                                Add appearance information
                             </a>
                         </div>
                         <div class="govuk-task-list__status" id="appearance-infromation-status">
@@ -35,7 +35,7 @@
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
                             <a class="govuk-link govuk-task-list__link" {% if data.courtDocumentsComplete == 1 %}href="court-documents"{% else %} href="document-type" {% endif %} aria-describedby="court-documents-status">
-                                Court documents
+                                Upload court documents
                             </a>
                         </div>
                         <div class="govuk-task-list__status" id="court-documents-status">
@@ -51,9 +51,15 @@
                     {% if data.appearance['warrant-type'] === 'Sentencing' %}
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
+                            {% if data.sentencesAdded == 1 %}
                             <a class="govuk-link govuk-task-list__link" href="../add-a-sentence/check-answers" aria-describedby="offences-and-sentences-status">
-                                Sentences
+                                Add sentences
                             </a>
+                            {% else %}
+                            <a class="govuk-link govuk-task-list__link" href="../add-a-sentence/count-number" aria-describedby="offences-and-sentences-status">
+                                Add sentences
+                            </a>
+                            {% endif %}
                         </div>
                         <div class="govuk-task-list__status" id="offences-and-sentences-status">
                             {% if data.appearanceDetailsComplete == 1 %}

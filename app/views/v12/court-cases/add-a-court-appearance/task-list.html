@@ -1,6 +1,5 @@
 {% extends "../template.html" %}
 {% block content %}
-<!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
         <form class="form" action="confirmation" method="post">
@@ -90,7 +89,7 @@
                     {% if data.appearance['warrant-type'] == "Remand" %}
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
-                            <a class="govuk-link govuk-task-list__link" href="next-court-date-select" aria-describedby="next-court-appearance-status">
+                            <a class="govuk-link govuk-task-list__link" href="next-court-date-select?route=appearance" aria-describedby="next-court-appearance-status">
                                 Add next court appearance
                             </a>
                         </div>

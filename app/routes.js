@@ -854,7 +854,11 @@ router.post('/:prototypeVersion/add-sentence-information-complete', function(req
             req.session.data.offencesComplete = offencesComplete
             return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`)
         } else if (warrantType == "Sentencing") {
+            if (req.session.data.appearance['finished-adding-sentences'] == "yes") {
             req.session.data.addSentenceInformationComplete = addSentenceInformationComplete
+            }
+            req.session.data.sentenceAdded = 0
+            req.session.data.sentencesAdded = 1
             return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`)
         }
     } else {

@@ -54,7 +54,7 @@
                         Tagged bail
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['tagged-bail'] | last }}
+                        {{ data['appearance']['tagged-bail'] | last }} {% if data['appearance']['tagged-bail'] != 'None' %}days{% endif %}
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link" href="tagged-bail?edit=true">
@@ -78,10 +78,8 @@
                 </div>
                 {% endif %}
             </dl>
-            <h2 class="govuk-heading-m">Now save this appearance</h2>
-            <p class="govuk-body">By saving this appearance you are confirming that the details you are providing match the details on the warrant.</p>
             <button class="govuk-button" data-module="govuk-button">
-                Save and continue
+                Accept and continue
             </button>
         </form>
     </div>
