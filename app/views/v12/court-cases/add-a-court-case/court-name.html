@@ -4,6 +4,8 @@
     <div class="govuk-grid-column-two-thirds">
                 {% if data.edit == 'true' %}
         <form class="form" action="check-answers" method="post">
+            {% elif data.appearance['warrant-type'] == "Remand" %}
+            <form action="overall-case-outcome" class="form" method="post">
             {% else %}
         <form class="form" action="tagged-bail">
             {% endif %}

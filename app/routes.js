@@ -162,7 +162,7 @@ router.post('/:prototypeVersion/outcome-select-3', function(req, res) {
     const route = req.session.data.route
     console.log('Outcome: ' + outcome)
     console.log('Route: ' + route)
-    if (outcome.includes('lookup-another-outcome')) {
+    if (outcome.contains('lookup-another-outcome')) {
         if (route == 'appearance') {
             res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/lookup-outcome`)
         } else
