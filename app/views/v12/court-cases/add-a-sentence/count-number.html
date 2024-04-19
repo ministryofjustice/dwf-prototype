@@ -4,6 +4,8 @@
     <div class="govuk-grid-column-two-thirds">
             {% if data.edit == 'true' %}
             <form class="form" action="/v12/persist-sentence?edit=true" method="post">
+                {% elif data.route == 'remand-to-sentence' %}
+                <form class="form" action="sentence-type" method="post">
                 {% else %}
                 <form class="form" action="offence-code" method="post">
                     {% endif %}
