@@ -76,6 +76,133 @@ module.exports = {
                             "outcome": "Remand before conviction"
                         }
                     ]
+                },
+                {
+                    "court-case-ref": "63GD1758052",
+                    "overall-case-outcome": "Remand before conviction",
+                    "next-court-date-set": "Yes",
+                    "next-hearing-type": "Court appearance",
+                    "warrant-date-day": "20",
+                    "warrant-date-month": "04",
+                    "warrant-date-year": "2024",
+                    "court-name": "Sheffield Crown Court",
+                    "next-court-date-day": "21",
+                    "next-court-date-month": "04",
+                    "next-court-date-year": "2024",
+                    "next-court-time": "09:00",
+                    "next-court-name": "Sheffield Crown Court",
+                    "offences": [
+                        {
+                            "offence-start-date-day": "25",
+                            "offence-start-date-month": "02",
+                            "offence-start-date-year": "2024",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "CL77001"
+                            ],
+                            "offence-name": "CL77001 - Use violence to secure entry to premises",
+                            "outcome": "Remand before conviction"
+                        },
+                        {
+                            "offence-start-date-day": "25",
+                            "offence-start-date-month": "02",
+                            "offence-start-date-year": "2024",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "CL77001"
+                            ],
+                            "offence-name": "TH68023 - Robbery",
+                            "outcome": "Remand before conviction"
+                        },
+                        {
+                            "offence-start-date-day": "25",
+                            "offence-start-date-month": "02",
+                            "offence-start-date-year": "2024",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "TH68050"
+                            ],
+                            "offence-name": "TH68050 - Take a motor vehicle without the owners consent",
+                            "outcome": "Remand before conviction"
+                        }
+                    ]
+                },
+                {
+                    "court-case-ref": "63GD1758087",
+                    "overall-case-outcome": "Imprisonment",
+                    "next-court-date-set": "No",
+                    "warrant-date-day": "25",
+                    "warrant-date-month": "04",
+                    "warrant-date-year": "2024",
+                    "court-name": "Sheffield Crown Court",
+                    "sentences": [
+                        {
+                            "count-number": "1",
+                            "offence-start-date-day": "25",
+                            "offence-start-date-month": "02",
+                            "offence-start-date-year": "2024",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "CL77001"
+                            ],
+                            "offence-name": "CL77001 - Use violence to secure entry to premises",
+                            "outcome": "Imprisonment",
+                            "sentence-type": "SDS (Standard Determinate Sentence)",
+                            "sentence-length-years": "1",
+                            "sentence-length-months": "6",
+                            "sentence-length-weeks": "0",
+                            "sentence-length-days": "0",
+                            "consecutive-concurrent" : "Forthwith"
+                        },
+                        {
+                            "count-number": "2",
+                            "offence-start-date-day": "25",
+                            "offence-start-date-month": "02",
+                            "offence-start-date-year": "2024",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "CL77001"
+                            ],
+                            "offence-name": "TH68023 - Robbery",
+                            "outcome": "Imprisonment",
+                            "sentence-type": "SDS (Standard Determinate Sentence)",
+                            "sentence-length-years": "0",
+                            "sentence-length-months": "6",
+                            "sentence-length-weeks": "0",
+                            "sentence-length-days": "0",
+                            "consecutive-concurrent" : "Consecutive to count 1"
+                        },
+                        {
+                            "count-number": "3",
+                            "offence-start-date-day": "25",
+                            "offence-start-date-month": "02",
+                            "offence-start-date-year": "2024",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "TH68050"
+                            ],
+                            "offence-name": "TH68050 - Take a motor vehicle without the owners consent",
+                            "outcome": "Imprisonment",
+                            "sentence-type": "SDS (Standard Determinate Sentence)",
+                            "sentence-length-years": "0",
+                            "sentence-length-months": "6",
+                            "sentence-length-weeks": "0",
+                            "sentence-length-days": "0",
+                            "consecutive-concurrent" : "Concurrent"
+                        }
+                    ]
                 }
             ]
         }
