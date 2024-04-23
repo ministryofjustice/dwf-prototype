@@ -83,6 +83,34 @@
                                     {{ lastAppearance['overall-case-outcome'] }}
                                 </dd>
                             </div>
+                            {% if lastAppearance.sentences %}
+                                                        <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Overall sentence length
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                    {{ lastAppearance['overall-sentence-length-years'] }} years {{ lastAppearance['overall-sentence-length-months'] }} months {{ lastAppearance['overall-sentence-length-weeks'] }} weeks {{ lastAppearance['overall-sentence-length-days'] }} days
+                                    <!-- <br>
+                                    <strong class="govuk-tag govuk-tag--red govuk-!-margin-top-2">
+          Mismatch
+        </strong>
+        <div class="govuk-hint govuk-!-margin-top-2">Something about what the user must do to correct this.</div> -->
+                                </dd>
+                            </div>
+                            <!-- <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Total length of sentences
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                    {{ lastAppearance['overall-sentence-length-years'] }} years {{ lastAppearance['overall-sentence-length-mobths'] }} months {{ lastAppearance['overall-sentence-length-weeks'] }} weeks {{ lastAppearance['overall-sentence-length-days'] }} days
+                                    <br>
+        <strong class="govuk-tag govuk-tag--red govuk-!-margin-top-2">
+          Mismatch
+        </strong>
+        <div class="govuk-hint govuk-!-margin-top-2">Something about what the user must do to correct this.</div>
+                                </dd>
+                            </div> -->
+                            {% endif %}
                             {% if (lastAppearance['next-court-date-set'] == 'Yes') %}
                             <div class="govuk-summary-list__row">
                                 <dt class="govuk-summary-list__key">
@@ -107,8 +135,9 @@
                             </div>
                             {% endif %}
                         </dl>
-                        <div class="govuk-accordion govuk-!-margin-top-6" data-module="govuk-accordion" id="accordion-default">
-                            {% if courtCase.appearances.length > 1 %}
+                        <h2 class="govuk-heading-m govuk-!-margin-top-6">Appearances and {% if lastAppearance.sentences %}sentences{% else %}offences{% endif %}</h2>
+                        <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+                            {% if courtCase.appearances %}
                             <div class="govuk-accordion__section">
                                 <div class="govuk-accordion__section-header">
                                     <h2 class="govuk-accordion__section-heading">
@@ -117,7 +146,7 @@
                                         </span>
                                     </h2>
                                 </div>
-                                <div id="accordion-default-content-1" class="govuk-accordion__section-content">
+                                <div id="accordion-default-content-1" class="govuk-accordion__section-content govuk-!-padding-top-0">
                                     <table class="govuk-table">
                             <thead class="govuk-table__head">
                                 <tr class="govuk-table__row">
@@ -143,7 +172,7 @@
                                 </div>
                             </div>
                             {% endif %}
-                            {% if appearance.sentences < 1 %}
+                            {% if lastAppearance.sentences == null %}
                             <div class="govuk-accordion__section">
                                 <div class="govuk-accordion__section-header">
                                     <h2 class="govuk-accordion__section-heading">
@@ -152,7 +181,7 @@
                                         </span>
                                     </h2>
                                 </div>
-                                <div id="accordion-default-content-2" class="govuk-accordion__section-content">
+                                <div id="accordion-default-content-2" class="govuk-accordion__section-content govuk-!-padding-top-0">
                                      {% for offence in lastAppearance.offences %}
                                     <div class="offence-card">
                                         <div class="offence-card-offence-details">
@@ -194,7 +223,7 @@
                                         </span>
                                     </h2>
                                 </div>
-                                <div id="accordion-default-content-3" class="govuk-accordion__section-content">
+                                <div id="accordion-default-content-3" class="govuk-accordion__section-content govuk-!-padding-top-0">
                                     {% for sentence in lastAppearance.sentences %}
                                     <div class="offence-card sentence-card">
                                         <div class="offence-card-offence-details">
@@ -294,7 +323,7 @@
                 {% endif %}
             </div>
         </div>
-        <nav class="govuk-pagination" role="navigation" aria-label="Pagination">
+        <!-- <nav class="govuk-pagination" role="navigation" aria-label="Pagination">
             <ul class="govuk-pagination__list">
                 <li class="govuk-pagination__item govuk-pagination__item--current">
                     <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 1" aria-current="page">
@@ -317,14 +346,14 @@
                         <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
                     </svg></a>
             </div>
-        </nav>
+        </nav> -->
     </div>
     <div class="govuk-grid-column-one-third">
         <div class="actions-list">
             <ul class="govuk-list actions-list-list">
                 <span class="govuk-heading-m actions-list-header">Actions</span>
                 <li><a href="/v12/create-court-case?route=new-court-case">Add a new court case</a></li>
-                <li><a href="">Record an appeal</a></li>
+                <!-- <li><a href="">Record an appeal</a></li> -->
             </ul>
         </div>
     </div>
