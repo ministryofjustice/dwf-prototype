@@ -8,7 +8,7 @@ v12{% extends "../template.html" %}
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add an appearance to a court case</span>
+                            <span class="govuk-caption-l">Review offences {% if data.appearance['warrant-type'] == "Sentencing" %}and sentences{% endif %}</span>
                             What is the new outcome for this offence?
                         </h1>
                     </legend>

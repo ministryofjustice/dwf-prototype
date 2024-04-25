@@ -13,7 +13,11 @@
                 <fieldset class="govuk-fieldset" role="group">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
+                            {% if data.route == 'remand-to-sentence' %}
+                            <span class="govuk-caption-l">Review offences and sentences</span>
+                            {% else %}
                             <span class="govuk-caption-l">Add a sentence</span>
+                            {% endif %}
                             Enter the count number
                         </h1>
                     </legend>
@@ -34,7 +38,7 @@
             <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
                 <div class="govuk-summary-list__row offences-summary-card-court-details-row">
                     <dt class="govuk-summary-list__key">
-                        Case reference number
+                        Case reference
                     </dt>
                     <dd class="govuk-summary-list__value">
                         {{ data['appearance']['court-case-ref'] }}

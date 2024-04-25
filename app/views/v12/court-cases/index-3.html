@@ -1,0 +1,70 @@
+{% extends "./template.html" %}
+{% set nav = true %}
+{% block content %}
+<!-- Court cases -->
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <h1 class="govuk-heading-xl">Court cases</h1>
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <form class="form" action="/v12/create-court-case?route=new-court-case" method="post">
+            <button class="govuk-button govuk-!-margin-bottom-8">Add a court case</button>
+        </form>
+        <div class="content-top govuk-!-margin-bottom-4">
+            <div>
+                <span class="govuk-body govuk-!-font-weight-bold">Sort by:</span><span class="govuk-body govuk-!-margin-left-2">Most recent <span class="seperator">|</span> <a href="">Earliest</a></span>
+            </div>
+            <div>
+                <span class="govuk-body">Showing <strong>{{ data.courtCases.length }}</strong> of <strong>{{ data.courtCases.length }}</strong> court cases</span>
+            </div>
+        </div>
+        {% if data.courtCases | length %}
+        <table class="govuk-table govuk-table--small-text-until-tablet">
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">Case ref</th>
+      <th scope="col" class="govuk-table__header">Court</th>
+      <th scope="col" class="govuk-table__header">Overall case outcome</th>
+      <th scope="col" class="govuk-table__header">Offences/sentences</th>
+      <th scope="col" class="govuk-table__header"></th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    {% for courtCase in data.courtCases %}
+    {% set lastAppearance = courtCase.appearances | last %}
+    {% set courtCaseIndex = loop.index0 %}
+    <tr class="govuk-table__row">
+      <td class="govuk-table__cell">{{ lastAppearance['court-case-ref'] }}</th>
+      <td class="govuk-table__cell">{{ lastAppearance['court-name']}}</td>
+      <td class="govuk-table__cell">{{ lastAppearance['overall-case-outcome'] }}</td>
+      <td class="govuk-table__cell">
+            {% if lastAppearance.sentences %}
+            {{ lastAppearance.sentences.length }} sentences
+            {% else %}
+            {{ lastAppearance.offences.length }} offences
+            {% endif %}
+      </td>
+      <td class="govuk-table__cell"><a href="court-case-detail?courtCaseIndex={{loop.index0}}">View court case <span class="govuk-visually-hidden">{{ lastAppearance['court-case-ref'] }} at {{ lastAppearance['court-name'] }}</span></a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>    
+        {% else %}
+        <p class="govuk-body">There are no court cases recorded for Daryl Evans.</p>
+        <p class="gouk-body"><a href="/v12/create-court-case?route=new-court-case">Add a court case now</a>
+        </p>
+        {% endif %}
+    </div>
+    <!-- <div class="govuk-grid-column-one-third">
+        <div class="actions-list">
+            <ul class="govuk-list actions-list-list">
+                <span class="govuk-heading-m actions-list-header">Actions</span>
+                <li><a href="/v12/create-court-case?route=new-court-case">Add a new court case</a></li>
+                <!-- <li><a href="">Record an appeal</a></li> -->
+    </ul>
+</div>
+</div>
+</div>
+{% endblock %}

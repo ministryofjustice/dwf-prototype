@@ -84,7 +84,7 @@
                                 </dd>
                             </div>
                             {% if lastAppearance.sentences %}
-                                                        <div class="govuk-summary-list__row">
+                            <div class="govuk-summary-list__row">
                                 <dt class="govuk-summary-list__key">
                                     Overall sentence length
                                 </dt>
@@ -135,19 +135,8 @@
                             </div>
                             {% endif %}
                         </dl>
-                        <h2 class="govuk-heading-m govuk-!-margin-top-6">Appearances and {% if lastAppearance.sentences %}sentences{% else %}offences{% endif %}</h2>
-                        <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
-                            {% if courtCase.appearances %}
-                            <div class="govuk-accordion__section">
-                                <div class="govuk-accordion__section-header">
-                                    <h2 class="govuk-accordion__section-heading">
-                                        <span class="govuk-accordion__section-button" id="accordion-default-heading-1">
-                                            Appearances <span class="govuk-body">({{ courtCase.appearances.length }})</span>
-                                        </span>
-                                    </h2>
-                                </div>
-                                <div id="accordion-default-content-1" class="govuk-accordion__section-content govuk-!-padding-top-0">
-                                    <table class="govuk-table">
+                        <h2 class="govuk-heading-m govuk-!-margin-top-6">Appearances</h2>
+                        <table class="govuk-table">
                             <thead class="govuk-table__head">
                                 <tr class="govuk-table__row">
                                     <th scope="col" class="govuk-table__header">Case reference</th>
@@ -160,73 +149,62 @@
                             <tbody class="govuk-table__body">
                                 {% for appearance in courtCase.appearances | reverse %}
                                 <tr class="govuk-table__row">
-                                    <td class="govuk-table__cell">{{ appearance['court-case-ref'] }}</td>
-                                    <td class="govuk-table__cell">{{ appearance['court-name'] }}</td>
-                                    <td class="govuk-table__cell">{{ appearance['warrant-date-day'] }}/{{ appearance['warrant-date-month'] }}/{{ appearance['warrant-date-year'] }}</td>
-                                    <td class="govuk-table__cell">{{ appearance['overall-case-outcome'] }}</td>
+                                    <td class="govuk-table__cell" style="border-bottom: none;">{{ appearance['court-case-ref'] }}</td>
+                                    <td class="govuk-table__cell" style="border-bottom: none;">{{ appearance['court-name'] }}</td>
+                                    <td class="govuk-table__cell" style="border-bottom: none;">{{ appearance['warrant-date-day'] }}/{{ appearance['warrant-date-month'] }}/{{ appearance['warrant-date-year'] }}</td>
+                                    <td class="govuk-table__cell" style="border-bottom: none;">{{ appearance['overall-case-outcome'] }}</td>
                                     <!-- <td class="govuk-table__cell" width="16%"><a href="/v12/view-appearance-detail?appearanceIndex={{loop.index0}}&courtCaseIndex={{courtCaseIndex}}">View and edit</a></td> -->
-                                    </tr>
-                                    {% endfor %}
-                            </tbody>
-                        </table>
-                                </div>
-                            </div>
-                            {% endif %}
-                            {% if lastAppearance.sentences == null %}
-                            <div class="govuk-accordion__section">
-                                <div class="govuk-accordion__section-header">
-                                    <h2 class="govuk-accordion__section-heading">
-                                        <span class="govuk-accordion__section-button" id="accordion-default-heading-2">
-                                            Offences
-                                        </span>
-                                    </h2>
-                                </div>
-                                <div id="accordion-default-content-2" class="govuk-accordion__section-content govuk-!-padding-top-0">
-                                     {% for offence in lastAppearance.offences %}
-                                    <div class="offence-card">
-                                        <div class="offence-card-offence-details">
-                                            <h4 class="govuk-heading-s">{{ offence['offence-name'] }}</h4>
-                                            <dl class="govuk-summary-list govuk-summary-list--no-border">
-                                                <div class="govuk-summary-list__row">
-                                                    <dt class="govuk-summary-list__key">
-                                                        Commited on
-                                                    </dt>
-                                                    <dd class="govuk-summary-list__value">
-                                                        {{ offence['offence-start-date-day'] }}/{{ offence['offence-start-date-month'] }}/{{ offence['offence-start-date-year'] }}
-                                                        {% if offence['offence-end-date-day'] > 0 %}
-                                                        to
-                                                        {{ offence['offence-end-date-day'] }}/{{ offence['offence-end-date-month'] }}/{{ offence['offence-end-date-year'] }}
-                                                        {% endif %}
-                                                    </dd>
+                                <tr class="govuk-table__row">
+                                    <td colspan="4" class="govuk-table__cell">
+                                        {% if appearance.sentences == null %}
+                                        <details class="govuk-details">
+                                            <summary class="govuk-details__summary">
+                                                <span class="govuk-details__summary-text">
+                                                    Offences ({{ appearance.offences.length }})
+                                                </span>
+                                            </summary>
+                                            <div class="govuk-details__text">
+                                                {% for offence in appearance.offences %}
+                                                <div class="offence-card">
+                                                    <div class="offence-card-offence-details govuk-!-padding-4">
+                                                        <h4 class="govuk-heading-s">{{ offence['offence-name'] }}</h4>
+                                                        <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                                            <div class="govuk-summary-list__row">
+                                                                <dt class="govuk-summary-list__key">
+                                                                    Commited on
+                                                                </dt>
+                                                                <dd class="govuk-summary-list__value">
+                                                                    {{ offence['offence-start-date-day'] }}/{{ offence['offence-start-date-month'] }}/{{ offence['offence-start-date-year'] }}
+                                                                    {% if offence['offence-end-date-day'] > 0 %}
+                                                                    to
+                                                                    {{ offence['offence-end-date-day'] }}/{{ offence['offence-end-date-month'] }}/{{ offence['offence-end-date-year'] }}
+                                                                    {% endif %}
+                                                                </dd>
+                                                            </div>
+                                                            <div class="govuk-summary-list__row">
+                                                                <dt class="govuk-summary-list__key">
+                                                                    Outcome
+                                                                </dt>
+                                                                <dd class="govuk-summary-list__value">
+                                                                    {{ offence['outcome'] }}
+                                                                </dd>
+                                                            </div>
+                                                        </dl>
+                                                    </div>
                                                 </div>
-                                                <div class="govuk-summary-list__row">
-                                                    <dt class="govuk-summary-list__key">
-                                                        Outcome
-                                                    </dt>
-                                                    <dd class="govuk-summary-list__value">
-                                                        {{ offence['outcome'] }}
-                                                    </dd>
-                                                </div>
-                                            </dl>
-                                        </div>
-                                    </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                            {% endif %}
-                            {% if lastAppearance.sentences %}
-                            <div class="govuk-accordion__section">
-                                <div class="govuk-accordion__section-header">
-                                    <h2 class="govuk-accordion__section-heading">
-                                        <span class="govuk-accordion__section-button" id="accordion-default-heading-3">
-                                            Sentences <span class="govuk-body">({{ lastAppearance.sentences | length }})</span>
-                                        </span>
-                                    </h2>
-                                </div>
-                                <div id="accordion-default-content-3" class="govuk-accordion__section-content govuk-!-padding-top-0">
-                                    {% for sentence in lastAppearance.sentences %}
+                                                {% endfor %}
+                                        </details>
+                                        {% else %}
+                                        <details class="govuk-details">
+                                            <summary class="govuk-details__summary">
+                                                <span class="govuk-details__summary-text">
+                                                    Sentences ({{ appearance.sentences.length }})
+                                                </span>
+                                            </summary>
+                                            <div class="govuk-details__text">
+                                                {% for sentence in appearance.sentences %}
                                     <div class="offence-card sentence-card">
-                                        <div class="offence-card-offence-details">
+                                        <div class="offence-card-offence-details govuk-!-padding-4">
                                             <span class="govuk-body-s">Count {{ sentence['count-number'] }}</span>
                                             <h4 class="govuk-heading-s">{{ sentence['offence-name'] }}
                                                 {% if sentence['terror-related'] == 'Yes' %}
@@ -309,10 +287,14 @@
                                         </div>
                                     </div>
                                     {% endfor %}
-                                </div>
-                            </div>
-                            {% endif %}
-                        </div>
+                                        </details>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 {% endfor %}

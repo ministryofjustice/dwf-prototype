@@ -7,19 +7,14 @@
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add an appearance</span>
-                            Upload court documents
+                            <span class="govuk-caption-l">Upload court documents</span>
+                            You have uploaded {{ data.appearance.documents.length }} documents
                         </h1>
                     </legend>
                     <div id="file-upload-1-hint" class="govuk-hint govuk-!-margin-top-1 govuk-!-margin-bottom-5">
     You can upload .pdf, .jpg, .doc or .docx files.
   </div>
 
-    {% if data.appearance.documents.length > 0 %}
-    <p class="govuk-body" aria-live="polite">{{ data.appearance.documents.length }} files uploaded</p>
-    {% else %}
-    
-    {% endif %}
     <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="document-type" method="post">Upload a document</button>
     
 
@@ -48,7 +43,7 @@
       {% endfor %}
       </dl>
     <button class="govuk-button" data-module="govuk-button">
-  Finish and continue
+  Continue
 </button>
         </form>
     </div>

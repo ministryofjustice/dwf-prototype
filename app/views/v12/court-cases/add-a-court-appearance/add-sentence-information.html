@@ -5,12 +5,12 @@
     <div class="govuk-grid-column-two-thirds">
         <form class="form" action="/v12/add-sentence-information-complete" method="post">
             <h1 class="govuk-heading-l">
-                <span class="govuk-caption-l">Add an appearance</span>
+                <!-- <span class="govuk-caption-l">Review offences {% if data.appearance['warrant-type'] == "Sentencing" %}and sentences{% endif %}</span> -->
                 Review offences {% if data.appearance['warrant-type'] == "Sentencing" %}and sentences{% endif %}
             </h1>
             <p class="govuk-body">Review and update the offences that have been entered for this court case.</p>
             <h2 class="govuk-heading-m">Offences<span class="govuk-body"> ({{ data.appearance.offences.length }})</span></h2>
-            {% if data.appearance.offences < 1 %} <p class="govuk-body">No offences.</p>
+            {% if data.appearance.offences < 1 %} <p class="govuk-body">There are no offences to show.</p>
                 {% endif %}
                 <button class="govuk-button govuk-button--secondary govuk-!-margin-bottom-2" data-module="govuk-button" formaction="/v12/create-offence?route=remand-to-sentence&edit=false" method="post">
                     Add an offence
@@ -59,7 +59,7 @@
                 <button class="govuk-button govuk-button--secondary govuk-!-margin-bottom-2" data-module="govuk-button" formaction="/v12/create-sentence?route=remand-to-sentence" method="post">
                     Add a sentence
                 </button>
-                {% if data.appearance.sentences.length == 0 %}<p class="govuk-body govuk-!-margin-top-4">There are no sentences. Add a sentence or update an offence outcome.</p>
+                {% if data.appearance.sentences.length == 0 %}<p class="govuk-body govuk-!-margin-top-4">There are no sentences to show. Add a sentence or update an offence outcome.</p>
                 {% endif %}
                 {% for sentence in data.appearance.sentences %}
                 {% if sentence['sentence-type'] != null %}
@@ -148,13 +148,13 @@
                 <div class="govuk-form-group govuk-!-margin-top-8">
                     <fieldset class="govuk-fieldset">
                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-                            Have you finished reviewing offences?
+                            Have you finished reviewing offences {% if data.appearance['warrant-type'] == "Sentencing" %}and sentences{% endif %}?
                         </legend>
                         <div class="govuk-radios" data-module="govuk-radios">
                             <div class="govuk-radios__item">
                                 <input class="govuk-radios__input" id="finished-adding-offences" name="appearance[finished-adding-offences]" type="radio" value="yes">
                                 <label class="govuk-label govuk-radios__label" for="finished-adding-offences">
-                                    Yes, I’ve finished reviewing sentences and offences
+                                    Yes, I’ve finished reviewing offences {% if data.appearance['warrant-type'] == "Sentencing" %}and sentences{% endif %}
                                 </label>
                             </div>
                             <div class="govuk-radios__item">
@@ -167,7 +167,7 @@
                     </fieldset>
                     <div class="govuk-button-group">
                         <button class="govuk-button govuk-!-margin-top-6" data-module="govuk-button">
-                            Finish and continue
+                            Continue
                         </button>
                     </div>
                 </div>
