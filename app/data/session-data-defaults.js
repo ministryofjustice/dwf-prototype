@@ -48,6 +48,45 @@ module.exports = {
                             ],
                             "offence-name": "CL77001 - Use violence to secure entry to premises",
                             "outcome": "Remand before conviction"
+                        },
+                        {
+                            "offence-start-date-day": "25",
+                            "offence-start-date-month": "02",
+                            "offence-start-date-year": "2024",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "CL77001"
+                            ],
+                            "offence-name": "TH68023 - Robbery",
+                            "outcome": "Remand before conviction"
+                        },
+                        {
+                            "offence-start-date-day": "25",
+                            "offence-start-date-month": "02",
+                            "offence-start-date-year": "2024",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "TH68050"
+                            ],
+                            "offence-name": "TH68050 - Take a motor vehicle without the owners consent",
+                            "outcome": "Remand before conviction"
+                        },
+                        {
+                            "offence-start-date-day": "25",
+                            "offence-start-date-month": "02",
+                            "offence-start-date-year": "2024",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "AN16330"
+                            ],
+                            "offence-name": "AN16330 - Person in charge of wind turbine generator fail to ensure light displayed",
+                            "outcome": "Remand before conviction"
                         }
                     ]
                 },
@@ -77,6 +116,45 @@ module.exports = {
                                 "CL77001"
                             ],
                             "offence-name": "CL77001 - Use violence to secure entry to premises",
+                            "outcome": "Remand before conviction"
+                        },
+                        {
+                            "offence-start-date-day": "25",
+                            "offence-start-date-month": "02",
+                            "offence-start-date-year": "2024",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "CL77001"
+                            ],
+                            "offence-name": "TH68023 - Robbery",
+                            "outcome": "Remand before conviction"
+                        },
+                        {
+                            "offence-start-date-day": "25",
+                            "offence-start-date-month": "02",
+                            "offence-start-date-year": "2024",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "TH68050"
+                            ],
+                            "offence-name": "TH68050 - Take a motor vehicle without the owners consent",
+                            "outcome": "Remand before conviction"
+                        },
+                        {
+                            "offence-start-date-day": "25",
+                            "offence-start-date-month": "02",
+                            "offence-start-date-year": "2024",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "AN16330"
+                            ],
+                            "offence-name": "AN16330 - Person in charge of wind turbine generator fail to ensure light displayed",
                             "outcome": "Remand before conviction"
                         }
                     ]
