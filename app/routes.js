@@ -638,6 +638,14 @@ router.post('/:prototypeVersion/persist-sentence', function(req, res) {
     req.session.data.changeMade = 0
     req.session.data.sentenceDeleted = 0
     req.session.data.sentenceAdded = 1
+    if(prototypeVersion == "v13"){
+        if (req.session.data.sentence['consecutive-concurrent'] == "Consecutive" | req.session.data.sentence['consecutive-concurrent'] == "Forthwith") {
+        req.session.data.appearance['total-sentence-length-years'] = parseInt(req.session.data.appearance['total-sentence-length-years'] + req.session.data.sentence['sentence-length-years'])
+        req.session.data.appearance['total-sentence-length-months'] = parseInt(req.session.data.appearance['total-sentence-length-months'] + req.session.data.sentence['sentence-length-months'])
+        req.session.data.appearance['total-sentence-length-weeks'] = parseInt(req.session.data.appearance['total-sentence-length-weeks'] +  req.session.data.sentence['sentence-length-weeks'])
+        req.session.data.appearance['total-sentence-length-days'] = parseInt(req.session.data.appearance['total-sentence-length-days'] + req.session.data.sentence['sentence-length-days'])
+        }
+    }
     return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers`)
 })
 
@@ -681,6 +689,12 @@ router.get('/:prototypeVersion/warrant-type-select', function(req, res) {
             res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/overall-case-outcome`)
         }
     } else if (warrantType == 'Sentencing') {
+        if (prototypeVersion == 'v13'){
+            req.session.data.appearance['total-sentence-length-years'] = 0
+            req.session.data.appearance['total-sentence-length-months'] = 0
+            req.session.data.appearance['total-sentence-length-weeks'] = 0
+            req.session.data.appearance['total-sentence-length-days'] = 0
+        }
         if (route == 'appearance') {
             req.session.data.appearance.sentences = []
             if (prototypeVersion == 'v12' || prototypeVersion == 'v13') {
