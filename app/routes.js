@@ -937,3 +937,10 @@ router.post('/:prototypeVersion/next-court-appearance-complete', function(req, r
     } else
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`)
 })
+
+router.get('/:prototypeVersion/launch-prototype', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    req.session.data.prototypeVersion = prototypeVersion
+    console.log("Launching prototype version: " + prototypeVersion)
+        res.redirect(`/${prototypeVersion}/court-cases/`)
+})
