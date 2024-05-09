@@ -941,7 +941,7 @@ router.post('/:prototypeVersion/next-court-appearance-complete', function(req, r
 
 router.get('/:prototypeVersion/launch-prototype', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
-    req.session.regenerate(function(err) {
+    req.session.regenerate(function() {
         req.session.data = sessionDataDefaults
         req.session.data.prototypeVersion = prototypeVersion
         console.log("Launching prototype version: " + prototypeVersion)
