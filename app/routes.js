@@ -4,6 +4,7 @@
 //
 
 const govukPrototypeKit = require('govuk-prototype-kit')
+const sessionDataDefaults = require('./data/session-data-defaults')
 const router = govukPrototypeKit.requests.setupRouter()
 
 router.post('/:prototypeVersion/next-court-date-select', function(req, res) {
@@ -954,7 +955,10 @@ router.post('/:prototypeVersion/next-court-appearance-complete', function(req, r
 
 router.get('/:prototypeVersion/launch-prototype', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
-    req.session.data.prototypeVersion = prototypeVersion
-    console.log("Launching prototype version: " + prototypeVersion)
+    req.session.regenerate(function() {
+        req.session.data = sessionDataDefaults
+        req.session.data.prototypeVersion = prototypeVersion
+        console.log("Launching prototype version: " + prototypeVersion)
         res.redirect(`/${prototypeVersion}/court-cases/`)
+    })
 })
