@@ -2,7 +2,7 @@
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <h1 class="govuk-heading-xl">Appearance details</h1>
+        <h1 class="govuk-heading-l govuk-!-margin-top-4">Appearance details</h1>
         <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
@@ -12,8 +12,8 @@
                     {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['court-case-ref'] }}
                 </dd>
                 <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
-                Edit<span class="govuk-visually-hidden"> customer reference</span>
+              <a class="govuk-link" href="add-a-court-appearance/court-case-reference-number?edit=true">
+                Edit<span class="govuk-visually-hidden"> case reference</span>
               </a>
             </dd>
             </div>

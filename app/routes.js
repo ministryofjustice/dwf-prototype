@@ -641,10 +641,10 @@ router.post('/:prototypeVersion/persist-sentence', function(req, res) {
     req.session.data.sentenceAdded = 1
     if(prototypeVersion == "v13"){
         if (req.session.data.sentence['consecutive-concurrent'] == "Consecutive" | req.session.data.sentence['consecutive-concurrent'] == "Forthwith") {
-        req.session.data.appearance['total-sentence-length-years'] = parseInt(req.session.data.appearance['total-sentence-length-years'] + req.session.data.sentence['sentence-length-years'])
-        req.session.data.appearance['total-sentence-length-months'] = parseInt(req.session.data.appearance['total-sentence-length-months'] + req.session.data.sentence['sentence-length-months'])
-        req.session.data.appearance['total-sentence-length-weeks'] = parseInt(req.session.data.appearance['total-sentence-length-weeks'] +  req.session.data.sentence['sentence-length-weeks'])
-        req.session.data.appearance['total-sentence-length-days'] = parseInt(req.session.data.appearance['total-sentence-length-days'] + req.session.data.sentence['sentence-length-days'])
+        req.session.data.appearance['total-sentence-length-years'] = parseInt(req.session.data.appearance['total-sentence-length-years'],10) + parseInt(req.session.data.sentence['sentence-length-years'],10)
+        req.session.data.appearance['total-sentence-length-months'] = parseInt(req.session.data.appearance['total-sentence-length-months'],10) + parseInt(req.session.data.sentence['sentence-length-months'],10)
+        req.session.data.appearance['total-sentence-length-weeks'] = parseInt(req.session.data.appearance['total-sentence-length-weeks'],10) + parseInt(req.session.data.sentence['sentence-length-weeks'],10)
+        req.session.data.appearance['total-sentence-length-days'] = parseInt(req.session.data.appearance['total-sentence-length-days'],10) + parseInt(req.session.data.sentence['sentence-length-days'],10)
         }
     }
     return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers`)

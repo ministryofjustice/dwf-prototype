@@ -46,7 +46,7 @@
             </h1>
         </legend>
         <form class="form" action="/{{data.prototypeVersion}}/add-sentence-information-complete?route=new-court-case" method="post">
-            <dl class="govuk-summary-list govuk-summary-list--no-border">
+<!--             <dl class="govuk-summary-list govuk-summary-list--no-border">
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Case reference
@@ -79,11 +79,11 @@
                         {{ data['appearance']['warrant-type'] }}
                     </dd>
                 </div>
-            </dl>
-            <h2 class="govuk-heading-m govuk-!-margin-bottom-6">Sentences <span class="govuk-body">({{ data['appearance'].sentences | length }})</span></h2>
-            <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-2">
+            </dl> -->
+            <!-- <h2 class="govuk-heading-m govuk-!-margin-bottom-6">Sentences <span class="govuk-body">({{ data['appearance'].sentences | length }})</span></h2> -->
+            <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-2 govuk-!-margin-top-8">
                 <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
+                    <dt class="govuk-summary-list__key" style="width: 50%;">
                         Overall sentence length
                     </dt>
                     <dd class="govuk-summary-list__value">
@@ -99,16 +99,16 @@
                     </dd>
                 </div>
             </dl>
-            <!-- <div class="govuk-inset-text govuk-!-margin-top-0 govuk-!-margin-bottom-6">
+            <div class="govuk-inset-text govuk-!-margin-top-0 govuk-!-margin-bottom-6">
                     Overall sentence length and the total length of sentences added do not match.
-            </div> -->
-            <div class="govuk-warning-text">
+            </div>
+<!--             <div class="govuk-warning-text">
   <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
   <strong class="govuk-warning-text__text">
     <span class="govuk-visually-hidden">Sentence length mismatch</span>
     Overall sentence length and the total length of sentences added do not match.
   </strong>
-</div>
+</div> -->
             <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="/{{data.prototypeVersion}}/create-sentence" method="post">
                 Add a sentence
             </button>
@@ -241,6 +241,37 @@
                 </button>
             </div>
         </form>
+    </div>
+    <div class="govuk-grid-column-one-third">
+        <div class="offence-summary">
+            <h2 class="govuk-heading-m govuk-!-margin-top-4">Appearance details</h2>
+            <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
+                <div class="govuk-summary-list__row offences-summary-card-court-details-row">
+                    <dt class="govuk-summary-list__key">
+                        Case reference
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['court-case-ref'] }}
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row offences-summary-card-court-details-row">
+                    <dt class="govuk-summary-list__key">
+                        Court name
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['court-name'] }}
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row offences-summary-card-court-details-row">
+                    <dt class="govuk-summary-list__key">
+                        Warrant date
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['warrant-date-day'] }}/{{ data['appearance']['warrant-date-month'] }}/{{ data['appearance']['warrant-date-year'] }}
+                    </dd>
+                </div>
+            </dl>
+        </div>
     </div>
 </div>
 {% endblock %}

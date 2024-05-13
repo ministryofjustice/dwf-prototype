@@ -19,7 +19,7 @@
     <div class="govuk-grid-column-two-thirds">
         <div class="govuk-grid-row govuk-!-margin-bottom-3">
             <div class="govuk-grid-column-full">
-                <!--                 <div class="moj-search search">
+<div class="moj-search search">
                     <form action="#" method="post">
                         <div class="govuk-form-group">
                             <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
@@ -34,11 +34,8 @@
                             Search
                         </button>
                     </form>
-                </div> -->
+                </div>
                 <div class="content-top">
-                    <div>
-                        <span class="govuk-body govuk-!-font-weight-bold">Sort by:</span><span class="govuk-body govuk-!-margin-left-2">Most recent <span class="seperator">|</span> <a href="">Earliest</a></span>
-                    </div>
                     <div>
                         <span class="govuk-body">Showing <strong>{{ data.courtCases.length }}</strong> of <strong>{{ data.courtCases.length }}</strong> court cases</span>
                     </div>
@@ -55,14 +52,13 @@
                     <div class="govuk-summary-card__title-wrapper">
                         <h2 class="govuk-summary-card__title">{{ lastAppearance['court-case-ref'] }} <span class="govuk-body">at</span> {{ lastAppearance['court-name']}} </h2>
                         <ul class="govuk-summary-card__actions">
-                            <li class="govuk-summary-card__action"> <a class="govuk-link govuk-link--no-visited-state" href="/{{data.prototypeVersion}}/create-appearance?courtIndex={{courtCaseIndex}}">
-                                    Add appearance<span class="govuk-visually-hidden"> to court case</span>
-                                </a>
+                            <li class="govuk-summary-card__action">
+                                    {% if courtCase['source'] == "nomis" %}
+                                    <span class="moj-badge moj-badge--grey">NOMIS - read only</span>
+                                    {% else %}
+                                    <a class="govuk-link govuk-link--no-visited-state" href="/{{data.prototypeVersion}}/create-appearance?courtIndex={{courtCaseIndex}}">Add appearance<span class="govuk-visually-hidden"> to court case</span></a>
+                                    {% endif %}
                             </li>
-                            <!--                             <li class="govuk-summary-card__action"> <a class="govuk-link govuk-link--no-visited-state" href="/v5/update-court-case?index={{courtCaseIndex}}">
-                                    Edit
-                                </a>
-                            </li> -->
                         </ul>
                     </div>
                     <div class="govuk-summary-card__content">
@@ -135,7 +131,11 @@
                             </div>
                             {% endif %}
                         </dl>
-                        <h2 class="govuk-heading-m govuk-!-margin-top-6">Appearances</h2>
+                        <h2 class="govuk-heading-m govuk-!-margin-top-6">Appearances {% if courtCase.appearances.length >= 5 %}
+                                <span class="govuk-body">(showing of 5 of {{courtCase.appearances.length}})</span>
+                                {% else %}
+                                <span class="govuk-body">({{courtCase.appearances.length}})</span>
+                                {% endif %}</h2>
                         <table class="govuk-table">
                             <thead class="govuk-table__head">
                                 <tr class="govuk-table__row">
@@ -148,6 +148,7 @@
                             </thead>
                             <tbody class="govuk-table__body">
                                 {% for appearance in courtCase.appearances | reverse %}
+                                {% if loop.index <=5 %}
                                 <tr class="govuk-table__row">
                                     <td class="govuk-table__cell" style="border-bottom: none;">{{ appearance['court-case-ref'] }}</td>
                                     <td class="govuk-table__cell" style="border-bottom: none;">{{ appearance['court-name'] }}</td>
@@ -291,10 +292,11 @@
                                         {% endif %}
                                     </td>
                                 </tr>
-                                </tr>
+                                {% endif %}
                                 {% endfor %}
                             </tbody>
                         </table>
+                        <p class="govuk-body"><a class="govuk-link--no-visited-state" href="court-case-detail?courtCaseIndex={{loop.index0}}">{% if courtCase['source'] == "nomis" %}View all appearances{% else %}View and edit all appearances{% endif %}</a></p>
                     </div>
                 </div>
                 {% endfor %}

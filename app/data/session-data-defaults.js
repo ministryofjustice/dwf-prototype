@@ -1,22 +1,3 @@
-/*
-
-Provide default values for user session data. These are automatically added
-via the `autoStoreData` middleware. Values will only be added to the
-session if a value doesn't already exist. This may be useful for testing
-journeys where users are returning or logging in to an existing application.
-
-============================================================================
-
-Example usage:
-
-"full-name": "Sarah Philips",
-
-"options-chosen": [ "foo", "bar" ]
-
-============================================================================
-
-*/
-
 module.exports = {
     courtCases:[
         {
@@ -158,10 +139,291 @@ module.exports = {
                             "outcome": "Remand before conviction"
                         }
                     ]
-                }
+                },
+                {
+    "court-case-ref": "83GD1759015",
+    "overall-case-outcome": "Remand before conviction",
+    "next-court-date-set": "Yes",
+    "next-hearing-type": "Court appearance",
+    "warrant-date-day": "30",
+    "warrant-date-month": "04",
+    "warrant-date-year": "2024",
+    "court-name": "Sheffield Crown Court",
+    "next-court-date-day": "01",
+    "next-court-date-month": "05",
+    "next-court-date-year": "2024",
+    "next-court-time": "10:00",
+    "next-court-name": "Sheffield Crown Court",
+    "offences": [
+        {
+            "offence-start-date-day": "25",
+            "offence-start-date-month": "02",
+            "offence-start-date-year": "2024",
+            "offence-end-date-day": "",
+            "offence-end-date-month": "",
+            "offence-end-date-year": "",
+            "offence-code": [
+                "CL77001"
+            ],
+            "offence-name": "CL77001 - Use violence to secure entry to premises",
+            "outcome": "Remand before conviction"
+        },
+        {
+            "offence-start-date-day": "25",
+            "offence-start-date-month": "02",
+            "offence-start-date-year": "2024",
+            "offence-end-date-day": "",
+            "offence-end-date-month": "",
+            "offence-end-date-year": "",
+            "offence-code": [
+                "CL77001"
+            ],
+            "offence-name": "TH68023 - Robbery",
+            "outcome": "Remand before conviction"
+        },
+        {
+            "offence-start-date-day": "25",
+            "offence-start-date-month": "02",
+            "offence-start-date-year": "2024",
+            "offence-end-date-day": "",
+            "offence-end-date-month": "",
+            "offence-end-date-year": "",
+            "offence-code": [
+                "TH68050"
+            ],
+            "offence-name": "TH68050 - Take a motor vehicle without the owners consent",
+            "outcome": "Remand before conviction"
+        },
+        {
+            "offence-start-date-day": "25",
+            "offence-start-date-month": "02",
+            "offence-start-date-year": "2024",
+            "offence-end-date-day": "",
+            "offence-end-date-month": "",
+            "offence-end-date-year": "",
+            "offence-code": [
+                "AN16330"
+            ],
+            "offence-name": "AN16330 - Person in charge of wind turbine generator fail to ensure light displayed",
+            "outcome": "Remand before conviction"
+        }
+    ]
+},
+
+                {
+    "court-case-ref": "83FD1762342",
+    "overall-case-outcome": "Remand before conviction",
+    "next-court-date-set": "Yes",
+    "next-hearing-type": "Court appearance",
+    "warrant-date-day": "02",
+    "warrant-date-month": "05",
+    "warrant-date-year": "2024",
+    "court-name": "Sheffield Crown Court",
+    "next-court-date-day": "03",
+    "next-court-date-month": "05",
+    "next-court-date-year": "2024",
+    "next-court-time": "11:00",
+    "next-court-name": "Sheffield Crown Court",
+    "offences": [
+        {
+            "offence-start-date-day": "25",
+            "offence-start-date-month": "02",
+            "offence-start-date-year": "2024",
+            "offence-end-date-day": "",
+            "offence-end-date-month": "",
+            "offence-end-date-year": "",
+            "offence-code": [
+                "CL77001"
+            ],
+            "offence-name": "CL77001 - Use violence to secure entry to premises",
+            "outcome": "Remand before conviction"
+        },
+        {
+            "offence-start-date-day": "25",
+            "offence-start-date-month": "02",
+            "offence-start-date-year": "2024",
+            "offence-end-date-day": "",
+            "offence-end-date-month": "",
+            "offence-end-date-year": "",
+            "offence-code": [
+                "CL77001"
+            ],
+            "offence-name": "TH68023 - Robbery",
+            "outcome": "Remand before conviction"
+        },
+        {
+            "offence-start-date-day": "25",
+            "offence-start-date-month": "02",
+            "offence-start-date-year": "2024",
+            "offence-end-date-day": "",
+            "offence-end-date-month": "",
+            "offence-end-date-year": "",
+            "offence-code": [
+                "TH68050"
+            ],
+            "offence-name": "TH68050 - Take a motor vehicle without the owners consent",
+            "outcome": "Remand before conviction"
+        },
+        {
+            "offence-start-date-day": "25",
+            "offence-start-date-month": "02",
+            "offence-start-date-year": "2024",
+            "offence-end-date-day": "",
+            "offence-end-date-month": "",
+            "offence-end-date-year": "",
+            "offence-code": [
+                "AN16330"
+            ],
+            "offence-name": "AN16330 - Person in charge of wind turbine generator fail to ensure light displayed",
+            "outcome": "Remand before conviction"
+        }
+    ]
+}
+,
+                {
+    "court-case-ref": "93GD1771230",
+    "overall-case-outcome": "Remand before conviction",
+    "next-court-date-set": "Yes",
+    "next-hearing-type": "Court appearance",
+    "warrant-date-day": "04",
+    "warrant-date-month": "05",
+    "warrant-date-year": "2024",
+    "court-name": "Sheffield Crown Court",
+    "next-court-date-day": "05",
+    "next-court-date-month": "05",
+    "next-court-date-year": "2024",
+    "next-court-time": "12:00",
+    "next-court-name": "Sheffield Crown Court",
+    "offences": [
+        {
+            "offence-start-date-day": "25",
+            "offence-start-date-month": "02",
+            "offence-start-date-year": "2024",
+            "offence-end-date-day": "",
+            "offence-end-date-month": "",
+            "offence-end-date-year": "",
+            "offence-code": [
+                "CL77001"
+            ],
+            "offence-name": "CL77001 - Use violence to secure entry to premises",
+            "outcome": "Remand before conviction"
+        },
+        {
+            "offence-start-date-day": "25",
+            "offence-start-date-month": "02",
+            "offence-start-date-year": "2024",
+            "offence-end-date-day": "",
+            "offence-end-date-month": "",
+            "offence-end-date-year": "",
+            "offence-code": [
+                "CL77001"
+            ],
+            "offence-name": "TH68023 - Robbery",
+            "outcome": "Remand before conviction"
+        },
+        {
+            "offence-start-date-day": "25",
+            "offence-start-date-month": "02",
+            "offence-start-date-year": "2024",
+            "offence-end-date-day": "",
+            "offence-end-date-month": "",
+            "offence-end-date-year": "",
+            "offence-code": [
+                "TH68050"
+            ],
+            "offence-name": "TH68050 - Take a motor vehicle without the owners consent",
+            "outcome": "Remand before conviction"
+        },
+        {
+            "offence-start-date-day": "25",
+            "offence-start-date-month": "02",
+            "offence-start-date-year": "2024",
+            "offence-end-date-day": "",
+            "offence-end-date-month": "",
+            "offence-end-date-year": "",
+            "offence-code": [
+                "AN16330"
+            ],
+            "offence-name": "AN16330 - Person in charge of wind turbine generator fail to ensure light displayed",
+            "outcome": "Remand before conviction"
+        }
+    ]
+}
+,
+                {
+    "court-case-ref": "63GD1781237",
+    "overall-case-outcome": "Remand before conviction",
+    "next-court-date-set": "Yes",
+    "next-hearing-type": "Court appearance",
+    "warrant-date-day": "06",
+    "warrant-date-month": "05",
+    "warrant-date-year": "2024",
+    "court-name": "Sheffield Crown Court",
+    "next-court-date-day": "07",
+    "next-court-date-month": "05",
+    "next-court-date-year": "2024",
+    "next-court-time": "13:00",
+    "next-court-name": "Sheffield Crown Court",
+    "offences": [
+        {
+            "offence-start-date-day": "25",
+            "offence-start-date-month": "02",
+            "offence-start-date-year": "2024",
+            "offence-end-date-day": "",
+            "offence-end-date-month": "",
+            "offence-end-date-year": "",
+            "offence-code": [
+                "CL77001"
+            ],
+            "offence-name": "CL77001 - Use violence to secure entry to premises",
+            "outcome": "Remand before conviction"
+        },
+        {
+            "offence-start-date-day": "25",
+            "offence-start-date-month": "02",
+            "offence-start-date-year": "2024",
+            "offence-end-date-day": "",
+            "offence-end-date-month": "",
+            "offence-end-date-year": "",
+            "offence-code": [
+                "CL77001"
+            ],
+            "offence-name": "TH68023 - Robbery",
+            "outcome": "Remand before conviction"
+        },
+        {
+            "offence-start-date-day": "25",
+            "offence-start-date-month": "02",
+            "offence-start-date-year": "2024",
+            "offence-end-date-day": "",
+            "offence-end-date-month": "",
+            "offence-end-date-year": "",
+            "offence-code": [
+                "TH68050"
+            ],
+            "offence-name": "TH68050 - Take a motor vehicle without the owners consent",
+            "outcome": "Remand before conviction"
+        },
+        {
+            "offence-start-date-day": "25",
+            "offence-start-date-month": "02",
+            "offence-start-date-year": "2024",
+            "offence-end-date-day": "",
+            "offence-end-date-month": "",
+            "offence-end-date-year": "",
+            "offence-code": [
+                "AN16330"
+            ],
+            "offence-name": "AN16330 - Person in charge of wind turbine generator fail to ensure light displayed",
+            "outcome": "Remand before conviction"
+        }
+    ]
+}
+
             ]
         },
         {
+            "source": "nomis",
             "appearances": [
                 {
                     "court-case-ref": "63GD1946270",
