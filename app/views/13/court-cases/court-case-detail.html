@@ -1,4 +1,5 @@
 {% extends "./template.html" %}
+{% set backLinkTarget = '/' + data.prototypeVersion + '/court-cases/' %}
 {% block content %}
 <!-- Court cases detailed view -->
 {% set lastAppearance = data.courtCases[data.courtCaseIndex].appearances | last %}
@@ -58,7 +59,7 @@
                         <tr class="govuk-table__row">
                                     <td colspan="5" class="govuk-table__cell">
                                         {% if appearance.sentences == null %}
-                                        <details class="govuk-details">
+                                        <details class="govuk-details govuk-!-margin-bottom-0">
                                             <summary class="govuk-details__summary">
                                                 <span class="govuk-details__summary-text">
                                                     Offences ({{ appearance.offences.length }})

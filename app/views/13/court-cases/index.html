@@ -158,7 +158,7 @@
                                 <tr class="govuk-table__row">
                                     <td colspan="4" class="govuk-table__cell">
                                         {% if appearance.sentences == null %}
-                                        <details class="govuk-details">
+                                        <details class="govuk-details govuk-!-margin-bottom-0">
                                             <summary class="govuk-details__summary">
                                                 <span class="govuk-details__summary-text">
                                                     Offences ({{ appearance.offences.length }})
@@ -196,7 +196,7 @@
                                                 {% endfor %}
                                         </details>
                                         {% else %}
-                                        <details class="govuk-details">
+                                        <details class="govuk-details govuk-!-margin-bottom-0">
                                             <summary class="govuk-details__summary">
                                                 <span class="govuk-details__summary-text">
                                                     Sentences ({{ appearance.sentences.length }})

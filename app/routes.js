@@ -122,6 +122,9 @@ router.post('/:prototypeVersion/offence-code-known', function(req, res) {
         if (warrantType == 'Sentencing') {
             return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-offence`)
         }
+        if (req.session.data.postSaveEdit == 'true') {
+            res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirm-offence`)
+        }
         if (route == 'new-court-case') {
             if (warrantType == 'Remand') {
                 res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirm-offence`)

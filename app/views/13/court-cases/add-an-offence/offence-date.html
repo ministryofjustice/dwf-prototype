@@ -6,6 +6,8 @@
         {% if data.edit == 'true' %}
         {% if data.route == 'remand-to-sentence' %}
         <form class="form" action="/{{data.prototypeVersion}}/persist-offence?edit=true" method="post">
+            {% elif data.postSaveEdit == 'true' %}
+            <form class="form" action="/{{data.prototypeVersion}}/persist-offence?edit=true" method="post">
             {% endif %}
             {% else %}
             {% if data.route == 'remand-to-sentence' %}
@@ -42,7 +44,7 @@
                                     <label class="govuk-label govuk-date-input__label" for="offence-start-date-day">
                                         Day
                                     </label>
-                                    <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="offence-start-date-day" name="offence[offence-start-date-day]" type="text" inputmode="numeric" value="{{ data.offence[offence-start-date-day] }}">
+                                    <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="offence-start-date-day" name="offence[offence-start-date-day]" type="text" inputmode="numeric" value="{{ data.offence[offence-start-date-day] }}{% if data.postSaveEdit == 'true' %}{{ data.appearance.offences[data.index]['offence-start-date-day'] }}{% endif %}">
                                 </div>
                             </div>
                             <div class="govuk-date-input__item">
@@ -50,7 +52,7 @@
                                     <label class="govuk-label govuk-date-input__label" for="offence-start-date-month">
                                         Month
                                     </label>
-                                    <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="offence-start-date-month" name="offence[offence-start-date-month]" type="text" inputmode="numeric" value="{{ data.offence[offence-start-date-month] }}">
+                                    <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="offence-start-date-month" name="offence[offence-start-date-month]" type="text" inputmode="numeric" value="{{ data.offence[offence-start-date-month] }}{% if data.postSaveEdit == 'true' %}{{ data.appearance.offences[data.index]['offence-start-date-month'] }}{% endif %}">
                                 </div>
                             </div>
                             <div class="govuk-date-input__item">
@@ -58,7 +60,7 @@
                                     <label class="govuk-label govuk-date-input__label" for="offence-start-date-year">
                                         Year
                                     </label>
-                                    <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="offence-start-date-year" name="offence[offence-start-date-year]" type="text" inputmode="numeric" value="{{ data.offence[offence-start-date-year] }}">
+                                    <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="offence-start-date-year" name="offence[offence-start-date-year]" type="text" inputmode="numeric" value="{{ data.offence[offence-start-date-year] }}{% if data.postSaveEdit == 'true' %}{{ data.appearance.offences[data.index]['offence-start-date-year'] }}{% endif %}">
                                 </div>
                             </div>
                         </div>

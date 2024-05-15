@@ -1,10 +1,12 @@
 {% extends "./template.html" %}
-{% block content %}
 <!-- {% set backLinkTarget = 'court-case-detail' %} -->
-{% set noBackLink = 'true' %}
+{% set backLinkTarget = '/' + data.prototypeVersion + '/court-cases/court-case-detail' %}
+{% set noBackLink = true %}
+{% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <h1 class="govuk-heading-l govuk-!-margin-top-4">Edit appearance</h1>
+        <form class="form" action="court-case-detail" method="post">
+        <h1 class="govuk-heading-l govuk-!-margin-top-4">Edit appearance {{ data.appearance['court-case-ref'] }} at {{ data.appearance['court-name'] }} on {{ data.appearance['warrant-date-day'] }}/{{ data.appearance['warrant-date-month'] }}/{{ data.appearance['warrant-date-year'] }}</h1>
         <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
@@ -45,19 +47,6 @@
               </a>
             </dd>
             </div>
-<!--             <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                    Hearing type
-                </dt>
-                <dd class="govuk-summary-list__value">
-                    {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['hearing-type'] }}
-                </dd>
-                <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="add-a-court-appearance/hearing-type?postSaveEdit=true">
-                Edit<span class="govuk-visually-hidden"> customer reference</span>
-              </a>
-            </dd>
-            </div> -->
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Overall case outcome
@@ -174,10 +163,19 @@
             </div>
                             <div class="offence-card-actions">
                     <ul class="offence-card-actions-list">
-                        <li class="offence-card-action-link"><a href="/{{data.prototypeVersion}}/update-offence?index={{loop.index0}}&postSaveEdit=true">Edit</a></li>
-                        <li class="offence-card-action-link"><a href="/{{data.prototypeVersion}}/confirm-delete?index={{loop.index0}}&postSaveEdit=true">Delete</a></li>
+                        <li class="offence-card-action-link"><a href="/{{data.prototypeVersion}}/update-offence?appearanceIndex=appearanceIndex&index={{loop.index0}}&postSaveEdit=true">Edit</a></li>
+                        <li class="offence-card-action-link"><a href="/{{data.prototypeVersion}}/confirm-delete?appearanceIndex=appearanceIndex&index={{loop.index0}}&postSaveEdit=true">Delete</a></li>
                     </ul>
                 </div>
         </div>
         {% endfor %}
+        <div class="govuk-button-group">
+            <button class="govuk-button govuk-!-margin-top-6" data-module="govuk-button">
+                Accept changes
+            </button>
+            <a href="court-case-detail" class="govuk-link">Cancel changes</a>
+        </div>
+        </form>
+    </div>
+</div>
         {% endblock %}
