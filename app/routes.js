@@ -334,10 +334,12 @@ router.post('/:prototypeVersion/persist-court-case', function(req, res) {
 
 router.get('/:prototypeVersion/update-appearance', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
-    const index = req.query.index
-    console.log(index)
-    req.session.data.courtCase = req.session.data.courtCases[index]
-    req.session.data.courtCaseIndex = index
+    const courtCaseIndex = req.query.courtCaseIndex
+    const appearanceIndex = req.query.appearanceIndex
+    console.log("Court case index: " + courtCaseIndex + "\n" + "Appearance index: " + appearanceIndex)
+    req.session.data.appearance = req.session.data.courtCases[courtCaseIndex].appearances[appearanceIndex]
+    req.session.data.courtCaseIndex = courtCaseIndex
+    req.session.data.appearanceIndex = appearanceIndex
     res.redirect(`/${prototypeVersion}/court-cases/appearance-detail`)
 })
 
@@ -405,12 +407,14 @@ router.post('/:prototypeVersion/persist-appearance', function(req, res) {
         if (prototypeVersion == 'v12' || prototypeVersion == '13') {
             appearanceDetailsComplete = 1
             req.session.data.appearanceDetailsComplete = appearanceDetailsComplete
-            console.log("Appearance details complee: " + appearanceDetailsComplete)
+            console.log("Appearance details complete: " + appearanceDetailsComplete)
             return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`)
         }
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`)
     } else if (route == "new-court-case") {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/confirmation`)
+    } else if (req.session.data.postSaveEdit == "true") {
+        return res.redirect(`/${prototypeVersion}/court-cases/appearance-detail`)
     }
 })
 

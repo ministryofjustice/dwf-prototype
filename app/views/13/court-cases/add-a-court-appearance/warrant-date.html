@@ -5,6 +5,8 @@
     <div class="govuk-grid-column-two-thirds">
         {% if data.edit == 'true' %}
         <form class="form" action="check-answers" method="post">
+         {% elif data.postSaveEdit == 'true' %}
+        <form class="form" action="/{{data.prototypeVersion}}/persist-appearance" method="post">
             {% else %}
         <form class="form" action="court-name-select">
             {% endif %}
@@ -22,7 +24,7 @@
                                 <label class="govuk-label govuk-date-input__label" for="warrant-date-day">
                                     Day
                                 </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="warrant-date-day" name="appearance[warrant-date-day]" type="text" inputmode="numeric" {% if data.edit == 'true' %}value="{{ data.appearance['warrant-date-day'] }}"{% endif %}>
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="warrant-date-day" name="appearance[warrant-date-day]" type="text" inputmode="numeric" {% if data.edit == 'true' %}value="{{ data.appearance['warrant-date-day'] }}"{% endif %}{% if data.postSaveEdit == 'true' %}value="{{ data.appearance['warrant-date-day'] }}"{% endif %}>
                             </div>
                         </div>
                         <div class="govuk-date-input__item">
@@ -30,7 +32,7 @@
                                 <label class="govuk-label govuk-date-input__label" for="warrant-date-month">
                                     Month
                                 </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="warrant-date-month" name="appearance[warrant-date-month]" type="text" inputmode="numeric" {% if data.edit == 'true' %}value="{{ data.appearance['warrant-date-month'] }}{"{% endif %}>
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="warrant-date-month" name="appearance[warrant-date-month]" type="text" inputmode="numeric" {% if data.edit == 'true' %}value="{{ data.appearance['warrant-date-month'] }}{"{% endif %}{% if data.postSaveEdit == 'true' %}value="{{ data.appearance['warrant-date-month'] }}"{% endif %}>
                             </div>
                         </div>
                         <div class="govuk-date-input__item">
@@ -38,7 +40,7 @@
                                 <label class="govuk-label govuk-date-input__label" for="warrant-date-year">
                                     Year
                                 </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="warrant-date-year" name="appearance[warrant-date-year]" type="text" inputmode="numeric" {% if data.edit == 'true' %}value="{{ data.appearance['warrant-date-year'] }}"{% endif %}>
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="warrant-date-year" name="appearance[warrant-date-year]" type="text" inputmode="numeric" {% if data.edit == 'true' %}value="{{ data.appearance['warrant-date-year'] }}"{% endif %}{% if data.postSaveEdit == 'true' %}value="{{ data.appearance['warrant-date-year'] }}"{% endif %}>
                             </div>
                         </div>
                     </div>

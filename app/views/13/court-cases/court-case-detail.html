@@ -53,7 +53,7 @@
                             <td class="govuk-table__cell" style="border-bottom: none;">{{ appearance['court-name'] }}</td>
                             <td class="govuk-table__cell" style="border-bottom: none;">{{ appearance['warrant-date-day'] }}/{{ appearance['warrant-date-month'] }}/{{ appearance['warrant-date-year'] }}</td>
                             <td class="govuk-table__cell" style="border-bottom: none;">{{ appearance['overall-case-outcome'] }}</td>
-                            <td class="govuk-table__cell" style="border-bottom: none;"><a href="/{{data.prototypeVersion}}/update-appearance?index={{loop.index0}}">Edit</a></td>
+                            <td class="govuk-table__cell" style="border-bottom: none;"><a href="/{{data.prototypeVersion}}/update-appearance?courtCaseIndex={{data.courtCaseIndex}}&appearanceIndex={{loop.index0}}">Edit</a></td>
                         </tr>
                         <tr class="govuk-table__row">
                                     <td colspan="5" class="govuk-table__cell">

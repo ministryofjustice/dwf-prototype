@@ -189,7 +189,7 @@ Court cases and release dates
 </header>
 <div class="service-header">
     <div class="service-header__container">
-        <a href="/{{data.version}}/court-cases/"><span class="service-header__service-name">Court cases and release dates</span></a>
+        <a href="/{{data.prototypeVersion}}/court-cases/"><span class="service-header__service-name">Court cases and release dates</span></a>
     </div>
 </div>
 {% endblock %}
@@ -230,8 +230,8 @@ Court cases and release dates
         </nav>
         {% else %}
         <div class="govuk-grid-row">
-            <div class="govuk-grid-column-one-half"><a href="../court-cases-standalone" class="govuk-back-link govuk-!-margin-top-0">Back</a></div>
-            <div class="govuk-grid-column-one-half govuk-!-text-align-right"><a href="/{{data.version}}/court-cases/" class="govuk-link govuk-body-s">Go to Court cases</a></div>
+            <div class="govuk-grid-column-one-half"><a href="{{backLinkTarget}}" class="govuk-back-link govuk-!-margin-top-0">Back</a></div>
+            <div class="govuk-grid-column-one-half govuk-!-text-align-right"><a href="/{{data.prototypeVersion}}/court-cases/" class="govuk-link govuk-body-s">Go to Court cases</a></div>
         </div>
         {% endif %}
         {% endblock %}

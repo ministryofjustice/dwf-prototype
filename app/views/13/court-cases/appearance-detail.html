@@ -1,5 +1,6 @@
 {% extends "./template.html" %}
 {% block content %}
+{% set backLinkTarget = 'court-case-detail' %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l govuk-!-margin-top-4">Appearance details</h1>
@@ -9,10 +10,10 @@
                     Case reference
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['court-case-ref'] }}
+                    {{ data.appearance['court-case-ref'] }}
                 </dd>
                 <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="add-a-court-appearance/court-case-reference-number">
+              <a class="govuk-link" href="add-a-court-appearance/court-case-reference-number?postSaveEdit=true">
                 Edit<span class="govuk-visually-hidden"> case reference</span>
               </a>
             </dd>
@@ -22,11 +23,11 @@
                     Warrant date
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['warrant-date-day'] }}/{{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['warrant-date-month'] }}/{{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['warrant-date-year'] }}
+                    {{ data.appearance['warrant-date-day'] }}/{{ data.appearance['warrant-date-month'] }}/{{ data.appearance['warrant-date-year'] }}
                 </dd>
                 <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
-                Edit<span class="govuk-visually-hidden"> customer reference</span>
+              <a class="govuk-link" href="add-a-court-appearance/warrant-date?postSaveEdit=true">
+                Edit<span class="govuk-visually-hidden"> warrant date</span>
               </a>
             </dd>
             </div>
@@ -35,15 +36,15 @@
                     Location
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['court-name'] }}
+                    {{ data.appearance['court-name'] }}
                 </dd>
                 <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
-                Edit<span class="govuk-visually-hidden"> customer reference</span>
+              <a class="govuk-link" href="add-a-court-appearance/court-name?postSaveEdit=true">
+                Edit<span class="govuk-visually-hidden"> court name</span>
               </a>
             </dd>
             </div>
-            <div class="govuk-summary-list__row">
+<!--             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Hearing type
                 </dt>
@@ -51,25 +52,25 @@
                     {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['hearing-type'] }}
                 </dd>
                 <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
+              <a class="govuk-link" href="add-a-court-appearance/hearing-type?postSaveEdit=true">
                 Edit<span class="govuk-visually-hidden"> customer reference</span>
               </a>
             </dd>
-            </div>
+            </div> -->
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Overall case outcome
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['overall-case-outcome'] }}
+                    {{ data.appearance['overall-case-outcome'] }}
                 </dd>
                 <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
-                Edit<span class="govuk-visually-hidden"> customer reference</span>
+              <a class="govuk-link" href="add-a-court-appearance/overall-case-outcome?postSaveEdit=true">
+                Edit<span class="govuk-visually-hidden"> overall case outcome</span>
               </a>
             </dd>
             </div>
-            {% if (data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['next-court-date-set'] != 'Yes') %}
+            {% if (data.appearance['next-court-date-set'] != 'Yes') %}
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Next hearing
@@ -79,13 +80,13 @@
                 </dd>
                 <dd class="govuk-summary-list__actions">
               <a class="govuk-link" href="#">
-                Edit<span class="govuk-visually-hidden"> customer reference</span>
+                Edit<span class="govuk-visually-hidden"> next hearing</span>
               </a>
             </dd>
             </div>
             {% endif %}
         </dl>
-        {% if (data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['next-court-date-set'] == 'Yes') %}
+        {% if (data.appearance['next-court-date-set'] == 'Yes') %}
         <h2 class="govuk-heading-m">Next hearing</h2>
         <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
@@ -93,10 +94,10 @@
                     Location
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['next-court-name'] }}
+                    {{ data.appearance['next-court-name'] }}
                 </dd>
                 <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
+              <a class="govuk-link" href="add-a-court-appearance/next-court-name?postSaveEdit=true">
                 Edit<span class="govuk-visually-hidden"> customer reference</span>
               </a>
             </dd>
@@ -106,11 +107,11 @@
                     Hearing type
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['next-hearing-type'] }}
+                    {{ data.appearance['next-hearing-type'] }}
                 </dd>
                 <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
-                Edit<span class="govuk-visually-hidden"> customer reference</span>
+              <a class="govuk-link" href="add-a-court-appearance/next-court-date-select">
+                Edit<span class="govuk-visually-hidden"> next hearing type</span>
               </a>
             </dd>
             </div>

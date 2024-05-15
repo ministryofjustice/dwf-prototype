@@ -4,7 +4,7 @@ module.exports = {
             "appearances": [
                 {
                     "court-case-ref": "63GD1757930",
-                    "overall-case-outcome": "Remand before conviction",
+                    "overall-case-outcome": "Remanded in custody",
                     "next-court-date-set": "Yes",
                     "next-hearing-type": "Court appearance",
                     "warrant-date-day": "12",
@@ -28,7 +28,7 @@ module.exports = {
                                 "CL77001"
                             ],
                             "offence-name": "CL77001 - Use violence to secure entry to premises",
-                            "outcome": "Remand before conviction"
+                            "outcome": "Remanded in custody"
                         },
                         {
                             "offence-start-date-day": "25",
@@ -41,7 +41,7 @@ module.exports = {
                                 "CL77001"
                             ],
                             "offence-name": "TH68023 - Robbery",
-                            "outcome": "Remand before conviction"
+                            "outcome": "Remanded in custody"
                         },
                         {
                             "offence-start-date-day": "25",
@@ -54,7 +54,7 @@ module.exports = {
                                 "TH68050"
                             ],
                             "offence-name": "TH68050 - Take a motor vehicle without the owners consent",
-                            "outcome": "Remand before conviction"
+                            "outcome": "Remanded in custody"
                         },
                         {
                             "offence-start-date-day": "25",
@@ -67,13 +67,13 @@ module.exports = {
                                 "AN16330"
                             ],
                             "offence-name": "AN16330 - Person in charge of wind turbine generator fail to ensure light displayed",
-                            "outcome": "Remand before conviction"
+                            "outcome": "Remanded in custody"
                         }
                     ]
                 },
                 {
                     "court-case-ref": "63GD1758052",
-                    "overall-case-outcome": "Remand before conviction",
+                    "overall-case-outcome": "Remanded in custody",
                     "next-court-date-set": "Yes",
                     "next-hearing-type": "Court appearance",
                     "warrant-date-day": "20",
@@ -97,7 +97,7 @@ module.exports = {
                                 "CL77001"
                             ],
                             "offence-name": "CL77001 - Use violence to secure entry to premises",
-                            "outcome": "Remand before conviction"
+                            "outcome": "Remanded in custody"
                         },
                         {
                             "offence-start-date-day": "25",
@@ -110,7 +110,7 @@ module.exports = {
                                 "CL77001"
                             ],
                             "offence-name": "TH68023 - Robbery",
-                            "outcome": "Remand before conviction"
+                            "outcome": "Remanded in custody"
                         },
                         {
                             "offence-start-date-day": "25",
@@ -123,7 +123,7 @@ module.exports = {
                                 "TH68050"
                             ],
                             "offence-name": "TH68050 - Take a motor vehicle without the owners consent",
-                            "outcome": "Remand before conviction"
+                            "outcome": "Remanded in custody"
                         },
                         {
                             "offence-start-date-day": "25",
@@ -136,13 +136,13 @@ module.exports = {
                                 "AN16330"
                             ],
                             "offence-name": "AN16330 - Person in charge of wind turbine generator fail to ensure light displayed",
-                            "outcome": "Remand before conviction"
+                            "outcome": "Remanded in custody"
                         }
                     ]
                 },
                 {
     "court-case-ref": "83GD1759015",
-    "overall-case-outcome": "Remand before conviction",
+    "overall-case-outcome": "Remanded in custody",
     "next-court-date-set": "Yes",
     "next-hearing-type": "Court appearance",
     "warrant-date-day": "30",
@@ -166,7 +166,7 @@ module.exports = {
                 "CL77001"
             ],
             "offence-name": "CL77001 - Use violence to secure entry to premises",
-            "outcome": "Remand before conviction"
+            "outcome": "Remanded in custody"
         },
         {
             "offence-start-date-day": "25",
@@ -179,7 +179,7 @@ module.exports = {
                 "CL77001"
             ],
             "offence-name": "TH68023 - Robbery",
-            "outcome": "Remand before conviction"
+            "outcome": "Remanded in custody"
         },
         {
             "offence-start-date-day": "25",
@@ -192,7 +192,7 @@ module.exports = {
                 "TH68050"
             ],
             "offence-name": "TH68050 - Take a motor vehicle without the owners consent",
-            "outcome": "Remand before conviction"
+            "outcome": "Remanded in custody"
         },
         {
             "offence-start-date-day": "25",
@@ -205,14 +205,14 @@ module.exports = {
                 "AN16330"
             ],
             "offence-name": "AN16330 - Person in charge of wind turbine generator fail to ensure light displayed",
-            "outcome": "Remand before conviction"
+            "outcome": "Remanded in custody"
         }
     ]
 },
 
                 {
     "court-case-ref": "83FD1762342",
-    "overall-case-outcome": "Remand before conviction",
+    "overall-case-outcome": "Remanded in custody",
     "next-court-date-set": "Yes",
     "next-hearing-type": "Court appearance",
     "warrant-date-day": "02",
@@ -236,7 +236,7 @@ module.exports = {
                 "CL77001"
             ],
             "offence-name": "CL77001 - Use violence to secure entry to premises",
-            "outcome": "Remand before conviction"
+            "outcome": "Remanded in custody"
         },
         {
             "offence-start-date-day": "25",
@@ -249,7 +249,7 @@ module.exports = {
                 "CL77001"
             ],
             "offence-name": "TH68023 - Robbery",
-            "outcome": "Remand before conviction"
+            "outcome": "Remanded in custody"
         },
         {
             "offence-start-date-day": "25",
@@ -262,7 +262,7 @@ module.exports = {
                 "TH68050"
             ],
             "offence-name": "TH68050 - Take a motor vehicle without the owners consent",
-            "outcome": "Remand before conviction"
+            "outcome": "Remanded in custody"
         },
         {
             "offence-start-date-day": "25",
@@ -275,14 +275,14 @@ module.exports = {
                 "AN16330"
             ],
             "offence-name": "AN16330 - Person in charge of wind turbine generator fail to ensure light displayed",
-            "outcome": "Remand before conviction"
+            "outcome": "Remanded in custody"
         }
     ]
 }
 ,
                 {
     "court-case-ref": "93GD1771230",
-    "overall-case-outcome": "Remand before conviction",
+    "overall-case-outcome": "Remanded in custody",
     "next-court-date-set": "Yes",
     "next-hearing-type": "Court appearance",
     "warrant-date-day": "04",
@@ -306,7 +306,7 @@ module.exports = {
                 "CL77001"
             ],
             "offence-name": "CL77001 - Use violence to secure entry to premises",
-            "outcome": "Remand before conviction"
+            "outcome": "Remanded in custody"
         },
         {
             "offence-start-date-day": "25",
@@ -319,7 +319,7 @@ module.exports = {
                 "CL77001"
             ],
             "offence-name": "TH68023 - Robbery",
-            "outcome": "Remand before conviction"
+            "outcome": "Remanded in custody"
         },
         {
             "offence-start-date-day": "25",
@@ -332,7 +332,7 @@ module.exports = {
                 "TH68050"
             ],
             "offence-name": "TH68050 - Take a motor vehicle without the owners consent",
-            "outcome": "Remand before conviction"
+            "outcome": "Remanded in custody"
         },
         {
             "offence-start-date-day": "25",
@@ -345,14 +345,14 @@ module.exports = {
                 "AN16330"
             ],
             "offence-name": "AN16330 - Person in charge of wind turbine generator fail to ensure light displayed",
-            "outcome": "Remand before conviction"
+            "outcome": "Remanded in custody"
         }
     ]
 }
 ,
                 {
     "court-case-ref": "63GD1781237",
-    "overall-case-outcome": "Remand before conviction",
+    "overall-case-outcome": "Remanded in custody",
     "next-court-date-set": "Yes",
     "next-hearing-type": "Court appearance",
     "warrant-date-day": "06",
@@ -376,7 +376,7 @@ module.exports = {
                 "CL77001"
             ],
             "offence-name": "CL77001 - Use violence to secure entry to premises",
-            "outcome": "Remand before conviction"
+            "outcome": "Remanded in custody"
         },
         {
             "offence-start-date-day": "25",
@@ -389,7 +389,7 @@ module.exports = {
                 "CL77001"
             ],
             "offence-name": "TH68023 - Robbery",
-            "outcome": "Remand before conviction"
+            "outcome": "Remanded in custody"
         },
         {
             "offence-start-date-day": "25",
@@ -402,7 +402,7 @@ module.exports = {
                 "TH68050"
             ],
             "offence-name": "TH68050 - Take a motor vehicle without the owners consent",
-            "outcome": "Remand before conviction"
+            "outcome": "Remanded in custody"
         },
         {
             "offence-start-date-day": "25",
@@ -415,7 +415,7 @@ module.exports = {
                 "AN16330"
             ],
             "offence-name": "AN16330 - Person in charge of wind turbine generator fail to ensure light displayed",
-            "outcome": "Remand before conviction"
+            "outcome": "Remanded in custody"
         }
     ]
 }
@@ -490,7 +490,7 @@ module.exports = {
     //     'warrant-date-month': '9',
     //     'warrant-date-year': '2023',
     //     'type-of-case': "Remand",
-    //     'overall-case-outcome': "Remand before conviction",
+    //     'overall-case-outcome': "Remanded in custody",
     //     'next-court-date-set': "No",
     //      offences: []
     // } Example of what is stored in the session for submitting a court case
