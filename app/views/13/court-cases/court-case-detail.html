@@ -39,14 +39,14 @@
           </h2>
               <table class="govuk-table govuk-!-margin-top-6">
                     <thead class="govuk-table__head">
-                        <tr class="govuk-table__row">
-                            <th scope="col" class="govuk-table__header">Case reference</th>
-                            <th scope="col" class="govuk-table__header">Location</th>
-                            <th scope="col" class="govuk-table__header">Warrant date</th>
-                            <th scope="col" class="govuk-table__header">Outcome</th>
-                            <th scope="col" class="govuk-table__header"></th>
-                        </tr>
-                    </thead>
+                                <tr class="govuk-table__row">
+                                    <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Case reference</th>
+                                    <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Location</th>
+                                    <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Warrant date</th>
+                                    <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Outcome</th>
+                                    <!-- <th scope="col" class="govuk-table__header"></th> -->
+                                </tr>
+                            </thead>
                     <tbody class="govuk-table__body">
                         {% for appearance in data.courtCases[data.courtCaseIndex].appearances %}
                         <tr class="govuk-table__row">

@@ -486,6 +486,7 @@ router.get('/:prototypeVersion/update-offence', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     const index = req.query.index
     console.log('Appearance index: ' + req.session.data.appearanceIndex)
+    console.log('Offence index: ' + req.session.data.appearanceIndex)
     const route = req.query.route
     req.session.data.route = route
     console.log('Edit route:' + route)
