@@ -230,7 +230,9 @@ Court cases and release dates
         </nav>
         {% else %}
         <div class="govuk-grid-row">
+            {% if noBackLink != 'true' %}
             <div class="govuk-grid-column-one-half"><a href="{{backLinkTarget}}" class="govuk-back-link govuk-!-margin-top-0">Back</a></div>
+            {% endif %}
             <div class="govuk-grid-column-one-half govuk-!-text-align-right"><a href="/{{data.prototypeVersion}}/court-cases/" class="govuk-link govuk-body-s">Go to Court cases</a></div>
         </div>
         {% endif %}

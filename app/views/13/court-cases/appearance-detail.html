@@ -1,9 +1,10 @@
 {% extends "./template.html" %}
 {% block content %}
-{% set backLinkTarget = 'court-case-detail' %}
+<!-- {% set backLinkTarget = 'court-case-detail' %} -->
+{% set noBackLink = 'true' %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <h1 class="govuk-heading-l govuk-!-margin-top-4">Appearance details</h1>
+        <h1 class="govuk-heading-l govuk-!-margin-top-4">Edit appearance</h1>
         <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
@@ -73,7 +74,7 @@
             {% if (data.appearance['next-court-date-set'] != 'Yes') %}
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
-                    Next hearing
+                    Next hearing set
                 </dt>
                 <dd class="govuk-summary-list__value">
                     Date to be fixed
@@ -89,6 +90,19 @@
         {% if (data.appearance['next-court-date-set'] == 'Yes') %}
         <h2 class="govuk-heading-m">Next hearing</h2>
         <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Next hearing set
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.appearance['next-court-date-set']}}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="add-a-court-appearance/next-court-date-select?postSaveEdit=true">
+                Edit<span class="govuk-visually-hidden"> next hearing set</span>
+              </a>
+            </dd>
+            </div>
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Location
@@ -130,7 +144,7 @@
             </div>
         </dl>
         {% endif %}
-        <h2 class="govuk-heading-l">Offences <span class="govuk-body-l">({{data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex].offences.length}})</span></h2>
+        <h2 class="govuk-heading-m">Offences <span class="govuk-body">({{data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex].offences.length}})</span></h2>
         {% for offence in data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex].offences %}
         <div class="offence-card">
             <div class="offence-card-offence-details">
@@ -160,8 +174,8 @@
             </div>
                             <div class="offence-card-actions">
                     <ul class="offence-card-actions-list">
-                        <li class="offence-card-action-link"><a href="/v8/update-offence?index={{loop.index0}}">Edit</a></li>
-                        <li class="offence-card-action-link"><a href="/v8/confirm-delete?index={{loop.index0}}&route=add-a-court-case">Delete</a></li>
+                        <li class="offence-card-action-link"><a href="/{{data.prototypeVersion}}/update-offence?index={{loop.index0}}&postSaveEdit=true">Edit</a></li>
+                        <li class="offence-card-action-link"><a href="/{{data.prototypeVersion}}/confirm-delete?index={{loop.index0}}&postSaveEdit=true">Delete</a></li>
                     </ul>
                 </div>
         </div>

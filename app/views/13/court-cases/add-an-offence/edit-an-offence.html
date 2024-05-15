@@ -2,7 +2,11 @@
 {% block content %}
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
+        {% if data.postSaveEdit == 'true' %}
+        <form class="form" action="/{{data.prototypeVersion}}/persist-appearance" method="post">
+        {% else %}
         <form class="form" action="/{{data.prototypeVersion}}/court-cases/add-a-court-appearance/add-sentence-information?edit=false" method="post">
+            {% endif %}
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
@@ -14,6 +18,11 @@
                         {% elif data.route == 'remand-to-sentence' %}
                         <h1 class="govuk-fieldset__heading">
                             <span class="govuk-caption-l">Add an appearance to court case</span>
+                            Edit offence details
+                        </h1>
+                        {% elif data.postSaveEdit == 'true' %}
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Edit appearance {{data.appearance['court-case-ref']}} at {{data.appearance['court-name']}}</span>
                             Edit offence details
                         </h1>
                         {% else %}
