@@ -6,7 +6,7 @@
         {% if data.edit == 'true' %}
         <form class="form" action="check-answers" method="post">
          {% elif data.postSaveEdit == 'true' %}
-        <form class="form" action="/{{data.prototypeVersion}}/persist-appearance" method="post">
+        <form class="form" action="/{{data.prototypeVersion}}/persist-appearance?changeMade=1&variableName=Warrant%20date&value=warrant-date" method="post">
             {% else %}
         <form class="form" action="court-name-select">
             {% endif %}

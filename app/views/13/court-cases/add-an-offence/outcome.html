@@ -4,7 +4,7 @@
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
         {% if data.postSaveEdit == 'true' %}
-        <form class="form" action="/{{data.prototypeVersion}}/persist-offence?edit=true" method="post">
+        <form class="form" action="/{{data.prototypeVersion}}/persist-offence?postSaveEdit=true&changeMade=1&variableName=Outcome&value=outcome" method="post">
         {% else %}
         {% if data.route == 'remand-to-sentence' %}
             {% if data.edit == 'true' %}

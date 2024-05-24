@@ -5,6 +5,8 @@
     <div class="govuk-grid-column-two-thirds">
         {% if data.edit == 'true' %}
         <form class="form" action="check-answers-next-appearance" method="post">
+            {% elif data.postSaveEdit == 'true' %}
+            <form class="form" action="/{{data.prototypeVersion}}/persist-appearance?changeMade=1&variableName=Next%20hearing%20type&value=next-hearing-type" method="post">
             {% else %}
         <form class="form" action="next-court-date" method="post">
             {% endif %}

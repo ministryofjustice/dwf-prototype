@@ -5,7 +5,7 @@
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="/{{data.prototypeVersion}}/persist-appearance" method="post">
+        <form class="form" action="/{{data.prototypeVersion}}/persist-appearance?changeMade=1&variableName=Location&value=court-name" method="post">
             <h1 class="govuk-heading-l govuk-!-margin-top-4">Do you want to apply change the court name to {{ data.appearance['court-name'] }} for all appearances?</h1>
             <div class="govuk-radios govuk-radios govuk-!-margin-top-6" data-module="govuk-radios">
                 <div class="govuk-radios__item">
@@ -25,7 +25,7 @@
                 <button class="govuk-button govuk-!-margin-top-6" data-module="govuk-button">
                     Continue
                 </button>
-                <a href="court-case-detail" class="govuk-link">Cancel changes</a>
+                <a href="appearance-detail" class="govuk-link">Cancel changes</a>
             </div>
         </form>
     </div>

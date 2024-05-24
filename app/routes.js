@@ -417,6 +417,15 @@ router.post('/:prototypeVersion/persist-appearance', function(req, res) {
     } else if (route == "new-court-case") {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/confirmation`)
     } else if (req.session.data.postSaveEdit == "true") {
+        if (req.query.changeMade = 1){
+            req.session.data.appearance['warrant-date'] = req.session.data.appearance['warrant-date-day'] + "/" + req.session.data.appearance['warrant-date-month'] + "/" + req.session.data.appearance['warrant-date-year']
+             req.session.data.appearance['next-hearing-date'] = req.session.data.appearance['next-court-date-day'] + "/" + req.session.data.appearance['next-court-date-month'] + "/" + req.session.data.appearance['next-court-date-year'] + " at " + req.session.data.appearance['next-court-time']
+            console.log("Warrant date: " + req.session.data.appearance['warrant-date'])
+            req.session.data['change-made'] = req.query.changeMade
+            req.session.data['variable-name'] = req.query.variableName
+            req.session.data['value'] = req.query.value
+            console.log("Changes made successfully: " + req.query.changeMade + "\n" + req.query.variableName + "\n" + req.query.value)
+        }
         return res.redirect(`/${prototypeVersion}/court-cases/appearance-detail`)
     }
 })
@@ -460,6 +469,13 @@ router.post('/:prototypeVersion/persist-offence', function(req, res) {
     if (edit == 'true') {
         console.log("Saving edits")
         req.session.data.appearance.offences[req.session.data.offenceIndex] = req.session.data.offence
+        return res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/edit-an-offence`)
+    }
+    if (req.session.data.postSaveEdit == "true") {
+        req.session.data['change-made'] = req.query.changeMade
+            req.session.data['variable-name'] = req.query.variableName
+            req.session.data['value'] = req.query.value
+            req.session.data.appearance.offences[req.session.data.offenceIndex] = req.session.data.offence
         return res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/edit-an-offence`)
     }
     if (req.session.data.offenceIndex !== undefined) {

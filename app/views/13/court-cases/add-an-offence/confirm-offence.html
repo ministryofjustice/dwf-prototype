@@ -4,7 +4,7 @@
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
         {% if data.postSaveEdit == 'true' %}
-            <form class="form" action="/{{data.prototypeVersion}}/persist-offence?edit=true" method="post">
+            <form class="form" action="/{{data.prototypeVersion}}/persist-offence?edit=true?changeMade=1&variableName=Offence&value=offence-code" method="post">
                 {% else %}
         <form class="form" action="offence-date" method="post">
             {% endif %}

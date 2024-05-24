@@ -3,7 +3,7 @@
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
         {% if data.postSaveEdit == 'true' %}
-            <form class="form" action="/{{data.prototypeVersion}}/persist-appearance" method="post">
+            <form class="form" action="/{{data.prototypeVersion}}/persist-appearance?changeMade=1&variableName=Next%20hearing&value=next-court-date-set" method="post">
             {% else %}
         <form class="form" action="/{{data.prototypeVersion}}/next-court-date-select" method="post">
             {% endif %}
