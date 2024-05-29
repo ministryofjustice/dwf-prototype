@@ -570,7 +570,10 @@ router.get('/:prototypeVersion/delete-offence', function(req, res) {
     const route = req.session.data.route
     if (req.session.data.confirmDeleteOffence == 'Yes') {
         req.session.data.appearance.offences.splice(index, 1)
-        if (route == "repeat-remand") {
+        if (req.session.data.postSaveEdit == "true") {
+            res.redirect(`/${prototypeVersion}/court-cases/appearance-detail`)
+        }
+        else if (route == "repeat-remand") {
             req.session.data.changeMade = 0
             req.session.data.offenceDeleted = 1
             req.session.data.offenceAdded = 0
@@ -584,7 +587,9 @@ router.get('/:prototypeVersion/delete-offence', function(req, res) {
             res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/check-answers`)
         }
     } else if (req.session.data.confirmDeleteOffence == 'No') {
-        if (route == 'repeat-remand') {
+        if (req.session.data.postSaveEdit == "true") {
+            res.redirect(`/${prototypeVersion}/court-cases/appearance-detail`)
+        } else if (route == 'repeat-remand') {
             res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/change-offences`)
         } else if (route == 'remand-to-sentence') {
             res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`)

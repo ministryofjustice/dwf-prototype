@@ -5,15 +5,15 @@
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="court-case-detail" method="post">
-            {% if data['change-made'] == 1 %}
+        <form class="form" action="court-case-detail?changeMade=1" method="post">
+            <!-- {% if data['change-made'] == 1 %}
             <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
                 <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
                     <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
                 </svg>
                 <div class="moj-banner__message">{{ data['variable-name'] }} successfully changed {{ data.appearance[data['value']] }}</div>
             </div>
-            {% endif %}
+            {% endif %} -->
             <h1 class="govuk-heading-l govuk-!-margin-top-4">Edit appearance {{ data.appearance['court-case-ref'] }} at {{ data.appearance['court-name'] }} on {{ data.appearance['warrant-date-day'] }}/{{ data.appearance['warrant-date-month'] }}/{{ data.appearance['warrant-date-year'] }}</h1>
             <div class="govuk-inset-text">
                 Some changes mean a recalculation of release dates will be required. You can do this from the Release dates and calculations page.

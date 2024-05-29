@@ -6,7 +6,7 @@
         {% if data.edit == 'true' %}
         <form class="form" action="check-answers-next-appearance" method="post">
             {% elif data.postSaveEdit == 'true' %}
-            <form class="form" action="/{{data.prototypeVersion}}/persist-appearance?changeMade=1&variableName=Next%20court%20date&value=next-hearing-date" method="post">
+            <form class="form" action="/{{data.prototypeVersion}}/persist-appearance" method="post">
             {% else %}
             <form class="form" action="next-court-select">
                 {% endif %}

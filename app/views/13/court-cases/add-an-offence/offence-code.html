@@ -50,7 +50,7 @@
             <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
                 <div class="govuk-summary-list__row offences-summary-card-court-details-row">
                     <dt class="govuk-summary-list__key">
-                        Case reference number
+                        Case reference
                     </dt>
                     <dd class="govuk-summary-list__value">
                         {{ data['appearance']['court-case-ref'] }}
@@ -78,7 +78,7 @@
                 <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
                 <div class="govuk-summary-list__row offences-summary-card-offence-details-row">
                     <dt class="govuk-summary-list__key">
-                        Offences added
+                        Offences {% if data.postSaveEdit != 'true' %}added{% endif %}
                     </dt>
                     <dd class="govuk-summary-list__value">
                         {{ data['appearance'].offences | length }}

@@ -5,6 +5,14 @@
 {% set lastAppearance = data.courtCases[data.courtCaseIndex].appearances | last %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+        {% if data['change-made'] == 1 %}
+            <div class="moj-banner moj-banner--success govuk-!-margin-top-4" role="region" aria-label="Success">
+                <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+                    <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
+                </svg>
+                <div class="moj-banner__message">Changes made to {{ data.appearance['court-case-ref'] }} at {{ data.appearance['court-name'] }} on {{ data.appearance['warrant-date'] }} saved</div>
+            </div>
+            {% endif %} 
         <h1 class="govuk-heading-l govuk-!-margin-top-4">Appearances for {{ lastAppearance['court-case-ref'] }} at {{ lastAppearance['court-name']}}</h1>
         <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
@@ -44,17 +52,17 @@
                                     <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Location</th>
                                     <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Warrant date</th>
                                     <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Outcome</th>
-                                    <!-- <th scope="col" class="govuk-table__header"></th> -->
+                                    <th scope="col" class="govuk-table__header"></th>
                                 </tr>
                             </thead>
                     <tbody class="govuk-table__body">
-                        {% for appearance in data.courtCases[data.courtCaseIndex].appearances %}
+                        {% for appearance in data.courtCases[data.courtCaseIndex].appearances | reverse %}
                         <tr class="govuk-table__row">
                             <td class="govuk-table__cell" style="border-bottom: none;">{{ appearance['court-case-ref'] }}</td>
                             <td class="govuk-table__cell" style="border-bottom: none;">{{ appearance['court-name'] }}</td>
                             <td class="govuk-table__cell" style="border-bottom: none;">{{ appearance['warrant-date-day'] }}/{{ appearance['warrant-date-month'] }}/{{ appearance['warrant-date-year'] }}</td>
                             <td class="govuk-table__cell" style="border-bottom: none;">{{ appearance['overall-case-outcome'] }}</td>
-                            <td class="govuk-table__cell" style="border-bottom: none;"><a href="/{{data.prototypeVersion}}/update-appearance?courtCaseIndex={{data.courtCaseIndex}}&appearanceIndex={{loop.index0}}">Edit</a></td>
+                            <td class="govuk-table__cell" style="border-bottom: none;"><a href="/{{data.prototypeVersion}}/update-appearance?courtCaseIndex={{data.courtCaseIndex}}&appearanceIndex={{loop.revindex0}}">Edit</a></td>
                         </tr>
                         <tr class="govuk-table__row">
                                     <td colspan="5" class="govuk-table__cell">

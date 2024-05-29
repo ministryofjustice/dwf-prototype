@@ -45,9 +45,9 @@
         <div class="govuk-grid-row">
             <div class="govuk-grid-column-full govuk-!-margin-top-1">
                 {% if data.courtCases | length %}
-                {% for courtCase in data.courtCases %}
+                {% for courtCase in data.courtCases | reverse %}
                 {% set lastAppearance = courtCase.appearances | last %}
-                {% set courtCaseIndex = loop.index0 %}
+                {% set courtCaseIndex = loop.revindex0 %}
                 <div class="govuk-summary-card">
                     <div class="govuk-summary-card__title-wrapper">
                         <h2 class="govuk-summary-card__title">{{ lastAppearance['court-case-ref'] }} <span class="govuk-body">at</span> {{ lastAppearance['court-name']}} </h2>
@@ -139,7 +139,7 @@
                             </div>
                             {% endif %}
                         </dl>
-                        <h2 class="govuk-heading-m govuk-!-margin-top-6">Appearances {% if courtCase.appearances.length >= 5 %}
+                        <h2 class="govuk-heading-m govuk-!-margin-top-6">Appearances {% if courtCase.appearances.length >= 5 | reverse %}
                                 <span class="govuk-body">(showing of 5 of {{courtCase.appearances.length}})</span>
                                 {% else %}
                                 <span class="govuk-body">({{courtCase.appearances.length}})</span>
@@ -304,7 +304,7 @@
                                 {% endfor %}
                             </tbody>
                         </table>
-                        <p class="govuk-body"><a class="govuk-link--no-visited-state" href="court-case-detail?courtCaseIndex={{loop.index0}}">{% if courtCase['source'] == "nomis" %}View all appearances{% else %}View and edit all appearances{% endif %}</a></p>
+                        <p class="govuk-body"><a class="govuk-link--no-visited-state" href="court-case-detail?courtCaseIndex={{loop.revindex0}}">{% if courtCase['source'] == "nomis" %}View all appearances{% else %}View and edit all appearances{% endif %}</a></p>
                     </div>
                 </div>
                 {% endfor %}
