@@ -3,6 +3,9 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
+        {% if data.postSaveEdit == 'true' %}
+            <form class="form" action="/{{data.prototypeVersion}}/persist-offence" method="post">
+                {% else %}
         {% if data.edit == 'true' %}
         {% if data.route == 'remand-to-sentence' %}
         <form class="form" action="/{{data.prototypeVersion}}/persist-offence?edit=true" method="post">
@@ -11,8 +14,6 @@
                 {% endif %}
             <form class="form" action="/{{data.prototypeVersion}}/case-outcome-apply" method="post">
                 {% endif %}
-                {% if data.postSaveEdit == 'true' %}
-            <form class="form" action="/{{data.prototypeVersion}}/persist-offence" method="post">
             {% endif %}
                 <fieldset class="govuk-fieldset" role="group" aria-describedby="passport-issued-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">

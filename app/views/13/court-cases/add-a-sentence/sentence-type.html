@@ -11,14 +11,21 @@
                 <div class="govuk-form-group">
                     <fieldset class="govuk-fieldset">
                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                            {% if data.postSaveEdit == 'true' %}
+                            <h1 class="govuk-fieldset__heading">
+                                <span class="govuk-caption-l">Appearance {{ data.appearance['court-case-ref'] }} at {{ data.appearance['court-name'] }} on {{ data.appearance['warrant-date-day'] }}/{{ data.appearance['warrant-date-month'] }}/{{ data.appearance['warrant-date-year'] }}</span>
+                                Edit the sentence type
+                            </h1>
+                            {% else %}
                             <h1 class="govuk-fieldset__heading">
                                 {% if data.route == 'remand-to-sentence' %}
-                            <span class="govuk-caption-l">Review offences and sentences</span>
-                            {% else %}
-                            <span class="govuk-caption-l">Add a sentence</span>
-                            {% endif %}
-                            Select the sentence type
+                                <span class="govuk-caption-l">Review offences and sentences</span>
+                                {% else %}
+                                <span class="govuk-caption-l">Add a sentence</span>
+                                {% endif %}
+                                Select the sentence type
                             </h1>
+                            {% endif %}
                         </legend>
                         <div class="govuk-radios" data-module="govuk-radios">
                             <div class="govuk-radios__item">
@@ -109,7 +116,7 @@
             <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
                 <div class="govuk-summary-list__row offences-summary-card-offence-details-row">
                     <dt class="govuk-summary-list__key">
-                        Offences added
+                        Sentneces {% if data.postSaveEdit != 'true' %}added{% endif %}
                     </dt>
                     <dd class="govuk-summary-list__value">
                         {{ data.appearance.offences | length }}

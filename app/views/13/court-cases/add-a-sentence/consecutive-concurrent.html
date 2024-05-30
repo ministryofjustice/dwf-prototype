@@ -4,32 +4,39 @@
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
         {% if data.edit == 'true' %}
-            {% if data.sentence['consecutive-concurrent'] == "Consecutive" %}
+        {% if data.sentence['consecutive-concurrent'] == "Consecutive" %}
         <form class="form" action="/{{data.prototypeVersion}}/consecutive-concurrent-select" method="post">
             {% else %}
             <form class="form" action="/{{data.prototypeVersion}}/persist-sentence?edit=true" method="post">
-            {% endif %}
-            {% else %}
+                {% endif %}
+                {% else %}
                 <form class="form" action="/{{data.prototypeVersion}}/consecutive-concurrent-select" method="post">
-        {% endif %}
+                    {% endif %}
                     <div class="govuk-form-group">
                         <fieldset class="govuk-fieldset" aria-describedby="changedName-hint">
                             <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                                {% if data.postSaveEdit == 'true' %}
+                                <h1 class="govuk-fieldset__heading">
+                                    <span class="govuk-caption-l">Appearance {{ data.appearance['court-case-ref'] }} at {{ data.appearance['court-name'] }} on {{ data.appearance['warrant-date-day'] }}/{{ data.appearance['warrant-date-month'] }}/{{ data.appearance['warrant-date-year'] }}</span>
+                                    Edit consecutive or concurrent
+                                </h1>
+                                {% else %}
                                 <h1 class="govuk-fieldset__heading">
                                     {% if data.route == 'remand-to-sentence' %}
-                            <span class="govuk-caption-l">Review offences and sentences</span>
-                            {% else %}
-                            <span class="govuk-caption-l">Add a sentence</span>
-                            {% endif %}
+                                    <span class="govuk-caption-l">Review offences and sentences</span>
+                                    {% else %}
+                                    <span class="govuk-caption-l">Add a sentence</span>
+                                    {% endif %}
                                     Is the sentence consecutive or concurrent?
                                 </h1>
+                                {% endif %}
                             </legend>
                             <!--                     <p class="govuk-body-l">
                             {{ data.sentence['offence-name'] }}
                         </p> -->
                             <div class="govuk-radios govuk-radios" data-module="govuk-radios">
                                 <div class="govuk-radios__item">
-                                    <input class="govuk-radios__input" id="consecutive-concurrent" name="sentence[consecutive-concurrent]" type="radio" value="Consecutive" {% if data.sentence['consecutive-concurrent']== 'Consecutive' %} checked {% endif %}>
+                                    <input class="govuk-radios__input" id="consecutive-concurrent" name="sentence[consecutive-concurrent]" type="radio" value="Consecutive" {% if data.sentence['consecutive-concurrent']=='Consecutive' %} checked {% endif %}>
                                     <label class="govuk-label govuk-radios__label" for="consecutive-concurrent">
                                         Consecutive
                                     </label>
@@ -40,6 +47,7 @@
                                         Concurrent
                                     </label>
                                 </div>
+                                {% if data.sentence['consecutive-concurrent'] != "Forthwith" %}
                                 {% if data.forthwithSelected != "Yes" %}
                                 <div class="govuk-radios__divider">or</div>
                                 <div class="govuk-radios__item">
@@ -49,6 +57,7 @@
                                         <div class="govuk-hint">There can only be one forthwith sentence in a case</div>
                                     </label>
                                 </div>
+                                {% endif %}
                                 {% endif %}
                                 {% if data.sentence['consecutive-concurrent'] == "Forthwith" %}
                                 <div class="govuk-radios__divider">or</div>

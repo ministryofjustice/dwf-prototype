@@ -7,10 +7,17 @@
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset" role="group">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        {% if data.postSaveEdit == 'true' %}
+                                <h1 class="govuk-fieldset__heading">
+                                    <span class="govuk-caption-l">Appearance {{ data.appearance['court-case-ref'] }} at {{ data.appearance['court-name'] }} on {{ data.appearance['warrant-date-day'] }}/{{ data.appearance['warrant-date-month'] }}/{{ data.appearance['warrant-date-year'] }}</span>
+                                    Edit the offence code
+                                </h1>
+                                {% else %}
                         <h1 class="govuk-fieldset__heading">
                             <span class="govuk-caption-l">Add sentence information for count {{ data['sentence']['count-number'] }}</span>
                             Enter the offence code
                         </h1>
+                        {% endif %}
                     </legend>
                     <input class="govuk-input govuk-input--width-10" id="offence-code" name="sentence[offence-code]" type="text" value="{{ data.sentence['offence-code'] }}">
                     <div class="govuk-checkboxes govuk-!-margin-top-6" data-module="govuk-checkboxes">
@@ -62,7 +69,7 @@
             <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
                 <div class="govuk-summary-list__row offences-summary-card-offence-details-row">
                     <dt class="govuk-summary-list__key">
-                        Sentences added
+                        Sentences {% if data.postSaveEdit != 'true' %}added{% endif %}
                     </dt>
                     <dd class="govuk-summary-list__value">
                         {{ data.appearance.sentences | length }}

@@ -502,7 +502,6 @@ router.get('/:prototypeVersion/update-offence', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     const index = req.query.index
     console.log('Appearance index: ' + req.session.data.appearanceIndex)
-    console.log('Offence index: ' + req.session.data.appearanceIndex)
     const route = req.query.route
     req.session.data.route = route
     console.log('Edit route:' + route)
@@ -523,11 +522,13 @@ router.get('/:prototypeVersion/update-offence', function(req, res) {
 router.get('/:prototypeVersion/update-sentence', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     const index = req.query.index
+    console.log('Appearance index: ' + req.session.data.appearanceIndex)
     const warrantType = req.session.data.appearance['warrant-type']
     const route = req.query.route
     req.session.data.route = route
     console.log('Edit route:' + route)
     req.session.data.sentence = req.session.data.appearance.sentences[index]
+    console.log('Sentence:' + req.session.data.sentence['offence-name'])
     req.session.data.sentenceIndex = index
     req.session.data.changeMade = 1
     req.session.data.sentenceDeleted = 0

@@ -183,6 +183,7 @@
             {% endfor %}
             {% endif %}
             {% if data.appearance.sentences %}
+            <h2 class="govuk-heading-m">Sentences <span class="govuk-body">({{data.appearance.sentences.length}})</span></h2>
             {% for sentence in data.appearance.sentences %}
             <div class="offence-card sentence-card">
                 <div class="offence-card-offence-details">
