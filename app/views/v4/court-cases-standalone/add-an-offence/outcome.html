@@ -1,0 +1,45 @@
+{% extends "../template.html" %}
+{% block content %}
+<!-- Back link -->
+<a href="confirm-offence" class="govuk-back-link govuk-!-margin-top-0">Back</a>
+<!-- What is the confirmed date -->
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" action="confirmation">
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Add an offence to court case {{ data['courtCase']['court-case-ref'] }}</span>
+                            Select the outcome
+                        </h1>
+                    </legend>
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="outcome" name="outcome" type="radio" value="Remand before conviction">
+                            <label class="govuk-label govuk-radios__label" for="outcome">
+                                Remand before conviction
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="outcome-2" name="outcome" type="radio" value="Remand after conviction">
+                            <label class="govuk-label govuk-radios__label" for="outcome-2">
+                                Remand after conviction
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="outcome-2" name="outcome" type="radio" value="Discontinued">
+                            <label class="govuk-label govuk-radios__label" for="outcome">
+                                Discontinued
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <button class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
