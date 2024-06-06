@@ -427,12 +427,197 @@ module.exports = {
             "appearances": [
                 {
                     "court-case-ref": "63GD1946270",
-                    "overall-case-outcome": "Imprisonment",
+                    "overall-case-outcome": "Remanded in custody",
+                    "next-court-date-set": "No",
+                    "warrant-date-day": "05",
+                    "warrant-date-month": "05",
+                    "warrant-date-year": "2024",
+                    "court-name": "Manchester MC",
+                    "offences": [
+                        {
+                            "offence-start-date-day": "30",
+                            "offence-start-date-month": "10",
+                            "offence-start-date-year": "2023",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "CJ88001"
+                            ],
+                            "offence-name": "CJ88001 - Common assault",
+                            "outcome": "Remand in custody",
+                        },
+                        {
+                            "offence-start-date-day": "30",
+                            "offence-start-date-month": "10",
+                            "offence-start-date-year": "2023",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "TH68033A"
+                            ],
+                            "offence-name": "TH68033A - Attempt burglary other than dwelling - with intent to commit damage",
+                            "outcome": "Remand in custody",
+                        }
+                    ]
+                },
+                {
+                    "court-case-ref": "63GD1946270",
+                    "overall-case-outcome": "Remanded in custody",
                     "next-court-date-set": "No",
                     "warrant-date-day": "15",
-                    "warrant-date-month": "11",
-                    "warrant-date-year": "2023",
-                    "court-name": "Darlington Crown Court",
+                    "warrant-date-month": "05",
+                    "warrant-date-year": "2024",
+                    "court-name": "Manchester Crown Court (Crown Square)",
+                    "offences": [
+                        {
+                            "offence-start-date-day": "30",
+                            "offence-start-date-month": "10",
+                            "offence-start-date-year": "2023",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "CJ88001"
+                            ],
+                            "offence-name": "CJ88001 - Common assault",
+                            "outcome": "Remand in custody",
+                        },
+                        {
+                            "offence-start-date-day": "30",
+                            "offence-start-date-month": "10",
+                            "offence-start-date-year": "2023",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "TH68033A"
+                            ],
+                            "offence-name": "TH68033A - Attempt burglary other than dwelling - with intent to commit damage",
+                            "outcome": "Remand in custody",
+                        }
+                    ]
+                },
+                {
+                    "court-case-ref": "63GD1946270",
+                    "overall-case-outcome": "Remanded in custody",
+                    "next-court-date-set": "No",
+                    "warrant-date-day": "16",
+                    "warrant-date-month": "05",
+                    "warrant-date-year": "2024",
+                    "court-name": "Manchester Crown Court (Crown Square)",
+                    "offences": [
+                        {
+                            "offence-start-date-day": "30",
+                            "offence-start-date-month": "10",
+                            "offence-start-date-year": "2023",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "CJ88001"
+                            ],
+                            "offence-name": "CJ88001 - Common assault",
+                            "outcome": "Remand in custody",
+                        },
+                        {
+                            "offence-start-date-day": "30",
+                            "offence-start-date-month": "10",
+                            "offence-start-date-year": "2023",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "TH68033A"
+                            ],
+                            "offence-name": "TH68033A - Attempt burglary other than dwelling - with intent to commit damage",
+                            "outcome": "Remand in custody",
+                        }
+                    ]
+                },
+                {
+                    "court-case-ref": "63GD1946270",
+                    "overall-case-outcome": "Remanded in custody",
+                    "next-court-date-set": "No",
+                    "warrant-date-day": "17",
+                    "warrant-date-month": "05",
+                    "warrant-date-year": "2024",
+                    "court-name": "Manchester Crown Court (Crown Square)",
+                    "offences": [
+                        {
+                            "offence-start-date-day": "30",
+                            "offence-start-date-month": "10",
+                            "offence-start-date-year": "2023",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "CJ88001"
+                            ],
+                            "offence-name": "CJ88001 - Common assault",
+                            "outcome": "Remand in custody",
+                        },
+                        {
+                            "offence-start-date-day": "30",
+                            "offence-start-date-month": "10",
+                            "offence-start-date-year": "2023",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "TH68033A"
+                            ],
+                            "offence-name": "TH68033A - Attempt burglary other than dwelling - with intent to commit damage",
+                            "outcome": "Remand in custody",
+                        }
+                    ]
+                },
+                {
+                    "court-case-ref": "63GD1946270",
+                    "overall-case-outcome": "Remanded in custody",
+                    "next-court-date-set": "No",
+                    "warrant-date-day": "20",
+                    "warrant-date-month": "05",
+                    "warrant-date-year": "2024",
+                    "court-name": "Manchester Crown Court (Crown Square)",
+                    "offences": [
+                        {
+                            "offence-start-date-day": "30",
+                            "offence-start-date-month": "10",
+                            "offence-start-date-year": "2023",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "CJ88001"
+                            ],
+                            "offence-name": "CJ88001 - Common assault",
+                            "outcome": "Remand in custody",
+                        },
+                        {
+                            "offence-start-date-day": "30",
+                            "offence-start-date-month": "10",
+                            "offence-start-date-year": "2023",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "TH68033A"
+                            ],
+                            "offence-name": "TH68033A - Attempt burglary other than dwelling - with intent to commit damage",
+                            "outcome": "Remand in custody",
+                        }
+                    ]
+                },
+                {
+                    "court-case-ref": "63GD1946270",
+                    "overall-case-outcome": "Imprisonment",
+                    "next-court-date-set": "No",
+                    "warrant-date-day": "05",
+                    "warrant-date-month": "06",
+                    "warrant-date-year": "2024",
+                    "court-name": "Manchester Crown Court (Crown Square)",
                     "overall-sentence-length-years": "4",
                     "overall-sentence-length-months": "0",
                     "overall-sentence-length-weeks": "0",
@@ -467,13 +652,13 @@ module.exports = {
                             "offence-end-date-month": "",
                             "offence-end-date-year": "",
                             "offence-code": [
-                                "I68403"
+                                "TH68033A"
                             ],
-                            "offence-name": "I68403 - Purchase/acquire prohibited weapon - rocket launcher",
+                            "offence-name": "TH68033A - Attempt burglary other than dwelling - with intent to commit damage",
                             "outcome": "Imprisonment",
                             "sentence-type": "SDS (Standard Determinate Sentence)",
-                            "sentence-length-years": "4",
-                            "sentence-length-months": "0",
+                            "sentence-length-years": "1",
+                            "sentence-length-months": "6",
                             "sentence-length-weeks": "0",
                             "sentence-length-days": "0",
                             "consecutive-concurrent" : "Concurrent"

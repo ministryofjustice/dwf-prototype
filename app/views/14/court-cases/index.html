@@ -130,7 +130,7 @@
                                     </ul>
                                 </dd>
                             </div>
-                            {% elif lastAppearance.sentences == null %}
+                            {% else %}
                             <div class="govuk-summary-list__row">
                                 <dt class="govuk-summary-list__key">
                                     Next hearing
@@ -142,7 +142,7 @@
                             {% endif %}
                         </dl>
                         <h2 class="govuk-heading-m govuk-!-margin-top-6">Appearances {% if courtCase.appearances.length >= 5 | reverse %}
-                                <span class="govuk-body">(showing of {% if courtCase.appearances.length <= 5%}{{courtCase.appearances.length}}{% else %}5{% endif %} of {{courtCase.appearances.length}})</span>
+                                <span class="govuk-body">(showing of 5 of {{courtCase.appearances.length}})</span>
                                 {% else %}
                                 <span class="govuk-body">({{courtCase.appearances.length}})</span>
                                 {% endif %}</h2>
