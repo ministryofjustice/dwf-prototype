@@ -32,7 +32,7 @@
                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                             <h1 class="govuk-fieldset__heading">
                                 <span class="govuk-caption-l">Appearance {{ data.appearance['court-case-ref'] }} at {{ data.appearance['court-name'] }} on {{ data.appearance['warrant-date-day'] }}/{{ data.appearance['warrant-date-month'] }}/{{ data.appearance['warrant-date-year'] }}</span>
-                                Edit case reference
+                                Edit the case reference
                             </h1>
                         </legend>
                         <input class="govuk-input govuk-input--width-10" id="court-case-ref" name="appearance[court-case-ref]" type="text" {% if data.appearance['court-case-ref'] | last !="None" %} value="{{ data.appearance['court-case-ref'] }}" {% endif %}>

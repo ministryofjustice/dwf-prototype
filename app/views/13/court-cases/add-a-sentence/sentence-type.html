@@ -3,7 +3,9 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        {% if data.edit == 'true' %}
+        {% if data.postSaveEdit == 'true' %}
+        <form class="form" action="edit-a-sentence" method="post">
+        {% elif data.edit == 'true' %}
         <form class="form" action="/{{data.prototypeVersion}}/persist-sentence?edit=true" method="post">
             {% else %}
             <form class="form" action="sentence-length" method="post">
@@ -14,7 +16,7 @@
                             {% if data.postSaveEdit == 'true' %}
                             <h1 class="govuk-fieldset__heading">
                                 <span class="govuk-caption-l">Appearance {{ data.appearance['court-case-ref'] }} at {{ data.appearance['court-name'] }} on {{ data.appearance['warrant-date-day'] }}/{{ data.appearance['warrant-date-month'] }}/{{ data.appearance['warrant-date-year'] }}</span>
-                                Edit the sentence type
+                                Select the sentence type
                             </h1>
                             {% else %}
                             <h1 class="govuk-fieldset__heading">
