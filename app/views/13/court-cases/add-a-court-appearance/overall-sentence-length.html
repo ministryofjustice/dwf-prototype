@@ -4,6 +4,8 @@
     <div class="govuk-grid-column-two-thirds">
         {% if data.edit == 'true' %}
         <form class="form" action="check-answers" method="post">
+            {% elif data.postSaveEdit == 'true' %}
+            <form class="form" action="/{{data.prototypeVersion}}/persist-appearance" method="post">
             {% else %}
         <form class="form" action="check-answers" method="post">
             {% endif %}

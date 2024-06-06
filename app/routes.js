@@ -107,6 +107,12 @@ router.post('/:prototypeVersion/offence-code-known', function(req, res) {
             if (warrantType == 'Sentencing') {
                 return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-name`)
             }
+            if (req.session.data.postSaveEdit == 'true' && route == 'sentence') {
+            res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-name`)
+            }
+            if (req.session.data.postSaveEdit == 'true' && route == 'offence') {
+            res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-name`)
+            }
             if (route == 'new-court-case') {
                 if (warrantType == 'Remand') {
                     return res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-name`)
@@ -122,8 +128,11 @@ router.post('/:prototypeVersion/offence-code-known', function(req, res) {
         if (warrantType == 'Sentencing') {
             return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-offence`)
         }
-        if (req.session.data.postSaveEdit == 'true') {
+        if (req.session.data.postSaveEdit == 'true' && route == 'offence') {
             res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirm-offence`)
+        }
+        if (req.session.data.postSaveEdit == 'true' && route == 'sentence') {
+            res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-offence`)
         }
         if (route == 'new-court-case') {
             if (warrantType == 'Remand') {
@@ -551,7 +560,9 @@ router.get('/:prototypeVersion/confirm-delete', function(req, res) {
             res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirm-delete`)
         } else
             res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-delete`)
-    } else
+    } else if (req.query.postSaveEdit == 'true' && route == "sentence") {
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-delete`)
+    }
         res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirm-delete`)
 })
 
@@ -609,6 +620,9 @@ router.get('/:prototypeVersion/delete-sentence', function(req, res) {
         req.session.data.changeMade = 0
         req.session.data.sentenceDeleted = 1
         req.session.data.sentenceAdded = 0
+        if (req.session.data.postSaveEdit == 'true') {
+            res.redirect(`/${prototypeVersion}/court-cases/appearance-detail`)
+        } else
         res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers`)
     } else if (req.session.data.confirmDeleteSentence == 'No') {
         res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers`)

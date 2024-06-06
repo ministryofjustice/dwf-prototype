@@ -71,6 +71,7 @@
                         </a>
                     </dd>
                 </div>
+                {% if data.appearance.sentences < 1 %}
                 {% if (data.appearance['next-court-date-set'] != 'Yes') %}
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
@@ -86,6 +87,22 @@
                     </dd>
                 </div>
                 {% endif %}
+                {% endif %}
+                {% if data.appearance.sentences %}
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Overall sentence length
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.appearance['overall-sentence-length-years'] }} years {{ data.appearance['overall-sentence-length-months'] }} months {{ data.appearance['overall-sentence-length-weeks'] }} weeks {{ data.appearance['overall-sentence-length-days'] }} days
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="add-a-court-appearance/overall-sentence-length?postSaveEdit=true">
+                            Edit<span class="govuk-visually-hidden"> overall sentence length</span>
+                        </a>
+                    </dd>
+            </div>
+            {% endif %}
             </dl>
             {% if (data.appearance['next-court-date-set'] == 'Yes') %}
             <h2 class="govuk-heading-m">Next hearing</h2>
@@ -270,7 +287,7 @@
                 <div class="offence-card-actions">
                     <ul class="offence-card-actions-list">
                         <li class="offence-card-action-link"><a href="/{{data.prototypeVersion}}/update-sentence?appearanceIndex={{data.appearanceIndex}}&index={{loop.index0}}&postSaveEdit=true">Edit</a></li>
-                        <li class="offence-card-action-link"><a href="/{{data.prototypeVersion}}/confirm-delete?appearanceIndex={{data.appearanceIndex}}&index={{loop.index0}}&postSaveEdit=true">Delete</a></li>
+                        <li class="offence-card-action-link"><a href="/{{data.prototypeVersion}}/confirm-delete?appearanceIndex={{data.appearanceIndex}}&index={{loop.index0}}&postSaveEdit=true&route=sentence">Delete</a></li>
                     </ul>
                 </div>
             </div>

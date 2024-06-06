@@ -31,6 +31,7 @@
                     {{ lastAppearance['overall-case-outcome'] }}
                 </dd>
             </div>
+            {% if lastAppearance.sentences < 1 %}
             {% if (lastAppearance['next-court-date-set'] != 'Yes') %}
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
@@ -38,6 +39,17 @@
                 </dt>
                 <dd class="govuk-summary-list__value">
                     Date to be fixed
+                </dd>
+            </div>
+            {% endif %}
+            {% endif %}
+            {% if lastAppearance.sentences %}
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Overall sentence length
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ lastAppearance['overall-sentence-length-years'] }} years {{ lastAppearance['overall-sentence-length-months'] }} months {{ lastAppearance['overall-sentence-length-weeks'] }} weeks {{ lastAppearance['overall-sentence-length-days'] }} days
                 </dd>
             </div>
             {% endif %}
