@@ -3,7 +3,11 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
+        {% if data.postSaveEdit == 'true' %}
+        <form class="form" action="/{{data.prototypeVersion}}/offence-code-known?postSaveEdit=true&route=sentence" method="post">
+        {% else %}
         <form class="form" action="/{{data.prototypeVersion}}/offence-code-known" method="post">
+            {% endif %}
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset" role="group">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">

@@ -3,7 +3,11 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
+        {% if data.postSaveEdit == 'true' %}
+        <form class="form" action="edit-a-sentence" method="post">
+            {% else %}
         <form class="form" action="terror-related" method="post">
+            {% endif %}
             <div class="govuk-form-group">
                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                     <h1 class="govuk-fieldset__heading">
@@ -25,7 +29,13 @@
                             Offence
                         </dt>
                         <dd class="govuk-summary-list__value">
+<<<<<<< 14/court-cases/add-a-sentence/confirm-offence.html
                             {% if data.sentence['offence-name'] %}
+=======
+                            {% if data.postSaveEdit == 'true' %}
+                            Conspire to commit a burglary other than a dwelling with intent to damage
+                            {% elif data.sentence['offence-name'] %}
+>>>>>>> 13/court-cases/add-a-sentence/confirm-offence.html
                             {{ data.sentence['offence-name']}}
                             {% else %}
                             Kidnap
@@ -34,7 +44,11 @@
                     </div>
                 </dl>
             </div>
+<<<<<<< 14/court-cases/add-a-sentence/confirm-offence.html
             <input type="hidden" name="sentence[offence-name]" value="{{ data.sentence['offence-name']}}" />
+=======
+            <input type="hidden" name="sentence[offence-name]" value="TH68033C Conspire to commit a burglary other than a dwelling with intent to damage" />
+>>>>>>> 13/court-cases/add-a-sentence/confirm-offence.html
             <button class="govuk-button" data-module="govuk-button">
                 Confirm and continue
             </button>

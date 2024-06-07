@@ -3,7 +3,13 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        {% if data.edit == 'true' %}
+        {% if data.postSaveEdit == 'true' %}
+        {% if data.sentence['consecutive-concurrent'] == "Consecutive" %}
+        <form class="form" action="consecutive-to" method="post">
+            {% else %}
+            <form class="form" action="edit-a-sentence" method="post">
+            {% endif %}
+        {% elif data.edit == 'true' %}
         {% if data.sentence['consecutive-concurrent'] == "Consecutive" %}
         <form class="form" action="/{{data.prototypeVersion}}/consecutive-concurrent-select" method="post">
             {% else %}
