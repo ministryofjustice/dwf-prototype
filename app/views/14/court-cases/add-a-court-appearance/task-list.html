@@ -118,7 +118,7 @@
             </h2>
             <p class="govuk-body">Once every task has been completed, you must  save the information. You will not be able to return to this page, but can edit the details in the Court cases tab.</p>
             <div class="govuk-button-group">
-                <button class="govuk-button" data-module="govuk-button" {% if data.offencesComplete != 1 %}disabled aria-disabled="true"{% endif %}>
+                <button class="govuk-button" data-module="govuk-button" {% if data.offencesComplete == 1 %}disabled aria-disabled="true"{% endif %}>
                     Finish and save
                 </button>
                 <button class="govuk-button govuk-button--secondary" data-module="govuk-button">

@@ -5,11 +5,11 @@
     <div class="govuk-grid-column-two-thirds">
         <form class="form" action="/{{data.prototypeVersion}}/add-sentence-information-complete" method="post">
             <h1 class="govuk-heading-l">
-                <!-- <span class="govuk-caption-l">Review offences {% if data.appearance['warrant-type'] == "Sentencing" %}and sentences{% endif %}</span> -->
-                Update offence {% if data.appearance['warrant-type'] == "Sentencing" %}and sentence{% endif %} outcomes
+                <span class="govuk-caption-l">Appearance {{ data.appearance['court-case-ref'] }} at {{ data.appearance['court-name'] }} on {{ data.appearance['warrant-date-day'] }}/{{ data.appearance['warrant-date-month'] }}/{{ data.appearance['warrant-date-year'] }}</span>
+                Update offence outcomes
             </h1>
             <p class="govuk-body">Review and update the offences and that have been entered for this court case.</p>
-            <h2 class="govuk-heading-m">Offences<span class="govuk-body"> ({{ data.appearance.offences.length }})</span></h2>
+            <div class="govuk-!-margin-top-6">
             {% if data.appearance.offences < 1 %} <p class="govuk-body">There are no offences to show.</p>
                 {% endif %}
                 <button class="govuk-button govuk-button--secondary govuk-!-margin-bottom-2" data-module="govuk-button" formaction="/{{data.prototypeVersion}}/create-offence?route=remand-to-sentence&edit=false" method="post">
@@ -55,10 +55,6 @@
                 {% endif %}
                 {% endfor %}
                 {% if data.appearance['warrant-type'] == "Sentencing" %}
-                <h2 class="govuk-heading-m govuk-!-margin-top-7">Sentences<span class="govuk-body">{% if data.appearance.sentences.length > 0 %} ({{ data.appearance.sentences.length }}) {% else %} (0){% endif %}</span></h2>
-                <button class="govuk-button govuk-button--secondary govuk-!-margin-bottom-2" data-module="govuk-button" formaction="/{{data.prototypeVersion}}/create-sentence?route=remand-to-sentence" method="post">
-                    Add a sentence
-                </button>
                 {% if data.appearance.sentences.length == 0 %}<p class="govuk-body govuk-!-margin-top-4">There are no sentences to show. Add a sentence or update an offence outcome.</p>
                 {% endif %}
                 {% for sentence in data.appearance.sentences %}
@@ -85,14 +81,16 @@
                                     {% endif %}
                                 </dd>
                             </div>
-                            <!--                         <div class="govuk-summary-list__row">
+                            <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key">
                                 Outcome
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                {{ sentence['outcome'] }}
+                                {{ sentence['outcome'] }} {% if sentence['outcome-changed'] == 'true' %} <strong class="govuk-tag govuk-!-font-size-16 govuk-!-margin-left-1">
+  Updated
+</strong>{% endif %}
                             </dd>
-                        </div> -->
+                           </div>
                             <div class="govuk-summary-list__row">
                                 <dt class="govuk-summary-list__key">
                                     Sentence type
@@ -145,10 +143,11 @@
                 {% endif %}
                 {% endfor %}
                 {% endif %}
+                </div>
                 <div class="govuk-form-group govuk-!-margin-top-8">
                     <fieldset class="govuk-fieldset">
                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-                            Have you finished reviewing offences {% if data.appearance['warrant-type'] == "Sentencing" %}and sentences{% endif %}?
+                            Have you finished reviewing offences?
                         </legend>
                         <div class="govuk-radios" data-module="govuk-radios">
                             <div class="govuk-radios__item">

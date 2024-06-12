@@ -860,6 +860,7 @@ router.get('/:prototypeVersion/add-sentence-information', function(req, res) {
     req.session.data.changeMade = 0
     req.session.data.offenceDeleted = 0
     req.session.data.offenceAdded = 0
+    req.session.data.sentence['outcome-changed'] = 'true'
     if (outcome == "Imprisonment") {
         req.session.data.changeMade = 0
         req.session.sentenceAdded = 1
