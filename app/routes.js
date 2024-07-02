@@ -108,10 +108,10 @@ router.post('/:prototypeVersion/offence-code-known', function(req, res) {
                 return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-name`)
             }
             if (req.session.data.postSaveEdit == 'true' && route == 'sentence') {
-            res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-name`)
+                res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-name`)
             }
             if (req.session.data.postSaveEdit == 'true' && route == 'offence') {
-            res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-name`)
+                res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-name`)
             }
             if (route == 'new-court-case') {
                 if (warrantType == 'Remand') {
@@ -278,6 +278,29 @@ router.post('/:prototypeVersion/case-outcome-apply', function(req, res) {
     } else res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/outcome`)
 })
 
+// Overall conviction date applies to all offences
+router.post('/:prototypeVersion/overall-conviction-date-apply', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    const courtCaseIndex = req.session.data.courtCaseIndex
+    const appearanceIndex = req.session.data.appearanceIndex
+    const route = req.query.route
+    const warrantType = req.session.data.warrantType
+    var overallConvictionDateApply = 'No'
+    overallConvictionDateApply = req.session.data.appearance['overall-conviction-date-apply-all']
+    console.log("Overall case conviction date applies to all offences: " + overallConvictionDateApply)
+    console.log("Warrant type: " + warrantType)
+    if (overallConvictionDateApply == 'Yes' && warrantType == 'Sentencing') {
+        req.session.data.appearance['overall-conviction-date-apply-all'] = overallConvictionDateApply
+        req.session.data.sentence = { "conviction-date-day": req.session.data['appearance']['overall-conviction-date-day'],
+        "conviction-date-month": req.session.data['appearance']['overall-conviction-date-month'],
+        "conviction-date-year": req.session.data['appearance']['overall-conviction-date-year'] 
+    }
+        console.log("Conviction date: " + req.session.data.sentence['conviction-date-day'] + "/" + req.session.data.sentence['conviction-date-month'] + "/" + req.session.data.sentence['conviction-date-year'])
+        return res.redirect(307, `/${prototypeVersion}/court-cases/add-a-sentence/count-number`)
+    } else
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/count-number`)
+})
+
 //Add court case
 router.get('/:prototypeVersion/create-court-case', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
@@ -396,7 +419,6 @@ router.get('/:prototypeVersion/create-appearance', function(req, res) {
 
 router.post('/:prototypeVersion/persist-appearance', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
-    var displaySuccess = 0
     var appearanceDetailsComplete = 0
     const route = req.session.data.route
     if (req.session.data.appearanceIndex !== undefined) {
@@ -409,8 +431,6 @@ router.post('/:prototypeVersion/persist-appearance', function(req, res) {
         req.session.data.appearanceIndex = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances.length - 1
         console.log('Appearance index: ' + req.session.data.appearanceIndex)
     }
-    displaySuccess = 1
-    req.session.data.appearanceSuccess = displaySuccess
     if (route == "repeat-remand") {
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers`)
     } else if (route == "add-a-court-case") {
@@ -426,16 +446,9 @@ router.post('/:prototypeVersion/persist-appearance', function(req, res) {
     } else if (route == "new-court-case") {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/confirmation`)
     } else if (req.session.data.postSaveEdit == "true") {
-        if (req.query.changeMade = 1){
-            req.session.data.appearance['warrant-date'] = req.session.data.appearance['warrant-date-day'] + "/" + req.session.data.appearance['warrant-date-month'] + "/" + req.session.data.appearance['warrant-date-year']
-             req.session.data.appearance['next-hearing-date'] = req.session.data.appearance['next-court-date-day'] + "/" + req.session.data.appearance['next-court-date-month'] + "/" + req.session.data.appearance['next-court-date-year'] + " at " + req.session.data.appearance['next-court-time']
-            console.log("Warrant date: " + req.session.data.appearance['warrant-date'])
-            req.session.data['change-made'] = req.query.changeMade
-            req.session.data['variable-name'] = req.query.variableName
-            req.session.data['value'] = req.query.value
-            console.log("Changes made successfully: " + req.query.changeMade + "\n" + req.query.variableName + "\n" + req.query.value)
-        }
         return res.redirect(`/${prototypeVersion}/court-cases/appearance-detail`)
+    } else if (req.session.data.postSaveEditComplete == "true") {
+        return res.redirect(`/${prototypeVersion}/court-cases/court-case-detail`)
     }
 })
 
@@ -482,9 +495,9 @@ router.post('/:prototypeVersion/persist-offence', function(req, res) {
     }
     if (req.session.data.postSaveEdit == "true") {
         req.session.data['change-made'] = req.query.changeMade
-            req.session.data['variable-name'] = req.query.variableName
-            req.session.data['value'] = req.query.value
-            req.session.data.appearance.offences[req.session.data.offenceIndex] = req.session.data.offence
+        req.session.data['variable-name'] = req.query.variableName
+        req.session.data['value'] = req.query.value
+        req.session.data.appearance.offences[req.session.data.offenceIndex] = req.session.data.offence
         return res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/edit-an-offence`)
     }
     if (req.session.data.offenceIndex !== undefined) {
@@ -563,7 +576,7 @@ router.get('/:prototypeVersion/confirm-delete', function(req, res) {
     } else if (req.query.postSaveEdit == 'true' && route == "sentence") {
         res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-delete`)
     }
-        res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirm-delete`)
+    res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirm-delete`)
 })
 
 router.get('/:prototypeVersion/add-an-offence-to-appearance', function(req, res) {
@@ -584,8 +597,7 @@ router.get('/:prototypeVersion/delete-offence', function(req, res) {
         req.session.data.appearance.offences.splice(index, 1)
         if (req.session.data.postSaveEdit == "true") {
             res.redirect(`/${prototypeVersion}/court-cases/appearance-detail`)
-        }
-        else if (route == "repeat-remand") {
+        } else if (route == "repeat-remand") {
             req.session.data.changeMade = 0
             req.session.data.offenceDeleted = 1
             req.session.data.offenceAdded = 0
@@ -623,7 +635,7 @@ router.get('/:prototypeVersion/delete-sentence', function(req, res) {
         if (req.session.data.postSaveEdit == 'true') {
             res.redirect(`/${prototypeVersion}/court-cases/appearance-detail`)
         } else
-        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers`)
+            res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers`)
     } else if (req.session.data.confirmDeleteSentence == 'No') {
         res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers`)
     }
@@ -649,6 +661,13 @@ router.get('/:prototypeVersion/create-sentence', function(req, res) {
             outcome: req.session.data.appearance['overall-case-outcome']
         }
     }
+    if (req.session.data.appearance['overall-conviction-date-apply-all'] === 'Yes') {
+        req.session.data.sentence = { "conviction-date-day": req.session.data.appearance['overall-conviction-date-day'],
+         "conviction-date-month": req.session.data.appearance['overall-conviction-date-month'],
+         "conviction-date-year": req.session.data.appearance['overall-conviction-date-year']
+     }
+        console.log("Conviction date: " + req.session.data.sentence['conviction-date-day'] + "/" + req.session.data.sentence['conviction-date-month'] + "/" + req.session.data.sentence['conviction-date-year'])
+    }
     return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/count-number`)
 })
 
@@ -659,10 +678,41 @@ router.post('/:prototypeVersion/persist-sentence', function(req, res) {
     const sentenceIndex = req.query.sentenceIndex
     console.log("Edit: " + edit)
     console.log("Route: " + route)
+    if (prototypeVersion > "13") {
+        if (req.session.data.sentence['consecutive-concurrent'] == "Consecutive" | req.session.data.sentence['consecutive-concurrent'] == "Forthwith") {
+            req.session.data.appearance['total-sentence-length-years'] = parseInt(req.session.data.appearance['total-sentence-length-years'], 10) + parseInt(req.session.data.sentence['sentence-length-years'], 10)
+            req.session.data.appearance['total-sentence-length-months'] = parseInt(req.session.data.appearance['total-sentence-length-months'], 10) + parseInt(req.session.data.sentence['sentence-length-months'], 10)
+            req.session.data.appearance['total-sentence-length-weeks'] = parseInt(req.session.data.appearance['total-sentence-length-weeks'], 10) + parseInt(req.session.data.sentence['sentence-length-weeks'], 10)
+            req.session.data.appearance['total-sentence-length-days'] = parseInt(req.session.data.appearance['total-sentence-length-days'], 10) + parseInt(req.session.data.sentence['sentence-length-days'], 10)
+        }
+        if (req.session.data.sentence['consecutive-concurrent'] == "Concurrent")
+            req.session.data.appearance['concurrent-sentences-years'] = req.session.data.appearance['concurrent-sentences-years'] + parseInt(req.session.data.sentence['sentence-length-years'], 10)
+        req.session.data.appearance['concurrent-sentences-months'] == parseInt(req.session.data.appearance['concurrent-sentences-months'], 10) + parseInt(req.session.data.sentence['sentence-length-months'], 10)
+        req.session.data.appearance['concurrent-sentences-weeks'] = parseInt(req.session.data.appearance['concurrent-sentences-weeks'], 10) + parseInt(req.session.data.sentence['sentence-length-weeks'], 10)
+        req.session.data.appearance['concurrent-sentences-days'] = parseInt(req.session.data.appearance['concurrent-sentences-days'], 10) + parseInt(req.session.data.sentence['sentence-length-days'], 10)
+        console.log("Concurrent sentences years: " + req.session.data.appearance['concurrent-sentences-years'])
+    }
+    if (req.session.data.appearance['concurrent-sentences-years'] > req.session.data.appearance['total-sentence-length-years']) {
+        req.session.data.appearance['total-sentence-length-years'] = req.session.data.appearance['total-sentence-length-years'] + (req.session.data.appearance['concurrent-sentences-years'] - req.session.data.appearance['total-sentence-length-years'])
+    }
+    if (req.session.data.appearance['concurrent-sentences-months'] > req.session.data.appearance['total-sentence-length-months']) {
+        req.session.data.appearance['total-sentence-length-months'] = req.session.data.appearance['total-sentence-length-months'] + (req.session.data.appearance['concurrent-sentences-months'] - req.session.data.appearance['total-sentence-length-months'])
+    }
+    if (req.session.data.appearance['concurrent-sentences-weeks'] > req.session.data.appearance['total-sentence-length-weeks']) {
+        req.session.data.appearance['total-sentence-length-weeks'] = req.session.data.appearance['total-sentence-length-weeks'] + (req.session.data.appearance['concurrent-sentences-weeks'] - req.session.data.appearance['total-sentence-length-weeks'])
+    }
+    if (req.session.data.appearance['concurrent-sentences-days'] > req.session.data.appearance['total-sentence-length-days']) {
+        req.session.data.appearance['total-sentence-length-days'] = req.session.data.appearance['total-sentence-length-days'] + (req.session.data.appearance['concurrent-sentences-days'] - req.session.data.appearance['total-sentence-length-days'])
+    }
     if (edit == 'true') {
         console.log("Saving edits")
         req.session.data.appearance.sentences[req.session.data.sentenceIndex] = req.session.data.sentence
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/edit-a-sentence`)
+    }
+    if (req.session.data.postSaveEdit == 'true') {
+        console.log("Saving edits")
+        req.session.data.appearance.sentences[req.session.data.sentenceIndex] = req.session.data.sentence
+        return res.redirect(`/${prototypeVersion}/court-cases/appearance-detail`)
     }
     if (req.session.data.sentenceIndex !== undefined) {
         req.session.data.appearance.sentences[req.session.data.sentenceIndex] = req.session.data.sentence
@@ -684,14 +734,6 @@ router.post('/:prototypeVersion/persist-sentence', function(req, res) {
     req.session.data.changeMade = 0
     req.session.data.sentenceDeleted = 0
     req.session.data.sentenceAdded = 1
-    if(prototypeVersion == "13"){
-        if (req.session.data.sentence['consecutive-concurrent'] == "Consecutive" | req.session.data.sentence['consecutive-concurrent'] == "Forthwith") {
-        req.session.data.appearance['total-sentence-length-years'] = parseInt(req.session.data.appearance['total-sentence-length-years'],10) + parseInt(req.session.data.sentence['sentence-length-years'],10)
-        req.session.data.appearance['total-sentence-length-months'] = parseInt(req.session.data.appearance['total-sentence-length-months'],10) + parseInt(req.session.data.sentence['sentence-length-months'],10)
-        req.session.data.appearance['total-sentence-length-weeks'] = parseInt(req.session.data.appearance['total-sentence-length-weeks'],10) + parseInt(req.session.data.sentence['sentence-length-weeks'],10)
-        req.session.data.appearance['total-sentence-length-days'] = parseInt(req.session.data.appearance['total-sentence-length-days'],10) + parseInt(req.session.data.sentence['sentence-length-days'],10)
-        }
-    }
     return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers`)
 })
 
@@ -735,11 +777,15 @@ router.get('/:prototypeVersion/warrant-type-select', function(req, res) {
             res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/overall-case-outcome`)
         }
     } else if (warrantType == 'Sentencing') {
-        if (prototypeVersion >= 13){
+        if (prototypeVersion >= 13) {
             req.session.data.appearance['total-sentence-length-years'] = 0
             req.session.data.appearance['total-sentence-length-months'] = 0
             req.session.data.appearance['total-sentence-length-weeks'] = 0
             req.session.data.appearance['total-sentence-length-days'] = 0
+            req.session.data.appearance['concurrent-sentences-years'] = 0
+            req.session.data.appearance['concurrent-sentences-months'] = 0
+            req.session.data.appearance['concurrent-sentences-weeks'] = 0
+            req.session.data.appearance['concurrent-sentences-days'] = 0
         }
         if (route == 'appearance') {
             req.session.data.appearance.sentences = []
@@ -830,7 +876,7 @@ router.post('/:prototypeVersion/sentence-length-select', function(req, res) {
     }
     if (sentenceType == "EDS (Extended Determinate Sentence)") {
         res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/licence-period`)
-    } else if (prototypeVersion >= 'v11') {
+    } else if (prototypeVersion >= 'v11' | prototypeVersion > 13) {
         res.redirect(`court-cases/add-a-sentence/consecutive-concurrent`)
     } else
         res.redirect(307, `/${prototypeVersion}/persist-sentence`)
@@ -861,6 +907,7 @@ router.get('/:prototypeVersion/add-sentence-information', function(req, res) {
     req.session.data.offenceDeleted = 0
     req.session.data.offenceAdded = 0
     req.session.data.sentence['outcome-changed'] = 'true'
+    console.log("Ouctome changed: " + req.session.data.sentence['outcome-changed'])
     if (outcome == "Imprisonment") {
         req.session.data.changeMade = 0
         req.session.sentenceAdded = 1
@@ -916,11 +963,14 @@ router.post('/:prototypeVersion/add-sentence-information-complete', function(req
             return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`)
         } else if (warrantType == "Sentencing") {
             if (req.session.data.appearance['finished-adding-sentences'] == "yes") {
-            req.session.data.addSentenceInformationComplete = addSentenceInformationComplete
+                req.session.data.addSentenceInformationComplete = addSentenceInformationComplete
             }
             req.session.data.sentenceAdded = 0
             req.session.data.sentencesAdded = 1
-            return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`)
+            if (req.session.data.appearance['total-sentence-length-years'] != req.session.data.appearance['overall-sentence-length-years'] | req.session.data.appearance['total-sentence-length-months'] != req.session.data.appearance['overall-sentence-length-months'] | req.session.data.appearance['total-sentence-length-weeks'] != req.session.data.appearance['overall-sentence-length-weeks']) {
+                return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/sentence-length-mismatch`)
+            } else
+                return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`)
         }
     } else {
         if (warrantType == "Remand") {
@@ -932,7 +982,10 @@ router.post('/:prototypeVersion/add-sentence-information-complete', function(req
             if (req.session.data.appearance['finished-adding-offences'] == "yes") {
                 req.session.data.addSentenceInformationComplete = addSentenceInformationComplete
             }
-            return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`)
+            if (req.session.data.appearance['total-sentence-length-years'] != req.session.data.appearance['overall-sentence-length-years'] | req.session.data.appearance['total-sentence-length-months'] != req.session.data.appearance['overall-sentence-length-months'] | req.session.data.appearance['total-sentence-length-weeks'] != req.session.data.appearance['overall-sentence-length-weeks']) {
+                return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/sentence-length-mismatch`)
+            } else
+                return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`)
         }
     }
 })
@@ -953,18 +1006,20 @@ router.post('/:prototypeVersion/add-court-document', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     var documentIndex = req.session.data.appearance.documentIndex
     const route = req.session.data.route
+    var currentDate = new Date();
     if (req.session.data.appearance.documents == undefined) {
         const documents = []
         req.session.data.appearance.documents = documents
     }
     const documentPrefix = req.session.data.appearance['document-type'] !== 'Other' ? req.session.data.appearance['document-type'] : req.session.data.appearance['other-document-name']
+    const documentUploadTime = currentDate.getDate() + "/" + (currentDate.getMonth() + 1) + "/" + currentDate.getFullYear() + " at " + currentDate.getHours() + ":" + currentDate.getMinutes()
     if (documentIndex != undefined) {
-        req.session.data.appearance.documents[documentIndex] = documentPrefix + " " + documentIndex
-        console.log("Document name: " + req.session.data.appearance.documents[documentIndex])
+        req.session.data.appearance.documents[documentIndex]['document-type'] = documentPrefix + " uploaded on " + documentUploadTime
+        console.log("Document name: " + documentPrefix + " uploaded on " + documentUploadTime)
     } else {
         documentIndex = req.session.data.appearance.documents.filter(documentName => documentName.startsWith(documentPrefix)).length
-        req.session.data.appearance.documents.push(documentPrefix + " " + (documentIndex + 1))
-        console.log("New document name: " + req.session.data.appearance.documents.at(-1))
+        req.session.data.appearance.documents.push(documentPrefix + " uploaded on " + documentUploadTime)
+        console.log("Document name: " + documentPrefix + " uploaded on " + documentUploadTime)
     }
     if (route == "new-court-case") {
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/court-documents`)
@@ -997,6 +1052,27 @@ router.post('/:prototypeVersion/next-court-appearance-complete', function(req, r
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`)
     } else
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`)
+})
+
+router.post('/:prototypeVersion/sentence-length-mismatch-select', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    const route = req.session.data.route
+    const sentenceLengthMismatch = req.session.data.appearance['sentence-length-mismatch']
+    console.log("Sentence length mismatch: " + sentenceLengthMismatch)
+    if (route == "new-court-case") {
+        if (sentenceLengthMismatch == 'yes') {
+            return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`)
+        } else {
+            return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence-check-answers`)
+        }
+    }
+    if (route == "remand-to-sentence") {
+        if (sentenceLengthMismatch == 'yes') {
+            return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`)
+        } else {
+            res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`)
+        }
+    }
 })
 
 router.get('/:prototypeVersion/launch-prototype', function(req, res) {

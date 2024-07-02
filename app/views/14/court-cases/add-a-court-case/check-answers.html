@@ -51,32 +51,6 @@
                 </div>
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
-                        Overall case outcome
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['overall-case-outcome'] }}
-                    </dd>
-                    <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="overall-case-outcome?edit=true">
-                            Edit<span class="govuk-visually-hidden"> court name</span>
-                        </a>
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Outcome applies to all offences
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['overall-case-outcome-apply-all'] }}
-                    </dd>
-                    <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="outcome-apply-all?edit=true">
-                            Edit<span class="govuk-visually-hidden"> court name</span>
-                        </a>
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
                         Tagged bail
                     </dt>
                     <dd class="govuk-summary-list__value">
@@ -92,21 +66,6 @@
                         </a>
                     </dd>
                 </div>
-                {% if data.appearance['warrant-type'] == "Sentencing" %}
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Overall sentence length
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['overall-sentence-length-years'] }} years {{ data['appearance']['overall-sentence-length-months'] }} months {{ data['appearance']['overall-sentence-length-weeks'] }} weeks {{ data['appearance']['overall-sentence-length-days'] }} days
-                    </dd>
-                    <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="overall-sentence-length?edit=true">
-                            Edit<span class="govuk-visually-hidden"> overall sentence length</span>
-                        </a>
-                    </dd>
-                </div>
-                {% endif %}
             </dl>
             <button class="govuk-button" data-module="govuk-button">
                 Accept and continue

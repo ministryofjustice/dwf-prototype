@@ -5,11 +5,7 @@
         {% if data.edit == 'true' %}
         <form class="form" action="check-answers" method="post">
             {% else %}
-            {% if data.appearance['warrant-type'] == "Remand" %}
             <form class="form" action="check-answers" method="post">
-                {% else %}
-                <form class="form" action="overall-sentence-length" method="post">
-                    {% endif %}
                     {% endif %}
                     <div class="govuk-form-group">
                         <fieldset class="govuk-fieldset">

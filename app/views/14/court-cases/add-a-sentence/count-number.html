@@ -8,6 +8,8 @@
             <form class="form" action="/{{data.prototypeVersion}}/persist-sentence?edit=true" method="post">
                 {% elif data.route == 'remand-to-sentence' %}
                 <form class="form" action="sentence-type" method="post">
+                {% elif data.appearance['overall-conviction-date-apply-all'] == "No" %}
+                <form class="form" action="conviction-date" method="post">
                 {% else %}
                 <form class="form" action="offence-code" method="post">
                     {% endif %}
@@ -26,7 +28,11 @@
                             {% else %}
                             <span class="govuk-caption-l">Add a sentence</span>
                             {% endif %}
+                            {% if data.appearance.sentences == 0 %}
+                            Enter the count number for the first offence 
+                            {% else %}
                             Enter the count number
+                            {% endif %}
                         </h1>
                         {% endif %}
                     </legend>

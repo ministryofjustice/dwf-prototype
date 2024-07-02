@@ -1,11 +1,11 @@
 {% extends "./template.html" %}
 <!-- {% set backLinkTarget = 'court-case-detail' %} -->
 {% set backLinkTarget = '/' + data.prototypeVersion + '/court-cases/court-case-detail' %}
-{% set noBackLink = true %}
+{% set noBackLink = false %}
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="court-case-detail?changeMade=1" method="post">
+        <form class="form" action="/{{data.prototypeVersion}}/persist-appearance?postSaveEditComplete=true&postSaveEdit=false&changeMade=1" method="post">
             <!-- {% if data['change-made'] == 1 %}
             <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
                 <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
@@ -144,8 +144,9 @@
                 </div>
             </dl>
             {% endif %}
+
+            <h2 class="govuk-heading-m">Offences <span class="govuk-body">({{data.appearance.sentences.length}})</span></h2>
             {% if data.appearance.offences %}
-            <h2 class="govuk-heading-m">Offences <span class="govuk-body">({{data.appearance.offences.length}})</span></h2>
             {% for offence in data.appearance.offences %}
             <div class="offence-card">
                 <div class="offence-card-offence-details">
@@ -183,7 +184,6 @@
             {% endfor %}
             {% endif %}
             {% if data.appearance.sentences %}
-            <h2 class="govuk-heading-m">Sentences <span class="govuk-body">({{data.appearance.sentences.length}})</span></h2>
             {% for sentence in data.appearance.sentences %}
             <div class="offence-card sentence-card">
                 <div class="offence-card-offence-details">

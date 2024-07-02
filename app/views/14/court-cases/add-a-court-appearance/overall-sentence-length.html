@@ -2,16 +2,12 @@
 {% block content %}
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        {% if data.edit == 'true' %}
-        <form class="form" action="check-answers" method="post">
-            {% else %}
-        <form class="form" action="check-answers" method="post">
-            {% endif %}
+        <form class="form" action="add-sentence-information" method="post">
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add appearance information</span>
+                            <span class="govuk-caption-l">Appearance {{ data.appearance['court-case-ref'] }} at {{ data.appearance['court-name'] }} on {{ data.appearance['warrant-date-day'] }}/{{ data.appearance['warrant-date-month'] }}/{{ data.appearance['warrant-date-year'] }}</span>
                             Enter the overall sentence length
                         </h1>
                         <div class="govuk-hint">

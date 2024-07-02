@@ -49,11 +49,11 @@
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
                             {% if data.appearanceDetailsComplete == 1 %}
-                            <a class="govuk-link govuk-task-list__link" href="add-sentence-information" aria-describedby="offences-and-sentences-status">
-                                Update offence and sentence outcomes
+                            <a class="govuk-link govuk-task-list__link" href="overall-sentence-length" aria-describedby="offences-and-sentences-status">
+                                Update offence outcomes
                             </a>
                             {% else %}
-                            Review offences and sentences
+                            Update offence outcomes
                             {% endif %}
                         </div>
                         <div class="govuk-task-list__status" id="offences-and-sentences-status">
@@ -114,11 +114,11 @@
                 </ul>
             </div>
             <h2 class="govuk-heading-m">
-                Finish adding an appearance
+                Finish adding an appearance 
             </h2>
             <p class="govuk-body">Once every task has been completed, you must  save the information. You will not be able to return to this page, but can edit the details in the Court cases tab.</p>
             <div class="govuk-button-group">
-                <button class="govuk-button" data-module="govuk-button" {% if data.offencesComplete == 1 %}disabled aria-disabled="true"{% endif %}>
+                <button class="govuk-button" data-module="govuk-button" {% if data.appearance['finished-adding-offences'] == 'no' %}disabled aria-disabled="true"{% endif %}>
                     Finish and save
                 </button>
                 <button class="govuk-button govuk-button--secondary" data-module="govuk-button">

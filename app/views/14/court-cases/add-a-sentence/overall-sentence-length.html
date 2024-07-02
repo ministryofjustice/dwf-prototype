@@ -3,9 +3,9 @@
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
         {% if data.edit == 'true' %}
-        <form class="form" action="check-answers" method="post">
+        <form class="form" action="check-answers?edit=false" method="post">
             {% else %}
-            <form class="form" action="check-answers" method="post">
+            <form class="form" action="overall-conviction-date" method="post">
                 {% endif %}
                 <div class="govuk-form-group">
                     <fieldset class="govuk-fieldset">
