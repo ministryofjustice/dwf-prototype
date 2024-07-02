@@ -50,7 +50,7 @@
                                     {% if courtCase['source'] == "nomis" %}
                                     <span class="moj-badge moj-badge--grey">NOMIS - read only</span>
                                     {% else %}
-                                    <a class="govuk-link govuk-link--no-visited-state" href="/{{data.prototypeVersion}}/create-appearance?courtIndex={{courtCaseIndex}}">Add appearance<span class="govuk-visually-hidden"> to court case</span></a> | <a class="govuk-link govuk-link--no-visited-state" href="/{{data.prototypeVersion}}/create-appearance?courtIndex={{courtCaseIndex}}">Edit<span class="govuk-visually-hidden"> to court case</span></a>
+                                    <a class="govuk-link govuk-link--no-visited-state" href="/{{data.prototypeVersion}}/create-appearance?courtIndex={{courtCaseIndex}}">Add appearance<span class="govuk-visually-hidden"> to court case</span></a>
                                     {% endif %}
                             </li>
                         </ul>
@@ -99,19 +99,14 @@
         <div class="govuk-hint govuk-!-margin-top-2">Something about what the user must do to correct this.</div> -->
                                 </dd>
                             </div>
-                            <!-- <div class="govuk-summary-list__row">
+                            <div class="govuk-summary-list__row">
                                 <dt class="govuk-summary-list__key">
-                                    Total length of sentences
+                                    Conviction date
                                 </dt>
                                 <dd class="govuk-summary-list__value">
-                                    {{ lastAppearance['overall-sentence-length-years'] }} years {{ lastAppearance['overall-sentence-length-mobths'] }} months {{ lastAppearance['overall-sentence-length-weeks'] }} weeks {{ lastAppearance['overall-sentence-length-days'] }} days
-                                    <br>
-        <strong class="govuk-tag govuk-tag--red govuk-!-margin-top-2">
-          Mismatch
-        </strong>
-        <div class="govuk-hint govuk-!-margin-top-2">Something about what the user must do to correct this.</div>
+                                    {{ lastAppearance['overall-conviction-date-day'] }}/{{ lastAppearance['overall-conviction-date-month'] }}/{{ lastAppearance['overall-conviction-date-year'] }}
                                 </dd>
-                            </div> -->
+                            </div>
                             {% endif %}
                             {% if (lastAppearance['next-court-date-set'] == 'Yes') %}
                             <div class="govuk-summary-list__row">
@@ -230,6 +225,14 @@
                                                         to
                                                         {{ sentence['offence-end-date-day'] }}/{{ sentence['offence-end-date-month'] }}/{{ sentence['offence-end-date-year'] }}
                                                         {% endif %}
+                                                    </dd>
+                                                </div>
+                                                <div class="govuk-summary-list__row">
+                                                    <dt class="govuk-summary-list__key">
+                                                        Conviction date
+                                                    </dt>
+                                                    <dd class="govuk-summary-list__value">
+                                                        {{ sentence['conviction-date-day'] }}/{{ sentence['conviction-date-month'] }}/{{ sentence['conviction-date-year'] }}
                                                     </dd>
                                                 </div>
                                                 <div class="govuk-summary-list__row">
