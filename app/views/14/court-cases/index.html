@@ -67,7 +67,7 @@
                             </div>
                             <div class="govuk-summary-list__row">
                                 <dt class="govuk-summary-list__key">
-                                    Start date
+                                    First appearance
                                 </dt>
                                 <dd class="govuk-summary-list__value">
                                     {{ courtCase.appearances[0]['warrant-date-day'] }}/{{ courtCase.appearances[0]['warrant-date-month'] }}/{{ courtCase.appearances[0]['warrant-date-year'] }}
@@ -143,6 +143,9 @@
                                     <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Case reference</th>
                                     <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Location</th>
                                     <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Warrant date</th>
+                                    {% if lastAppearance.sentences %}
+                                    <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Conviction date</th>
+                                    {% endif %}
                                     <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Outcome</th>
                                     <!-- <th scope="col" class="govuk-table__header"></th> -->
                                 </tr>
@@ -154,10 +157,21 @@
                                     <td class="govuk-table__cell" style="border-bottom: none;">{{ appearance['court-case-ref'] }}</td>
                                     <td class="govuk-table__cell" style="border-bottom: none;">{{ appearance['court-name'] }}</td>
                                     <td class="govuk-table__cell" style="border-bottom: none;">{{ appearance['warrant-date-day'] }}/{{ appearance['warrant-date-month'] }}/{{ appearance['warrant-date-year'] }}</td>
+                                    {% if lastAppearance.sentences %}
+                                    {% if appearance['overall-conviction-date-day'] != null %}
+                                    <td class="govuk-table__cell" style="border-bottom: none;">{{ appearance['overall-conviction-date-day'] }}/{{ appearance['overall-conviction-date-month'] }}/{{ appearance['overall-conviction-date-year'] }}</td>
+                                    {% else  %}
+                                    <td class="govuk-table__cell" style="border-bottom: none;"></td>
+                                    {% endif %}
+                                    {% endif %}
                                     <td class="govuk-table__cell" style="border-bottom: none;">{{ appearance['overall-case-outcome'] }}</td>
                                     <!-- <td class="govuk-table__cell" width="16%"><a href="/{{data.prototypeVersion}}/view-appearance-detail?appearanceIndex={{loop.index0}}&courtCaseIndex={{courtCaseIndex}}">View and edit</a></td> -->
                                 <tr class="govuk-table__row">
+                                    {% if appearance['overall-conviction-date-day'] != null %}
+                                    <td colspan="5" class="govuk-table__cell">
+                                    {% else %}
                                     <td colspan="4" class="govuk-table__cell">
+                                        {% endif %}
                                         {% if appearance.sentences == null %}
                                         <details class="govuk-details govuk-!-margin-bottom-0">
                                             <summary class="govuk-details__summary">

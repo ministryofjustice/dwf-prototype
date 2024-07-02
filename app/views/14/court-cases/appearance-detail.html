@@ -47,6 +47,19 @@
                 </div>
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
+                        Conviction date
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data.appearance['overall-conviction-date-day'] }}/{{ data.appearance['overall-conviction-date-month'] }}/{{ data.appearance['overall-conviction-date-year'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="add-a-sentence/overall-conviction-date?postSaveEdit=true">
+                            Edit<span class="govuk-visually-hidden"> conviction date</span>
+                        </a>
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
                         Location
                     </dt>
                     <dd class="govuk-summary-list__value">
@@ -205,6 +218,14 @@
                                 to
                                 {{ sentence['offence-end-date-day'] }}/{{ sentence['offence-end-date-month'] }}/{{ sentence['offence-end-date-year'] }}
                                 {% endif %}
+                            </dd>
+                        </div>
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Convicton date
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                {{ sentence['conviction-date-day'] }}/{{ sentence['conviction-date-month'] }}/{{ sentence['conviction-date-year'] }}
                             </dd>
                         </div>
                         <div class="govuk-summary-list__row">

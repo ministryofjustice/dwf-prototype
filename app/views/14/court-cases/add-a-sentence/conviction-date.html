@@ -2,7 +2,9 @@
 {% block content %}
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        {% if data.edit == 'true' %}
+        {% if data.postSaveEdit == 'true' %} 
+        <form class="form" action="/{{data.prototypeVersion}}/persist-sentence?edit=true" method="post">
+        {% elif data.edit == 'true' %}
             <form class="form" action="/{{data.prototypeVersion}}/persist-sentence?edit=true" method="post">
             {% else %}
             <form class="form" action="offence-code" method="post">
