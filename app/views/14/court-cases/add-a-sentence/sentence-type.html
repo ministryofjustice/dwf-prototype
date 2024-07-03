@@ -6,7 +6,7 @@
         {% if data.edit == 'true' %}
         <form class="form" action="/{{data.prototypeVersion}}/persist-sentence?edit=true" method="post">
             {% else %}
-            <form class="form" action="sentence-length" method="post">
+            <form class="form" action="/{{data.prototypeVersion}}/sentence-length-select" method="post">
                 {% endif %}
                 <div class="govuk-form-group">
                     <fieldset class="govuk-fieldset">
@@ -50,15 +50,57 @@
                                 </div>
                             </div>
                             <div class="govuk-radios__item">
-                                <input class="govuk-radios__input" id="sentence-type-4" name="sentence[sentence-type]" type="radio" value="DTO (Detention and Training Order)" {% if data.sentence['sentence-type']=='DTO (Detention and Training Order)' %} checked {% endif %}>
+                                <input class="govuk-radios__input" id="sentence-type-4" name="sentence[sentence-type]" type="radio" value="ORA (Sentencing Code Standard Determinate Sentence)" {% if data.sentence['sentence-type']=='ORA (Sentencing Code Standard Determinate Sentence)' %} checked {% endif %}>
                                 <label class="govuk-label govuk-radios__label" for="sentence-type-4">
-                                    DTO (Detention and Training Order)
+                                    ORA (Sentencing Code Standard Determinate Sentence)
                                 </label>
                             </div>
                             <div class="govuk-radios__item">
-                                <input class="govuk-radios__input" id="sentence-type-5
-                        5" name="sentence[sentence-type]" type="radio" value="A/FINE" {% if data.sentence['sentence-type']=='A/FINE' %} checked {% endif %}>
+                                <input class="govuk-radios__input" id="sentence-type-5" name="sentence[sentence-type]" type="radio" value="ALP (Automatic life)" {% if data.sentence['sentence-type']=='ALP (Automatic life)' %} checked {% endif %}>
                                 <label class="govuk-label govuk-radios__label" for="sentence-type-5">
+                                    ALP (Automatic life)
+                                </label>
+                            </div>
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="sentence-type-6" name="sentence[sentence-type]" type="radio" value="BOTUS (ORA Breach Top Up Supervision)" {% if data.sentence['sentence-type']=='BOTUS (ORA Breach Top Up Supervision)' %} checked {% endif %}>
+                                <label class="govuk-label govuk-radios__label" for="sentence-type-6">
+                                    BOTUS (ORA Breach Top Up Supervision)
+                                </label>
+                            </div>
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="sentence-type-7" name="sentence[sentence-type]" type="radio" value="DLP (Adult Discretionary Life)" {% if data.sentence['sentence-type']=='DLP (Adult Discretionary Life)' %} checked {% endif %}>
+                                <label class="govuk-label govuk-radios__label" for="sentence-type-7">
+                                    DLP (Adult Discretionary Life)
+                                </label>
+                            </div>
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="sentence-type-8" name="sentence[sentence-type]" type="radio" value="MLP (Adult Mandatory Life)" {% if data.sentence['sentence-type']=='DLP (Adult Discretionary Life)' %} checked {% endif %}>
+                                <label class="govuk-label govuk-radios__label" for="sentence-type-8">
+                                    MLP (Adult Mandatory Life)
+                                </label>
+                            </div>
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="sentence-type-9" name="sentence[sentence-type]" type="radio" value="STS (Serious Terrorism Sentence Sec 282A 21+)" {% if data.sentence['sentence-type']=='STS (Serious Terrorism Sentence Sec 282A 21+)' %} checked {% endif %}>
+                                <label class="govuk-label govuk-radios__label" for="sentence-type-9">
+                                    STS (Serious Terrorism Sentence Sec 282A 21+)
+                                </label>
+                            </div>
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="sentence-type-10" name="sentence[sentence-type]" type="radio" value="VOO (Violent offender order)" {% if data.sentence['sentence-type']=='STS (Serious Terrorism Sentence Sec 282A 21+)' %} checked {% endif %}>
+                                <label class="govuk-label govuk-radios__label" for="sentence-type-10">
+                                    VOO (Violent offender order)
+                                </label>
+                            </div>
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="sentence-type-11" name="sentence[sentence-type]" type="radio" value="Civil imprisonment" {% if data.sentence['sentence-type']=='Civil imprisonment' %} checked {% endif %}>
+                                <label class="govuk-label govuk-radios__label" for="sentence-type-11">
+                                    Civil imprisonment
+                                </label>
+                            </div>
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="sentence-type-12
+                        5" name="sentence[sentence-type]" type="radio" value="A/FINE" {% if data.sentence['sentence-type']=='A/FINE' %} checked {% endif %}>
+                                <label class="govuk-label govuk-radios__label" for="sentence-type-12">
                                     A/FINE
                                 </label>
                             </div>

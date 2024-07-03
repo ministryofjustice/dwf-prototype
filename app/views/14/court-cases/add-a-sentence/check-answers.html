@@ -135,6 +135,7 @@
                                     {{ sentence['sentence-type'] }}
                                 </dd>
                             </div>
+                            {% if (sentence['sentence-type'] == 'SDS (Standard Determinate Sentence)') or (sentence['sentence-type'] == 'ORA (Sentencing Code Standard Determinate Sentence)') or (sentence['sentence-type'] == 'SOPC (Special Custodial Sentence for Certain Offenders of Particular Concern)') %}
                             <div class="govuk-summary-list__row">
                                 <dt class="govuk-summary-list__key">
                                     Sentence length
@@ -162,6 +163,55 @@
                                     {% endif %}
                                 </dd>
                             </div>
+                            {% endif %}
+                            {% if sentence['sentence-type'] == 'A/FINE' %}
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Fine amount
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                    £{{ sentence['fine-amount'] }}
+                                </dd>
+                            </div>
+                            {% endif %}
+                            {% if (sentence['sentence-type'] == "ALP (Automatic life)") or (sentence['sentence-type'] == "DLP (Adult Discretionary Life)") or (sentence['sentence-type'] == "MLP (Adult Mandatory Life)") %}
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Tariff length
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                    {{ sentence['tariff-length-years'] }} years {{ sentence['tariff-length-months'] }} months {{ sentence['tariff-length-weeks'] }} weeks {{ sentence['tariff-length-days'] }} days
+                                </dd>
+                            </div>
+                            {% endif %}
+                            {% if (sentence['sentence-type'] == 'BOTUS (ORA Breach Top Up Supervision)') or (sentence['sentence-type'] == 'Civil imprisonment') %} 
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Term length
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                    {{ sentence['term-length-years'] }} years {{ sentence['term-length-months'] }} months {{ sentence['term-length-weeks'] }} weeks {{ sentence['term-length-days'] }} days
+                                </dd>
+                            </div>
+                            {% endif %}
+                            {% if (sentence['sentence-type'] == 'EDS (Extended Determinate Sentence)') or (sentence['sentence-type'] == 'STS (Serious Terrorism Sentence Sec 282A 21+)') %} 
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Overall sentence length
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                    {{ sentence['overall-sentence-length-individual-years'] }} years {{ sentence['overall-sentence-length-individual-months'] }} months {{ sentence['overall-sentence-length-individual-weeks'] }} weeks {{ sentence['overall-sentence-length-individual-days'] }} days
+                                </dd>
+                            </div>
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Custodial term
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                    {{ sentence['custodial-term-years'] }} years {{ sentence['custodial-term-months'] }} months {{ sentence['custodial-term-weeks'] }} weeks {{ sentence['custodial-term-days'] }} days
+                                </dd>
+                            </div>
+                            {% endif %}
                             {% if sentence['licence-period-years'] %}
                             <div class="govuk-summary-list__row">
                                 <dt class="govuk-summary-list__key">
