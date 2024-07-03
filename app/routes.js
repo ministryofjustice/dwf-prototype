@@ -122,6 +122,10 @@ router.post('/:prototypeVersion/offence-code-known', function(req, res) {
             }
         }
     } else {
+        if (req.session.data.sentence['offence-code'] == '1234')
+        {
+            return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/invalid-offence-code`)
+        }
         if (route == "remand-to-sentence") {
             return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-offence`)
         }

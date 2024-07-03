@@ -1,0 +1,28 @@
+{% extends "../template.html" %}
+{% block content %}
+<!-- What is the confirmed date -->
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" action="terror-related" method="post">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    <h1 class="govuk-fieldset__heading">
+                        <span class="govuk-caption-l">Add sentence information for count {{ data['sentence']['count-number'] }}</span>
+                        There is a problem
+                    </h1>
+                </legend>
+                <p class="govuk-body">The offence code {{ data.sentence['offence-code'] }} cannot be used.</p>
+                <p class="govuk-body">This could be because:</p>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>It isn't applicable to the offence date {{ data.sentence['offence-start-date-day'] }}/{{ data.sentence['offence-start-date-month'] }}/{{ data.sentence['offence-start-date-year'] }}</li>
+                    <li>It isn't applicable to Daryl Evan's age on the offence date</li>
+                </ul>
+                <h2 class="govuk-heading-m">What to do next</h2>
+                <ul class="govuk-list govuk-list--no-bullet">
+            <li><p class="govuk-body"><a href="offence-code">Enter a different offence code</a></p></li>
+            <li><p class="govuk-body"><a href="offence-code">Look up an offence by name</a></p></li>
+            <li>or contact {{ data.appearance['court-name'] }} to correct the warrant</li>
+        </ul>
+            </div>
+    </div>
+</div>
+{% endblock %}
