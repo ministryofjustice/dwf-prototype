@@ -135,7 +135,7 @@
                                     {{ sentence['sentence-type'] }}
                                 </dd>
                             </div>
-                            {% if (sentence['sentence-type'] == 'SDS (Standard Determinate Sentence)') or (sentence['sentence-type'] == 'ORA (Sentencing Code Standard Determinate Sentence)') or (sentence['sentence-type'] == 'SOPC (Special Custodial Sentence for Certain Offenders of Particular Concern)') %}
+                            {% if (sentence['sentence-type'] == 'SDS (Standard Determinate Sentence)') or (sentence['sentence-type'] == 'ORA (Sentencing Code Standard Determinate Sentence)') or (sentence['sentence-type'] == 'SOPC (offenders of a particular concern)') %}
                             <div class="govuk-summary-list__row">
                                 <dt class="govuk-summary-list__key">
                                     Sentence length
@@ -164,7 +164,7 @@
                                 </dd>
                             </div>
                             {% endif %}
-                            {% if sentence['sentence-type'] == 'A/FINE' %}
+                            {% if sentence['sentence-type'] == 'Imprisonment in default of a fine' %}
                             <div class="govuk-summary-list__row">
                                 <dt class="govuk-summary-list__key">
                                     Fine amount
@@ -174,7 +174,10 @@
                                 </dd>
                             </div>
                             {% endif %}
-                            {% if (sentence['sentence-type'] == "ALP (Automatic life)") or (sentence['sentence-type'] == "DLP (Adult Discretionary Life)") or (sentence['sentence-type'] == "MLP (Adult Mandatory Life)") %}
+
+
+
+                            {% if (sentence['sentence-type'] == "Automatic life") or (sentence['sentence-type'] == "Adult discretionary life") or (sentence['sentence-type'] == "Adult mandatory life") %}
                             <div class="govuk-summary-list__row">
                                 <dt class="govuk-summary-list__key">
                                     Tariff length
@@ -184,7 +187,11 @@
                                 </dd>
                             </div>
                             {% endif %}
-                            {% if (sentence['sentence-type'] == 'BOTUS (ORA Breach Top Up Supervision)') or (sentence['sentence-type'] == 'Civil imprisonment') %} 
+
+
+
+                            
+                            {% if (sentence['sentence-type'] == 'BOTUS (Breach of top up supervision)') or (sentence['sentence-type'] == 'Civil imprisonment') %} 
                             <div class="govuk-summary-list__row">
                                 <dt class="govuk-summary-list__key">
                                     Term length
@@ -194,7 +201,7 @@
                                 </dd>
                             </div>
                             {% endif %}
-                            {% if (sentence['sentence-type'] == 'EDS (Extended Determinate Sentence)') or (sentence['sentence-type'] == 'STS (Serious Terrorism Sentence Sec 282A 21+)') %} 
+                            {% if (sentence['sentence-type'] == 'EDS (Extended Determinate Sentence)') or (sentence['sentence-type'] == 'STS (Serious terrorism sentence)') %} 
                             <div class="govuk-summary-list__row">
                                 <dt class="govuk-summary-list__key">
                                     Overall sentence length
@@ -222,6 +229,7 @@
                                 </dd>
                             </div>
                             {% endif %}
+                            {% if sentence['consecutive-concurrent'] %}
                             <div class="govuk-summary-list__row">
                                 <dt class="govuk-summary-list__key">
                                     Consecutive or concurrent
@@ -235,6 +243,8 @@
                                     to count {{ sentence['consecutive-to'] }}
                                     {% endif %}
                                 </dd>
+                            </div>
+                                {% endif %}
                         </dl>
                     </div>
                     <div class="offence-card-actions">

@@ -122,7 +122,7 @@ router.post('/:prototypeVersion/offence-code-known', function(req, res) {
             }
         }
     } else {
-        if (req.session.data.sentence['offence-code'] == '1234')
+        if (req.session.data.sentence['offence-code'] == 'TH68033A')
         {
             return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/invalid-offence-code`)
         }
@@ -878,40 +878,51 @@ router.post('/:prototypeVersion/sentence-length-select', function(req, res) {
         req.session.data['sentence']['licence-period-weeks'] = '0'
         req.session.data['sentence']['licence-period-days'] = '0'
     }
-    if (sentenceType == "ALP (Automatic life)") {
+    if (sentenceType == "Automatic life") {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/tariff-length`)
     }
-    if (sentenceType == "BOTUS (ORA Breach Top Up Supervision)") {
+    if (sentenceType == "BOTUS (Breach of top up supervision)") {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/term-length`)
     }
     if (sentenceType == "Civil imprisonment") {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/term-length`)
     }
-    if (sentenceType == "DLP (Adult Discretionary Life)") {
+    if (sentenceType == "Adult discretionary life") {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/tariff-length`)
     }
-    if (sentenceType == "MLP (Adult Mandatory Life)") {
+    if (sentenceType == "Adult mandatory life") {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/tariff-length`)
     }
-    if (sentenceType == "SOPC (Special Custodial Sentence for Certain Offenders of Particular Concern)") {
+    if (sentenceType == "SOPC (offenders of a particular concern)") {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/sentence-length`)
     }
     if (sentenceType == "EDS (Extended Determinate Sentence)") {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/overall-sentence-length-individual`)
     }
-    if (sentenceType == "STS (Serious Terrorism Sentence Sec 282A 21+)") {
+    if (sentenceType == "STS (Serious terrorism sentence)") {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/overall-sentence-length-individual`)
     }
     if (sentenceType == "VOO (Violent offender order)") {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/consecutive-concurrent`)
     }
-    if (sentenceType == "A/FINE") {
-        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/fine-amount`)
+    if (sentenceType == "Imprisonment in default of a fine") {
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/term-length`)
     }
      else if (prototypeVersion >= 'v11' | prototypeVersion > 13) {
         res.redirect(`court-cases/add-a-sentence/sentence-length`)
     } else
         res.redirect(307, `/${prototypeVersion}/persist-sentence`)
+})
+
+router.post('/:prototypeVersion/term-length-select', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    var sentenceType = req.session.data['sentence']['sentence-type']
+    if (sentenceType == 'Imprisonment in default of a fine') {
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/fine-amount`)
+    }
+    else {
+    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/consecutive-concurrent`)
+}
 })
 
 router.post('/:prototypeVersion/sentence-length-select-2', function(req, res) {
@@ -1112,7 +1123,7 @@ router.post('/:prototypeVersion/sentence-length-mismatch-select', function(req, 
         if (sentenceLengthMismatch == 'yes') {
             return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`)
         } else {
-            return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence-check-answers`)
+            return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers`)
         }
     }
     if (route == "remand-to-sentence") {

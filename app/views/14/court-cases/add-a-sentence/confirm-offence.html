@@ -22,14 +22,58 @@
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key dwf-confirm-offence-key">
-                            Offence
+                            Description
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {% if data.sentence['offence-name'] %}
-                            {{ data.sentence['offence-name']}}
-                            {% else %}
-                            Kidnap
-                            {% endif %}
+                            Conspire to commit a burglary other than a dwelling with intent to damage
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key dwf-confirm-offence-key">
+                            Start date
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            28 Aug 1993
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key dwf-confirm-offence-key">
+                            End date
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            None
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key dwf-confirm-offence-key">
+                            Home office code (CJA)
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            030/02
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key dwf-confirm-offence-key">
+                            Maximum indictment
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            10 Years
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key dwf-confirm-offence-key">
+                            Legislation
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            Contrary to section 1(1) of the Criminal Law Act 1977.
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key dwf-confirm-offence-key">
+                            Imprisonable
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            Yes
                         </dd>
                     </div>
                 </dl>
@@ -72,11 +116,11 @@
                 </div>
             </dl>
             <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-            <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-2">Sentences</h2>
+            <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-2">Offences</h2>
             <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
                 <div class="govuk-summary-list__row offences-summary-card-offence-details-row">
                     <dt class="govuk-summary-list__key">
-                        Sentences added
+                        Offences added
                     </dt>
                     <dd class="govuk-summary-list__value">
                         {{ data.appearance.sentences | length }}
@@ -86,7 +130,7 @@
             <details class="govuk-details" data-module="govuk-details">
                 <summary class="govuk-details__summary">
                     <span class="govuk-details__summary-text">
-                        Show sentences
+                        Show offences
                     </span>
                 </summary>
                 <div class="govuk-details__text">

@@ -75,7 +75,7 @@
                         Case reference
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['court-case-ref'] | join }}
+                        {{ data['appearance']['court-case-ref'] }}
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row offences-summary-card-court-details-row">
@@ -103,7 +103,7 @@
                         Offences added
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data.appearance.offences | length }}
+                        {{ data.appearance.sentences | length }}
                     </dd>
                 </div>
             </dl>
@@ -115,12 +115,12 @@
                 </summary>
                 <div class="govuk-details__text">
                     <dl class="offences-summary-card-content">
-                        {% for offence in data.appearance.offences %}
+                        {% for sentence in data.appearance.sentences %}
                         <div class="offences-summary-card-row">
                             <dt class="offences-summary-card-key govuk-!-font-weight-bold">
-                                {{ offence['offence-name'] }}
+                                {{ sentence['offence-name'] }}
                             </dt>
-                            <dd class="offences-summary-card-value govuk-body-s">Committed on {{ offence['offence-start-date-day'] }}/{{ offence['offence-start-date-month'] }}/{{ offence['offence-start-date-year'] }}</dd>
+                            <dd class="offences-summary-card-value govuk-body-s">Committed on {{ sentence['offence-start-date-day'] }}/{{ sentence['offence-start-date-month'] }}/{{ sentence['offence-start-date-year'] }}</dd>
                         </div>
                         {% endfor %}
                     </dl>
