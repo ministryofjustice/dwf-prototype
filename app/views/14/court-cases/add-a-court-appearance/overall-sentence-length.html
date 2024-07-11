@@ -50,6 +50,15 @@
                             </div>
                         </div>
                     </div>
+                    <input class="govuk-input govuk-input--width-10" id="offence-code" name="sentence[offence-code]" type="text" value="{{ data.sentence['offence-code'] }}">
+                    <div class="govuk-checkboxes govuk-!-margin-top-6" data-module="govuk-checkboxes">
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" id="no-offence-code" name="offence-code-known" type="checkbox" value="None">
+                            <label class="govuk-label govuk-checkboxes__label" for="no-offence-code">
+                                I do not have the offence code
+                            </label>
+                        </div>
+                    </div>
                 </fieldset>
             </div>
             <div class="govuk-!-margin-bottom-6">

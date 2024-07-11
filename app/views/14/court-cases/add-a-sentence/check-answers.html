@@ -56,7 +56,11 @@
                             Overall sentence length
                         </dt>
                         <dd class="govuk-summary-list__value">
+                            {% if data['appearance']['life-sentence'] == 'yes' %}
+                            Life sentence
+                            {% else %}
                             {{ data['appearance']['overall-sentence-length-years'] }} years {{ data['appearance']['overall-sentence-length-months'] }} months {{ data['appearance']['overall-sentence-length-weeks'] }} weeks {{ data['appearance']['overall-sentence-length-days'] }} days
+                            {% endif %}
                         </dd>
                         <dd class="govuk-summary-list__actions govuk-!-padding-right-5">
                             <a class="govuk-link" href="overall-sentence-length?edit=true">Edit<span class="govuk-visually-hidden"> overall sentence length</span></a>
