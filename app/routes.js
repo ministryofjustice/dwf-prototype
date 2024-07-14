@@ -126,7 +126,8 @@ router.post('/:prototypeVersion/offence-code-known', function(req, res) {
         {
             return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/invalid-offence-code`)
         }
-        if (route == "remand-to-sentence") {
+        if (req.session.data.sentence['offence-code'] == 'TH68033C')
+        {
             return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-offence`)
         }
         if (warrantType == 'Sentencing') {

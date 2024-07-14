@@ -3,87 +3,59 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="terror-related" method="post">
-            <div class="govuk-form-group">
+     <form class="form" action="/{{data.prototypeVersion}}/term-length-select" method="post">
+            <fieldset class="govuk-fieldset" role="group" aria-describedby="passport-issued-hint">
                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                     <h1 class="govuk-fieldset__heading">
-                        <span class="govuk-caption-l">Add sentence information for count {{ data['sentence']['count-number'] }}</span>
-                        Confirm the offence
+                        {% if data.route == 'remand-to-sentence' %}
+                        <span class="govuk-caption-l">Review offences and sentences</span>
+                        {% else %}
+                        <span class="govuk-caption-l">Add a sentence</span>
+                        {% endif %}
+                        Enter the term length
                     </h1>
                 </legend>
-                <dl class="govuk-summary-list govuk-summary-list--no-border">
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key dwf-confirm-offence-key">
-                            Offence code
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            {{ data['sentence']['offence-code'] }}
-                        </dd>
+                <div class="govuk-form-group">
+                    <div class="govuk-date-input" id="term-length">
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="term-length-years">
+                                    Years
+                                </label>
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="term-length-years" name="sentence[term-length-years]" type="text" inputmode="numeric">
+                            </div>
+                        </div>
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="term-length-months">
+                                    Months
+                                </label>
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="term-length-months" name="sentence[term-length-months]" type="text" inputmode="numeric">
+                            </div>
+                        </div>
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="term-length-weeks">
+                                    Weeks
+                                </label>
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="term-length-weeks" name="sentence[term-length-weeks]" type="text" inputmode="numeric">
+                            </div>
+                        </div>
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="term-length-days">
+                                    Days
+                                </label>
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="term-length-days" name="sentence[term-length-days]" type="text" inputmode="numeric">
+                            </div>
+                        </div>
                     </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key dwf-confirm-offence-key">
-                            Description
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            Conspire to commit a burglary other than a dwelling with intent to damage
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key dwf-confirm-offence-key">
-                            Start date
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            28 Aug 1993
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key dwf-confirm-offence-key">
-                            End date
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            None
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key dwf-confirm-offence-key">
-                            Home office code (CJA)
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            030/02
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key dwf-confirm-offence-key">
-                            Maximum indictment
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            10 Years
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key dwf-confirm-offence-key">
-                            Legislation
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            Contrary to section 1(1) of the Criminal Law Act 1977.
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key dwf-confirm-offence-key">
-                            Imprisonable
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            Yes
-                        </dd>
-                    </div>
-                </dl>
-            </div>
-            <input type="hidden" name="sentence[offence-name]" value="{{ data.sentence['offence-code']}} Conspire to commit a burglary other than a dwelling with intent to damage" />
+                </div>
+            </fieldset>
+            <!-- <p class="govuk-body"><a href="alternative-sentence-length">The sentence length is formatted differently</a></p> -->
             <button class="govuk-button" data-module="govuk-button">
-                Confirm and continue
+                Continue
             </button>
-            <p class="govuk-body"><a href="offence-code">Enter a different offence code</a></p>
-            <p class="govuk-body"><a href="offence-code">Look up an offence by name</a></p>
         </form>
     </div>
     <div class="govuk-grid-column-one-third">
@@ -148,5 +120,6 @@
             </details>
         </div>
     </div>
+</div>
 </div>
 {% endblock %}
