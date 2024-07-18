@@ -50,8 +50,8 @@
                              {% if data.addSentenceInformationComplete == 1 %}
                              Completed
                              {% else %}
-                            <strong class="govuk-tag govuk-tag--blue">
-                                Incomplete
+                            <strong class="govuk-tag govuk-tag--light-blue">
+                                In progress
                             </strong>
                             {% endif %}
                             {% else %}
@@ -128,9 +128,9 @@
                 <button class="govuk-button" data-module="govuk-button">
                     Finish and save
                 </button>
-                <button class="govuk-button govuk-button--secondary" data-module="govuk-button">
-                    Save and come back later
-                </button>
+                <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="/{{data.prototypeVersion}}/save-court-case" method="post">
+                Save and come back later
+            </button>
             </div>
         </form>
     </div>

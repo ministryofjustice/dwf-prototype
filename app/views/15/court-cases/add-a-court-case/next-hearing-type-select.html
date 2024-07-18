@@ -12,7 +12,7 @@
                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                             <h1 class="govuk-fieldset__heading">
                                 <span class="govuk-caption-l">Add a court case</span>
-                                Select the next hearing type
+                                How will they attend the hearing?
                             </h1>
                         </legend>
                         <div class="govuk-radios" data-module="govuk-radios">
@@ -26,6 +26,12 @@
                                 <input class="govuk-radios__input" id="next-hearing-type-2" name="appearance[next-hearing-type]" type="radio" value="Video link" {% if data.appearance['next-hearing-type']=="Video link" %}checked{% endif %}>
                                 <label class="govuk-label govuk-radios__label" for="next-hearing-type-2">
                                     Video link
+                                </label>
+                            </div>
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="next-hearing-type-3" name="appearance[next-hearing-type]" type="radio" value="Unknown" {% if data.appearance['next-hearing-type']=="Unknown" %}checked{% endif %}>
+                                <label class="govuk-label govuk-radios__label" for="next-hearing-type-3">
+                                    Unknown
                                 </label>
                             </div>
                         </div>

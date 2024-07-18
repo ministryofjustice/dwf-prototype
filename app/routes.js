@@ -449,11 +449,17 @@ router.post('/:prototypeVersion/persist-appearance', function(req, res) {
         }
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`)
     } else if (route == "new-court-case") {
+        if(req.query.saveCourtCase == 'true'){
+            req.session.data.appearance['status'] = ['draft']
+            console.log("Appearance status: " + req.session.data.appearance['status'])
+            return res.redirect(`/${prototypeVersion}/court-cases/`)
+        } else {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/confirmation`)
+        }
     } else if (req.session.data.postSaveEdit == "true") {
         return res.redirect(`/${prototypeVersion}/court-cases/appearance-detail`)
     } else if (req.session.data.postSaveEditComplete == "true") {
-        return res.redirect(`/${prototypeVersion}/court-cases/court-case-detail`)
+        return res.redirect(`/${prototypeVersion}/court-cases/confirmation-edit`)
     }
 })
 
@@ -1135,6 +1141,11 @@ router.post('/:prototypeVersion/sentence-length-mismatch-select', function(req, 
         }
     }
 })
+
+router.get('/:prototypeVersion/save-court-case', function(req, res) {
+    const prototypeVersion = req.query.version
+        res.redirect(`/${prototypeVersion}/court-cases/save-court-case`)
+    })
 
 router.get('/:prototypeVersion/launch-prototype', function(req, res) {
     const prototypeVersion = req.query.version

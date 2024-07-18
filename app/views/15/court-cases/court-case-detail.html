@@ -4,7 +4,7 @@
 <!-- Court cases detailed view -->
 {% set lastAppearance = data.courtCases[data.courtCaseIndex].appearances | last %}
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-grid-column-full">
         {% if data['change-made'] == 1 %}
             <div class="moj-banner moj-banner--success govuk-!-margin-top-4" role="region" aria-label="Success">
                 <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
@@ -13,7 +13,9 @@
                 <div class="moj-banner__message">Updates to {{ data.appearance['court-case-ref'] }} at {{ data.appearance['court-name'] }} on {{ data.appearance['warrant-date'] }} have been saved.</div>
             </div>
             {% endif %} 
-        <h1 class="govuk-heading-l govuk-!-margin-top-4">Appearances for {{ lastAppearance['court-case-ref'] }} at {{ lastAppearance['court-name']}}</h1>
+        <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            <h1 class="govuk-heading-l govuk-!-margin-top-4">Appearances for {{ lastAppearance['court-case-ref'] }} at {{ lastAppearance['court-name']}}</h1>
         <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
@@ -42,19 +44,22 @@
             </div>
             {% endif %}
         </dl>
-  <h2 class="govuk-heading-m govuk-!-margin-top-8" id="3">
+        </div>
+        </div>
+  <h2 class="govuk-heading-m" id="3">
           Appearances <span class="govuk-body">({{ data.courtCases[data.courtCaseIndex].appearances.length }})</span>
           </h2>
               <table class="govuk-table govuk-!-margin-top-6">
                     <thead class="govuk-table__head">
                                 <tr class="govuk-table__row">
-                                    <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Case reference</th>
+                                    <th scope="col" class="govuk-table__header govuk-!-width-one-fifth">Case reference</th>
                                     <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Location</th>
-                                    <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Warrant date</th>
+                                    <th scope="col" class="govuk-table__header govuk-!-width-one-fifth">Warrant date</th>
                                     {% if lastAppearance.sentences %}
-                                    <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Conviction date</th>
+                                    <th scope="col" class="govuk-table__header govuk-!-width-one-fifth">Conviction date</th>
                                     {% endif %}
-                                    <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Outcome</th>
+                                    <th scope="col" class="govuk-table__header govuk-!-width-one-fifth">Outcome</th>
+                                    <th scope="col" class="govuk-table__header"><span class="govuk-visually-hidden">Information</span></th>
                                     <th scope="col" class="govuk-table__header"></th>
                                 </tr>
                             </thead>
@@ -72,13 +77,14 @@
                                     {% endif %}
                                     {% endif %}
                             <td class="govuk-table__cell" style="border-bottom: none;">{{ appearance['overall-case-outcome'] }}</td>
-                            <td class="govuk-table__cell" style="border-bottom: none;"><a href="/{{data.prototypeVersion}}/update-appearance?courtCaseIndex={{data.courtCaseIndex}}&appearanceIndex={{loop.revindex0}}">Edit</a></td>
+                            <td class="govuk-table__cell" style="border-bottom: none;">{% if appearance['status'] == 'draft' %}<strong class="govuk-tag govuk-tag--grey govuk-!-margin-bottom-1">Draft - not saved to NOMIS</strong>{% endif %}</td>
+                            <td class="govuk-table__cell" style="border-bottom: none;">{% if appearance['status'] == 'draft' %}<a href="" class="govuk-link--no-visited-state">Complete</a>{% else %}<a href="/{{data.prototypeVersion}}/update-appearance?courtCaseIndex={{data.courtCaseIndex}}&appearanceIndex={{loop.revindex0}}">Edit</a>{% endif %}</td>
                         </tr>
                         <tr class="govuk-table__row">
                                     {% if lastAppearance.sentences %}
 <td colspan="6" class="govuk-table__cell">
                                     {% else %}
-                                    <td colspan="5" class="govuk-table__cell">
+                                    <td colspan="6" class="govuk-table__cell">
                                         {% endif %}
                                         {% if appearance.sentences == null %}
                                         <details class="govuk-details govuk-!-margin-bottom-0">

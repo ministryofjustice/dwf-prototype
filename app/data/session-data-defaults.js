@@ -14,6 +14,7 @@ module.exports = {
                     "next-court-date-year": "2024",
                     "next-court-time": "13:00",
                     "next-court-name": "Sheffield Crown Court",
+                    "status": ["saved","mismatch"],
                     "offences": [{
                             "offence-start-date-day": "25",
                             "offence-start-date-month": "02",
@@ -355,6 +356,7 @@ module.exports = {
                     "next-court-date-year": "2024",
                     "next-court-time": "13:00",
                     "next-court-name": "Sheffield Crown Court",
+                    "status": ["draft"],
                     "offences": [{
                             "offence-start-date-day": "25",
                             "offence-start-date-month": "02",
@@ -609,6 +611,7 @@ module.exports = {
                     "overall-sentence-length-months": "0",
                     "overall-sentence-length-weeks": "0",
                     "overall-sentence-length-days": "0",
+                    "status": ["saved","mismatch"],
                     "sentences": [{
                             "count-number": "1",
                             "conviction-date-day": "05",
