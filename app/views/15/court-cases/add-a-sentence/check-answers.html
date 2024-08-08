@@ -90,7 +90,7 @@
                 <a href="/{{data.prototypeVersion}}/create-sentence" role="button" draggable="false" class="govuk-button govuk-button--link govuk-!-margin-bottom-5" data-module="govuk-button">
                         Add an offence
                     </a>
-            {% if data['appearance'].sentences < 1 %} <p class="govuk-body govuk-!-font-weight-bold">offences will appear here.</p>
+            {% if data['appearance'].sentences < 1 %} <p class="govuk-body govuk-!-margin-top-4">No offences added to this appearance. Once offences are added, they will show here.</p>
                 {% endif %}
                 {% for sentence in data['appearance'].sentences %}
                 <div class="offence-card sentence-card">

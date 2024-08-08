@@ -301,9 +301,9 @@ router.post('/:prototypeVersion/overall-conviction-date-apply', function(req, re
         "conviction-date-year": req.session.data['appearance']['overall-conviction-date-year'] 
     }
         console.log("Conviction date: " + req.session.data.sentence['conviction-date-day'] + "/" + req.session.data.sentence['conviction-date-month'] + "/" + req.session.data.sentence['conviction-date-year'])
-        return res.redirect(307, `/${prototypeVersion}/court-cases/add-a-sentence/count-number`)
+        return res.redirect(307, `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`)
     } else
-        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/count-number`)
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers`)
 })
 
 //Add court case
