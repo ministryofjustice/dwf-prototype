@@ -72,16 +72,16 @@
                 </div>
                 {% endif %}
                 <div class="govuk-button-group">
-                <button class="govuk-button" data-module="govuk-button">
-                    Continue
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Save and continue
                 </button>
-                <button class="govuk-button govuk-button--secondary" data-module="govuk-button">
-                    Save and come back later
-                </button>
-                </div>
+                <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="/{{data.prototypeVersion}}/save-court-case">
+                    Save as draft
+                </a>
+            </div>
             </form>
     </div>
-   <div class="govuk-grid-column-one-third">
+    <div class="govuk-grid-column-one-third">
         <div class="offence-summary">
             <h2 class="govuk-heading-m govuk-!-margin-top-4">Appearance details</h2>
             <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">

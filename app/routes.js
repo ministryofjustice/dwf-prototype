@@ -1143,7 +1143,12 @@ router.post('/:prototypeVersion/sentence-length-mismatch-select', function(req, 
 })
 
 router.get('/:prototypeVersion/save-court-case', function(req, res) {
-    const prototypeVersion = req.query.version
+    const prototypeVersion = req.params.prototypeVersion
+    const progressSaved = true
+    var url = req.get('Referer');
+    console.log("URL saved from: " + url)
+    req.session.data.progressSaved = progressSaved
+    req.session.data.savedURL = url
         res.redirect(`/${prototypeVersion}/court-cases/save-court-case`)
     })
 

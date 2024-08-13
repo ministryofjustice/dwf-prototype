@@ -1257,3 +1257,16 @@ padding: 10px;
 .govuk-tag {
     max-width: none !important;
 }
+
+.govuk-button--secondary:hover, .govuk-button--secondary:visited {
+    color: #0b0c0c;
+    text-decoration: none;
+}
+
+.govuk-button:link {
+    color: #0b0c0c;
+}
+
+.govuk-button {
+    text-decoration: none !important;
+}
