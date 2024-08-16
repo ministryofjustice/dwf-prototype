@@ -35,36 +35,48 @@
                     {% if data.appearance['warrant-type'] === 'Sentencing' %}
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
-                            {% if data.sentencesAdded == 1 %}
+                            {% if data.appearanceDetailsComplete == 1 %}
+                            {% if (data.sentencesAdded == 1) or (data.overallQuestionsComplete == "Yes") %}
                             <a class="govuk-link govuk-task-list__link" href="../add-a-sentence/check-answers">
                                 Add offences
                             </a>
+                            {% elif data.progressSaved == true %}
+                            {% if "task-list" in data.savedURL %}
+                            <a class="govuk-link govuk-task-list__link" href="../add-a-sentence/overall-sentence-length?addOffencesStarted=1">
+                                Add offences
+                            </a>
                             {% else %}
-                            {% if data.progressSaved == true %}
-                                <a class="govuk-link govuk-task-list__link" href="{{ data.savedURL }}">
+                            <a class="govuk-link govuk-task-list__link" href="{{data.savedURL}}">
+                                Add offences
+                            </a>
+                            {% endif %}
+                            {% else %}
+                                <a class="govuk-link govuk-task-list__link" href="../add-a-sentence/overall-sentence-length?addOffencesStarted=1">
                                     Add offences
                                 </a>
-                                {% else %}
-                                <a class="govuk-link govuk-task-list__link" href="../add-a-sentence/overall-sentence-length">
-                                    Add offences
-                                </a>
-                                {% endif %}
+                            {% endif %}
+                            {% else %}
+                            Add offences
                             {% endif %}
                         </div>
                         <div class="govuk-task-list__status" id="offences-and-sentences-status">
                             {% if data.appearanceDetailsComplete == 1 %}
                              {% if data.addSentenceInformationComplete == 1 %}
                              Completed
-                             {% else %}
-                            <strong class="govuk-tag govuk-tag--light-blue">
+                             {% elif data.addOffencesStarted == 1 %}
+                             <strong class="govuk-tag govuk-tag--light-blue">
                                 In progress
+                            </strong>
+                             {% else %}
+                            <strong class="govuk-tag govuk-tag--blue">
+                                Not yet started
                             </strong>
                             {% endif %}
                             {% else %}
                             <span class="govuk-task-list__status--cannot-start-yet">Cannot start yet</span>
                             {% endif %}
                         </div>
-                    </li>
+                    </li>   
                     {% endif %}
                     {% if data.appearance['warrant-type'] === 'Remand' %}
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
@@ -129,14 +141,14 @@
             <h2 class="govuk-heading-m">
                 Finish adding court case
             </h2>
-            <p class="govuk-body">Once every task has been completed, you must save the information. You will not be able to return to this page, but can edit the details in the Court cases tab.</p>
-            <p class="govuk-body">You must complete appearance information before you can save and come back</p>
+            <p class="govuk-body">To save a draft of the court case, you must first complete the appearance information.</p>
+            <p class="govuk-body">Once you have finished adding all the information, select ‘Finish and save’. You will not be able to return to this page, but can edit the details in the Court cases tab.</p>
 
-            <div class="govuk-button-group">
+            <div class="govuk-button-group govuk-!-margin-top-6">
                 <button class="govuk-button" data-module="govuk-button">
                     Finish and save
                 </button>
-                <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="/{{data.prototypeVersion}}/save-court-case" method="post">
+                <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="/{{data.prototypeVersion}}/save-court-case" method="post" {% if data.appearanceDetailsComplete != 1 %}disabled aria-disabled="true"{% endif %}>
                 Save and come back later
             </button>
             </div>

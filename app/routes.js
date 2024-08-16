@@ -301,8 +301,12 @@ router.post('/:prototypeVersion/overall-conviction-date-apply', function(req, re
         "conviction-date-year": req.session.data['appearance']['overall-conviction-date-year'] 
     }
         console.log("Conviction date: " + req.session.data.sentence['conviction-date-day'] + "/" + req.session.data.sentence['conviction-date-month'] + "/" + req.session.data.sentence['conviction-date-year'])
+        req.session.data.overallQuestionsComplete = 'Yes'
+        console.log("Overall questions complete " + req.session.data.overallQuestionsComplete)
         return res.redirect(307, `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`)
     } else
+        req.session.data.overallQuestionsComplete = 'Yes'
+        console.log("Overall questions complete " + req.session.data.overallQuestionsComplete)
         res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers`)
 })
 
@@ -314,10 +318,12 @@ router.get('/:prototypeVersion/create-court-case', function(req, res) {
     var appearanceDetailsComplete = 0
     var courtDocumentsComplete = 0
     var addSentenceInformationComplete = 0
+    var overallQuestionsComplete = "No"
     if (prototypeVersion == 'v12' || prototypeVersion >= 13) {
         req.session.data.route = 'new-court-case'
         console.log('Route: ' + req.session.data.route)
         req.session.data.appearanceDetailsComplete = appearanceDetailsComplete
+        req.session.data.overallQuestionsComplete = overallQuestionsComplete
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/warrant-type`)
     } else
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/court-case-reference-number`)
@@ -454,6 +460,7 @@ router.post('/:prototypeVersion/persist-appearance', function(req, res) {
             console.log("Appearance status: " + req.session.data.appearance['status'])
             return res.redirect(`/${prototypeVersion}/court-cases/`)
         } else {
+            req.session.data.appearance['status'] = ['complete']
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/confirmation`)
         }
     } else if (req.session.data.postSaveEdit == "true") {
@@ -661,6 +668,7 @@ router.get('/:prototypeVersion/create-sentence', function(req, res) {
     delete req.session.data.sentence
     const appearanceIndex = req.query.appearanceIndex
     const route = req.session.data.route
+    req.session.data.newSentence = 1
     console.log('Route: ' + route)
     req.session.data.edit = 'false'
     if (appearanceIndex !== undefined) {
@@ -1149,6 +1157,10 @@ router.get('/:prototypeVersion/save-court-case', function(req, res) {
     console.log("URL saved from: " + url)
     req.session.data.progressSaved = progressSaved
     req.session.data.savedURL = url
+    console.log("Progress saved:" + req.session.data.progressSaved + "\n" + "Saved URL: " + req.session.data.savedURL + "\n" + "Overall questions complete:" + req.session.data.overallQuestionsComplete)
+    if (req.session.data.newSentence == 1){
+        res.redirect(307, `/${prototypeVersion}/persist-sentence`)
+    } else 
         res.redirect(`/${prototypeVersion}/court-cases/save-court-case`)
     })
 

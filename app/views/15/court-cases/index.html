@@ -49,6 +49,8 @@
                             <li class="govuk-summary-card__action">
                                 {% if courtCase['source'] == "nomis" %}
                                 <span class="moj-badge moj-badge--grey">NOMIS - read only</span>
+                                {% elif (courtCase.appearances.length == 1) and (lastAppearance['status'] == 'draft') %}
+                                <strong class="govuk-tag govuk-tag--blue">Draft</strong>
                                 {% else %}
                                 <a class="govuk-link govuk-link--no-visited-state" href="/{{data.prototypeVersion}}/create-appearance?courtIndex={{courtCaseIndex}}">Add appearance<span class="govuk-visually-hidden"> to court case</span></a>
                                 {% endif %}
@@ -56,6 +58,10 @@
                         </ul>
                     </div>
                     <div class="govuk-summary-card__content">
+                        {% if (courtCase.appearances.length == 1) and (lastAppearance['status'] == 'draft') %}
+                        <p class="govuk-body govuk-!-margin-top-2">The appearance information for this court case has been saved as a draft.</p>
+                            <p class="govuk-body"><a href="add-a-court-case/task-list?courtCaseIndex={{loop.revindex0}}">Continue adding appearance information</a></p>
+                        {% else %}
                         <dl class="govuk-summary-list">
                             <div class="govuk-summary-list__row">
                                 <dt class="govuk-summary-list__key">
@@ -134,20 +140,15 @@
                         </dl>
                         <hr class="govuk-section-break govuk-section-break--visible">
                         <div class="govuk-grid-row">
-                        <div class="govuk-grid-column-two-thirds">
+                        <div class="govuk-grid-column-one-half">
                             <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-2">Latest appearance</h2>
                         </div>
-                        </div>
-                            <div class="govuk-grid-row">
-                        <div class="govuk-grid-column-full"><p class="govuk-body govuk-!-margin-bottom-4 govuk-!-margin-top-2">
-                                    {% for status in lastAppearance['status'] %}
-                                    {% if status === 'draft' %}<strong class="govuk-tag govuk-tag--grey">Draft - not saved to NOMIS</strong> <a href="add-a-court-case/task-list" class="govuk-!-margin-left-2">finish adding appearance information</a>{% endif %}
-                                    {% if status === 'mismatch' %}<strong class="govuk-tag govuk-tag--orange govuk-!-margin-top-2">Sentence length mismatch</strong>{% endif %}
-                                    {% if status === 'saved' %}<strong class="govuk-tag govuk-tag--green govuk-!-margin-top-2">Saved to NOMIS</strong>{% endif %}
+                        <div class="govuk-column-one-half govuk-!-text-align-right govuk-!-padding-right-3">
+                             {% for status in lastAppearance['status'] %}
+                                    {% if status === 'mismatch' %}<strong class="govuk-tag govuk-tag--orange govuk-!-margin-top-6">Sentence length mismatch</strong>{% endif %}
                                     {% endfor %}
-                                </p>
-                                </div>
-                            </div>
+                        </div>
+                        </div>
                         <div class="govuk-grid-row govuk-!-padding-bottom-2 govuk-!-margin-top-2">
                             <div class="govuk-grid-column-one-third">
                                 <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Case reference</h3>
@@ -309,8 +310,10 @@
                                    {% endif %}
                             </div>
                         </div>
+                        
                         <hr class="govuk-section-break govuk-!-margin-top-4 govuk-section-break--visible">
-                        <p class="govuk-body govuk-!-margin-top-6"><a class="govuk-link--no-visited-state govuk-!-font-weight-bold" href="court-case-detail?courtCaseIndex={{loop.revindex0}}">{% if courtCase['source'] == "nomis" %}View all appearances{% else %}View and edit all appearances ({{ courtCase.appearances.length }}){% endif %}</a></p>
+                        <p class="govuk-body govuk-!-margin-top-6"><a class="govuk-link--no-visited-state govuk-!-font-weight-bold" href="court-case-detail?courtCaseIndex={{loop.revindex0}}">{% if courtCase['source'] == "nomis" %}View all appearances{% else %}View and edit all appearances ({% if lastAppearance['status'] == 'draft' %}{{ courtCase.appearances.length - 1 }} and 1 draft {% else %}{{ courtCase.appearances.length}}{% endif %}){% endif %}</a></p>
+                        {% endif %}
                     </div>
                 </div>
                 {% endfor %}
