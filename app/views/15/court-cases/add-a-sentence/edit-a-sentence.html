@@ -15,7 +15,7 @@
                             {% if data.route == "remand-to-sentence" %}
                             <span class="govuk-caption-l">Add an appearance</span>
                             {% else %}
-                            <span class="govuk-caption-l">Add sentences to a court case</span>
+                            <span class="govuk-caption-l">Add offences</span>
                             {% endif %}
                             Edit sentence details
                         </h1>
@@ -50,6 +50,17 @@
                             </dd>
                             <dd class="govuk-summary-list__actions">
                                         <a class="govuk-link" href="offence-code">Edit<span class="govuk-visually-hidden"> offence name</span></a>
+                                    </dd>
+                        </div>  
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Terror related
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                {{ data.sentence['terror-related'] }}
+                            </dd>
+                            <dd class="govuk-summary-list__actions">
+                                        <a class="govuk-link" href="terror-related">Edit<span class="govuk-visually-hidden"> terror related</span></a>
                                     </dd>
                         </div>
                         <div class="govuk-summary-list__row">

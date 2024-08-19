@@ -26,14 +26,14 @@
                             {% if data.route == 'remand-to-sentence' %}
                             <span class="govuk-caption-l">Review offences and sentences</span>
                             {% else %}
-                            <span class="govuk-caption-l">Add a sentence</span>
+                            <span class="govuk-caption-l">Add an offence</span>
                             {% endif %}
-                            Enter the count number
+                            Enter the offence number
                         </h1>
                         {% endif %}
                     </legend>
                     <div id="event-name-hint" class="govuk-hint">
-                        You must enter it exactly as it is written on the warrant.
+                        You must enter it exactly as it is written on the warrant. On some warrants this is called 'Count'.
                     </div>
                     <input class="govuk-input govuk-input--width-5" id="count-number" name="sentence[count-number]" type="text" value="{{ data.sentence['count-number'] }}">
                 </fieldset>

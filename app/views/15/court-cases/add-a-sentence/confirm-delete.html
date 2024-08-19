@@ -8,7 +8,7 @@
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         {% if data.route == 'repeat-remand' %}
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add an appearance to court case {{ data.courtCaseIndex | int + 1 }}</span>
+                            <span class="govuk-caption-l">Add sentence information for offence {{ data['sentence']['count-number'] }}</span>
                             Are you sure you want to delete this sentence?
                         </h1>
                         {% else %}

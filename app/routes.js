@@ -695,6 +695,8 @@ router.post('/:prototypeVersion/persist-sentence', function(req, res) {
     const route = req.session.data.route
     const edit = req.query.edit
     const sentenceIndex = req.query.sentenceIndex
+    req.session.data.newSentence = 0
+    req.session.data.sentence['status'] = 'complete'
     console.log("Edit: " + edit)
     console.log("Route: " + route)
     if (prototypeVersion > "13") {
@@ -1159,7 +1161,14 @@ router.get('/:prototypeVersion/save-court-case', function(req, res) {
     req.session.data.savedURL = url
     console.log("Progress saved:" + req.session.data.progressSaved + "\n" + "Saved URL: " + req.session.data.savedURL + "\n" + "Overall questions complete:" + req.session.data.overallQuestionsComplete)
     if (req.session.data.newSentence == 1){
-        res.redirect(307, `/${prototypeVersion}/persist-sentence`)
+        req.session.data.sentence['status'] = 'draft'
+        if (req.session.data.sentenceIndex !== undefined) {
+        req.session.data.appearance.sentences[req.session.data.sentenceIndex] = req.session.data.sentence
+        } else {
+        req.session.data.appearance.sentences.push(req.session.data.sentence)
+        req.session.data.sentenceIndex = req.session.data.appearance.sentences.length - 1
+        }
+        res.redirect(`/${prototypeVersion}/court-cases/save-court-case`)
     } else 
         res.redirect(`/${prototypeVersion}/court-cases/save-court-case`)
     })
