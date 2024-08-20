@@ -1162,6 +1162,7 @@ router.get('/:prototypeVersion/save-court-case', function(req, res) {
     console.log("Progress saved:" + req.session.data.progressSaved + "\n" + "Saved URL: " + req.session.data.savedURL + "\n" + "Overall questions complete:" + req.session.data.overallQuestionsComplete)
     if (req.session.data.newSentence == 1){
         req.session.data.sentence['status'] = 'draft'
+        req.session.data.sentence['saved-from'] = url
         if (req.session.data.sentenceIndex !== undefined) {
         req.session.data.appearance.sentences[req.session.data.sentenceIndex] = req.session.data.sentence
         } else {

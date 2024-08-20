@@ -21,7 +21,7 @@
         {% endif %}
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
-                <span class="govuk-caption-l">Add offences to a court case</span>
+                <span class="govuk-caption-l">Add offences</span>
                 {% if data.appearance.sentences.length == 0 %}
                 {% if data['appearance']['court-case-ref'] | last != "None" %}
                 Add offences to case {{ data['appearance']['court-case-ref'] | last }}
@@ -258,7 +258,7 @@
                             {% endif %}
                         </dl>
                         {% if sentence['status'] == 'draft' %}
-                        <p class="govuk-!-body govuk-!-margin-top-3 govuk-!-margin-bottom-1"><a href="{{ data.savedURL }}?index={{ loop.index0 }}">Finish adding offence details</a></p>
+                        <p class="govuk-!-body govuk-!-margin-top-3 govuk-!-margin-bottom-1"><a href="{{ data.sentence['saved-from'] }}?index={{ loop.index }}">Finish adding offence details</a></p>
                         {% endif %}
                     </div>
                     <div class="offence-card-actions">
