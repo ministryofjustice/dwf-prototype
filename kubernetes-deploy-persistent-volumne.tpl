@@ -29,7 +29,8 @@ spec:
         ports:
         - containerPort: 3000
         volumeMounts:
-        - mountPath: "/"
+        - name: "data"
+          mountPath: "/"
         securityContext:
           runAsNonRoot: true
           runAsUser: 1000
