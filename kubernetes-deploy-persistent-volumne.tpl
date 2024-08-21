@@ -30,7 +30,7 @@ spec:
         - containerPort: 3000
         volumeMounts:
         - name: moj-prototype-${BRANCH}
-          mountPath: "/"
+          mountPath: "/app/.tmp"
         securityContext:
           runAsNonRoot: true
           runAsUser: 1000
