@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: moj-prototype-${BRANCH}
 spec:
@@ -28,11 +28,27 @@ spec:
                 key: password
         ports:
         - containerPort: 3000
+        volumneMounts:
+        - mountPath: "/"
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 1000
+          fsGroup: 1000
         resources:
           requests:
             memory: 512Mi
           limits:
             memory: 1G
+  volumeClaimTemplates:
+  - metadata:
+      name: moj-prototype-${BRANCH}
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "gp2-expand" # StorageClass name used to create PV
+      resources:
+        requests:
+          storage: 4Gi # Storage resource request size    
 
 ---
 apiVersion: v1
@@ -46,6 +62,7 @@ spec:
   - port: 3000
     name: http
     targetPort: 3000
+  clusterIP: None
   selector:
     app: prototype-${BRANCH}
 ---
