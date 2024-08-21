@@ -28,7 +28,7 @@ spec:
                 key: password
         ports:
         - containerPort: 3000
-        volumneMounts:
+        volumeMounts:
         - mountPath: "/"
         securityContext:
           runAsNonRoot: true
