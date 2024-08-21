@@ -28,13 +28,13 @@ spec:
                 key: password
         ports:
         - containerPort: 3000
-        volumneMounts:
-        - mountPath: "/"
+        volumeMounts:
+        - name: moj-prototype-${BRANCH}
+          mountPath: "/app/.tmp"
         securityContext:
           runAsNonRoot: true
           runAsUser: 1000
           runAsGroup: 1000
-          fsGroup: 1000
         resources:
           requests:
             memory: 512Mi
