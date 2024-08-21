@@ -29,7 +29,7 @@ spec:
         ports:
         - containerPort: 3000
         volumeMounts:
-        - name: "data"
+        - name: moj-prototype-${BRANCH}
           mountPath: "/"
         securityContext:
           runAsNonRoot: true
