@@ -12,3 +12,11 @@ addFilter('hasSentence', function(arr) {
 addFilter('needsSentence', function(arr) {
     return arr.filter(sentence => sentence['count-number'] === undefined) 
 })
+
+addFilter('countNonDraft', function(arr) {
+    return arr.filter(appearance => appearance['status'] != 'draft').length 
+})
+
+addFilter('countDraft', function(arr) {
+    return arr.filter(appearance => appearance['status'] == 'draft').length 
+})
