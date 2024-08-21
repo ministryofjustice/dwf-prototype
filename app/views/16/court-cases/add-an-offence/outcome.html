@@ -1,0 +1,211 @@
+{% extends "../template.html" %}
+{% block content %}
+<!-- What is the confirmed date -->
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        {% if data.postSaveEdit == 'true' %}
+        <form class="form" action="/{{data.prototypeVersion}}/persist-offence?postSaveEdit=true&changeMade=1&variableName=Outcome&value=outcome" method="post">
+        {% else %}
+        {% if data.route == 'remand-to-sentence' %}
+            {% if data.edit == 'true' %}
+        <form class="form" action="edit-an-offence" method="post">
+            {% endif %}
+        <form class="form" action="/{{data.prototypeVersion}}/outcome-select-4" method="post">
+        {% endif %}
+        {% endif %}
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        {% if data.route == 'repeat-remand' %}
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Add an appearance to court case</span>
+                            Select the outcome for this offence
+                        </h1>
+                        {% elif data.route == 'remand-to-sentence' %}
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Add an appearance to court case</span>
+                            Select the outcome for this offence
+                        </h1>
+                        {% elif data.postSaveEdit == 'true' %}
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Appearance {{ data.appearance['court-case-ref'] }} at {{ data.appearance['court-name'] }} on {{ data.appearance['warrant-date-day'] }}/{{ data.appearance['warrant-date-month'] }}/{{ data.appearance['warrant-date-year'] }}</span>
+                            Edit the outcome for this offence
+                        </h1>
+                        {% else %}
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Add a court case</span>
+                            Select the outcome for this offence
+
+                        </h1>
+                        {% endif %}
+                    </legend>
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="offence-outcome" name="offence[outcome]" type="radio" value="Remanded in custody" {% if data.offence['outcome']== 'Remanded in custody' %} checked {% endif %}>
+                            <label class="govuk-label govuk-radios__label" for="offence-outcome">
+                                Remanded in custody
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="offence-outcome-2" name="offence[outcome]" type="radio" value="Sent to Crown Court in custody for trial with bail direction" {% if data.offence['outcome']== 'Sent to Crown Court in custody for trial with bail direction' %} checked {% endif %}>
+                            <label class="govuk-label govuk-radios__label" for="offence-outcome-2">
+                                Sent to Crown Court in custody for trial with bail direction
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="offence-outcome-3" name="offence[outcome]" type="radio" value="Committed to Crown Court for sentence - in custody with bail direction" {% if data.offence['outcome']== 'Committed to Crown Court for sentence - in custody with bail direction' %} checked {% endif %}>
+                            <label class="govuk-label govuk-radios__label" for="offence-outcome-3">
+                                Committed to Crown Court for sentence - in custody with bail direction
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="offence-outcome-4" name="offence[outcome]" type="radio" value="Committed to Crown Court for sentence in custody" {% if data.offence['outcome']== 'Committed to Crown Court for sentence in custody' %} checked {% endif %}>
+                            <label class="govuk-label govuk-radios__label" for="offence-outcome-4">
+                                Committed to Crown Court for sentence in custody
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="offence-outcome-5" name="offence[outcome]" type="radio" value="Adult remittal for sentence In custody" {% if data.offence['outcome']== 'Adult remittal for sentence In custody' %} checked {% endif %}>
+                            <label class="govuk-label govuk-radios__label" for="offence-outcome-5">
+                                Adult remittal for sentence In custody
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="offence-outcome-6" name="offence[outcome]" type="radio" value="Sent to Crown Court for trial in custody" {% if data.offence['outcome']== 'Sent to Crown Court for trial in custody' %} checked {% endif %}>
+                            <label class="govuk-label govuk-radios__label" for="offence-outcome-6">
+                                Sent to Crown Court for trial in custody
+                            </label>
+                        </div>
+                                                <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="offence-outcome-7" name="offence[outcome]" type="radio" value="Committed to Crown Court for sentence in prison for restriction order" {% if data.offence['outcome']== 'Committed to Crown Court for sentence in prison for restriction order' %} checked {% endif %}>
+                            <label class="govuk-label govuk-radios__label" for="offence-outcome-7">
+                                Committed to Crown Court for sentence in prison for restriction order
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="offence-outcome-8" name="offence[outcome]" type="radio" value="Committed to the Crown Court in custody for consideration of the question of bail in a charge of murder" {% if data.offence['outcome']== 'Committed to the Crown Court in custody for consideration of the question of bail in a charge of murder' %} checked {% endif %}>
+                            <label class="govuk-label govuk-radios__label" for="offence-outcome-8">
+                                Committed to the Crown Court in custody for consideration of the question of bail in a charge of murder
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="offence-outcome-9" name="offence[outcome]" type="radio" value="Prosecutor's notice of appeal received. Remanded in custody" {% if data.offence['outcome']== 'Prosecutor&#39;s notice of appeal received. Remanded in custody' %} checked {% endif %}>
+                            <label class="govuk-label govuk-radios__label" for="offence-outcome-9">
+                                Prosecutor's notice of appeal received. Remanded in custody
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="offence-outcome-10" name="offence[outcome]" type="radio" value="Recommended for deportation when detained" {% if data.offence['outcome']== 'Recommended for deportation when detained' %} checked {% endif %}>
+                            <label class="govuk-label govuk-radios__label" for="offence-outcome-10">
+                                Recommended for deportation when detained
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="offence-outcome-11" name="offence[outcome]" type="radio" value="The court orders that the defendant be transferred to service custody" {% if data.offence['outcome']== 'The court orders that the defendant be transferred to service custody' %} checked {% endif %}>
+                            <label class="govuk-label govuk-radios__label" for="offence-outcome-11">
+                                The court orders that the defendant be transferred to service custody
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="offence-outcome-12" name="offence[outcome]" type="radio" value="Remanded in custody pending receipt of Prosecutor's written notice of appeal" {% if data.offence['outcome']== 'Remanded in custody pending receipt of Prosecutor&#39;s written notice of appeal' %} checked {% endif %}>
+                            <label class="govuk-label govuk-radios__label" for="offence-outcome-12">
+                                Remanded in custody pending receipt of Prosecutor's written notice of appeal
+                            </label>
+                        </div>
+                        <div class="govuk-radios__divider">or</div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="offence-outcome-13" name="offence[outcome]" type="radio" value="Dismissed">
+                            <label class="govuk-label govuk-radios__label" for="offence-outcome-13">
+                                Dismissed
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="offence-outcome-14" name="offence[outcome]" type="radio" value="No separate penalty">
+                            <label class="govuk-label govuk-radios__label" for="offence-outcome-14">
+                                No separate penalty
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="offence-outcome-15" name="offence[outcome]" type="radio" value="Not guilty">
+                            <label class="govuk-label govuk-radios__label" for="offence-outcome-15">
+                                Not guilty
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="offence-outcome-16" name="offence[outcome]" type="radio" value="Other non-custodial outcome">
+                            <label class="govuk-label govuk-radios__label" for="offence-outcome-16">
+                                Other non-custodial outcome
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <button class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+    <div class="govuk-grid-column-one-third">
+        <div class="offence-summary">
+            <h2 class="govuk-heading-m govuk-!-margin-top-4">Appearance details</h2>
+            <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
+                <div class="govuk-summary-list__row offences-summary-card-court-details-row">
+                    <dt class="govuk-summary-list__key">
+                        Case reference number
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['court-case-ref'] }}
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row offences-summary-card-court-details-row">
+                    <dt class="govuk-summary-list__key">
+                        Court name
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['court-name'] }}
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row offences-summary-card-court-details-row">
+                    <dt class="govuk-summary-list__key">
+                        Warrant date
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['warrant-date-day'] }}/{{ data['appearance']['warrant-date-month'] }}/{{ data['appearance']['warrant-date-year'] }}
+                    </dd>
+                </div>
+            </dl>
+            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+            <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-2">Offences</h2>
+            <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
+                <div class="govuk-summary-list__row offences-summary-card-offence-details-row">
+                    <dt class="govuk-summary-list__key">
+                        Offences {% if data.postSaveEdit != 'true' %}added{% endif %}
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data.appearance.offences | length }}
+                    </dd>
+                </div>
+            </dl>
+            <details class="govuk-details" data-module="govuk-details">
+                <summary class="govuk-details__summary">
+                    <span class="govuk-details__summary-text">
+                        Show offences
+                    </span>
+                </summary>
+                <div class="govuk-details__text">
+                    <dl class="offences-summary-card-content">
+                        {% for offence in data.appearance.offences %}
+                        <div class="offences-summary-card-row">
+                            <dt class="offences-summary-card-key govuk-!-font-weight-bold">
+                                {{ offence['offence-name'] }}
+                            </dt>
+                            <dd class="offences-summary-card-value govuk-body-s">Committed on {{ offence['offence-start-date-day'] }}/{{ offence['offence-start-date-month'] }}/{{ offence['offence-start-date-year'] }}</dd>
+                        </div>
+                        {% endfor %}
+                    </dl>
+                </div>
+            </details>
+        </div>
+    </div>
+</div>
+{% endblock %}

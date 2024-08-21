@@ -923,7 +923,7 @@ router.post('/:prototypeVersion/sentence-length-select', function(req, res) {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/consecutive-concurrent`)
     }
     if (sentenceType == "Imprisonment in default of a fine") {
-        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/term-length`)
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/sentence-length`)
     }
      else if (prototypeVersion >= 'v11' | prototypeVersion > 13) {
         res.redirect(`court-cases/add-a-sentence/sentence-length`)
@@ -953,6 +953,8 @@ router.post('/:prototypeVersion/sentence-length-select-2', function(req, res) {
     }
     if (sentenceType == "EDS (Extended Determinate Sentence)") {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/licence-period`)
+    } else if (sentenceType == "Imprisonment in default of a fine") {
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/fine-amount`)
     } else if (prototypeVersion >= 'v11' | prototypeVersion > 13) {
         res.redirect(`court-cases/add-a-sentence/consecutive-concurrent`)
     } else
