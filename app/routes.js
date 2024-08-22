@@ -7,6 +7,18 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const sessionDataDefaults = require('./data/session-data-defaults')
 const router = govukPrototypeKit.requests.setupRouter()
 
+router.use('/15', (req, res, next) => {
+    const {courtCases: _, ...sessionData } = req.session.data
+    const log = {  
+        method: req.method,  
+        url: req.originalUrl,  
+        data: sessionData
+      }  
+      console.log(JSON.stringify(log, null, 2))  
+
+    next()  
+})
+
 router.post('/:prototypeVersion/next-court-date-select', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     const warrantType = req.session.data.warrantType
