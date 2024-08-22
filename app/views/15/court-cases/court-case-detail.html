@@ -267,7 +267,11 @@
                     <td class="govuk-table__cell" style="border-bottom: none;">{{ appearance['court-case-ref'] }}</td>
                     <td class="govuk-table__cell" style="border-bottom: none;">{{ appearance['court-name'] }}</td>
                     <td class="govuk-table__cell" style="border-bottom: none;">{{ appearance['warrant-date-day'] }}/{{ appearance['warrant-date-month'] }}/{{ appearance['warrant-date-year'] }}</td>
-                    <td class="govuk-table__cell govuk-!-text-align-right" style="border-bottom: none;">{% if appearance['status'] == 'draft' %}<a href="" class="govuk-link--no-visited-state">Continue adding appearance information</a>{% else %}<a href="/{{data.prototypeVersion}}/update-appearance?courtCaseIndex={{data.courtCaseIndex}}&appearanceIndex={{loop.revindex0}}">Edit</a>{% endif %}</td>
+                    <td class="govuk-table__cell govuk-!-text-align-right" style="border-bottom: none;">
+                        <ul class="offence-card-actions-list">
+                            <li class="offence-card-action-link">{% if appearance['status'] == 'draft' %}<a href="" class="govuk-link--no-visited-state">Continue adding appearance information</a>{% else %}<a href="/{{data.prototypeVersion}}/update-appearance?courtCaseIndex={{data.courtCaseIndex}}&appearanceIndex={{loop.revindex0}}">Edit</a>{% endif %}</li>
+                            <li class="offence-card-action-link"><a href="" class="govuk-link--no-visited-state">Delete</a> </li>
+                        </ul></td>
                 </tr>
                 <tr class="govuk-table__row">
                     {% if lastAppearance.sentences %}
