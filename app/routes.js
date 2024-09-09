@@ -99,6 +99,32 @@ router.post('/:prototypeVersion/offence-code-known', function(req, res) {
         console.log('Route: ' + route)
     }
     console.log(offenceCodeKnown)
+    if (req.session.data.sentence['offence-code'] != null)
+    {
+        if (req.session.data.sentence['offence-code'].includes('TR06001'))
+        {
+            req.session.data.sentence['terror-related'] = 'Yes'
+            req.session.data.sentence['offence-name'] = 'Publish / cause another to publish statement intending / reckless as to encouragement of terrorism - Terrorism Act 2006'
+            req.session.data.sentence['cja-code'] = "066/53"
+            req.session.data.sentence['legislation'] = "Contrary to section 2(1) and (11) of the Terrorism Act 2006"
+        }
+        if (req.session.data.sentence['offence-code'].includes('TR06002'))
+        {
+            req.session.data.sentence['terror-related'] = 'Yes'
+            req.session.data.sentence['offence-name'] = 'Distribute / circulate a terrorist publication - Terrorism Act 2006'
+            req.session.data.sentence['cja-code'] = "066/54"
+            req.session.data.sentence['legislation'] = "Contrary to section 2(1) and (11) of the Terrorism Act 2006"
+        }
+        if (req.session.data.sentence['offence-code'].includes('TR06003'))
+        {
+            req.session.data.sentence['terror-related'] = 'Yes'
+            req.session.data.sentence['offence-name'] = 'Give / sell / lend / offer for sale / loan a terrorist publication - Terrorism Act 2006'
+            req.session.data.sentence['cja-code'] = "066/55"
+            req.session.data.sentence['legislation'] = "Contrary to section 2(1) and (11) of the Terrorism Act 2006"
+        } else {
+
+        }
+    }
     if (offenceCodeKnown != null) {
         if (offenceCodeKnown.includes('None')) {
             if (route == "remand-to-sentence") {
@@ -1172,6 +1198,17 @@ router.get('/:prototypeVersion/save-court-case', function(req, res) {
         res.redirect(`/${prototypeVersion}/court-cases/save-court-case`)
     } else 
         res.redirect(`/${prototypeVersion}/court-cases/save-court-case`)
+    })
+
+router.get('/:prototypeVersion/terror-related-offence', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    var offenceName = req.session.data.sentence['offence-name']
+    if (offenceName.includes("TR06001") || offenceName.includes("TR06002") || offenceName.includes("TR06003")) {
+        req.session.data.sentence['terror-related'] = 'Yes'
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/sentence-type`)
+    } else {
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/terror-related`)
+    }
     })
 
 router.get('/:prototypeVersion/launch-prototype', function(req, res) {
