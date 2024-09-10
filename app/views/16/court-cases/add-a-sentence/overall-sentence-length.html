@@ -8,18 +8,29 @@
             <form class="form" action="overall-conviction-date" method="post">
                 {% endif %}
                 <div class="govuk-form-group">
-                    <fieldset class="govuk-fieldset">
-                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                            <h1 class="govuk-fieldset__heading">
-                                <span class="govuk-caption-l">Add offences</span>
-                                Enter the overall sentence length
-                            </h1>
-                            <div id="account-number-hint" class="govuk-hint govuk-!-margin-top-2">
-                                This must be entered exactly as it is written on the warrant.
-                            </div>
-                        </legend>
-                        <div class="govuk-form-group">
-                            <div class="govuk-date-input" id="overall-sentence-length-years">
+  <div class="govuk-form-group">
+  <fieldset class="govuk-fieldset" aria-describedby="overall-sentence-length-hint">
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+      <h1 class="govuk-fieldset__heading">
+        Is there an overall sentence length on the warrant?
+      </h1>
+    </legend>
+    <div id="overall-sentence-length-hint" class="govuk-hint">
+      Select one option.
+    </div>
+    <div class="govuk-radios" data-module="govuk-radios">
+      <div class="govuk-radios__item">
+        <input class="govuk-radios__input" id="overall-sentence-length" name="apperance['overall-sentence-length']" type="radio" value="yes" data-aria-controls="conditional-overall-sentence-length">
+        <label class="govuk-label govuk-radios__label" for="overall-sentence-length">
+          Yes
+        </label>
+      </div>
+      <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-overall-sentence-length">
+        <div class="govuk-form-group">
+            <h1 class="govuk-heading-s">
+        Enter the overall sentence length
+      </h1>
+          <div class="govuk-date-input" id="overall-sentence-length-years">
                                 <div class="govuk-date-input__item">
                                     <div class="govuk-form-group">
                                         <label class="govuk-label govuk-date-input__label" for="overall-sentence-length-years">
@@ -53,17 +64,18 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    <div class="govuk-checkboxes govuk-!-margin-top-6" data-module="govuk-checkboxes">
-                        <div class="govuk-checkboxes__item">
-                            <input class="govuk-checkboxes__input" id="life-sentence" name="appearance[life-sentence]" type="checkbox" value="yes">
-                            <label class="govuk-label govuk-checkboxes__label" for="life-sentence">
-                                Life sentence
-                            </label>
-                        </div>
-                    </div>
-                    </fieldset>
-                </div>
+        </div>
+      </div>
+      <div class="govuk-radios__item">
+        <input class="govuk-radios__input" id="overall-sentence-length-2" name="apperance['overall-sentence-length']" type="radio" value="no">
+        <label class="govuk-label govuk-radios__label" for="overall-sentence-length-2">
+          No
+        </label>
+      </div>
+    </div>
+  </fieldset>
+</div>
+</div>
                 <div class="govuk-button-group">
                 <button type="submit" class="govuk-button" data-module="govuk-button">
                     Save and continue
