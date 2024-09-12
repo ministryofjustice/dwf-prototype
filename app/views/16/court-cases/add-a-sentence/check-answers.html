@@ -56,8 +56,8 @@
                             Overall sentence length
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {% if data['appearance']['life-sentence'] == 'yes' %}
-                            Life sentence
+                            {% if data['appearance']['overall-sentence-length'] == 'no' %}
+                            Life sentence 
                             {% else %}
                             {{ data['appearance']['overall-sentence-length-years'] }} years {{ data['appearance']['overall-sentence-length-months'] }} months {{ data['appearance']['overall-sentence-length-weeks'] }} weeks {{ data['appearance']['overall-sentence-length-days'] }} days
                             {% endif %}
@@ -66,6 +66,7 @@
                             <a class="govuk-link" href="overall-sentence-length?edit=true">Edit<span class="govuk-visually-hidden"> overall sentence length</span></a>
                         </dd>
                     </div>
+                    {% if data['appearance']['overall-sentence-length'] == 'yes' %}
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Offences added
@@ -74,6 +75,7 @@
                             {{ data['appearance']['total-sentence-length-years'] }} years {{data['appearance']['total-sentence-length-months']}} months {{data['appearance']['total-sentence-length-weeks']}} weeks {{data['appearance']['total-sentence-length-days']}} days
                         </dd>
                     </div>
+                    {% endif %}
                 </dl>
             </dl>
             <!--             <div class="govuk-inset-text govuk-!-margin-top-0 govuk-!-margin-bottom-6">
