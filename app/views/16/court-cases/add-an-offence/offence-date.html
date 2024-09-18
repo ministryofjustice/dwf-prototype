@@ -1,20 +1,19 @@
 {% extends "../template.html" %}
 {% block content %}
-<!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
         {% if data.postSaveEdit == 'true' %}
             <form class="form" action="/{{data.prototypeVersion}}/persist-offence" method="post">
-                {% else %}
-        {% if data.edit == 'true' %}
-        {% if data.route == 'remand-to-sentence' %}
-        <form class="form" action="/{{data.prototypeVersion}}/persist-offence?edit=true" method="post">
-            {% elif data.route == 'remand-to-sentence' %}
-            <form class="form" action="outcome" method="post">
+        {% else %}
+            {% if data.edit == 'true' %}
+                {% if data.route == 'remand-to-sentence' %}
+                    <form class="form" action="/{{data.prototypeVersion}}/persist-offence?edit=true" method="post">
+                {% elif data.route == 'remand-to-sentence' %}
+                    <form class="form" action="outcome" method="post">
+                {% endif %}
                 {% endif %}
             <form class="form" action="/{{data.prototypeVersion}}/case-outcome-apply" method="post">
                 {% endif %}
-            {% endif %}
                 <fieldset class="govuk-fieldset" role="group" aria-describedby="passport-issued-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         {% if data.route == 'repeat-remand' %}

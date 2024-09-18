@@ -92,8 +92,8 @@
                     {% endif %}
                     {% endif %}
                     <td class="govuk-table__cell" style="border-bottom: none;">{{ appearance['overall-case-outcome'] }}</td>
-                    <td class="govuk-table__cell" style="border-bottom: none;">{% if appearance['status'] == 'draft' %}<strong class="govuk-tag govuk-tag--grey govuk-!-margin-bottom-1">Draft - not saved to NOMIS</strong>{% endif %}</td>
-                    <td class="govuk-table__cell" style="border-bottom: none;">{% if appearance['status'] == 'draft' %}<a href="" class="govuk-link--no-visited-state">Complete</a>{% else %}<a href="/{{data.prototypeVersion}}/update-appearance?courtCaseIndex={{data.courtCaseIndex}}&appearanceIndex={{loop.revindex0}}">Edit</a>{% endif %}</td>
+                    <td class="govuk-table__cell" style="border-bottom: none;">{% if appearance['status'] == 'draft' %}<strong class="govuk-tag govuk-tag--grey govuk-!-margin-bottom-1">Draft - not saved to NOMIS</strong>{% endif %}{% if appearance['source'] == 'nomis' %}<strong class="moj-badge moj-badge--grey govuk-!-margin-bottom-1 govuk-body-s">NOMIS &ndash;<br>Read only</strong>{% endif %}</td>
+                    <td class="govuk-table__cell" style="border-bottom: none;">{% if (appearance['status'] == 'draft') %}<a href="" class="govuk-link--no-visited-state">Complete</a>{% elif appearance['source'] == 'nomis' %}{% else %}<a href="/{{data.prototypeVersion}}/update-appearance?courtCaseIndex={{data.courtCaseIndex}}&appearanceIndex={{loop.revindex0}}">Edit</a>{% endif %}</td>
                 </tr>
                 <tr class="govuk-table__row">
                     {% if lastAppearance.sentences %}

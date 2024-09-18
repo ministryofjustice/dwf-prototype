@@ -91,6 +91,7 @@ router.post('/:prototypeVersion/offence-code-known', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     const warrantType = req.session.data.warrantType
     var offenceCodeKnown = req.session.data['offence-code-known']
+    var offenceCode = req.session.data['offence-code']
     var route = ''
     if (req.query.route != null) {
         route = req.query.route
@@ -99,23 +100,23 @@ router.post('/:prototypeVersion/offence-code-known', function(req, res) {
         console.log('Route: ' + route)
     }
     console.log(offenceCodeKnown)
-    if (req.session.data.sentence['offence-code'] != null)
+    if (offenceCode != null)
     {
-        if (req.session.data.sentence['offence-code'].includes('TR06001'))
+        if (offenceCode.includes('TR06001'))
         {
             req.session.data.sentence['terror-related'] = 'Yes'
             req.session.data.sentence['offence-name'] = 'Publish / cause another to publish statement intending / reckless as to encouragement of terrorism - Terrorism Act 2006'
             req.session.data.sentence['cja-code'] = "066/53"
             req.session.data.sentence['legislation'] = "Contrary to section 2(1) and (11) of the Terrorism Act 2006"
         }
-        if (req.session.data.sentence['offence-code'].includes('TR06002'))
+        if (offenceCode.includes('TR06002'))
         {
             req.session.data.sentence['terror-related'] = 'Yes'
             req.session.data.sentence['offence-name'] = 'Distribute / circulate a terrorist publication - Terrorism Act 2006'
             req.session.data.sentence['cja-code'] = "066/54"
             req.session.data.sentence['legislation'] = "Contrary to section 2(1) and (11) of the Terrorism Act 2006"
         }
-        if (req.session.data.sentence['offence-code'].includes('TR06003'))
+        if (offenceCode.includes('TR06003'))
         {
             req.session.data.sentence['terror-related'] = 'Yes'
             req.session.data.sentence['offence-name'] = 'Give / sell / lend / offer for sale / loan a terrorist publication - Terrorism Act 2006'
@@ -148,7 +149,7 @@ router.post('/:prototypeVersion/offence-code-known', function(req, res) {
             }
         }
     } else {
-        if (req.session.data.sentence['offence-code'] == 'TH68033A')
+        if (offenceCode == 'TH68033A')
         {
             return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/invalid-offence-code`)
         }
