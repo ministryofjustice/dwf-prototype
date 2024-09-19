@@ -166,12 +166,13 @@
                                 <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Outcome</h3>
                                 <p class="govuk-body govuk-!-margin-bottom-2">{{ lastAppearance['overall-case-outcome'] }}</p>
                             </div>
-                            <div class="govuk-grid-column-full govuk-!-margin-top-4">
+                            <div class="govuk-grid-column-full govuk-!-margin-top-2">
                                 {% if lastAppearance.sentences == null %}
+                                        <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Offences</h3>
                                         <details class="govuk-details govuk-!-margin-bottom-0">
                                             <summary class="govuk-details__summary">
                                                 <span class="govuk-details__summary-text">
-                                                    Offences ({{ lastAppearance.offences.length }})
+                                                    offences ({{ lastAppearance.offences.length }})
                                                 </span>
                                             </summary>
                                             <div class="govuk-details__text">
@@ -206,17 +207,18 @@
                                                 {% endfor %}
                                         </details>
                                         {% else %}
+                                        <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Offences</h3>
                                         <details class="govuk-details govuk-!-margin-bottom-0">
                                             <summary class="govuk-details__summary">
                                                 <span class="govuk-details__summary-text">
-                                                    Offences ({{ lastAppearance.sentences.length }})
+                                                    offences ({{ lastAppearance.sentences.length }})
                                                 </span>
                                             </summary>
                                             <div class="govuk-details__text">
                                                 {% for sentence in lastAppearance.sentences %}
                                     <div class="offence-card sentence-card">
                                         <div class="offence-card-offence-details">
-                                            <span class="govuk-body-s">Count {{ sentence['count-number'] }}</span>
+                                            <span class="govuk-body">Offence {{ sentence['count-number'] }}</span>
                                             <h4 class="govuk-heading-s">{{ sentence['offence-name'] }}
                                                 {% if sentence['terror-related'] == 'Yes' %}
                                                 <br><strong class="govuk-tag govuk-!-margin-top-2">
@@ -238,14 +240,6 @@
                                 </dd>
                             </div>
                             {% endif %}
-                            <!--                         <div class="govuk-summary-list__row">
-                            <dt class="govuk-summary-list__key">
-                                Outcome
-                            </dt>
-                            <dd class="govuk-summary-list__value">
-                                {{ sentence['outcome'] }}
-                            </dd>
-                        </div> -->
                             {% if sentence['conviction-date-day'] %}
                             <div class="govuk-summary-list__row">
                                 <dt class="govuk-summary-list__key">
