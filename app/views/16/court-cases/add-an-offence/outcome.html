@@ -114,7 +114,6 @@
                                 Sentence Postponed
                             </label>
                         </div>
-                        <!-- <div class="govuk-radios__divider">or</div> -->
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="outcome-13" name="offence[outcome]" type="radio" value="Fine" {% if data.offence[outcome]== 'v' %} checked {% endif %}>
                             <label class="govuk-label govuk-radios__label" for="outcome-13">
@@ -142,9 +141,14 @@
                     </div>
                 </fieldset>
             </div>
-            <button class="govuk-button" data-module="govuk-button">
-                Continue
-            </button>
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Save and continue
+                </button>
+                <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="/{{data.prototypeVersion}}/save-court-case">
+                    Save as draft
+                </a>
+            </div>
         </form>
     </div>
     <div class="govuk-grid-column-one-third">

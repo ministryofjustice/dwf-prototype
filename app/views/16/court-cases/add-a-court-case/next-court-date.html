@@ -55,9 +55,14 @@
                         <input class="govuk-input govuk-input--width-4" id="next-court-time" name="appearance[next-court-time]" type="text" value="{{ data['appearance']['next-court-time'] }}">
                     </div>
                 </fieldset>
-                <button class="govuk-button" data-module="govuk-button">
-                    Continue
-                </button>
+                <div class="govuk-button-group">
+                    <button type="submit" class="govuk-button" data-module="govuk-button">
+                        Save and continue
+                    </button>
+                    <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="/{{data.prototypeVersion}}/save-court-case">
+                        Save as draft
+                    </a>
+                </div>
             </form>
     </div>
 </div>

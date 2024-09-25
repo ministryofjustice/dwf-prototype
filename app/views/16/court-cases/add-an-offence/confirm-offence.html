@@ -47,9 +47,14 @@
                 </dl>
             </div>
             <input type="hidden" name="offence[offence-name]" value="Kidnap" />
-            <button class="govuk-button" data-module="govuk-button">
-                Confirm and continue
-            </button>
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Confirm and continue
+                </button>
+                <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="/{{data.prototypeVersion}}/save-court-case">
+                    Save as draft
+                </a>
+            </div>
             <p class="govuk-body"><a href="offence-code">Enter a different offence code</a></p>
             <p class="govuk-body"><a href="offence-code">Look up an offence by name</a></p>
         </form>
