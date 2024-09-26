@@ -512,6 +512,7 @@ router.get('/:prototypeVersion/create-offence', function(req, res) {
     delete req.session.data.offence
     const appearanceIndex = req.query.appearanceIndex
     const route = req.session.data.route
+    const path = req.query.path
     console.log('Route: ' + route)
     if (appearanceIndex !== undefined) {
         req.session.data.appearance = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[appearanceIndex]
@@ -522,7 +523,11 @@ router.get('/:prototypeVersion/create-offence', function(req, res) {
             outcome: req.session.data.appearance['overall-case-outcome']
         }
     }
-    res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-code`)
+    if (path == 'cta'){
+        res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-date`)
+    } else {
+    res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/check-answers`)
+    }
 })
 
 router.post('/:prototypeVersion/persist-offence', function(req, res) {

@@ -57,6 +57,17 @@
                                 </div>
                                 <div class="govuk-summary-list__row">
                                     <dt class="govuk-summary-list__key offence-card-edit-offence-details-key">
+                                        Terror related
+                                    </dt>
+                                    <dd class="govuk-summary-list__value offence-card-edit-offence-details-value">
+                                        {{ data.appearance.offences[data.index]['terror-related'] }}
+                                    </dd>
+                                    <dd class="govuk-summary-list__actions">
+                                        <a class="govuk-link" href="terror-related?postSaveEdit=true">Edit<span class="govuk-visually-hidden"> offence outcome</span></a>
+                                    </dd>
+                                </div>
+                                <div class="govuk-summary-list__row">
+                                    <dt class="govuk-summary-list__key offence-card-edit-offence-details-key">
                                         Outcome
                                     </dt>
                                     <dd class="govuk-summary-list__value offence-card-edit-offence-details-value">

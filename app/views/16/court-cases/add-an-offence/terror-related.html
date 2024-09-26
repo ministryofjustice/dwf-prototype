@@ -4,9 +4,9 @@
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
         {% if data.edit == 'true' %}
-        <form class="form" action="/{{data.prototypeVersion}}/persist-sentence?edit=true" method="post">
+        <form class="form" action="/{{data.prototypeVersion}}/persist-offence?edit=true" method="post">
             {% else %}
-            <form class="form" action="sentence-type" method="post">
+            <form class="form" action="/{{data.prototypeVersion}}/case-outcome-apply" method="post">
                 {% endif %}
                 <div class="govuk-form-group">
                     <fieldset class="govuk-fieldset" aria-describedby="changedName-hint">
@@ -14,38 +14,37 @@
                             {% if data.route == 'repeat-remand' %}
                         <h1 class="govuk-fieldset__heading">
                             <span class="govuk-caption-l">Add an appearance to court case</span>
-                            Select the outcome for this offence
+                            Was the offence terror related?
                         </h1>
                         {% elif data.route == 'remand-to-sentence' %}
                         <h1 class="govuk-fieldset__heading">
                             <span class="govuk-caption-l">Add an appearance to court case</span>
-                            Select the outcome for this offence
+                            Was the offence terror related?
                         </h1>
                         {% elif data.postSaveEdit == 'true' %}
                         <h1 class="govuk-fieldset__heading">
                             <span class="govuk-caption-l">Appearance {{ data.appearance['court-case-ref'] }} at {{ data.appearance['court-name'] }} on {{ data.appearance['warrant-date-day'] }}/{{ data.appearance['warrant-date-month'] }}/{{ data.appearance['warrant-date-year'] }}</span>
-                            Edit the outcome for this offence
+                            Was the offence terror related?
                         </h1>
                         {% else %}
                         <h1 class="govuk-fieldset__heading">
                             <span class="govuk-caption-l">Add a court case</span>
-                            Select the outcome for this offence
-
+                            Was the offence terror related?
                         </h1>
                         {% endif %}
                         </legend>
-                        <!--                     <p class="govuk-body-l">
+                        <!-- <p class="govuk-body-l">
                             {{ data.sentence['offence-name'] }}
                         </p> -->
                         <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
                             <div class="govuk-radios__item">
-                                <input class="govuk-radios__input" id="terror-related" name="sentence[terror-related]" type="radio" value="Yes" {% if data.sentence['terror-related'] == 'Yes'%} checked {% endif %}>
+                                <input class="govuk-radios__input" id="terror-related" name="offence[terror-related]" type="radio" value="Yes" {% if data.offence['terror-related'] == 'Yes'%} checked {% endif %}>
                                 <label class="govuk-label govuk-radios__label" for="terror-related">
                                     Yes
                                 </label>
                             </div>
                             <div class="govuk-radios__item">
-                                <input class="govuk-radios__input" id="terror-related-2" name="sentence[terror-related]" type="radio" value="No" {% if data.sentence['terror-related'] == 'No'%} checked {% endif %}>
+                                <input class="govuk-radios__input" id="terror-related-2" name="offence[terror-related]" type="radio" value="No" {% if data.offence['terror-related'] == 'No'%} checked {% endif %}>
                                 <label class="govuk-label govuk-radios__label" for="terror-related-2">
                                     No
                                 </label>
