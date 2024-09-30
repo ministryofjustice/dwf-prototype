@@ -47,7 +47,9 @@
                         <h2 class="govuk-summary-card__title">{{ lastAppearance['court-case-ref'] }} <span class="govuk-body">at</span> {{ lastAppearance['court-name']}} </h2>
                         <ul class="govuk-summary-card__actions">
                             <li class="govuk-summary-card__action">
-                                {% if courtCase['source'] == "nomis" %}
+                                {% if courtCase['status'] == "inactive" %}
+                                <span class="moj-badge moj-badge--grey">Inactive</span>
+                                {% elif courtCase['source'] == "NOMIS" %}
                                 <span class="moj-badge moj-badge--grey">NOMIS - read only</span>
                                 {% elif (courtCase.appearances.length == 1) and (lastAppearance['status'] == 'draft') %}
                                 <strong class="govuk-tag govuk-tag--blue">Draft</strong>
@@ -62,6 +64,11 @@
                         <p class="govuk-body govuk-!-margin-top-2">The appearance information for this court case has been saved as a draft.</p>
                             <p class="govuk-body"><a href="add-a-court-case/task-list?courtCaseIndex={{loop.revindex0}}">Continue adding appearance information</a></p>
                         {% else %}
+                        {% if courtCase['status'] == 'inactive' %}
+                        <div class="govuk-inset-text">
+                            Inactive court cases can only be updated in NOMIS
+                          </div>
+                        {% endif %}
                         <dl class="govuk-summary-list">
                             <div class="govuk-summary-list__row">
                                 <dt class="govuk-summary-list__key">
@@ -373,7 +380,7 @@
                         </div>
                         
                         <hr class="govuk-section-break govuk-!-margin-top-4 govuk-section-break--visible">
-                        <p class="govuk-body govuk-!-margin-top-6"><a class="govuk-link--no-visited-state govuk-!-font-weight-bold" href="court-case-detail?courtCaseIndex={{loop.revindex0}}">{% if courtCase['source'] == "nomis" %}View all appearances{% else %}View and edit all appearances ({% if lastAppearance['status'] == 'draft' %}{{ courtCase.appearances.length - 1 }} and 1 draft {% else %}{{ courtCase.appearances.length}}{% endif %}){% endif %}</a></p>
+                        <p class="govuk-body govuk-!-margin-top-6"><a class="govuk-link--no-visited-state govuk-!-font-weight-bold" href="court-case-detail?courtCaseIndex={{loop.revindex0}}">{% if (courtCase['source'] == "nomis") or (courtCase['status'] == "inactive") %}View all appearances{% else %}View and edit all appearances ({% if lastAppearance['status'] == 'draft' %}{{ courtCase.appearances.length - 1 }} and 1 draft {% else %}{{ courtCase.appearances.length}}{% endif %}){% endif %}</a></p>
                         {% endif %}
                     </div>
                 </div>

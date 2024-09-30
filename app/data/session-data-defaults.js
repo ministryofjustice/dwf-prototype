@@ -1,5 +1,6 @@
 module.exports = {
     courtCases: [{
+            // "status": "inactive",
             "appearances": [{
                     "court-case-ref": "63GD1757930",
                     "overall-case-outcome": "Remanded in custody",
@@ -415,7 +416,7 @@ module.exports = {
             ]
         },
         {
-            // "source": "nomis",
+            "source": "nomis",
             "appearances": [{
                     "court-case-ref": "63GD1946270",
                     "overall-case-outcome": "Remanded in custody",
