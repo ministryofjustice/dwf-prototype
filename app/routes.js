@@ -49,9 +49,9 @@ router.post('/:prototypeVersion/next-hearing-court-select', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     var nextCourtDateSelect = req.session.data['appearance']['next-hearing-court-select']
     if (nextCourtDateSelect == "No") {
-        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/next-court-name`)
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/next-court-name`)
     } else {
-        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers-next-appearance`)
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers-next-appearance`)
     }
 })
 
@@ -153,7 +153,7 @@ router.post('/:prototypeVersion/offence-code-known', function(req, res) {
         {
             return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/invalid-offence-code`)
         }
-        if (req.session.data.sentence['offence-code'] == 'TH68033C')
+        if (offenceCode == 'TH68033C')
         {
             return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-offence`)
         }

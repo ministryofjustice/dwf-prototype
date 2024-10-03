@@ -1,6 +1,6 @@
 module.exports = {
     courtCases: [{
-            // "status": "inactive",
+        // "status": "inactive",
             "appearances": [{
                     "court-case-ref": "63GD1757930",
                     "overall-case-outcome": "Remanded in custody",

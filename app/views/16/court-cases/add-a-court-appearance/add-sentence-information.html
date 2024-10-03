@@ -23,7 +23,7 @@
                 </div>
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
-                        Offences added
+                        Sentences added
                     </dt>
                     <dd class="govuk-summary-list__value">
                         {{ data['appearance']['total-sentence-length-years'] }} years {{data['appearance']['total-sentence-length-months']}} months {{data['appearance']['total-sentence-length-weeks']}} weeks {{data['appearance']['total-sentence-length-days']}} days
@@ -34,6 +34,7 @@
                     <button class="govuk-button govuk-button--link govuk-!-margin-bottom-2" data-module="govuk-button" formaction="/{{data.prototypeVersion}}/create-offence?route=remand-to-sentence&edit=false" method="post">
                         Add an offence
                     </button>
+                    <!-- <h2 class="govuk-heading-m govuk-!-margin-top-8 govuk-!-margin-bottom-6">Offences that have not been sentenced</h2> -->
                     {% for offence in data.appearance.offences %}
                     {% if sentence['sentence-type'] == null %}
                     <div class="offence-card">
@@ -76,7 +77,12 @@
                     {% endif %}
                     {% endfor %}
                     {% if data.appearance['warrant-type'] == "Sentencing" %}
-                    
+                    <!-- <h2 class="govuk-heading-m govuk-!-margin-top-8 govuk-!-margin-bottom-6">Offences that have been sentenced</h2> -->
+                    <!-- {% if data.appearance.sentences.length < 1 %}
+                    <div class="govuk-inset-text">
+                        No sentences have been added for this appearance. Update offence outcomes to add sentencing informaition.
+                       </div>
+                    {% endif %} -->
                     {% for sentence in data.appearance.sentences %}
                     {% if sentence['sentence-type'] != null %}
                     <div class="offence-card sentence-card">
