@@ -91,7 +91,7 @@ router.post('/:prototypeVersion/offence-code-known', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     const warrantType = req.session.data.warrantType
     var offenceCodeKnown = req.session.data['offence-code-known']
-    var offenceCode = req.session.data['offence-code']
+    var offenceCode = req.session.data.sentence['offence-code']
     var route = ''
     if (req.query.route != null) {
         route = req.query.route
@@ -100,8 +100,9 @@ router.post('/:prototypeVersion/offence-code-known', function(req, res) {
         console.log('Route: ' + route)
     }
     console.log(offenceCodeKnown)
-    if (offenceCode != null)
+    if (offenceCode != 'None')
     {
+        console.log("Offence code" + offenceCode)
         if (offenceCode.includes('TR06001'))
         {
             req.session.data.sentence['terror-related'] = 'Yes'
@@ -123,7 +124,11 @@ router.post('/:prototypeVersion/offence-code-known', function(req, res) {
             req.session.data.sentence['cja-code'] = "066/55"
             req.session.data.sentence['legislation'] = "Contrary to section 2(1) and (11) of the Terrorism Act 2006"
         } else {
-
+            req.session.data.sentence['offence-code'] = "CJ88001"
+            req.session.data.sentence['terror-related'] = 'No'
+            req.session.data.sentence['offence-name'] = 'Common assault'
+            req.session.data.sentence['cja-code'] = "105/01"
+            req.session.data.sentence['legislation'] = "Contrary to section 39 of theCriminal Justice Act 1988"
         }
     }
     if (offenceCodeKnown != null) {
@@ -1049,7 +1054,7 @@ router.post('/:prototypeVersion/consecutive-concurrent-select', function(req, re
     console.log('Consecutive sentence: ' + consecConcur)
     console.log('Forthwith selected: ' + forthwithSelected)
     if (consecConcur == "Consecutive") {
-        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to`)
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to-case`)
     } else if (consecConcur == "Forthwith" && forthwithSelected != 'Yes') {
         forthwithSelected = "Yes"
         req.session.data['sentence']['consecutive-concurrent'] = 'Forthwith'
@@ -1058,6 +1063,34 @@ router.post('/:prototypeVersion/consecutive-concurrent-select', function(req, re
     } else if (consecConcur == "Concurrent" && forthwithSelected == 'Yes') {
         res.redirect(307, `/${prototypeVersion}/persist-sentence`)
     }
+})
+
+router.post('/:prototypeVersion/consecutive-to-case-select', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    var route = req.session.data.route
+    const consecToCase = req.session.data['sentence']['consecutive-to-case']
+    console.log('Route: ' + route)
+    console.log('Consecutive to another case: ' + consecToCase)
+    if (consecToCase == "yes") {
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/select-consecutive-case`)
+    } else if (consecToCase == "no") {
+        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to`)
+    }
+})
+
+router.post('/:prototypeVersion/select-consecutive-case-select', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    var route = req.session.data.route
+    var  consecToCaseRef = req.session.data['sentence']['consecutive-to-case-ref']
+    console.log('Route: ' + route)
+    console.log('Consecutive to another case: ' + consecToCaseRef)
+    var splitArr = consecToCaseRef.split(',')
+    console.log(splitArr)
+    req.session.data['sentence']['consecutive-to-case-ref-index'] = splitArr[0]
+    req.session.data['sentence']['consecutive-to-case-ref'] = splitArr[1]
+    console.log(req.session.data['sentence']['consecutive-to-case-ref-index'])
+    console.log(req.session.data['sentence']['consecutive-to-case-ref'])
+    res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to-another-case`)
 })
 
 router.post('/:prototypeVersion/add-sentence-information-complete', function(req, res) {

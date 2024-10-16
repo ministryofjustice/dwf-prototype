@@ -1,0 +1,61 @@
+{% extends "../template.html" %}
+{% block content %}
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" action="/{{data.prototypeVersion}}/court-documents-complete" method="post">
+            <div class="govuk-form-group"> 
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Add a court case</span>
+                            Upload court documents
+                        </h1>
+                    </legend>
+                    <div id="file-upload-1-hint" class="govuk-hint govuk-!-margin-top-1 govuk-!-margin-bottom-5">
+    You can upload .pdf, .jpg, .doc or .docx files.
+  </div>
+
+    {% if data.appearance.documents.length > 0 %}
+    <p class="govuk-body" aria-live="polite">{{ data.appearance.documents.length }} files uploaded</p>
+    {% else %}
+    
+    {% endif %}
+    <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="document-type" method="post">Upload a document</button>
+    
+
+    
+    <p class="govuk-body govuk-!-display-none" id="refreshPageProgress"><a href="#" class="govuk-link">Refresh page to update file upload progress</a></p>
+    <dl class="govuk-summary-list govuk-summary-list--long-key">
+        {% for document in data.appearance.documents %}
+          <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          <a class="govuk-link" href="#">{{ document }}</a>
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <strong class="govuk-tag govuk-tag--green">
+  uploaded
+</strong>
+
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#">
+            Delete<span class="govuk-visually-hidden"> {{ document }}</span>
+          </a>
+        </dd>
+      </div>
+      {% else %}
+      <p class="govuk-body">No documents have been uploaded for this appearance yet.</p>
+      {% endfor %}
+      </dl>
+      <div class="govuk-button-group">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+            Save and continue
+        </button>
+        <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="/{{data.prototypeVersion}}/save-court-case">
+            Save as draft
+        </a>
+    </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
