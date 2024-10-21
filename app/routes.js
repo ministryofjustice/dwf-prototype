@@ -724,7 +724,11 @@ router.get('/:prototypeVersion/create-sentence', function(req, res) {
      }
         console.log("Conviction date: " + req.session.data.sentence['conviction-date-day'] + "/" + req.session.data.sentence['conviction-date-month'] + "/" + req.session.data.sentence['conviction-date-year'])
     }
-    return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/count-number`)
+    if (req.session.data.appearance['over-two-offences'] == 'no') {
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-date`)
+    } else {
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/count-number`)
+    }
 })
 
 router.post('/:prototypeVersion/persist-sentence', function(req, res) {

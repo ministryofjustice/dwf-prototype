@@ -1,0 +1,52 @@
+{% extends "../template.html" %}
+{% block content %}
+<!-- What is the confirmed date -->
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" action="overall-conviction-date" method="post">
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Add offences</span>
+                            Are there more than 2 offences on the warrant?
+                        </h1>
+                    </legend>
+                    <details class="govuk-details govuk-!-margin-top-2">
+                        <summary class="govuk-details__summary">
+                          <span class="govuk-details__summary-text">
+                            Why are you asking this?
+                          </span>
+                        </summary>
+                        <div class="govuk-details__text">
+                          Lorum ipsum etc.
+                        </div>
+                      </details>
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="over-two-offences" name="appearance[over-two-offences]" type="radio" value="yes">
+                            <label class="govuk-label govuk-radios__label" for="over-two-offences">
+                                Yes
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="over-two-offences-2" name="appearance[over-two-offences]" type="radio" value="no">
+                            <label class="govuk-label govuk-radios__label" for="over-two-offences-2">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Save and continue
+                </button>
+                <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="/{{data.prototypeVersion}}/save-court-case">
+                    Save as draft
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
