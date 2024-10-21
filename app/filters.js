@@ -20,3 +20,11 @@ addFilter('countNonDraft', function(arr) {
 addFilter('countDraft', function(arr) {
     return arr.filter(appearance => appearance['status'] == 'draft').length 
 })
+
+addFilter('inactiveCase', function(arr) {
+    return arr.filter(courtCase => courtCase['status'] == 'inactive')
+})
+
+addFilter('activeCase', function(arr) {
+    return arr.filter(courtCase => courtCase['status'] != 'inactive')
+})

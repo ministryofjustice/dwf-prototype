@@ -3,22 +3,6 @@
 {% block content %}
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        {% if data.changeMade == 1 %}
-        <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
-            <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
-                <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
-            </svg>
-            <div class="moj-banner__message">Changes successfully made</div>
-        </div>
-        {% endif %}
-        {% if data.sentenceDeleted == 1 %}
-        <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
-            <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
-                <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
-            </svg>
-            <div class="moj-banner__message">Sentence deleted</div>
-        </div>
-        {% endif %}
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
                 <span class="govuk-caption-l">Add offences</span>
@@ -56,8 +40,8 @@
                             Overall sentence length
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {% if data['appearance']['life-sentence'] == 'yes' %}
-                            Life sentence
+                            {% if data['appearance']['overall-sentence-length'] == 'no' %}
+                            Life sentence 
                             {% else %}
                             {{ data['appearance']['overall-sentence-length-years'] }} years {{ data['appearance']['overall-sentence-length-months'] }} months {{ data['appearance']['overall-sentence-length-weeks'] }} weeks {{ data['appearance']['overall-sentence-length-days'] }} days
                             {% endif %}
@@ -66,6 +50,7 @@
                             <a class="govuk-link" href="overall-sentence-length?edit=true">Edit<span class="govuk-visually-hidden"> overall sentence length</span></a>
                         </dd>
                     </div>
+                    {% if data['appearance']['overall-sentence-length'] == 'yes' %}
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Offences added
@@ -74,6 +59,7 @@
                             {{ data['appearance']['total-sentence-length-years'] }} years {{data['appearance']['total-sentence-length-months']}} months {{data['appearance']['total-sentence-length-weeks']}} weeks {{data['appearance']['total-sentence-length-days']}} days
                         </dd>
                     </div>
+                    {% endif %}
                 </dl>
             </dl>
             <!--             <div class="govuk-inset-text govuk-!-margin-top-0 govuk-!-margin-bottom-6">

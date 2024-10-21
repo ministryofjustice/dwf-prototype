@@ -1274,3 +1274,11 @@ padding: 10px;
 .govuk-button {
     text-decoration: none !important;
 }
+
+.show-toggle.govuk-details[open] > .govuk-details__summary > .govuk-details__summary-text::before {
+  content: "Hide";
+}
+
+.show-toggle.govuk-details > .govuk-details__summary > .govuk-details__summary-text::before {
+  content: "Show";
+}

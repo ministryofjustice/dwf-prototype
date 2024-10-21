@@ -47,10 +47,12 @@
                         <h2 class="govuk-summary-card__title">{{ lastAppearance['court-case-ref'] }} <span class="govuk-body">at</span> {{ lastAppearance['court-name']}} </h2>
                         <ul class="govuk-summary-card__actions">
                             <li class="govuk-summary-card__action">
-                                {% if courtCase['source'] == "nomis" %}
-                                <span class="moj-badge moj-badge--grey">NOMIS - read only</span>
+                                {% if courtCase['status'] == "inactive" %}
+                                <span class="moj-badge moj-badge--grey">Inactive</span>
                                 {% elif (courtCase.appearances.length == 1) and (lastAppearance['status'] == 'draft') %}
                                 <strong class="govuk-tag govuk-tag--blue">Draft</strong>
+                                <!-- {% elif courtCase['status'] == "inactive" %}
+                                <strong class="govuk-tag govuk-tag--grey">Inactive</strong> -->
                                 {% else %}
                                 <a class="govuk-link govuk-link--no-visited-state" href="/{{data.prototypeVersion}}/create-appearance?courtIndex={{courtCaseIndex}}">Add appearance<span class="govuk-visually-hidden"> to court case</span></a>
                                 {% endif %}
