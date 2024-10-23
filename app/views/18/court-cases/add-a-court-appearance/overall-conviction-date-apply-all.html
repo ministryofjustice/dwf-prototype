@@ -3,35 +3,26 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="overall-conviction-date" method="post">
+        <form class="form" action="add-sentence-information" method="post">
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add offences</span>
-                            Are there more than 2 offences on the warrant?
+                            <span class="govuk-caption-l">Appearance {{ data.appearance['court-case-ref'] }} at {{ data.appearance['court-name'] }} on {{ data.appearance['warrant-date-day'] }}/{{ data.appearance['warrant-date-month'] }}/{{ data.appearance['warrant-date-year'] }}</span>
+                            Is the conviction date the same for all offences on the warrant?
                         </h1>
                     </legend>
-                    <details class="govuk-details govuk-!-margin-top-2">
-                        <summary class="govuk-details__summary">
-                          <span class="govuk-details__summary-text">
-                            Why are you asking this?
-                          </span>
-                        </summary>
-                        <div class="govuk-details__text">
-                          Lorum ipsum etc.
-                        </div>
-                      </details>
+                    <p class="govuk-body-l">{{ data['appearance']['overall-conviction-date-day'] }}/{{ data['appearance']['overall-conviction-date-month'] }}/{{ data['appearance']['overall-conviction-date-year'] }}</p>
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="over-two-offences" name="appearance[over-two-offences]" type="radio" value="yes">
-                            <label class="govuk-label govuk-radios__label" for="over-two-offences">
+                            <input class="govuk-radios__input" id="overall-conviction-date-apply-all" name="appearance[overall-conviction-date-apply-all]" type="radio" value="Yes">
+                            <label class="govuk-label govuk-radios__label" for="overall-case-outcome">
                                 Yes
                             </label>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="over-two-offences-2" name="appearance[over-two-offences]" type="radio" value="no">
-                            <label class="govuk-label govuk-radios__label" for="over-two-offences-2">
+                            <input class="govuk-radios__input" id="overall-conviction-date-apply-all-2" name="appearance[overall-conviction-date-apply-all]" type="radio" value="No">
+                            <label class="govuk-label govuk-radios__label" for="overall-conviction-date-apply-all-2">
                                 No
                             </label>
                         </div>
