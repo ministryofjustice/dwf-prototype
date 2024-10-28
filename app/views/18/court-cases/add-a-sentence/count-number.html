@@ -2,17 +2,7 @@
 {% block content %}
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        {% if data.postSaveEdit == 'true' %}
-            <form class="form" action="/{{data.prototypeVersion}}/persist-sentence?edit=true" method="post">
-            {% elif data.edit == 'true' %}
-            <form class="form" action="/{{data.prototypeVersion}}/persist-sentence?edit=true" method="post">
-                {% elif data.route == 'remand-to-sentence' %}
-                <form class="form" action="sentence-type" method="post">
-                {% elif data.appearance['overall-conviction-date-apply-all'] == "No" %}
-                <form class="form" action="conviction-date" method="post">
-                {% else %}
-                <form class="form" action="offence-date" method="post">
-                    {% endif %}
+            <form class="form" action="/{{data.prototypeVersion}}/count-number" method="post">
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset" role="group">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
@@ -32,6 +22,9 @@
                         </h1>
                         {% endif %}
                     </legend>
+                    {% if data.route == 'remand-to-sentence' %}
+                            <p class="govuk-body-l">{{ data.sentence['offence-name'] }}</p>
+                    {% endif %}
                     <details class="govuk-details govuk-!-margin-top-2">
                         <summary class="govuk-details__summary">
                           <span class="govuk-details__summary-text">

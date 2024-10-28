@@ -625,13 +625,13 @@ router.get('/:prototypeVersion/confirm-delete', function(req, res) {
     console.log('Offence index' + req.session.data.index)
     if (warrantType == 'Sentencing') {
         if (route == 'remand-to-sentence') {
-            res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirm-delete`)
+           return res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirm-delete`)
         } else
-            res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-delete`)
+           return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-delete`)
     } else if (req.query.postSaveEdit == 'true' && route == "sentence") {
-        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-delete`)
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-delete`)
     }
-    res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirm-delete`)
+    return res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirm-delete`)
 })
 
 router.get('/:prototypeVersion/add-an-offence-to-appearance', function(req, res) {
@@ -705,6 +705,8 @@ router.get('/:prototypeVersion/create-sentence', function(req, res) {
     delete req.session.data.sentence
     const appearanceIndex = req.query.appearanceIndex
     const route = req.session.data.route
+    const path = req.query.path
+    req.session.data.path = path
     req.session.data.newSentence = 1
     console.log('Route: ' + route)
     req.session.data.edit = 'false'
@@ -793,6 +795,7 @@ router.post('/:prototypeVersion/persist-sentence', function(req, res) {
     if (req.session.data['sentence']['forthwith'] == "Yes") {
         req.session.data.forthwithSelected = "Yes"
     }
+    
     req.session.data.changeMade = 0
     req.session.data.sentenceDeleted = 0
     req.session.data.sentenceAdded = 1
@@ -1253,6 +1256,39 @@ router.get('/:prototypeVersion/terror-related-offence', function(req, res) {
         res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/terror-related`)
     }
     })
+
+
+    router.get('/:prototypeVersion/count-number', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    const sentenceIndex = req.session.data.appearance.sentences.length + 1
+    const route = req.session.data.route
+    const path = req.session.data.path
+    console.log("Path: " + path)
+    console.log("SentenceIndex: " + sentenceIndex)
+    if (req.session.data['sentence']['has-count-number'] == "no") {
+        req.session.data['sentence']['count-number'] = sentenceIndex
+        console.log("Automatically generated count number:" + "count" + req.session.data['sentence']['count-number'])
+    }
+    if (req.query.postSaveEdit == 'true'){
+        return res.redirect(307, `/${prototypeVersion}/persist-sentence`)
+    }
+    if (req.query.edit == 'true'){
+        return res.redirect(307, `/${prototypeVersion}/persist-sentence`)
+    }
+    if (req.session.data['appearance']['overall-conviction-date-apply-all'] == 'No'){
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-date`)
+    }
+    if (route == "remand-to-sentence" && path == 'rts-new-offence') {
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-date`)
+    }
+    if (route == "remand-to-sentence") {
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/sentence-type`)
+    }
+    else {
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-date`)
+    }
+
+})
 
 router.get('/:prototypeVersion/launch-prototype', function(req, res) {
     const prototypeVersion = req.query.version

@@ -40,7 +40,7 @@
                             <div class="govuk-radios govuk-radios" data-module="govuk-radios">  
                                 {% for sentence in consecAppearance.sentences %}
                                 <div class="govuk-radios__item">
-                                    <input class="govuk-radios__input" id="consecutive-to-case-ref" name="sentence[consecutive-to]" type="radio" value="Count {{ sentence['count-number'] }} on case {{ consecAppearance['court-case-ref'] }}">
+                                    <input class="govuk-radios__input" id="consecutive-to-case-ref" name="sentence[consecutive-to]" type="radio" value=" {{ sentence['count-number'] }} on case {{ consecAppearance['court-case-ref'] }}">
                                     <label class="govuk-label govuk-radios__label" for="consecutive-concurrent">
                                         Count {{ sentence['count-number'] }}<br>
                                         {{ sentence['offence-name'] }}<br>

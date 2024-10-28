@@ -14,14 +14,14 @@
                             {% if data.route == 'remand-to-sentence' %}
                             <span class="govuk-caption-l">Review offences and sentences</span>
                             {% else %}
-                            <span class="govuk-caption-l">Add sentence information for offence {{ data['sentence']['count-number'] }}</span>
+                            <span class="govuk-caption-l">Add sentence information for count {{ data['sentence']['count-number'] }}</span>
                             {% endif %}
-                            Which sentence is offence {{ data.sentence['count-number'] }} consecutive to?
+                            Which offence is count {{ data.sentence['count-number'] }} consecutive to?
                         </h1>
                     </legend>
                     {% for sentence in data['appearance'].sentences %}
                                 <div class="govuk-radios__item">
-                                    <input class="govuk-radios__input" id="consecutive-to-case-ref" name="sentence[consecutive-to]" type="radio" value="Count {{ sentence['count-number'] }} on case {{ appearance['court-case-ref'] }}">
+                                    <input class="govuk-radios__input" id="consecutive-to-case-ref" name="sentence[consecutive-to]" type="radio" value=" {{ sentence['count-number'] }}">
                                     <label class="govuk-label govuk-radios__label" for="consecutive-concurrent">
                                         {% if sentence['count-number'] %}
                                         Count {{ sentence['count-number'] }}<br>

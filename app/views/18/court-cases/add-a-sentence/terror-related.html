@@ -21,13 +21,13 @@
                         </p> -->
                         <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
                             <div class="govuk-radios__item">
-                                <input class="govuk-radios__input" id="terror-related" name="sentence[terror-related]" type="radio" value="Yes" {% if data.sentence['terror-related'] == 'Yes'%} checked {% endif %}>
+                                <input class="govuk-radios__input" id="terror-related" name="sentence[terror-related]" type="radio" value="Yes" {% if data.sentence['terror-related'] == 'Yes' %} checked {% endif %}>
                                 <label class="govuk-label govuk-radios__label" for="terror-related">
                                     Yes
                                 </label>
                             </div>
                             <div class="govuk-radios__item">
-                                <input class="govuk-radios__input" id="terror-related-2" name="sentence[terror-related]" type="radio" value="No" {% if data.sentence['terror-related'] == 'No'%} checked {% endif %}>
+                                <input class="govuk-radios__input" id="terror-related-2" name="sentence[terror-related]" type="radio" value="No" {% if (data.sentence['terror-related'] == 'No') %} checked {% endif %}>
                                 <label class="govuk-label govuk-radios__label" for="terror-related-2">
                                     No
                                 </label>
