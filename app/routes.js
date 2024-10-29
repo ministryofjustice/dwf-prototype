@@ -126,7 +126,7 @@ router.post('/:prototypeVersion/offence-code-known', function(req, res) {
         } else {
             req.session.data.sentence['offence-code'] = "CJ88001"
             req.session.data.sentence['terror-related'] = 'No'
-            req.session.data.sentence['offence-name'] = 'Common assault'
+            req.session.data.sentence['offence-name'] = 'CJ88001 - Common assault'
             req.session.data.sentence['cja-code'] = "105/01"
             req.session.data.sentence['legislation'] = "Contrary to section 39 of theCriminal Justice Act 1988"
         }
@@ -250,7 +250,7 @@ router.post('/:prototypeVersion/new-court-name', function(req, res) {
     var newCourtName = req.session.data.appearance['court-name-select']
     console.log("New court name:" + newCourtName)
     if (newCourtName.includes('Yes')) {
-        req.session.data.appearance['court-name'] = req.session.data.courtCases[courtCaseIndex].appearances.at(-1)['court-name']
+        req.session.data.appearance['court-name'] = req.session.data.courtCases[courtCaseIndex].appearances.at(-1)['next-court-name']
         if (prototypeVersion == 'v9' || prototypeVersion == 'v8') {
             res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`)
         } else if (prototypeVersion == 'v12' || prototypeVersion >= 13) {
@@ -738,8 +738,10 @@ router.post('/:prototypeVersion/persist-sentence', function(req, res) {
     const route = req.session.data.route
     const edit = req.query.edit
     const sentenceIndex = req.query.sentenceIndex
+    const path = req.session.data.path
     req.session.data.newSentence = 0
     req.session.data.sentence['status'] = 'complete'
+    req.session.data.sentence['outcome'] = "Imprisonment"
     console.log("Edit: " + edit)
     console.log("Route: " + route)
     if (prototypeVersion > "13") {
@@ -789,7 +791,9 @@ router.post('/:prototypeVersion/persist-sentence', function(req, res) {
     if (route == 'repeat-remand') {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/change-offences`)
     } else if (route == 'remand-to-sentence') {
+        if (path != 'rts-new-offence') {
         req.session.data.appearance.offences.splice(req.session.data.index, 1)
+        }
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`)
     }
     if (req.session.data['sentence']['forthwith'] == "Yes") {

@@ -5,7 +5,6 @@
     <div class="govuk-grid-column-two-thirds">
         <form class="form" action="/{{data.prototypeVersion}}/add-sentence-information-complete" method="post">
             <h1 class="govuk-heading-l">
-                <span class="govuk-caption-l">Appearance {{ data.appearance['court-case-ref'] }} at {{ data.appearance['court-name'] }} on {{ data.appearance['warrant-date-day'] }}/{{ data.appearance['warrant-date-month'] }}/{{ data.appearance['warrant-date-year'] }}</span>
                 Update offence outcomes
             </h1>
             <div class="govuk-!-margin-top-6">
@@ -64,9 +63,11 @@
                                     </dd>
                                 </div>
                             </dl>
+                            {% if offence['outcome-changed'] != 'true' %}
                             <ul class="govuk-list govuk-!-margin-top-4 govuk-!-margin-bottom-2">
                                 <li><a href="change-outcome?index={{loop.index0}}&edit=false">Update outcome</a></li>
                             </ul>
+                            {% endif %}
                         </div>
                         <div class="offence-card-actions">
                             <ul class="offence-card-actions-list">
@@ -197,6 +198,37 @@
                 </div>
             </div>
         </form>
+    </div>
+    <div class="govuk-grid-column-one-third">
+        <div class="offence-summary">
+            <h2 class="govuk-heading-m govuk-!-margin-top-4">Appearance details</h2>
+            <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
+                <div class="govuk-summary-list__row offences-summary-card-court-details-row">
+                    <dt class="govuk-summary-list__key">
+                        Case reference
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['court-case-ref'] }}
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row offences-summary-card-court-details-row">
+                    <dt class="govuk-summary-list__key">
+                        Court name
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['court-name'] }}
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row offences-summary-card-court-details-row">
+                    <dt class="govuk-summary-list__key">
+                        Warrant date
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['warrant-date-day'] }}/{{ data['appearance']['warrant-date-month'] }}/{{ data['appearance']['warrant-date-year'] }}
+                    </dd>
+                </div>
+            </dl>
+        </div>
     </div>
 </div>
 {% endblock %}
