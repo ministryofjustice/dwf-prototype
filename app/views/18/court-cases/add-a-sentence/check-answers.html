@@ -83,11 +83,7 @@
                 {% for sentence in data['appearance'].sentences %}
                 <div class="offence-card sentence-card">
                     <div class="offence-card-offence-details">
-                        {% if sentence["has-count-number"] == 'yes' %}
                         <span class="govuk-body">Count {{ sentence['count-number'] }}</span>
-                        {% else %}
-                        <span class="govuk-body">Count {{loop.index}} (system generated)</span>
-                        {% endif %}
                         {% if sentence['status'] == 'draft' %}
                         <strong class="govuk-tag govuk-tag--blue govuk-!-margin-left-2 govuk-!-margin-bottom-2">
                             Draft

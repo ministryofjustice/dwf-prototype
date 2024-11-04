@@ -1282,3 +1282,165 @@ padding: 10px;
 .show-toggle.govuk-details > .govuk-details__summary > .govuk-details__summary-text::before {
   content: "Show";
 }
+
+.filter > .govuk-details__text {
+  border: none;
+  padding-top: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  background-color: #f3f2f1;
+}
+
+.filter > .govuk-details__summary {
+  padding-left: 0;
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+.filter > .govuk-details__summary > .results {
+  float: right;
+  color: #0b0c0c;
+}
+
+.filter > .govuk-details__text > .apply-filter {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.filter > .govuk-details__text > .apply-filter > .govuk-button {
+  margin-bottom: 0;
+}
+
+.filter.govuk-details[open] > .govuk-details__summary::before {
+  border-style: solid;
+  border-width: 2px 2px 0 0;
+  content: "";
+  display: inline-block;
+  height: 10px;
+  position: relative;
+  vertical-align: middle;
+  width: 10px;
+  border-color: initial;
+  clip-path: unset;
+  -webkit-transform: translateY(30%) rotate(-45deg) scale(1);
+  -ms-transform: translateY(30%) rotate(-45deg) scale(1);
+  transform: translateY(30%) rotate(-45deg) scale(1);
+  margin-right: 5px;
+}
+
+.filter.govuk-details > .govuk-details__summary::before {
+  border-style: solid;
+  border-width: 2px 2px 0 0;
+  content: "";
+  display: inline-block;
+  height: 10px;
+  position: relative;
+  vertical-align: middle;
+  width: 10px;
+  border-color: initial;
+  clip-path: unset;
+  -webkit-transform: translateY(-25%) rotate(135deg) scale(1);
+  -ms-transform: translateY(-25%) rotate(135deg) scale(1);
+  transform: translateY(-25%) rotate(135deg) scale(1);
+  margin-right: 5px;
+}
+
+.filter > .govuk-details__text > .hods-expandable-banner {
+  background-color: #f3f2f1;
+  color: #0b0c0c;
+  padding-left: 0;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #b1b4b6;
+}
+
+.filter > .govuk-details__text > .hods-expandable-banner > .hods-expandable-banner__summary {
+  color: #0b0c0c;
+  text-transform: none;
+}
+
+.filter > .govuk-details__text > .hods-expandable-banner > .hods-expandable-banner__text {
+  border-top: none;
+}
+
+.filter > .govuk-details__summary:focus {
+  outline: none;
+  box-shadow: none;
+  background: none;
+  color: #195f9c;
+}
+
+.filter > .govuk-details__summary:focus:hover {
+  outline: none;
+  box-shadow: none;
+  background: none;
+  color: #003078;
+  text-decoration: underline;
+  text-underline-offset: .1578em;
+text-decoration-thickness: max(3px, .1875rem, .12em);
+-webkit-text-decoration-skip-ink: none;
+text-decoration-skip-ink: none;
+-webkit-text-decoration-skip: none;
+text-decoration-skip: none;
+}
+
+.filter > .govuk-details__text > .hods-expandable-banner > .hods-expandable-banner__summary {
+  padding-left: 0;
+}
+
+.filter > .govuk-details__text > .hods-expandable-banner > .hods-expandable-banner__summary::before {
+  border-style: solid;
+  border-width: 2px 2px 0 0;
+  content: "";
+  display: inline-block;
+  height: 10px;
+  position: relative;
+  vertical-align: middle;
+  width: 10px;
+  border-color: initial;
+  clip-path: unset;
+  -webkit-transform: translateY(-25%) rotate(135deg) scale(1);
+  -ms-transform: translateY(-25%) rotate(135deg) scale(1);
+  transform: translateY(-25%) rotate(135deg) scale(1);
+  margin-right: 5px;
+}
+
+.filter > .govuk-details__text > .hods-expandable-banner[open] > .hods-expandable-banner__summary::before {
+  border-style: solid;
+  border-width: 2px 2px 0 0;
+  content: "";
+  display: inline-block;
+  height: 10px;
+  position: relative;
+  vertical-align: middle;
+  width: 10px;
+  border-color: initial;
+  clip-path: unset;
+  -webkit-transform: translateY(30%) rotate(-45deg) scale(1);
+  -ms-transform: translateY(30%) rotate(-45deg) scale(1);
+  transform: translateY(30%) rotate(-45deg) scale(1);
+  margin-right: 5px;
+}
+
+.filter > .govuk-details__text > .hods-expandable-banner > .hods-expandable-banner__summary:focus {
+  background: none;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+.filter > .govuk-details__text > .hods-expandable-banner > .hods-expandable-banner__summary:focus > .filter-heading {
+background-color: #fd0;
+outline: 3px solid rgba(0,0,0,0);
+color: #0b0c0c;
+background-color: #fd0;
+box-shadow: 0 -2px #fd0,0 4px #0b0c0c;
+text-decoration: none;
+-webkit-box-decoration-break: clone;
+box-decoration-break: clone;
+}
+
+// .filter > .govuk-details__text > .hods-expandable-banner[open] > .hods-expandable-banner__summary:focus {
+//   background: none;
+//   text-decoration: none;
+// }

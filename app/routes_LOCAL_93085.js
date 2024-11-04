@@ -9,14 +9,14 @@ const router = govukPrototypeKit.requests.setupRouter()
 
 router.use('/15', (req, res, next) => {
     const {courtCases: _, ...sessionData } = req.session.data
-    const log = {
-        method: req.method,
-        url: req.originalUrl,
+    const log = {  
+        method: req.method,  
+        url: req.originalUrl,  
         data: sessionData
-      }
-      console.log(JSON.stringify(log, null, 2))
+      }  
+      console.log(JSON.stringify(log, null, 2))  
 
-    return next()
+    return next()  
 })
 
 router.post('/:prototypeVersion/next-court-date-select', function(req, res) {
@@ -53,7 +53,7 @@ router.post('/:prototypeVersion/next-court-date-select', function(req, res) {
     } else {
         if (nextCourtDateSelect == "Yes") {
             return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/next-hearing-type-select`)
-        } else
+        } else 
             return res.redirect(307, `/${prototypeVersion}/persist-appearance`)
     }
 })
@@ -104,7 +104,6 @@ router.post('/:prototypeVersion/offence-code-known', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     const warrantType = req.session.data.warrantType
     var offenceCodeKnown = req.session.data['offence-code-known']
-    var offenceCode = req.session.data.sentence['offence-code']
     var route = ''
     if (req.query.route != null) {
         route = req.query.route
@@ -113,37 +112,6 @@ router.post('/:prototypeVersion/offence-code-known', function(req, res) {
         console.log('Route: ' + route)
     }
     console.log(offenceCodeKnown)
-    if (offenceCode != 'None')
-    {
-        console.log("Offence code" + offenceCode)
-        if (offenceCode.includes('TR06001'))
-        {
-            req.session.data.sentence['terror-related'] = 'Yes'
-            req.session.data.sentence['offence-name'] = 'Publish / cause another to publish statement intending / reckless as to encouragement of terrorism - Terrorism Act 2006'
-            req.session.data.sentence['cja-code'] = "066/53"
-            req.session.data.sentence['legislation'] = "Contrary to section 2(1) and (11) of the Terrorism Act 2006"
-        }
-        if (offenceCode.includes('TR06002'))
-        {
-            req.session.data.sentence['terror-related'] = 'Yes'
-            req.session.data.sentence['offence-name'] = 'Distribute / circulate a terrorist publication - Terrorism Act 2006'
-            req.session.data.sentence['cja-code'] = "066/54"
-            req.session.data.sentence['legislation'] = "Contrary to section 2(1) and (11) of the Terrorism Act 2006"
-        }
-        if (offenceCode.includes('TR06003'))
-        {
-            req.session.data.sentence['terror-related'] = 'Yes'
-            req.session.data.sentence['offence-name'] = 'Give / sell / lend / offer for sale / loan a terrorist publication - Terrorism Act 2006'
-            req.session.data.sentence['cja-code'] = "066/55"
-            req.session.data.sentence['legislation'] = "Contrary to section 2(1) and (11) of the Terrorism Act 2006"
-        } else {
-            req.session.data.sentence['offence-code'] = "CJ88001"
-            req.session.data.sentence['terror-related'] = 'No'
-            req.session.data.sentence['offence-name'] = 'CJ88001 - Common assault'
-            req.session.data.sentence['cja-code'] = "105/01"
-            req.session.data.sentence['legislation'] = "Contrary to section 39 of theCriminal Justice Act 1988"
-        }
-    }
     if (offenceCodeKnown != null) {
         if (offenceCodeKnown.includes('None')) {
             if (route == "remand-to-sentence") {
@@ -167,11 +135,11 @@ router.post('/:prototypeVersion/offence-code-known', function(req, res) {
             }
         }
     } else {
-        if (offenceCode == 'TH68033A')
+        if (req.session.data.sentence['offence-code'] == 'TH68033A')
         {
             return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/invalid-offence-code`)
         }
-        if (offenceCode == 'TH68033C')
+        if (req.session.data.sentence['offence-code'] == 'TH68033C')
         {
             return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-offence`)
         }
@@ -205,7 +173,7 @@ router.post('/:prototypeVersion/outcome-select', function(req, res) {
     if (outcome.includes('lookup-another-outcome')) {
         // Send user to next page
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-first-court-appearance/lookup-outcome`)
-    } else
+    } else 
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-first-court-appearance/next-court-date-select`)
 })
 
@@ -217,7 +185,7 @@ router.post('/:prototypeVersion/outcome-select-2', function(req, res) {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/lookup-outcome`)
     } else if (prototypeVersion == 'v8') {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/outcome-apply-all`)
-    } else
+    } else 
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/next-court-date-select`)
 })
 
@@ -244,7 +212,7 @@ router.post('/:prototypeVersion/outcome-select-4', function(req, res) {
     console.log(outcome)
     if (outcome.includes('lookup-another-outcome')) {
         return res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/lookup-outcome`)
-    } else
+    } else 
         return res.redirect(307, `/${prototypeVersion}/persist-offence`)
 })
 
@@ -256,7 +224,7 @@ router.post('/:prototypeVersion/new-court-case-ref', function(req, res) {
     if (caseRefSelect.includes('Yes')) {
         req.session.data.appearance['court-case-ref'] = req.session.data.courtCases[courtCaseIndex].appearances.at(-1)['court-case-ref']
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/warrant-date`)
-    } else
+    } else 
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-case-reference-number`)
 })
 
@@ -267,7 +235,7 @@ router.post('/:prototypeVersion/new-court-name', function(req, res) {
     var newCourtName = req.session.data.appearance['court-name-select']
     console.log("New court name:" + newCourtName)
     if (newCourtName.includes('Yes')) {
-        req.session.data.appearance['court-name'] = req.session.data.courtCases[courtCaseIndex].appearances.at(-1)['next-court-name']
+        req.session.data.appearance['court-name'] = req.session.data.courtCases[courtCaseIndex].appearances.at(-1)['court-name']
         if (prototypeVersion == 'v9' || prototypeVersion == 'v8') {
             res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`)
         } else if (prototypeVersion == 'v12' || prototypeVersion >= 13) {
@@ -278,7 +246,7 @@ router.post('/:prototypeVersion/new-court-name', function(req, res) {
             }
         } else
             return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/warrant-type`)
-    } else
+    } else 
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-name`)
 })
 
@@ -292,7 +260,7 @@ router.post('/:prototypeVersion/change-offences-select', function(req, res) {
         req.session.data.offenceDeleted = 0
         req.session.data.offenceAdded = 0
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/change-offences`)
-    } else
+    } else 
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/next-court-date-select`)
 })
 
@@ -331,7 +299,7 @@ router.post('/:prototypeVersion/case-outcome-apply', function(req, res) {
         return res.redirect(307, `/${prototypeVersion}/court-cases/add-a-sentence/sentence-type`)
     } else if (warrantType == 'Sentencing') {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/outcome`)
-    } else
+    } else 
         return res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/outcome`)
 })
 
@@ -537,7 +505,6 @@ router.get('/:prototypeVersion/create-offence', function(req, res) {
     delete req.session.data.offence
     const appearanceIndex = req.query.appearanceIndex
     const route = req.session.data.route
-    const path = req.query.path
     console.log('Route: ' + route)
     if (appearanceIndex !== undefined) {
         req.session.data.appearance = req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[appearanceIndex]
@@ -548,11 +515,7 @@ router.get('/:prototypeVersion/create-offence', function(req, res) {
             outcome: req.session.data.appearance['overall-case-outcome']
         }
     }
-    if (path == 'cta'){
-        return res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-date`)
-    } else {
-        return res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/check-answers`)
-    }
+    return res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-code`)
 })
 
 router.post('/:prototypeVersion/persist-offence', function(req, res) {
@@ -645,9 +608,9 @@ router.get('/:prototypeVersion/confirm-delete', function(req, res) {
     console.log('Offence index' + req.session.data.index)
     if (warrantType == 'Sentencing') {
         if (route == 'remand-to-sentence') {
-           return res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirm-delete`)
+            return res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirm-delete`)
         } else
-           return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-delete`)
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-delete`)
     } else if (req.query.postSaveEdit == 'true' && route == "sentence") {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-delete`)
     }
@@ -725,8 +688,6 @@ router.get('/:prototypeVersion/create-sentence', function(req, res) {
     delete req.session.data.sentence
     const appearanceIndex = req.query.appearanceIndex
     const route = req.session.data.route
-    const path = req.query.path
-    req.session.data.path = path
     req.session.data.newSentence = 1
     console.log('Route: ' + route)
     req.session.data.edit = 'false'
@@ -746,11 +707,7 @@ router.get('/:prototypeVersion/create-sentence', function(req, res) {
      }
         console.log("Conviction date: " + req.session.data.sentence['conviction-date-day'] + "/" + req.session.data.sentence['conviction-date-month'] + "/" + req.session.data.sentence['conviction-date-year'])
     }
-    if (req.session.data.appearance['over-two-offences'] == 'no') {
-        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-date`)
-    } else {
-        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/count-number`)
-    }
+    return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/count-number`)
 })
 
 router.post('/:prototypeVersion/persist-sentence', function(req, res) {
@@ -758,10 +715,8 @@ router.post('/:prototypeVersion/persist-sentence', function(req, res) {
     const route = req.session.data.route
     const edit = req.query.edit
     const sentenceIndex = req.query.sentenceIndex
-    const path = req.session.data.path
     req.session.data.newSentence = 0
     req.session.data.sentence['status'] = 'complete'
-    req.session.data.sentence['outcome'] = "Imprisonment"
     console.log("Edit: " + edit)
     console.log("Route: " + route)
     if (prototypeVersion > "13") {
@@ -811,15 +766,12 @@ router.post('/:prototypeVersion/persist-sentence', function(req, res) {
     if (route == 'repeat-remand') {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/change-offences`)
     } else if (route == 'remand-to-sentence') {
-        if (path != 'rts-new-offence') {
         req.session.data.appearance.offences.splice(req.session.data.index, 1)
-        }
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`)
     }
     if (req.session.data['sentence']['forthwith'] == "Yes") {
         req.session.data.forthwithSelected = "Yes"
     }
-
     req.session.data.changeMade = 0
     req.session.data.sentenceDeleted = 0
     req.session.data.sentenceAdded = 1
@@ -1085,7 +1037,7 @@ router.post('/:prototypeVersion/consecutive-concurrent-select', function(req, re
     console.log('Consecutive sentence: ' + consecConcur)
     console.log('Forthwith selected: ' + forthwithSelected)
     if (consecConcur == "Consecutive") {
-        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to-case`)
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to`)
     } else if (consecConcur == "Forthwith" && forthwithSelected != 'Yes') {
         forthwithSelected = "Yes"
         req.session.data['sentence']['consecutive-concurrent'] = 'Forthwith'
@@ -1094,34 +1046,6 @@ router.post('/:prototypeVersion/consecutive-concurrent-select', function(req, re
     } else if (consecConcur == "Concurrent" && forthwithSelected == 'Yes') {
         return res.redirect(307, `/${prototypeVersion}/persist-sentence`)
     }
-})
-
-router.post('/:prototypeVersion/consecutive-to-case-select', function(req, res) {
-    const prototypeVersion = req.params.prototypeVersion
-    var route = req.session.data.route
-    const consecToCase = req.session.data['sentence']['consecutive-to-case']
-    console.log('Route: ' + route)
-    console.log('Consecutive to another case: ' + consecToCase)
-    if (consecToCase == "yes") {
-        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/select-consecutive-case`)
-    } else if (consecToCase == "no") {
-        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to`)
-    }
-})
-
-router.post('/:prototypeVersion/select-consecutive-case-select', function(req, res) {
-    const prototypeVersion = req.params.prototypeVersion
-    var route = req.session.data.route
-    var  consecToCaseRef = req.session.data['sentence']['consecutive-to-case-ref']
-    console.log('Route: ' + route)
-    console.log('Consecutive to another case: ' + consecToCaseRef)
-    var splitArr = consecToCaseRef.split(',')
-    console.log(splitArr)
-    req.session.data['sentence']['consecutive-to-case-ref-index'] = splitArr[0]
-    req.session.data['sentence']['consecutive-to-case-ref'] = splitArr[1]
-    console.log(req.session.data['sentence']['consecutive-to-case-ref-index'])
-    console.log(req.session.data['sentence']['consecutive-to-case-ref'])
-    res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to-another-case`)
 })
 
 router.post('/:prototypeVersion/add-sentence-information-complete', function(req, res) {
@@ -1269,50 +1193,6 @@ router.get('/:prototypeVersion/save-court-case', function(req, res) {
     } else 
         return res.redirect(`/${prototypeVersion}/court-cases/save-court-case`)
     })
-
-router.get('/:prototypeVersion/terror-related-offence', function(req, res) {
-    const prototypeVersion = req.params.prototypeVersion
-    var offenceName = req.session.data.sentence['offence-name']
-    if (offenceName.includes("TR06001") || offenceName.includes("TR06002") || offenceName.includes("TR06003")) {
-        req.session.data.sentence['terror-related'] = 'Yes'
-        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/sentence-type`)
-    } else {
-        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/terror-related`)
-    }
-    })
-
-
-    router.get('/:prototypeVersion/count-number', function(req, res) {
-    const prototypeVersion = req.params.prototypeVersion
-    const sentenceIndex = req.session.data.appearance.sentences.length + 1
-    const route = req.session.data.route
-    const path = req.session.data.path
-    console.log("Path: " + path)
-    console.log("SentenceIndex: " + sentenceIndex)
-    if (req.session.data['sentence']['has-count-number'] == "no") {
-        req.session.data['sentence']['count-number'] = sentenceIndex
-        console.log("Automatically generated count number:" + "count" + req.session.data['sentence']['count-number'])
-    }
-    if (req.query.postSaveEdit == 'true'){
-        return res.redirect(307, `/${prototypeVersion}/persist-sentence`)
-    }
-    if (req.query.edit == 'true'){
-        return res.redirect(307, `/${prototypeVersion}/persist-sentence`)
-    }
-    if (req.session.data['appearance']['overall-conviction-date-apply-all'] == 'No'){
-        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-date`)
-    }
-    if (route == "remand-to-sentence" && path == 'rts-new-offence') {
-        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-date`)
-    }
-    if (route == "remand-to-sentence") {
-        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/sentence-type`)
-    }
-    else {
-        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-date`)
-    }
-
-})
 
 router.get('/:prototypeVersion/launch-prototype', function(req, res) {
     const prototypeVersion = req.query.version
