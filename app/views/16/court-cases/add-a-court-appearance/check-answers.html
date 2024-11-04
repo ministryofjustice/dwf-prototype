@@ -82,7 +82,11 @@
                         Tagged bail
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['tagged-bail'] | last }} {% if "Yes" in data['appearance']['tagged-bail'] %}days{% endif %}
+                        {% if data['appearance']['tagged-bail'] == 'None' %}
+                        None
+                        {% else %}
+                        {{ data['appearance']['tagged-bail-days'] }} days
+                        {% endif %}
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link" href="tagged-bail?edit=true">
