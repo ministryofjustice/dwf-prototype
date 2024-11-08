@@ -1,6 +1,59 @@
 module.exports = {
     courtCases: [
         {
+            "status" : "inactive",
+            "appearances": [{
+                    "court-case-ref": "63GD1757930",
+                    "overall-case-outcome": "Remanded in custody",
+                    "next-court-date-set": "No",
+                    "warrant-date-day": "17",
+                    "warrant-date-month": "10",
+                    "warrant-date-year": "2024",
+                    "court-name": "Manchester MC",
+                    "offences": [{
+                            "offence-start-date-day": "05",
+                            "offence-start-date-month": "10",
+                            "offence-start-date-year": "2024",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "CL77001"
+                            ],
+                            "offence-name": "CL77001 - Use violence to secure entry to premises",
+                            "outcome": "Remanded in custody"
+                        },
+                        {
+                            "offence-start-date-day": "05",
+                            "offence-start-date-month": "10",
+                            "offence-start-date-year": "2024",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "TH68023"
+                            ],
+                            "offence-name": "TH68023 - Robbery",
+                            "outcome": "Remanded in custody"
+                        },
+                        {
+                            "offence-start-date-day": "05",
+                            "offence-start-date-month": "10",
+                            "offence-start-date-year": "2024",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": [
+                                "CJ88001"
+                            ],
+                            "offence-name": "CJ88001 - Common assault",
+                            "outcome": "Remanded in custody"
+                        }
+                    ]
+                }
+                ]
+        },
+        {
             "appearances": [{
                     "court-case-ref": "T20223256",
                     "overall-case-outcome": "Remanded in custody",

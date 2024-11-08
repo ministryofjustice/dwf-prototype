@@ -11,7 +11,7 @@
     <div class="govuk-grid-column-two-thirds">
         {% if data.courtCases | length %}
         <div class="govuk-grid-row">
-            <div class="govuk-grid-column-full">
+            <div class="govuk-grid-column-full govuk-!-margin-bottom-6">
                 <div class="moj-search govuk-!-margin-bottom-6">
                     <form action="#" method="post">
                         <div class="govuk-form-group">
@@ -94,7 +94,7 @@
         </div>
         {% endif %}
         <div class="govuk-grid-row">
-            <div class="govuk-grid-column-full govuk-!-margin-top-4">
+            <div class="govuk-grid-column-full govçuk-!-margin-top-4">
                 {% if data.courtCases | length %}
                 {% for courtCase in data.courtCases | reverse %}
                 {% set lastAppearance = courtCase.appearances | last %}
@@ -108,6 +108,8 @@
                                 <span class="moj-badge moj-badge--grey">NOMIS - read only</span>
                                 {% elif (courtCase.appearances.length == 1) and (lastAppearance['status'] == 'draft') %}
                                 <strong class="govuk-tag govuk-tag--blue">Draft</strong>
+                                {% elif (courtCase['status'] == 'inactive') %}
+                                <strong class="govuk-tag govuk-tag--blue">Inactive</strong>
                                 {% else %}
                                 <a class="govuk-link govuk-link--no-visited-state" href="/{{data.prototypeVersion}}/create-appearance?courtIndex={{courtCaseIndex}}">Add appearance<span class="govuk-visually-hidden"> to court case</span></a>
                                 {% endif %}

@@ -1440,6 +1440,10 @@ text-decoration: none;
 box-decoration-break: clone;
 }
 
+body {
+  height: unset;
+}
+
 // .filter > .govuk-details__text > .hods-expandable-banner[open] > .hods-expandable-banner__summary:focus {
 //   background: none;
 //   text-decoration: none;
