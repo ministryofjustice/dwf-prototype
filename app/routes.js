@@ -91,7 +91,11 @@ router.post('/:prototypeVersion/offence-code-known', function(req, res) {
     const prototypeVersion = req.params.prototypeVersion
     const warrantType = req.session.data.warrantType
     var offenceCodeKnown = req.session.data['offence-code-known']
+    if (req.session.data.sentence != null){
     var offenceCode = req.session.data.sentence['offence-code']
+    } else {
+        var offenceCode = "None"
+    }
     var route = ''
     if (req.query.route != null) {
         route = req.query.route
