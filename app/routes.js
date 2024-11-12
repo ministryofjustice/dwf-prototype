@@ -18,11 +18,9 @@ router.post('/:prototypeVersion/next-court-date-select', function(req, res) {
                 res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/next-hearing-type-select`)
             } else {
                 if (warrantType == "Remand") {
-                    req.session.data.nextCourtAppearanceComplete = "Yes"
-                    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`)
+                    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers-next-appearance`)
                 } else if (warrantType == "Sentencing") {
-                    req.session.data.nextCourtAppearanceComplete = "Yes"
-                    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`)
+                    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers-next-appearance`)
                 }
             }
         } else {
@@ -30,8 +28,7 @@ router.post('/:prototypeVersion/next-court-date-select', function(req, res) {
                 res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/next-hearing-type-select`)
             } else {
                 if (warrantType == "Remand") {
-                    req.session.data.nextCourtAppearanceComplete = "Yes"
-                    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`)
+                    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/check-answers-next-appearance`)
                 } else if (warrantType == "Sentencing") {
                     req.session.data.nextCourtAppearanceComplete = "Yes"
                     res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`)

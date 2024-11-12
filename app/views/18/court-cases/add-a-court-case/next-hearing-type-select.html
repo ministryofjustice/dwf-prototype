@@ -3,7 +3,7 @@
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
         {% if data.edit == 'true' %}
-        <form class="form" action="check-answers-2" method="post">
+        <form class="form" action="check-answers-next-appearance" method="post">
             {% else %}
             <form class="form" action="next-court-date" method="post">
                 {% endif %}
@@ -11,7 +11,7 @@
                     <fieldset class="govuk-fieldset">
                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                             <h1 class="govuk-fieldset__heading">
-                                <span class="govuk-caption-l">Add a court case</span>
+                                <span class="govuk-caption-l">Next court case</span>
                                 How will they attend the hearing?
                             </h1>
                         </legend>

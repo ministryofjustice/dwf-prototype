@@ -3,11 +3,26 @@
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">
-            <span class="govuk-caption-l">Add an appearance</span>
+            <span class="govuk-caption-l">Next court appearance</span>
             Check your answers
         </h1>
         <form class="form" action="/{{data.prototypeVersion}}/next-court-appearance-complete" method="post">
             <dl class="govuk-summary-list">
+                {% if data['appearance']['next-court-date-set'] == "Date to be fixed" %}
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Next court date set
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['next-court-date-set'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="next-court-date-select?edit=true">
+                            Edit<span class="govuk-visually-hidden"> next court date set</span>
+                        </a>
+                    </dd>
+                </div>
+                {% else %}
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Next hearing type
@@ -47,6 +62,7 @@
                         </a>
                     </dd>
                 </div>
+                {% endif %}
             </dl>
             <button class="govuk-button govuk-!-margin-top-2" data-module="govuk-button">
                 Accept and continue
