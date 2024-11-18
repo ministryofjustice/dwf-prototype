@@ -12,7 +12,7 @@
                     <fieldset class="govuk-fieldset" aria-describedby="changedName-hint">
                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                             <h1 class="govuk-fieldset__heading">
-                                <span class="govuk-caption-l">Add sentence information for offence {{ data['sentence']['count-number'] }}</span>
+                                <span class="govuk-caption-l">Add offences</span>
                                 Was the offence terror related?
                             </h1>
                         </legend>
@@ -27,7 +27,7 @@
                                 </label>
                             </div>
                             <div class="govuk-radios__item">
-                                <input class="govuk-radios__input" id="terror-related-2" name="sentence[terror-related]" type="radio" value="No" {% if (data.sentence['terror-related'] == 'No') %} checked {% endif %}>
+                                <input class="govuk-radios__input" id="terror-related-2" name="sentence[terror-related]" type="radio" value="No" {% if data.sentence['terror-related'] == 'No' %} checked {% endif %}>
                                 <label class="govuk-label govuk-radios__label" for="terror-related-2">
                                     No
                                 </label>
@@ -86,10 +86,10 @@
                     </dd>
                 </div>
             </dl>
-            <details class="govuk-details" data-module="govuk-details">
+            <details class="govuk-details show-toggle filter white" data-module="govuk-details">
                 <summary class="govuk-details__summary">
                     <span class="govuk-details__summary-text">
-                        Show offences
+                        offences
                     </span>
                 </summary>
                 <div class="govuk-details__text">

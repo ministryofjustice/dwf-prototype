@@ -1292,6 +1292,10 @@ padding: 10px;
   background-color: #f3f2f1;
 }
 
+.filter.white > .govuk-details__text {
+  background-color: #fff;
+}
+
 .filter > .govuk-details__summary {
   padding-left: 0;
   width: 100%;

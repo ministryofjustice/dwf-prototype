@@ -18,11 +18,7 @@
                                 </h1>
                                 {% else %}
                                 <h1 class="govuk-fieldset__heading">
-                                    {% if data.route == 'remand-to-sentence' %}
-                                    <span class="govuk-caption-l">Add sentncing information</span>
-                                    {% else %}
-                                    <span class="govuk-caption-l">Add sentence information for offence {{ data['sentence']['count-number'] }}</span>
-                                    {% endif %}
+                                    <span class="govuk-caption-l">Add offences</span>
                                     Select the consecutive offence
                                 </h1>
                                 {% endif %}
@@ -91,21 +87,11 @@
                 </div>
             </dl>
             <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-            <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-2">Offences</h2>
-            <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
-                <div class="govuk-summary-list__row offences-summary-card-offence-details-row">
-                    <dt class="govuk-summary-list__key">
-                        Offences added
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        {{ data.appearance.sentences | length }}
-                    </dd>
-                </div>
-            </dl>
-            <details class="govuk-details" data-module="govuk-details">
+            <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-2">Offences ({{ data.appearance.sentences | length }})</h2>
+            <details class="govuk-details show-toggle filter white" data-module="govuk-details">
                 <summary class="govuk-details__summary">
                     <span class="govuk-details__summary-text">
-                        Show offences
+                        offences
                     </span>
                 </summary>
                 <div class="govuk-details__text">

@@ -10,6 +10,7 @@
             <div class="govuk-!-margin-top-6">
                 {% if data.appearance.offences < 1 %} <p class="govuk-body">There are no offences to show.</p>
                     {% endif %}
+                {% if data.appearance['warrant-type'] == "Sentencing" %}
                     <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-top-4">
             <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-2">
                 <div class="govuk-summary-list__row">
@@ -30,6 +31,7 @@
                 </div>
             </dl>
                     </dl>
+                    {% endif %}
                     <button class="govuk-button govuk-button--link govuk-!-margin-bottom-2" data-module="govuk-button" formaction="/{{data.prototypeVersion}}/create-sentence?route=remand-to-sentence&path=rts-new-offence&edit=false" method="post">
                         Add an offence
                     </button>

@@ -21,7 +21,7 @@
                         </h1>
                         {% else %}
                             <h1 class="govuk-fieldset__heading">
-                                <span class="govuk-caption-l">Add sentence information for offence {{ data['sentence']['count-number'] }}</span>
+                                <span class="govuk-caption-l">Add offences</span>
                                 Enter the offence dates
                             </h1>
                             {% endif %}
@@ -143,10 +143,10 @@
                     </dd>
                 </div>
             </dl>
-            <details class="govuk-details" data-module="govuk-details">
+            <details class="govuk-details show-toggle filter white" data-module="govuk-details">
                 <summary class="govuk-details__summary">
                     <span class="govuk-details__summary-text">
-                        Show offences
+                        offences
                     </span>
                 </summary>
                 <div class="govuk-details__text">
