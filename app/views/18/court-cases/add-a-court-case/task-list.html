@@ -122,17 +122,25 @@
                     {% endif %}
                                         <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
+                            {% if data.appearanceDetailsComplete == 1 %}
                             <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" {% if data.courtDocumentsComplete == 1 %}href="court-documents"{% else %} href="document-type" {% endif %} aria-describedby="court-documents-status">
                                 Upload court documents
                             </a>
+                            {% else %}
+                            Upload court documents
+                            {% endif %}
                         </div>
                         <div class="govuk-task-list__status" id="court-documents-status">
+                            {% if data.appearanceDetailsComplete == 1 %}
                             {% if data.courtDocumentsComplete == 1 %}
                                 Completed
                             {% else %}
                             <strong class="govuk-tag govuk-tag--grey">
                                 Optional
                             </strong>
+                            {% endif %}
+                            {% else %}
+                            <span class="govuk-task-list__status--cannot-start-yet">Cannot start yet</span>
                             {% endif %}
                         </div>
                     </li>
