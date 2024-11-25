@@ -287,35 +287,8 @@
         </form>
     </div>
     <div class="govuk-grid-column-one-third">
-        <div class="offence-summary">
-            <h2 class="govuk-heading-m govuk-!-margin-top-4">Appearance details</h2>
-            <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
-                <div class="govuk-summary-list__row offences-summary-card-court-details-row">
-                    <dt class="govuk-summary-list__key">
-                        Case reference
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['court-case-ref'] }}
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row offences-summary-card-court-details-row">
-                    <dt class="govuk-summary-list__key">
-                        Court name
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['court-name'] }}
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row offences-summary-card-court-details-row">
-                    <dt class="govuk-summary-list__key">
-                        Warrant date
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['warrant-date-day'] }}/{{ data['appearance']['warrant-date-month'] }}/{{ data['appearance']['warrant-date-year'] }}
-                    </dd>
-                </div>
-            </dl>
-        </div>
+        {% set showOffences = false %}
+        {% include "includes/templates/appearance-info.njk" %}
     </div>
 </div>
 {% endblock %}

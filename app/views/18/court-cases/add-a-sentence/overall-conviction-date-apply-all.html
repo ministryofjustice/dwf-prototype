@@ -12,7 +12,6 @@
                             Is the conviction date the same for all offences on the warrant?
                         </h1>
                     </legend>
-                    <p class="govuk-body-l">{{ data['appearance']['overall-conviction-date-day'] }}/{{ data['appearance']['overall-conviction-date-month'] }}/{{ data['appearance']['overall-conviction-date-year'] }}</p>
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="overall-conviction-date-apply-all" name="appearance[overall-conviction-date-apply-all]" type="radio" value="Yes">
@@ -38,6 +37,10 @@
                 </a>
             </div>
         </form>
+    </div>
+    <div class="govuk-grid-column-one-third">
+        {% set showOffences = false %}
+        {% include "includes/templates/appearance-info.njk" %}
     </div>
 </div>
 {% endblock %}
