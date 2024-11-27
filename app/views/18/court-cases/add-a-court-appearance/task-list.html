@@ -16,7 +16,7 @@
                 <ul class="govuk-task-list govuk-!-margin-top-7">
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
-                            <a class="govuk-link govuk-task-list__link" href={% if data.appearanceDetailsComplete == 1 %}"check-answers"{% else %}"court-case-reference-number-select"{% endif %} aria-describedby="appearance-infromation-status">
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href={% if data.appearanceDetailsComplete == 1 %}"check-answers"{% else %}"court-case-reference-number-select"{% endif %} aria-describedby="appearance-infromation-status">
                                 Add appearance information
                             </a>
                         </div>
@@ -34,7 +34,7 @@
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
                             {% if data.appearanceDetailsComplete == 1 %}
-                            <a class="govuk-link govuk-task-list__link" href="add-sentence-information" aria-describedby="court-documents-status">
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="add-sentence-information" aria-describedby="court-documents-status">
                                 Review offences
                             </a>
                             {% else %}
@@ -60,7 +60,7 @@
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
                             {% if data.appearanceDetailsComplete == 1 %}
-                            <a class="govuk-link govuk-task-list__link" href="overall-sentence-length" aria-describedby="offences-and-sentences-status">
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="overall-sentence-length" aria-describedby="offences-and-sentences-status">
                                 Update offence outcomes
                             </a>
                             {% else %}
@@ -86,7 +86,7 @@
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
                             {% if data.appearanceDetailsComplete == 1 %}
-                            <a class="govuk-link govuk-task-list__link" href="next-court-date-select?route=appearance" aria-describedby="next-court-appearance-status">
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="next-court-date-select?route=appearance" aria-describedby="next-court-appearance-status">
                                 Add next court appearance
                             </a>
                             {% else %}
@@ -112,11 +112,11 @@
                         <div class="govuk-task-list__name-and-hint">
                             {% if data.appearanceDetailsComplete == 1 %}
                             {% if data.courtDocumentsComplete == 1 %}
-                            <a class="govuk-link govuk-task-list__link" href="court-documents" aria-describedby="court-documents-status">
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="court-documents" aria-describedby="court-documents-status">
                                 Upload court documents
                             </a>
                             {% else %}
-                            <a class="govuk-link govuk-task-list__link" href="document-type" aria-describedby="court-documents-status">
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="document-type" aria-describedby="court-documents-status">
                                 Upload court documents
                             </a>
                             {% endif %}
@@ -143,7 +143,8 @@
             <h2 class="govuk-heading-m">
                 Finish adding an appearance 
             </h2>
-            <p class="govuk-body">Once every task has been completed, you must  save the information. You will not be able to return to this page, but can edit the details in the Court cases tab.</p>
+            <p class="govuk-body">To save a draft of the court case, you must first complete the appearance information.</p>
+            <p class="govuk-body">Once every task has been completed, you must  save the information. You will not be able to return to this page, but can edit the details in the Court cases tab.</p  >
             <div class="govuk-button-group">
                 <button class="govuk-button" data-module="govuk-button" {% if data.appearance['finished-adding-offences'] == 'no' %}disabled aria-disabled="true"{% endif %}>
                     Finish and save

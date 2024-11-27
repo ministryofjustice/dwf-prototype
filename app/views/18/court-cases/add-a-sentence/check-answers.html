@@ -24,6 +24,7 @@
         <form class="form" action="/{{data.prototypeVersion}}/add-sentence-information-complete?route=new-court-case" method="post">
             <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-top-4">
                 <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-0">
+                    {% if data.appearance['overall-conviction-date-apply-all'] == 'Yes' %}
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key" style="width: 35%;">
                             Conviction date
@@ -35,6 +36,7 @@
                             <a class="govuk-link" href="overall-conviction-date?edit=true">Edit<span class="govuk-visually-hidden"> overall conviction date</span></a>
                         </dd>
                     </div>
+                    {% endif %}
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Overall sentence length
@@ -62,16 +64,6 @@
                     {% endif %}
                 </dl>
             </dl>
-            <!--             <div class="govuk-inset-text govuk-!-margin-top-0 govuk-!-margin-bottom-6">
-                    Overall sentence length and the total length of sentences added do not match.
-            </div> -->
-            <!--             <div class="govuk-warning-text">
-  <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-  <strong class="govuk-warning-text__text">
-    <span class="govuk-visually-hidden">Sentence length mismatch</span>
-    Overall sentence length and the total length of sentences added do not match.
-  </strong>
-</div> -->
             <a href="/{{data.prototypeVersion}}/create-sentence" role="button" draggable="false" class="govuk-button govuk-button--link govuk-!-margin-bottom-5" data-module="govuk-button">
                 Add an offence
             </a>
@@ -83,7 +75,9 @@
                 {% for sentence in data['appearance'].sentences %}
                 <div class="offence-card sentence-card">
                     <div class="offence-card-offence-details">
+                        {% if sentence['count-numnber'] %}
                         <span class="govuk-body">Count {{ sentence['count-number'] }}</span>
+                        {% endif %}
                         {% if sentence['status'] == 'draft' %}
                         <strong class="govuk-tag govuk-tag--blue govuk-!-margin-left-2 govuk-!-margin-bottom-2">
                             Draft
@@ -240,7 +234,7 @@
                                     (forthwith)
                                     {% endif %}
                                     {% if sentence['consecutive-concurrent'] == 'Consecutive' %}
-                                    to count {{ sentence['consecutive-to'] }}
+                                    to {% if data['appearance']['no-count-numbers'] != 'true' %}count{% endif %} {{ sentence['consecutive-to'] }}
                                     {% endif %}
                                 </dd>
                             </div>

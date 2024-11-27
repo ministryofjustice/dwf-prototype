@@ -322,6 +322,7 @@ router.post('/:prototypeVersion/overall-conviction-date-apply', function(req, re
     const courtCaseIndex = req.session.data.courtCaseIndex
     const appearanceIndex = req.session.data.appearanceIndex
     const route = req.query.route
+    console.log("Route: " + route)
     const warrantType = req.session.data.warrantType
     var overallConvictionDateApply = 'No'
     overallConvictionDateApply = req.session.data.appearance['overall-conviction-date-apply-all']
@@ -337,14 +338,28 @@ router.post('/:prototypeVersion/overall-conviction-date-apply', function(req, re
         req.session.data.overallQuestionsComplete = 'Yes'
         console.log("Overall questions complete " + req.session.data.overallQuestionsComplete)
         if (prototypeVersion >= 18){
+            if (route == "remand-to-sentence")
+            {
+                return res.redirect(307, `/${prototypeVersion}/court-cases/add-a-court-appearance/overall-conviction-date`)
+            } else {
             return res.redirect(307, `/${prototypeVersion}/court-cases/add-a-sentence/overall-conviction-date`)
+        }
         } else {
         return res.redirect(307, `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`)
         }
     } else
         req.session.data.overallQuestionsComplete = 'Yes'
         console.log("Overall questions complete " + req.session.data.overallQuestionsComplete)
-        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers`)
+        if (prototypeVersion >= 18){
+            if (route == "remand-to-sentence")
+            {
+                return res.redirect(307, `/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`)
+            } else {
+            return res.redirect(307, `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`)
+        }
+        } else {
+        return res.redirect(307, `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`)
+        }
 })
 
 //Add court case
@@ -1007,7 +1022,12 @@ router.post('/:prototypeVersion/sentence-length-select-2', function(req, res) {
     if (sentenceType == "EDS (Extended Determinate Sentence)") {
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/licence-period`)
     } else if (prototypeVersion >= 'v11' | prototypeVersion > 13) {
+        if (req.session.data.appearance['no-count-numbers'] == 'true'){
+            req.session.data.sentence['consecutive-concurrent'] = 'Concurrent'
+            res.redirect(307, `/${prototypeVersion}/persist-sentence`)
+        } else {
         res.redirect(`court-cases/add-a-sentence/consecutive-concurrent`)
+        }
     } else
         res.redirect(307, `/${prototypeVersion}/persist-sentence`)
 })
@@ -1056,7 +1076,7 @@ router.post('/:prototypeVersion/offence-name-same', function(req, res) {
     console.log('Route: ' + route)
     console.log('Offence name same: ' + offenceNameSame)
     if (offenceNameSame == "Yes") {
-        res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/terror-related`)
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/terror-related`)
     } else
         res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/offence-code`)
 })
@@ -1070,6 +1090,12 @@ router.post('/:prototypeVersion/consecutive-concurrent-select', function(req, re
     console.log('Consecutive sentence: ' + consecConcur)
     console.log('Forthwith selected: ' + forthwithSelected)
     if (consecConcur == "Consecutive") {
+        if (req.session.data.appearance.sentences[0]['count-number'] == ''){
+            req.session.data.appearance['no-count-numbers'] = "true"
+            req.session.data['sentence']['consecutive-to'] = req.session.data.appearance.sentences[0]['offence-name']
+            return res.redirect(307, `/${prototypeVersion}/persist-sentence`)
+
+        }
         res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to-case`)
     } else if (consecConcur == "Forthwith" && forthwithSelected != 'Yes') {
         forthwithSelected = "Yes"
@@ -1274,10 +1300,6 @@ router.get('/:prototypeVersion/terror-related-offence', function(req, res) {
     const path = req.session.data.path
     console.log("Path: " + path)
     console.log("SentenceIndex: " + sentenceIndex)
-    if (req.session.data['sentence']['has-count-number'] == "no") {
-        req.session.data['sentence']['count-number'] = sentenceIndex
-        console.log("Automatically generated count number:" + "count" + req.session.data['sentence']['count-number'])
-    }
     if (req.query.postSaveEdit == 'true'){
         return res.redirect(307, `/${prototypeVersion}/persist-sentence`)
     }
