@@ -28,18 +28,12 @@
                                     Video link
                                 </label>
                             </div>
-                            <div class="govuk-radios__item">
-                                <input class="govuk-radios__input" id="next-hearing-type-3" name="appearance[next-hearing-type]" type="radio" value="Unknown" {% if data.appearance['next-hearing-type']=="Unknown" %}checked{% endif %}>
-                                <label class="govuk-label govuk-radios__label" for="next-hearing-type-3">
-                                    Unknown
-                                </label>
-                            </div>
                         </div>
                     </fieldset>
                 </div>
                 <div class="govuk-button-group">
                     <button type="submit" class="govuk-button" data-module="govuk-button">
-                        Save and continue
+                        Continue
                     </button>
                     <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="/{{data.prototypeVersion}}/save-court-case">
                         Save as draft
@@ -47,5 +41,9 @@
                 </div>
             </form>
     </div>
+    <div class="govuk-grid-column-one-third">
+        {% set showOffences = true %}
+        {% include "includes/templates/appearance-info.njk" %}
+      </div>
 </div>
 {% endblock %}

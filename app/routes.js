@@ -56,10 +56,10 @@ router.post('/:prototypeVersion/next-hearing-court-select-2', function(req, res)
     const prototypeVersion = req.params.prototypeVersion
     var nextCourtDateSelect = req.session.data['appearance']['next-hearing-court-select']
     if (nextCourtDateSelect == "No") {
-        res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/next-court-name`)
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/next-court-name`)
     } else
         req.session.data['appearance']['next-court-name'] = req.session.data['appearance']['court-name']
-    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/check-answers-2`)
+    res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/check-answers-next-appearance`)
 })
 
 
