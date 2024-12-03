@@ -37,7 +37,7 @@
                         <div class="govuk-task-list__name-and-hint">
                             {% if data.appearanceDetailsComplete == 1 %}
                             {% if (data.sentencesAdded == 1) or (data.overallQuestionsComplete == "Yes") %}
-                            <a class="govuk-link govuk-task-list__link" href="../add-a-sentence/check-answers">
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="../add-a-sentence/check-answers">
                                 Add offences
                             </a>
                             {% elif data.progressSaved == true %}
@@ -135,7 +135,7 @@
                                         <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
                             {% if data.appearanceDetailsComplete == 1 %}
-                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" {% if data.courtDocumentsComplete == 1 %}href="court-documents"{% else %} href="document-type" {% endif %} aria-describedby="court-documents-status">
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" {% if data.courtDocumentsComplete == 1 %}href="court-documents"{% else %} href="/{{data.prototypeVersion}}/document-type" {% endif %} aria-describedby="court-documents-status">
                                 Upload court documents
                             </a>
                             {% else %}

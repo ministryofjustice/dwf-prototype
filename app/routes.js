@@ -1198,14 +1198,18 @@ router.post('/:prototypeVersion/add-court-document', function(req, res) {
     const documentPrefix = req.session.data.appearance['document-type'] !== 'Other' ? req.session.data.appearance['document-type'] : req.session.data.appearance['other-document-name']
     const documentUploadTime = currentDate.getDate() + "/" + (currentDate.getMonth() + 1) + "/" + currentDate.getFullYear() + " at " + currentDate.getHours() + ":" + currentDate.getMinutes()
     if (documentIndex != undefined) {
-        req.session.data.appearance.documents[documentIndex]['document-type'] = documentPrefix + " uploaded on " + documentUploadTime
+        req.session.data.appearance.documents[documentIndex]['document-type'] = documentPrefix
         console.log("Document name: " + documentPrefix + " uploaded on " + documentUploadTime)
     } else {
         documentIndex = req.session.data.appearance.documents.filter(documentName => documentName.startsWith(documentPrefix)).length
-        req.session.data.appearance.documents.push(documentPrefix + " uploaded on " + documentUploadTime)
+        req.session.data.appearance.documents.push(documentPrefix)
         console.log("Document name: " + documentPrefix + " uploaded on " + documentUploadTime)
     }
     if (route == "new-court-case") {
+        if (req.session.data.appearance['warrant-type'] == 'Sentencing' )
+        {
+            return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/additional-documents`)
+        }
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/court-documents`)
     } else
         res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-documents`)
@@ -1321,6 +1325,58 @@ router.get('/:prototypeVersion/terror-related-offence', function(req, res) {
 
 })
 
+router.get('/:prototypeVersion/document-type', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    const warrantType = req.session.data.appearance['warrant-type']
+    console.log("Warrant type: " + warrantType)
+    if (warrantType == 'Sentencing') {
+        req.session.data.appearance['document-type'] = "sentencing warrant"
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/upload-document`)
+    } else {
+        req.session.data.appearance['document-type'] = "remand warrant"
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/upload-document`)
+    }
+
+
+})
+
+router.get('/:prototypeVersion/additional-document-select', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    const warrantType = req.session.data.appearance['warrant-type']
+    console.log("Warrant type: " + warrantType)
+    if (warrantType == 'Sentencing') {
+        req.session.data.appearance['document-type'] = "sentencing warrant"
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/upload-document`)
+    } else {
+        req.session.data.appearance['document-type'] = "remand warrant"
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/upload-document`)
+    }
+})
+
+router.get('/:prototypeVersion/additional-documents', function(req, res) {
+    const prototypeVersion = req.params.prototypeVersion
+    const warrantType = req.session.data.appearance['warrant-type']
+    const additionalDocs = req.session.data.appearance['additional-documents']
+    console.log("Additional documents:" + additionalDocs)
+    if (additionalDocs == 'yes'){
+        if (req.session.data.appearance['doc-index'] == undefined){
+            req.session.data.appearance['doc-index'] = 0
+            console.log("Doc index:" + req.session.data.appearance['doc-index']) 
+            console.log("Additional documents:" + req.session.data.appearance['additional-documents-list'])
+            return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/upload-additional-document`)
+        }
+        else if (req.session.data.appearance['doc-index'] < req.session.data.appearance['additional-documents'].length -1){
+            req.session.data.appearance['doc-index'] = req.session.data.appearance['doc-index'] + 1
+            console.log("Doc index:" + req.session.data.appearance['doc-index']) 
+            return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/upload-additional-document`)
+        } else {
+            return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/court-documents`)
+        }
+    } else {
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/court-documents`) 
+    }
+})
+
 router.get('/:prototypeVersion/launch-prototype', function(req, res) {
     const prototypeVersion = req.query.version
     req.session.regenerate(function() {
@@ -1330,3 +1386,5 @@ router.get('/:prototypeVersion/launch-prototype', function(req, res) {
         res.redirect(`/${prototypeVersion}/court-cases/`)
     })
 })
+
+

@@ -50,6 +50,29 @@
                 </div>
             </details>
             {% endif %}
+            {% if (data.appearance.offences.length > 0) and (data.appearance['warrant-type'] == 'Remand') %}
+            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+            <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-2">Offences ({{ data.appearance.offences | length }})</h2>
+            <details class="govuk-details show-toggle filter white" data-module="govuk-details">
+                <summary class="govuk-details__summary">
+                    <span class="govuk-details__summary-text">
+                        offences
+                    </span>
+                </summary>
+                <div class="govuk-details__text">
+                    <dl class="offences-summary-card-content">
+                        {% for offence in data.appearance.offences %}
+                        <div class="offences-summary-card-row">
+                            <dt class="offences-summary-card-key govuk-!-font-weight-bold">
+                                {{ offence['offence-name'] }}
+                            </dt>
+                            <dd class="offences-summary-card-value govuk-body-s">Committed on {{ offence['offence-start-date-day'] }}/{{ offence['offence-start-date-month'] }}/{{ offence['offence-start-date-year'] }}</dd>
+                        </div>
+                        {% endfor %}
+                    </dl>
+                </div>
+            </details>
+            {% endif %}
             {% endif %}
         </div>
         
