@@ -337,30 +337,24 @@ router.post('/:prototypeVersion/overall-conviction-date-apply', function(req, re
         console.log("Conviction date: " + req.session.data.sentence['conviction-date-day'] + "/" + req.session.data.sentence['conviction-date-month'] + "/" + req.session.data.sentence['conviction-date-year'])
         req.session.data.overallQuestionsComplete = 'Yes'
         console.log("Overall questions complete " + req.session.data.overallQuestionsComplete)
-        if (prototypeVersion >= 18){
+        if (prototypeVersion == 18){
             if (route == "remand-to-sentence")
             {
                 return res.redirect(307, `/${prototypeVersion}/court-cases/add-a-court-appearance/overall-conviction-date`)
             } else {
             return res.redirect(307, `/${prototypeVersion}/court-cases/add-a-sentence/overall-conviction-date`)
+            }
         }
-        } else {
-        return res.redirect(307, `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`)
-        }
-    } else
-        req.session.data.overallQuestionsComplete = 'Yes'
-        console.log("Overall questions complete " + req.session.data.overallQuestionsComplete)
-        if (prototypeVersion >= 18){
+        if (prototypeVersion == 19){
             if (route == "remand-to-sentence")
             {
-                return res.redirect(307, `/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`)
+                return res.redirect(307, `/${prototypeVersion}/court-cases/add-a-court-appearance/overall-conviction-date`)
             } else {
-            return res.redirect(307, `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`)
+            return res.redirect(307, `/${prototypeVersion}/court-cases/add-a-court-case/overall-conviction-date`)
         }
         } else {
         return res.redirect(307, `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`)
-        }
-})
+}}})
 
 //Add court case
 router.get('/:prototypeVersion/create-court-case', function(req, res) {
@@ -548,7 +542,7 @@ router.get('/:prototypeVersion/create-offence', function(req, res) {
             outcome: req.session.data.appearance['overall-case-outcome']
         }
     }
-    if (path == 'cta'){
+    if (path == 'cta' || prototypeVersion >= 19){
         res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-date`)
     } else {
     res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/check-answers`)
