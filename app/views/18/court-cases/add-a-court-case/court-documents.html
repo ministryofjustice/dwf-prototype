@@ -8,7 +8,11 @@
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
               <span class="govuk-caption-l">Upload court documents</span>
+              {% if data.appearance['warrant-type'] == "Remand" %}
+              You have uploaded the remand warrant
+              {% else %}
               You have uploaded {{ data.appearance.documents.length + data.appearance['additional-documents-list'].length}}  documents
+              {% endif %}
             </h1>
           </legend>
           <p class="govuk-body govuk-!-display-none" id="refreshPageProgress"><a href="#" class="govuk-link">Refresh
