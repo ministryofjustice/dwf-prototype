@@ -27,7 +27,7 @@
                                         <label class="govuk-label" for="appearance[tagged-bail]">
                                             Number of days
                                         </label>
-                                        <input class="govuk-input govuk-!-width-one-third" id="tagged-bail-days" name="appearance[tagged-bail]" type="number" {% if data.appearance['tagged-bail'] %}{% if data.appearance['tagged-bail'].includes('Yes') %}value="{{ data.appearance['tagged-bail'] | last }}" {% endif %}{% endif %}>
+                                        <input class="govuk-input govuk-input--width-3" id="tagged-bail-days" name="appearance[tagged-bail]" type="number" {% if data.appearance['tagged-bail'] %}{% if data.appearance['tagged-bail'].includes('Yes') %}value="{{ data.appearance['tagged-bail'] | last }}" {% endif %}{% endif %}>
                                     </div>
                                 </div>
                                 <div class="govuk-radios__item">

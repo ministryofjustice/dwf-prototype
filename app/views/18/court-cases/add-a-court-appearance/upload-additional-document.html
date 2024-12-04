@@ -2,13 +2,13 @@
 {% block content %}
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="/{{data.prototypeVersion}}/add-court-document" method="post">
+        <form class="form" action="/{{data.prototypeVersion}}/additional-documents" method="post">
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
                             <span class="govuk-caption-l">Upload court documents</span>
-                            Upload the {{ data.appearance['document-type'] }}
+                            Upload the {{data.appearance['additional-documents-list'][data.appearance['doc-index']]}}
                         </h1>
                     </legend>
                     <div id="file-upload-1-hint" class="govuk-hint govuk-!-margin-top-1 govuk-!-margin-bottom-5">
@@ -22,7 +22,7 @@
 
                     <div class="govuk-button-group">
                         <button type="submit" class="govuk-button" data-module="govuk-button">
-                            Continue
+                            Save and continue
                         </button>
                         <a class="govuk-button govuk-button--secondary" data-module="govuk-button"
                             href="/{{data.prototypeVersion}}/save-court-case">
