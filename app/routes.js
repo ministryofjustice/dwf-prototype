@@ -466,7 +466,7 @@ router.post(
         "Overall questions complete " +
           req.session.data.overallQuestionsComplete
       );
-      if (prototypeVersion == 18) {
+      if (prototypeVersion == 18 || prototypeVersion >= 18 ) {
         if (route == "remand-to-sentence") {
           return res.redirect(
             307,
@@ -1432,14 +1432,19 @@ router.post("/:prototypeVersion/sentence-length-select-2", function (req, res) {
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-sentence/licence-period`
     );
-  } else if ((prototypeVersion >= "v11") | (prototypeVersion > 13)) {
+  } else if ((prototypeVersion >= "v11") | (prototypeVersion > 13 && prototypeVersion < 20)) {
     if (req.session.data.appearance["no-count-numbers"] == "true") {
       req.session.data.sentence["consecutive-concurrent"] = "Concurrent";
       res.redirect(307, `/${prototypeVersion}/persist-sentence`);
     } else {
       res.redirect(`court-cases/add-a-sentence/consecutive-concurrent`);
     }
-  } else res.redirect(307, `/${prototypeVersion}/persist-sentence`);
+  } 
+  else if (prototypeVersion >= 20){
+    res.redirect(`court-cases/add-a-sentence/consecutive-concurrent`);
+  } else {
+  res.redirect(307, `/${prototypeVersion}/persist-sentence`);
+  }
 });
 
 router.post("/:prototypeVersion/offence-to-sentence", function (req, res) {
@@ -1514,9 +1519,15 @@ router.post(
     if (consecConcur == "Consecutive") {
       if (req.session.data.appearance.sentences[0]["count-number"] == "") {
         req.session.data.appearance["no-count-numbers"] = "true";
+        if (prototypeVersion >= 20){
+          return res.redirect(
+            `/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to-case`
+          );
+        } else {
         req.session.data["sentence"]["consecutive-to"] =
           req.session.data.appearance.sentences[0]["offence-name"];
         return res.redirect(307, `/${prototypeVersion}/persist-sentence`);
+      }
       }
       res.redirect(
         `/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to-case`
@@ -1545,6 +1556,13 @@ router.post(
         `/${prototypeVersion}/court-cases/add-a-sentence/select-consecutive-case`
       );
     } else if (consecToCase == "no") {
+      if(prototypeVersion <= 20){
+        if (req.session.data.appearance["no-count-numbers"] == "true" && req.session.data.appearance.sentences.length == 2){
+          return res.redirect(
+            `/${prototypeVersion}/court-cases/add-a-sentence/no-count-numbers-error`
+          );
+        }
+      }
       res.redirect(
         `/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to`
       );
@@ -1845,6 +1863,7 @@ router.get("/:prototypeVersion/count-number", function (req, res) {
   const path = req.session.data.path;
   console.log("Path: " + path);
   console.log("SentenceIndex: " + sentenceIndex);
+  console.log("Edit: " + req.query.edit)
   if (req.query.postSaveEdit == "true") {
     return res.redirect(307, `/${prototypeVersion}/persist-sentence`);
   }
@@ -1979,6 +1998,12 @@ router.get("/:prototypeVersion/additional-documents", function (req, res) {
       `/${prototypeVersion}/court-cases/add-a-court-case/court-documents`
     );
   }
+});
+
+router.get("/:prototypeVersion/enter-count-number", function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion;
+  req.session.data['no-count'] = "true"
+  res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/count-number`);
 });
 
 router.get("/:prototypeVersion/launch-prototype", function (req, res) {

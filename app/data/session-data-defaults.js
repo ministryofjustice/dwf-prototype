@@ -4,6 +4,7 @@ module.exports = {
             "status" : "inactive",
             "appearances": [{
                     "court-case-ref": "63GD1757930",
+                    "warrant-type": "Remand",
                     "overall-case-outcome": "Remanded in custody",
                     "next-court-date-set": "No",
                     "warrant-date-day": "17",
@@ -56,6 +57,7 @@ module.exports = {
         {
             "appearances": [{
                     "court-case-ref": "T20223256",
+                    "warrant-type": "Remand",
                     "overall-case-outcome": "Remanded in custody",
                     "next-court-date-set": "Yes",
                     "next-court-date-day": "02",
@@ -96,6 +98,7 @@ module.exports = {
                 },
                 {
                     "court-case-ref": "T20223256",
+                    "warrant-type": "Remand",
                     "overall-case-outcome": "Remanded in custody",
                     "next-court-date-set": "No",
                     "warrant-date-day": "02",
@@ -137,6 +140,7 @@ module.exports = {
                 },
                 {
                     "court-case-ref": "T20223256",
+                    "warrant-type": "Sentencing",
                     "overall-case-outcome": "Imprisonment",
                     "overall-conviction-date-day": "05",
                     "overall-conviction-date-month": "10",
@@ -204,6 +208,7 @@ module.exports = {
     {
             "appearances": [{
                     "court-case-ref": "63GD1757930",
+                    "warrant-type": "Remand",
                     "overall-case-outcome": "Remanded in custody",
                     "next-court-date-set": "Yes",
                     "next-hearing-type": "Court appearance",
@@ -258,6 +263,7 @@ module.exports = {
                 },
                 {
                     "court-case-ref": "63GD1757930",
+                    "warrant-type": "Remand",
                     "overall-case-outcome": "Remanded in custody",
                     "next-court-date-set": "Yes",
                     "next-hearing-type": "Court appearance",
@@ -312,6 +318,7 @@ module.exports = {
                 },
                 {
                     "court-case-ref": "63GD1757930",
+                    "warrant-type": "Remand",
                     "overall-case-outcome": "Remanded in custody",
                     "next-court-date-set": "Yes",
                     "next-hearing-type": "Court appearance",
@@ -366,6 +373,7 @@ module.exports = {
                 },
                 {
                     "court-case-ref": "63GD1757930",
+                    "warrant-type": "Remand",
                     "overall-case-outcome": "Remanded in custody",
                     "next-court-date-set": "Yes",
                     "next-hearing-type": "Court appearance",
@@ -420,6 +428,7 @@ module.exports = {
                 },
                 {
                     "court-case-ref": "63GD1757930",
+                    "warrant-type": "Remand",
                     "overall-case-outcome": "Remanded in custody",
                     "next-court-date-set": "Yes",
                     "next-hearing-type": "Court appearance",
