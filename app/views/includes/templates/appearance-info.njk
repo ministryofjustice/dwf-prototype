@@ -40,6 +40,7 @@
                     <dl class="offences-summary-card-content">
                         {% for sentence in data.appearance.sentences %}
                         <div class="offences-summary-card-row">
+                        <dd class="offences-summary-card-value govuk-body-s govuk-!-margin-bottom-1">{% if sentence['count-number'] > 0 %}Count {{ sentence['count-number'] }}{% endif %}</dd>
                             <dt class="offences-summary-card-key govuk-!-font-weight-bold">
                                 {{ sentence['offence-name'] }}
                             </dt>

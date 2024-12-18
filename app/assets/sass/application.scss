@@ -444,6 +444,10 @@ padding-left: 20px;
   border-bottom: none !important;
 }
 
+.no-left-border {
+  border-left: none !important;
+}
+
 .govuk-width-container {
     max-width: 1170px;
     margin-right: 15px;
@@ -1350,6 +1354,10 @@ padding: 10px;
   margin-right: 5px;
 }
 
+.filter > .govuk-details__text {
+  border-left: 4px solid #b1b4b6;
+}
+
 .filter > .govuk-details__text > .hods-expandable-banner {
   background-color: #f3f2f1;
   color: #0b0c0c;
@@ -1442,6 +1450,14 @@ box-shadow: 0 -2px #fd0,0 4px #0b0c0c;
 text-decoration: none;
 -webkit-box-decoration-break: clone;
 box-decoration-break: clone;
+}
+
+.moj-interruption-card__body > p, .moj-interruption-card__body > ul, .moj-interruption-card__body > ol  {
+  color: govuk-colour("white") ;
+}
+
+.govuk-summary-list__actions {
+  width: 10% !important;
 }
 
 body {

@@ -156,7 +156,7 @@ module.exports = {
                     "overall-sentence-length-days": "0",
                     // "status": ["saved","mismatch"],
                     "sentences": [{
-                            "count-number": "1",
+                            "count-number": "",
                             "conviction-date-day": "05",
                             "conviction-date-month": "10",
                             "conviction-date-year": "2024",
@@ -179,7 +179,7 @@ module.exports = {
                             "consecutive-concurrent": "Forthwith"
                         },
                         {
-                            "count-number": "2",
+                            "count-number": "",
                             "conviction-date-day": "05",
                             "conviction-date-month": "10",
                             "conviction-date-year": "2024",
