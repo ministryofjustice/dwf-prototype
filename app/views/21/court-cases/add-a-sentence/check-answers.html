@@ -32,9 +32,6 @@
                         <dd class="govuk-summary-list__value" style="width: 40%;">
                             {{ data['appearance']['overall-conviction-date-day'] }}/{{ data['appearance']['overall-conviction-date-month'] }}/{{ data['appearance']['overall-conviction-date-year'] }}
                         </dd>
-                        <dd class="govuk-summary-list__actions govuk-!-padding-right-5">
-                            <a class="govuk-link" href="overall-conviction-date?edit=true">Edit<span class="govuk-visually-hidden"> overall conviction date</span></a>
-                        </dd>
                     </div>
                     {% endif %}
                     <div class="govuk-summary-list__row">
@@ -47,9 +44,6 @@
                             {% else %}
                             {{ data['appearance']['overall-sentence-length-years'] }} years {{ data['appearance']['overall-sentence-length-months'] }} months {{ data['appearance']['overall-sentence-length-weeks'] }} weeks {{ data['appearance']['overall-sentence-length-days'] }} days
                             {% endif %}
-                        </dd>
-                        <dd class="govuk-summary-list__actions govuk-!-padding-right-5">
-                            <a class="govuk-link" href="overall-sentence-length?edit=true">Edit<span class="govuk-visually-hidden"> overall sentence length</span></a>
                         </dd>
                     </div>
                     {% if data['appearance']['overall-sentence-length'] == 'yes' %}
