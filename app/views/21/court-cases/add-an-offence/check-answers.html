@@ -61,6 +61,7 @@
                             </strong>
                             {% endif %}</h4>
                     <dl class="govuk-summary-list govuk-summary-list--no-border">
+                        {% if offence['offence-start-date-day'] %}
                         <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key">
                                 Commited on
@@ -73,6 +74,8 @@
                                 {% endif %}
                             </dd>
                         </div>
+                        {% endif %}
+                        {% if offence['outcome'] %}
                         <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key">
                                 Outcome
@@ -81,18 +84,27 @@
                                 {{ offence['outcome'] }}
                             </dd>
                         </div>
+                        {% endif %}
                     </dl>
+                    {% if offence['status'] == 'draft' %}
+                        <p class="govuk-!-body govuk-!-margin-top-3 govuk-!-margin-bottom-1"><a href="{{ data.offence['saved-from'] }}?index={{ loop.index }}">Continue adding offence details</a></p>
+                        {% endif %}
                 </div>
                 <div class="offence-card-actions">
                     <ul class="offence-card-actions-list">
+                        {% if offence['status'] == 'draft' %}
+                        <li class="offence-card-action-link"></li><strong class="govuk-tag govuk-tag--blue  govuk-!-margin-bottom-2">
+                            Draft
+                        </strong></li>
+                        {% else %}
                         <li class="offence-card-action-link"><a href="/{{data.prototypeVersion}}/update-offence?index={{loop.index0}}">Edit</a></li>
                         <li class="offence-card-action-link"><a href="/{{data.prototypeVersion}}/confirm-delete?index={{loop.index0}}&route=add-a-court-case">Delete</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
             {% endfor %}
             {% endif %}
-            {% if data['appearance'].offences.length > 0 %}
             <div class="govuk-form-group govuk-!-margin-top-8">
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
@@ -117,7 +129,6 @@
             <button type="submit" class="govuk-button" data-module="govuk-button">
                 Continue
             </button>
-            {% endif %}
         </form>
     </div>
     <div class="govuk-grid-column-one-third">

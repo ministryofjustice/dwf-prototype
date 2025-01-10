@@ -62,7 +62,7 @@
                         <div class="govuk-task-list__status" id="offences-and-sentences-status">
                             {% if data.additionalInformationComplete == 1 %}
                              Completed
-                             {% elif data.addOffencesStarted == 1 %}
+                             {% elif data.additionalInformationStarted == 1 %}
                              <strong class="govuk-tag govuk-tag--light-blue">
                                 In progress
                             </strong>
@@ -78,7 +78,7 @@
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
                             {% if data.appearanceDetailsComplete == 1 %}
-                            {% if (data.sentencesAdded == 1) or (data.overallQuestionsComplete == "Yes") %}
+                            {% if (data.sentencesAdded == 1) %}
                             <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="../add-a-sentence/check-answers">
                                 Add offences
                             </a>
@@ -88,7 +88,7 @@
                                 Add offences
                             </a>
                             {% else %}
-                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="{{data.savedURL}}">
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="../add-a-sentence/check-answers?addOffencesStarted=1">
                                 Add offences
                             </a>
                             {% endif %}
