@@ -67,7 +67,11 @@
                             </dl>
                             {% if offence['outcome-changed'] != 'true' %}
                             <ul class="govuk-list govuk-!-margin-top-4 govuk-!-margin-bottom-2">
-                                <li><a href="change-outcome?index={{loop.index0}}&edit=false">Update outcome</a></li>
+                            {% if offence['status'] == 'draft' %}
+                            <a href="{{data.savedURL}}">Continue updating outcome</a></li>
+                            {% else %}
+                                <li><a href="/{{data.prototypeVersion}}/update-outcome?index={{loop.index0}}&edit=false">Update outcome</a></li>
+                            {% endif %}
                             </ul>
                             {% endif %}
                         </div>
@@ -87,7 +91,7 @@
                        </div>
                     {% endif %} -->
                     {% for sentence in data.appearance.sentences %}
-                    {% if sentence['sentence-type'] != null %}
+                    
                     <div class="offence-card sentence-card">
                         <div class="offence-card-offence-details">
                             <span class="govuk-body">Count {{ sentence['count-number'] }}</span>
@@ -161,6 +165,9 @@
                                     </dd>
                                 </div>
                             </dl>
+                           {% if sentence['status'] == 'draft' %}
+                           <p class="govuk-body govuk-!-margin-top-4 govuk-!-margin-bottom-2"><a href="{{ data.savedURL }}">Continue adding sentence information</a></p>
+                           {% endif %}
                         </div>
                         <div class="offence-card-actions">
                             <ul class="offence-card-actions-list">
@@ -169,7 +176,6 @@
                             </ul>
                         </div>
                     </div>
-                    {% endif %}
                     {% endfor %}
                     {% endif %}
             </div>

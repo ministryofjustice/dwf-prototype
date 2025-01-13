@@ -22,7 +22,8 @@ module.exports = {
                                 "CL77001"
                             ],
                             "offence-name": "CL77001 - Use violence to secure entry to premises",
-                            "outcome": "Remanded in custody"
+                            "outcome": "Remanded in custody",
+                            "status" : ""
                         },
                         {
                             "offence-start-date-day": "05",
@@ -35,7 +36,8 @@ module.exports = {
                                 "TH68023"
                             ],
                             "offence-name": "TH68023 - Robbery",
-                            "outcome": "Remanded in custody"
+                            "outcome": "Remanded in custody",
+                            "status" : ""
                         },
                         {
                             "offence-start-date-day": "05",
@@ -48,7 +50,8 @@ module.exports = {
                                 "CJ88001"
                             ],
                             "offence-name": "CJ88001 - Common assault",
-                            "outcome": "Remanded in custody"
+                            "outcome": "Remanded in custody",
+                            "status" : ""
                         }
                     ]
                 }
@@ -231,7 +234,8 @@ module.exports = {
                                 "CL77001"
                             ],
                             "offence-name": "CL77001 - Use violence to secure entry to premises",
-                            "outcome": "Remanded in custody"
+                            "outcome": "Remanded in custody",
+                            "status" : ""
                         },
                         {
                             "offence-start-date-day": "05",
@@ -244,7 +248,8 @@ module.exports = {
                                 "TH68023"
                             ],
                             "offence-name": "TH68023 - Robbery",
-                            "outcome": "Remanded in custody"
+                            "outcome": "Remanded in custody",
+                            "status" : ""
                         },
                         {
                             "offence-start-date-day": "05",
@@ -257,7 +262,8 @@ module.exports = {
                                 "CJ88001"
                             ],
                             "offence-name": "CJ88001 - Common assault",
-                            "outcome": "Remanded in custody"
+                            "outcome": "Remanded in custody",
+                            "status" : ""
                         }
                     ]
                 },
@@ -286,7 +292,8 @@ module.exports = {
                                 "CL77001"
                             ],
                             "offence-name": "CL77001 - Use violence to secure entry to premises",
-                            "outcome": "Remanded in custody"
+                            "outcome": "Remanded in custody",
+                            "status" : ""
                         },
                         {
                             "offence-start-date-day": "05",
@@ -299,7 +306,8 @@ module.exports = {
                                 "TH68023"
                             ],
                             "offence-name": "TH68023 - Robbery",
-                            "outcome": "Remanded in custody"
+                            "outcome": "Remanded in custody",
+                            "status" : ""
                         },
                         {
                             "offence-start-date-day": "05",
@@ -312,7 +320,8 @@ module.exports = {
                                 "CJ88001"
                             ],
                             "offence-name": "CJ88001 - Common assault",
-                            "outcome": "Remanded in custody"
+                            "outcome": "Remanded in custody",
+                            "status" : ""
                         }
                     ]
                 },
@@ -341,7 +350,8 @@ module.exports = {
                                 "CL77001"
                             ],
                             "offence-name": "CL77001 - Use violence to secure entry to premises",
-                            "outcome": "Remanded in custody"
+                            "outcome": "Remanded in custody",
+                            "status" : ""
                         },
                         {
                             "offence-start-date-day": "05",
@@ -354,7 +364,8 @@ module.exports = {
                                 "TH68023"
                             ],
                             "offence-name": "TH68023 - Robbery",
-                            "outcome": "Remanded in custody"
+                            "outcome": "Remanded in custody",
+                            "status" : ""
                         },
                         {
                             "offence-start-date-day": "05",
@@ -367,7 +378,8 @@ module.exports = {
                                 "CJ88001"
                             ],
                             "offence-name": "CJ88001 - Common assault",
-                            "outcome": "Remanded in custody"
+                            "outcome": "Remanded in custody",
+                            "status" : ""
                         }
                     ]
                 },
@@ -396,7 +408,8 @@ module.exports = {
                                 "CL77001"
                             ],
                             "offence-name": "CL77001 - Use violence to secure entry to premises",
-                            "outcome": "Remanded in custody"
+                            "outcome": "Remanded in custody",
+                            "status" : ""
                         },
                         {
                             "offence-start-date-day": "05",
@@ -409,7 +422,8 @@ module.exports = {
                                 "TH68023"
                             ],
                             "offence-name": "TH68023 - Robbery",
-                            "outcome": "Remanded in custody"
+                            "outcome": "Remanded in custody",
+                            "status" : ""
                         },
                         {
                             "offence-start-date-day": "05",
@@ -422,7 +436,8 @@ module.exports = {
                                 "CJ88001"
                             ],
                             "offence-name": "CJ88001 - Common assault",
-                            "outcome": "Remanded in custody"
+                            "outcome": "Remanded in custody",
+                            "status" : ""
                         }
                     ]
                 },
@@ -451,7 +466,8 @@ module.exports = {
                                 "CL77001"
                             ],
                             "offence-name": "CL77001 - Use violence to secure entry to premises",
-                            "outcome": "Remanded in custody"
+                            "outcome": "Remanded in custody",
+                            "status" : ""
                         },
                         {
                             "offence-start-date-day": "05",
@@ -464,7 +480,8 @@ module.exports = {
                                 "TH68023"
                             ],
                             "offence-name": "TH68023 - Robbery",
-                            "outcome": "Remanded in custody"
+                            "outcome": "Remanded in custody",
+                            "status" : ""
                         },
                         {
                             "offence-start-date-day": "05",
@@ -477,7 +494,8 @@ module.exports = {
                                 "CJ88001"
                             ],
                             "offence-name": "CJ88001 - Common assault",
-                            "outcome": "Remanded in custody"
+                            "outcome": "Remanded in custody",
+                            "status" : ""
                         }
                     ]
                 }

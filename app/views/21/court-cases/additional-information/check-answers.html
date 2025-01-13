@@ -76,6 +76,7 @@
                         <a class="govuk-link" href="merged-cases?edit=true">Edit<span class="govuk-visually-hidden"> warrant include offences from other court cases</span></a>
                     </dd>
                 </div>
+                {% if data.appearance['merged-cases'] == 'yes' %}
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Offences merged from
@@ -89,6 +90,7 @@
                         <a class="govuk-link" href="merged-cases?edit=true">Edit<span class="govuk-visually-hidden"> warrant include offences from other court cases</span></a>
                     </dd>
                 </div>
+                {% endif %}
             </dl>
             <button class="govuk-button" data-module="govuk-button">
                 Confirm and continue

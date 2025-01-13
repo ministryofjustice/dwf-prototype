@@ -350,7 +350,7 @@ router.post("/:prototypeVersion/new-court-name", function (req, res) {
         );
       } else {
         res.redirect(
-          `/${prototypeVersion}/court-cases/add-a-court-appearance/tagged-bail`
+          `/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers`
         );
       }
     } else
@@ -750,6 +750,14 @@ router.post("/:prototypeVersion/persist-appearance", function (req, res) {
         `/${prototypeVersion}/court-cases/add-a-court-case/confirmation`
       );
     }
+  } else if (route == "remand-to-sentence") {
+    if (req.query.saveCourtCase == "true") {
+      req.session.data.appearance["status"] = ["draft"];
+      console.log(
+        "Appearance status: " + req.session.data.appearance["status"]
+      );
+      return res.redirect(`/${prototypeVersion}/court-cases/`);
+    }
   } else if (req.session.data.postSaveEdit == "true") {
     return res.redirect(`/${prototypeVersion}/court-cases/appearance-detail`);
   } else if (req.session.data.postSaveEditComplete == "true") {
@@ -1075,7 +1083,9 @@ router.post("/:prototypeVersion/persist-sentence", function (req, res) {
   const sentenceIndex = req.query.sentenceIndex;
   const path = req.session.data.path;
   req.session.data.newSentence = 0;
+  if(req.session.data.progressSaved != true) {
   req.session.data.sentence["status"] = "complete";
+  }
   req.session.data.sentence["outcome"] = "Imprisonment";
   console.log("Edit: " + edit);
   console.log("Route: " + route);
@@ -1184,12 +1194,20 @@ router.post("/:prototypeVersion/persist-sentence", function (req, res) {
       req.session.data.appearance.sentences.length - 1;
   }
   if (route == "repeat-remand") {
+    if (sentence['status'] = 'draft'){
+      return res.redirect(
+        `/${prototypeVersion}/court-cases/`
+      );
+    } else
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-court-appearance/change-offences`
     );
   } else if (route == "remand-to-sentence") {
     if (path != "rts-new-offence") {
       req.session.data.appearance.offences.splice(req.session.data.index, 1);
+      return res.redirect(
+        `/${prototypeVersion}/court-cases/`
+      );
     }
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`
@@ -1876,7 +1894,7 @@ router.post(
   }
 );
 
-router.get("/:prototypeVersion/save-court-case", function (req, res) {
+router.post("/:prototypeVersion/save-court-case", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   const progressSaved = true;
   var url = req.get("Referer");
@@ -1918,7 +1936,23 @@ router.get("/:prototypeVersion/save-court-case", function (req, res) {
         req.session.data.appearance.offences.length - 1;
     }
     res.redirect(`/${prototypeVersion}/court-cases/save-court-case`);
-  } else res.redirect(`/${prototypeVersion}/court-cases/save-court-case`);
+  }
+  if (req.session.data.route == "remand-to-sentence") {
+    console.log("Saved from remand to sentence")
+    if (req.session.sentenceAdded == 1) {
+      req.session.data.sentence["status"] = "draft";
+      req.session.data.route = "remand-to-sentence";
+      req.session.data.sentence["saved-from"] = url;
+      return res.redirect(307, `/${prototypeVersion}/persist-sentence`);
+    } else {
+      req.session.data.offence["status"] = "draft";
+      req.session.data.route = "remand-to-sentence";
+      req.session.data.offence["saved-from"] = url;
+    }
+    res.redirect(`/${prototypeVersion}/court-cases/save-court-case`);
+  } else {
+      res.redirect(`/${prototypeVersion}/court-cases/save-court-case`);
+  }
 });
 
 router.get("/:prototypeVersion/terror-related-offence", function (req, res) {
@@ -2137,7 +2171,11 @@ router.get(
   function (req, res) {
     const prototypeVersion = req.params.prototypeVersion;
     req.session.data.additionalInformationComplete = 1;
+    if (req.session.data.route == "appearance"){
+      res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`);
+    } else {
     res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`);
+    }
   }
 );
 
@@ -2189,6 +2227,18 @@ router.get("/:prototypeVersion/select-merged-cases", function (req, res) {
     `/${prototypeVersion}/court-cases/additional-information/check-answers`
   );
 });
+
+router.get("/:prototypeVersion/update-outcome", function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion;
+  const index = req.query.index;
+  const edit = req.query.edit;
+  req.session.index = index;
+  req.session.edit = edit;
+  console.log(req.session.data.appearance.offences[index])
+  req.session.data.appearance.offences[index]['status'] = 'draft';
+  res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/change-outcome`);
+});
+
 
 router.get("/:prototypeVersion/launch-prototype", function (req, res) {
   const prototypeVersion = req.query.version;
