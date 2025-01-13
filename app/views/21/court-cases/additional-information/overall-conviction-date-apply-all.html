@@ -14,39 +14,61 @@
                     </legend>
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="overall-conviction-date-apply-all" name="appearance[overall-conviction-date-apply-all]" value="Yes" type="radio" data-aria-controls="conditional-overall-conviction-date-apply-all" {% if data.appearance['overall-conviction-date-apply-all'] %}{% if data.appearance['overall-conviction-date-apply-all'].includes('Yes') %}checked{% endif %}{% endif %}>
+                            <input class="govuk-radios__input" id="overall-conviction-date-apply-all"
+                                name="appearance[overall-conviction-date-apply-all]" value="Yes" type="radio"
+                                data-aria-controls="conditional-overall-conviction-date-apply-all" {% if
+                                data.appearance['overall-conviction-date-apply-all'] %}{% if
+                                data.appearance['overall-conviction-date-apply-all'].includes('Yes') %}checked{% endif
+                                %}{% endif %}>
                             <label class="govuk-label govuk-radios__label" for="overall-conviction-date-apply-all">
                                 Yes
                             </label>
                         </div>
-                        <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-overall-conviction-date-apply-all">
+                        <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
+                            id="conditional-overall-conviction-date-apply-all">
                             <div class="govuk-date-input__item">
                                 <div class="govuk-form-group">
-                                    <label class="govuk-label govuk-date-input__label" for="overall-conviction-date-day">
+                                    <label class="govuk-label govuk-date-input__label"
+                                        for="overall-conviction-date-day">
                                         Day
                                     </label>
-                                    <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="overall-conviction-date-day" name="appearance[overall-conviction-date-day]" type="text" inputmode="numeric" value="{{data.appearance['overall-conviction-date-day']}}">
+                                    <input class="govuk-input govuk-date-input__input govuk-input--width-2"
+                                        id="overall-conviction-date-day" name="appearance[overall-conviction-date-day]"
+                                        type="text" inputmode="numeric"
+                                        value="{{data.appearance['overall-conviction-date-day']}}">
                                 </div>
                             </div>
                             <div class="govuk-date-input__item" id="overall-conviction-date-month">
                                 <div class="govuk-form-group">
-                                    <label class="govuk-label govuk-date-input__label" for="overall-conviction-date-month">
+                                    <label class="govuk-label govuk-date-input__label"
+                                        for="overall-conviction-date-month">
                                         Month
                                     </label>
-                                    <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="overall-conviction-date-month" name="appearance[overall-conviction-date-month]" type="text" inputmode="numeric" value="{{data.appearance['overall-conviction-date-month']}}">
+                                    <input class="govuk-input govuk-date-input__input govuk-input--width-2"
+                                        id="overall-conviction-date-month"
+                                        name="appearance[overall-conviction-date-month]" type="text" inputmode="numeric"
+                                        value="{{data.appearance['overall-conviction-date-month']}}">
                                 </div>
                             </div>
                             <div class="govuk-date-input__item" id="overall-conviction-date-year">
                                 <div class="govuk-form-group">
-                                    <label class="govuk-label govuk-date-input__label" for="overall-conviction-date-year">
+                                    <label class="govuk-label govuk-date-input__label"
+                                        for="overall-conviction-date-year">
                                         Year
                                     </label>
-                                    <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="overall-conviction-date-year" name="appearance[overall-conviction-date-year]" type="text" inputmode="numeric" value="{{data.appearance['overall-conviction-date-year']}}">
+                                    <input class="govuk-input govuk-date-input__input govuk-input--width-4"
+                                        id="overall-conviction-date-year"
+                                        name="appearance[overall-conviction-date-year]" type="text" inputmode="numeric"
+                                        value="{{data.appearance['overall-conviction-date-year']}}">
                                 </div>
                             </div>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="overall-conviction-date-apply-all-2" name="appearance[overall-conviction-date-apply-all]" type="radio" value="None" {% if data.appearance['overall-conviction-date-apply-all'] %}{% if data.appearance['overall-conviction-date-apply-all'].includes('None') %}checked{% endif %}{% endif %}>
+                            <input class="govuk-radios__input" id="overall-conviction-date-apply-all-2"
+                                name="appearance[overall-conviction-date-apply-all]" type="radio" value="None" {% if
+                                data.appearance['overall-conviction-date-apply-all'] %}{% if
+                                data.appearance['overall-conviction-date-apply-all'].includes('None') %}checked{% endif
+                                %}{% endif %}>
                             <label class="govuk-label govuk-radios__label" for="overall-conviction-date-apply-all-2">
                                 No
                             </label>
@@ -55,12 +77,13 @@
                 </fieldset>
             </div>
             <div class="govuk-button-group">
-                <button type="submit" class="govuk-button" data-module="govuk-button">
+                <button class="govuk-button" data-module="govuk-button">
                     Continue
                 </button>
-                <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="/{{data.prototypeVersion}}/save-court-case">
-                    Save as draft
-                </a>
+                <button class="govuk-button govuk-button--secondary" data-module="govuk-button"
+                    formaction="/{{data.prototypeVersion}}/save-court-case" method="post">
+                    Save as a draft
+                </button>
             </div>
         </form>
     </div>

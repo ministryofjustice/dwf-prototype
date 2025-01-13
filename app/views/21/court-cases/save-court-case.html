@@ -8,8 +8,8 @@
                 <fieldset class="govuk-fieldset" role="group" aria-describedby="passport-issued-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add a court case</span>
-                            Court case {{ data.appearance['court-case-ref'] }} on {{ data.appearance['warrant-date-day'] }}/{{ data.appearance['warrant-date-month'] }}/{{ data.appearance['warrant-date-year'] }} at {{ data.appearance['court-name'] }} has been saved
+                            {% if (data.route == 'appearance') or (data.route == 'remand-to-sentence') %} Appearance {% else %}
+                            Court case {% endif %} {{ data.appearance['court-case-ref'] }} on {{ data.appearance['warrant-date-day'] }}/{{ data.appearance['warrant-date-month'] }}/{{ data.appearance['warrant-date-year'] }} at {{ data.appearance['court-name'] }} has been saved
                         </h1>
                     </legend>
                     <div class="govuk-inset-text">

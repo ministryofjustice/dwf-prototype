@@ -15,11 +15,14 @@
                     <fieldset class="govuk-fieldset" role="group" aria-describedby="passport-issued-hint">
                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                             {% if data.postSaveEdit == 'true' %}
-                        <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Appearance {{ data.appearance['court-case-ref'] }} at {{ data.appearance['court-name'] }} on {{ data.appearance['warrant-date-day'] }}/{{ data.appearance['warrant-date-month'] }}/{{ data.appearance['warrant-date-year'] }}</span>
-                            Edit the offence dates
-                        </h1>
-                        {% else %}
+                            <h1 class="govuk-fieldset__heading">
+                                <span class="govuk-caption-l">Appearance {{ data.appearance['court-case-ref'] }} at {{
+                                    data.appearance['court-name'] }} on {{ data.appearance['warrant-date-day'] }}/{{
+                                    data.appearance['warrant-date-month'] }}/{{ data.appearance['warrant-date-year']
+                                    }}</span>
+                                Edit the offence dates
+                            </h1>
+                            {% else %}
                             <h1 class="govuk-fieldset__heading">
                                 <span class="govuk-caption-l">Add offences</span>
                                 Enter the offence dates
@@ -36,23 +39,34 @@
                                         <label class="govuk-label govuk-date-input__label" for="offence-start-date-day">
                                             Day
                                         </label>
-                                        <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="offence-start-date-day" name="sentence[offence-start-date-day]" type="text" inputmode="numeric" value="{{ data.sentence['offence-start-date-day'] }}">
+                                        <input class="govuk-input govuk-date-input__input govuk-input--width-2"
+                                            id="offence-start-date-day" name="sentence[offence-start-date-day]"
+                                            type="text" inputmode="numeric"
+                                            value="{{ data.sentence['offence-start-date-day'] }}">
                                     </div>
                                 </div>
                                 <div class="govuk-date-input__item">
                                     <div class="govuk-form-group">
-                                        <label class="govuk-label govuk-date-input__label" for="offence-start-date-month">
+                                        <label class="govuk-label govuk-date-input__label"
+                                            for="offence-start-date-month">
                                             Month
                                         </label>
-                                        <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="offence-start-date-month" name="sentence[offence-start-date-month]" type="text" inputmode="numeric" value="{{ data.sentence['offence-start-date-month'] }}">
+                                        <input class="govuk-input govuk-date-input__input govuk-input--width-2"
+                                            id="offence-start-date-month" name="sentence[offence-start-date-month]"
+                                            type="text" inputmode="numeric"
+                                            value="{{ data.sentence['offence-start-date-month'] }}">
                                     </div>
                                 </div>
                                 <div class="govuk-date-input__item">
                                     <div class="govuk-form-group">
-                                        <label class="govuk-label govuk-date-input__label" for="offence-start-date-year">
+                                        <label class="govuk-label govuk-date-input__label"
+                                            for="offence-start-date-year">
                                             Year
                                         </label>
-                                        <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="offence-start-date-year" name="sentence[offence-start-date-year]" type="text" inputmode="numeric" value="{{ data.sentence['offence-start-date-year'] }}">
+                                        <input class="govuk-input govuk-date-input__input govuk-input--width-4"
+                                            id="offence-start-date-year" name="sentence[offence-start-date-year]"
+                                            type="text" inputmode="numeric"
+                                            value="{{ data.sentence['offence-start-date-year'] }}">
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +84,9 @@
                                         <label class="govuk-label govuk-date-input__label" for="offence-end-date-day">
                                             Day
                                         </label>
-                                        <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="offence-end-date-day" name="sentence[offence-end-date-day]" type="text" inputmode="numeric">
+                                        <input class="govuk-input govuk-date-input__input govuk-input--width-2"
+                                            id="offence-end-date-day" name="sentence[offence-end-date-day]" type="text"
+                                            inputmode="numeric">
                                     </div>
                                 </div>
                                 <div class="govuk-date-input__item">
@@ -78,7 +94,9 @@
                                         <label class="govuk-label govuk-date-input__label" for="offence-end-date-month">
                                             Month
                                         </label>
-                                        <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="offence-end-date-month" name="sentence[offence-end-date-month]" type="text" inputmode="numeric">
+                                        <input class="govuk-input govuk-date-input__input govuk-input--width-2"
+                                            id="offence-end-date-month" name="sentence[offence-end-date-month]"
+                                            type="text" inputmode="numeric">
                                     </div>
                                 </div>
                                 <div class="govuk-date-input__item">
@@ -86,20 +104,23 @@
                                         <label class="govuk-label govuk-date-input__label" for="offence-end-date-year">
                                             Year
                                         </label>
-                                        <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="offence-end-date-year" name="sentence[offence-end-date-year]" type="text" inputmode="numeric">
+                                        <input class="govuk-input govuk-date-input__input govuk-input--width-4"
+                                            id="offence-end-date-year" name="sentence[offence-end-date-year]"
+                                            type="text" inputmode="numeric">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </fieldset>
                     <div class="govuk-button-group">
-                <button type="submit" class="govuk-button" data-module="govuk-button">
-                    Continue
-                </button>
-                <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="/{{data.prototypeVersion}}/save-court-case">
-                    Save as draft
-                </a>
-            </div>
+                        <button type="submit" class="govuk-button" data-module="govuk-button">
+                            Continue
+                        </button>
+                        <button class="govuk-button govuk-button--secondary" data-module="govuk-button"
+                            formaction="/{{data.prototypeVersion}}/save-court-case" method="post">
+                            Save as a draft
+                        </button>
+                    </div>
                 </form>
     </div>
     <div class="govuk-grid-column-one-third">

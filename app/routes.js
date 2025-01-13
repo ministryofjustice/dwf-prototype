@@ -1206,7 +1206,7 @@ router.post("/:prototypeVersion/persist-sentence", function (req, res) {
     if (path != "rts-new-offence") {
       req.session.data.appearance.offences.splice(req.session.data.index, 1);
       return res.redirect(
-        `/${prototypeVersion}/court-cases/`
+        `/${prototypeVersion}/court-cases/save-court-case`
       );
     }
     return res.redirect(

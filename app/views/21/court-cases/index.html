@@ -101,13 +101,13 @@
                 {% set courtCaseIndex = loop.revindex0 %}
                 <div class="govuk-summary-card">
                     <div class="govuk-summary-card__title-wrapper">
-                        <h2 class="govuk-summary-card__title">{{ lastAppearance['court-case-ref'] }} <span class="govuk-body">at</span> {{ lastAppearance['court-name']}} </h2>
+                        <h2 class="govuk-summary-card__title">{{ lastAppearance['court-case-ref'] }} <span class="govuk-body">at</span> {{ lastAppearance['court-name']}}{% if (courtCase.appearances.length == 1) and (lastAppearance['status'] == 'draft') %} <strong class="govuk-tag govuk-tag--blue govuk-!-margin-left-2">Draft</strong>{% endif %}</h2>
                         <ul class="govuk-summary-card__actions">
                             <li class="govuk-summary-card__action">
                                 {% if courtCase['source'] == "NOMIS" %}
                                 <span class="moj-badge moj-badge--grey">NOMIS - read only</span>
                                 {% elif (courtCase.appearances.length == 1) and (lastAppearance['status'] == 'draft') %}
-                                <strong class="govuk-tag govuk-tag--blue">Draft</strong>
+                                <a class="govuk-link govuk-link--no-visited-state" href="">Delete</a>
                                 {% elif (courtCase['status'] == 'inactive') %}
                                 <strong class="govuk-tag govuk-tag--blue">Inactive</strong>
                                 {% else %}

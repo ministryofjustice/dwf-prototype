@@ -7,7 +7,8 @@
                 <fieldset class="govuk-fieldset" role="group">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add sentence information for offence {{ data['sentence']['count-number'] }}</span>
+                            <span class="govuk-caption-l">Add sentence information for offence {{
+                                data['sentence']['count-number'] }}</span>
                             Is this sentence forthwith?
                         </h1>
                     </legend>
@@ -16,13 +17,15 @@
                     </div>
                     <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="forthwith-1" name="sentence[forthwith]" type="radio" value="Yes">
+                            <input class="govuk-radios__input" id="forthwith-1" name="sentence[forthwith]" type="radio"
+                                value="Yes">
                             <label class="govuk-label govuk-radios__label" for="forthwith-1">
                                 Yes
                             </label>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="forthwith-2" name="sentence[forthwith]" type="radio" value="No">
+                            <input class="govuk-radios__input" id="forthwith-2" name="sentence[forthwith]" type="radio"
+                                value="No">
                             <label class="govuk-label govuk-radios__label" for="forthwith-2">
                                 No
                             </label>
@@ -34,9 +37,10 @@
                 <button type="submit" class="govuk-button" data-module="govuk-button">
                     Continue
                 </button>
-                <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="/{{data.prototypeVersion}}/save-court-case">
-                    Save as draft
-                </a>
+                <button class="govuk-button govuk-button--secondary" data-module="govuk-button"
+                    formaction="/{{data.prototypeVersion}}/save-court-case" method="post">
+                    Save as a draft
+                </button>
             </div>
         </form>
     </div>

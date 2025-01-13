@@ -22,7 +22,9 @@
                                 <label class="govuk-label govuk-date-input__label" for="tariff-length-years">
                                     Years
                                 </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="tariff-length-years" name="sentence[tariff-length-years]" type="text" inputmode="numeric">
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2"
+                                    id="tariff-length-years" name="sentence[tariff-length-years]" type="text"
+                                    inputmode="numeric">
                             </div>
                         </div>
                         <div class="govuk-date-input__item">
@@ -30,7 +32,9 @@
                                 <label class="govuk-label govuk-date-input__label" for="tariff-length-months">
                                     Months
                                 </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="tariff-length-months" name="sentence[tariff-length-months]" type="text" inputmode="numeric">
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2"
+                                    id="tariff-length-months" name="sentence[tariff-length-months]" type="text"
+                                    inputmode="numeric">
                             </div>
                         </div>
                         <div class="govuk-date-input__item">
@@ -38,7 +42,9 @@
                                 <label class="govuk-label govuk-date-input__label" for="tariff-length-weeks">
                                     Weeks
                                 </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="tariff-length-weeks" name="sentence[tariff-length-weeks]" type="text" inputmode="numeric">
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2"
+                                    id="tariff-length-weeks" name="sentence[tariff-length-weeks]" type="text"
+                                    inputmode="numeric">
                             </div>
                         </div>
                         <div class="govuk-date-input__item">
@@ -46,7 +52,9 @@
                                 <label class="govuk-label govuk-date-input__label" for="tariff-length-days">
                                     Days
                                 </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="tariff-length-days" name="sentence[tariff-length-days]" type="text" inputmode="numeric">
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2"
+                                    id="tariff-length-days" name="sentence[tariff-length-days]" type="text"
+                                    inputmode="numeric">
                             </div>
                         </div>
                     </div>
@@ -57,9 +65,10 @@
                 <button type="submit" class="govuk-button" data-module="govuk-button">
                     Continue
                 </button>
-                <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="/{{data.prototypeVersion}}/save-court-case">
-                    Save as draft
-                </a>
+                <button class="govuk-button govuk-button--secondary" data-module="govuk-button"
+                    formaction="/{{data.prototypeVersion}}/save-court-case" method="post">
+                    Save as a draft
+                </button>
             </div>
         </form>
     </div>

@@ -94,7 +94,9 @@
                     
                     <div class="offence-card sentence-card">
                         <div class="offence-card-offence-details">
+                            {% if sentence['count-number'] %}
                             <span class="govuk-body">Count {{ sentence['count-number'] }}</span>
+                            {% endif %}
                             <h4 class="govuk-heading-s">{{ sentence['offence-name'] }}
                                 {% if sentence['terror-related'] == 'Yes' %}
                                 <br><strong class="govuk-tag govuk-!-margin-top-2">
@@ -102,6 +104,7 @@
                                 </strong>
                                 {% endif %}</h4>
                             <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                {% if sentence['offence-start-date-day'] %}
                                 <div class="govuk-summary-list__row">
                                     <dt class="govuk-summary-list__key">
                                         Commited on
@@ -114,6 +117,7 @@
                                         {% endif %}
                                     </dd>
                                 </div>
+                                {% endif %}
                                 <div class="govuk-summary-list__row">
                                     <dt class="govuk-summary-list__key">
                                         Outcome
@@ -124,6 +128,7 @@
                                         </strong>{% endif %}
                                     </dd>
                                 </div>
+                                {% if sentence['sentence-type'] %}
                                 <div class="govuk-summary-list__row">
                                     <dt class="govuk-summary-list__key">
                                         Sentence type
@@ -132,6 +137,8 @@
                                         {{ sentence['sentence-type'] }}
                                     </dd>
                                 </div>
+                                {% endif %}
+                                {% if sentence['sentence-length-years'] %}
                                 <div class="govuk-summary-list__row">
                                     <dt class="govuk-summary-list__key">
                                         Sentence length
@@ -140,6 +147,7 @@
                                         {{ sentence['sentence-length-years'] }} years {{ sentence['sentence-length-months'] }} months {{ sentence['sentence-length-weeks'] }} weeks {{ sentence['sentence-length-days'] }} days
                                     </dd>
                                 </div>
+                                {% endif %}
                                 {% if sentence['licence-period-years'] %}
                                 <div class="govuk-summary-list__row">
                                     <dt class="govuk-summary-list__key">
@@ -150,6 +158,7 @@
                                     </dd>
                                 </div>
                                 {% endif %}
+                                {% if sentence['consecutive-concurrent'] %}
                                 <div class="govuk-summary-list__row">
                                     <dt class="govuk-summary-list__key">
                                         Consecutive or concurrent
@@ -164,6 +173,7 @@
                                         {% endif %}
                                     </dd>
                                 </div>
+                                {% endif %}
                             </dl>
                            {% if sentence['status'] == 'draft' %}
                            <p class="govuk-body govuk-!-margin-top-4 govuk-!-margin-bottom-2"><a href="{{ data.savedURL }}">Continue adding sentence information</a></p>
