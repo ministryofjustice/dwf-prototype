@@ -2182,6 +2182,7 @@ router.get(
 router.get("/:prototypeVersion/merged-cases-select", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   const mergedCases = req.session.data.appearance["merged-cases"];
+  console.log("Merged cases: " + mergedCases)
   if (mergedCases == "Yes") {
     res.redirect(
       `/${prototypeVersion}/court-cases/additional-information/select-merged-cases`
@@ -2193,10 +2194,10 @@ router.get("/:prototypeVersion/merged-cases-select", function (req, res) {
   }
 });
 
-router.get("/:prototypeVersion/select-merged-cases", function (req, res) {
+router.post("/:prototypeVersion/select-merged-cases", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   const mergedFrom = req.session.data.appearance["merged-from"];
-  console.log("Merged cases: " + mergedFrom.length);
+  console.log("Merged cases: " + + mergedFrom + mergedFrom.length);
   for (let i = 0; i < mergedFrom.length; i++) {
     let mergedCourtCase = req.session.data.courtCases[mergedFrom[i]];
     console.log("court case length: " + mergedCourtCase.appearances.length);
@@ -2205,22 +2206,15 @@ router.get("/:prototypeVersion/select-merged-cases", function (req, res) {
         mergedCourtCase.appearances[mergedCourtCase.appearances.length - 1]
           .sentences.length
     );
-    for (
-      var j = 0;
-      j <
-      mergedCourtCase.appearances[mergedCourtCase.appearances.length - 1]
-        .sentences.length;
-      j++
-    ) {
+    for (var j = 0; j < mergedCourtCase.appearances[mergedCourtCase.appearances.length - 1].sentences.length; j++) {
       console.log(
         "Offence: " +
           mergedCourtCase.appearances[mergedCourtCase.appearances.length - 1]
             .sentences[j]
       );
-      req.session.data.appearance.sentences.push(
-        mergedCourtCase.appearances[mergedCourtCase.appearances.length - 1]
-          .sentences[j]
-      );
+      req.session.data.appearance.sentences.push(mergedCourtCase.appearances[mergedCourtCase.appearances.length - 1].sentences[j]);
+      // let sentence = req.session.data.appearance.sentences[req.session.data.appearance.sentences - 1];
+      req.session.data.appearance.sentences[j]["merged-from"] = mergedCourtCase.appearances[mergedCourtCase.appearances.length - 1]['court-name'] + " on " + mergedCourtCase.appearances[mergedCourtCase.appearances.length - 1]['warrant-date-day'] + "/" + mergedCourtCase.appearances[mergedCourtCase.appearances.length - 1]['warrant-date-month'] + "/" + mergedCourtCase.appearances[mergedCourtCase.appearances.length - 1]['warrant-date-year']; 
     }
   }
   res.redirect(
