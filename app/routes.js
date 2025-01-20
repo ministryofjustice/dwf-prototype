@@ -2183,6 +2183,7 @@ router.get("/:prototypeVersion/merged-cases-select", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   const mergedCases = req.session.data.appearance["merged-cases"];
   console.log("Merged cases: " + mergedCases)
+  if(prototypeVersion < 22)
   if (mergedCases == "Yes") {
     res.redirect(
       `/${prototypeVersion}/court-cases/additional-information/select-merged-cases`
@@ -2191,7 +2192,17 @@ router.get("/:prototypeVersion/merged-cases-select", function (req, res) {
     res.redirect(
       `/${prototypeVersion}/court-cases/additional-information/check-answers`
     );
+  } else if (prototypeVersion >= 22) {
+    if (mergedCases == "Yes") {
+      res.redirect(
+        `/${prototypeVersion}/court-cases/add-a-sentence/select-merged-cases`
+      );
+    } else {
+      res.redirect(
+        `/${prototypeVersion}/court-cases/add-a-sentence/count-number`
+      );
   }
+}
 });
 
 router.post("/:prototypeVersion/select-merged-cases", function (req, res) {
@@ -2217,9 +2228,15 @@ router.post("/:prototypeVersion/select-merged-cases", function (req, res) {
       req.session.data.appearance.sentences[j]["merged-from"] = mergedCourtCase.appearances[mergedCourtCase.appearances.length - 1]['court-name'] + " on " + mergedCourtCase.appearances[mergedCourtCase.appearances.length - 1]['warrant-date-day'] + "/" + mergedCourtCase.appearances[mergedCourtCase.appearances.length - 1]['warrant-date-month'] + "/" + mergedCourtCase.appearances[mergedCourtCase.appearances.length - 1]['warrant-date-year']; 
     }
   }
+  if (prototypeVersion < 22){
   res.redirect(
     `/${prototypeVersion}/court-cases/additional-information/check-answers`
   );
+} else if (prototypeVersion >= 22){
+  res.redirect(
+    `/${prototypeVersion}/court-cases/add-a-sentence/check-answers-additional-information`
+  );
+}
 });
 
 router.get("/:prototypeVersion/update-outcome", function (req, res) {
