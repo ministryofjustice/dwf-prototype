@@ -7,7 +7,7 @@
             <span class="govuk-caption-l">Add offences</span>
             Check your answers 
         </h1>
-        {% if data.appearance.sentences.length > 0 %}
+        {% if (data.appearance.sentences.length > 0) or (data.appearance.offences.length > 0) %}
         <form class="form" action="check-answers" method="post">
         {% else %}
         <form class="form" action="/{{data.prototypeVersion}}/create-sentence?route=new-court-case" method="post">
