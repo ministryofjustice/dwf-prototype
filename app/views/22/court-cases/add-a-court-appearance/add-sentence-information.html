@@ -64,6 +64,16 @@
                                         </strong>{% endif %}
                                     </dd>
                                 </div>
+                                {% if offence["merged-from"] %}
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Merged from
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                    {{ offence['merged-from'] }}
+                                </dd>
+                            </div>
+                            {% endif %}
                             </dl>
                             {% if offence['outcome-changed'] != 'true' %}
                             <ul class="govuk-list govuk-!-margin-top-4 govuk-!-margin-bottom-2">
@@ -174,6 +184,16 @@
                                     </dd>
                                 </div>
                                 {% endif %}
+                                {% if sentence["merged-from"] %}
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Merged from
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                    {{ sentence['merged-from'] }}
+                                </dd>
+                            </div>
+                            {% endif %}
                             </dl>
                            {% if sentence['status'] == 'draft' %}
                            <p class="govuk-body govuk-!-margin-top-4 govuk-!-margin-bottom-2"><a href="{{ data.savedURL }}">Continue adding sentence information</a></p>

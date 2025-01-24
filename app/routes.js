@@ -348,9 +348,13 @@ router.post("/:prototypeVersion/new-court-name", function (req, res) {
         res.redirect(
           `/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`
         );
-      } else {
+      } else if (prototypeVersion < 22){
         res.redirect(
           `/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers`
+        );
+      } else {
+        res.redirect(
+          `/${prototypeVersion}/court-cases/add-a-court-appearance/tagged-bail`
         );
       }
     } else
@@ -1206,7 +1210,7 @@ router.post("/:prototypeVersion/persist-sentence", function (req, res) {
     if (path != "rts-new-offence") {
       req.session.data.appearance.offences.splice(req.session.data.index, 1);
       return res.redirect(
-        `/${prototypeVersion}/court-cases/save-court-case`
+        `/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`
       );
     }
     return res.redirect(
@@ -1620,10 +1624,10 @@ router.post(
         `/${prototypeVersion}/court-cases/add-a-sentence/select-consecutive-case`
       );
     } else if (consecToCase == "no") {
-      if (prototypeVersion <= 20) {
+      if (prototypeVersion >= 20) {
         if (
           req.session.data.appearance["no-count-numbers"] == "true" &&
-          req.session.data.appearance.sentences.length == 2
+          req.session.data.appearance.sentences.length >= 2
         ) {
           return res.redirect(
             `/${prototypeVersion}/court-cases/add-a-sentence/no-count-numbers-error`
@@ -2194,13 +2198,27 @@ router.get("/:prototypeVersion/merged-cases-select", function (req, res) {
     );
   } else if (prototypeVersion >= 22) {
     if (mergedCases == "Yes") {
+      if(req.session.data.appearance['warrant-type'] == "Remand")
+      {
+        res.redirect(
+          `/${prototypeVersion}/court-cases/add-an-offence/select-merged-cases`
+        );
+      } else {
       res.redirect(
         `/${prototypeVersion}/court-cases/add-a-sentence/select-merged-cases`
       );
-    } else {
+    }
+   } else {
+    if(req.session.data.appearance['warrant-type'] == "Remand")
+      {
+        res.redirect(
+          `/${prototypeVersion}/court-cases/add-an-offence/count-number`
+        );
+      } else {
       res.redirect(
         `/${prototypeVersion}/court-cases/add-a-sentence/count-number`
       );
+    }
   }
 }
 });
@@ -2225,7 +2243,7 @@ router.post("/:prototypeVersion/select-merged-cases", function (req, res) {
           console.log(
             "Offence: " +
               mergedCourtCase.appearances[mergedCourtCase.appearances.length - 1]
-                .offences[j]
+                .offences[j]['offence-name']
           );
           if (req.session.data.appearance.offences == undefined)
           {
@@ -2252,7 +2270,7 @@ router.post("/:prototypeVersion/select-merged-cases", function (req, res) {
       console.log(
         "Offence: " +
           mergedCourtCase.appearances[mergedCourtCase.appearances.length - 1]
-            .sentences[j]
+            .sentences[j]['offence-name']
       );
       req.session.data.appearance.sentences.push(mergedCourtCase.appearances[mergedCourtCase.appearances.length - 1].sentences[j]);
       // let sentence = req.session.data.appearance.sentences[req.session.data.appearance.sentences - 1];
@@ -2266,9 +2284,15 @@ router.post("/:prototypeVersion/select-merged-cases", function (req, res) {
     `/${prototypeVersion}/court-cases/additional-information/check-answers`
   );
 } else if (prototypeVersion >= 22){
+  if (req.session.data.appearance['warrant-type'] == "Remand"){
+    res.redirect(
+      `/${prototypeVersion}/court-cases/add-an-offence/check-answers-additional-information`
+    );
+  } else {
   res.redirect(
     `/${prototypeVersion}/court-cases/add-a-sentence/check-answers-additional-information`
   );
+}
 }
 });
 

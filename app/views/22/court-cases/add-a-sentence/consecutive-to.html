@@ -25,8 +25,6 @@
                             <label class="govuk-label govuk-radios__label" for="consecutive-concurrent">
                                 {% if sentence['count-number'] %}
                                 Count {{ sentence['count-number'] }}<br>
-                                {% else %}
-                                Count {{ loop.index }}<br>
                                 {% endif %}
                                 {{ sentence['offence-name'] }}<br>
                                 <span class="govuk-hint">Committed on {{ sentence['offence-start-date-day'] }}/{{

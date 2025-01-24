@@ -8,7 +8,11 @@
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
+                            {% if data.route == "appearance" %}
+                            <span class="govuk-caption-l">Update offence outcomes</span>
+                            {% else %}
                             <span class="govuk-caption-l">Add offences</span>
+                            {% endif %}
                             Is the conviction date the same for all offences on the warrant?
                         </h1>
                     </legend>

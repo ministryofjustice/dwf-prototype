@@ -13,7 +13,7 @@
               {% if data['no-count'] == "true" %}
               <h1 class="govuk-fieldset__heading">
                 <span class="govuk-caption-l">Add offences</span>
-                Enter the count number for {% if data.appearance.sentences == 0 %}the first offence{% else %} this offence{% endif %}
+                Enter the count number for {% if (data.appearance.sentences == 0) and (data.appearance.offences == 0) %}the first offence {% else %} this offence{% endif %}
               </h1>
               <p class="govuk-body-l govuk-!-margin-top-2">{{ data.sentence['offence-name'] }} committed on {{
                 data.sentence['offence-start-date-day'] }}/{{ data.sentence['offence-start-date-month'] }}/{{
@@ -34,7 +34,7 @@
               {% else %}
               <h1 class="govuk-fieldset__heading">
                 <span class="govuk-caption-l">Add offences</span>
-                Is there a count number for {% if data.appearance.sentences == 0 %}the first offence{% else %}this offence{% endif %}?
+                Enter the count number for {% if (data.appearance.sentences == 0) and (data.appearance.offences == 0) %}the first offence {% else %} this offence{% endif %}
               </h1>
               {% endif %}
             </legend>
