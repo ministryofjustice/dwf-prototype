@@ -1556,9 +1556,15 @@ router.get("/:prototypeVersion/add-sentence-information", function (req, res) {
   } else req.session.data.changeMade = 1;
   req.session.sentenceAdded = 0;
   req.session.data.appearance.offences[index]["outcome"] = outcome;
+  if (route == "new-court-case"){
+    res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`
+    );
+  } else {
   res.redirect(
     `/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`
   );
+}
 });
 
 router.post("/:prototypeVersion/offence-name-same", function (req, res) {
@@ -1873,6 +1879,19 @@ router.post(
     const sentenceLengthMismatch =
       req.session.data.appearance["sentence-length-mismatch"];
     console.log("Sentence length mismatch: " + sentenceLengthMismatch);
+    if(prototypeVersion >= 22){
+      if (route == "new-court-case") {
+          return res.redirect(
+            `/${prototypeVersion}/court-cases/add-a-court-case/task-list`
+          );
+      }
+      else if (route == "remand-to-sentence") {
+          res.redirect(
+            `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
+          );
+      }
+    }
+    else {
     if (route == "new-court-case") {
       if (sentenceLengthMismatch == "yes") {
         return res.redirect(
@@ -1895,6 +1914,7 @@ router.post(
         );
       }
     }
+  }
   }
 );
 
@@ -2227,6 +2247,10 @@ router.post("/:prototypeVersion/select-merged-cases", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   const mergedFrom = req.session.data.appearance["merged-from"];
   console.log("Merged cases: " + + mergedFrom + mergedFrom.length);
+  req.session.data.courtCases[mergedFrom]["status"] = "inactive"
+  req.session.data.courtCases[mergedFrom]["merged-with"] = req.session.data.appearance["court-case-ref"] + " at " + req.session.data.appearance["court-name"] + " on " + req.session.data.appearance["warrant-date-day"] + "/" + req.session.data.appearance["warrant-date-month"] + "/" + req.session.data.appearance["warrant-date-year"]
+  console.log(req.session.data.courtCases[mergedFrom]["status"])
+  console.log(req.session.data.courtCases[mergedFrom]["merged-with"])
   for (let i = 0; i < mergedFrom.length; i++) {
     let mergedCourtCase = req.session.data.courtCases[mergedFrom[i]];
     console.log("Court case length: " + mergedCourtCase.appearances.length);

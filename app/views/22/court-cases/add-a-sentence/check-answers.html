@@ -310,6 +310,15 @@
                             </div>
                             {% endif %}
                     </dl>
+                    {% if offence['outcome-changed'] != 'true' %}
+                            <ul class="govuk-list govuk-!-margin-top-4 govuk-!-margin-bottom-2">
+                            {% if offence['status'] == 'draft' %}
+                            <a href="{{data.savedURL}}">Continue updating outcome</a></li>
+                            {% else %}
+                                <li><a href="/{{data.prototypeVersion}}/update-outcome?index={{loop.index0}}&edit=false&route=new-court-case">Update outcome</a></li>
+                            {% endif %}
+                            </ul>
+                            {% endif %}
                     {% if offence['status'] == 'draft' %}
                         <p class="govuk-!-body govuk-!-margin-top-3 govuk-!-margin-bottom-1"><a href="{{ data.offence['saved-from'] }}?index={{ loop.index }}">Continue adding offence details</a></p>
                         {% endif %}

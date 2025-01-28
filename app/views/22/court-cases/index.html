@@ -230,7 +230,7 @@
                                 <p class="govuk-body govuk-!-margin-bottom-2">{{ lastAppearance['overall-case-outcome'] }}</p>
                             </div>
                             <div class="govuk-grid-column-full govuk-!-margin-top-2">
-                                {% if (lastAppearance.offences != null) and (lastAppearance.sentences == null) %}
+                                {% if (lastAppearance.offences) and (lastAppearance.sentences == null) %}
                                         <!-- <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Offences</h3> -->
                                         <details class="govuk-details filter white show-toggle govuk-!-margin-bottom-0">
                                             <summary class="govuk-details__summary">
@@ -269,7 +269,7 @@
                                                 </div>
                                                 {% endfor %}
                                         </details>
-                                        {% elif (lastAppearance.sentences != null) and (lastAppearance.offences == null) %}
+                                        {% elif (lastAppearance.sentences) and (lastAppearance.offences == null) %}
                                         <!-- <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Offences</h3> -->
                                         <details class="govuk-details filter white show-toggle govuk-!-margin-bottom-0">
                                             <summary class="govuk-details__summary">
@@ -441,11 +441,11 @@
                                     </div>
                                     {% endfor %}
                                         </details>
-                    {% elif (lastAppearance.offences != null) and (lastAppearance.sentences != null) %}
+                    {% elif (lastAppearance.sentences) and (lastAppearance.offences) %}
                     <details class="govuk-details filter white show-toggle govuk-!-margin-bottom-0">
                         <summary class="govuk-details__summary">
                             <span class="govuk-details__summary-text">
-                                offences ({{ lastAppearance.offences.length + lastAppearance.sentences.length }})
+                                offences ({{ (lastAppearance.offences.length) + (lastAppearance.sentences.length) }})
                             </span>
                         </summary>
                         <div class="govuk-details__text">
@@ -669,7 +669,7 @@
                 {% endif %}
             </div>
         </div>
-        <!-- <nav class="govuk-pagination" role="navigation" aria-label="Pagination">
+        <nav class="govuk-pagination govuk-!-margin-top-6" role="navigation" aria-label="Pagination">
             <ul class="govuk-pagination__list">
                 <li class="govuk-pagination__item govuk-pagination__item--current">
                     <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 1" aria-current="page">
@@ -692,7 +692,7 @@
                         <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
                     </svg></a>
             </div>
-        </nav> -->
+        </nav>
     </div>
     <div class="govuk-grid-column-one-third">
         <div class="actions-list">
