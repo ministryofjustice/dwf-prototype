@@ -449,35 +449,7 @@
                             </span>
                         </summary>
                         <div class="govuk-details__text">
-                            {% for offence in lastAppearance.offences %}
-                            <div class="offence-card">
-                                <div class="offence-card-offence-details">
-                                    <h4 class="govuk-heading-s">{{ offence['offence-name'] }}</h4>
-                                    <dl class="govuk-summary-list govuk-summary-list--no-border">
-                                        <div class="govuk-summary-list__row">
-                                            <dt class="govuk-summary-list__key">
-                                                Commited on
-                                            </dt>
-                                            <dd class="govuk-summary-list__value">
-                                                {{ offence['offence-start-date-day'] }}/{{ offence['offence-start-date-month'] }}/{{ offence['offence-start-date-year'] }}
-                                                {% if offence['offence-end-date-day'] > 0 %}
-                                                to
-                                                {{ offence['offence-end-date-day'] }}/{{ offence['offence-end-date-month'] }}/{{ offence['offence-end-date-year'] }}
-                                                {% endif %}
-                                            </dd>
-                                        </div>
-                                        <div class="govuk-summary-list__row">
-                                            <dt class="govuk-summary-list__key">
-                                                Outcome
-                                            </dt>
-                                            <dd class="govuk-summary-list__value">
-                                                {{ offence['outcome'] }}
-                                            </dd>
-                                        </div>
-                                    </dl>
-                                </div>
-                            </div>
-                            {% endfor %}
+                            <h3 class="govuk-heading-s govuk-!-margin-bottom-4">Offences with custodial outcomes</h3>
                             {% for sentence in lastAppearance.sentences %}
                                     <div class="offence-card sentence-card">
                                         <div class="offence-card-offence-details">
@@ -640,6 +612,36 @@
                                         </div>
                                     </div>
                                     {% endfor %}
+                                    <h3 class="govuk-heading-s govuk-!-margin-top-6 govuk-!-margin-bottom-4">Offences with non-custodial outcomes</h3>
+                                    {% for offence in lastAppearance.offences %}
+                            <div class="offence-card">
+                                <div class="offence-card-offence-details">
+                                    <h4 class="govuk-heading-s">{{ offence['offence-name'] }}</h4>
+                                    <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                        <div class="govuk-summary-list__row">
+                                            <dt class="govuk-summary-list__key">
+                                                Commited on
+                                            </dt>
+                                            <dd class="govuk-summary-list__value">
+                                                {{ offence['offence-start-date-day'] }}/{{ offence['offence-start-date-month'] }}/{{ offence['offence-start-date-year'] }}
+                                                {% if offence['offence-end-date-day'] > 0 %}
+                                                to
+                                                {{ offence['offence-end-date-day'] }}/{{ offence['offence-end-date-month'] }}/{{ offence['offence-end-date-year'] }}
+                                                {% endif %}
+                                            </dd>
+                                        </div>
+                                        <div class="govuk-summary-list__row">
+                                            <dt class="govuk-summary-list__key">
+                                                Outcome
+                                            </dt>
+                                            <dd class="govuk-summary-list__value">
+                                                {{ offence['outcome'] }}
+                                            </dd>
+                                        </div>
+                                    </dl>
+                                </div>
+                            </div>
+                            {% endfor %}
                     </details>
 
 
