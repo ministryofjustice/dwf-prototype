@@ -121,6 +121,9 @@
                         <p class="govuk-body govuk-!-margin-top-2">The appearance information for this court case has been saved as a draft.</p>
                             <p class="govuk-body"><a href="add-a-court-case/task-list?courtCaseIndex={{loop.revindex0}}">Continue adding appearance information</a></p>
                         {% else %}
+                        {% if (courtCase['status'] == 'inactive') and (courtCase['merged-with']) %}
+                        <div class="govuk-inset-text govuk-!-margin-top-2">This court case has been merged with {{ courtCase['merged-with'] }}</div>
+                         {% endif %}       
                         <dl class="govuk-summary-list">
                             <div class="govuk-summary-list__row">
                                 <dt class="govuk-summary-list__key">
