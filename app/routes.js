@@ -1703,8 +1703,12 @@ router.post(
     var addSentenceInformationComplete = 1;
     var offencesComplete = 1;
     const route = req.session.data.route;
+    if (req.session.data.appearance.offences){
     console.log("Offences: " + req.session.data.appearance.offences.length)
-    console.log("Sentences: " + req.session.data.appearance.sentences.length)
+    }
+    if (req.session.data.appearance.sentences){
+      console.log("Sentences: " + req.session.data.appearance.sentences.length)
+      }
     if (route == "new-court-case") {
       if (warrantType == "Remand") {
         req.session.data.offencesComplete = offencesComplete;
