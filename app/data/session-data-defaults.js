@@ -157,6 +157,10 @@ module.exports = {
                     "overall-sentence-length-months": "0",
                     "overall-sentence-length-weeks": "0",
                     "overall-sentence-length-days": "0",
+                    "total-sentence-length-years" : "4",
+                    "total-sentence-length-months" : "0",
+                    "total-sentence-length-weeks" : "0",
+                    "total-sentence-length-days" : "0",
                     // "status": ["saved","mismatch"],
                     "sentences": [{
                             "count-number": "",
@@ -595,6 +599,59 @@ module.exports = {
 //         {
 //             appearances: [
 //                 {
+//                     "court-case-ref": "T20210182",
+//                     "warrant-type": "Remand",
+//                     "overall-case-outcome": "Commit to Crown Court for Sentence",
+//                     "warrant-date-day": "15",
+//                     "warrant-date-month": "11",
+//                     "warrant-date-year": "2021",
+//                     "next-court-date-set": "Yes",
+//                     "next-court-date-day": "21",
+//                     "next-court-date-month": "12",
+//                     "next-court-date-year": "2021",
+//                     "next-court-time": "10:00",
+//                     "next-court-name": "Northampton Crown Court",
+//                     "court-name": "Northampton Crown Court",
+//                     "offences": [
+//                         {
+//                             "offence-start-date-day": "01",
+//                             "offence-start-date-month": "07",
+//                             "offence-start-date-year": "2018",
+//                             "offence-code": "MD71130",
+//                             "offence-name": "MD71130 - Supply a controlled drug of Class A - Cocaine",
+//                             "outcome": "Commit to Crown Court for Sentence"
+//                         },
+//                         {
+//                             "offence-start-date-day": "01",
+//                             "offence-start-date-month": "07",
+//                             "offence-start-date-year": "2018",
+//                             "offence-code": "MD71131",
+//                             "offence-name": "MD71131 - Supply a controlled drug of Class A - Heroin",
+//                             "outcome": "Commit to Crown Court for Sentence"
+//                         },
+//                         {
+//                             "offence-start-date-day": "10",
+//                             "offence-start-date-month": "08",
+//                             "offence-start-date-year": "2020",
+//                             "offence-code": "MD71231",
+//                             "offence-name": "MD71231 - Possess with intent to supply a controlled drug of Class A - Heroin",
+//                             "outcome": "Commit to Crown Court for Sentence"
+//                         },
+//                         {
+//                             "offence-start-date-day": "10",
+//                             "offence-start-date-month": "08",
+//                             "offence-start-date-year": "2020",
+//                             "offence-code": "PC02021",
+//                             "offence-name": "PC02021 - Acquire / use / possess criminal property",
+//                             "outcome": "Commit to Crown Court for Sentence"
+//                         }
+//                     ]
+//                 }
+//             ]
+//         },
+//         {
+//             appearances: [
+//                 {
 //                     "court-case-ref": "T20207250",
 //                     "warrant-type": "Remand",
 //                     "overall-case-outcome": "Commit to Crown Court for trial in custody",
@@ -616,8 +673,8 @@ module.exports = {
 //                             "offence-end-date-day": "",
 //                             "offence-end-date-month": "",
 //                             "offence-end-date-year": "",
-//                             "offence-code": [],
-//                             "offence-name": "Manslaughter",
+//                             "offence-code": "COML022",
+//                             "offence-name": "COML022 - Manslaughter",
 //                             "outcome": "Commit to Crown Court for trial in custody"
 //                         }
 //                     ]
@@ -644,8 +701,8 @@ module.exports = {
 //                             "offence-end-date-day": "",
 //                             "offence-end-date-month": "",
 //                             "offence-end-date-year": "",
-//                             "offence-code": [],
-//                             "offence-name": "Manslaughter",
+//                             "offence-code": "COML022",
+//                             "offence-name": "COML022 - Manslaughter",
 //                             "outcome": "Commit to Crown Court for trial in custody"
 //                         }
 //                     ]
@@ -672,61 +729,45 @@ module.exports = {
 //                             "offence-end-date-day": "",
 //                             "offence-end-date-month": "",
 //                             "offence-end-date-year": "",
-//                             "offence-code": [],
-//                             "offence-name": "Manslaughter",
+//                             "offence-code": "COML022",
+//                             "offence-name": "COML022 - Manslaughter",
 //                             "outcome": "Commit to Crown Court for trial in custody"
 //                         }
 //                     ]
 //                 },
 //                 {
 //                     "court-case-ref": "T20207250",
-//                     "warrant-type": "Sentencing",
-//                     "overall-case-outcome": "Imprisonment",
-//                     "warrant-date-day": "21",
-//                     "warrant-date-month": "12",
+//                     "warrant-type": "Remand",
+//                     "overall-case-outcome": "Commit to Crown Court for trial in custody",
+//                     "warrant-date-day": "11",
+//                     "warrant-date-month": "11",
 //                     "warrant-date-year": "2021",
+//                     "next-court-date-set": "Yes",
+//                     "next-court-date-day": "18",
+//                     "next-court-date-month": "11",
+//                     "next-court-date-year": "2021",
+//                     "next-court-time": "10:00",
+//                     "next-court-name": "Northampton Crown Court",
 //                     "court-name": "Northampton Crown Court",
-//                     "total-custodial-period-years": 11,
-//                     "sentences": [
+//                     "offences": [
 //                         {
-//                             "conviction-date-day": "21",
-//                             "conviction-date-month": "12",
-//                             "conviction-date-year": "2021",
 //                             "offence-start-date-day": "05",
 //                             "offence-start-date-month": "12",
 //                             "offence-start-date-year": "2018",
-//                             "offence-code": [],
-//                             "offence-name": "Manslaughter",
-//                             "outcome": "Imprisonment",
-//                             "sentence-type": "SDS",
-//                             "sentence-length-months": 90,
-//                             "consecutive-concurrent": "Forthwith"
-//                         },
-//                         {
-//                             "conviction-date-day": "21",
-//                             "conviction-date-month": "12",
-//                             "conviction-date-year": "2021",
-//                             "offence-start-date-day": "01",
-//                             "offence-start-date-month": "07",
-//                             "offence-start-date-year": "2018",
-//                             "offence-code": [],
-//                             "offence-name": "Supply a controlled drug of Class A - Cocaine",
-//                             "outcome": "Imprisonment",
-//                             "sentence-type": "SDS",
-//                             "sentence-length-months": 42,
-//                             "consecutive-concurrent": "Consecutive to offence 1"
+//                             "offence-end-date-day": "",
+//                             "offence-end-date-month": "",
+//                             "offence-end-date-year": "",
+//                             "offence-code": "COML022",
+//                             "offence-name": "COML022 - Manslaughter",
+//                             "outcome": "Commit to Crown Court for trial in custody"
 //                         }
 //                     ]
-//                 }
-//             ]
-//         },
-//         {
-//             appearances: [
+//                 },
 //                 {
-//                     "court-case-ref": "T20210182",
+//                     "court-case-ref": "T20207250",
 //                     "warrant-type": "Remand",
 //                     "overall-case-outcome": "Commit to Crown Court for Sentence",
-//                     "warrant-date-day": "15",
+//                     "warrant-date-day": "18",
 //                     "warrant-date-month": "11",
 //                     "warrant-date-year": "2021",
 //                     "next-court-date-set": "Yes",
@@ -738,19 +779,14 @@ module.exports = {
 //                     "court-name": "Northampton Crown Court",
 //                     "offences": [
 //                         {
-//                             "offence-start-date-day": "01",
-//                             "offence-start-date-month": "07",
+//                             "offence-start-date-day": "05",
+//                             "offence-start-date-month": "12",
 //                             "offence-start-date-year": "2018",
-//                             "offence-code": [],
-//                             "offence-name": "Supply a controlled drug of Class A - Cocaine",
-//                             "outcome": "Commit to Crown Court for Sentence"
-//                         },
-//                         {
-//                             "offence-start-date-day": "01",
-//                             "offence-start-date-month": "07",
-//                             "offence-start-date-year": "2018",
-//                             "offence-code": [],
-//                             "offence-name": "Supply a controlled drug of Class A - Heroin",
+//                             "offence-end-date-day": "",
+//                             "offence-end-date-month": "",
+//                             "offence-end-date-year": "",
+//                             "offence-code": "COML022",
+//                             "offence-name": "COML022 - Manslaughter",
 //                             "outcome": "Commit to Crown Court for Sentence"
 //                         }
 //                     ]

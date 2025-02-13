@@ -28,3 +28,10 @@ addFilter('inactiveCase', function(arr) {
 addFilter('activeCase', function(arr) {
     return arr.filter(courtCase => courtCase['status'] != 'inactive')
 })
+
+// addFilter('hasMerged', function(arr) {
+//     if(arr) {
+//          return arr.filter(appearance => appearance['merged-from-ref'] !== undefined)
+//     }
+//     return false
+// })

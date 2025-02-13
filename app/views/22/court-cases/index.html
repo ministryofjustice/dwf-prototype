@@ -11,7 +11,7 @@
     <div class="govuk-grid-column-two-thirds">
         {% if data.courtCases | length %}
         <div class="govuk-grid-row">
-            <div class="govuk-grid-column-full govuk-!-margin-bottom-6">
+            <div class="govuk-grid-column-full govuk-!-margin-bottom-0">
                 <div class="moj-search govuk-!-margin-bottom-6">
                     <form action="#" method="post">
                         <div class="govuk-form-group">
@@ -28,86 +28,44 @@
                     </button>
                     </form>
                 </div>
-                <details class="govuk-details filter govuk-!-margin-bottom-2">
-                    <summary class="govuk-details__summary">
-                      <span class="govuk-details__summary-text">
-                        Filter and sort
-                      </span>
-                      <div class="gouk-body govuk-!-font-weight-bold results">{{ data.courtCases.length }} court cases</div>
-                    </summary>
-                    <div class="govuk-details__text no-left-border">
-                        <details class="hods-expandable-banner">
-                            <summary class="hods-expandable-banner__summary">
-                              <span class="filter-heading">Sort by</span>
-                            </summary>
-                            <div class="hods-expandable-banner__text">
-                                <div class="govuk-form-group govuk-!-margin-bottom-0">
-                                    <fieldset class="govuk-fieldset">
-                                      <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
-                                        <div class="govuk-radios__item">
-                                          <input class="govuk-radios__input" id="changedName" name="changedName" type="radio" value="month" checked>
-                                          <label class="govuk-label govuk-radios__label" for="changedName">
-                                            Court appearance (most recent)
-                                          </label>
-                                        </div>
-                                        <div class="govuk-radios__item">
-                                          <input class="govuk-radios__input" id="changedName-2" name="changedName" type="radio" value="year">
-                                          <label class="govuk-label govuk-radios__label" for="changedName-2">
-                                            Court appearance (oldest)
-                                          </label>
-                                        </div>
-                                      </div>
-                                    </fieldset>
-                                  </div>
-                            </div>
-                          </details>
-                          <details class="hods-expandable-banner">
-                            <summary class="hods-expandable-banner__summary">
-                                <span class="filter-heading">Status</span>
-                            </summary>
-                            <div class="hods-expandable-banner__text">
-                                <div class="govuk-form-group govuk-!-margin-bottom-0">
-                                    <fieldset class="govuk-fieldset">
-                                      <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
-                                        <div class="govuk-checkboxes__item">
-                                          <input class="govuk-checkboxes__input" id="organisation" name="organisation" type="checkbox" value="hmrc" checked>
-                                          <label class="govuk-label govuk-checkboxes__label" for="organisation">
-                                            Show active cases
-                                          </label>
-                                        </div>
-                                        <div class="govuk-checkboxes__item">
-                                          <input class="govuk-checkboxes__input" id="organisation-2" name="organisation" type="checkbox" value="employment-tribunal" checked>
-                                          <label class="govuk-label govuk-checkboxes__label" for="organisation-2">
-                                            Show inactive cases
-                                          </label>
-                                        </div>
-                                      </div>
-                                    </fieldset>
-                                  </div>
-                            </div>
-                          </details>
-                          <div class="apply-filter"><button class="govuk-button">Apply</button></div> 
-                    </div>
-                  </details>
-                  <hr class="govuk-section-break govuk-section-break--visible">
+                <div class="govuk-form-group govuk-!-margin-bottom-0">
+                    <fieldset class="govuk-fieldset">
+                      <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+                        <div class="govuk-checkboxes__item">
+                          <input class="govuk-checkboxes__input" id="organisation" name="organisation" type="checkbox" value="hmrc" checked>
+                          <label class="govuk-label govuk-checkboxes__label" for="organisation">
+                            Show active cases
+                          </label>
+                        </div>
+                        <div class="govuk-checkboxes__item">
+                          <input class="govuk-checkboxes__input" id="organisation-2" name="organisation" type="checkbox" value="employment-tribunal" checked>
+                          <label class="govuk-label govuk-checkboxes__label" for="organisation-2">
+                            Show inactive cases
+                          </label>
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+                  <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+                  <div class="govuk-body govuk-!-font-weight-bold govuk-!-margin-top-6">Showing {{ data.courtCases.length }} of {{ data.courtCases.length }} court cases</div>
             </div>
         </div>
         {% endif %}
         <div class="govuk-grid-row">
-            <div class="govuk-grid-column-full govçuk-!-margin-top-4">
+            <div class="govuk-grid-column-full">
                 {% if data.courtCases | length %}
                 {% for courtCase in data.courtCases | reverse %}
                 {% set lastAppearance = courtCase.appearances | last %}
                 {% set courtCaseIndex = loop.revindex0 %}
                 <div class="govuk-summary-card">
                     <div class="govuk-summary-card__title-wrapper">
-                        <h2 class="govuk-summary-card__title">{{ lastAppearance['court-case-ref'] }} <span class="govuk-body">at</span> {{ lastAppearance['court-name']}}{% if (courtCase.appearances.length == 1) and (lastAppearance['status'] == 'draft') %} <strong class="govuk-tag govuk-tag--blue govuk-!-margin-left-2">Draft</strong>{% endif %}</h2>
+                        <h2 class="govuk-summary-card__title">{{ lastAppearance['court-case-ref'] }} <span class="govuk-body">and</span> {% if lastAppearance['merged-from-case'] %}{{ lastAppearance['merged-from-case'] }}{% endif %} <span class="govuk-body">at</span> {{ lastAppearance['court-name']}}{% if (courtCase.appearances.length == 1) and (lastAppearance['status'] == 'draft') %} <strong class="govuk-tag govuk-tag--blue govuk-!-margin-left-2">Draft</strong>{% endif %}</h2>
                         <ul class="govuk-summary-card__actions">
                             <li class="govuk-summary-card__action">
                                 {% if courtCase['source'] == "NOMIS" %}
                                 <span class="moj-badge moj-badge--grey">NOMIS - read only</span>
                                 {% elif (courtCase.appearances.length == 1) and (lastAppearance['status'] == 'draft') %}
-                                <a class="govuk-link govuk-link--no-visited-state" href="">Delete</a>
+                                <a class="govuk-link govuk-link--no-visited-state" href="confirm-delete-draft-court-case?courtCaseIndex={{courtCaseIndex}}">Delete</a>
                                 {% elif (courtCase['status'] == 'inactive') %}
                                 <strong class="govuk-tag govuk-tag--blue">Inactive</strong>
                                 {% else %}
@@ -131,6 +89,10 @@
                                 </dt>
                                 <dd class="govuk-summary-list__value">
                                     {{ courtCase.appearances | unique("court-case-ref") | join(", ") }}
+                                    <br>
+                                    {% if lastAppearance['merged-from-case'] %}
+                                   {{ lastAppearance['merged-from-case'] }} (merged) 
+                                   {% endif %}
                                 </dd>
                             </div>
                             <div class="govuk-summary-list__row">
@@ -138,7 +100,7 @@
                                     First day in custody
                                 </dt>
                                 <dd class="govuk-summary-list__value">
-                                    {{ courtCase.appearances[0]['warrant-date-day'] }}/{{ courtCase.appearances[0]['warrant-date-month'] }}/{{ courtCase.appearances[0]['warrant-date-year'] }}
+                                    {{ courtCase.appearances[0]['warrant-date-day'] }}/{{ courtCase.appearances[0]['warrant-date-month'] }}/{{ courtCase.appearances[0]['warrant-date-year'] }} ({{ courtCase.appearances[0]['warrant-type'] }})
                                 </dd>
                             </div>
                             <div class="govuk-summary-list__row">
@@ -221,16 +183,18 @@
                                 <p class="govuk-body govuk-!-margin-bottom-2">{{ lastAppearance['court-case-ref'] }}</p>
                                 <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Warrant date</h3>
                                 <p class="govuk-body govuk-!-margin-bottom-2">{{ lastAppearance['warrant-date-day'] }}/{{ lastAppearance['warrant-date-month'] }}/{{ lastAppearance['warrant-date-year'] }}</p>
-                                {% if lastAppearance['overall-case-outcome'] == 'Imprisonment' %}
-                                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Conviction date</h3>
-                                <p class="govuk-body govuk-!-margin-bottom-2">{{ lastAppearance['overall-conviction-date-day'] }}/{{ lastAppearance['overall-conviction-date-month'] }}/{{ lastAppearance['overall-conviction-date-year'] }}</p>
-                                {% endif %}
+                                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Outcome</h3>
+                                <p class="govuk-body govuk-!-margin-bottom-2">{{ lastAppearance['overall-case-outcome'] }}</p>
                             </div>
                             <div class="govuk-grid-column-two-thirds">
                                 <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Location</h3>
                                 <p class="govuk-body govuk-!-margin-bottom-2">{{ lastAppearance['court-name'] }}</p>
-                                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Outcome</h3>
-                                <p class="govuk-body govuk-!-margin-bottom-2">{{ lastAppearance['overall-case-outcome'] }}</p>
+                                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Warrant type</h3>
+                                <p class="govuk-body govuk-!-margin-bottom-2">{{ lastAppearance['warrant-type'] }}</p>
+                                {% if lastAppearance['overall-case-outcome'] == 'Imprisonment' %}
+                                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Conviction date</h3>
+                                <p class="govuk-body govuk-!-margin-bottom-2">{{ lastAppearance['overall-conviction-date-day'] }}/{{ lastAppearance['overall-conviction-date-month'] }}/{{ lastAppearance['overall-conviction-date-year'] }}</p>
+                                {% endif %}
                             </div>
                             <div class="govuk-grid-column-full govuk-!-margin-top-2">
                                 {% if (lastAppearance.offences) and (lastAppearance.sentences == null) %}
@@ -646,23 +610,12 @@
                             </div>
                             {% endfor %}
                     </details>
-
-
-
-
-
-
-
-
-
-
-
                     {% endif %}
                             </div>
                         </div>
                         
                         <hr class="govuk-section-break govuk-!-margin-top-4 govuk-section-break--visible">
-                        <p class="govuk-body govuk-!-margin-top-6"><a class="govuk-link--no-visited-state govuk-!-font-weight-bold" href="court-case-detail?courtCaseIndex={{loop.revindex0}}">{% if (courtCase['source'] == "nomis") or (courtCase['status'] == "inactive") %}View all appearances{% else %}View and edit all appearances ({% if lastAppearance['status'] == 'draft' %}{{ courtCase.appearances.length - 1 }} and 1 draft {% else %}{{ courtCase.appearances.length}}{% endif %}){% endif %}</a></p>
+                        <p class="govuk-body govuk-!-margin-top-6"><a class="govuk-link--no-visited-state govuk-!-font-weight-bold" href="court-case-detail?courtCaseIndex={{loop.revindex0}}">{% if (courtCase['source'] == "nomis") or (courtCase['status'] == "inactive") %}View all appearances{% else %}View and edit all appearances {% endif %} for this court case ({% if lastAppearance['status'] == 'draft' %}{{ courtCase.appearances.length - 1 }} and 1 draft {% else %}{{ courtCase.appearances.length}}{% endif %})</a></p>
                         {% endif %}
                     </div>
                 </div>

@@ -6,6 +6,10 @@
         <form class="form"
             action="/{{data.prototypeVersion}}/add-sentence-information?route=new-court-case&index={{data.index}}"
             method="post">
+            {% elif (data.route == "new-court-case") or (data.route == "edit-appearance") %}
+            <form class="form"
+            action="/{{data.prototypeVersion}}/add-sentence-information?route=edit-appearance&index={{data.index}}"
+            method="post">
             {% else %}
             <form class="form"
                 action="/{{data.prototypeVersion}}/add-sentence-information?route=remand-to-sentence&index={{data.index}}"
@@ -15,18 +19,22 @@
                     <fieldset class="govuk-fieldset">
                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                             <h1 class="govuk-fieldset__heading">
-                                {% if data.route == "new-court-case" %}
+                                {% if (data.route == "new-court-case") or (data.route == "edit-appearance") %}
                                 <span class="govuk-caption-l">Add offences</span>
+                                What is the outcome?
                                 {% else %}
                                 <span class="govuk-caption-l">Update offence outcomes</span>
-                                {% endif %}
                                 What is the new outcome for this offence?
+                                {% endif %}
+                                
                             </h1>
                         </legend>
-                        <p class="govuk-body-l">{{ data.appearance.offences[data.index]['offence-name'] }} committed on
-                            {{ data.appearance.offences[data.index]['offence-start-date-day'] }}/{{
-                            data.appearance.offences[data.index]['offence-start-date-month'] }}/{{
-                            data.appearance.offences[data.index]['offence-start-date-year'] }}</p>
+                        {% if data.route != "edit-appearance" %} 
+                            <p class="govuk-body-l">{{ data.appearance.offences[data.index]['offence-name'] }} committed on
+                                {{ data.appearance.offences[data.index]['offence-start-date-day'] }}/{{
+                                data.appearance.offences[data.index]['offence-start-date-month'] }}/{{
+                                data.appearance.offences[data.index]['offence-start-date-year'] }}</p>
+                            {% endif %}
                         {% if data.appearance['warrant-type'] == 'Remand' %}
                         <div class="govuk-radios" data-module="govuk-radios">
                             <div class="govuk-radios__item">

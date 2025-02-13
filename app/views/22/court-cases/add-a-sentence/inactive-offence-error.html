@@ -9,33 +9,18 @@
             <form class="form" action="terror-related" method="post">
                 {% endif %}
                 <div class="govuk-form-group">
-                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                        <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add offences</span>
-                            Confirm the offence
-                        </h1>
-                    </legend>
-                    {% if data['sentence']['offence-active'] == "inactive" %}
-                    <div class="govuk-inset-text">This offence is no longer active and may have been recategorised or replaced. Check that you have used the correct offence code.</div>
-                    <div class="govuk-warning-text govuk-!-margin-top-6 govuk-!-margin-bottom-3">
-                        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-                        <strong class="govuk-warning-text__text">
-                          <span class="govuk-visually-hidden">Warning</span>
-                          This offence {{ data['sentence']['offence-name'] }} is no longer active 
-                        </strong>
-                      </div>
-                    {% endif %}
-                    <dl class="govuk-summary-list govuk-summary-list--no-border">
+                    <h1 class="govuk-heading-l">
+                        <span class="govuk-caption-l">Add offences</span>
+                        You have entered an inactive offence
+                    </h1>
+                    <p class="govuk-body">The offence <strong>{{ data['sentence']['offence-code'] }} {{ data['sentence']['offence-name'] }}</strong> was made inactive on <strong>31/08/2007</strong>.</p>
+                    <!-- <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-4">
                         <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key dwf-confirm-offence-key">
                                 Offence code
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                {{ data['sentence']['offence-code'] }} {% if data['sentence']['offence-active'] == "inactive" %}<td class="govuk-table__cell">
-                                    <strong class="govuk-tag govuk-tag--grey govuk-!-margin-left-2">
-                                      Inactive
-                                    </strong>
-                                  </td>{% endif %}
+                                {{ data['sentence']['offence-code'] }} 
                             </dd>
                         </div>
                         <div class="govuk-summary-list__row">
@@ -71,20 +56,36 @@
                             </dd>
                         </div>
                         {% endif %}
-                    </dl>
+                    </dl> -->
+                    <p class="govuk-body">Selecting this offence could impact your release dates calcuation.</p>
+                    <fieldset class="govuk-fieldset govuk-!-margin-top-6"></fieldset>
+                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                          <h1 class="govuk-fieldset__heading">
+                            Do you want to continue with this offence?
+                          </h1>
+                        </legend>
+                        <div class="govuk-radios" data-module="govuk-radios">
+                          <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="sentence-length-mismatch" name="appearance[sentence-length-mismatch]" type="radio" value="yes">
+                            <label class="govuk-label govuk-radios__label" for="sentence-length-mismatch">
+                                Yes, continue with this inactive offence    
+                            </label>
+                          </div>
+                          <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="sentence-length-mismatch-2" name="appearance[sentence-length-mismatch]" type="radio" value="no">
+                            <label class="govuk-label govuk-radios__label" for="sentence-length-mismatch-2">
+                                No, go back and change the offence
+                            </label>
+                          </div>
+                        </div>
+                      </fieldset>
                 </div>
                 <input type="hidden" name="sentence[offence-name]" value="{{ data.sentence['offence-name']}}" />
                 <div class="govuk-button-group">
                     <button type="submit" class="govuk-button" data-module="govuk-button">
-                        Confirm and continue
-                    </button>
-                    <button class="govuk-button govuk-button--secondary" data-module="govuk-button"
-                        formaction="/{{data.prototypeVersion}}/save-court-case" method="post">
-                        Save as a draft
+                        Continue
                     </button>
                 </div>
-                <p class="govuk-body"><a href="offence-code">Enter a different offence code</a></p>
-                <p class="govuk-body"><a href="offence-code">Look up an offence by name</a></p>
             </form>
     </div>
     <div class="govuk-grid-column-one-third">

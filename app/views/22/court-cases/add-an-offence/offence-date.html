@@ -12,7 +12,7 @@
                     <form class="form" action="outcome" method="post">
                 {% endif %}
                 {% endif %}
-            <form class="form" action="terror-related" method="post">
+            <form class="form" action="offence-code" method="post">
                 {% endif %}
                 <fieldset class="govuk-fieldset" role="group" aria-describedby="passport-issued-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
@@ -23,7 +23,7 @@
                         </h1>
                         {% elif data.route == 'remand-to-sentence' %}
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add aoffences</span>
+                            <span class="govuk-caption-l">Add offences</span>
                             Enter the offence dates
                         </h1>
                         {% elif data.postSaveEdit == 'true' %}
@@ -34,7 +34,7 @@
                         {% else %}
                         <h1 class="govuk-fieldset__heading">
                             <span class="govuk-caption-l">Add offences</span>
-                            Enter the offence dates
+                            Enter the offence dates {% if data.appearance.offences < 1 %}for the first offence{% endif %}
                         </h1>
                         {% endif %}
                     </legend>

@@ -78,7 +78,7 @@
                         </strong>
                         {% endif %}
                         {% if sentence['offence-name'] %}
-                        <h4 class="govuk-heading-s">{{ sentence['offence-name'] }}
+                        <h4 class="govuk-heading-s">{% if sentence['offence-code'] %}{{ sentence['offence-code'] }} - {% endif %}{{ sentence['offence-name'] }}
                             {% if sentence['terror-related'] == 'Yes' %}
                             <br><strong class="govuk-tag govuk-!-margin-top-2">
                                 Terror-related
