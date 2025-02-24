@@ -54,7 +54,7 @@
             {% for offence in data['appearance'].offences %}
             <div class="offence-card">
                 <div class="offence-card-offence-details">
-                    <h4 class="govuk-heading-s">{{ offence['offence-name'] }}</h4>
+                    <h4 class="govuk-heading-s">{% if offence['offence-code'] %}{{ offence['offence-code'] }} - {% endif %}{{ offence['offence-name'] }}</h4>
                     {% if offence['terror-related'] == 'Yes' %}
                             <strong class="govuk-tag govuk-!-margin-bottom-4">
                                 Terror-related

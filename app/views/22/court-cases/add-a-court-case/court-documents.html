@@ -11,7 +11,7 @@
               {% if data.appearance['warrant-type'] == "Remand" %}
               You have uploaded the remand warrant
               {% else %}
-              You have uploaded {{ data.appearance.documents.length + data.appearance['additional-documents-list'].length}}  documents
+              You have uploaded {% if data.appearance['additional-documents-list'].length %}{{ data.appearance.documents.length + data.appearance['additional-documents-list'].length}} documents{% else %}1 document{% endif %}  
               {% endif %}
             </h1>
           </legend>
@@ -21,7 +21,7 @@
             {% for document in data.appearance.documents %}
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
-                <a class="govuk-link" href="#">{{ document | capitalize }}</a>
+                <a class="govuk-link govuk-link--no-visited-state" target="_blank" href="{{ asset_path }}documents/order-of-imprisonment-court-case-1.pdf">{{ document | capitalize }}</a>
               </dt>
               <!-- <dd class="govuk-summary-list__value">
                 <strong class="govuk-tag govuk-tag--green">
@@ -31,10 +31,11 @@
               <dd class="govuk-summary-list__actions">
                 <ul class="govuk-summary-list__actions-list">
                   <li class="govuk-summary-list__actions-list-item">
-                    <a class="govuk-link" href="#">Replace<span class="govuk-visually-hidden"> {{ document }}</span></a>
+                    <a class="govuk-link govuk-link--no-visited-state" href="upload-document">Replace<span class="govuk-visually-hidden"> {{ document }}</span></a>
                   </li>
                   <li class="govuk-summary-list__actions-list-item">
-                    <a class="govuk-link" href="#">Delete<span class="govuk-visually-hidden"> c{{ document }}</span></a>
+                    <a class="govuk-link govuk-link--no-visited-state" href="confirm-delete-document">Delete<span class="govuk-visually-hidden"> c
+                      {{ document }}</span></a>
                   </li>
                 </ul>
               </dd>
@@ -45,7 +46,7 @@
             {% for document in data.appearance['additional-documents-list'] %}
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
-                <a class="govuk-link" href="#">{{ document }}</a>
+                <a class="govuk-link govuk-link--no-visited-state" href="#">{{ document | capitalize }}</a>
               </dt>
               <!-- <dd class="govuk-summary-list__value">
                 <strong class="govuk-tag govuk-tag--green">
@@ -56,10 +57,10 @@
               <dd class="govuk-summary-list__actions">
                 <ul class="govuk-summary-list__actions-list">
                   <li class="govuk-summary-list__actions-list-item">
-                    <a class="govuk-link" href="#">Replace<span class="govuk-visually-hidden"> {{ document }}</span></a>
+                    <a class="govuk-link govuk-link--no-visited-state" href="upload-additional-document">Replace<span class="govuk-visually-hidden"> {{ document }}</span></a>
                   </li>
                   <li class="govuk-summary-list__actions-list-item">
-                    <a class="govuk-link" href="#">Delete<span class="govuk-visually-hidden"> c{{ document }}</span></a>
+                    <a class="govuk-link govuk-link--no-visited-state" href="confirm-delete-document">Delete<span class="govuk-visually-hidden"> c{{ document }}</span></a>
                   </li>
                 </ul>
               </dd>
