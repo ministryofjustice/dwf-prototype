@@ -7,74 +7,65 @@
         <fieldset class="govuk-fieldset">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
-              <span class="govuk-caption-l">Upload court documents</span>
-              {% if data.appearance['warrant-type'] == "Remand" %}
-              You have uploaded the remand warrant
-              {% else %}
-              You have uploaded {% if data.appearance['additional-documents-list'].length %}{{ data.appearance.documents.length + data.appearance['additional-documents-list'].length}} documents{% else %}1 document{% endif %}  
-              {% endif %}
+              Upload court documents
             </h1>
           </legend>
-          <p class="govuk-body govuk-!-display-none" id="refreshPageProgress"><a href="#" class="govuk-link">Refresh
-              page to update file upload progress</a></p>
-          <dl class="govuk-summary-list govuk-!-margin-top-2">
-            {% for document in data.appearance.documents %}
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                <a class="govuk-link govuk-link--no-visited-state" target="_blank" href="{{ asset_path }}documents/order-of-imprisonment-court-case-1.pdf">{{ document | capitalize }}</a>
-              </dt>
-              <!-- <dd class="govuk-summary-list__value">
-                <strong class="govuk-tag govuk-tag--green">
-                  uploaded
-                </strong>
-              </dd> -->
-              <dd class="govuk-summary-list__actions">
-                <ul class="govuk-summary-list__actions-list">
-                  <li class="govuk-summary-list__actions-list-item">
-                    <a class="govuk-link govuk-link--no-visited-state" href="upload-document">Replace<span class="govuk-visually-hidden"> {{ document }}</span></a>
-                  </li>
-                  <li class="govuk-summary-list__actions-list-item">
-                    <a class="govuk-link govuk-link--no-visited-state" href="confirm-delete-document">Delete<span class="govuk-visually-hidden"> c
-                      {{ document }}</span></a>
-                  </li>
-                </ul>
-              </dd>
-            </div>
-            {% else %}
-            <p class="govuk-body">No documents have been uploaded for this appearance yet.</p>
-            {% endfor %}
-            {% for document in data.appearance['additional-documents-list'] %}
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                <a class="govuk-link govuk-link--no-visited-state" href="#">{{ document | capitalize }}</a>
-              </dt>
-              <!-- <dd class="govuk-summary-list__value">
-                <strong class="govuk-tag govuk-tag--green">
-                  uploaded
-                </strong>
 
-              </dd> -->
-              <dd class="govuk-summary-list__actions">
-                <ul class="govuk-summary-list__actions-list">
-                  <li class="govuk-summary-list__actions-list-item">
-                    <a class="govuk-link govuk-link--no-visited-state" href="upload-additional-document">Replace<span class="govuk-visually-hidden"> {{ document }}</span></a>
-                  </li>
-                  <li class="govuk-summary-list__actions-list-item">
-                    <a class="govuk-link govuk-link--no-visited-state" href="confirm-delete-document">Delete<span class="govuk-visually-hidden"> c{{ document }}</span></a>
-                  </li>
-                </ul>
-              </dd>
-            </div>
-            {% endfor %}
-          </dl>
-          <div class="govuk-button-group">
+    <div id="file-upload-1-hint" class="govuk-hint">
+      Documents must be in a .PDF format and smaller than 500MB.
+    </div>
+
+    <p class="govuk-body" aria-live="polite">1 file uploaded</p>
+
+    <p class="govuk-body govuk-!-display-none" id="refreshPageProgress"><a href="#" class="govuk-link">Refresh page to update file upload progress</a></p>
+
+    <dl class="govuk-summary-list govuk-summary-list--long-key">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          <a class="govuk-link" href="#">file-name.pdf</a>
+          <div class="govuk-body govuk-!-margin-0">Sentencing warrant</div>
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <strong class="govuk-tag govuk-tag--green">
+  Uploaded
+</strong>
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#">Remove<span class="govuk-visually-hidden"> file-name.pdf</span></a>
+        </dd>
+      </div>
+    </dl>
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="file-upload-1">
+        Trial record sheet
+      </label>
+      <input class="govuk-file-upload" id="file-upload-1" name="file-upload-1" type="file">
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="file-upload-2">
+        Indictment
+      </label>
+      <input class="govuk-file-upload" id="file-upload-2" name="file-upload-2" type="file">
+    </div>
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="file-upload-2">
+        Prison court register
+      </label>
+      <input class="govuk-file-upload" id="file-upload-2" name="file-upload-2" type="file">
+    </div>
+
+
+
+          <div class="govuk-button-group govuk-!-margin-top-8">
             <button type="submit" class="govuk-button" data-module="govuk-button">
              Accept and finish
             </button>
-            <a class="govuk-button govuk-button--secondary" data-module="govuk-button"
-              href="/{{data.prototypeVersion}}/save-court-case">
-              Save as draft
-            </a>
           </div>
     </form>
   </div>
