@@ -75,7 +75,7 @@
                             Does this warrant include offences from other court cases?
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{ data['appearance']['merged-cases'] }}
+                            {% if data['appearance']['merged-cases'] == "None" %}No{% else %}{{ data['appearance']['merged-cases'] }}{% endif %}
                         </dd>
                         <dd class="govuk-summary-list__actions">
                             <a class="govuk-link" href="merged-cases?edit=true">Edit<span class="govuk-visually-hidden">

@@ -2255,6 +2255,10 @@ router.get(
 
 router.get("/:prototypeVersion/merged-cases-select", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
+  const route = req.session.data.route;
+  console.log("Route: " + route);
+  const warrantType = req.session.data.appearance["warrant-type"];
+  console.log("Warrant type: " + warrantType);
   const mergedCases = req.session.data.appearance["merged-cases"];
   console.log("Merged cases: " + mergedCases);
   if (prototypeVersion < 22)
@@ -2269,7 +2273,7 @@ router.get("/:prototypeVersion/merged-cases-select", function (req, res) {
     }
   else if (prototypeVersion >= 22) {
     if (mergedCases == "Yes") {
-      if (req.session.data.appearance["warrant-type"] == "Remand") {
+      if (warrantType == "Remand") {
         res.redirect(
           `/${prototypeVersion}/court-cases/add-an-offence/select-merged-cases`
         );
@@ -2279,13 +2283,18 @@ router.get("/:prototypeVersion/merged-cases-select", function (req, res) {
         );
       }
     } else {
-      if (req.session.data.appearance["warrant-type"] == "Remand") {
+      if (warrantType == "Remand") {
         res.redirect(
           `/${prototypeVersion}/court-cases/add-an-offence/offence-date`
         );
-      } else {
+      } else if (warrantType == "Sentencing" && route == "appearance"){
         res.redirect(
-          `/${prototypeVersion}/court-cases/add-a-sentence/count-number`
+          `/${prototypeVersion}/court-cases/add-a-sentence/check-answers-additional-information`
+        );
+      }
+       else {
+        res.redirect(
+          `/${prototypeVersion}/court-cases/add-a-sentence/check-answers-additional-information`
         );
       }
     }

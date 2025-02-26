@@ -1464,6 +1464,10 @@ body {
   height: unset;
 }
 
+.moj-interruption-card__body > p {
+  font-size: unset !important;
+}
+
 // .filter > .govuk-details__text > .hods-expandable-banner[open] > .hods-expandable-banner__summary:focus {
 //   background: none;
 //   text-decoration: none;

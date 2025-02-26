@@ -1,43 +1,38 @@
 {% extends "../template.html" %}
 {% block content %}
-<!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
-    <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="/{{data.prototypeVersion}}/sentence-length-mismatch-select" method="post">
-            <div class="govuk-form-group">
-                <h1 class="govuk-heading-l">
-                            <span class="govuk-caption-l">Add offences</span>
-                            Sentence length mismatch
-                        </h1>
-                        <p class="govuk-body">The sentence lengths you have entered total {{ data.appearance['total-sentence-length-years'] }} years {{ data.appearance['total-sentence-length-months'] }} months {{ data.appearance['total-sentence-length-weeks'] }} weeks {{ data.appearance['total-sentence-length-days'] }} days. </p>
-                          <p>This does not match the overall sentence length from the warrant, which is <br>{{ data.appearance['overall-sentence-length-years'] }} years {{ data.appearance['overall-sentence-length-months'] }} months {{ data.appearance['overall-sentence-length-weeks'] }} weeks {{ data.appearance['overall-sentence-length-days'] }} days.</p>
-                        <div class="govuk-form-group">
-  <fieldset class="govuk-fieldset govuk-!-margin-top-6">
-    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-      <h1 class="govuk-fieldset__heading">
-        Do you want to continue?
-      </h1>
-    </legend>
-    <div class="govuk-radios" data-module="govuk-radios">
-      <div class="govuk-radios__item">
-        <input class="govuk-radios__input" id="sentence-length-mismatch" name="appearance[sentence-length-mismatch]" type="radio" value="yes">
-        <label class="govuk-label govuk-radios__label" for="sentence-length-mismatch">
-          Yes, continue with mismatching sentence lengths    
-        </label>
-      </div>
-      <div class="govuk-radios__item">
-        <input class="govuk-radios__input" id="sentence-length-mismatch-2" name="appearance[sentence-length-mismatch]" type="radio" value="no">
-        <label class="govuk-label govuk-radios__label" for="sentence-length-mismatch-2">
-          No, go back and review offences
-        </label>
-      </div>
-    </div>
-  </fieldset>
-  <div class="govuk-button-group govuk-!-margin-top-6"><button class="govuk-button">Continue</button></div>
-  
-</div>
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="/{{data.prototypeVersion}}/sentence-length-mismatch-select"
+      method="post">
+      <div class="govuk-form-group">
+        <div class="moj-interruption-card">
+          <div class="moj-interruption-card__content">
+            <h1 class="govuk-heading-l moj-interruption-card__heading">Sentence length mismatch</h1>
+            <div class="govuk-body moj-interruption-card__body">
+              <p class="govuk-body">The sentence lengths you have entered total:</p> 
+              <p class="govuk-body govuk-!-font-weight-bold">{{
+          data.appearance['total-sentence-length-years'] }} years {{ data.appearance['total-sentence-length-months'] }}
+          months {{ data.appearance['total-sentence-length-weeks'] }} weeks {{
+          data.appearance['total-sentence-length-days'] }} days. </p>
+        <p>This does not match the overall sentence length from the warrant, which is:
+          <p class="govuk-body govuk-!-font-weight-bold"> {{
+          data.appearance['overall-sentence-length-years'] }} years {{ data.appearance['overall-sentence-length-months']
+          }} months {{ data.appearance['overall-sentence-length-weeks'] }} weeks {{
+          data.appearance['overall-sentence-length-days'] }} days.</p>
+          <p class="govuk-body">You can go back and review offences, or you can continue with sentence length mismatch.</p>
+          <p class="govuk-body">If you continue, only a provisional calculation can be made.</p>
+          <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-top-6">Do you want to continue?</p>
             </div>
-        </form>
-    </div>
+            <div class="govuk-button-group moj-interruption-card__actions">
+              <button type="submit" class="govuk-button govuk-button--inverse" data-module="govuk-button">
+                Yes, continue
+            </button>
+              <a class="govuk-link govuk-link--inverse" href="add-sentence-information">Go back to update offence outcomes</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
 {% endblock %}
