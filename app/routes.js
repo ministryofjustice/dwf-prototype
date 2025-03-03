@@ -185,6 +185,11 @@ router.post("/:prototypeVersion/offence-code-known", function (req, res) {
           `/${prototypeVersion}/court-cases/add-a-sentence/offence-name`
         );
       }
+      if (warrantType == "Sentencing" && overallCaseOutcomeApply != "Yes") {
+        return res.redirect(
+          `/${prototypeVersion}/court-cases/add-an-offence/offence-name`
+        );
+      }
       if (warrantType == "Sentencing") {
         return res.redirect(
           `/${prototypeVersion}/court-cases/add-a-sentence/offence-name`
@@ -261,9 +266,17 @@ router.post("/:prototypeVersion/offence-code-known", function (req, res) {
 
 router.post("/:prototypeVersion/outcome-select", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
-  var outcome = req.session.data.offence["outcome"];
+  var outcome = req.session.data.sentence["outcome"];
   console.log("Offence outcome: " + outcome);
-  if (outcome == "Imprisonment"){
+  if (outcome === "Imprisonment"){
+    req.session.data.sentence['offence-start-date-day'] = req.session.data.offence['offence-start-date-day']
+    req.session.data.sentence['offence-start-date-month'] = req.session.data.offence['offence-start-date-month']
+    req.session.data.sentence['offence-start-date-year'] = req.session.data.offence['offence-start-date-year']
+    req.session.data.sentence['offence-end-date-day'] = req.session.data.offence['offence-end-date-day']
+    req.session.data.sentence['offence-end-date-month'] = req.session.data.offence['offence-end-date-month']
+    req.session.data.sentence['offence-end-date-year'] = req.session.data.offence['offence-end-date-year']
+    req.session.data.sentence['offence-name'] = req.session.data.offence['offence-name']
+    req.session.data.sentence['terror-related'] = req.session.data.offence['terror-related']
     res.redirect(
       `/${prototypeVersion}/court-cases/add-a-sentence/count-number`
     );
@@ -847,6 +860,7 @@ router.get("/:prototypeVersion/create-offence", function (req, res) {
   const appearanceIndex = req.query.appearanceIndex;
   const route = req.session.data.route;
   const path = req.query.path;
+  const overallCaseOutcomeApply = req.session.data.appearance['overall-case-outcome-apply-all']
   req.session.data.newOffence = 1;
   console.log("Route: " + route);
   if (appearanceIndex !== undefined) {
@@ -1107,6 +1121,7 @@ router.get("/:prototypeVersion/create-sentence", function (req, res) {
   const appearanceIndex = req.query.appearanceIndex;
   const route = req.session.data.route;
   const path = req.query.path;
+  const overallCaseOutcomeApply = req.session.data.appearance['overall-case-outcome-apply-all']
   req.session.data.path = path;
   req.session.data.newSentence = 1;
   console.log("Route: " + route);
@@ -1150,6 +1165,9 @@ router.get("/:prototypeVersion/create-sentence", function (req, res) {
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-sentence/offence-date`
     );
+  }
+  if (overallCaseOutcomeApply == "No"){
+    res.redirect(307, `/${prototypeVersion}/create-offence`);
   } else {
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-sentence/count-number`
@@ -2068,22 +2086,27 @@ router.get("/:prototypeVersion/terror-related-offence", function (req, res) {
 router.get("/:prototypeVersion/count-number", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   const sentenceIndex = req.session.data.appearance.sentences.length + 1;
+  const overallCaseOutcomeApply = req.session.data.appearance['overall-case-outcome-apply-all']
   const route = req.session.data.route;
   const path = req.session.data.path;
   console.log("Path: " + path);
   console.log("SentenceIndex: " + sentenceIndex);
   console.log("Edit: " + req.query.edit);
+  console.log("Overall case outcome apply all" + overallCaseOutcomeApply)
   if (req.query.postSaveEdit == "true") {
     return res.redirect(307, `/${prototypeVersion}/persist-sentence`);
   }
   if (req.query.edit == "true") {
     return res.redirect(307, `/${prototypeVersion}/persist-sentence`);
   }
-  if (
-    req.session.data["appearance"]["overall-conviction-date-apply-all"] == "No"
-  ) {
+  if (req.session.data["appearance"]["overall-conviction-date-apply-all"] == "No") {
     return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-sentence/offence-date`
+      `/${prototypeVersion}/court-cases/add-a-sentence/sentence-type`
+    );
+  }
+  if (overallCaseOutcomeApply == "No"){
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-sentence/sentence-type`
     );
   }
   if (route == "remand-to-sentence" && path == "rts-new-offence") {
