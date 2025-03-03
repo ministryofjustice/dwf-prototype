@@ -97,6 +97,7 @@ router.post(
 router.post("/:prototypeVersion/offence-code-known", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   const warrantType = req.session.data.warrantType;
+  const overallCaseOutcomeApply = req.session.data.appearance["overall-case-outcome-apply-all"]
   var offenceCodeKnown = req.session.data["offence-code-known"];
   if (req.session.data.sentence != null) {
     var offenceCode = req.session.data.sentence["offence-code"];
@@ -154,7 +155,7 @@ router.post("/:prototypeVersion/offence-code-known", function (req, res) {
         `/${prototypeVersion}/court-cases/add-a-sentence/inactive-offence-error`
       );
     } else {
-      if (req.session.data.appearance["warrant-type"] == "Sentencing") {
+      if (req.session.data.appearance["warrant-type"] == "Sentencing" && overallCaseOutcomeApply == "Yes") {
         req.session.data.sentence["offence-code"] = "CJ88001";
         req.session.data.sentence["terror-related"] = "No";
         req.session.data.sentence["offence-name"] = "Common assault";
@@ -260,16 +261,15 @@ router.post("/:prototypeVersion/offence-code-known", function (req, res) {
 
 router.post("/:prototypeVersion/outcome-select", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
-  // Make a variable and give it the value
-  var outcome = req.session.data.appearance["overall-case-outcome"];
-  console.log(outcome);
-  // Check whether the variable matches a condition
-  if (outcome.includes("lookup-another-outcome")) {
-    // Send user to next page
+  var outcome = req.session.data.offence["outcome"];
+  console.log("Offence outcome: " + outcome);
+  if (outcome == "Imprisonment"){
     res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-first-court-appearance/lookup-outcome`
+      `/${prototypeVersion}/court-cases/add-a-sentence/count-number`
     );
-  } else res.redirect(`/${prototypeVersion}/court-cases/add-a-first-court-appearance/next-court-date-select`);
+  } else {
+    return res.redirect(307, `/${prototypeVersion}/persist-offence`);
+  }
 });
 
 router.post("/:prototypeVersion/outcome-select-2", function (req, res) {
@@ -322,6 +322,17 @@ router.post("/:prototypeVersion/outcome-select-4", function (req, res) {
   if (outcome.includes("lookup-another-outcome")) {
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-an-offence/lookup-outcome`
+    );
+  } else return res.redirect(307, `/${prototypeVersion}/persist-offence`);
+});
+
+router.post("/:prototypeVersion/sentence-outcome-select", function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion;
+  var outcome = req.session.data.sentence["outcome"];
+  console.log("Outcome: " + outcome);
+  if (outcome == "Imprisonment") {
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-an-sentence/sentence-type`
     );
   } else return res.redirect(307, `/${prototypeVersion}/persist-offence`);
 });
@@ -448,10 +459,17 @@ router.post("/:prototypeVersion/case-outcome-apply", function (req, res) {
         sentence.outcome = req.session.data.appearance["overall-case-outcome"];
         return sentence;
       });
+      if(prototypeVersion >= 23){
+        return res.redirect(
+          307,
+          `/${prototypeVersion}/court-cases/add-a-sentence/outcome`
+        );
+      } else {
     return res.redirect(
       307,
       `/${prototypeVersion}/court-cases/add-a-sentence/sentence-type`
     );
+  }
   } else if (warrantType == "Sentencing" && route == "edit-appearance") {
     res.redirect(
       `/${prototypeVersion}/court-cases/add-a-court-appearance/change-outcome`
@@ -910,10 +928,11 @@ router.post("/:prototypeVersion/persist-offence", function (req, res) {
     );
   } else if (route == "edit-appearance") {
     return res.redirect(`/${prototypeVersion}/court-cases/edit-appearance`);
-  } else req.session.data.changeMade = 0;
-  req.session.data.offenceDeleted = 0;
-  req.session.data.offenceAdded = 1;
+  } else if (req.session.data.appearance['warrant-type'] == 'Sentencing'){
+    res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers`);
+  } else {
   res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/check-answers`);
+  }
 });
 
 router.get("/:prototypeVersion/update-offence", function (req, res) {
@@ -1059,6 +1078,7 @@ router.get("/:prototypeVersion/delete-offence", function (req, res) {
 router.get("/:prototypeVersion/delete-sentence", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   const index = req.query.index;
+  console.log("Index: " + index)
   const route = req.session.data.route;
   if (req.session.data.confirmDeleteSentence == "Yes") {
     req.session.data.appearance.sentences.splice(index, 1);
@@ -1304,6 +1324,7 @@ router.get("/:prototypeVersion/warrant-type-select", function (req, res) {
       req.session.data.appearance["concurrent-sentences-months"] = 0;
       req.session.data.appearance["concurrent-sentences-weeks"] = 0;
       req.session.data.appearance["concurrent-sentences-days"] = 0;
+      req.session.data.appearance["overall-case-outcome"] = "Imprisonment"
     }
     if (route == "appearance") {
       req.session.data.appearance.sentences = [];
@@ -2415,6 +2436,21 @@ router.get("/:prototypeVersion/update-outcome", function (req, res) {
   res.redirect(
     `/${prototypeVersion}/court-cases/add-a-court-appearance/change-outcome`
   );
+});
+
+router.get("/:prototypeVersion/add-offences-select", function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion;
+  const index = req.query.index;
+  req.session.index = index;
+  const route = req.session.route;
+  console.log("Route: " + route)
+  const overallCaseOutcomeApply = req.session.data.appearance['overall-case-outcome-apply-all'];
+  console.log("Overall case outcome apply all: " + overallCaseOutcomeApply) 
+  if (overallCaseOutcomeApply == "No"){
+  res.redirect(307, `/${prototypeVersion}/create-offence?route=new-court-case`);
+  } else {
+    res.redirect(307, `/${prototypeVersion}/create-sentence?route=new-court-case`);
+  }
 });
 
 router.get("/:prototypeVersion/launch-prototype", function (req, res) {

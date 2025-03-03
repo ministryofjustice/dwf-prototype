@@ -1,0 +1,96 @@
+{% extends "../template.html" %}
+{% block content %}
+<!-- What is the confirmed date -->
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        {% if data.postSaveEdit == 'true' %}
+        <form class="form" action="/{{data.prototypeVersion}}/persist-offence?postSaveEdit=true&changeMade=1&variableName=Outcome&value=outcome" method="post">
+        {% else %}
+        <form class="form" action="/{{data.prototypeVersion}}/outcome-select" method="post">
+        {% endif %}
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Add a court case</span>
+                            Select the outcome for this offence
+
+                        </h1>
+                    </legend>
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="outcome-17" name="sentence[outcome]" type="radio"
+                                value="Imprisonment">
+                            <label class="govuk-label govuk-radios__label" for="outcome-17">
+                                Imprisonment
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="outcome-18" name="sentence[outcome]" type="radio"
+                                value="Imprisonment in default">
+                            <label class="govuk-label govuk-radios__label" for="outcome-18">
+                                Imprisonment in default
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="outcome-19" name="sentence[outcome]" type="radio"
+                                value="Suspended imprisonment">
+                            <label class="govuk-label govuk-radios__label" for="outcome-19">
+                                Suspended imprisonment
+                            </label>
+                        </div>
+                        <div class="govuk-radios__divider">or</div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="outcome-20" name="sentence[outcome]" type="radio"
+                                value="Dismissed">
+                            <label class="govuk-label govuk-radios__label" for="outcome-20">
+                                Dismissed
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="outcome-21" name="sentence[outcome]" type="radio"
+                                value="No seperate penalty">
+                            <label class="govuk-label govuk-radios__label" for="outcome-21">
+                                No seperate penalty
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="outcome-22" name="sentence[outcome]" type="radio"
+                                value="Not guilty">
+                            <label class="govuk-label govuk-radios__label" for="outcome-22">
+                                Not guilty
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="outcome-23" name="sentence[outcome]" type="radio"
+                                value="sentence replaced">
+                            <label class="govuk-label govuk-radios__label" for="outcome-23">
+                                Offence replaced
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="outcome-24" name="sentence[outcome]" type="radio"
+                                value="Other non-custodial outcome">
+                            <label class="govuk-label govuk-radios__label" for="outcome-24">
+                                Other non-custodial outcome
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Continue
+                </button>
+                <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="/{{data.prototypeVersion}}/save-court-case">
+                    Save as draft
+                </a>
+            </div>
+        </form>
+    </div>
+    <div class="govuk-grid-column-one-third">
+        {% set showOffences = false %}
+        {% include "includes/templates/appearance-info.njk" %}
+    </div>
+</div>
+{% endblock %}
