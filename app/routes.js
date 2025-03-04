@@ -791,7 +791,6 @@ router.post("/:prototypeVersion/persist-appearance", function (req, res) {
       `/${prototypeVersion}/court-cases/add-a-court-case/confirmation`
     );
   } else if (route == "appearance") {
-    if (prototypeVersion == "v12" || prototypeVersion >= 13) {
       appearanceDetailsComplete = 1;
       req.session.data.appearanceDetailsComplete = appearanceDetailsComplete;
       console.log("Appearance details complete: " + appearanceDetailsComplete);
@@ -801,12 +800,15 @@ router.post("/:prototypeVersion/persist-appearance", function (req, res) {
           "Appearance status: " + req.session.data.appearance["status"]
         );
         return res.redirect(`/${prototypeVersion}/court-cases/`);
+      } else if (req.query.appearanceComplete == 'true') {
+        return res.redirect(
+          `/${prototypeVersion}/court-cases/add-a-court-appearance/confirmation`
+        );
       } else {
         return res.redirect(
           `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
         );
       }
-    }
     res.redirect(
       `/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`
     );
@@ -1282,9 +1284,17 @@ router.post("/:prototypeVersion/persist-sentence", function (req, res) {
   }
 
   req.session.data.sentenceAdded = 1;
-  return res.redirect(
-    `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`
-  );
+
+  if (route == "remand-to-sentence"){
+    console.log("Redirecting to add sentence information")
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`
+    );
+  } else {
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`
+    );
+  }
 });
 
 router.get("/:prototypeVersion/view-court-case-detail", function (req, res) {
@@ -1614,13 +1624,10 @@ router.post("/:prototypeVersion/add-sentence-information", function (req, res) {
   ) {
     req.session.data.sentence = req.session.data.appearance.offences[index];
   }
-  req.session.data.changeMade = 0;
-  req.session.data.offenceDeleted = 0;
-  req.session.data.offenceAdded = 0;
   if (route == "remand-to-sentence") {
-    req.session.data.sentence["outcome-changed"] = "true";
+    req.session.data.sentence = {...req.session.data.sentence, 'outcome-changed': "true"}
     console.log(
-      "Ouctome changed: " + req.session.data.sentence["outcome-changed"]
+      "Outcome changed: " + req.session.data.sentence["outcome-changed"]
     );
   }
   if (outcome == "Imprisonment") {

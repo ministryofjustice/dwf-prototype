@@ -24,7 +24,7 @@
                                 </div>
                                 <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-tagged-bail">
                                     <div class="govuk-form-group">
-                                        <label class="govuk-label" for="appearance[tagged-bail]">
+                                        <label class="govuk-label govuk-!-font-weight-bold" for="tagged-bail-days">
                                             Number of days
                                         </label>
                                         <input class="govuk-input govuk-input--width-3" id="tagged-bail-days" name="appearance[tagged-bail]" type="number" {% if data.appearance['tagged-bail'] %}{% if data.appearance['tagged-bail'].includes('Yes') %}value="{{ data.appearance['tagged-bail'] | last }}" {% endif %}{% endif %}>
