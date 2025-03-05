@@ -74,8 +74,7 @@
                                 {% endif %}
                             </dd>
                         </div>
-                        {% endif %}
-                        {% if offence['outcome'] %}
+                        {% endif %}  
                         <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key">
                                 Outcome
@@ -84,7 +83,6 @@
                                 {{ offence['outcome'] }}
                             </dd>
                         </div>
-                        {% endif %}
                     </dl>
                     {% if offence['status'] == 'draft' %}
                         <p class="govuk-!-body govuk-!-margin-top-3 govuk-!-margin-bottom-1"><a href="{{ data.offence['saved-from'] }}?index={{ loop.index }}">Continue adding offence details</a></p>

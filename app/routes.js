@@ -421,6 +421,7 @@ router.post("/:prototypeVersion/case-outcome-apply", function (req, res) {
     req.session.data.appearance.offences =
       req.session.data.appearance.offences.map((offence) => {
         offence.outcome = req.session.data.appearance["overall-case-outcome"];
+        console.log("Offence outcome: " + offence["outcome"])
         return offence;
       });
     if (route == "repeat-remand") {
