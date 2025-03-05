@@ -9,16 +9,14 @@
         <form class="form" action="/{{data.prototypeVersion}}/persist-appearance?edit=false" method="post">
             <dl class="govuk-summary-list">
                 <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
+                    <dt class="govuk-summary-list__key govuk-summary-list--long-key">
                         Warrant type
                     </dt>
                     <dd class="govuk-summary-list__value">
                         {{ data['appearance']['warrant-type'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="warrant-type?edit=true">
-                            Edit<span class="govuk-visually-hidden"> warrant type</span>
-                        </a>
+                
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row">
@@ -61,12 +59,25 @@
                     </dd>
                 </div>
                 {% if data.appearance['warrant-type'] == "Remand" %}
-                                <div class="govuk-summary-list__row">
+                <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Overall case outcome
                     </dt>
                     <dd class="govuk-summary-list__value">
                         {{ data['appearance']['overall-case-outcome'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="overall-case-outcome?edit=true">
+                            Edit<span class="govuk-visually-hidden"> overall case outcome</span>
+                        </a>
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Does this outcome apply to all offences on the warrant?
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['overall-case-outcome-apply-all'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link" href="overall-case-outcome?edit=true">

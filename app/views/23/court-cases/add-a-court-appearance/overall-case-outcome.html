@@ -6,7 +6,9 @@
         <form class="form" action="check-answers" method="post">
             {% elif data.postSaveEdit == 'true' %}
             <form class="form" action="/{{data.prototypeVersion}}/persist-appearance" method="post">
-            {% else %}
+            {% elif data.appearance['warrant-type'] == "Remand" %}
+            <form class="form" action="outcome-apply-all" method="post">
+                {% else %}
         <form class="form" action="tagged-bail" method="post">
             {% endif %}
             <div class="govuk-form-group">

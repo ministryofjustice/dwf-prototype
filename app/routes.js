@@ -377,29 +377,11 @@ router.post("/:prototypeVersion/new-court-name", function (req, res) {
       req.session.data.courtCases[courtCaseIndex].appearances.at(-1)[
         "next-court-name"
       ];
-    if (prototypeVersion == "v9" || prototypeVersion == "v8") {
+    
       res.redirect(
         `/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`
       );
-    } else if (prototypeVersion == "v12" || prototypeVersion >= 13) {
-      if (warrantType == "Remand") {
-        res.redirect(
-          `/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`
-        );
-      } else if (prototypeVersion < 22) {
-        res.redirect(
-          `/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers`
-        );
-      } else {
-        res.redirect(
-          `/${prototypeVersion}/court-cases/add-a-court-appearance/tagged-bail`
-        );
-      }
-    } else
-      res.redirect(
-        `/${prototypeVersion}/court-cases/add-a-court-appearance/warrant-type`
-      );
-  } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-name`);
+    }  else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-name`);
 });
 
 router.post("/:prototypeVersion/change-offences-select", function (req, res) {
@@ -429,19 +411,10 @@ router.post("/:prototypeVersion/case-outcome-apply", function (req, res) {
     route = req.session.data.route;
   }
   console.log("Route: " + route);
-  var warrantType = "";
-  if (req.session.data.appearance["warrant-type"]) {
-    console.log("Warrant type: " + req.session.data.appearance["warrant-type"]);
-    warrantType = req.session.data.appearance["warrant-type"];
-    console.log("warrantType: " + warrantType);
-  } else {
-    warrantType = req.session.data.warrantType;
-  }
-  var overallCaseOutcomeApply = "No";
-  overallCaseOutcomeApply =
-    req.session.data.appearance["overall-case-outcome-apply-all"];
-  console.log("Overall case outcome applies: " + overallCaseOutcomeApply);
+  var warrantType = req.session.data.appearance["warrant-type"];
   console.log("Warrant type: " + warrantType);
+  var overallCaseOutcomeApply = req.session.data.appearance["overall-case-outcome-apply-all"];
+  console.log("Overall case outcome applies: " + overallCaseOutcomeApply);
   if (overallCaseOutcomeApply == "Yes" && warrantType != "Sentencing") {
     req.session.data.appearance["overall-case-outcome-apply-all"] =
       overallCaseOutcomeApply;
@@ -452,7 +425,7 @@ router.post("/:prototypeVersion/case-outcome-apply", function (req, res) {
       });
     if (route == "repeat-remand") {
       return res.redirect(
-        `/${prototypeVersion}/court-cases/add-a-court-appearance/review-offences`
+        `/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers`
       );
     }
     if (warrantType == "Sentencing") {
@@ -1624,10 +1597,10 @@ router.post("/:prototypeVersion/add-sentence-information", function (req, res) {
   ) {
     req.session.data.sentence = req.session.data.appearance.offences[index];
   }
-  if (route == "remand-to-sentence") {
-    req.session.data.sentence = {...req.session.data.sentence, 'outcome-changed': "true"}
+  if (route == "remand-to-sentence" && outcome != "Imprisonment" || route == "remand-to-sentence" && outcome != "Imprisonment in default") {
+    req.session.data.offence = {...req.session.data.offence, 'outcome-changed': "true"}
     console.log(
-      "Outcome changed: " + req.session.data.sentence["outcome-changed"]
+      "Outcome changed: " + req.session.data.offence["outcome-changed"]
     );
   }
   if (outcome == "Imprisonment") {

@@ -3,7 +3,7 @@
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">
-            <span class="govuk-caption-l">Add an appearance</span>
+            <span class="govuk-caption-l">Add next court appearance</span>
             Check your answers
         </h1>
         <form class="form" action="/{{data.prototypeVersion}}/next-court-appearance-complete" method="post">
@@ -39,7 +39,7 @@
                         Next hearing location
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['next-court-name'] }}
+                        {{ data.appearance['next-court-name'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link" href="next-court-name?edit=true">

@@ -1,14 +1,13 @@
 {% extends "../template.html" %}
 {% block content %}
-<!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="/{{data.prototypeVersion}}/case-outcome-apply?route=repeat-remand" method="post">
+        <form class="form" action="check-answers" method="post">
             <div class="govuk-form-group"> 
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add a court case</span>
+                            <span class="govuk-caption-l">Add appearance information</span>
                             Does this outcome apply to all offences on the warrant?
                         </h1>
                     </legend>
