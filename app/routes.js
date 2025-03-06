@@ -99,8 +99,11 @@ router.post("/:prototypeVersion/offence-code-known", function (req, res) {
   const warrantType = req.session.data.warrantType;
   const overallCaseOutcomeApply = req.session.data.appearance["overall-case-outcome-apply-all"]
   var offenceCodeKnown = req.session.data["offence-code-known"];
+  var offenceCode = ""
   if (req.session.data.sentence != null) {
-    var offenceCode = req.session.data.sentence["offence-code"];
+    offenceCode = req.session.data.sentence["offence-code"];
+  } else if (req.session.data.offence != null) {
+    offenceCode = req.session.data.offence["offence-code"];
   } else {
     var offenceCode = "None";
   }
@@ -115,6 +118,7 @@ router.post("/:prototypeVersion/offence-code-known", function (req, res) {
   if (offenceCodeKnown != "None") {
     console.log("Offence code" + offenceCode);
     if (offenceCode.includes("TR06001")) {
+      console.log("TEST")
       req.session.data.sentence["terror-related"] = "Yes";
       req.session.data.sentence["offence-name"] =
         "Publish / cause another to publish statement intending / reckless as to encouragement of terrorism - Terrorism Act 2006";
@@ -122,7 +126,7 @@ router.post("/:prototypeVersion/offence-code-known", function (req, res) {
       req.session.data.sentence["legislation"] =
         "Contrary to section 2(1) and (11) of the Terrorism Act 2006";
     }
-    if (offenceCode.includes("TR06002")) {
+    else if (offenceCode.includes("TR06002")) {
       req.session.data.sentence["terror-related"] = "Yes";
       req.session.data.sentence["offence-name"] =
         "Distribute / circulate a terrorist publication - Terrorism Act 2006";
@@ -130,7 +134,7 @@ router.post("/:prototypeVersion/offence-code-known", function (req, res) {
       req.session.data.sentence["legislation"] =
         "Contrary to section 2(1) and (11) of the Terrorism Act 2006";
     }
-    if (offenceCode.includes("TR06003")) {
+    else if (offenceCode.includes("TR06003")) {
       req.session.data.sentence["terror-related"] = "Yes";
       req.session.data.sentence["offence-name"] =
         "Give / sell / lend / offer for sale / loan a terrorist publication - Terrorism Act 2006";
@@ -138,15 +142,7 @@ router.post("/:prototypeVersion/offence-code-known", function (req, res) {
       req.session.data.sentence["legislation"] =
         "Contrary to section 2(1) and (11) of the Terrorism Act 2006";
     }
-    if (offenceCode.includes("TR06003")) {
-      req.session.data.sentence["terror-related"] = "Yes";
-      req.session.data.sentence["offence-name"] =
-        "Give / sell / lend / offer for sale / loan a terrorist publication - Terrorism Act 2006";
-      req.session.data.sentence["cja-code"] = "066/55";
-      req.session.data.sentence["legislation"] =
-        "Contrary to section 2(1) and (11) of the Terrorism Act 2006";
-    }
-    if (offenceCode.includes("TR06003")) {
+    else if (offenceCode.includes("BL63016")) {
       req.session.data.sentence["offence-code"] = "BL63016";
       req.session.data.sentence["terror-related"] = "No";
       req.session.data.sentence["offence-name"] = "Betting in the street";
@@ -154,29 +150,30 @@ router.post("/:prototypeVersion/offence-code-known", function (req, res) {
       res.redirect(
         `/${prototypeVersion}/court-cases/add-a-sentence/inactive-offence-error`
       );
-    } else {
-      if (req.session.data.appearance["warrant-type"] == "Sentencing" && overallCaseOutcomeApply == "Yes") {
-        req.session.data.sentence["offence-code"] = "CJ88001";
-        req.session.data.sentence["terror-related"] = "No";
-        req.session.data.sentence["offence-name"] = "Common assault";
-        req.session.data.sentence["cja-code"] = "105/01";
-        req.session.data.sentence["legislation"] =
-          "Contrary to section 39 of the Criminal Justice Act 1988";
-        return res.redirect(
-          `/${prototypeVersion}/court-cases/add-a-sentence/confirm-offence`
-        );
-      } else {
-        req.session.data.offence["offence-code"] = "CJ88001";
-        req.session.data.offence["terror-related"] = "No";
-        req.session.data.offence["offence-name"] = "Common assault";
-        req.session.data.offence["cja-code"] = "105/01";
-        req.session.data.offence["legislation"] =
-          "Contrary to section 39 of the Criminal Justice Act 1988";
-        return res.redirect(
-          `/${prototypeVersion}/court-cases/add-an-offence/confirm-offence`
-        );
-      }
-    }
+    } 
+    else if (offenceCode.includes("CJ88001") && overallCaseOutcomeApply == "No") {
+      console.log("TEST")
+      req.session.data.offence["offence-code"] = "CJ88001";
+      req.session.data.offence["terror-related"] = "No";
+      req.session.data.offence["offence-name"] = "Common assault";
+      req.session.data.offence["cja-code"] = "105/01";
+      req.session.data.offence["legislation"] =
+        "Contrary to section 39 of the Criminal Justice Act 1988";
+      return res.redirect(
+        `/${prototypeVersion}/court-cases/add-an-offence/confirm-offence`
+      );
+  }
+  else if (offenceCode.includes("CJ88001")) {
+    req.session.data.sentence["offence-code"] = "CJ88001";
+    req.session.data.sentence["terror-related"] = "No";
+    req.session.data.sentence["offence-name"] = "Common assault";
+    req.session.data.sentence["cja-code"] = "105/01";
+    req.session.data.sentence["legislation"] =
+      "Contrary to section 39 of the Criminal Justice Act 1988";
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-sentence/confirm-offence`
+    );
+}
   }
   if (offenceCodeKnown == "None") {
     if (offenceCodeKnown.includes("None")) {
@@ -266,7 +263,11 @@ router.post("/:prototypeVersion/offence-code-known", function (req, res) {
 
 router.post("/:prototypeVersion/outcome-select", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
-  var outcome = req.session.data.sentence["outcome"];
+  if (req.session.data.offence["outcome"]){
+  var outcome = req.session.data.offence["outcome"] 
+  } else {
+    outcome = req.session.data.sentence["outcome"] 
+  }
   console.log("Offence outcome: " + outcome);
   if (outcome === "Imprisonment"){
     req.session.data.sentence['offence-start-date-day'] = req.session.data.offence['offence-start-date-day']
@@ -377,10 +378,15 @@ router.post("/:prototypeVersion/new-court-name", function (req, res) {
       req.session.data.courtCases[courtCaseIndex].appearances.at(-1)[
         "next-court-name"
       ];
-    
+      if (req.session.data.appearance["overall-case-outcome"] == "Imprisonment") {
+        res.redirect(
+          `/${prototypeVersion}/court-cases/add-a-court-appearance/tagged-bail`
+        );
+      } else {
       res.redirect(
         `/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`
       );
+    }
     }  else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-name`);
 });
 
@@ -1146,7 +1152,7 @@ router.get("/:prototypeVersion/create-sentence", function (req, res) {
     res.redirect(307, `/${prototypeVersion}/create-offence`);
   } else {
     return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-sentence/count-number`
+      `/${prototypeVersion}/court-cases/add-a-sentence/offence-date`
     );
   }
 });
@@ -1261,6 +1267,7 @@ router.post("/:prototypeVersion/persist-sentence", function (req, res) {
 
   if (route == "remand-to-sentence"){
     console.log("Redirecting to add sentence information")
+    req.session.data.sentence = {...req.session.data.sentence, 'outcome-changed': "true"}
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`
     );
@@ -1599,23 +1606,16 @@ router.post("/:prototypeVersion/add-sentence-information", function (req, res) {
     req.session.data.sentence = req.session.data.appearance.offences[index];
   }
   if (route == "remand-to-sentence" && outcome != "Imprisonment" || route == "remand-to-sentence" && outcome != "Imprisonment in default") {
-    req.session.data.offence = {...req.session.data.offence, 'outcome-changed': "true"}
-    console.log(
-      "Outcome changed: " + req.session.data.offence["outcome-changed"]
-    );
+    req.session.data.appearance.offences[index]["outcome-changed"] = "true";
   }
   if (outcome == "Imprisonment") {
-    req.session.data.changeMade = 0;
-    req.session.sentenceAdded = 1;
+    req.session.data.appearance.offences.splice(index, 1);
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-sentence/count-number`
     );
-  } else req.session.data.changeMade = 1;
-  req.session.sentenceAdded = 0;
-  if (route == "edit-appearance") {
+  } else if (route == "edit-appearance") {
     return res.redirect(307, `/${prototypeVersion}/persist-offence`);
   }
-  req.session.data.appearance.offences[index]["outcome"] = outcome;
   if (route == "new-court-case") {
     res.redirect(
       `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`
@@ -2070,22 +2070,24 @@ router.get("/:prototypeVersion/count-number", function (req, res) {
   const overallCaseOutcomeApply = req.session.data.appearance['overall-case-outcome-apply-all']
   const route = req.session.data.route;
   const path = req.session.data.path;
+  const overallConvictionDateApply = req.session.data.appearance["overall-conviction-date-apply-all"]
   console.log("Path: " + path);
   console.log("SentenceIndex: " + sentenceIndex);
   console.log("Edit: " + req.query.edit);
   console.log("Overall case outcome apply all" + overallCaseOutcomeApply)
+  console.log("Overall conviction date apply all:  " + overallConvictionDateApply);
   if (req.query.postSaveEdit == "true") {
     return res.redirect(307, `/${prototypeVersion}/persist-sentence`);
   }
   if (req.query.edit == "true") {
     return res.redirect(307, `/${prototypeVersion}/persist-sentence`);
   }
-  if (req.session.data["appearance"]["overall-conviction-date-apply-all"] == "No") {
+  if (overallConvictionDateApply == "No") {
     return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-sentence/sentence-type`
+      `/${prototypeVersion}/court-cases/add-a-sentence/conviction-date`
     );
   }
-  if (overallCaseOutcomeApply == "No"){
+  if (overallConvictionDateApply == "Yes"){
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-sentence/sentence-type`
     );
@@ -2101,7 +2103,7 @@ router.get("/:prototypeVersion/count-number", function (req, res) {
     );
   } else {
     return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-sentence/offence-date`
+      `/${prototypeVersion}/court-cases/add-a-sentence/sentence-type`
     );
   }
 });
@@ -2436,7 +2438,7 @@ router.get("/:prototypeVersion/update-outcome", function (req, res) {
   req.session.index = index;
   req.session.edit = edit;
   console.log(req.session.data.appearance.offences[index]);
-  req.session.data.appearance.offences[index]["status"] = "draft";
+  
   res.redirect(
     `/${prototypeVersion}/court-cases/add-a-court-appearance/change-outcome`
   );

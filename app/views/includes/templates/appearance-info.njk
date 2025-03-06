@@ -25,6 +25,14 @@
                         {{ data['appearance']['warrant-date-day'] }}/{{ data['appearance']['warrant-date-month'] }}/{{ data['appearance']['warrant-date-year'] }}
                     </dd>
                 </div>
+                <div class="govuk-summary-list__row offences-summary-card-court-details-row">
+                    <dt class="govuk-summary-list__key">
+                        Overall case outcome
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['overall-case-outcome'] }}
+                    </dd>
+                </div>
             </dl>
             {% if showOffences == true %}
             {% if data.appearance.sentences.length > 0 %}

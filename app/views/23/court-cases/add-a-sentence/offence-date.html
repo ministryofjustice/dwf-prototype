@@ -25,7 +25,7 @@
                             {% else %}
                             <h1 class="govuk-fieldset__heading">
                                 <span class="govuk-caption-l">Add offences</span>
-                                Enter the offence dates
+                                Enter the offence dates {% if (data.appearance.offences.length < 1) or (data.appearance.sentences.length < 1) %}for the first offence{% endif %}
                             </h1>
                             {% endif %}
                         </legend>

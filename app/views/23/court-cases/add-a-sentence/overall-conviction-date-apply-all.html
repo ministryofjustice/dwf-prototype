@@ -19,7 +19,7 @@
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="overall-conviction-date-apply-all"
-                                name="appearance[overall-conviction-date-apply-all]" value="Yes" type="radio"
+                                name="appearance[overall-conviction-date-apply-all]" value="Yes" type="radio" name="appearance[overall-conviction-date-apply-all]"
                                 data-aria-controls="conditional-overall-conviction-date-apply-all" {% if
                                 data.appearance['overall-conviction-date-apply-all'] %}{% if
                                 data.appearance['overall-conviction-date-apply-all'].includes('Yes') %}checked{% endif
@@ -72,7 +72,7 @@
                         </div>
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="overall-conviction-date-apply-all-2"
-                                name="appearance[overall-conviction-date-apply-all]" type="radio" value="None" {% if
+                                name="appearance[overall-conviction-date-apply-all]" type="radio" value="No" {% if
                                 data.appearance['overall-conviction-date-apply-all'] %}{% if
                                 data.appearance['overall-conviction-date-apply-all'].includes('None') %}checked{% endif
                                 %}{% endif %}>
