@@ -11,7 +11,7 @@
                     at {{ lastAppearance['court-name']}}</h1>
             </div>
         </div>
-        <div class="govuk-tabs" data-module="govuk-tabs">
+        <!-- <div class="govuk-tabs" data-module="govuk-tabs">
             <h2 class="govuk-tabs__title">
                 Appearances
             </h2>
@@ -26,8 +26,7 @@
                         Drafts ({{ data.courtCases[data.courtCaseIndex].appearances | countDraft }})
                     </a>
                 </li>
-            </ul>
-            <div class="govuk-tabs__panel" id="appearances">
+            </ul> -->
                 {% for appearance in data.courtCases[data.courtCaseIndex].appearances | reverse %}
                 {% if appearance['status'] != 'draft' %}
                 <div class="govuk-grid-row">
@@ -125,7 +124,7 @@
                             </summary>
                             <div class="govuk-details__text">
                                 {% for offence in appearance.offences %}
-                                <div class="offence-card">
+                                <div class="offence-card govuk-!-width-two-thirds">
                                     <div class="offence-card-offence-details">
                                         <h4 class="govuk-heading-s">{{ offence['offence-name'] }}</h4>
                                         {% if offence['terror-related'] == 'Yes' %}
@@ -164,7 +163,6 @@
                                 {% endfor %}
                         </details>
                         {% else %}
-                        <!-- <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Offences</h3> -->
                         <details class="govuk-details govuk-!-margin-bottom-0 show-toggle filter white">
                             <summary class="govuk-details__summary">
                                 <span class="govuk-details__summary-text">
@@ -173,7 +171,7 @@
                             </summary>
                             <div class="govuk-details__text govuk-!-width-two-thirds">
                                 {% for sentence in appearance.sentences %}
-                                <div class="offence-card sentence-card">
+                                <div class="offence-card sentence-card govuk-!-width-two-thirds">
                                     <div class="offence-card-offence-details">
                                         {% if sentence['count-number'] %}
                                         <span class="govuk-body">Count {{ sentence['count-number'] }}</span>
@@ -370,37 +368,7 @@
                     </div>
                 </div>
                 <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-
-
                 {% endif %}
                 {% endfor %}
-            </div>
-            <div class="govuk-tabs__panel" id="drafts">
-                {% for appearance in data.courtCases[data.courtCaseIndex].appearances | reverse %}
-                {% if appearance['status'] == 'draft' %}
-                <div class="govuk-grid-row">
-                    <div class="govuk-grid-column-three-quarters">
-                        <h2 class="govuk-heading-m">{{ appearance['court-case-ref'] }} at {{ appearance['court-name'] }}
-                            on {{ appearance['warrant-date-day'] }}/{{ appearance['warrant-date-month'] }}/{{
-                            appearance['warrant-date-year'] }}</h2>
-                    </div>
-                    <div class="govuk-grid-column-one-quarter">
-                        <ul class="offence-card-actions-list">
-                            <li class="offence-card-action-link"><a href=""
-                                    class="govuk-link--no-visited-state">Delete</a> </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="govuk-grid-row">
-                    <div class="govuk-grid-column-full">
-                        <a href="add-a-court-appearance/task-list?courtCaseIndex={{loop.revindex0}}">Continue adding appearance information</a>
-                    </div>
-                </div>
-                <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-                {% endif %}
-                {% endfor %}
-            </div>
-        </div>
-    </div>
 </div>
 {% endblock %}

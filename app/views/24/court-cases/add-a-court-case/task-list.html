@@ -85,7 +85,7 @@
                             {% if data.appearance.offences.length > 0 %}
                             <a class="govuk-link govuk-task-list__link" href="../add-an-offence/check-answers" aria-describedby="offences-and-sentences-status">
                             {% else %}
-                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="../add-an-offence/merged-cases" aria-describedby="offences-and-sentences-status">
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="../add-an-offence/offence-date" aria-describedby="offences-and-sentences-status">
                             {% endif %}
                                 Add offences
                             </a>
@@ -168,9 +168,9 @@
                 <button class="govuk-button" data-module="govuk-button">
                     Finish and save
                 </button>
-                <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="/{{data.prototypeVersion}}/save-court-case" method="post" {% if data.appearanceDetailsComplete != 1 %}disabled aria-disabled="true"{% endif %}>
+                <!-- <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="/{{data.prototypeVersion}}/save-court-case" method="post" {% if data.appearanceDetailsComplete != 1 %}disabled aria-disabled="true"{% endif %}>
                 Save and come back later
-            </button>
+            </button> -->
             </div>
         </form>
     </div>
