@@ -83,7 +83,7 @@
                         <div class="govuk-task-list__name-and-hint">
                             {% if data.appearanceDetailsComplete == 1 %}
                             {% if data.appearance.offences.length > 0 %}
-                            <a class="govuk-link govuk-task-list__link" href="../add-an-offence/check-answers" aria-describedby="offences-and-sentences-status">
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="../add-an-offence/check-answers" aria-describedby="offences-and-sentences-status">
                             {% else %}
                             <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="../add-an-offence/offence-date" aria-describedby="offences-and-sentences-status">
                             {% endif %}
@@ -107,6 +107,7 @@
                             {% endif %}
                         </div>
                     </li>
+                    {% endif %}
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
                             {% if data.appearanceDetailsComplete == 1 %}
@@ -122,8 +123,8 @@
                             {% if data.nextCourtAppearanceComplete == "Yes" %}
                             Completed
                             {% else %}
-                            <strong class="govuk-tag govuk-tag--blue">
-                                Incomplete
+                            <strong class="govuk-tag govuk-tag--grey">
+                                Optional
                             </strong>
                             {% endif %}
                             {% else %}
@@ -131,7 +132,7 @@
                             {% endif %}
                         </div>
                     </li>
-                    {% endif %}
+                    
                                         <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
                             {% if data.appearanceDetailsComplete == 1 %}

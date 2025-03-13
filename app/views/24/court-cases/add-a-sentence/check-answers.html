@@ -67,8 +67,16 @@
             {% endif %}
             <h3 class="govuk-heading-m">Offences with custodial outcomes</h3>
             {% set no_matches = true %}
+            {% if (data.appearance['no-count-numbers'] == "true") %}
+                        <div class="govuk-warning-text">
+                            <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                            <strong class="govuk-warning-text__text">
+                              <span class="govuk-visually-hidden">Warning</span>
+                              You must enter the count numbers for all offence on the warrant.
+                            </strong>
+                          </div>
+            {% endif %}
             {% for sentence in data.appearance.sentences %}
-            
             {% set no_matches = false %}
             <div class="offence-card sentence-card">
                 <div class="offence-card-offence-details">
@@ -144,18 +152,30 @@
                             </dd>
                         </div>
                         {% endif %}
+                        {% if sentence['fine-amount'] %}
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Fine amount
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                £{{ sentence['fine-amount'] }}
+                            </dd>
+                        </div>
+                        {% endif %}
                         {% if sentence['consecutive-concurrent'] %}
                         <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key">
                                 Consecutive or concurrent
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                {{ sentence['consecutive-concurrent'] }}
-                                {% if sentence['forthwith'] == 'Yes' %}
-                                (forthwith)
                                 {% endif %}
+                                {% if (data.appearance['no-count-numbers'] == "true") and (sentence['consecutive-concurrent'] == "Consecutive") and (loop.index > 2) %}
+                                <a href="">Select consecutive offence</a>
+                                {% else %}
                                 {% if sentence['consecutive-concurrent'] == 'Consecutive' %}
-                                to count {{ sentence['consecutive-to'] }}
+                                {{ sentence['consecutive-concurrent'] }} to {% if sentence['consecutive-to'] > 0 %} count {% endif %}{{ sentence['consecutive-to'] }}
+                                {% else %}
+                                {{ sentence['consecutive-concurrent'] }}
                                 {% endif %}
                             </dd>
                         </div>
@@ -177,8 +197,8 @@
                 </div>
                 <div class="offence-card-actions">
                     <ul class="offence-card-actions-list">
-                        <li class="offence-card-action-link"><a href="/{{data.prototypeVersion}}/update-sentence?index={{loop.index0}}&route=remand-to-sentence">Edit</a></li>
-                        <!-- <li class="offence-card-action-link"><a href="/{{data.prototypeVersion}}/confirm-delete?index={{loop.index0}}&route=add-a-court-case">Delete</a></li> -->
+                        <li class="offence-card-action-link"><a href="/{{data.prototypeVersion}}/update-sentence?index={{loop.index0}}&route={{ data.route }}">Edit</a></li>
+                        <li class="offence-card-action-link"><a href="/{{data.prototypeVersion}}/confirm-delete?index={{loop.index0}}&route=add-a-court-case">Delete</a></li>
                     </ul>
                 </div>
             </div>
@@ -232,7 +252,8 @@
                 </div>
                 <div class="offence-card-actions">
                     <ul class="offence-card-actions-list">
-                        <li class="offence-card-action-link"><a href="/{{data.prototypeVersion}}/update-offence?index={{loop.index0}}&route=remand-to-sentence">Edit</a></li>
+                        <li class="offence-card-action-link"><a href="/{{data.prototypeVersion}}/update-offence?index={{loop.index0}}&route={{ data.route }}">Edit</a></li>
+                        <li class="offence-card-action-link"><a href="/{{data.prototypeVersion}}/confirm-delete?index={{loop.index0}}&route=add-a-court-case">Delete</a></li>
                     </ul>
                 </div>
             </div>

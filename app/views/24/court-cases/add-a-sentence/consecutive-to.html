@@ -21,7 +21,7 @@
                         {% for sentence in data['appearance'].sentences %}
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="consecutive-to-case-ref"
-                                name="sentence[consecutive-to]" type="radio" value=" {{ sentence['count-number'] }}">
+                                name="sentence[consecutive-to]" type="radio" value="{% if sentence['count-number'] %}{{ sentence['count-number'] }}{% else %}{{ sentence['offence-name'] + " committed on " + sentence['offence-start-date-day'] + "/" + sentence['offence-start-date-month'] + "/" + sentence['offence-start-date-year'] }}{% endif %}">
                             <label class="govuk-label govuk-radios__label" for="consecutive-concurrent">
                                 {% if sentence['count-number'] %}
                                 Count {{ sentence['count-number'] }}<br>

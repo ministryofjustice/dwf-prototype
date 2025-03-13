@@ -345,10 +345,16 @@
                         There are no offences with non-custodial outcomes.
                        </div>
                     {% endif %}
-            <div class="govuk-button-group govuk-!-margin-top-9">
-            <button type="submit" class="govuk-button" data-module="govuk-button">
-                Accept changes
-            </button>
+            <div class="govuk-button-group govuk-!-margin-top-8">
+                {% if data.addCountNumbersOtherSentence == true %}
+                <button class="govuk-button" data-module="govuk-button">
+                    Finish adding count numbers
+                </button>
+                {% else %}
+                <button class="govuk-button govuk-!-margin-top-6" data-module="govuk-button">
+                    Confirm changes
+                </button>
+                {% endif %}
             <a href="court-case-detail" class="govuk-link govuk-body">Cancel changes</a>
         </div>
         </form>

@@ -39,7 +39,7 @@
                         </details>
                         <div class="govuk-radios govuk-radios" data-module="govuk-radios">
                             {% for courtCase in data.courtCases %}
-                            {% if courtCase["status"] != "inactive" %}
+                            {% if (courtCase["status"] != "inactive") %}
                             {% if loop.index < data.courtCases.length %} {% set lastAppearance=courtCase.appearances |
                                 last %} <div class="govuk-radios__item">
                                 <input class="govuk-radios__input" id="consecutive-to-case-ref"

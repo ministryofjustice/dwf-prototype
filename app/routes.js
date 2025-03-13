@@ -515,7 +515,7 @@ router.post(
         "Overall questions complete " +
           req.session.data.overallQuestionsComplete
       );
-      if (prototypeVersion == 18 || prototypeVersion >= 20) {
+      if (prototypeVersion == 18 || prototypeVersion >= 20 && prototypeVersion < 23 ) {
         if (route == "remand-to-sentence") {
           return res.redirect(
             307,
@@ -543,7 +543,7 @@ router.post(
       } else {
         return res.redirect(
           307,
-          `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`
+          `/${prototypeVersion}/court-cases/add-a-sentence/overall-outcome-apply-all`
         );
       }
     }
@@ -646,6 +646,7 @@ router.get("/:prototypeVersion/update-appearance", function (req, res) {
   req.session.data.courtCaseIndex = courtCaseIndex;
   req.session.data.appearanceIndex = appearanceIndex;
   if ((prototypeVersion) => 22) {
+    console.log("TEST")
     return res.redirect(`/${prototypeVersion}/court-cases/edit-appearance`);
   }
   res.redirect(`/${prototypeVersion}/court-cases/appearance-detail`);
@@ -1651,10 +1652,12 @@ router.post(
     var forthwithSelected = req.session.data.forthwithSelected;
     console.log("Route: " + route);
     console.log("Consecutive sentence: " + consecConcur);
+    console.log("Consecutive to: " + req.session.data["sentence"]["consecutive-to"])
     console.log("Forthwith selected: " + forthwithSelected);
     if (consecConcur == "Consecutive") {
       if (req.session.data.appearance.sentences[0]["count-number"] == "") {
         req.session.data.appearance["no-count-numbers"] = "true";
+        console.log("No count numbers")
         if (prototypeVersion >= 20) {
           return res.redirect(
             `/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to-case`
@@ -1664,7 +1667,7 @@ router.post(
             req.session.data.appearance.sentences[0]["offence-name"];
           return res.redirect(307, `/${prototypeVersion}/persist-sentence`);
         }
-      }
+      } 
       res.redirect(
         `/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to-case`
       );
@@ -1692,20 +1695,18 @@ router.post(
         `/${prototypeVersion}/court-cases/add-a-sentence/select-consecutive-case`
       );
     } else if (consecToCase == "no") {
-      if (prototypeVersion >= 20) {
-        if (
-          req.session.data.appearance["no-count-numbers"] == "true" &&
-          req.session.data.appearance.sentences.length >= 2
-        ) {
+        if (req.session.data.appearance["no-count-numbers"] == "true" && req.session.data.appearance.sentences.length >= 2){
+          if (req.session.data.sentence["consecutive-concurrent"] == "Consecutive"){
           return res.redirect(
             `/${prototypeVersion}/court-cases/add-a-sentence/no-count-numbers-error`
           );
-        }
-      }
-      res.redirect(
-        `/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to`
-      );
-    }
+        } 
+  } else {
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to`
+    );
+  }
+}
   }
 );
 
