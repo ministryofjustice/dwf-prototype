@@ -2,7 +2,7 @@
 {% block content %}
 <div class="govuk-grid-row govuk-!-margin-top-4">
   <div class="govuk-grid-column-two-thirds govuk-!-padding-right-8">
-    <form class="form" action="/{{data.prototypeVersion}}/court-documents-complete" method="post">
+    <form class="form" action="court-documents-uploaded" method="post">
       <div class="govuk-form-group">
         <fieldset class="govuk-fieldset">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
@@ -15,41 +15,25 @@
       Uploading documents is optional. The selected file type should be .PDF under 500MB.
     </div>
 
-    <p class="govuk-body" aria-live="polite">1 file uploaded</p>
+    <!-- <p class="govuk-body" aria-live="polite">1 file uploaded</p> -->
 
     <p class="govuk-body govuk-!-display-none" id="refreshPageProgress"><a href="#" class="govuk-link">Refresh page to update file upload progress</a></p>
 
-    <dl class="govuk-summary-list govuk-summary-list--long-key govuk-!-margin-0">
-      <div class="govuk-summary-list__row">
-        <div class="govuk-form-group">
-          <label class="govuk-label" for="file-upload-1">
-            Upload a file
-          </label>
-          <div
-            class="govuk-drop-zone"
-            data-module="govuk-file-upload">
-            <input class="govuk-file-upload" id="file-upload-1" name="fileUpload1" type="file">
-          </div>
-        </div>
-        <dd class="govuk-summary-list__actions">
-          <a class="govuk-link" href="#">Remove<span class="govuk-visually-hidden"> file-name.pdf</span></a>
-        </dd>
-      </div>
+            <div class="govuk-form-group govuk-!-margin-top-6">
+              <label class="govuk-label" for="file-upload-2">
+                {% if data.appearance['warrant-type'] == "Sentencing" %}Sentencing{% else %}Remand{% endif %} warrant               
+              </label>
+              <input class="govuk-file-upload" id="file-upload-2" name="file-upload-2" type="file">
+            </div>
+
       {% if data.appearance['warrant-type'] == "Sentencing" %}
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          file-name.pdf
-          <div class="govuk-body govuk-!-margin-0">Trial record sheet</div>
-        </dt>
-        <dd class="govuk-summary-list__value govuk-!-text-align-right">
-          <strong class="govuk-tag govuk-tag--yellow">
-            Uploading
-        </strong>
-        </dd>
-        <dd class="govuk-summary-list__actions">
-          <a class="govuk-link" href="#">Remove<span class="govuk-visually-hidden"> file-name.pdf</span></a>
-        </dd>
-      </div>
+      <hr class="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-4">
+      <div class="govuk-form-group">
+              <label class="govuk-label" for="file-upload-2">
+                Trial record sheet                
+              </label>
+              <input class="govuk-file-upload" id="file-upload-2" name="file-upload-2" type="file">
+            </div>
       {% endif %}
     </dl>
     <hr class="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-4">
@@ -70,7 +54,7 @@
     </div>
           <div class="govuk-button-group govuk-!-margin-top-8">
             <button type="submit" class="govuk-button" data-module="govuk-button">
-             Continue
+             Upload documents
             </button>
           </div>
     </form>
