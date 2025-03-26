@@ -27,9 +27,10 @@
                     </a>
                 </li>
             </ul> -->
+            
                 {% for appearance in data.courtCases[data.courtCaseIndex].appearances | reverse %}
                 {% if appearance['status'] != 'draft' %}
-                <div class="govuk-grid-row">
+                <div class="govuk-grid-row govuk-!-margin-top-6">
                     <div class="govuk-grid-column-one-half">
                         <h2 class="govuk-heading-m">{{ appearance['court-case-ref'] }} at {{ appearance['court-name'] }}
                             on {{ appearance['warrant-date-day'] }}/{{ appearance['warrant-date-month'] }}/{{
@@ -87,8 +88,6 @@
                         {% endif %}
                         <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Court documents</h3>
                         <ul class="govuk-list govuk-list--no--bullet govuk-!-margin-bottom-3">
-                            {% if data.appearance.documents %}
-                            {% for document in data.appearance.documents %}
                             <li><a href="{{ asset_path }}documents/order-of-imprisonment-court-case-2.pdf"
                                     class="govuk-link--no-visited-state" target="_blank"><svg
                                         class="moj-timeline__document-icon" xmlns="http://www.w3.org/2000/svg"
@@ -96,9 +95,8 @@
                                         <path
                                             d="M9 7V1.5L14.5 7H9zM2 0C.9 0 0 .9 0 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6l-6-6H2z">
                                         </path>
-                                    </svg>{{document | capitalize}}</a></li>
-                            {% endfor %}
-                            {% for document in data.appearance['additional-documents-list'] %}
+                                    </svg>{% if appearance['warrant-type'] == "Remand" %}Remand warrant{% else %}Setencing warrant{% endif %}</a></li>
+                                    {% if appearance['warrant-type'] == "Sentencing" %}
                             <li><a href="{{ asset_path }}documents/order-of-imprisonment-court-case-2.pdf"
                                     class="govuk-link--no-visited-state" target="_blank"><svg
                                         class="moj-timeline__document-icon" xmlns="http://www.w3.org/2000/svg"
@@ -106,11 +104,8 @@
                                         <path
                                             d="M9 7V1.5L14.5 7H9zM2 0C.9 0 0 .9 0 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6l-6-6H2z">
                                         </path>
-                                    </svg>{{document | capitalize}}</a></li>
-                            {% endfor %}
-                            {% else %}
-                            <p class="govuk-body govuk-!-margin-bottom-3">No documents</p>
-                            {% endif %}
+                                    </svg>Prison court register</a></li>
+                                    {% endif %}
                         </ul>
                     </div>
                     <div class="govuk-grid-column-full govuk-!-margin-top-4">

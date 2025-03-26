@@ -6,7 +6,11 @@
             <fieldset class="govuk-fieldset" role="group" aria-describedby="passport-issued-hint">
                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                     <h1 class="govuk-fieldset__heading">
-                        <span class="govuk-caption-l">Add offences</span>
+                        {% if data.route == "appearance" %}
+                            <span class="govuk-caption-l">Update offence outcomes</span>
+                            {% else %}
+                            <span class="govuk-caption-l">Add offences</span>
+                            {% endif %}
                         Enter the sentence length
                     </h1>
                 </legend>

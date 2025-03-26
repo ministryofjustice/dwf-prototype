@@ -1468,6 +1468,19 @@ body {
   font-size: unset !important;
 }
 
+.active-cases-checkbox {
+  margin-right: 10px;
+}
+
+.active-cases-checkbox:first-of-type {
+  margin-left: 0;
+}
+
+.active-cases-checkbox > .govuk-checkboxes__label {
+  max-width: unset;
+}
+
+
 // .filter > .govuk-details__text > .hods-expandable-banner[open] > .hods-expandable-banner__summary:focus {
 //   background: none;
 //   text-decoration: none;

@@ -33,7 +33,11 @@
               </h1>
               {% else %}
               <h1 class="govuk-fieldset__heading">
-                <span class="govuk-caption-l">Add offences</span>
+                {% if data.route == "remand-to-sentence" %}
+                            <span class="govuk-caption-l">Update offence outcomes</span>
+                            {% else %}
+                            <span class="govuk-caption-l">Add offences</span>
+                            {% endif %}
                 Is there a count number for {% if (data.appearance['overall-case-outcome-apply-all'] == "Yes") and (data.appearance.sentences < 1) and (data.appearance.offences < 1) %}the first offence {% else %} this offence{% endif %}
               </h1>
               {% endif %}

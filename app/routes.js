@@ -147,7 +147,7 @@ router.post("/:prototypeVersion/offence-code-known", function (req, res) {
       req.session.data.sentence["terror-related"] = "No";
       req.session.data.sentence["offence-name"] = "Betting in the street";
       req.session.data.sentence["offence-active"] = "inactive";
-      res.redirect(
+      return res.redirect(
         `/${prototypeVersion}/court-cases/add-a-sentence/inactive-offence-error`
       );
     } 
