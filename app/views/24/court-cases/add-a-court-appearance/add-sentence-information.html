@@ -39,7 +39,7 @@
                     <button class="govuk-button govuk-button--link govuk-!-margin-bottom-2" data-module="govuk-button" formaction="/{{data.prototypeVersion}}/create-sentence?route=remand-to-sentence&path=rts-new-offence&edit=false" method="post">
                         Add an offence
                     </button>
-                    {% if data.appearance['warrant-type'] == "Sentencing" %}<h2 class="govuk-heading-m govuk-!-margin-top-8 govuk-!-margin-bottom-6">Offences with outcomes that need updating</h2>{% endif %}
+                    {% if data.appearance['warrant-type'] == "Sentencing" %}<h2 class="govuk-heading-m govuk-!-margin-top-8 govuk-!-margin-bottom-6">Offences with outcomes that have not been updated</h2>{% endif %}
                     {% set no_match3 = true %}
                     {% for offence in data.appearance.offences %}
                     {% if (sentence['sentence-type'] == null) and (offence['outcome-changed'] != 'true') %}
@@ -430,13 +430,13 @@
             <div class="govuk-form-group govuk-!-margin-top-8">
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-                        Have you finished reviewing offences?
+                        Have you finished updating offence outcomes?
                     </legend>
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="finished-adding-offences" name="appearance[finished-adding-offences]" type="radio" value="yes">
                             <label class="govuk-label govuk-radios__label" for="finished-adding-offences">
-                                Yes, I’ve finished reviewing offences {% if data.appearance['warrant-type'] == "Sentencing" %}and sentences{% endif %}
+                                Yes, I’ve finished updating offence outcomes {% if data.appearance['warrant-type'] == "Sentencing" %}and sentences{% endif %}
                             </label>
                         </div>
                         <div class="govuk-radios__item">
