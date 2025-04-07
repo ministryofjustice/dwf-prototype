@@ -1481,6 +1481,20 @@ body {
 }
 
 
+li code, caption code, td code, p code {
+  padding: 1px 3px;
+  color: #d13118;
+  background-color: #f3f2f1;
+  font-size: 1rem;
+  line-height: 1.25;
+  }
+
+  .app-content pre, .app-content code {
+    font-family: ui-monospace,menlo,"Cascadia Mono","Segoe UI Mono",consolas,"Liberation Mono",monospace;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    }
+
 // .filter > .govuk-details__text > .hods-expandable-banner[open] > .hods-expandable-banner__summary:focus {
 //   background: none;
 //   text-decoration: none;

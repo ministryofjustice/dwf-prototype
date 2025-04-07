@@ -28,7 +28,7 @@
                     </button>
                     </form>
                 </div> -->
-                  <div class="govuk-form-group govuk-!-margin-bottom-4">
+                  <!-- <div class="govuk-form-group govuk-!-margin-bottom-4">
                     <fieldset class="govuk-fieldset">
                       <div class="govuk-checkboxes govuk-checkboxes--small govuk-radios--inline" data-module="govuk-checkboxes">
                         <div class="govuk-checkboxes__item active-cases-checkbox">
@@ -45,7 +45,7 @@
                         </div>
                       </div>
                     </fieldset>
-                  </div>
+                  </div> -->
                   <p class="govuk-body govuk-!-font-weight-bold">Showing 5 of {{ data.courtCases.length }} court cases</p>
             </div>
         </div>
@@ -59,7 +59,7 @@
                 {% if courtCaseIndex <= 4 %}
                 <div class="govuk-summary-card">
                     <div class="govuk-summary-card__title-wrapper">
-                        <h2 class="govuk-summary-card__title">{{ lastAppearance['court-case-ref'] }} <span class="govuk-body">and</span> {% if lastAppearance['merged-from-case'] %}{{ lastAppearance['merged-from-case'] }}{% endif %} <span class="govuk-body">at</span> {{ lastAppearance['court-name']}}{% if (courtCase.appearances.length == 1) and (lastAppearance['status'] == 'draft') %} <strong class="govuk-tag govuk-tag--blue govuk-!-margin-left-2">Draft</strong>{% endif %}</h2>
+                        <h2 class="govuk-summary-card__title govuk-!-width-two-thirds">{{ lastAppearance['court-case-ref'] }} <span class="govuk-body">and</span> {% if lastAppearance['merged-from-case'] %}{{ lastAppearance['merged-from-case'] }}{% endif %} <span class="govuk-body">at</span> {{ lastAppearance['court-name']}}{% if (courtCase.appearances.length == 1) and (lastAppearance['status'] == 'draft') %} <strong class="govuk-tag govuk-tag--blue govuk-!-margin-left-2">Draft</strong>{% endif %}</h2>
                         <ul class="govuk-summary-card__actions">
                             <li class="govuk-summary-card__action">
                                 {% if courtCase['source'] == "NOMIS" %}

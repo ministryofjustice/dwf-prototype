@@ -144,6 +144,7 @@ module.exports = {
                 },
                 {
                     "court-case-ref": "T20223256",
+                    "merged-from-case": "T22029876",
                     "warrant-type": "Sentencing",
                     "overall-case-outcome": "Imprisonment",
                     "overall-conviction-date-day": "05",
@@ -163,7 +164,8 @@ module.exports = {
                     "total-sentence-length-weeks" : "0",
                     "total-sentence-length-days" : "0",
                     "sentences": [{
-                            "count-number": "",
+                            "merged-from": "T20229876 at Oldham Crown Court",
+                            "count-number": "1",
                             "conviction-date-day": "05",
                             "conviction-date-month": "10",
                             "conviction-date-year": "2024",
@@ -186,7 +188,7 @@ module.exports = {
                             "consecutive-concurrent": "Forthwith"
                         },
                         {
-                            "count-number": "",
+                            "count-number": "2",
                             "conviction-date-day": "05",
                             "conviction-date-month": "10",
                             "conviction-date-year": "2024",
