@@ -27,16 +27,6 @@
                             </h1>
                             {% endif %}
                         </legend>
-                        <details class="govuk-details govuk-!-margin-top-2">
-                            <summary class="govuk-details__summary">
-                                <span class="govuk-details__summary-text">
-                                    What to do if the case isn't listed
-                                </span>
-                            </summary>
-                            <div class="govuk-details__text">
-                                Lorum ipsum
-                            </div>
-                        </details>
                         <div class="govuk-radios govuk-radios" data-module="govuk-radios">
                             {% for courtCase in data.courtCases %}
                             {% if (courtCase["status"] != "inactive") %}
