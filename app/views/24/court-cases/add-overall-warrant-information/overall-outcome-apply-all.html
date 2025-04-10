@@ -3,16 +3,12 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="check-answers-additional-information" method="post">
+        <form class="form" action="check-answers" method="post">
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
-                            {% if data.route == "appearance" %}
-                            <span class="govuk-caption-l">Update offence outcomes</span>
-                            {% else %}
-                            <span class="govuk-caption-l">Add offences</span>
-                            {% endif %}
+                            <span class="govuk-caption-l">Add overall warrant information</span>
                             Is the outcome the same for all offences on the warrant?
                         </h1>
                     </legend>

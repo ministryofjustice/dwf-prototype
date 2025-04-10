@@ -4,22 +4,10 @@
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">
-            {% if data.route == "appearance" %}
-            <span class="govuk-caption-l">Update offence outcomes</span>
-            {% else %}
-            <span class="govuk-caption-l">Add offences</span>
-            {% endif %}
+            <span class="govuk-caption-l">Add overall warrant information</span>
             Check your answers
         </h1>
-        {% if (data.appearance.sentences.length > 0) or (data.appearance.offences.length > 0) %}
-            {% if data.route == 'appearance' %}
-            <form class="form" action="../add-a-court-appearance/add-sentence-information" method="post">
-            {% else %}
-        <form class="form" action="check-answers" method="post">
-            {% endif %}
-            {% else %}
-            <form class="form" action="/{{data.prototypeVersion}}/add-offences-select?route=new-court-case" method="post">
-                {% endif %}
+        <form class="form" action="/{{data.prototypeVersion}}/add-overall-warrant-information-complete" method="post">
                 <dl class="govuk-summary-list">
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
@@ -146,11 +134,7 @@
                 </dl>
                 <div class="govuk-button-group">
                     <button class="govuk-button" data-module="govuk-button">
-                        {% if data.route == "appearance" %}
-                        Confirm and update offence outcomes
-                        {% else %}
-                        Confirm and add offences
-                        {% endif %}
+                        Confirm and continue
                     </button>
                 </div>
             </form>

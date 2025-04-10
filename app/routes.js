@@ -1753,6 +1753,23 @@ router.post(
   }
 );
 
+router.post("/:prototypeVersion/add-overall-warrant-information-complete",
+  function (req, res) {
+    const prototypeVersion = req.params.prototypeVersion;
+    const route = req.session.data.route;
+    var additionalInformationComplete = 1;
+    req.session.data.additionalInformationComplete = additionalInformationComplete;
+    if(route == "appearance") {
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
+    );
+  } else {
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-court-case/task-list`
+    );
+  }
+});
+
 router.post(
   "/:prototypeVersion/add-sentence-information-complete",
   function (req, res) {
