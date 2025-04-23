@@ -1121,26 +1121,6 @@ router.get("/:prototypeVersion/create-sentence", function (req, res) {
       outcome: req.session.data.appearance["overall-case-outcome"],
     };
   }
-  if (
-    req.session.data.appearance["overall-conviction-date-apply-all"] === "Yes"
-  ) {
-    req.session.data.sentence = {
-      "conviction-date-day":
-        req.session.data.appearance["overall-conviction-date-day"],
-      "conviction-date-month":
-        req.session.data.appearance["overall-conviction-date-month"],
-      "conviction-date-year":
-        req.session.data.appearance["overall-conviction-date-year"],
-    };
-    console.log(
-      "Conviction date: " +
-        req.session.data.sentence["conviction-date-day"] +
-        "/" +
-        req.session.data.sentence["conviction-date-month"] +
-        "/" +
-        req.session.data.sentence["conviction-date-year"]
-    );
-  }
   if (route == "edit-appearance") {
     req.session.data.forthwithSelected = "Yes";
   }
@@ -1169,6 +1149,7 @@ router.post("/:prototypeVersion/persist-sentence", function (req, res) {
   if (req.session.data.progressSaved != true) {
     req.session.data.sentence["status"] = "complete";
   }
+
   req.session.data.sentence["outcome"] = "Imprisonment";
 
   if (prototypeVersion > "13") {
@@ -1233,6 +1214,20 @@ router.post("/:prototypeVersion/persist-sentence", function (req, res) {
       req.session.data.appearance["total-sentence-length-days"] / 7
     );
     req.session.data.appearance["total-sentence-length-days"] %= 7;
+  }
+
+  if (req.session.data.appearance["overall-conviction-date-apply-all"] === "Yes") {
+    req.session.data.sentence["conviction-date-day"] = req.session.data.appearance["overall-conviction-date-day"];
+    req.session.data.sentence["conviction-date-month"] = req.session.data.appearance["overall-conviction-date-month"];
+    req.session.data.sentence["conviction-date-year"] = req.session.data.appearance["overall-conviction-date-year"];  
+    console.log(
+      "Conviction date: " +
+        req.session.data.sentence["conviction-date-day"] +
+        "/" +
+        req.session.data.sentence["conviction-date-month"] +
+        "/" +
+        req.session.data.sentence["conviction-date-year"]
+    );
   }
 
   if (edit === "true") {
@@ -1660,7 +1655,7 @@ router.post(
         console.log("No count numbers")
         if (prototypeVersion >= 20) {
           return res.redirect(
-            `/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to-case`
+            `/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to`
           );
         } else {
           req.session.data["sentence"]["consecutive-to"] =
@@ -1669,7 +1664,7 @@ router.post(
         }
       } 
       res.redirect(
-        `/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to-case`
+        `/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to`
       );
     } else if (consecConcur == "Forthwith" && forthwithSelected != "Yes") {
       forthwithSelected = "Yes";
