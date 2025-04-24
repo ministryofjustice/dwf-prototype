@@ -145,6 +145,7 @@ module.exports = {
                 {
                     "court-case-ref": "T20223256",
                     "merged-from-case": "T22029876",
+                    "merged-from-case-date": "05/10/2024",
                     "warrant-type": "Sentencing",
                     "overall-case-outcome": "Imprisonment",
                     "overall-conviction-date-day": "05",
@@ -164,25 +165,25 @@ module.exports = {
                     "total-sentence-length-weeks" : "0",
                     "total-sentence-length-days" : "0",
                     "sentences": [{
-                            "merged-from": "T20229876 at Oldham Crown Court",
+                            "merged-from": "T20250103 at Sheffield Crown Court",
                             "count-number": "1",
-                            "conviction-date-day": "05",
-                            "conviction-date-month": "10",
-                            "conviction-date-year": "2024",
-                            "offence-start-date-day": "24",
-                            "offence-start-date-month": "12",
-                            "offence-start-date-year": "2023",
+                            "conviction-date-day": "20",
+                            "conviction-date-month": "03",
+                            "conviction-date-year": "2025",
+                            "offence-start-date-day": "01",
+                            "offence-start-date-month": "01",
+                            "offence-start-date-year": "2025",
                             "offence-end-date-day": "",
                             "offence-end-date-month": "",
                             "offence-end-date-year": "",
                             "offence-code": [
-                                "CJ88001"
+                                "AB06001"
                             ],
-                            "offence-name": "CJ88001 - Common assault",
+                            "offence-name": "AB06001 - Obstruct person acting in execution of the regulations",
                             "outcome": "Imprisonment",
                             "sentence-type": "SDS (Standard Determinate Sentence)",
-                            "sentence-length-years": "2",
-                            "sentence-length-months": "6",
+                            "sentence-length-years": "1",
+                            "sentence-length-months": "0",
                             "sentence-length-weeks": "0",
                             "sentence-length-days": "0",
                             "consecutive-concurrent": "Forthwith"
@@ -915,9 +916,12 @@ module.exports = {
                             ]
                         },
                         {
+                            "status": "inactive",
                             appearances: [
                                 {
                                     "court-case-ref": "T20250103",
+                                    "merged-with": "T20223256 at Manchester Crown Court (Crown Square)",
+                                    "merged-with-case-date": "05/10/2024",
                                     "warrant-type": "Sentencing",
                                     "overall-case-outcome": "Imprisonment",
                                     "overall-conviction-date-day": "20",
