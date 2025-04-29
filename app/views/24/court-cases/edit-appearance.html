@@ -18,7 +18,7 @@
                         {{ data.appearance['court-case-ref'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="add-a-court-appearance/court-case-reference-number?postSaveEdit=true">
+                        <a class="govuk-link govuk-link--no-visited-state" href="add-a-court-appearance/court-case-reference-number?postSaveEdit=true">
                             Edit<span class="govuk-visually-hidden"> case reference</span>
                         </a>
                     </dd>
@@ -31,7 +31,7 @@
                         {{ data.appearance['warrant-date-day'] }}/{{ data.appearance['warrant-date-month'] }}/{{ data.appearance['warrant-date-year'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="add-a-court-appearance/warrant-date?postSaveEdit=true">
+                        <a class="govuk-link govuk-link--no-visited-state" href="add-a-court-appearance/warrant-date?postSaveEdit=true">
                             Edit<span class="govuk-visually-hidden"> warrant date</span>
                         </a>
                     </dd>
@@ -45,7 +45,7 @@
                         {{ data.appearance['overall-conviction-date-day'] }}/{{ data.appearance['overall-conviction-date-month'] }}/{{ data.appearance['overall-conviction-date-year'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="add-a-sentence/overall-conviction-date?postSaveEdit=true">
+                        <a class="govuk-link govuk-link--no-visited-state" href="add-a-sentence/overall-conviction-date?postSaveEdit=true">
                             Edit<span class="govuk-visually-hidden"> conviction date</span>
                         </a>
                     </dd>
@@ -59,7 +59,7 @@
                         {{ data.appearance['court-name'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="add-a-court-appearance/court-name?postSaveEdit=true">
+                        <a class="govuk-link govuk-link--no-visited-state" href="add-a-court-appearance/court-name?postSaveEdit=true">
                             Edit<span class="govuk-visually-hidden"> court name</span>
                         </a>
                     </dd>
@@ -72,7 +72,7 @@
                         {{ data.appearance['overall-case-outcome'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="add-a-court-appearance/overall-case-outcome?postSaveEdit=true">
+                        <a class="govuk-link govuk-link--no-visited-state" href="add-a-court-appearance/overall-case-outcome?postSaveEdit=true">
                             Edit<span class="govuk-visually-hidden"> overall case outcome</span>
                         </a>
                     </dd>
@@ -86,7 +86,7 @@
                         No future appearance scheduled
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="add-a-court-appearance/next-court-date-select?postSaveEdit=true">
+                        <a class="govuk-link govuk-link--no-visited-state" href="add-a-court-appearance/next-court-date-select?postSaveEdit=true">
                             Edit<span class="govuk-visually-hidden"> next hearing</span>
                         </a>
                     </dd>
@@ -104,7 +104,7 @@
                         {{ data.appearance['next-court-date-set']}}
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="add-a-court-appearance/next-court-date-select?postSaveEdit=true">
+                        <a class="govuk-link govuk-link--no-visited-state" href="add-a-court-appearance/next-court-date-select?postSaveEdit=true">
                             Edit<span class="govuk-visually-hidden"> next hearing set</span>
                         </a>
                     </dd>
@@ -117,7 +117,7 @@
                         {{ data.appearance['next-court-name'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="add-a-court-appearance/next-court-name?postSaveEdit=true">
+                        <a class="govuk-link govuk-link--no-visited-state" href="add-a-court-appearance/next-court-name?postSaveEdit=true">
                             Edit<span class="govuk-visually-hidden"> customer reference</span>
                         </a>
                     </dd>
@@ -130,8 +130,21 @@
                         {{ data.appearance['next-hearing-type'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="add-a-court-appearance/next-hearing-type-select?postSaveEdit=true">
+                        <a class="govuk-link govuk-link--no-visited-state" href="add-a-court-appearance/next-hearing-type-select?postSaveEdit=true">
                             Edit<span class="govuk-visually-hidden"> next hearing type</span>
+                        </a>
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Date
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['next-court-date-day'] }}/{{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['next-court-date-month'] }}/{{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['next-court-date-year'] }} at {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['next-court-time'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link govuk-link--no-visited-state" href="add-a-court-appearance/next-court-date?postSaveEdit=true">
+                            Edit<span class="govuk-visually-hidden"> next court date</span>
                         </a>
                     </dd>
                 </div>
@@ -150,6 +163,30 @@
                 </div>
             </dl>
             {% endif %}
+            <div class="govuk-!-margin-bottom-7">
+            <h2 class="govuk-heading-m">Court documents</h2>
+            <ul class="govuk-list govuk-list--no--bullet govuk-!-margin-bottom-3">
+                <li><a href="{{ asset_path }}documents/order-of-imprisonment-court-case-2.pdf"
+                        class="govuk-link--no-visited-state" target="_blank"><svg
+                            class="moj-timeline__document-icon" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 16 20" width="20" height="16">
+                            <path
+                                d="M9 7V1.5L14.5 7H9zM2 0C.9 0 0 .9 0 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6l-6-6H2z">
+                            </path>
+                        </svg>{% if data.appearance['warrant-type'] == "Remand" %}Remand warrant{% else %}Sentencing warrant{% endif %}</a></li>
+                        {% if data.appearance['warrant-type'] == "Sentencing" %}
+                <li><a href="{{ asset_path }}documents/order-of-imprisonment-court-case-2.pdf"
+                        class="govuk-link--no-visited-state" target="_blank"><svg
+                            class="moj-timeline__document-icon" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 16 20" width="20" height="16">
+                            <path
+                                d="M9 7V1.5L14.5 7H9zM2 0C.9 0 0 .9 0 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6l-6-6H2z">
+                            </path>
+                        </svg>Prison court register</a></li>
+                        {% endif %}
+            </ul>
+            <p class="govuk-body govuk-!-margin-top-4"><a class="govuk-link--no-visited-state" href="add-a-court-appearance/court-documents?postSaveEdit=true">Manage court documents</a></p>
+            </div>
             <h2 class="govuk-heading-m">Offences ({% if (data.appearance.offences) and (data.appearance.sentences) %}{{ data.appearance.offences.length + data.appearance.sentences.length }}{% elif data.appearance.offences %}{{ data.appearance.offences.length }}{% elif data.appearance.sentences %}{{ data.appearance.sentences.length }}{% endif %})</h2>
 <dl class="govuk-summary-list">
                 <div class="govuk-summary-list__row">
@@ -295,7 +332,6 @@
                     <h3 class="govuk-heading-s govuk-!-margin-top-7">Offences with non-custodial outcomes</h3>
                     {% set no_matches2 = true %}
                     {% for offence in data.appearance.offences %}
-                    
                     {% set no_matches2 = false %}
                     <div class="offence-card">
                         <div class="offence-card-offence-details">

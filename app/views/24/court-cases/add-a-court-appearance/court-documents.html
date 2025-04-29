@@ -6,9 +6,16 @@
       <div class="govuk-form-group">
         <fieldset class="govuk-fieldset">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            {% if data.postSaveEdit == 'true' %}
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">{{ data.appearance['court-case-ref'] }} at {{ data.appearance['court-name'] }} on {{ data.appearance['warrant-date-day'] }}/{{ data.appearance['warrant-date-month'] }}/{{ data.appearance['warrant-date-year'] }}</span>
+                            Manage court documents
+                        </h1>
+                        {% else %}
             <h1 class="govuk-fieldset__heading">
               Upload court documents
             </h1>
+            {% endif %}
           </legend>
 
     <div id="file-upload-1-hint" class="govuk-hint">

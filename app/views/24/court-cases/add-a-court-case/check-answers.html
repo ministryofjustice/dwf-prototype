@@ -87,25 +87,7 @@
                     </dd>
                 </div>
                 {% endif %}
-                {% if data.appearance['warrant-type'] == "Sentencing" %}
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Tagged bail
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        {% if data['appearance']['tagged-bail'] | first != 'No' %}
-                        {{ data['appearance']['tagged-bail'] | last }} days
-                        {% else %}
-                        None
-                        {% endif %}
-                    </dd>
-                    <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="tagged-bail?edit=true">
-                            Edit<span class="govuk-visually-hidden"> court name</span>
-                        </a>
-                    </dd>
-                </div>
-                {% endif %}
+                
             </dl>
             <button class="govuk-button" data-module="govuk-button">
                 Confirm and continue

@@ -6,7 +6,7 @@
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
                 You have added {% if data.appearance.offences %}{{ data.appearance.offences.length + data.appearance.sentences.length }}{% else %}{{ data.appearance.sentences.length }}{% endif %} offence{% if
-                (data.appearance.offences.length > 0) or (data.appearance.sentences.length > 0) %}s{% endif %}
+                (data.appearance.offences.length > 0) or (data.appearance.sentences.length > 1) %}s{% endif %}
             </h1>
         </legend>
         <form class="form" action="/{{data.prototypeVersion}}/add-sentence-information-complete?route=new-court-case"

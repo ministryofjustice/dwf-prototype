@@ -380,7 +380,7 @@ router.post("/:prototypeVersion/new-court-name", function (req, res) {
       ];
       if (req.session.data.appearance["overall-case-outcome"] == "Imprisonment") {
         res.redirect(
-          `/${prototypeVersion}/court-cases/add-a-court-appearance/tagged-bail`
+          `/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers`
         );
       } else {
       res.redirect(

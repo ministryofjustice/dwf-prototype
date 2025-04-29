@@ -19,78 +19,76 @@
 
     <p class="govuk-body govuk-!-display-none" id="refreshPageProgress"><a href="#" class="govuk-link">Refresh page to update file upload progress</a></p>
 
-    <dl class="govuk-summary-list govuk-summary-list--long-key govuk-!-margin-0">
+    <dl class="govuk-summary-list govuk-summary-list--long-key govuk-!-margin-bottom-0">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          <a class="govuk-link govuk-link--no-visited-state" href="#">file-name.pdf</a>
-          <div class="govuk-body govuk-!-margin-0">{% if data.appearance['warrant-type'] == "Sentencing" %}Sentencing{% else %}Remand{% endif %} warrant</div>
+          <a class="govuk-link" href="#">sentencing-warrant.pdf</a>
+          <div class="govuk-body govuk-!-margin-0">Sentencing warrant</div>
         </dt>
-        <dd class="govuk-summary-list__value govuk-!-text-align-right">
+        <dd class="govuk-summary-list__value">
           <strong class="govuk-tag govuk-tag--green">
-            Uploaded
-        </strong>
+  Uploaded
+</strong>
+
         </dd>
         <dd class="govuk-summary-list__actions">
-          <a class="govuk-link govuk-link--no-visited-state" href="confirm-delete-document">Delete<span class="govuk-visually-hidden"> file-name.pdf</span></a>
+          <a class="govuk-link govuk-link--no-visited-state" href="#">Remove<span class="govuk-visually-hidden"> sentencing-warrant.pdf</span></a>
         </dd>
       </div>
-      {% if data.appearance['warrant-type'] == "Sentencing" %}
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          <a class="govuk-link govuk-link--no-visited-state" href="#">file-name.pdf</a>
-          <div class="govuk-body govuk-!-margin-0">Trial record sheet</div>
+          <a class="govuk-link" href="#">prison-court-register.pdf</a>
+          <div class="govuk-body govuk-!-margin-0">Prison court register</div>
         </dt>
-        <dd class="govuk-summary-list__value govuk-!-text-align-right">
+        <dd class="govuk-summary-list__value">
           <strong class="govuk-tag govuk-tag--green">
-            Uploaded
-        </strong>
+  Uploaded
+</strong>
+
         </dd>
         <dd class="govuk-summary-list__actions">
-          <a class="govuk-link govuk-link--no-visited-state" href="confirm-delete-document">Delete<span class="govuk-visually-hidden"> file-name.pdf</span></a>
+          <a class="govuk-link govuk-link--no-visited-state" href="#">Remove<span class="govuk-visually-hidden"> prison-court-register.pdf</span></a>
         </dd>
       </div>
-      {% endif %}
-    {% if data.appearance['warrant-type'] == "Sentencing" %}
-    <div class="govuk-summary-list__row">
-      <dt class="govuk-summary-list__key">
-        <a class="govuk-link govuk-link--no-visited-state" href="#">file-name.pdf</a>
-        <div class="govuk-body govuk-!-margin-0">Indictment</div>
-      </dt>
-      <dd class="govuk-summary-list__value govuk-!-text-align-right">
-        <strong class="govuk-tag govuk-tag--green">
-          Uploaded
-      </strong>
-      </dd>
-      <dd class="govuk-summary-list__actions">
-        <a class="govuk-link govuk-link--no-visited-state" href="confirm-delete-document">Delete<span class="govuk-visually-hidden"> file-name.pdf</span></a>
-      </dd>
-    </div>
-    {% endif %}
-    <div class="govuk-summary-list__row">
-      <dt class="govuk-summary-list__key">
-        <a class="govuk-link govuk-link--no-visited-state" href="#">file-name.pdf</a>
-        <div class="govuk-body govuk-!-margin-0">Prison court register</div>
-      </dt>
-      <dd class="govuk-summary-list__value govuk-!-text-align-right">
-        <strong class="govuk-tag govuk-tag--green">
-          Uploaded
-      </strong>
-      </dd>
-      <dd class="govuk-summary-list__actions">
-        <a class="govuk-link govuk-link--no-visited-state" href="confirm-delete-document">Delete<span class="govuk-visually-hidden"> file-name.pdf</span></a>
-      </dd>
-    </div>
-    
     </dl>
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="file-upload-1">
+        Indictment
+      </label>
+      <input class="govuk-file-upload" id="file-upload-1" name="file-upload-1" type="file">
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="file-upload-2">
+        Trial record sheet
+      </label>
+      <input class="govuk-file-upload" id="file-upload-2" name="file-upload-2" type="file">
+    </div>
+
     <!-- <div class="govuk-form-group">
       <label class="govuk-label" for="file-upload-2">
         Prison court register
       </label>
       <input class="govuk-file-upload" id="file-upload-2" name="file-upload-2" type="file">
     </div> -->
+
+
+<div class="govuk-inset-text">There are files that have not yet been uploaded:<br>
+  <ul class="govuk-list govuk-list--no-bullet govuk-!-margin-top-4">
+    <li>Trial Record Sheet Case 1.pdf</li>
+  </ul>
+  You must upload these to add them to the appearance.<br>
+  <button type="submit" class="govuk-button govuk-button--secondary govuk-!-margin-top-4" data-module="govuk-button">
+  Upload documents now
+ </button></div>
+
+
           <div class="govuk-button-group govuk-!-margin-top-8">
             <button type="submit" class="govuk-button" data-module="govuk-button">
-             Continue
+             Finish uploading documents
             </button>
           </div>
     </form>
