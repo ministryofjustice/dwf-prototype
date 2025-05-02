@@ -807,7 +807,7 @@ router.post("/:prototypeVersion/persist-appearance", function (req, res) {
       );
     }
   } else if (route == "edit-appearance") {
-    return res.redirect(`/${prototypeVersion}/court-cases/court-case-detail`);
+    return res.redirect(`/${prototypeVersion}/court-cases/confirmation-edit`);
   } else if (route == "remand-to-sentence") {
     if (req.query.saveCourtCase == "true") {
       req.session.data.appearance["status"] = ["draft"];

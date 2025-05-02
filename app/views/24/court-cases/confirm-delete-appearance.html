@@ -1,0 +1,34 @@
+{% extends "./template.html" %}
+<!-- {% set backLinkTarget = 'court-case-detail' %} -->
+{% set backLinkTarget = '/' + data.prototypeVersion + '/court-cases/appearance-detail' %}
+{% set noBackLink = false %}
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" action="court-case-detail" method="post">
+            <h1 class="govuk-heading-l govuk-!-margin-top-4">Are you sure you want to delete this appearance?</h1>
+            <div class="govuk-body-l">{{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['court-case-ref'] }} at {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['court-name']}} on {{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['warrant-date-day']}}/{{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['warrant-date-month']}}/{{ data.courtCases[data.courtCaseIndex].appearances[data.appearanceIndex]['warrant-date-year']}}</div> 
+           <!-- <div class="govuk-inset-text">By deleting this appearance, you will be removing the court case from this person’s record.</div> -->
+           <div class="govuk-radios govuk-!-margin-top-6" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="confirm-delete-sentence" name="confirmDeleteSentence" type="radio" value="Yes">
+                <label class="govuk-label govuk-radios__label" for="confirm-delete-sentence">
+                    Yes
+                </label>
+            </div>
+            <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="confirm-delete-sentence-2" name="confirmDeleteSentence" type="radio" value="No">
+                <label class="govuk-label govuk-radios__label" for="confirm-delete-sentence-2">
+                    No
+                </label>
+            </div>
+        </div>
+            <div class="govuk-button-group">
+                <button class="govuk-button govuk-!-margin-top-6" data-module="govuk-button">
+                    Continue
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
