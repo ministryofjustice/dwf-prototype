@@ -185,7 +185,7 @@
                         </svg>Prison court register</a></li>
                         {% endif %}
             </ul>
-            <p class="govuk-body govuk-!-margin-top-4"><a class="govuk-link--no-visited-state" href="add-a-court-appearance/court-documents?postSaveEdit=true">Manage court documents</a></p>
+            <p class="govuk-body govuk-!-margin-top-4"><a class="govuk-link--no-visited-state" href="add-court-documents/court-documents-uploaded?postSaveEdit=true">Manage court documents</a></p>
             </div>
             <h2 class="govuk-heading-m">Offences ({% if (data.appearance.offences) and (data.appearance.sentences) %}{{ data.appearance.offences.length + data.appearance.sentences.length }}{% elif data.appearance.offences %}{{ data.appearance.offences.length }}{% elif data.appearance.sentences %}{{ data.appearance.sentences.length }}{% endif %})</h2>
 <dl class="govuk-summary-list">
