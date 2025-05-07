@@ -432,7 +432,7 @@ router.post("/:prototypeVersion/case-outcome-apply", function (req, res) {
       });
     if (route == "repeat-remand") {
       return res.redirect(
-        `/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers`
+        `/${prototypeVersion}/court-cases/add-an-offence/confirm-offence`
       );
     }
     if (warrantType == "Sentencing") {
@@ -443,7 +443,7 @@ router.post("/:prototypeVersion/case-outcome-apply", function (req, res) {
     }
     if (route == "edit-appearance") {
       res.redirect(`/${prototypeVersion}/court-cases/edit-appearance`);
-    } else return res.redirect(307, `/${prototypeVersion}/persist-offence`);
+    } else return res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirm-offence`);
   } else if (overallCaseOutcomeApply == "Yes" && warrantType == "Sentencing") {
     req.session.data.appearance["overall-case-outcome-apply-all"] =
       overallCaseOutcomeApply;

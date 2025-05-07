@@ -3,7 +3,7 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        {% if data.route == 'remand-to-sentence' %}
+        <!-- {% if data.route == 'remand-to-sentence' %}
             {% if data.edit == 'true' %}
                 <form class="form" action="edit-an-offence">
             {% else %}
@@ -11,7 +11,12 @@
             {% endif %}
             {% else %}
             <form class="form" action="terror-related">
-            {% endif %}
+            {% endif %} -->
+            {% if data.edit == 'true' %}
+        <form class="form" action="/{{data.prototypeVersion}}/persist-offence?edit=true" method="post">
+            {% else %}
+            <form class="form" action="/{{data.prototypeVersion}}/case-outcome-apply" method="post">
+                {% endif %}
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset" role="group">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
