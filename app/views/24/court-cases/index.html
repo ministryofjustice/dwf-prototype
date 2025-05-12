@@ -8,6 +8,10 @@
         <h1 class="govuk-heading-xl govuk-!-margin-bottom-6">Court cases</h1>
     </div>
 </div>
+
+
+
+
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         {% if data.courtCases | length %}
@@ -60,13 +64,13 @@
                 {% if courtCaseIndex <= 4 %}
                 <div class="govuk-summary-card">
                     <div class="govuk-summary-card__title-wrapper">
-                        <h2 class="govuk-summary-card__title govuk-!-width-two-thirds">{{ lastAppearance['court-case-ref'] }} <span class="govuk-body">at</span> {{ lastAppearance['court-name']}}{% if (courtCase.appearances.length == 1) and (lastAppearance['status'] == 'draft') %} <strong class="govuk-tag govuk-tag--blue govuk-!-margin-left-2">Draft</strong>{% endif %}</h2>
+                        <h2 class="govuk-summary-card__title govuk-!-width-two-thirds">{{ lastAppearance['court-case-ref'] }} <span class="govuk-body">at</span> {{ lastAppearance['court-name']}}</h2>
                         <ul class="govuk-summary-card__actions">
                             <li class="govuk-summary-card__action">
                                 {% if courtCase['source'] == "NOMIS" %}
                                 <span class="moj-badge moj-badge--grey">NOMIS - read only</span>
-                                {% elif (courtCase.appearances.length == 1) and (lastAppearance['status'] == 'draft') %}
-                                <a class="govuk-link govuk-link--no-visited-state" href="confirm-delete-draft-court-case?courtCaseIndex={{courtCaseIndex}}">Delete</a>
+                                {% elif  lastAppearance['status'] == 'draft' %}
+                                <strong class="govuk-tag govuk-tag--blue govuk-!-margin-left-2">Draft</strong>
                                 {% elif (courtCase['status'] == 'inactive') %}
                                 <strong class="govuk-tag govuk-tag--blue">Inactive</strong>
                                 {% else %}
@@ -667,4 +671,8 @@
         </div>
     </div>
 </div>
+
+<strong class="govuk-tag">
+    Inactive
+  </strong>
 {% endblock %}

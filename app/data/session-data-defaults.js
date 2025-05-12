@@ -258,6 +258,7 @@ module.exports = {
                     ]
                 },
                 {
+                    "status": "draft",
                     "court-case-ref": "1234567",
                     "warrant-type": "Remand",
                     "overall-case-outcome": "Remanded in custody",
