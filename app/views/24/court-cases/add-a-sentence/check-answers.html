@@ -173,10 +173,24 @@
                                 <a href="">Select consecutive offence</a>
                                 {% else %}
                                 {% if sentence['consecutive-concurrent'] == 'Consecutive' %}
+                                    {% if sentence['consecutive-to'] == 'none' %}
+                                        <a class="govuk-link--no-visited-state" href="/{{data.prototypeVersion}}/update-consec-concurr?index={{loop.index0}}&route=update-consec-concurr">Select consecutive or concurrent</a>
+                                    {% else %}
                                 {{ sentence['consecutive-concurrent'] }} to {% if sentence['consecutive-to'] > 0 %} count {% endif %}{{ sentence['consecutive-to'] }}
+                                    {% endif %}
                                 {% else %}
                                 {{ sentence['consecutive-concurrent'] }}
                                 {% endif %}
+                            </dd>
+                        </div>
+                        {% endif %}
+                        {% if sentence['consecutive-from'] %}
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Consecutive from
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                Count {{ sentence['consecutive-from'] }}
                             </dd>
                         </div>
                         {% endif %}

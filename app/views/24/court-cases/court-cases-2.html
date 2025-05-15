@@ -64,7 +64,9 @@
                         <ul class="govuk-summary-card__actions">
                             <li class="govuk-summary-card__action">
                                 {% if courtCase['source'] == "NOMIS" %}
-                                <span class="moj-badge moj-badge--grey">NOMIS - read only</span>
+                                <strong class="govuk-tag">
+                                    From NOMIS
+                                  </strong>
                                 {% elif (courtCase.appearances.length == 1) and (lastAppearance['status'] == 'draft') %}
                                 <a class="govuk-link govuk-link--no-visited-state" href="confirm-delete-draft-court-case?courtCaseIndex={{courtCaseIndex}}">Delete</a>
                                 {% elif (courtCase['status'] == 'inactive') %}

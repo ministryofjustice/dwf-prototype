@@ -68,7 +68,9 @@
                         <ul class="govuk-summary-card__actions">
                             <li class="govuk-summary-card__action">
                                 {% if courtCase['source'] == "NOMIS" %}
-                                <span class="moj-badge moj-badge--grey">NOMIS - read only</span>
+                                <strong class="govuk-tag">
+                                    NOMIS - read only
+                                  </strong>
                                 {% elif  lastAppearance['status'] == 'draft' %}
                                 <strong class="govuk-tag govuk-tag--blue govuk-!-margin-left-2">Draft</strong>
                                 {% elif (courtCase['status'] == 'inactive') %}
@@ -671,8 +673,4 @@
         </div>
     </div>
 </div>
-
-<strong class="govuk-tag">
-    Inactive
-  </strong>
 {% endblock %}

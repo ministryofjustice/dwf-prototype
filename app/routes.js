@@ -961,6 +961,8 @@ router.get("/:prototypeVersion/update-offence", function (req, res) {
   } else res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-code`);
 });
 
+
+
 router.get("/:prototypeVersion/update-sentence", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   const index = req.query.index;
@@ -1230,6 +1232,30 @@ router.post("/:prototypeVersion/persist-sentence", function (req, res) {
     );
   }
 
+  if (req.session.data.sentence['consecutive-to']) {
+    const consecutiveToCount = req.session.data.sentence['consecutive-to'];
+    const allSentences = req.session.data.appearance.sentences;
+  
+    // Find the sentence being linked to
+    const targetSentence = allSentences.find(s => s['count-number'] === consecutiveToCount);
+  
+    if (targetSentence) {
+      // Initialise the property if it doesn't exist
+      if (!targetSentence['consecutive-from']) {
+        targetSentence['consecutive-from'] = [];
+      }
+  
+      // Avoid duplicate entries
+      if (!targetSentence['consecutive-from'].includes(req.session.data.sentence['count-number'])) {
+        targetSentence['consecutive-from'].push(req.session.data.sentence['count-number']);
+      }
+  
+      console.log("Assigned consecutive-from: ", targetSentence['consecutive-from']);
+    } else {
+      console.log("No sentence found with count-number:", consecutiveToCount);
+    }
+  }
+
   if (edit === "true") {
     req.session.data.appearance.sentences[sentenceIndex] =
       req.session.data.sentence;
@@ -1259,7 +1285,12 @@ router.post("/:prototypeVersion/persist-sentence", function (req, res) {
     return res.redirect(`/${prototypeVersion}/court-cases/edit-appearance`);
   }
 
-  req.session.data.sentenceAdded = 1;
+  if (route === "update-consec-concurr") {
+    console.log(sentenceIndex)
+    req.session.data.appearance.sentences[sentenceIndex]['consecutive-to'] =
+      req.session.data.sentence['consecutive-to'];
+    return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers`);
+  }
 
   if (route == "remand-to-sentence"){
     console.log("Redirecting to add sentence information")
@@ -1649,8 +1680,9 @@ router.post(
     console.log("Consecutive sentence: " + consecConcur);
     console.log("Consecutive to: " + req.session.data["sentence"]["consecutive-to"])
     console.log("Forthwith selected: " + forthwithSelected);
+    console.log("Count number: " + req.session.data["sentence"]["count-number"])
     if (consecConcur == "Consecutive") {
-      if (req.session.data.appearance.sentences[0]["count-number"] == "") {
+      if (req.session.data["sentence"]["count-number"] == "") {
         req.session.data.appearance["no-count-numbers"] = "true";
         console.log("No count numbers")
         if (prototypeVersion >= 20) {
@@ -2470,6 +2502,22 @@ router.get("/:prototypeVersion/add-offences-select", function (req, res) {
   } else {
     res.redirect(307, `/${prototypeVersion}/create-sentence?route=new-court-case`);
   }
+});
+
+router.get("/:prototypeVersion/update-consec-concurr", function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion;
+  const index = req.query.index;
+  console.log("Index: " + req.session.data.index);
+  const warrantType = req.session.data.appearance["warrant-type"];
+  const route = req.query.route;
+  req.session.data.route = route;
+  console.log("Edit route:" + route);
+  req.session.data.sentence = req.session.data.appearance.sentences[index];
+  console.log("Sentence:" + req.session.data.sentence["offence-name"]);
+  req.session.data.sentenceIndex = index;
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-sentence/consecutive-concurrent`
+    );
 });
 
 router.get("/:prototypeVersion/launch-prototype", function (req, res) {

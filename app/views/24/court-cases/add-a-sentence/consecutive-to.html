@@ -4,6 +4,8 @@
     <div class="govuk-grid-column-two-thirds">
         {% if data.edit == 'true' %}
         <form class="form" action="edit-a-sentence" method="post">
+            {% elif data.route == 'update-consec-concurr' %}
+            <form class="form" action="/{{data.prototypeVersion}}/persist-sentence?sentenceIndex={{data.sentenceIndex}}" method="post">
             {% else %}
             <form class="form" action="/{{data.prototypeVersion}}/persist-sentence" method="post">
                 {% endif %}
@@ -19,7 +21,9 @@
                             data.sentence['offence-start-date-day'] }}/{{ data.sentence['offence-start-date-month']
                             }}/{{ data.sentence['offence-start-date-year'] }}</p>
                         <h2 class="govuk-heading-m">Sentences on this case</h2>
+                        {% if data['appearance'].sentences.length > 0 %}
                         {% for sentence in data['appearance'].sentences %}
+   
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="consecutive-to-case-ref"
                                 name="sentence[consecutive-to]" type="radio" value="{% if sentence['count-number'] %}{{ sentence['count-number'] }}{% else %}{{ sentence['offence-name'] + " committed on " + sentence['offence-start-date-day'] + "/" + sentence['offence-start-date-month'] + "/" + sentence['offence-start-date-year'] }}{% endif %}">
@@ -33,7 +37,18 @@
                                     }}</span>
                             </label>
                         </div>
+
                         {% endfor %}
+                        {% else %}
+                        <div class="govuk-inset-text">There are no other sentences added to this appearance yet. You can select the consecutive sentence later.</div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="consecutive-to-case-ref"
+                                name="sentence[consecutive-to]" type="radio" value="none">
+                            <label class="govuk-label govuk-radios__label" for="consecutive-concurrent">
+                                Select the consecutive sentence later
+                            </label>
+                        </div>
+                        {% endif %}
                         <div class="govuk-!-margin-top-6">
                             <h2 class="govuk-heading-m govuk-!-margin-top-7">Sentences on other cases</h2>
                         {% for courtCase in data.courtCases %}

@@ -258,7 +258,6 @@ module.exports = {
                     ]
                 },
                 {
-                    "status": "draft",
                     "court-case-ref": "1234567",
                     "warrant-type": "Remand",
                     "overall-case-outcome": "Remanded in custody",
@@ -855,8 +854,10 @@ module.exports = {
                             ]
                         },
                         {
+                            "source": "NOMIS",
                             appearances: [
                                 {
+                                    "source": "NOMIS",
                                     "court-case-ref": "T20250102",
                                     "warrant-type": "Sentencing",
                                     "overall-case-outcome": "Imprisonment",
@@ -877,6 +878,7 @@ module.exports = {
                                     "total-sentence-length-days": "0",
                                     "sentences": [
                                         {
+                                            "source": "NOMIS",
                                             "count-number": "1",
                                             "conviction-date-day": "12",
                                             "conviction-date-month": "02",
@@ -895,6 +897,7 @@ module.exports = {
                                             "consecutive-concurrent": "Forthwith"
                                         },
                                         {
+                                            "source": "NOMIS",
                                             "count-number": "2",
                                             "conviction-date-day": "12",
                                             "conviction-date-month": "02",
