@@ -974,19 +974,9 @@ router.get("/:prototypeVersion/update-sentence", function (req, res) {
   req.session.data.sentence = req.session.data.appearance.sentences[index];
   console.log("Sentence:" + req.session.data.sentence["offence-name"]);
   req.session.data.sentenceIndex = index;
-  req.session.data.changeMade = 1;
-  req.session.data.sentenceDeleted = 0;
-  req.session.data.sentenceAdded = 0;
-  if (
-    prototypeVersion == "v11" ||
-    prototypeVersion == "v12" ||
-    prototypeVersion >= 13
-  ) {
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-sentence/edit-a-sentence`
     );
-  }
-  res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/count-number`);
 });
 
 router.get("/:prototypeVersion/confirm-delete", function (req, res) {
@@ -1076,26 +1066,51 @@ router.get("/:prototypeVersion/delete-offence", function (req, res) {
 
 router.get("/:prototypeVersion/delete-sentence", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
-  const index = req.query.index;
-  console.log("Index: " + index)
+  const index = Number(req.query.index);
   const route = req.session.data.route;
-  if (req.session.data.confirmDeleteSentence == "Yes") {
-    req.session.data.appearance.sentences.splice(index, 1);
-    req.session.data.changeMade = 0;
-    req.session.data.sentenceDeleted = 1;
-    req.session.data.sentenceAdded = 0;
-    if (req.session.data.postSaveEdit == "true") {
-      res.redirect(`/${prototypeVersion}/court-cases/appearance-detail`);
-    } else
-      res.redirect(
-        `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`
-      );
-  } else if (req.session.data.confirmDeleteSentence == "No") {
-    res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`
-    );
+  const sentences = req.session.data.appearance.sentences;
+  const sentenceToDelete = sentences[index];
+
+  if (req.session.data.confirmDeleteSentence === "Yes") {
+    const deletedCountNumber = sentenceToDelete["count-number"];
+    const consecutiveTo = sentenceToDelete["consecutive-to"];
+
+    if (consecutiveTo) {
+      const target = sentences.find(s => s["count-number"] === consecutiveTo);
+      if (target) {
+        if (Array.isArray(target["consecutive-from"])) {
+          target["consecutive-from"] = target["consecutive-from"].filter(from => from !== deletedCountNumber);
+          if (target["consecutive-from"].length === 0) {
+            target["consecutive-from"] = null;
+          }
+        } else if (target["consecutive-from"] == deletedCountNumber) {
+          target["consecutive-from"] = null;
+        }
+      }
+    }
+
+    sentences.forEach(s => {
+      if (s["consecutive-to"] === deletedCountNumber) {
+        s["consecutive-to"] = "none";
+      }
+      if (s["consecutive-from"] === deletedCountNumber) {
+        s["consecutive-from"] = null;
+      }
+    });
+
+    sentences.splice(index, 1);
+
+    const redirectUrl = req.session.data.postSaveEdit === "true"
+      ? `/${prototypeVersion}/court-cases/appearance-detail`
+      : `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`;
+
+    return res.redirect(redirectUrl);
   }
+
+  res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers`);
 });
+
+
 
 // Add sentences
 
@@ -1148,7 +1163,7 @@ router.post("/:prototypeVersion/persist-sentence", function (req, res) {
   const path = req.session.data.path;
   req.session.data.newSentence = 0;
 
-  if (req.session.data.progressSaved != true) {
+  if (req.session.data.progressSaved !== true) {
     req.session.data.sentence["status"] = "complete";
   }
 
@@ -1178,40 +1193,29 @@ router.post("/:prototypeVersion/persist-sentence", function (req, res) {
     }
 
     if (req.session.data.sentence["consecutive-concurrent"] === "Concurrent") {
-      let newYears = parseInt(
-        req.session.data.sentence["sentence-length-years"],
-        10
-      );
-      let newMonths = parseInt(
-        req.session.data.sentence["sentence-length-months"],
-        10
-      );
+      let newYears = parseInt(req.session.data.sentence["sentence-length-years"], 10);
+      let newMonths = parseInt(req.session.data.sentence["sentence-length-months"], 10);
 
       if (
         newYears > req.session.data.appearance["total-sentence-length-years"] ||
-        (newYears ===
-          req.session.data.appearance["total-sentence-length-years"] &&
-          newMonths >
-            req.session.data.appearance["total-sentence-length-months"])
+        (newYears === req.session.data.appearance["total-sentence-length-years"] &&
+         newMonths > req.session.data.appearance["total-sentence-length-months"])
       ) {
         req.session.data.appearance["total-sentence-length-years"] = newYears;
         req.session.data.appearance["total-sentence-length-months"] = newMonths;
       }
     }
 
-    // Convert weeks to months (4 weeks = 1 month)
     req.session.data.appearance["total-sentence-length-months"] += Math.floor(
       req.session.data.appearance["total-sentence-length-weeks"] / 4
     );
     req.session.data.appearance["total-sentence-length-weeks"] %= 4;
 
-    // Convert months to years (12 months = 1 year)
     req.session.data.appearance["total-sentence-length-years"] += Math.floor(
       req.session.data.appearance["total-sentence-length-months"] / 12
     );
     req.session.data.appearance["total-sentence-length-months"] %= 12;
 
-    // Convert days to weeks (7 days = 1 week)
     req.session.data.appearance["total-sentence-length-weeks"] += Math.floor(
       req.session.data.appearance["total-sentence-length-days"] / 7
     );
@@ -1221,89 +1225,94 @@ router.post("/:prototypeVersion/persist-sentence", function (req, res) {
   if (req.session.data.appearance["overall-conviction-date-apply-all"] === "Yes") {
     req.session.data.sentence["conviction-date-day"] = req.session.data.appearance["overall-conviction-date-day"];
     req.session.data.sentence["conviction-date-month"] = req.session.data.appearance["overall-conviction-date-month"];
-    req.session.data.sentence["conviction-date-year"] = req.session.data.appearance["overall-conviction-date-year"];  
-    console.log(
-      "Conviction date: " +
-        req.session.data.sentence["conviction-date-day"] +
-        "/" +
-        req.session.data.sentence["conviction-date-month"] +
-        "/" +
-        req.session.data.sentence["conviction-date-year"]
-    );
+    req.session.data.sentence["conviction-date-year"] = req.session.data.appearance["overall-conviction-date-year"];
   }
 
-  if (req.session.data.sentence['consecutive-to']) {
-    const consecutiveToCount = req.session.data.sentence['consecutive-to'];
-    const allSentences = req.session.data.appearance.sentences;
-  
-    // Find the sentence being linked to
-    const targetSentence = allSentences.find(s => s['count-number'] === consecutiveToCount);
-  
-    if (targetSentence) {
-      // Initialise the property if it doesn't exist
-      if (!targetSentence['consecutive-from']) {
-        targetSentence['consecutive-from'] = [];
+  // ✅ Break the chain if consecutive-to has changed or it's no longer consecutive
+  if (edit === "true" && sentenceIndex !== undefined) {
+    const original = req.session.data.appearance.sentences[sentenceIndex];
+    const oldConsecutiveTo = original["consecutive-to"];
+    const newConsecutiveTo = req.session.data.sentence["consecutive-to"];
+    const newType = req.session.data.sentence["consecutive-concurrent"];
+
+    if (
+      oldConsecutiveTo &&
+      (oldConsecutiveTo !== newConsecutiveTo || newType !== "Consecutive")
+    ) {
+      const target = req.session.data.appearance.sentences.find(
+        s => s["count-number"] === oldConsecutiveTo
+      );
+      if (target) {
+        if (Array.isArray(target["consecutive-from"])) {
+          target["consecutive-from"] = target["consecutive-from"].filter(from => from !== original["count-number"]);
+          if (target["consecutive-from"].length === 0) {
+            target["consecutive-from"] = null;
+          }
+        } else if (target["consecutive-from"] == original["count-number"]) {
+          target["consecutive-from"] = null;
+        }
       }
-  
-      // Avoid duplicate entries
-      if (!targetSentence['consecutive-from'].includes(req.session.data.sentence['count-number'])) {
-        targetSentence['consecutive-from'].push(req.session.data.sentence['count-number']);
-      }
-  
-      console.log("Assigned consecutive-from: ", targetSentence['consecutive-from']);
-    } else {
-      console.log("No sentence found with count-number:", consecutiveToCount);
     }
   }
 
+  // ✅ Assign consecutive-from if applicable
+  if (req.session.data.sentence['consecutive-to']) {
+    const consecutiveToCount = req.session.data.sentence['consecutive-to'];
+    const allSentences = req.session.data.appearance.sentences;
+
+    const targetSentence = allSentences.find(s => s['count-number'] === consecutiveToCount);
+
+    if (targetSentence) {
+      if (!targetSentence['consecutive-from']) {
+        targetSentence['consecutive-from'] = [];
+      }
+
+      if (!targetSentence['consecutive-from'].includes(req.session.data.sentence['count-number'])) {
+        targetSentence['consecutive-from'].push(req.session.data.sentence['count-number']);
+      }
+    }
+  }
+
+  // ✅ Store sentence back into list
   if (edit === "true") {
-    req.session.data.appearance.sentences[sentenceIndex] =
-      req.session.data.sentence;
-    return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-sentence/edit-a-sentence`
-    );
+    req.session.data.appearance.sentences[sentenceIndex] = req.session.data.sentence;
+    return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/edit-a-sentence`);
   }
 
   if (req.session.data.postSaveEdit === "true") {
-    req.session.data.appearance.sentences[sentenceIndex] =
-      req.session.data.sentence;
+    req.session.data.appearance.sentences[sentenceIndex] = req.session.data.sentence;
     return res.redirect(`/${prototypeVersion}/court-cases/appearance-detail`);
   }
 
   if (sentenceIndex !== undefined) {
-    req.session.data.appearance.sentences[sentenceIndex] =
-      req.session.data.sentence;
+    req.session.data.appearance.sentences[sentenceIndex] = req.session.data.sentence;
   } else {
     req.session.data.appearance.sentences.push(req.session.data.sentence);
-    req.session.data.sentenceIndex =
-      req.session.data.appearance.sentences.length - 1;
+    req.session.data.sentenceIndex = req.session.data.appearance.sentences.length - 1;
   }
 
   if (route === "edit-appearance") {
-    req.session.data.appearance.sentences[sentenceIndex] =
-      req.session.data.sentence;
+    req.session.data.appearance.sentences[sentenceIndex] = req.session.data.sentence;
     return res.redirect(`/${prototypeVersion}/court-cases/edit-appearance`);
   }
 
   if (route === "update-consec-concurr") {
-    console.log(sentenceIndex)
     req.session.data.appearance.sentences[sentenceIndex]['consecutive-to'] =
       req.session.data.sentence['consecutive-to'];
     return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers`);
   }
 
-  if (route == "remand-to-sentence"){
-    console.log("Redirecting to add sentence information")
-    req.session.data.sentence = {...req.session.data.sentence, 'outcome-changed': "true"}
-    return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`
-    );
-  } else {
-    return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`
-    );
+  if (route === "remand-to-sentence") {
+    req.session.data.sentence = {
+      ...req.session.data.sentence,
+      'outcome-changed': "true"
+    };
+    return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`);
   }
+
+  return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers`);
 });
+
 
 router.get("/:prototypeVersion/view-court-case-detail", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
