@@ -174,11 +174,20 @@
                                     {% endif %}
                                 </dd>
                                 <dd class="govuk-summary-list__actions">
-                                    <a class="govuk-link govuk-link--no-visited-state" href="consecutive-concurrent">Edit<span
+                                    <a class="govuk-link govuk-link--no-visited-state" href="consecutive-concurrent?editConsecutiveConcurrent=true">Edit<span
                                             class="govuk-visually-hidden"> consecutive or concurrent</span></a>
                                 </dd>
                         </dl>
                     </fieldset>
+                    {% if data.editConsecutiveConcurrent == "true" %}
+                    <div class="govuk-warning-text">
+                        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                        <strong class="govuk-warning-text__text">
+                          <span class="govuk-visually-hidden">Warning</span>
+                          Making changes to the consecutive or concurrent nature of this sentence could effect the consecutive chain. Check that sentences accurately reflect the warrnat. 
+                        </strong>
+                      </div>
+                    {% endif %}
                     <button class="govuk-button" data-module="govuk-button">
                         Accept changes
                     </button>

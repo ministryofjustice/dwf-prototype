@@ -4,7 +4,9 @@
 //
 
 const govukPrototypeKit = require("govuk-prototype-kit");
-const sessionDataDefaults = require("./data/session-data-defaults");
+const sessionDataDefaults = require("./data/session-sets/example");
+const emptyData = require('./data/session-sets/empty-data');
+const exampleData = require('./data/session-sets/example');
 const router = govukPrototypeKit.requests.setupRouter();
 
 router.post("/:prototypeVersion/next-court-date-select", function (req, res) {
@@ -573,6 +575,12 @@ router.get("/:prototypeVersion/create-court-case", function (req, res) {
 router.post("/:prototypeVersion/persist-court-case", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   const warrantType = req.session.data.warrantType;
+
+  if (!req.session.data.courtCases) {
+    req.session.data.courtCases = [];
+  }
+
+
   if (req.session.data.courtCaseIndex !== undefined) {
     req.session.data.courtCases[req.session.data.courtCaseIndex] =
       req.session.data.courtCase;
@@ -974,6 +982,7 @@ router.get("/:prototypeVersion/update-sentence", function (req, res) {
   req.session.data.sentence = req.session.data.appearance.sentences[index];
   console.log("Sentence:" + req.session.data.sentence["offence-name"]);
   req.session.data.sentenceIndex = index;
+  req.session.data.edit = true;
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-sentence/edit-a-sentence`
     );
@@ -1158,8 +1167,8 @@ router.get("/:prototypeVersion/create-sentence", function (req, res) {
 router.post("/:prototypeVersion/persist-sentence", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   const route = req.session.data.route;
-  const edit = req.query.edit;
-  const sentenceIndex = req.query.sentenceIndex;
+  const edit = req.query.edit || req.body.edit || req.session.data.edit;
+  const sentenceIndex = req.query.sentenceIndex || req.session.data.sentenceIndex
   const path = req.session.data.path;
   req.session.data.newSentence = 0;
 
@@ -1228,7 +1237,9 @@ router.post("/:prototypeVersion/persist-sentence", function (req, res) {
     req.session.data.sentence["conviction-date-year"] = req.session.data.appearance["overall-conviction-date-year"];
   }
 
-  // ✅ Break the chain if consecutive-to has changed or it's no longer consecutive
+  console.log("Edit:", edit);
+console.log("Sentence index:", sentenceIndex);
+
   if (edit === "true" && sentenceIndex !== undefined) {
     const original = req.session.data.appearance.sentences[sentenceIndex];
     const oldConsecutiveTo = original["consecutive-to"];
@@ -1255,7 +1266,6 @@ router.post("/:prototypeVersion/persist-sentence", function (req, res) {
     }
   }
 
-  // ✅ Assign consecutive-from if applicable
   if (req.session.data.sentence['consecutive-to']) {
     const consecutiveToCount = req.session.data.sentence['consecutive-to'];
     const allSentences = req.session.data.appearance.sentences;
@@ -1273,9 +1283,11 @@ router.post("/:prototypeVersion/persist-sentence", function (req, res) {
     }
   }
 
-  // ✅ Store sentence back into list
-  if (edit === "true") {
+  if (edit === true || edit === "true") {
     req.session.data.appearance.sentences[sentenceIndex] = req.session.data.sentence;
+    if (req.query.editConsecutiveConcurrent){
+      req.session.data.editConsecutiveConcurrent = req.query.editConsecutiveConcurrent
+    }
     return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/edit-a-sentence`);
   }
 
@@ -1691,6 +1703,10 @@ router.post(
     console.log("Forthwith selected: " + forthwithSelected);
     console.log("Count number: " + req.session.data["sentence"]["count-number"])
     if (consecConcur == "Consecutive") {
+      if (req.session.data.courtCases.length === 1) {
+        req.session.data["sentence"]["consecutive-to"] = "none";
+        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/no-other-sentences`);
+      }
       if (req.session.data["sentence"]["count-number"] == "") {
         req.session.data.appearance["no-count-numbers"] = "true";
         console.log("No count numbers")
@@ -2530,11 +2546,24 @@ router.get("/:prototypeVersion/update-consec-concurr", function (req, res) {
 });
 
 router.get("/:prototypeVersion/launch-prototype", function (req, res) {
-  const prototypeVersion = req.query.version;
+  const prototypeVersion = req.params.prototypeVersion;
+  const dataset = req.query.data || "example";
+
+  let sessionData;
+  switch (dataset) {
+    case "empty":
+      sessionData = emptyData;
+      break;
+    case "example":
+      sessionData = exampleData;
+  }
+
   req.session.regenerate(function () {
-    req.session.data = sessionDataDefaults;
+    req.session.data = JSON.parse(JSON.stringify(sessionData));
     req.session.data.prototypeVersion = prototypeVersion;
-    console.log("Launching prototype version: " + prototypeVersion);
+    console.log(`Launching prototype version: ${prototypeVersion} with dataset: ${dataset}`);
     res.redirect(`/${prototypeVersion}/court-cases/`);
   });
 });
+
+module.exports = router;

@@ -3,15 +3,11 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        {% if data.edit == 'true' %}
         {% if data.sentence['consecutive-concurrent'] == "Consecutive" %}
-        <form class="form" action="/{{data.prototypeVersion}}/consecutive-concurrent-select" method="post">
-            {% else %}
-            <form class="form" action="/{{data.prototypeVersion}}/persist-sentence?edit=true" method="post">
-                {% endif %}
-                {% else %}
-                <form class="form" action="/{{data.prototypeVersion}}/consecutive-concurrent-select" method="post">
-                    {% endif %}
+  <form class="form" action="/{{data.prototypeVersion}}/consecutive-concurrent-select" method="post">
+{% else %}
+  <form class="form" action="/{{data.prototypeVersion}}/persist-sentence" method="post">
+{% endif %}
                     <div class="govuk-form-group">
                         <fieldset class="govuk-fieldset" aria-describedby="changedName-hint">
                             <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
@@ -30,9 +26,6 @@
                                 </h1>
                                 {% endif %}
                             </legend>
-                            <!--                     <p class="govuk-body-l">
-                            {{ data.sentence['offence-name'] }}
-                        </p> -->
                             <div class="govuk-radios govuk-radios" data-module="govuk-radios">
                                 <div class="govuk-radios__item">
                                     <input class="govuk-radios__input" id="consecutive-concurrent"
