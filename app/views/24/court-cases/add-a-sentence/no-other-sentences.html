@@ -3,28 +3,24 @@
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
             <form class="form" action="/{{data.prototypeVersion}}/persist-sentence" method="post">
-                <div class="govuk-form-group">
-                    <fieldset class="govuk-fieldset" role="group">
-                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                            <h1 class="govuk-fieldset__heading">
-                                <span class="govuk-caption-l">Add offences</span>
-                                There are no other sentences
-                            </h1>
-                        </legend>
-                        <p class="govuk-body">There are no other valid sentences that <strong>{{ data['sentence']['offence-code'] }} {{ data['sentence']['offence-name'] }}</strong> committed on  <strong>{{ data['sentence']['offence-start-date-day'] }}/{{ data['sentence']['offence-start-date-month'] }}/{{ data['sentence']['offence-start-date-year'] }}</strong> can be made conscutive to.</p>
-                        <p class="govuk-body">You can select the consecutive sentences later, once you have added the more than one sentence.</p>
-                    </fieldset>
-                </div>
-                <div class="govuk-button-group">
-                    <button type="submit" class="govuk-button" data-module="govuk-button">
-                        Continue
-                    </button>
-                </div>
+                <div class="moj-interruption-card">
+                    <div class="moj-interruption-card__content">
+                      <h1 class="govuk-heading-l moj-interruption-card__heading">This sentence cannot be made consecutive yet</h1>
+                      <div class="govuk-body moj-interruption-card__body">
+                        <p class="govuk-body">This is because there are no other valid sentences that <strong>{{ data['sentence']['offence-code'] }} {{ data['sentence']['offence-name'] }}</strong> can be made consecutive to.</p>
+                        <p class="govuk-body">You can add the consecutive or concurrent information later.</p>
+                    <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-top-6">Do you want to continue?</p>
+                      </div>
+                      <div class="govuk-button-group moj-interruption-card__actions">
+                        <button type="submit" class="govuk-button govuk-button--inverse" data-module="govuk-button">
+                          Yes, continue
+                      </button>
+                        <a class="govuk-link govuk-link--inverse" href="consecutive-concurrent">Go back</a>
+                      </div>
+                    </div>
+                  </div>
+                
             </form>
-    </div>
-    <div class="govuk-grid-column-one-third">
-        {% set showOffences = true %}
-        {% include "includes/templates/appearance-info.njk" %}
     </div>
 </div>
 {% endblock %}

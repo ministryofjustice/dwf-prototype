@@ -8,6 +8,8 @@
             <form class="form" action="/{{data.prototypeVersion}}/persist-sentence" method="post">
                 {% elif data.edit == 'true' %}
                 <form class="form" action="/{{data.prototypeVersion}}/persist-sentence?edit=false" method="post">
+                    {% else %}
+                    <form class="form" action="check-answers" method="post">
                     {% endif %}
                     <fieldset class="govuk-fieldset">
                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
@@ -179,15 +181,6 @@
                                 </dd>
                         </dl>
                     </fieldset>
-                    {% if data.editConsecutiveConcurrent == "true" %}
-                    <div class="govuk-warning-text">
-                        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-                        <strong class="govuk-warning-text__text">
-                          <span class="govuk-visually-hidden">Warning</span>
-                          Making changes to the consecutive or concurrent nature of this sentence could effect the consecutive chain. Check that sentences accurately reflect the warrnat. 
-                        </strong>
-                      </div>
-                    {% endif %}
                     <button class="govuk-button" data-module="govuk-button">
                         Accept changes
                     </button>

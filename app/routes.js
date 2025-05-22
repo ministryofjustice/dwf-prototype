@@ -1073,6 +1073,24 @@ router.get("/:prototypeVersion/delete-offence", function (req, res) {
   }
 });
 
+router.get("/:prototypeVersion/check-delete", function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion;
+  const index = parseInt(req.query.index);
+  console.log("Index: " + index)
+  const route = req.query.route;
+  req.session.data.route = route;
+  const sentence = req.session.data.appearance.sentences[index];
+  req.session.data.sentence = sentence;
+  console.log("Consecutive from: " + sentence["consecutive-from"])
+  if (sentence["consecutive-from"]) {
+    // Redirect to the page that warns about breaking a chain
+    return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-delete-break-chain?index=${index}&route=${route}`);
+  } else {
+    // Redirect to the normal confirm-delete page
+    return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-delete?index=${index}&route=${route}`);
+  }
+});
+
 router.get("/:prototypeVersion/delete-sentence", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   const index = Number(req.query.index);
@@ -1288,7 +1306,7 @@ console.log("Sentence index:", sentenceIndex);
     if (req.query.editConsecutiveConcurrent){
       req.session.data.editConsecutiveConcurrent = req.query.editConsecutiveConcurrent
     }
-    return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/edit-a-sentence`);
+    return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-edit-consecutive-concurrent`);
   }
 
   if (req.session.data.postSaveEdit === "true") {
@@ -1698,12 +1716,11 @@ router.post(
     const consecConcur = req.session.data["sentence"]["consecutive-concurrent"];
     var forthwithSelected = req.session.data.forthwithSelected;
     console.log("Route: " + route);
-    console.log("Consecutive sentence: " + consecConcur);
-    console.log("Consecutive to: " + req.session.data["sentence"]["consecutive-to"])
+    console.log("Consecutive or concurrent: " + consecConcur);
     console.log("Forthwith selected: " + forthwithSelected);
     console.log("Count number: " + req.session.data["sentence"]["count-number"])
     if (consecConcur == "Consecutive") {
-      if (req.session.data.courtCases.length === 1) {
+      if (req.session.data.courtCases.length === 1 && req.session.data.appearance.sentences < 1) {
         req.session.data["sentence"]["consecutive-to"] = "none";
         return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/no-other-sentences`);
       }
@@ -1720,7 +1737,7 @@ router.post(
           return res.redirect(307, `/${prototypeVersion}/persist-sentence`);
         }
       } 
-      res.redirect(
+      return res.redirect(
         `/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to`
       );
     } else if (consecConcur == "Forthwith" && forthwithSelected != "Yes") {

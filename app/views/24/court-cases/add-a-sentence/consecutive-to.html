@@ -17,7 +17,6 @@
                                 Select the sentence this is consecutive to
                             </h1>
                         </legend>
-                        {{ data.courtCases}}
                         <p class="govuk-body-l">{{ data.sentence['offence-name'] }} committed on {{
                             data.sentence['offence-start-date-day'] }}/{{ data.sentence['offence-start-date-month']
                             }}/{{ data.sentence['offence-start-date-year'] }}</p>
@@ -51,7 +50,10 @@
                         </div>
                         {% endif %}
                         <div class="govuk-!-margin-top-6">
+                            {% if data.courtCases.length > 1 %}
                             <h2 class="govuk-heading-m govuk-!-margin-top-7">Sentences on other cases</h2>
+                            {% endif %}
+
                         {% for courtCase in data.courtCases %}
                         {% set lastAppearance = courtCase.appearances | last %}
                         {% set courtCaseIndex = loop.revindex0 %}
