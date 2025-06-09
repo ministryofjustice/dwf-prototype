@@ -447,11 +447,8 @@
                         </div>
                     </div>
                 </fieldset>
-                <div class="govuk-button-group">
-                    <button class="govuk-button govuk-!-margin-top-6" data-module="govuk-button">
-                        Continue
-                    </button>
-                </div>
+                {% set showCancel = true %}
+                {% include "includes/templates/page-ctas.njk" %}
             </div>
         </form>
     </div>

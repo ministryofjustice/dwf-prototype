@@ -30,6 +30,18 @@
 {%- from "moj/components/primary-navigation/macro.njk" import mojPrimaryNavigation -%}
 {% block head %}
 {% include "includes/head.html" %}
+{%- from  "hmrc/components/timeout-dialog/macro.njk" import hmrcTimeoutDialog -%}
+{{ hmrcTimeoutDialog ({
+  timeout: 100,
+  countdown: 68,
+  keepAliveUrl: "?continue=true",
+  signOutUrl: "?lang=English",
+  title: "For your security",
+  message: "We will delete your answers in",
+  keepAliveButtonText: "Continue adding appearance information for Daryl Evans",
+  signOutButtonText: "Delete your answers",
+  language: "en"
+}) }}
 {% endblock %}
 {% block pageTitle %}
 Court cases and release dates
@@ -187,11 +199,50 @@ Court cases and release dates
         </div>
     </nav>
 </header>
-<div class="service-header">
-    <div class="service-header__container">
-        <a href="/{{data.prototypeVersion}}/court-cases/"><span class="service-header__service-name">Court cases and release dates</span></a>
+<section aria-label="Service information" class="govuk-service-navigation"
+  data-module="govuk-service-navigation">
+  <div class="govuk-width-container">
+    <div class="govuk-service-navigation__container">
+      <span class="govuk-service-navigation__service-name">
+        <a href="/{{ data.prototypeVersion }}/court-cases/confirm-exit" class="govuk-service-navigation__link">
+          Court cases and release dates
+        </a>
+      </span>
+      <nav aria-label="Menu" class="govuk-service-navigation__wrapper">
+        <button type="button" class="govuk-service-navigation__toggle govuk-js-service-navigation-toggle" aria-controls="navigation" hidden>
+          Menu
+        </button>
+        <ul class="govuk-service-navigation__list" id="navigation">
+          <li class="govuk-service-navigation__item">
+            <a class="govuk-service-navigation__link" href="/{{ data.prototypeVersion }}/court-cases/confirm-exit">
+              Overview
+            </a>
+          </li>
+          <li class="govuk-service-navigation__item govuk-service-navigation__item--active">
+            <a class="govuk-service-navigation__link" href="/{{ data.prototypeVersion }}/court-cases/confirm-exit" aria-current="true">
+              <strong class="govuk-service-navigation__active-fallback">Court cases</strong>
+            </a>
+          </li>
+          <li class="govuk-service-navigation__item">
+            <a class="govuk-service-navigation__link" href="/{{ data.prototypeVersion }}/court-cases/confirm-exit">
+              Adjustments
+            </a>
+          </li>
+          <li class="govuk-service-navigation__item">
+            <a class="govuk-service-navigation__link" href="/{{ data.prototypeVersion }}/court-cases/confirm-exit">
+              Release dates and calculations
+            </a>
+          </li>
+          <li class="govuk-service-navigation__item">
+            <a class="govuk-service-navigation__link" href="/{{ data.prototypeVersion }}/court-cases/confirm-exit">
+              Recalls
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
-</div>
+  </div>
+</section>
 {% endblock %}
 {% set mainClasses = mainClasses | default("govuk-main-wrapper--auto-spacing") %}
 {% block main %}
@@ -209,42 +260,9 @@ Court cases and release dates
         cellLocation: 'A-1-1'
         } %}
         {{ miniProfile(person, '/public/images/prisoner.jpeg', '#') }}
-        <!-- Naigation -->
-        {% block nav %}
-        {% if nav %}
-        <nav class="moj-sub-navigation" aria-label="Navigation">
-            <ul class="moj-sub-navigation__list">
-                <li class="moj-sub-navigation__item">
-                    <a class="moj-sub-navigation__link" href="#1">Overview</a>
-                </li>
-                <li class="moj-sub-navigation__item">
-                    <a class="moj-sub-navigation__link" aria-current="page" href="/{{data.prototypeVersion}}/court-cases">Court cases</a>
-                </li>
-                <li class="moj-sub-navigation__item">
-                    <a class="moj-sub-navigation__link" href="#3">Adjustments</a>
-                </li>
-                <li class="moj-sub-navigation__item">
-                    <a class="moj-sub-navigation__link" href="#3">Release dates and calculations</a>
-                </li>
-                <li class="moj-sub-navigation__item">
-                    <a class="moj-sub-navigation__link" href="#4">Recalls</a>
-                </li>
-            </ul>
-        </nav>
+        {% if noBackLink != true %}
+        <a href="javascript:history.back()" class="govuk-back-link">Back</a>
         {% endif %}
-        <div class="govuk-grid-row">
-            {% if noBackLink == true %}
-            <div class="govuk-grid-column-full govuk-!-text-align-right"><a href="/{{data.prototypeVersion}}/court-cases/" class="govuk-link govuk-body-s govuk-link--no-visited-state">Go to Court cases</a></div> 
-            {% else %}
-                {% if backLinkTarget %}
-                    <div class="govuk-grid-column-one-half"><a href="{{backLinkTarget}}" class="govuk-back-link govuk-!-margin-top-0">Back</a></div>
-                {% else %}
-                    <div class="govuk-grid-column-one-half"><a href="#" class="govuk-back-link govuk-link--no-visited-state govuk-!-margin-top-0">Back</a></div>
-                {% endif %}
-                    <div class="govuk-grid-column-one-half govuk-!-text-align-right"><a href="/{{data.prototypeVersion}}/court-cases/" class="govuk-link govuk-body-s govuk-link--no-visited-state">Go to Court cases</a></div>
-            {% endif %} 
-        </div>
-        {% endblock %}
         {% block content %}
         {% endblock %}
     </div>

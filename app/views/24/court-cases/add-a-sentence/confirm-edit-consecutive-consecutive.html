@@ -6,7 +6,7 @@
             <input type="hidden" name="confirmDeleteSentence" value="Yes">
                     <div class="moj-interruption-card">
                     <div class="moj-interruption-card__content">
-                      <h1 class="govuk-heading-l moj-interruption-card__heading">Making this sentence concurrent will affect the consecutive chain</h1>
+                      <h1 class="govuk-heading-l moj-interruption-card__heading">Changing what this sentence is consecutive to will affect the consecutive chain</h1>
                       <div class="govuk-body moj-interruption-card__body">
                         <p class="govuk-body-l govuk-!-width-three-quarters">
                             Count {{ data['sentence']['count-number'] }}<br>
@@ -15,13 +15,13 @@
                                 data['sentence']['offence-start-date-month'] }}/{{ data['sentence']['offence-start-date-year']
                                 }}
                                 </p>
-                                <p class="govuk-body">This sentence is currently linked to another sentence as part of a consecutive chain. Changing this sentence to concurrent will impact the chain and might no longer reflect the warrant correctly.</p>
-                        <p class="govuk-body">If you make the sentence concurrent, you will need to check the other sentences, to make sure they are accurate.</p>
-                    <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-top-6">Are you sure you want to make it concurrent?</p>
+                                <p class="govuk-body">By changing the order of the consecutive chain, the warrant information might no longer be reflected correctly.</p>
+                        <p class="govuk-body">You will need to check the other sentences, to make sure they are accurate.</p>
+                    <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-top-6">Are you sure you want to make this change?</p>
                       </div>
                       <div class="govuk-button-group moj-interruption-card__actions">
                         <button type="submit" class="govuk-button govuk-button--inverse" data-module="govuk-button">
-                          Yes, make the sentence concurrent
+                          Yes, change the consecutive chain
                       </button>
                         <a class="govuk-link govuk-link--inverse" href="check-answers">Go back</a>
                       </div>

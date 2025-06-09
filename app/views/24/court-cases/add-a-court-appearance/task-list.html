@@ -186,11 +186,9 @@
             </h2>
             <p class="govuk-body">To save a draft of the court case, you must first complete the appearance information.</p>
             <p class="govuk-body">Once every task has been completed, you must  save the information. You will not be able to return to this page, but can edit the details in the Court cases tab.</p  >
-            <div class="govuk-button-group">
-                <button class="govuk-button" data-module="govuk-button" {% if data.appearance['finished-adding-offences'] == 'no' %}disabled aria-disabled="true"{% endif %}>
-                    Finish and save
-                </button>
-            </div>
+                {% set showCancel = true %}
+                {% set continueText = "Finish and save" %}
+                {% include "includes/templates/page-ctas.njk" %}
         </form>
     </div>
 </div>

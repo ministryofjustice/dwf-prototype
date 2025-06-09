@@ -32,9 +32,8 @@
                     </div>
                 </fieldset>
             </div>
-            <button class="govuk-button" data-module="govuk-button">
-                Continue
-            </button>
+            {% set showCancel = true %}
+            {% include "includes/templates/page-ctas.njk" %}
         </form>
     </div>
 </div>

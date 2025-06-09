@@ -2,11 +2,11 @@
 {% block content %}
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="edit-a-sentence" method="post">
+        <form class="form" action="/{{data.prototypeVersion}}/delete-sentence?index={{ data.index }}" method="post">
             <input type="hidden" name="confirmDeleteSentence" value="Yes">
                     <div class="moj-interruption-card">
                     <div class="moj-interruption-card__content">
-                      <h1 class="govuk-heading-l moj-interruption-card__heading">Making this sentence concurrent will affect the consecutive chain</h1>
+                      <h1 class="govuk-heading-l moj-interruption-card__heading">Making this sentence forthwith will affect the consecutive chain on another case</h1>
                       <div class="govuk-body moj-interruption-card__body">
                         <p class="govuk-body-l govuk-!-width-three-quarters">
                             Count {{ data['sentence']['count-number'] }}<br>
@@ -15,13 +15,20 @@
                                 data['sentence']['offence-start-date-month'] }}/{{ data['sentence']['offence-start-date-year']
                                 }}
                                 </p>
-                                <p class="govuk-body">This sentence is currently linked to another sentence as part of a consecutive chain. Changing this sentence to concurrent will impact the chain and might no longer reflect the warrant correctly.</p>
-                        <p class="govuk-body">If you make the sentence concurrent, you will need to check the other sentences, to make sure they are accurate.</p>
-                    <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-top-6">Are you sure you want to make it concurrent?</p>
+                                <p class="govuk-body">This sentence is currently linked to a sentence on another case as part of a consecutive chain. Making it forthwith will impact the chain on the case and it might no longer reflect the warrant correctly.</p>
+                        <p class="govuk-body">This effects sentence:</p>
+                        <p class="govuk-body">
+                          Count 5<br>
+                          <strong>CJ88001 Common assault</strong><br>
+                          Committed on 05/10/2024<br>
+                          on Case T202498765 at Nottingham Crown Court on 15/12/2024
+                        </p>
+                        <p class="govuk-body">If you make this sentence forthwith, you will need to check sentences on case T202498765 to make sure they are accurate.</p>
+                    <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-top-6">Are you sure you want to make this change?</p>
                       </div>
                       <div class="govuk-button-group moj-interruption-card__actions">
                         <button type="submit" class="govuk-button govuk-button--inverse" data-module="govuk-button">
-                          Yes, make the sentence concurrent
+                          Yes, make the change
                       </button>
                         <a class="govuk-link govuk-link--inverse" href="check-answers">Go back</a>
                       </div>
