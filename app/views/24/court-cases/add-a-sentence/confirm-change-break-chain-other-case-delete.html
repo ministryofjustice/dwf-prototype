@@ -17,9 +17,14 @@
                                 data['sentence']['offence-start-date-month'] }}/{{ data['sentence']['offence-start-date-year']
                                 }}
                                 </p>
-                                <p class="govuk-body">This sentence is linked to a sentence on another case, as part of a consecutive chain. Deleting this sentence breaks the chain, which could mean it does not reflect the information on the warrant.</p>
-                                <p class="govuk-body">This affects case  <strong>T202498765</strong> at <strong>Nottingham Crown Court</strong> on <strong>15/12/2024</strong>.</p>
-                                <p class="govuk-body">You will need to update the consecutive details on the other case, before deleting this sentence.</p>
+                                <p class="govuk-body">This sentence is linked to sentences on other cases, as part of a consecutive chain. Deleting this sentence breaks the chain, which could mean it does not reflect the information on the warrant.</p>
+                                <p class="govuk-body">This affects cases:  
+                                    <ul class="govuk-list govuk-list-bullet">
+                                        <li><strong>T202498765</strong> at <strong>Nottingham Crown Court</strong> on <strong>15/12/2024</strong></p></li>
+                                        <li><strong>T202461839</strong> at <strong>Sheffield Crown Court</strong> on <strong>10/12/2024</strong></p></li>
+                                        <li><strong>T202410382</strong> at <strong>Sheffield Crown Court</strong> on <strong>08/12/2024</strong></p></li>
+                                    </ul>
+                                <p class="govuk-body govuk-!-margin-top-6">You will need to update the consecutive details on the other cases before deleting this sentence.</p>
                       </fieldset>
                 </div> 
                 <input type="hidden" name="sentence[offence-name]" value="{{ data.sentence['offence-name']}}" />
