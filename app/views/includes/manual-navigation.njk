@@ -1,0 +1,26 @@
+<nav class="moj-side-navigation govuk-!-padding-top-0" aria-label="Side navigation">
+  <h4 class="moj-side-navigation__title">Pages</h4>
+  <ul class="moj-side-navigation__list">
+    <li class="moj-side-navigation__item {% if activePage == 'court-cases' %}moj-side-navigation__item--active{% endif %}">
+      <a href="court-cases-page.html">Court cases</a>
+    </li>
+    <li class="moj-side-navigation__item {% if activePage == 'question' %}moj-side-navigation__item--active{% endif %}">
+      <a href="question-page.html">Question page</a>
+    </li>
+    <li class="moj-side-navigation__item {% if activePage == 'add-offences' %}moj-side-navigation__item--active{% endif %}">
+      <a href="add-offences-page.html">Add offences</a>
+    </li>
+  </ul>
+
+  <h4 class="moj-side-navigation__title">Components</h4>
+  <ul class="moj-side-navigation__list">
+    <li class="moj-side-navigation__item {% if activePage == 'offence-card' %}moj-side-navigation__item--active{% endif %}">
+      <a href="offence-card.html">Offence card</a>
+    </li>
+    <li class="moj-side-navigation__item {% if activePage == 'appearance-info' %}moj-side-navigation__item--active{% endif %}">
+      <a href="appearance-information-panel.html">Appearance information panel</a>
+    </li>
+    <!-- ...continue for the rest -->
+  </ul>
+</nav>
+
