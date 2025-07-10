@@ -983,8 +983,92 @@ module.exports = {
                                     ]
                                 }
                             ]
+                        },
+                        {
+            "appearances": [
+                {
+                    "court-case-ref": "T20252391",
+                    "warrant-type": "Remand",
+                    "overall-case-outcome": "Remanded in custody",
+                    "next-court-date-set": "Yes",
+                    "next-hearing-type": "Court appearance",
+                    "next-court-date-day": "15",
+                    "next-court-date-month": "07",
+                    "next-court-date-year": "2025",
+                    "next-court-name": "Leeds Crown Court",
+                    "warrant-date-day": "01",
+                    "warrant-date-month": "07",
+                    "warrant-date-year": "2025",
+                    "court-name": "Leeds Magistrates’ Court",
+                    "offences": [
+                        {
+                            "offence-start-date-day": "20",
+                            "offence-start-date-month": "06",
+                            "offence-start-date-year": "2025",
+                            "offence-code": [ "TH68001" ],
+                            "offence-name": "TH68001 - Theft from a shop",
+                            "outcome": "Remanded in custody",
+                            "status": ""
+                        },
+                        {
+                            "offence-start-date-day": "22",
+                            "offence-start-date-month": "06",
+                            "offence-start-date-year": "2025",
+                            "offence-code": [ "CD71001" ],
+                            "offence-name": "CD71001 - Criminal damage to property under £5,000",
+                            "outcome": "Remanded in custody",
+                            "status": ""
                         }
-                        
+                    ]
+                },
+                {
+                    "court-case-ref": "T20252391",
+                    "merged-from-case": "T22059876",
+                    "merged-from-case-date": "05/10/2025",
+                    "warrant-type": "Remand",
+                    "overall-case-outcome": "Remand in custody",
+                    "warrant-date-day": "15",
+                    "warrant-date-month": "07",
+                    "warrant-date-year": "2025",
+                    "court-name": "Leeds Crown Court",
+                    "offences": [
+                        {
+                            "offence-start-date-day": "20",
+                            "offence-start-date-month": "06",
+                            "offence-start-date-year": "2025",
+                            "offence-code": [ "TH68001" ],
+                            "offence-name": "TH68001 - Theft from a shop",
+                            "outcome": "Remanded in custody"
+                        },
+                        {
+                            "offence-start-date-day": "22",
+                            "offence-start-date-month": "06",
+                            "offence-start-date-year": "2025",
+                            "offence-code": [ "CD71001" ],
+                            "offence-name": "CD71001 - Criminal damage to property under £5,000",
+                            "outcome": "Remanded in custody"
+                        },
+                        {
+                            "offence-start-date-day": "11",
+                            "offence-start-date-month": "05",
+                            "offence-start-date-year": "2025",
+                            "offence-code": [ "MD71002" ],
+                            "offence-name": "MD71002 - Possession of a controlled drug – Class B – Cannabis",
+                            "outcome": "Remand in custody",
+                            "merged-from": "T20250103 at Sheffield Crown Court"
+                        },
+                        {
+                            "offence-start-date-day": "12",
+                            "offence-start-date-month": "05",
+                            "offence-start-date-year": "2025",
+                            "offence-code": [ "MD71002" ],
+                            "offence-name": "MD71002 - Possession of a controlled drug – Class B – Cannabis",
+                            "outcome": "Remand in custody",
+                            "merged-from": "T20250103 at Sheffield Crown Court"
+                        }
+                    ]
+                }
+            ]
+        }
     ]
 };
-

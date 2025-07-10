@@ -209,12 +209,15 @@
                         {% endif %}
                     </fieldset>
                 </div>
-                {% set showCancel = true %}
-                {% include "includes/templates/page-ctas.njk" %}
+                <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Continue
+                </button>
+            </div>
             </form>
     </div>
     <div class="govuk-grid-column-one-third">
-        {% set showOffences = false %}
+        {% set showOffences = true %}
         {% include "includes/templates/appearance-info.njk" %}
     </div>
 </div>

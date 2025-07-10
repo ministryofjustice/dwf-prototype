@@ -31,17 +31,17 @@
 {% block head %}
 {% include "includes/head.html" %}
 {%- from  "hmrc/components/timeout-dialog/macro.njk" import hmrcTimeoutDialog -%}
-{{ hmrcTimeoutDialog ({
+<!-- {{ hmrcTimeoutDialog ({
   timeout: 100,
   countdown: 68,
   keepAliveUrl: "?continue=true",
-  signOutUrl: "?lang=English",
-  title: "For your security",
-  message: "We will delete your answers in",
+  signOutUrl: "timeout.html",
+  title: "You have been inactive for 30 minutes",
+  message: "For security, the appearance information you’ve entered will be deleted in",
   keepAliveButtonText: "Continue adding appearance information for Daryl Evans",
   signOutButtonText: "Delete your answers",
   language: "en"
-}) }}
+}) }} -->
 {% endblock %}
 {% block pageTitle %}
 Court cases and release dates
@@ -270,50 +270,66 @@ Court cases and release dates
 {% endblock %}
 {% if useAutoStoreData %}
 {% block footer %}
-<footer class="govuk-footer govuk-!-display-none-print govuk-!-margin-top-8" role="contentinfo">
-    <div class="moj-width-container ">
-        <div class="govuk-footer__meta">
-            <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
-                <h2 class="govuk-visually-hidden">Support links</h2>
-                <div class="govuk-footer__meta-custom">
-                    <h3 class="govuk-heading-m">Support</h3>
-                    <p class="govuk-footer__meta-custom govuk-list govuk-!-margin-bottom-8">
-                        Email <a class="govuk-link govuk-footer__link" href="mailto:ashley.wheat@digital.justice.gov.uk">ashley.wheat<wbr>@digital.justice.gov.uk</a> for support.<br>
-                    </p>
-                </div>
-                <ul class="govuk-footer__inline-list">
-                    <li class="govuk-footer__inline-list-item">
-                        <a class="govuk-footer__link" href="#">
-                            Privacy
-                        </a>
+<footer class="connect-dps-common-footer govuk-!-display-none-print govuk-!-margin-top-6" role="contentinfo" data-qa="ccrds-footer">
+    <div class="govuk-width-container">
+        <div class="govuk-grid-row">
+            <div id="connect-dps-common-footer-services" class="govuk-grid-column-two-thirds connect-dps-common-footer__services-menu">
+                <h2>Services</h2>
+                <ul class="govuk-list">
+                    <li>
+                        <a id="footer-check-my-diary-link" class="connect-dps-common-footer__link" href="https://check-my-diary-dev.prison.service.justice.gov.uk?fromDPS=true">Check my diary</a>
                     </li>
-                    <li class="govuk-footer__inline-list-item">
-                        <a class="govuk-footer__link" href="#">
-                            Accessibility statement
-                        </a>
+                    <li>
+                        <a id="footer-submit-intelligence-report-link" class="connect-dps-common-footer__link" href="https://submit-a-mercury-report-dev.hmpps.service.justice.gov.uk">Submit an Intelligence Report</a>
                     </li>
-                    <li class="govuk-footer__inline-list-item">
-                        <a class="govuk-footer__link" href="#">
-                            Cookies
-                        </a>
-                    </li>
-                    <li class="govuk-footer__inline-list-item">
-                        <a class="govuk-footer__link" href="/manage-prototype/clear-data">
-                            Clear data
-                        </a>
-                    </li>
-                    <li class="govuk-footer__inline-list-item">
-                        <a class="govuk-footer__link" href="">
-                        </a>
-                    </li>
-                    <li class="govuk-footer__inline-list-item">
-                        <a class="govuk-footer__link" href="">
-                        </a>
-                    </li>
+
                 </ul>
             </div>
-            <div class="govuk-footer__meta-item">
-                <a class="govuk-footer__link govuk-footer__copyright-logo" href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/">© Crown copyright</a>
+            <div class="govuk-grid-column-one-third">
+                <div class="connect-dps-common-footer__help">
+                    <h2>Support</h2>
+                    <p id="support-text">To get help, email <a id="footer-support-link" class="connect-dps-common-footer__link" href="mailto:omu.specialistsupportteam@justice.gov.uk">omu.specialistsupportteam@justice.gov.uk</a>.</p>
+                </div>
+            </div>
+        </div>
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+                <div class="connect-dps-common-footer__support-links">
+                    <h2 class="govuk-visually-hidden">Support links</h2>
+
+                    <ul class="connect-dps-common-footer__inline-list">
+                        <li class="connect-dps-common-footer__inline-list-item">
+                            <a id="footer-feedback-link" class="connect-dps-common-footer__link" href="https://court-cases-release-dates-dev.hmpps.service.justice.gov.uk/feedback" target="_blank" referrerpolicy="no-referrer" rel="noopener">
+                                Feedback (opens in a new tab)
+                            </a>
+                        </li>
+
+                        <li class="connect-dps-common-footer__inline-list-item">
+                            <a id="footer-accessibility-statement-link" class="connect-dps-common-footer__link" href="https://court-cases-release-dates-dev.hmpps.service.justice.gov.uk/accessibility">
+                                Accessibility
+                            </a>
+                        </li>
+
+                        <li class="connect-dps-common-footer__inline-list-item">
+                            <a id="footer-terms-conditions-link" class="connect-dps-common-footer__link" href="https://dps-dev.prison.service.justice.gov.uk/terms-and-conditions">
+                                Terms and conditions
+                            </a>
+                        </li>
+
+                        <li class="connect-dps-common-footer__inline-list-item">
+                            <a id="footer-privacy-policy-link" class="connect-dps-common-footer__link" href="https://dps-dev.prison.service.justice.gov.uk/privacy-policy">
+                                Privacy policy
+                            </a>
+                        </li>
+
+                        <li class="connect-dps-common-footer__inline-list-item">
+                            <a id="footer-cookies-link" class="connect-dps-common-footer__link" href="https://dps-dev.prison.service.justice.gov.uk/cookies-policy">
+                                Cookies policy
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

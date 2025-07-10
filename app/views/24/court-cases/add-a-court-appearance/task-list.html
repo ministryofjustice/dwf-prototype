@@ -30,7 +30,7 @@
                             </strong>
                             {% else %}
                             <strong class="govuk-tag govuk-tag--blue">
-                                Not yet started
+                                Incomplete
                             </strong>
                             {% endif %}
                         </div>
@@ -86,7 +86,7 @@
                             </strong>
                              {% else %}
                             <strong class="govuk-tag govuk-tag--blue">
-                                Not yet started
+                                Incomplete
                             </strong>
                             {% endif %}
                             {% else %}
@@ -114,7 +114,7 @@
                             </strong>
                             {% else %}
                             <strong class="govuk-tag govuk-tag--blue">
-                                Not yet started
+                                Incomplete
                             </strong>
                             {% endif %}
                             {% else %}
@@ -184,11 +184,13 @@
             <h2 class="govuk-heading-m">
                 Finish adding an appearance 
             </h2>
-            <p class="govuk-body">To save a draft of the court case, you must first complete the appearance information.</p>
+            <!-- <p class="govuk-body">To save a draft of the court case, you must first complete the appearance information.</p> -->
             <p class="govuk-body">Once every task has been completed, you must  save the information. You will not be able to return to this page, but can edit the details in the Court cases tab.</p  >
-                {% set showCancel = true %}
-                {% set continueText = "Finish and save" %}
-                {% include "includes/templates/page-ctas.njk" %}
+                <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Finish and save
+                </button>
+            </div>
         </form>
     </div>
 </div>

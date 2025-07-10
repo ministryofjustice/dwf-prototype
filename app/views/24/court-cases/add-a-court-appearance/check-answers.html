@@ -87,9 +87,11 @@
                 </div>
                 {% endif %}
             </dl>
-            {% set showCancel = true %}
-            {% set continueText = "Confirm and continue" %}
-            {% include "includes/templates/page-ctas.njk" %}
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Confirm and continue
+                </button>
+            </div>
         </form>
     </div>
 </div>
