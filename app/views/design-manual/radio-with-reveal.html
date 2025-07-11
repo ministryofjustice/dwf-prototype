@@ -1,0 +1,126 @@
+{% extends "includes/layouts/prototype-home-layout.html" %}
+{% set serviceName = "Design manual" %}
+{% set section = "components" %}
+{% set activePage = "radio-with-reveal" %}
+{% block content %}
+{% include "includes/manual-top-nav.html" %}
+
+<main class="govuk-main-wrapper-govuk-body">
+    <div class="govuk-width-container govuk-!-margin-top-6">
+        <div class="govuk-grid-row govuk-!-margin-top-6">
+            <div class="govuk-grid-column-one-quarter">
+                {% include "includes/manual-side-nav.html" %}
+            </div>
+            <div class="govuk-grid-column-two-thirds">
+
+                <h1 class="govuk-heading-xl">
+                    Radio with reveal
+                    <strong class="govuk-tag app-status-tag govuk-tag--blue">
+                       GOV.UK Design System
+                    </strong>
+                </h1>
+                <p class="govuk-body-l">Use the radio with reveal to capture additional information when a user answers a question.</p>
+
+                <h2 class="govuk-heading-l">When to use it</h2>
+                <p class="govuk-body">If a user selects an option that requires additional information, use a radio with reveal to capture it. This avoids introducing additional pages and keeps journeys shorter.</p>
+                <h3 class="govuk-heading-m">GOV.UK Design System</h3>
+                <p class="govuk-body">
+                    Radio with reveal is part of the <a href="https://design-system.service.gov.uk/components/radios/#conditionally-revealing-a-related-question">GOV.UK Design System radios component</a>.
+                </p>
+                <h2 class="govuk-heading-l">When not to use it</h2>
+                <p class="govuk-body">Do not use a radio with reveal when the additional information required has more than one part. Use multiple stages instead.</p>
+
+                <h2 class="govuk-heading-l">How it works</h2>
+                <p class="govuk-body">When the user answers a question that requires additional information, reveal the follow-up question when they select the relevant option</a>.</p>
+                <p class="govuk-body">Make sure that any revealed fields are only submitted when visible and completed. For example, if a user enters information in a reveal but then selects a different option, do not submit the information in the reveal. This prevents validation issues.</p>
+                <div class="example govuk-!-padding-4 govuk-!-margin-top-6">
+                    <div class="govuk-form-group govuk-!-margin-bottom-0">
+            <fieldset class="govuk-fieldset" aria-describedby="overall-sentence-length-hint">
+              <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                <h1 class="govuk-fieldset__heading">
+                  Is there an overall sentence length on the warrant?
+                </h1>
+              </legend>
+              <div id="overall-sentence-length-hint" class="govuk-hint">
+                Select one option.
+              </div>
+              <div class="govuk-radios" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="overall-sentence-length"
+                    name="appearance[overall-sentence-length]" type="radio" value="yes"
+                    data-aria-controls="conditional-overall-sentence-length">
+                  <label class="govuk-label govuk-radios__label" for="overall-sentence-length">
+                    Yes
+                  </label>
+                </div>
+                <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
+                  id="conditional-overall-sentence-length">
+                  <div class="govuk-form-group">
+                    <label class="govuk-label govuk-!-font-weight-bold" for="contact-by-email">
+                      Enter the overall sentence length
+                    </label>
+                    <div class="govuk-date-input" id="overall-sentence-length-years">
+                      <div class="govuk-date-input__item">
+                        <div class="govuk-form-group">
+                          <label class="govuk-label govuk-date-input__label" for="overall-sentence-length-years">
+                            Years
+                          </label>
+                          <input class="govuk-input govuk-date-input__input govuk-input--width-2"
+                            id="overall-sentence-length-years" name="appearance[overall-sentence-length-years]"
+                            type="text" inputmode="numeric"
+                            value="{{data.appearance['overall-sentence-length-years']}}">
+                        </div>
+                      </div>
+                      <div class="govuk-date-input__item">
+                        <div class="govuk-form-group">
+                          <label class="govuk-label govuk-date-input__label" for="overall-sentence-length-months">
+                            Months
+                          </label>
+                          <input class="govuk-input govuk-date-input__input govuk-input--width-2"
+                            id="overall-sentence-length-months" name="appearance[overall-sentence-length-months]"
+                            type="text" inputmode="numeric"
+                            value="{{data.appearance['overall-sentence-length-months']}}">
+                        </div>
+                      </div>
+                      <div class="govuk-date-input__item">
+                        <div class="govuk-form-group">
+                          <label class="govuk-label govuk-date-input__label" for="overall-sentence-length-weeks">
+                            Weeks
+                          </label>
+                          <input class="govuk-input govuk-date-input__input govuk-input--width-2"
+                            id="overall-sentence-length-weeks" name="appearance[overall-sentence-length-weeks]"
+                            type="text" inputmode="numeric"
+                            value="{{data.appearance['overall-sentence-length-weeks']}}">
+                        </div>
+                      </div>
+                      <div class="govuk-date-input__item">
+                        <div class="govuk-form-group">
+                          <label class="govuk-label govuk-date-input__label" for="overall-sentence-length-days">
+                            Days
+                          </label>
+                          <input class="govuk-input govuk-date-input__input govuk-input--width-2"
+                            id="overall-sentence-length-days" name="appearance[overall-sentence-length-days]"
+                            type="text" inputmode="numeric" value="{{data.appearance['overall-sentence-length-days']}}">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="overall-sentence-length-2"
+                    name="appearance[overall-sentence-length]" type="radio" value="no">
+                  <label class="govuk-label govuk-radios__label" for="overall-sentence-length-2">
+                    No
+                  </label>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

@@ -1,96 +1,83 @@
-
 {% extends "includes/layouts/prototype-home-layout.html" %}
+{% set serviceName = "Design manual" %}
+{% set section = "components" %}
+{% set activePage = "interruption-card" %}
 {% block content %}
-<div class="app-masthead govuk-!-margin-top-0">
-    <div class="govuk-width-container">
-        <div class="govuk-grid-row">
-            <div class="govuk-grid-column-full">
-                <h1 class="app-masthead__title govuk-heading-xl govuk-!-margin-bottom-6">
-                    {{serviceName}} design manual
-                </h1>
+{% include "includes/manual-top-nav.html" %}
+
+<main class="govuk-main-wrapper-govuk-body">
+    <div class="govuk-width-container govuk-!-margin-top-6">
+        <div class="govuk-grid-row govuk-!-margin-top-6">
+            <div class="govuk-grid-column-one-quarter">
+                {% include "includes/manual-side-nav.html" %}
             </div>
             <div class="govuk-grid-column-two-thirds">
-                <div class="app-masthead__description">
-                    <p class="govuk-body-l">Design components, patterns and styles used in the Remand and sentencing service.</p>
+
+                <h1 class="govuk-heading-xl">
+                    Interruption card
+                    <strong class="govuk-tag app-status-tag govuk-tag--purple">
+                        MoJ Design System
+                    </strong>
+                </h1>
+                <p class="govuk-body-l">Use the interruption card to pause the user’s journey and draw attention to something important about the action they are performing.</p>
+
+                <h2 class="govuk-heading-l">When to use it</h2>
+                <p class="govuk-body">Use this component in Remand and Sentencing to help prevent mistakes when a user’s action could affect other parts of the service, such as breaking a consecutive sentence chain.</p>
+                <p class="govuk-body">Only use an interruption card when the user has a choice. They should always have the option to cancel the action and go back a step.</p>
+
+                <h3 class="govuk-heading-m">Ministry of Justice Design System</h3>
+                <p class="govuk-body">
+                    The interruption card is part of the Ministry of Justice Design System. 
+                    <a href="https://design-patterns.service.justice.gov.uk/components/interruption-card/">Read more on the MoJ Design System website</a>.
+                </p>
+
+                <h2 class="govuk-heading-m">Use sparingly</h2>
+                <p class="govuk-body">Interruption cards should only be used when there’s no better way to prevent errors. Service design should minimise the chance of user actions leading to problems elsewhere.</p>
+                <p class="govuk-body">Make sure there is a clear use case and avoid using them too often, as users may start to ignore them (known as banner blindness).</p>
+
+                <h2 class="govuk-heading-l">When not to use it</h2>
+                <p class="govuk-body">Do not use an interruption card to block users from performing an action. It should highlight risks, not prevent action.</p>
+
+                <h2 class="govuk-heading-l">How it works</h2>
+                <p class="govuk-body">The title of the interruption card should briefly describe the potential issue. If the journey is in the context of something specific (like a sentence), include this information—similar to the <a href="">contextual question pattern</a>.</p>
+                <p class="govuk-body">Give clear instructions that explain the potential impact elsewhere in the service and what the user may need to do as a result.</p>
+                <p class="govuk-body">The card should ask whether the user wants to continue with the action. Provide a clear primary call to action and always offer a way to go back or cancel.</p>              
+
+                <div class="example govuk-!-padding-4 govuk-!-margin-top-6">
+                    <div class="moj-interruption-card">
+                        <div class="moj-interruption-card__content">
+                            <h1 class="govuk-heading-l moj-interruption-card__heading">
+                                Changing what this sentence is consecutive to will affect the consecutive chain
+                            </h1>
+                            <div class="govuk-body moj-interruption-card__body">
+                                <p class="govuk-body-l govuk-!-width-three-quarters">
+                                    Count 1<br>
+                                    <strong>CJ88001 - Common assault</strong><br>
+                                    Committed on 10/03/2025
+                                </p>
+                                <p class="govuk-body">
+                                    By changing the order of the consecutive chain, the warrant information might no longer be correct.
+                                </p>
+                                <p class="govuk-body">
+                                    You’ll need to check the other sentences to make sure they’re still accurate.
+                                </p>
+                                <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-top-6">
+                                    Are you sure you want to make this change?
+                                </p>
+                            </div>
+                            <div class="govuk-button-group moj-interruption-card__actions">
+                                <button type="submit" class="govuk-button govuk-button--inverse" data-module="govuk-button">
+                                    Yes, change the consecutive chain
+                                </button>
+                                <a class="govuk-link govuk-link--inverse" href="check-answers">Go back</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
-</div>
-<main class="govuk-main-wrapper-govuk-body">
-    <div class="govuk-width-container govuk-!-margin-top-6">
-        <div class="govuk-grid-row">
-            <div class="govuk-grid-column-full">
-                <div class="govuk-breadcrumbs">
-                    <ol class="govuk-breadcrumbs__list">
-                        <li class="govuk-breadcrumbs__list-item">
-                            <a class="govuk-breadcrumbs__link" href="../design-manual/">Home</a>
-                        </li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-        <div class="govuk-grid-row govuk-!-margin-top-6">
-            <div class="govuk-grid-column-one-quarter">
-                <nav class="moj-side-navigation govuk-!-padding-top-0" aria-label="Side navigation">
-
-<h4 class="moj-side-navigation__title">Pages</h4>
-<ul class="moj-side-navigation__list">
-  <li class="moj-side-navigation__item"><a href="court-cases-page.html">Court cases</a></li>
-  <li class="moj-side-navigation__item"><a href="question-page.html">Question page</a></li>
-  <li class="moj-side-navigation__item"><a href="add-offences-page.html">Add offences</a></li>
-</ul>
-<h4 class="moj-side-navigation__title">Components</h4>
-<ul class="moj-side-navigation__list">
-  <li class="moj-side-navigation__item"><a href="offence-card.html">Offence card</a></li>
-  <li class="moj-side-navigation__item"><a href="appearance-information-panel.html">Appearance information panel</a></li>
-  <li class="moj-side-navigation__item"><a href="offence-reveal.html">Offence reveal</a></li>
-  <li class="moj-side-navigation__item"><a href="terror-related-tag.html">Terror related tag</a></li>
-  <li class="moj-side-navigation__item"><a href="/interruption-card.html">Interruption card</a></li>
-  <li class="moj-side-navigation__item"><a href="accessible-autocomplete.html">Accessible autocomplete</a></li>
-  <li class="moj-side-navigation__item"><a href="radio-with-reveal.html">Radio with reveal</a></li>
-  <li class="moj-side-navigation__item"><a href="empty-state.html">Empty state</a></li>
-</ul>
-<h4 class="moj-side-navigation__title">Patterns</h4>
-<ul class="moj-side-navigation__list">
-  <li class="moj-side-navigation__item"><a href="contextual-question.html">Contextual question</a></li>
-  <li class="moj-side-navigation__item"><a href="task-list.html">Task list</a></li>
-  <li class="moj-side-navigation__item"><a href="add-offences-pattern.html">Add offences</a></li>
-</ul>
-
-                    <h4 class="moj-side-navigation__title">Components</h4>
-                    <ul class="moj-side-navigation__list">
-                        <li class="moj-side-navigation__item moj-side-navigation__item--active">
-                            <a href="offence-card.html">Offence card</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="govuk-grid-column-two-thirds">
-                <h1 class="govuk-heading-xl">Interruption card</h1>
-                <p class="govuk-body">Highlights important information that users need to see before continuing.</p>
-                <h2 class="govuk-heading-l">When to use it</h2>
-<ul class="govuk-list govuk-list--bullet">
-<li>To warn users about possible errors</li>
-<li>When the source of an error cannot be shown next to the input field</li>
-<li>To provide users with clear instructions on how to resolve an issue</li>
-</ul>
-<h2 class="govuk-heading-l">How it works</h2>
-<ul class="govuk-list govuk-list--bullet">
-<li>Displays an interruption card containing key information</li>
-<li>Provides guidance on how to resolve the error when the source isn’t visible</li>
-<li>The call to action (CTA) depends on the type of interruption:</li>
-<li>Possible error: Users can either acknowledge and continue or return to the previous page to check their input</li>
-<li>Instructions to fix an error: Users are directed to the page where they can resolve the issue or go back a step if needed</li>
-</ul>
-<h2 class="govuk-heading-l">Research &amp; rationale</h2>
-<ul class="govuk-list govuk-list--bullet">
-<li>Ensures users are made aware of important errors</li>
-<li>Helps reduce confusion by explaining how to fix issues when direct inline error messaging isn’t possible</li>
-</ul>
-
-</div>
-</div>
-</div>
 </main>
+
 {% endblock %}

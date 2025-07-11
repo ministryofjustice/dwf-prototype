@@ -1,95 +1,156 @@
-
 {% extends "includes/layouts/prototype-home-layout.html" %}
+{% set serviceName = "Design manual" %}
+{% set section = "components" %}
+{% set activePage = "appearance-info" %}
 {% block content %}
-<div class="app-masthead govuk-!-margin-top-0">
-    <div class="govuk-width-container">
-        <div class="govuk-grid-row">
-            <div class="govuk-grid-column-full">
-                <h1 class="app-masthead__title govuk-heading-xl govuk-!-margin-bottom-6">
-                    {{serviceName}} design manual
-                </h1>
+{% include "includes/manual-top-nav.html" %}
+
+<main class="govuk-main-wrapper-govuk-body">
+    <div class="govuk-width-container govuk-!-margin-top-6">
+        <div class="govuk-grid-row govuk-!-margin-top-6">
+            <div class="govuk-grid-column-one-quarter">
+                {% include "includes/manual-side-nav.html" %}
             </div>
             <div class="govuk-grid-column-two-thirds">
-                <div class="app-masthead__description">
-                    <p class="govuk-body-l">Design components, patterns and styles used in the Remand and sentencing service.</p>
+
+                <h1 class="govuk-heading-xl">Appearance information panel <strong
+                        class="govuk-tag app-status-tag govuk-tag--turquoise govuk-!-margin-left-0">
+                        Custom component
+                    </strong></h1>
+                <p class="govuk-body-l">Use this component when the user is in the context of a specific court
+                    appearance.</p>
+
+                <h2 class="govuk-heading-l">When to use it</h2>
+                <p class="govuk-body">Use the appearance information panel when the user is on a journey within the context of a single appearance.</p>
+
+                <h2 class="govuk-heading-l">When not to use it</h2>
+                <p class="govuk-body">Do not use the appearance information panel if that information is already shown
+                    on the page, or if the page includes multiple court cases or appearances.</p>
+
+                <h2 class="govuk-heading-l">How it works</h2>
+                <p class="govuk-body">Place the panel in a one-quarter-width column using the class <code>govuk-grid-column-one-quarter</code>.</p>
+                <div class="example govuk-!-width-one-half govuk-!-padding-6 govuk-!-margin-top-6">
+                    <div class="offence-summary">
+                        <h2 class="govuk-heading-m govuk-!-margin-top-4">Appearance details</h2>
+                        <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
+                            <div class="govuk-summary-list__row offences-summary-card-court-details-row">
+                                <dt class="govuk-summary-list__key">
+                                    Case reference
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                    T2025654321
+                                </dd>
+                            </div>
+                            <div class="govuk-summary-list__row offences-summary-card-court-details-row">
+                                <dt class="govuk-summary-list__key">
+                                    Court name
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                    Leeds Crown Court
+                                </dd>
+                            </div>
+                            <div class="govuk-summary-list__row offences-summary-card-court-details-row">
+                                <dt class="govuk-summary-list__key">
+                                    Warrant date
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                    10/04/2025
+                                </dd>
+                            </div>
+                            <div class="govuk-summary-list__row offences-summary-card-court-details-row">
+                                <dt class="govuk-summary-list__key">
+                                    Overall case outcome
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                   Imprisonment
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
                 </div>
+                <h3 class="govuk-heading-m govuk-!-margin-top-7">Showing offences</h3>
+                <p class="govuk-body">You can include offences in the panel using the <a href="offence-reveal">offence reveal component</a>. Only show key offence details to avoid overwhelming users.</p>
+                <p class="govuk-body">If a sentence includes a count number, display this alongside the offence.</p>
+                <div class="example govuk-!-width-one-half govuk-!-padding-6 govuk-!-margin-top-6">
+                    <div class="offence-summary">
+            <h2 class="govuk-heading-m govuk-!-margin-top-4">Appearance details</h2>
+            <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
+                <div class="govuk-summary-list__row offences-summary-card-court-details-row">
+                    <dt class="govuk-summary-list__key">
+                        Case reference
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        T2025654321
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row offences-summary-card-court-details-row">
+                    <dt class="govuk-summary-list__key">
+                        Court name
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        Leeds Crown Court
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row offences-summary-card-court-details-row">
+                    <dt class="govuk-summary-list__key">
+                        Warrant date
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        10/04/2025
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row offences-summary-card-court-details-row">
+                    <dt class="govuk-summary-list__key">
+                        Overall case outcome
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['overall-case-outcome'] }}
+                    </dd>
+                </div>
+            </dl>
+   
+            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+            <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-2">Offences (3)</h2>
+            <details class="govuk-details show-toggle filter white" data-module="govuk-details">
+                <summary class="govuk-details__summary">
+                    <span class="govuk-details__summary-text">
+                        offences
+                    </span>
+                </summary>
+                <div class="govuk-details__text">
+                    <dl class="offences-summary-card-content">
+                       
+                        <div class="offences-summary-card-row">
+                        <dd class="offences-summary-card-value govuk-body-s govuk-!-margin-bottom-1">Count 1</dd>
+                            <dt class="offences-summary-card-key govuk-!-font-weight-bold">
+                                CJ88001 - Common assault
+                            </dt>
+                            <dd class="offences-summary-card-value govuk-body-s">Committed on 10/03/2025</dd>
+                        </div>
+                        <div class="offences-summary-card-row">
+                        <dd class="offences-summary-card-value govuk-body-s govuk-!-margin-bottom-1">Count 2</dd>
+                            <dt class="offences-summary-card-key govuk-!-font-weight-bold">
+                                CJ88001A - Attempt common assault
+                            </dt>
+                            <dd class="offences-summary-card-value govuk-body-s">Committed on 10/03/2025</dd>
+                        </div>
+                        <div class="offences-summary-card-row">
+                            <dt class="offences-summary-card-key govuk-!-font-weight-bold">
+                                CJ88116 - Assault by beating
+                            </dt>
+                            <dd class="offences-summary-card-value govuk-body-s">Committed on 10/03/2025</dd>
+                        </div>
+                    </dl>
+                </div>
+            </details>
+        </div>
+                </div>
+
+
             </div>
         </div>
     </div>
-</div>
-<main class="govuk-main-wrapper-govuk-body">
-    <div class="govuk-width-container govuk-!-margin-top-6">
-        <div class="govuk-grid-row">
-            <div class="govuk-grid-column-full">
-                <div class="govuk-breadcrumbs">
-                    <ol class="govuk-breadcrumbs__list">
-                        <li class="govuk-breadcrumbs__list-item">
-                            <a class="govuk-breadcrumbs__link" href="../design-manual/">Home</a>
-                        </li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-        <div class="govuk-grid-row govuk-!-margin-top-6">
-            <div class="govuk-grid-column-one-quarter">
-                <nav class="moj-side-navigation govuk-!-padding-top-0" aria-label="Side navigation">
-
-<h4 class="moj-side-navigation__title">Pages</h4>
-<ul class="moj-side-navigation__list">
-  <li class="moj-side-navigation__item"><a href="court-cases-page.html">Court cases</a></li>
-  <li class="moj-side-navigation__item"><a href="question-page.html">Question page</a></li>
-  <li class="moj-side-navigation__item"><a href="add-offences-page.html">Add offences</a></li>
-</ul>
-<h4 class="moj-side-navigation__title">Components</h4>
-<ul class="moj-side-navigation__list">
-  <li class="moj-side-navigation__item"><a href="offence-card.html">Offence card</a></li>
-  <li class="moj-side-navigation__item"><a href="appearance-information-panel.html" class="moj-side-navigation__item--active">Appearance information panel</a></li>
-  <li class="moj-side-navigation__item"><a href="offence-reveal.html">Offence reveal</a></li>
-  <li class="moj-side-navigation__item"><a href="terror-related-tag.html">Terror related tag</a></li>
-  <li class="moj-side-navigation__item"><a href="/interruption-card.html">Interruption card</a></li>
-  <li class="moj-side-navigation__item"><a href="accessible-autocomplete.html">Accessible autocomplete</a></li>
-  <li class="moj-side-navigation__item"><a href="radio-with-reveal.html">Radio with reveal</a></li>
-  <li class="moj-side-navigation__item"><a href="empty-state.html">Empty state</a></li>
-</ul>
-<h4 class="moj-side-navigation__title">Patterns</h4>
-<ul class="moj-side-navigation__list">
-  <li class="moj-side-navigation__item"><a href="contextual-question.html">Contextual question</a></li>
-  <li class="moj-side-navigation__item"><a href="task-list.html">Task list</a></li>
-  <li class="moj-side-navigation__item"><a href="add-offences-pattern.html">Add offences</a></li>
-</ul>
-
-                    <h4 class="moj-side-navigation__title">Components</h4>
-                    <ul class="moj-side-navigation__list">
-                        <li class="moj-side-navigation__item moj-side-navigation__item--active">
-                            <a href="offence-card.html">Offence card</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="govuk-grid-column-two-thirds">
-                <h1 class="govuk-heading-xl">Appearance information panel</h1>
-                <p class="govuk-body">Displays key details about a court appearance within journeys.</p>
-                <h2 class="govuk-heading-l">When to use it</h2>
-<ul class="govuk-list govuk-list--bullet">
-<li>When users need a quick reference to court appearance details</li>
-<li>To provide context when reviewing or updating case information</li>
-</ul>
-<h2 class="govuk-heading-l">How it works</h2>
-<ul class="govuk-list govuk-list--bullet">
-<li>The panel includes:</li>
-<li>Appearance information – always shown when available</li>
-<li>Offences – only displayed when offences have been added</li>
-<li>The panel does not appear on the Add Appearance Information task, as no details have been entered yet</li>
-<li>The offences section is hidden on pages where offences are already listed, such as the Add Offences page</li>
-</ul>
-<h2 class="govuk-heading-l">Research &amp; rationale</h2>
-<ul class="govuk-list govuk-list--bullet">
-<li>Ensures key details are surfaced without requiring users to navigate elsewhere</li>
-<li>Provides clarity and reduces errors in data entry or decision-making</li>
-</ul>
-
-</div>
-</div>
-</div>
+    </div>
 </main>
+
 {% endblock %}

@@ -1,0 +1,105 @@
+{% extends "includes/layouts/prototype-home-layout.html" %}
+{% set serviceName = "Design manual" %}
+{% set section = "components" %}
+{% set activePage = "offence-reveal" %}
+{% block content %}
+{% include "includes/manual-top-nav.html" %}
+
+<main class="govuk-main-wrapper-govuk-body">
+    <div class="govuk-width-container govuk-!-margin-top-6">
+        <div class="govuk-grid-row govuk-!-margin-top-6">
+            <div class="govuk-grid-column-one-quarter">
+                {% include "includes/manual-side-nav.html" %}
+            </div>
+            <div class="govuk-grid-column-two-thirds">
+
+                <h1 class="govuk-heading-xl">
+                    Offence reveal 
+                    <strong class="govuk-tag app-status-tag govuk-tag--turquoise">
+                        Custom component
+                    </strong>
+                </h1>
+                <p class="govuk-body-l">Use the offence reveal to show or hide offences when they don’t need to be visible by default.</p>
+
+                <h2 class="govuk-heading-l">When to use it</h2>
+                <p class="govuk-body">Use this component on pages that include multiple court cases or appearances with offences.</p>
+
+                <h3 class="govuk-heading-m">Similar components</h3>
+                <p class="govuk-body">
+                    The offence reveal is similar to the 
+                    <a href="https://design-system.service.gov.uk/components/details/">details component in the GOV.UK Design System</a>.
+                </p>
+
+                <h2 class="govuk-heading-l">When not to use it</h2>
+                <p class="govuk-body">Do not use the offence reveal in the context of a single appearance, where key information should remain visible.</p>
+                <p class="govuk-body">Only use this component to show offences or sentences. Offences that require user actions (such as edit or delete) should not be shown in an offence reveal.</p>
+
+                <h2 class="govuk-heading-l">How it works</h2>
+                <p class="govuk-body">The offence reveal is a toggle link that shows or hides a list of offences or sentences when clicked.</p>
+                <p class="govuk-body">The text changes between ‘Show offences’ and ‘Hide offences’ depending on the state.</p>
+                <p class="govuk-body">Each offence should be displayed using the <a href="offence-card">offence card component</a>.</p>
+
+                <div class="example govuk-!-padding-4 govuk-!-margin-top-6">
+                    <details class="govuk-details filter white show-toggle govuk-!-margin-bottom-0">
+                        <summary class="govuk-details__summary">
+                            <span class="govuk-details__summary-text">
+                                Offences (2)
+                            </span>
+                        </summary>
+                        <div class="govuk-details__text">
+                            <div class="offence-card">
+                                <div class="offence-card-offence-details">
+                                    <h4 class="govuk-heading-s">CJ88001 - Common assault</h4>
+                                    <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                        <div class="govuk-summary-list__row">
+                                            <dt class="govuk-summary-list__key">
+                                                Committed on
+                                            </dt>
+                                            <dd class="govuk-summary-list__value">
+                                                10/03/2025
+                                            </dd>
+                                        </div>
+                                        <div class="govuk-summary-list__row">
+                                            <dt class="govuk-summary-list__key">
+                                                Outcome
+                                            </dt>
+                                            <dd class="govuk-summary-list__value">
+                                                Remand in custody
+                                            </dd>
+                                        </div>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="offence-card">
+                                <div class="offence-card-offence-details">
+                                    <h4 class="govuk-heading-s">CJ88001A - Attempt common assault</h4>
+                                    <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                        <div class="govuk-summary-list__row">
+                                            <dt class="govuk-summary-list__key">
+                                                Committed on
+                                            </dt>
+                                            <dd class="govuk-summary-list__value">
+                                                10/03/2025
+                                            </dd>
+                                        </div>
+                                        <div class="govuk-summary-list__row">
+                                            <dt class="govuk-summary-list__key">
+                                                Outcome
+                                            </dt>
+                                            <dd class="govuk-summary-list__value">
+                                                Remand in custody
+                                            </dd>
+                                        </div>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

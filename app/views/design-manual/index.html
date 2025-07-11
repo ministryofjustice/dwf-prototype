@@ -1,126 +1,75 @@
 {% extends "includes/layouts/prototype-home-layout.html" %}
+{% set serviceName = "Design manual" %}
+{% set section = "home" %}
 {% block content %}
-<div class="app-masthead govuk-!-margin-top-0">
-    <div class="govuk-width-container">
-        <div class="govuk-grid-row">
-            <div class="govuk-grid-column-full">
-                <h1 class="app-masthead__title govuk-heading-xl govuk-!-margin-bottom-6">
-                    {{serviceName}} design manual
-                </h1>
-            </div>
-            <div class="govuk-grid-column-two-thirds">
-                <div class="app-masthead__description">
-                    <p class="govuk-body-l">Design components, patterns and styles used in the Remand and sentencing service.</p>
-                </div>
-            </div>
-            <div class="govuk-grid-column-one-third">
-            </div>
-        </div>
-    </div>
-</div>
 <main class="govuk-main-wrapper-govuk-body">
-    <div class="govuk-width-container govuk-!-margin-top-6">
-        
-        <div class="govuk-grid-row">
-            <div class="govuk-grid-column-full">
-                <div class="govuk-breadcrumbs">
-                    <ol class="govuk-breadcrumbs__list">
-                        <li class="govuk-breadcrumbs__list-item">
-                            <a class="govuk-breadcrumbs__link" href="../design-manual/">Home</a>
-                        </li>
-                    </ol>
-                </div>
-            </div>
+
+  <div class="app-masthead govuk-!-margin-top-0">
+    <div class="govuk-width-container">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full">
+          <h1 class="app-masthead__title govuk-heading-xl govuk-!-margin-bottom-6">
+            Remand and sentencing design manual
+          </h1>
         </div>
-        <div class="govuk-grid-row govuk-!-margin-top-6">
-            <!-- Navigation -->
-            <div class="govuk-grid-column-one-quarter">
-              <nav class="moj-side-navigation govuk-!-padding-top-0" aria-label="Side navigation">
-                <h4 class="moj-side-navigation__title">Pages</h4>
-                <ul class="moj-side-navigation__list">
-                  <li class="moj-side-navigation__item">
-                    <a href="court-cases-page.html" aria-current="location">Court cases</a>
-                  </li>
-                  <li class="moj-side-navigation__item">
-                    <a href="question-page">Question page</a>
-                  </li>
-                  <li class="moj-side-navigation__item">
-                    <a href="add-offences-page">Add offences</a>
-                  </li>
-                </ul>
-                <h4 class="moj-side-navigation__title">Components</h4>
-                <ul class="moj-side-navigation__list">
-                  <li class="moj-side-navigation__item">
-                    <a href="offence-card">Offence card</a>
-                  </li>
-                  <li class="moj-side-navigation__item">
-                    <a href="appearance-information-panel">Appearance information panel</a>
-                  </li>
-                  <li class="moj-side-navigation__item">
-                    <a href="offence-reveal">Offence reveal</a>
-                  </li>
-                  <li class="moj-side-navigation__item">
-                    <a href="terror-related-tag">Terror related tag</a>
-                  </li>
-                  <li class="moj-side-navigation__item">
-                    <a href="/interruption-card">Interruption card</a>
-                  </li>
-                  <li class="moj-side-navigation__item">
-                    <a href="accessible-autocomplete">Accessible autocomplete</a>
-                  </li>
-                  <li class="moj-side-navigation__item">
-                    <a href="radio-with-reveal">Radio with reveal</a>
-                  </li>
-                  <li class="moj-side-navigation__item">
-                    <a href="empty-state">Empty state</a>
-                  </li>
-                </ul>
-
-                <h4 class="moj-side-navigation__title">Patterns</h4>
-                <ul class="moj-side-navigation__list">
-                  <li class="moj-side-navigation__item">
-                    <a href="contextual-question">Contextual question</a>
-                  </li>
-          
-                  <li class="moj-side-navigation__item">
-                    <a href="task-list">Task list</a>
-                  </li>
-          
-                  <li class="moj-side-navigation__item">
-                    <a href="add-offences-pattern">Add offences</a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-            <div class="govuk-grid-column-two-thirds">
-                <div class="moj-banner" role="region" aria-label="information">
-                    <div class="moj-banner__message">
-                        <h2 class="govuk-heading-m">Work in progress</h2>
-                        <p class="govuk-body">This design manual is currently being worked on. This means there are sections that are incomplete and missing. Some links might not work as expected.</p>
-                    </div>
-                </div>
-                <h1 class="govuk-heading-xl">Introduction</h1>
-                <p class="govuk-body">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam earum illo amet dolor explicabo, accusantium optio molestiae veritatis harum provident vel dicta saepe libero hic porro tenetur ad tempora molestias. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum numquam pariatur laboriosam, molestiae assumenda quibusdam saepe quidem neque modi. Deleniti, optio nemo vero provident numquam praesentium tempora sed laudantium maiores?
-                </p>
-                <!-- <p class="govuk-body">
-                    This design manual gives an overview of the service, including how each page works, the patterns used and user research gathered.
-                </p> -->
-                <h2 class="govuk-heading-l">Service overview</h2>
-                <p class="govuk-body">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci excepturi, numquam nesciunt velit natus tenetur eius odio in quibusdam odit id, ipsum provident laboriosam perferendis temporibus quam iste ipsa quidem?
-                </p>
-                <h3 class="govuk-heading-m govuk-!-margin-top-7">
-                    Journey maps
-                </h3>
-                <p class="govuk-body">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. <a href="">link to Miro</a>.
-                </p>
-                
-            </div>
+        <div class="govuk-grid-column-two-thirds">
+          <p class="govuk-body-l">
+            Design components, patterns and styles used in the Remand and sentencing service.
+          </p>
         </div>
-
-
+      </div>
     </div>
+  </div>
+
+  <div class="app-whats-new govuk-!-padding-top-7 govuk-!-padding-bottom-5 govuk-!-margin-bottom-7">
+    <div class="govuk-width-container">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          <h2 class="govuk-heading-l">What’s new</h2>
+          <h3 class="govuk-heading-s">11 July 2025: Design manual published</h3>
+          <p class="govuk-body">
+            The first version of the Remand and sentencing design manual includes documentation on the components and patterns used in the
+            <a href="https://justiceuk.sharepoint.com/:w:/r/sites/TransformingSentenceCalculations/_layouts/15/Doc.aspx?sourcedoc=%7B55649084-E2A6-4915-B9E9-04FA6AFE45FB%7D&file=Remand%20and%20Sentencing%20MVP.docx&action=default&mobileredirect=true">
+              Remand and sentencing MVP (access required)
+            </a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="govuk-width-container">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-third">
+        <h2 class="govuk-heading-l">Components</h2>
+        <p class="govuk-body">
+          Reusable components from the GOV.UK Design System, Ministry of Justice, and service-specific designs for creating a consistent, usable and accessible service.
+        </p>
+        <p class="govuk-body govuk-!-font-weight-bold"><a href="components">Go to components</a></p>
+      </div>
+      <div class="govuk-grid-column-one-third">
+        <h2 class="govuk-heading-l">Patterns</h2>
+        <p class="govuk-body">
+          Common layouts and design approaches that help users complete tasks and understand information clearly and consistently.<br><br>
+        </p>
+        <p class="govuk-body govuk-!-font-weight-bold"><a href="patterns">Go to patterns</a></p>
+      </div>
+    </div>
+    <hr class="govuk-section-break govuk-section-break--xl govuk-!-margin-top-7 govuk-section-break--visible">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-heading-l">Principles we follow</h2>
+        <p class="govuk-body">
+  This design manual builds on the <a href="https://design-system.service.gov.uk/" class="govuk-link">GOV.UK Design System</a> and follows the 
+  <a href="https://www.gov.uk/guidance/government-design-principles" class="govuk-link">Government Design Principles</a>, 
+  the <a href="https://www.gov.uk/service-manual/service-standard" class="govuk-link">Service Standard</a> and 
+  <a href="https://www.gov.uk/guidance/content-design" class="govuk-link">content design guidance</a>. 
+  It also follows the <a href="https://design-system.service.gov.uk/accessibility/accessibility-strategy/" class="govuk-link">GOV.UK accessibility strategy</a> to help make services more accessible to all users.
+</p>
+
+      </div>
+    </div>
+  </div>
+
 </main>
 {% endblock %}
