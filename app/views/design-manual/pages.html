@@ -1,0 +1,25 @@
+{% extends "includes/layouts/prototype-home-layout.html" %}
+{% set serviceName = "Design manual" %}
+{% set section = "pages" %}
+{% block content %}
+{% include "includes/manual-top-nav.html" %}
+
+<main class="govuk-main-wrapper-govuk-body">
+    <div class="govuk-width-container govuk-!-margin-top-6">
+        <div class="govuk-grid-row govuk-!-margin-top-6">
+            <div class="govuk-grid-column-one-quarter">
+                {% include "includes/manual-side-nav.html" %}
+            </div>
+            <div class="govuk-grid-column-two-thirds">
+
+                <h1 class="govuk-heading-xl">
+                    Pages
+                </h1>
+                
+                <p class="govuk-body">The patterns documented here are best practice design solutions for specific user scenarios in the Remand and sentencing service.</p>
+                <p class="govuk-body">Patterns use one or more <a href="components">components</a>, and show how they are applied in specific contexts.</p>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

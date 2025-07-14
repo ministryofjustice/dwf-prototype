@@ -32,7 +32,7 @@
 {% block head %}
 {% include "includes/head.html" %}
 {%- from  "hmrc/components/timeout-dialog/macro.njk" import hmrcTimeoutDialog -%}
-<!-- {{ hmrcTimeoutDialog ({
+{{ hmrcTimeoutDialog ({
   timeout: 100,
   countdown: 68,
   keepAliveUrl: "?continue=true",
@@ -42,7 +42,7 @@
   keepAliveButtonText: "Continue adding appearance information for Daryl Evans",
   signOutButtonText: "Delete your answers",
   language: "en"
-}) }} -->
+}) }}
 {% endblock %}
 {% block pageTitle %}
 Court cases and release dates
