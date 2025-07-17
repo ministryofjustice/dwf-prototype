@@ -1,17 +1,5 @@
 {% extends "./template.html" %}
 {% set nav = true %}
-{%- from  "hmrc/components/timeout-dialog/macro.njk" import hmrcTimeoutDialog -%}
-{{ hmrcTimeoutDialog ({
-  timeout: 5,
-  countdown: 68,
-  keepAliveUrl: "?continue=true",
-  signOutUrl: "timeout.html",
-  title: "You have been inactive for 30 minutes",
-  message: "For security, the appearance information you’ve entered will be deleted in",
-  keepAliveButtonText: "Continue adding appearance information for Daryl Evans",
-  signOutButtonText: "Delete your answers",
-  language: "en"
-}) }}
 {% set noBackLink = true %}
 {% block content %}
 <!-- Court cases -->

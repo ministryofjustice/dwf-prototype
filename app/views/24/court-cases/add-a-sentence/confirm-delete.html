@@ -1,5 +1,7 @@
 {% extends "../template.html" %}
+{% set noBackLink = true %}
 {% block content %}
+
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
         <form class="form" action="/{{data.prototypeVersion}}/delete-sentence?index={{ data.index }}" method="post">
@@ -162,26 +164,21 @@
   <!-- <div class="govuk-inset-text">
     Deleting this sentence will break a consecutive sentence chain. Lorem ipsum dolor sit amet consectetur, adipisicing elit.
   </div> -->
+  
 {% endif %}
-                    <div class="govuk-radios govuk-!-margin-top-6" data-module="govuk-radios">
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="confirm-delete-sentence" name="confirmDeleteSentence" type="radio" value="Yes">
-                            <label class="govuk-label govuk-radios__label" for="confirm-delete-sentence">
-                                Yes
-                            </label>
-                        </div>
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="confirm-delete-sentence-2" name="confirmDeleteSentence" type="radio" value="No">
-                            <label class="govuk-label govuk-radios__label" for="confirm-delete-sentence-2">
-                                No
-                            </label>
-                        </div>
-                    </div>
+{% if data.appearance['court-case-ref'] == "T20250101" %}
+<div class="govuk-inset-text">
+    Deleting this sentence will also delete adjustments associated with it.
+  </div>
+  {% endif %}
                 </fieldset>
             </div>
-            <button class="govuk-button" data-module="govuk-button">
-                Continue
+            <div class="govuk-button-group">
+            <button class="govuk-button govuk-button--warning" data-module="govuk-button">
+                Yes, delete offence
             </button>
+            <a class="govuk-link" href="#">Cancel and go back</a>
+            </div>
         </form>
     </div>
 </div>

@@ -31,12 +31,12 @@
         {% for appearance in data.courtCases[data.courtCaseIndex].appearances | reverse %}
         {% if appearance['status'] != 'draft' %}
         <div class="govuk-grid-row govuk-!-margin-top-6">
-            <div class="govuk-grid-column-one-half">
+            <div class="govuk-grid-column-three-quarters">
                 <h2 class="govuk-heading-m">{{ appearance['court-case-ref'] }} at {{ appearance['court-name'] }}
                     on {{ appearance['warrant-date-day'] }}/{{ appearance['warrant-date-month'] }}/{{
                     appearance['warrant-date-year'] }}</h2>
             </div>
-            <div class="govuk-grid-column-one-half">
+            <div class="govuk-grid-column-one-quarter">
                 <ul class="offence-card-actions-list">
                     <li class="offence-card-action-link">{% if appearance['status'] == 'draft' %}<a
                             class="govuk-link--no-visited-state"
@@ -45,19 +45,19 @@
                             appearance information</a>{% else %}<a
                             href="/{{data.prototypeVersion}}/update-appearance?courtCaseIndex={{data.courtCaseIndex}}&appearanceIndex={{loop.revindex0}}">Edit</a>{% endif %}
                         </li>
-                    {% if appearance['overall-case-outcome'] != 'Imprisonment' %}<li class="offence-card-action-link"><a href="" class="govuk-link--no-visited-state">Delete</a>{% endif %}
+                    {% if appearance['overall-case-outcome'] != 'Imprisonment' %}<li class="offence-card-action-link"><a href="confirm-delete-appearance?courtCaseIndex={{data.courtCaseIndex}}&appearanceIndex={{loop.revindex0}}" class="govuk-link--no-visited-state">Delete</a>{% endif %}
                     </li>
                 </ul>
             </div>
             {% if appearance["merged-from-case"] %}
             <div class="govuk-grid-column-two-thirds">
-            <div class="govuk-inset-text govuk-!-margin-0">Offences from {{ appearance['merged-from-case'] }} were merged with this appearance on {{ appearance['merged-from-case-date'] }}</div>
+            <div class="govuk-inset-text govuk-!-margin-0">Offences from {{ appearance['merged-from-case'] }} were merged with this appearance on {{ appearance['merged-from-case-date'] }}.</div>
             </div>
             {% endif %}
             {{ data.appearance["merged-with"] }}
-            <!-- {% if appearance['overall-case-outcome'] == 'Imprisonment' %}<div class="govuk-grid-column-two-thirds">
-                <div class="govuk-inset-text govuk-!-margin-top-1 govuk-!-margin-bottom-1">Appearances with the outcome of imprisonment cannot be deleted. Sentences must be deleted individually by editing the appearance.</div>
-            </div>{% endif %} -->
+            {% if appearance['overall-case-outcome'] == 'Imprisonment' %}<div class="govuk-grid-column-two-thirds">
+                <div class="govuk-inset-text govuk-!-margin-top-3 govuk-!-margin-bottom-1">You cannot delete an appearance that includes sentences.</div>
+            </div>{% endif %}
         </div>
         <div class="govuk-grid-full govuk-!-margin-bottom-6">
             <h3 class="govuk-visually-hidden">Flags</h3>
