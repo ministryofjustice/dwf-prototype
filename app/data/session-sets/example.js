@@ -847,7 +847,7 @@ module.exports = {
                                             "sentence-length-months": "6",
                                             "sentence-length-weeks": "0",
                                             "sentence-length-days": "0",
-                                            "consecutive-concurrent": "Concurrent"
+                                            "consecutive-concurrent": "Consecutive to count 1 on T20223256 at Manchester Crown Court (Crown Square) on 05/10/2024"
                                         }
                                     ]
                                 }

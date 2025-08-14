@@ -153,7 +153,7 @@ router.post("/:prototypeVersion/offence-code-known", function (req, res) {
         `/${prototypeVersion}/court-cases/add-a-sentence/inactive-offence-error`
       );
     } 
-    else if (offenceCode.includes("CJ88001") && overallCaseOutcomeApply == "No") {
+    else if (offenceCode.includes("CJ88001") && overallCaseOutcomeApply == "No" && warrantType == "Remand") {
       console.log("TEST")
       req.session.data.offence["offence-code"] = "CJ88001";
       req.session.data.offence["terror-related"] = "No";

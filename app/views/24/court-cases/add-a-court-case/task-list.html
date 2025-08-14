@@ -1,8 +1,8 @@
 {% extends "../template.html" %}
+{% set noBackLink = true %}
 {% block content %}
 {% set noBackLink = false %}
-<!-- What is the confirmed date -->
-<div class="govuk-grid-row govuk-!-margin-top-4">
+<div class="govuk-grid-row govuk-!-margin-top-8">
     <div class="govuk-grid-column-two-thirds">
         <form class="form" action="/{{data.prototypeVersion}}/persist-appearance" method="post">
             <div class="govuk-form-group">
@@ -32,7 +32,7 @@
                             </strong>
                             {% else %}
                             <strong class="govuk-tag govuk-tag--blue">
-                                Not yet started
+                                Incomplete
                             </strong>
                             {% endif %}
                         </div>
@@ -62,7 +62,7 @@
                             </strong>
                              {% else %}
                             <strong class="govuk-tag govuk-tag--blue">
-                                Not yet started
+                                Incomplete
                             </strong>
                             {% endif %}
                             {% else %}
@@ -106,7 +106,7 @@
                             </strong>
                              {% else %}
                             <strong class="govuk-tag govuk-tag--blue">
-                                Not yet started
+                                Incomplete
                             </strong>
                             {% endif %}
                             {% else %}
