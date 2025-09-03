@@ -694,7 +694,7 @@ router.get("/:prototypeVersion/create-appearance", function (req, res) {
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-court-appearance/court-case-reference-number-select`
     );
-  } else if (prototypeVersion == "v12" || prototypeVersion >= 13) {
+  } else if (prototypeVersion == "v12" || prototypeVersion >= 13 && prototypeVersion < 25) {
     req.session.data.appearanceDetailsComplete = 0;
     req.session.data.courtDocumentsComplete = 0;
     req.session.data.offencesComplete = 0;
@@ -702,6 +702,15 @@ router.get("/:prototypeVersion/create-appearance", function (req, res) {
     req.session.data.edit = "false";
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-court-appearance/warrant-type`
+    );
+  } else if (prototypeVersion >= 25 ) {
+    req.session.data.appearanceDetailsComplete = 0;
+    req.session.data.courtDocumentsComplete = 0;
+    req.session.data.offencesComplete = 0;
+    req.session.data.nextCourtAppearanceComplete = "No";
+    req.session.data.edit = "false";
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-court-appearance/custodial-outcome`
     );
   } else {
     return res.redirect(
@@ -1844,15 +1853,40 @@ router.post(
   function (req, res) {
     const prototypeVersion = req.params.prototypeVersion;
     const warrantType = req.session.data.warrantType;
+    const route = req.session.data.route;
+
+    // Helper: find offences that still need outcome updates
+    const offences = (req.session.data.appearance?.offences) || [];
+    const incompleteOffences = offences.filter(o =>
+      (o?.sentence?.['sentence-type'] == null) && (String(o?.['outcome-changed']) !== 'true')
+    );
+
+    const hasIncomplete = incompleteOffences.length > 0;
+
+    // If they’re trying to complete, but some outcomes aren’t updated yet,
+    // send them back to the page to finish
+    if (hasIncomplete) {
+      req.session.data.addSentenceInformationError = {
+        message: "Update the offence outcome",
+        count: incompleteOffences.length
+      };
+      return res.redirect(
+        `/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`
+      );
+    }
+
+    // --- Existing logic below (with || fixes) ---
+
     var addSentenceInformationComplete = 1;
     var offencesComplete = 1;
-    const route = req.session.data.route;
+
     if (req.session.data.appearance.offences) {
       console.log("Offences: " + req.session.data.appearance.offences.length);
     }
     if (req.session.data.appearance.sentences) {
       console.log("Sentences: " + req.session.data.appearance.sentences.length);
     }
+
     if (route == "new-court-case") {
       if (warrantType == "Remand") {
         req.session.data.offencesComplete = offencesComplete;
@@ -1861,26 +1895,27 @@ router.post(
         );
       } else if (warrantType == "Sentencing") {
         if (req.session.data.appearance["finished-adding-sentences"] == "yes") {
-          req.session.data.addSentenceInformationComplete =
-            addSentenceInformationComplete;
+          req.session.data.addSentenceInformationComplete = addSentenceInformationComplete;
         }
         req.session.data.sentenceAdded = 0;
         req.session.data.sentencesAdded = 1;
+
         if (
           (req.session.data.appearance["total-sentence-length-years"] !=
-            req.session.data.appearance["overall-sentence-length-years"]) |
+            req.session.data.appearance["overall-sentence-length-years"]) ||
           (req.session.data.appearance["total-sentence-length-months"] !=
-            req.session.data.appearance["overall-sentence-length-months"]) |
+            req.session.data.appearance["overall-sentence-length-months"]) ||
           (req.session.data.appearance["total-sentence-length-weeks"] !=
             req.session.data.appearance["overall-sentence-length-weeks"])
         ) {
           return res.redirect(
             `/${prototypeVersion}/court-cases/add-a-court-case/sentence-length-mismatch`
           );
-        } else
+        } else {
           return res.redirect(
             `/${prototypeVersion}/court-cases/add-a-court-case/task-list`
           );
+        }
       }
     } else {
       if (warrantType == "Remand") {
@@ -1892,28 +1927,30 @@ router.post(
         );
       } else if (warrantType == "Sentencing") {
         if (req.session.data.appearance["finished-adding-offences"] == "yes") {
-          req.session.data.addSentenceInformationComplete =
-            addSentenceInformationComplete;
+          req.session.data.addSentenceInformationComplete = addSentenceInformationComplete;
         }
+
         if (
           (req.session.data.appearance["total-sentence-length-years"] !=
-            req.session.data.appearance["overall-sentence-length-years"]) |
+            req.session.data.appearance["overall-sentence-length-years"]) ||
           (req.session.data.appearance["total-sentence-length-months"] !=
-            req.session.data.appearance["overall-sentence-length-months"]) |
+            req.session.data.appearance["overall-sentence-length-months"]) ||
           (req.session.data.appearance["total-sentence-length-weeks"] !=
             req.session.data.appearance["overall-sentence-length-weeks"])
         ) {
           return res.redirect(
             `/${prototypeVersion}/court-cases/add-a-court-appearance/sentence-length-mismatch`
           );
-        } else
+        } else {
           return res.redirect(
             `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
           );
+        }
       }
     }
   }
 );
+
 
 router.post("/:prototypeVersion/court-documents-complete", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;

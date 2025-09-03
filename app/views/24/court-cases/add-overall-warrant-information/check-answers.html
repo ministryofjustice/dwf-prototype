@@ -10,7 +10,7 @@
         <form class="form" action="/{{data.prototypeVersion}}/add-overall-warrant-information-complete" method="post">
                 <dl class="govuk-summary-list">
                     <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
+                        <dt class="govuk-summary-list__key govuk-!-width-one-third">
                             Is there an overall sentence length on the warrant?
                         </dt>
                         <dd class="govuk-summary-list__value">
@@ -70,18 +70,6 @@
                         </dd>
                     </div>
                     {% endif %}
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Is the outcome the same for all offences on the warrant?
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            {{ data['appearance']['overall-case-outcome-apply-all'] }}
-                        </dd>
-                        <dd class="govuk-summary-list__actions">
-                            <a class="govuk-link govuk-link--no-visited-state" href="overall-outcome-apply-all?edit=true">Edit<span
-                                    class="govuk-visually-hidden"> overall conviction date</span></a>
-                        </dd>
-                    </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Overall case outcome

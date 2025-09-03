@@ -1,0 +1,147 @@
+{% extends "../template.html" %}
+{% set edit = "false" %}
+{% block content %}
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">
+            <span class="govuk-caption-l">Add overall warrant information</span>
+            Check your answers
+        </h1>
+        <form class="form" action="/{{data.prototypeVersion}}/add-overall-warrant-information-complete" method="post">
+                <dl class="govuk-summary-list">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Is there an overall sentence length on the warrant?
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                           {{ data.appearance['overall-sentence-length'] | capitalize }}
+                        </dd>
+                        <dd class="govuk-summary-list__actions">
+                            <a class="govuk-link govuk-link--no-visited-state" href="overall-sentence-length?edit=true">Edit<span
+                                    class="govuk-visually-hidden"> is there an overall sentence length on the warrant?</span></a>
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Overall sentence length
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {% if data['appearance']['overall-sentence-length'] == 'no' %}
+                            Life sentence
+                            {% else %}
+                            {{ data['appearance']['overall-sentence-length-years'] }} years {{
+                            data['appearance']['overall-sentence-length-months'] }} months {{
+                            data['appearance']['overall-sentence-length-weeks'] }} weeks {{
+                            data['appearance']['overall-sentence-length-days'] }} days
+                            {% endif %}
+                        </dd>
+                        <dd class="govuk-summary-list__actions">
+                            <a class="govuk-link govuk-link--no-visited-state" href="overall-sentence-length?edit=true">Edit<span
+                                    class="govuk-visually-hidden"> overall sentence length</span></a>
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key govuk-summary-list--long-key">
+                            Is the conviction date the same for all offences on the warrant?
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {% if data.appearance['overall-conviction-date-apply-all'] == 'Yes' %}Yes{% else %}No{%
+                            endif %}
+                        </dd>
+                        <dd class="govuk-summary-list__actions">
+                            <a class="govuk-link govuk-link--no-visited-state" href="overall-conviction-date?edit=true">Edit<span
+                                    class="govuk-visually-hidden"> overall conviction date same ofr all
+                                    offences</span></a>
+                        </dd>
+                    </div>
+                    {% if data.appearance['overall-conviction-date-apply-all'] == 'Yes' %}
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Conviction date
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data['appearance']['overall-conviction-date-day'] }}/{{
+                            data['appearance']['overall-conviction-date-month'] }}/{{
+                            data['appearance']['overall-conviction-date-year'] }}
+                        </dd>
+                        <dd class="govuk-summary-list__actions">
+                            <a class="govuk-link govuk-link--no-visited-state" href="overall-conviction-date-apply-all?edit=true">Edit<span
+                                    class="govuk-visually-hidden"> overall conviction date</span></a>
+                        </dd>
+                    </div>
+                    {% endif %}
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Is the outcome the same for all offences on the warrant?
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data['appearance']['overall-case-outcome-apply-all'] }}
+                        </dd>
+                        <dd class="govuk-summary-list__actions">
+                            <a class="govuk-link govuk-link--no-visited-state" href="overall-outcome-apply-all?edit=true">Edit<span
+                                    class="govuk-visually-hidden"> overall conviction date</span></a>
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Overall case outcome
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data['appearance']['overall-case-outcome'] }}
+                        </dd>
+                        <dd class="govuk-summary-list__actions">
+                            
+                        </dd>
+                    </div>
+                    <!-- <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Does this warrant include offences from other court cases?
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {% if data['appearance']['merged-cases'] == "None" %}No{% else %}{{ data['appearance']['merged-cases'] }}{% endif %}
+                        </dd>
+                        <dd class="govuk-summary-list__actions">
+                            <a class="govuk-link govuk-link--no-visited-state" href="merged-cases?edit=true">Edit<span class="govuk-visually-hidden">
+                                    warrant include offences from other court cases</span></a>
+                        </dd>
+                    </div> -->
+                    {% if data.appearance['merged-cases'] == 'Yes' %}
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Offences merged from
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {% for mergedFrom in data.appearance['merged-from'] %}
+                            <p>{{
+                                data.courtCases[data.appearance['merged-from'][loop.index0]].appearances[data.courtCases[data.appearance['merged-from'][loop.index0]].appearances.length
+                                -1]['court-case-ref']}} at {{
+                                data.courtCases[data.appearance['merged-from'][loop.index0]].appearances[data.courtCases[data.appearance['merged-from'][loop.index0]].appearances.length
+                                -1]['court-name']}} on {{
+                                data.courtCases[data.appearance['merged-from'][loop.index0]].appearances[data.courtCases[data.appearance['merged-from'][loop.index0]].appearances.length
+                                -1]['warrant-date-day']}}/{{
+                                data.courtCases[data.appearance['merged-from'][loop.index0]].appearances[data.courtCases[data.appearance['merged-from'][loop.index0]].appearances.length
+                                -1]['warrant-date-month']}}/{{
+                                data.courtCases[data.appearance['merged-from'][loop.index0]].appearances[data.courtCases[data.appearance['merged-from'][loop.index0]].appearances.length
+                                -1]['warrant-date-year']}}</p>
+                            {% endfor %}
+                        </dd>
+                        <dd class="govuk-summary-list__actions">
+                            <a class="govuk-link govuk-link--no-visited-state" href="merged-cases?edit=true">Edit<span class="govuk-visually-hidden">
+                                    warrant include offences from other court cases</span></a>
+                        </dd>
+                    </div>
+                    {% endif %}
+                </dl>
+                <div class="govuk-button-group">
+                    <button class="govuk-button" data-module="govuk-button">
+                        Confirm and continue
+                    </button>
+                </div>
+            </form>
+    </div>
+    <div class="govuk-grid-column-one-third">
+        {% set showOffences = false %}
+        {% include "includes/templates/appearance-info.njk" %}
+    </div>
+</div>
+{% endblock %}
