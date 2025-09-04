@@ -2562,6 +2562,9 @@ router.get("/:prototypeVersion/update-outcome", function (req, res) {
   req.session.index = index;
   req.session.edit = edit;
   console.log(req.session.data.appearance.offences[index]);
+  if (req.query.clearError === "true") {
+    req.session.data.addSentenceInformationError = null;
+  }
   
   res.redirect(
     `/${prototypeVersion}/court-cases/add-a-court-appearance/change-outcome`
