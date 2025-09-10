@@ -1867,7 +1867,7 @@ router.post(
     // send them back to the page to finish
     if (hasIncomplete) {
       req.session.data.addSentenceInformationError = {
-        message: "Update the offence outcome",
+        message: "One or more offence outcomes need updating",
         count: incompleteOffences.length
       };
       return res.redirect(
