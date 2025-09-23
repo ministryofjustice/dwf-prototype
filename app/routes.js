@@ -799,32 +799,62 @@ router.get("/:prototypeVersion/overall-case-outcome", function (req, res) {
 
 router.post("/:prototypeVersion/persist-appearance", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
-  var appearanceDetailsComplete = 0;
+
+  // --- Safely reconstruct the working appearance + indices ---
+  const cases = req.session.data.courtCases || [];
+  let courtCaseIndex = req.session.data.courtCaseIndex;
+  let appearanceIndex = req.session.data.appearanceIndex;
+
+  // Try to recover indices if missing
+  if (courtCaseIndex == null) {
+    courtCaseIndex = cases.length ? cases.length - 1 : 0;
+    req.session.data.courtCaseIndex = courtCaseIndex;
+  }
+  const appearances = cases[courtCaseIndex]?.appearances || [];
+  if (appearanceIndex == null) {
+    appearanceIndex = appearances.length ? appearances.length - 1 : 0;
+    req.session.data.appearanceIndex = appearanceIndex;
+  }
+
+  // Current appearance from session or persisted array
+  let currentAppearance =
+    req.session.data.appearance || appearances[appearanceIndex] || {};
+  // Ensure session appearance exists for downstream code
+  req.session.data.appearance = currentAppearance;
+
+  let appearanceDetailsComplete = 0;
   const route = req.session.data.route;
-  const warrantType = req.session.data.appearance["warrant-type"];
+  const warrantType = currentAppearance?.["warrant-type"];
   console.log("Route: " + route);
+
+  // --- Persist appearance back to the array safely ---
   if (req.session.data.appearanceIndex !== undefined) {
-    req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[
-      req.session.data.appearanceIndex
-    ] = req.session.data.appearance;
+    if (!cases[courtCaseIndex]) cases[courtCaseIndex] = { appearances: [] };
+    if (!cases[courtCaseIndex].appearances)
+      cases[courtCaseIndex].appearances = [];
+    cases[courtCaseIndex].appearances[appearanceIndex] =
+      req.session.data.appearance;
   } else if (req.query.isFirst) {
-    req.session.data.courtCases[
-      req.session.data.courtCaseIndex
-    ].appearances[0] = {
-      ...req.session.data.courtCases[req.session.data.courtCaseIndex]
-        .appearances[0],
+    if (!cases[courtCaseIndex]) cases[courtCaseIndex] = { appearances: [] };
+    if (!cases[courtCaseIndex].appearances)
+      cases[courtCaseIndex].appearances = [];
+    cases[courtCaseIndex].appearances[0] = {
+      ...(cases[courtCaseIndex].appearances[0] || {}),
       ...req.session.data.appearance,
     };
     req.session.data.appearanceIndex = 0;
   } else {
-    req.session.data.courtCases[
-      req.session.data.courtCaseIndex
-    ].appearances.push(req.session.data.appearance);
+    if (!cases[courtCaseIndex]) cases[courtCaseIndex] = { appearances: [] };
+    if (!cases[courtCaseIndex].appearances)
+      cases[courtCaseIndex].appearances = [];
+    cases[courtCaseIndex].appearances.push(req.session.data.appearance);
     req.session.data.appearanceIndex =
-      req.session.data.courtCases[req.session.data.courtCaseIndex].appearances
-        .length - 1;
+      cases[courtCaseIndex].appearances.length - 1;
     console.log("Appearance index: " + req.session.data.appearanceIndex);
   }
+  req.session.data.courtCases = cases;
+
+  // Post-save edit shortcut
   if (
     req.session.data.addCountNumbersOtherSentence == true &&
     req.session.data.postSaveEditComplete == "true"
@@ -843,55 +873,49 @@ router.post("/:prototypeVersion/persist-appearance", function (req, res) {
       `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`
     );
   }
-  if (req.session.data.addCountNumbersOtherSentence == true) {
-    console.log(
-      "Consec court case: " +
-        req.session.data.consecCourtCase +
-        "/n" +
-        "Consec court appearance: " +
-        req.session.data.consecAppearance
-    );
+
+  // ===== EARLY SHORT-CIRCUIT FOR NON-CUSTODIAL =====
+  if (warrantType === "Non-custodial") {
+    if (req.query.appearanceComplete === "true") {
+      // Finalise non-custodial flow → confirmation
+      return res.redirect(
+        `/${prototypeVersion}/court-cases/record-an-immediate-release/confirmation`
+      );
+    }
+    // Otherwise keep them in the non-custodial task list
     return res.redirect(
-      307,
-      `/${prototypeVersion}/update-appearance?courtCaseIndex=` +
-        req.session.data.consecCourtCase +
-        "&appearanceIndex=" +
-        req.session.data.consecAppearance
+      `/${prototypeVersion}/court-cases/record-an-immediate-release/task-list`
     );
   }
+  // =================================================
+
   if (route == "repeat-remand") {
-    res.redirect(
+    return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers`
     );
   } else if (route == "add-a-court-case") {
-    res.redirect(
+    return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-court-case/confirmation`
     );
   } else if (route == "appearance") {
     appearanceDetailsComplete = 1;
     req.session.data.appearanceDetailsComplete = appearanceDetailsComplete;
     console.log("Appearance details complete: " + appearanceDetailsComplete);
+
     if (req.session.data.saveCourtCase == "true") {
       req.session.data.appearance["status"] = ["draft"];
       console.log(
         "Appearance status: " + req.session.data.appearance["status"]
       );
       return res.redirect(`/${prototypeVersion}/court-cases/`);
-    } else if (req.query.appearanceComplete == "true") {
+    }
+    if (req.query.appearanceComplete == "true") {
       return res.redirect(
         `/${prototypeVersion}/court-cases/add-a-court-appearance/confirmation`
       );
-    } else if (warrantType == "Non-custodial") {
-      return res.redirect(
-        `/${prototypeVersion}/court-cases/record-an-immediate-release/task-list`
-      );
-    } else {
-      return res.redirect(
-        `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
-      );
     }
-    res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
     );
   } else if (route == "new-court-case") {
     if (req.query.saveCourtCase == "true") {
@@ -907,9 +931,7 @@ router.post("/:prototypeVersion/persist-appearance", function (req, res) {
       );
     }
   } else if (route == "edit-appearance") {
-    return res.redirect(`/${prototypeVersion}/court-cases/confirmation-edit`);
-  } else if (route == "remand-to-sentence") {
-    if (req.query.saveCourtCase == "true") {
+    if (req.session.data.saveCourtCase == "true") {
       req.session.data.appearance["status"] = ["draft"];
       console.log(
         "Appearance status: " + req.session.data.appearance["status"]
@@ -925,7 +947,13 @@ router.post("/:prototypeVersion/persist-appearance", function (req, res) {
       );
     }
   }
+
+  // Absolute fallback
+  return res.redirect(
+    `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
+  );
 });
+
 
 router.get("/:prototypeVersion/close-success-message", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;

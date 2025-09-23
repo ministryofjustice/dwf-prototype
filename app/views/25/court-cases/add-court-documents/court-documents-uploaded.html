@@ -26,8 +26,16 @@
     <dl class="govuk-summary-list govuk-summary-list--long-key govuk-!-margin-bottom-0">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
+          {% if data.appearance['warrant-type'] == 'Non-custodial' %}
+          <a class="govuk-link" href="#">prison-court-register.pdf</a>
+          <div class="govuk-body govuk-!-margin-0">Prison court register</div>
+          {% elif data.appearance['warrant-type'] == 'Sentencing' %}
           <a class="govuk-link" href="#">sentencing-warrant.pdf</a>
           <div class="govuk-body govuk-!-margin-0">Sentencing warrant</div>
+          {% else %}
+          <a class="govuk-link" href="#">remand-warrant.pdf</a>
+          <div class="govuk-body govuk-!-margin-0">Remand warrant</div>
+          {% endif %}
         </dt>
         <dd class="govuk-summary-list__value">
           <strong class="govuk-tag govuk-tag--green">
@@ -60,11 +68,25 @@
     </div>
     <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
     {% endif %}
+    {% if data.appearance['warrant-type'] == "Non-custodial" %}
+    <div class="govuk-form-group">
+      <div class="govuk-form-group govuk-!-margin-top-6 govuk-body">
+        <a class="govuk-link--no-visited-state" href="upload-document?document-type=prison court register">Upload order of discontinuance</a>
+      </div>
+    </div>
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    <div class="govuk-form-group">
+      <div class="govuk-form-group govuk-!-margin-top-6 govuk-body">
+        <a class="govuk-link--no-visited-state" href="upload-document?document-type=prison court register">Upload bail order</a>
+      </div>
+    </div>
+    {% else %}
     <div class="govuk-form-group">
       <div class="govuk-form-group govuk-!-margin-top-6 govuk-body">
         <a class="govuk-link--no-visited-state" href="upload-document?document-type=prison court register">Upload prison court register</a>
       </div>
     </div>
+    {% endif %}
           <div class="govuk-button-group govuk-!-margin-top-8">
             <button type="submit" class="govuk-button" data-module="govuk-button">
              Continue
