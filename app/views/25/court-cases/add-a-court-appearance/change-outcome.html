@@ -10,6 +10,10 @@
             <form class="form"
             action="/{{data.prototypeVersion}}/add-sentence-information?route=edit-appearance&index={{data.index}}"
             method="post">
+            {% elif data.route == "non-custodial" %}
+            <form class="form"
+                action="/{{data.prototypeVersion}}/add-sentence-information?route=non-custodial&index={{data.index}}"
+                method="post">
             {% else %}
             <form class="form"
                 action="/{{data.prototypeVersion}}/add-sentence-information?route=remand-to-sentence&index={{data.index}}"
@@ -35,7 +39,7 @@
                                 data.appearance.offences[data.index]['offence-start-date-month'] }}/{{
                                 data.appearance.offences[data.index]['offence-start-date-year'] }}</p>
                             {% endif %}
-                        {% if data.appearance['warrant-type'] == 'Remand' %}
+                        {% if (data.appearance['warrant-type'] == 'Remand') %}
                         <div class="govuk-radios" data-module="govuk-radios" data-govuk-radios-init="">
                             <div class="govuk-radios__item">
                               <input class="govuk-radios__input" id="outcome-1" name="offence[outcome]" type="radio" value="Commit to Crown Court for trial in custody">
@@ -125,6 +129,7 @@
                         
                         {% else %}
                         <div class="govuk-radios" data-module="govuk-radios" data-govuk-radios-init="">
+                          {% if  data.appearance['warrant-type'] != 'Non-custodial' %}
                             <div class="govuk-radios__item">
                                 <input class="govuk-radios__input" id="outcome-1" name="offence[outcome]" type="radio" value="Imprisonment">
                                 <label class="govuk-label govuk-radios__label" for="outcome-1">
@@ -144,6 +149,7 @@
                                     Suspended imprisonment
                                 </label>
                             </div>
+                          {% endif %}
                             <div class="govuk-radios__item">
                                 <input class="govuk-radios__input" id="outcome-4" name="offence[outcome]" type="radio" value="Lie on file">
                                 <label class="govuk-label govuk-radios__label" for="outcome-4">

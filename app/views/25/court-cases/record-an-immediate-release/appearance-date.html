@@ -1,0 +1,51 @@
+{% extends "../template.html" %}
+{% block content %}
+<!-- What is the confirmed date -->
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" action="court-name-select">
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" role="group" aria-describedby="passport-issued-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Add appearance information</span>
+                            Enter the appearance date
+                        </h1>
+                    </legend>
+                    <div class="govuk-date-input" id="appearance-date">
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="appearance-date-day">
+                                    Day
+                                </label>
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="appearance-date-day" name="appearance[appearance-date-day]" type="text" inputmode="numeric" {% if data.edit == 'true' %}value="{{ data.appearance['appearance-date-day'] }}"{% endif %}{% if data.postSaveEdit == 'true' %}value="{{ data.appearance['appearance-date-day'] }}"{% endif %}>
+                            </div>
+                        </div>
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="appearance-date-month">
+                                    Month
+                                </label>
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="appearance-date-month" name="appearance[appearance-date-month]" type="text" inputmode="numeric" {% if data.edit == 'true' %}value="{{ data.appearance['appearance-date-month'] }}"{% endif %}{% if data.postSaveEdit == 'true' %}value="{{ data.appearance['appearance-date-month'] }}"{% endif %}>
+                            </div>
+                        </div>
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="appearance-date-year">
+                                    Year
+                                </label>
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="appearance-date-year" name="appearance[appearance-date-year]" type="text" inputmode="numeric" {% if data.edit == 'true' %}value="{{ data.appearance['appearance-date-year'] }}"{% endif %}{% if data.postSaveEdit == 'true' %}value="{{ data.appearance['appearance-date-year'] }}"{% endif %}>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Continue
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

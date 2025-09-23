@@ -5,8 +5,8 @@
 
 const govukPrototypeKit = require("govuk-prototype-kit");
 const sessionDataDefaults = require("./data/session-sets/example");
-const emptyData = require('./data/session-sets/empty-data');
-const exampleData = require('./data/session-sets/example');
+const emptyData = require("./data/session-sets/empty-data");
+const exampleData = require("./data/session-sets/example");
 const router = govukPrototypeKit.requests.setupRouter();
 
 router.post("/:prototypeVersion/next-court-date-select", function (req, res) {
@@ -99,9 +99,10 @@ router.post(
 router.post("/:prototypeVersion/offence-code-known", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   const warrantType = req.session.data.warrantType;
-  const overallCaseOutcomeApply = req.session.data.appearance["overall-case-outcome-apply-all"]
+  const overallCaseOutcomeApply =
+    req.session.data.appearance["overall-case-outcome-apply-all"];
   var offenceCodeKnown = req.session.data["offence-code-known"];
-  var offenceCode = ""
+  var offenceCode = "";
   if (req.session.data.sentence != null) {
     offenceCode = req.session.data.sentence["offence-code"];
   } else if (req.session.data.offence != null) {
@@ -120,31 +121,28 @@ router.post("/:prototypeVersion/offence-code-known", function (req, res) {
   if (offenceCodeKnown != "None") {
     console.log("Offence code" + offenceCode);
     if (offenceCode.includes("TR06001")) {
-      console.log("TEST")
+      console.log("TEST");
       req.session.data.sentence["terror-related"] = "Yes";
       req.session.data.sentence["offence-name"] =
         "Publish / cause another to publish statement intending / reckless as to encouragement of terrorism - Terrorism Act 2006";
       req.session.data.sentence["cja-code"] = "066/53";
       req.session.data.sentence["legislation"] =
         "Contrary to section 2(1) and (11) of the Terrorism Act 2006";
-    }
-    else if (offenceCode.includes("TR06002")) {
+    } else if (offenceCode.includes("TR06002")) {
       req.session.data.sentence["terror-related"] = "Yes";
       req.session.data.sentence["offence-name"] =
         "Distribute / circulate a terrorist publication - Terrorism Act 2006";
       req.session.data.sentence["cja-code"] = "066/54";
       req.session.data.sentence["legislation"] =
         "Contrary to section 2(1) and (11) of the Terrorism Act 2006";
-    }
-    else if (offenceCode.includes("TR06003")) {
+    } else if (offenceCode.includes("TR06003")) {
       req.session.data.sentence["terror-related"] = "Yes";
       req.session.data.sentence["offence-name"] =
         "Give / sell / lend / offer for sale / loan a terrorist publication - Terrorism Act 2006";
       req.session.data.sentence["cja-code"] = "066/55";
       req.session.data.sentence["legislation"] =
         "Contrary to section 2(1) and (11) of the Terrorism Act 2006";
-    }
-    else if (offenceCode.includes("BL63016")) {
+    } else if (offenceCode.includes("BL63016")) {
       req.session.data.sentence["offence-code"] = "BL63016";
       req.session.data.sentence["terror-related"] = "No";
       req.session.data.sentence["offence-name"] = "Betting in the street";
@@ -152,9 +150,12 @@ router.post("/:prototypeVersion/offence-code-known", function (req, res) {
       return res.redirect(
         `/${prototypeVersion}/court-cases/add-a-sentence/inactive-offence-error`
       );
-    } 
-    else if (offenceCode.includes("CJ88001") && overallCaseOutcomeApply == "No" && warrantType == "Remand") {
-      console.log("TEST")
+    } else if (
+      offenceCode.includes("CJ88001") &&
+      overallCaseOutcomeApply == "No" &&
+      warrantType == "Remand"
+    ) {
+      console.log("TEST");
       req.session.data.offence["offence-code"] = "CJ88001";
       req.session.data.offence["terror-related"] = "No";
       req.session.data.offence["offence-name"] = "Common assault";
@@ -164,18 +165,17 @@ router.post("/:prototypeVersion/offence-code-known", function (req, res) {
       return res.redirect(
         `/${prototypeVersion}/court-cases/add-an-offence/confirm-offence`
       );
-  }
-  else if (offenceCode.includes("CJ88001")) {
-    req.session.data.sentence["offence-code"] = "CJ88001";
-    req.session.data.sentence["terror-related"] = "No";
-    req.session.data.sentence["offence-name"] = "Common assault";
-    req.session.data.sentence["cja-code"] = "105/01";
-    req.session.data.sentence["legislation"] =
-      "Contrary to section 39 of the Criminal Justice Act 1988";
-    return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-sentence/confirm-offence`
-    );
-}
+    } else if (offenceCode.includes("CJ88001")) {
+      req.session.data.sentence["offence-code"] = "CJ88001";
+      req.session.data.sentence["terror-related"] = "No";
+      req.session.data.sentence["offence-name"] = "Common assault";
+      req.session.data.sentence["cja-code"] = "105/01";
+      req.session.data.sentence["legislation"] =
+        "Contrary to section 39 of the Criminal Justice Act 1988";
+      return res.redirect(
+        `/${prototypeVersion}/court-cases/add-a-sentence/confirm-offence`
+      );
+    }
   }
   if (offenceCodeKnown == "None") {
     if (offenceCodeKnown.includes("None")) {
@@ -265,21 +265,29 @@ router.post("/:prototypeVersion/offence-code-known", function (req, res) {
 
 router.post("/:prototypeVersion/outcome-select", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
-  if (req.session.data.offence["outcome"]){
-  var outcome = req.session.data.offence["outcome"] 
+  if (req.session.data.offence["outcome"]) {
+    var outcome = req.session.data.offence["outcome"];
   } else {
-    outcome = req.session.data.sentence["outcome"] 
+    outcome = req.session.data.sentence["outcome"];
   }
   console.log("Offence outcome: " + outcome);
-  if (outcome === "Imprisonment"){
-    req.session.data.sentence['offence-start-date-day'] = req.session.data.offence['offence-start-date-day']
-    req.session.data.sentence['offence-start-date-month'] = req.session.data.offence['offence-start-date-month']
-    req.session.data.sentence['offence-start-date-year'] = req.session.data.offence['offence-start-date-year']
-    req.session.data.sentence['offence-end-date-day'] = req.session.data.offence['offence-end-date-day']
-    req.session.data.sentence['offence-end-date-month'] = req.session.data.offence['offence-end-date-month']
-    req.session.data.sentence['offence-end-date-year'] = req.session.data.offence['offence-end-date-year']
-    req.session.data.sentence['offence-name'] = req.session.data.offence['offence-name']
-    req.session.data.sentence['terror-related'] = req.session.data.offence['terror-related']
+  if (outcome === "Imprisonment") {
+    req.session.data.sentence["offence-start-date-day"] =
+      req.session.data.offence["offence-start-date-day"];
+    req.session.data.sentence["offence-start-date-month"] =
+      req.session.data.offence["offence-start-date-month"];
+    req.session.data.sentence["offence-start-date-year"] =
+      req.session.data.offence["offence-start-date-year"];
+    req.session.data.sentence["offence-end-date-day"] =
+      req.session.data.offence["offence-end-date-day"];
+    req.session.data.sentence["offence-end-date-month"] =
+      req.session.data.offence["offence-end-date-month"];
+    req.session.data.sentence["offence-end-date-year"] =
+      req.session.data.offence["offence-end-date-year"];
+    req.session.data.sentence["offence-name"] =
+      req.session.data.offence["offence-name"];
+    req.session.data.sentence["terror-related"] =
+      req.session.data.offence["terror-related"];
     res.redirect(
       `/${prototypeVersion}/court-cases/add-a-sentence/count-number`
     );
@@ -345,7 +353,10 @@ router.post("/:prototypeVersion/outcome-select-4", function (req, res) {
 router.post("/:prototypeVersion/sentence-outcome-select", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   var outcome = req.session.data.sentence["outcome"];
+  const warrantType = req.session.data.appearance["warrant-type"];
+
   console.log("Outcome: " + outcome);
+  console.log("Warrant type: " + warrantType);
   if (outcome == "Imprisonment") {
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-an-sentence/sentence-type`
@@ -357,15 +368,21 @@ router.post("/:prototypeVersion/new-court-case-ref", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   const courtCaseIndex = req.session.data.courtCaseIndex;
   var caseRefSelect = req.session.data.appearance["case-ref-select"];
+  const warrantType = req.session.data.appearance["warrant-type"];
   console.log("Case ref select:" + caseRefSelect);
   if (caseRefSelect.includes("Yes")) {
     req.session.data.appearance["court-case-ref"] =
       req.session.data.courtCases[courtCaseIndex].appearances.at(-1)[
         "court-case-ref"
       ];
-    res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-court-appearance/warrant-date`
-    );
+    if (warrantType == "Non-custodial") {
+      res.redirect(
+        `/${prototypeVersion}/court-cases/record-an-immediate-release/appearance-date`
+      );
+    } else
+      res.redirect(
+        `/${prototypeVersion}/court-cases/add-a-court-appearance/warrant-date`
+      );
   } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-case-reference-number`);
 });
 
@@ -380,16 +397,20 @@ router.post("/:prototypeVersion/new-court-name", function (req, res) {
       req.session.data.courtCases[courtCaseIndex].appearances.at(-1)[
         "next-court-name"
       ];
-      if (req.session.data.appearance["overall-case-outcome"] == "Imprisonment") {
-        res.redirect(
-          `/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers`
-        );
-      } else {
+    if (req.session.data.appearance["overall-case-outcome"] == "Imprisonment") {
+      res.redirect(
+        `/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers`
+      );
+    } else if (warrantType == "Non-custodial") {
+      res.redirect(
+        `/${prototypeVersion}/court-cases/record-an-immediate-release/check-answers`
+      );
+    } else {
       res.redirect(
         `/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`
       );
     }
-    }  else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-name`);
+  } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-name`);
 });
 
 router.post("/:prototypeVersion/change-offences-select", function (req, res) {
@@ -421,7 +442,8 @@ router.post("/:prototypeVersion/case-outcome-apply", function (req, res) {
   console.log("Route: " + route);
   var warrantType = req.session.data.appearance["warrant-type"];
   console.log("Warrant type: " + warrantType);
-  var overallCaseOutcomeApply = req.session.data.appearance["overall-case-outcome-apply-all"];
+  var overallCaseOutcomeApply =
+    req.session.data.appearance["overall-case-outcome-apply-all"];
   console.log("Overall case outcome applies: " + overallCaseOutcomeApply);
   if (overallCaseOutcomeApply == "Yes" && warrantType != "Sentencing") {
     req.session.data.appearance["overall-case-outcome-apply-all"] =
@@ -429,7 +451,7 @@ router.post("/:prototypeVersion/case-outcome-apply", function (req, res) {
     req.session.data.appearance.offences =
       req.session.data.appearance.offences.map((offence) => {
         offence.outcome = req.session.data.appearance["overall-case-outcome"];
-        console.log("Offence outcome: " + offence["outcome"])
+        console.log("Offence outcome: " + offence["outcome"]);
         return offence;
       });
     if (route == "repeat-remand") {
@@ -445,7 +467,10 @@ router.post("/:prototypeVersion/case-outcome-apply", function (req, res) {
     }
     if (route == "edit-appearance") {
       res.redirect(`/${prototypeVersion}/court-cases/edit-appearance`);
-    } else return res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/confirm-offence`);
+    } else
+      return res.redirect(
+        `/${prototypeVersion}/court-cases/add-an-offence/confirm-offence`
+      );
   } else if (overallCaseOutcomeApply == "Yes" && warrantType == "Sentencing") {
     req.session.data.appearance["overall-case-outcome-apply-all"] =
       overallCaseOutcomeApply;
@@ -454,17 +479,17 @@ router.post("/:prototypeVersion/case-outcome-apply", function (req, res) {
         sentence.outcome = req.session.data.appearance["overall-case-outcome"];
         return sentence;
       });
-      if(prototypeVersion >= 23){
-        return res.redirect(
-          307,
-          `/${prototypeVersion}/court-cases/add-a-sentence/outcome`
-        );
-      } else {
-    return res.redirect(
-      307,
-      `/${prototypeVersion}/court-cases/add-a-sentence/sentence-type`
-    );
-  }
+    if (prototypeVersion >= 23) {
+      return res.redirect(
+        307,
+        `/${prototypeVersion}/court-cases/add-a-sentence/outcome`
+      );
+    } else {
+      return res.redirect(
+        307,
+        `/${prototypeVersion}/court-cases/add-a-sentence/sentence-type`
+      );
+    }
   } else if (warrantType == "Sentencing" && route == "edit-appearance") {
     res.redirect(
       `/${prototypeVersion}/court-cases/add-a-court-appearance/change-outcome`
@@ -517,7 +542,10 @@ router.post(
         "Overall questions complete " +
           req.session.data.overallQuestionsComplete
       );
-      if (prototypeVersion == 18 || prototypeVersion >= 20 && prototypeVersion < 23 ) {
+      if (
+        prototypeVersion == 18 ||
+        (prototypeVersion >= 20 && prototypeVersion < 23)
+      ) {
         if (route == "remand-to-sentence") {
           return res.redirect(
             307,
@@ -579,7 +607,6 @@ router.post("/:prototypeVersion/persist-court-case", function (req, res) {
   if (!req.session.data.courtCases) {
     req.session.data.courtCases = [];
   }
-
 
   if (req.session.data.courtCaseIndex !== undefined) {
     req.session.data.courtCases[req.session.data.courtCaseIndex] =
@@ -654,7 +681,7 @@ router.get("/:prototypeVersion/update-appearance", function (req, res) {
   req.session.data.courtCaseIndex = courtCaseIndex;
   req.session.data.appearanceIndex = appearanceIndex;
   if ((prototypeVersion) => 22) {
-    console.log("TEST")
+    console.log("TEST");
     return res.redirect(`/${prototypeVersion}/court-cases/edit-appearance`);
   }
   res.redirect(`/${prototypeVersion}/court-cases/appearance-detail`);
@@ -694,7 +721,10 @@ router.get("/:prototypeVersion/create-appearance", function (req, res) {
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-court-appearance/court-case-reference-number-select`
     );
-  } else if (prototypeVersion == "v12" || prototypeVersion >= 13 && prototypeVersion < 25) {
+  } else if (
+    prototypeVersion == "v12" ||
+    (prototypeVersion >= 13 && prototypeVersion < 25)
+  ) {
     req.session.data.appearanceDetailsComplete = 0;
     req.session.data.courtDocumentsComplete = 0;
     req.session.data.offencesComplete = 0;
@@ -703,14 +733,14 @@ router.get("/:prototypeVersion/create-appearance", function (req, res) {
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-court-appearance/warrant-type`
     );
-  } else if (prototypeVersion >= 25 ) {
+  } else if (prototypeVersion >= 25) {
     req.session.data.appearanceDetailsComplete = 0;
     req.session.data.courtDocumentsComplete = 0;
     req.session.data.offencesComplete = 0;
     req.session.data.nextCourtAppearanceComplete = "No";
     req.session.data.edit = "false";
     return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-court-appearance/custodial-outcome`
+      `/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`
     );
   } else {
     return res.redirect(
@@ -719,10 +749,59 @@ router.get("/:prototypeVersion/create-appearance", function (req, res) {
   }
 });
 
+router.get("/:prototypeVersion/overall-case-outcome", function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion;
+
+  // Safeguards
+  req.session.data = req.session.data || {};
+  req.session.data.appearance = req.session.data.appearance || {};
+
+  const outcome = req.session.data.appearance["overall-case-outcome"];
+
+  if (outcome) {
+    const SENTENCING = new Set([
+      "Imprisonment",
+      "Detention and training order (DTO)",
+      "Imprisonment in default of a fine",
+    ]);
+
+    const REMAND = "Remand in Custody (Bail Refused)";
+
+    const NON_CUSTODIAL = new Set([
+      "Lie on file",
+      "Community Order",
+      "Adjournment",
+      "Dismissed",
+      "No Evidence Offered - Dismissed",
+      "Discontinuance",
+      "Commit/Transfer/Send to Crown Court for Trial in Custody",
+      "Detention and Training Order",
+      "Commit to Crown Court for Trial (Summary / Either Way Offences)",
+      "Guilty",
+      "Sentence Postponed",
+      "Fine",
+      "Proceedings Stayed",
+      "Discharged",
+      "Withdrawn - Final",
+    ]);
+
+    if (SENTENCING.has(outcome)) {
+      req.session.data.appearance["warrant-type"] = "Sentencing";
+    } else if (outcome === REMAND) {
+      req.session.data.appearance["warrant-type"] = "Remand";
+    } else if (NON_CUSTODIAL.has(outcome)) {
+      req.session.data.appearance["warrant-type"] = "Non-custodial";
+    }
+  }
+
+  return res.redirect(307, `/${prototypeVersion}/warrant-type-select`);
+});
+
 router.post("/:prototypeVersion/persist-appearance", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   var appearanceDetailsComplete = 0;
   const route = req.session.data.route;
+  const warrantType = req.session.data.appearance["warrant-type"];
   console.log("Route: " + route);
   if (req.session.data.appearanceIndex !== undefined) {
     req.session.data.courtCases[req.session.data.courtCaseIndex].appearances[
@@ -789,24 +868,28 @@ router.post("/:prototypeVersion/persist-appearance", function (req, res) {
       `/${prototypeVersion}/court-cases/add-a-court-case/confirmation`
     );
   } else if (route == "appearance") {
-      appearanceDetailsComplete = 1;
-      req.session.data.appearanceDetailsComplete = appearanceDetailsComplete;
-      console.log("Appearance details complete: " + appearanceDetailsComplete);
-      if (req.session.data.saveCourtCase == "true") {
-        req.session.data.appearance["status"] = ["draft"];
-        console.log(
-          "Appearance status: " + req.session.data.appearance["status"]
-        );
-        return res.redirect(`/${prototypeVersion}/court-cases/`);
-      } else if (req.query.appearanceComplete == 'true') {
-        return res.redirect(
-          `/${prototypeVersion}/court-cases/add-a-court-appearance/confirmation`
-        );
-      } else {
-        return res.redirect(
-          `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
-        );
-      }
+    appearanceDetailsComplete = 1;
+    req.session.data.appearanceDetailsComplete = appearanceDetailsComplete;
+    console.log("Appearance details complete: " + appearanceDetailsComplete);
+    if (req.session.data.saveCourtCase == "true") {
+      req.session.data.appearance["status"] = ["draft"];
+      console.log(
+        "Appearance status: " + req.session.data.appearance["status"]
+      );
+      return res.redirect(`/${prototypeVersion}/court-cases/`);
+    } else if (req.query.appearanceComplete == "true") {
+      return res.redirect(
+        `/${prototypeVersion}/court-cases/add-a-court-appearance/confirmation`
+      );
+    } else if (warrantType == "Non-custodial") {
+      return res.redirect(
+        `/${prototypeVersion}/court-cases/record-an-immediate-release/task-list`
+      );
+    } else {
+      return res.redirect(
+        `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
+      );
+    }
     res.redirect(
       `/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`
     );
@@ -860,7 +943,8 @@ router.get("/:prototypeVersion/create-offence", function (req, res) {
   const appearanceIndex = req.query.appearanceIndex;
   const route = req.session.data.route;
   const path = req.query.path;
-  const overallCaseOutcomeApply = req.session.data.appearance['overall-case-outcome-apply-all']
+  const overallCaseOutcomeApply =
+    req.session.data.appearance["overall-case-outcome-apply-all"];
   req.session.data.newOffence = 1;
   console.log("Route: " + route);
   if (appearanceIndex !== undefined) {
@@ -942,10 +1026,14 @@ router.post("/:prototypeVersion/persist-offence", function (req, res) {
     );
   } else if (route == "edit-appearance") {
     return res.redirect(`/${prototypeVersion}/court-cases/edit-appearance`);
-  } else if (req.session.data.appearance['warrant-type'] == 'Sentencing'){
-    res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers`);
+  } else if (req.session.data.appearance["warrant-type"] == "Sentencing") {
+    res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`
+    );
   } else {
-  res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/check-answers`);
+    res.redirect(
+      `/${prototypeVersion}/court-cases/add-an-offence/check-answers`
+    );
   }
 });
 
@@ -978,8 +1066,6 @@ router.get("/:prototypeVersion/update-offence", function (req, res) {
   } else res.redirect(`/${prototypeVersion}/court-cases/add-an-offence/offence-code`);
 });
 
-
-
 router.get("/:prototypeVersion/update-sentence", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   const index = req.query.index;
@@ -992,9 +1078,9 @@ router.get("/:prototypeVersion/update-sentence", function (req, res) {
   console.log("Sentence:" + req.session.data.sentence["offence-name"]);
   req.session.data.sentenceIndex = index;
   req.session.data.edit = true;
-    return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-sentence/edit-a-sentence`
-    );
+  return res.redirect(
+    `/${prototypeVersion}/court-cases/add-a-sentence/edit-a-sentence`
+  );
 });
 
 router.get("/:prototypeVersion/confirm-delete", function (req, res) {
@@ -1085,18 +1171,22 @@ router.get("/:prototypeVersion/delete-offence", function (req, res) {
 router.get("/:prototypeVersion/check-delete", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   const index = parseInt(req.query.index);
-  console.log("Index: " + index)
+  console.log("Index: " + index);
   const route = req.query.route;
   req.session.data.route = route;
   const sentence = req.session.data.appearance.sentences[index];
   req.session.data.sentence = sentence;
-  console.log("Consecutive from: " + sentence["consecutive-from"])
+  console.log("Consecutive from: " + sentence["consecutive-from"]);
   if (sentence["consecutive-from"]) {
     // Redirect to the page that warns about breaking a chain
-    return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-delete-break-chain?index=${index}&route=${route}`);
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-sentence/confirm-delete-break-chain?index=${index}&route=${route}`
+    );
   } else {
     // Redirect to the normal confirm-delete page
-    return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-delete?index=${index}&route=${route}`);
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-sentence/confirm-delete?index=${index}&route=${route}`
+    );
   }
 });
 
@@ -1112,10 +1202,12 @@ router.get("/:prototypeVersion/delete-sentence", function (req, res) {
     const consecutiveTo = sentenceToDelete["consecutive-to"];
 
     if (consecutiveTo) {
-      const target = sentences.find(s => s["count-number"] === consecutiveTo);
+      const target = sentences.find((s) => s["count-number"] === consecutiveTo);
       if (target) {
         if (Array.isArray(target["consecutive-from"])) {
-          target["consecutive-from"] = target["consecutive-from"].filter(from => from !== deletedCountNumber);
+          target["consecutive-from"] = target["consecutive-from"].filter(
+            (from) => from !== deletedCountNumber
+          );
           if (target["consecutive-from"].length === 0) {
             target["consecutive-from"] = null;
           }
@@ -1125,7 +1217,7 @@ router.get("/:prototypeVersion/delete-sentence", function (req, res) {
       }
     }
 
-    sentences.forEach(s => {
+    sentences.forEach((s) => {
       if (s["consecutive-to"] === deletedCountNumber) {
         s["consecutive-to"] = "none";
       }
@@ -1136,17 +1228,16 @@ router.get("/:prototypeVersion/delete-sentence", function (req, res) {
 
     sentences.splice(index, 1);
 
-    const redirectUrl = req.session.data.postSaveEdit === "true"
-      ? `/${prototypeVersion}/court-cases/appearance-detail`
-      : `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`;
+    const redirectUrl =
+      req.session.data.postSaveEdit === "true"
+        ? `/${prototypeVersion}/court-cases/appearance-detail`
+        : `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`;
 
     return res.redirect(redirectUrl);
   }
 
   res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers`);
 });
-
-
 
 // Add sentences
 
@@ -1157,7 +1248,8 @@ router.get("/:prototypeVersion/create-sentence", function (req, res) {
   const appearanceIndex = req.query.appearanceIndex;
   const route = req.session.data.route;
   const path = req.query.path;
-  const overallCaseOutcomeApply = req.session.data.appearance['overall-case-outcome-apply-all']
+  const overallCaseOutcomeApply =
+    req.session.data.appearance["overall-case-outcome-apply-all"];
   req.session.data.path = path;
   req.session.data.newSentence = 1;
   console.log("Route: " + route);
@@ -1182,7 +1274,7 @@ router.get("/:prototypeVersion/create-sentence", function (req, res) {
       `/${prototypeVersion}/court-cases/add-a-sentence/offence-date`
     );
   }
-  if (overallCaseOutcomeApply == "No"){
+  if (overallCaseOutcomeApply == "No") {
     res.redirect(307, `/${prototypeVersion}/create-offence`);
   } else {
     return res.redirect(
@@ -1195,7 +1287,8 @@ router.post("/:prototypeVersion/persist-sentence", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   const route = req.session.data.route;
   const edit = req.query.edit || req.body.edit || req.session.data.edit;
-  const sentenceIndex = req.query.sentenceIndex || req.session.data.sentenceIndex
+  const sentenceIndex =
+    req.query.sentenceIndex || req.session.data.sentenceIndex;
   const path = req.session.data.path;
   req.session.data.newSentence = 0;
 
@@ -1229,13 +1322,21 @@ router.post("/:prototypeVersion/persist-sentence", function (req, res) {
     }
 
     if (req.session.data.sentence["consecutive-concurrent"] === "Concurrent") {
-      let newYears = parseInt(req.session.data.sentence["sentence-length-years"], 10);
-      let newMonths = parseInt(req.session.data.sentence["sentence-length-months"], 10);
+      let newYears = parseInt(
+        req.session.data.sentence["sentence-length-years"],
+        10
+      );
+      let newMonths = parseInt(
+        req.session.data.sentence["sentence-length-months"],
+        10
+      );
 
       if (
         newYears > req.session.data.appearance["total-sentence-length-years"] ||
-        (newYears === req.session.data.appearance["total-sentence-length-years"] &&
-         newMonths > req.session.data.appearance["total-sentence-length-months"])
+        (newYears ===
+          req.session.data.appearance["total-sentence-length-years"] &&
+          newMonths >
+            req.session.data.appearance["total-sentence-length-months"])
       ) {
         req.session.data.appearance["total-sentence-length-years"] = newYears;
         req.session.data.appearance["total-sentence-length-months"] = newMonths;
@@ -1258,14 +1359,19 @@ router.post("/:prototypeVersion/persist-sentence", function (req, res) {
     req.session.data.appearance["total-sentence-length-days"] %= 7;
   }
 
-  if (req.session.data.appearance["overall-conviction-date-apply-all"] === "Yes") {
-    req.session.data.sentence["conviction-date-day"] = req.session.data.appearance["overall-conviction-date-day"];
-    req.session.data.sentence["conviction-date-month"] = req.session.data.appearance["overall-conviction-date-month"];
-    req.session.data.sentence["conviction-date-year"] = req.session.data.appearance["overall-conviction-date-year"];
+  if (
+    req.session.data.appearance["overall-conviction-date-apply-all"] === "Yes"
+  ) {
+    req.session.data.sentence["conviction-date-day"] =
+      req.session.data.appearance["overall-conviction-date-day"];
+    req.session.data.sentence["conviction-date-month"] =
+      req.session.data.appearance["overall-conviction-date-month"];
+    req.session.data.sentence["conviction-date-year"] =
+      req.session.data.appearance["overall-conviction-date-year"];
   }
 
   console.log("Edit:", edit);
-console.log("Sentence index:", sentenceIndex);
+  console.log("Sentence index:", sentenceIndex);
 
   if (edit === "true" && sentenceIndex !== undefined) {
     const original = req.session.data.appearance.sentences[sentenceIndex];
@@ -1278,11 +1384,13 @@ console.log("Sentence index:", sentenceIndex);
       (oldConsecutiveTo !== newConsecutiveTo || newType !== "Consecutive")
     ) {
       const target = req.session.data.appearance.sentences.find(
-        s => s["count-number"] === oldConsecutiveTo
+        (s) => s["count-number"] === oldConsecutiveTo
       );
       if (target) {
         if (Array.isArray(target["consecutive-from"])) {
-          target["consecutive-from"] = target["consecutive-from"].filter(from => from !== original["count-number"]);
+          target["consecutive-from"] = target["consecutive-from"].filter(
+            (from) => from !== original["count-number"]
+          );
           if (target["consecutive-from"].length === 0) {
             target["consecutive-from"] = null;
           }
@@ -1293,65 +1401,86 @@ console.log("Sentence index:", sentenceIndex);
     }
   }
 
-  if (req.session.data.sentence['consecutive-to']) {
-    const consecutiveToCount = req.session.data.sentence['consecutive-to'];
+  if (req.session.data.sentence["consecutive-to"]) {
+    const consecutiveToCount = req.session.data.sentence["consecutive-to"];
     const allSentences = req.session.data.appearance.sentences;
 
-    const targetSentence = allSentences.find(s => s['count-number'] === consecutiveToCount);
+    const targetSentence = allSentences.find(
+      (s) => s["count-number"] === consecutiveToCount
+    );
 
     if (targetSentence) {
-      if (!targetSentence['consecutive-from']) {
-        targetSentence['consecutive-from'] = [];
+      if (!targetSentence["consecutive-from"]) {
+        targetSentence["consecutive-from"] = [];
       }
 
-      if (!targetSentence['consecutive-from'].includes(req.session.data.sentence['count-number'])) {
-        targetSentence['consecutive-from'].push(req.session.data.sentence['count-number']);
+      if (
+        !targetSentence["consecutive-from"].includes(
+          req.session.data.sentence["count-number"]
+        )
+      ) {
+        targetSentence["consecutive-from"].push(
+          req.session.data.sentence["count-number"]
+        );
       }
     }
   }
 
   if (edit === true || edit === "true") {
-    req.session.data.appearance.sentences[sentenceIndex] = req.session.data.sentence;
-    if (req.query.editConsecutiveConcurrent){
-      req.session.data.editConsecutiveConcurrent = req.query.editConsecutiveConcurrent
+    req.session.data.appearance.sentences[sentenceIndex] =
+      req.session.data.sentence;
+    if (req.query.editConsecutiveConcurrent) {
+      req.session.data.editConsecutiveConcurrent =
+        req.query.editConsecutiveConcurrent;
     }
-    return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/confirm-edit-consecutive-concurrent`);
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-sentence/confirm-edit-consecutive-concurrent`
+    );
   }
 
   if (req.session.data.postSaveEdit === "true") {
-    req.session.data.appearance.sentences[sentenceIndex] = req.session.data.sentence;
+    req.session.data.appearance.sentences[sentenceIndex] =
+      req.session.data.sentence;
     return res.redirect(`/${prototypeVersion}/court-cases/appearance-detail`);
   }
 
   if (sentenceIndex !== undefined) {
-    req.session.data.appearance.sentences[sentenceIndex] = req.session.data.sentence;
+    req.session.data.appearance.sentences[sentenceIndex] =
+      req.session.data.sentence;
   } else {
     req.session.data.appearance.sentences.push(req.session.data.sentence);
-    req.session.data.sentenceIndex = req.session.data.appearance.sentences.length - 1;
+    req.session.data.sentenceIndex =
+      req.session.data.appearance.sentences.length - 1;
   }
 
   if (route === "edit-appearance") {
-    req.session.data.appearance.sentences[sentenceIndex] = req.session.data.sentence;
+    req.session.data.appearance.sentences[sentenceIndex] =
+      req.session.data.sentence;
     return res.redirect(`/${prototypeVersion}/court-cases/edit-appearance`);
   }
 
   if (route === "update-consec-concurr") {
-    req.session.data.appearance.sentences[sentenceIndex]['consecutive-to'] =
-      req.session.data.sentence['consecutive-to'];
-    return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers`);
+    req.session.data.appearance.sentences[sentenceIndex]["consecutive-to"] =
+      req.session.data.sentence["consecutive-to"];
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`
+    );
   }
 
   if (route === "remand-to-sentence") {
     req.session.data.sentence = {
       ...req.session.data.sentence,
-      'outcome-changed': "true"
+      "outcome-changed": "true",
     };
-    return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`);
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`
+    );
   }
 
-  return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/check-answers`);
+  return res.redirect(
+    `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`
+  );
 });
-
 
 router.get("/:prototypeVersion/view-court-case-detail", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
@@ -1408,7 +1537,7 @@ router.get("/:prototypeVersion/warrant-type-select", function (req, res) {
       req.session.data.appearance["concurrent-sentences-months"] = 0;
       req.session.data.appearance["concurrent-sentences-weeks"] = 0;
       req.session.data.appearance["concurrent-sentences-days"] = 0;
-      req.session.data.appearance["overall-case-outcome"] = "Imprisonment"
+      req.session.data.appearance["overall-case-outcome"] = "Imprisonment";
     }
     if (route == "appearance") {
       req.session.data.appearance.sentences = [];
@@ -1430,6 +1559,10 @@ router.get("/:prototypeVersion/warrant-type-select", function (req, res) {
       res.redirect(
         `/${prototypeVersion}/court-cases/add-a-court-case/tagged-bail`
       );
+  } else if (warrantType == "Non-custodial") {
+    res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-court-appearance/reason-for-release`
+    );
   }
 });
 
@@ -1680,7 +1813,12 @@ router.post("/:prototypeVersion/add-sentence-information", function (req, res) {
   ) {
     req.session.data.sentence = req.session.data.appearance.offences[index];
   }
-  if (route == "remand-to-sentence" && outcome != "Imprisonment" || route == "remand-to-sentence" && outcome != "Imprisonment in default") {
+  if (
+    (route == "remand-to-sentence" && outcome != "Imprisonment") ||
+    (route == "remand-to-sentence" && outcome != "Imprisonment in default") ||
+    route == "non-custodial"
+  ) {
+    req.session.data.appearance.offences[index]["outcome"] = outcome
     req.session.data.appearance.offences[index]["outcome-changed"] = "true";
   }
   if (outcome == "Imprisonment") {
@@ -1697,7 +1835,11 @@ router.post("/:prototypeVersion/add-sentence-information", function (req, res) {
     );
   } else if (route == "edit-appearance") {
     return res.redirect(`/${prototypeVersion}/court-cases/edit-appearance`);
-  } else {
+  } else if (route == "non-custodial")
+    res.redirect(
+      `/${prototypeVersion}/court-cases/record-an-immediate-release/update-offence-outcomes`
+    );
+  else {
     res.redirect(
       `/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`
     );
@@ -1727,15 +1869,22 @@ router.post(
     console.log("Route: " + route);
     console.log("Consecutive or concurrent: " + consecConcur);
     console.log("Forthwith selected: " + forthwithSelected);
-    console.log("Count number: " + req.session.data["sentence"]["count-number"])
+    console.log(
+      "Count number: " + req.session.data["sentence"]["count-number"]
+    );
     if (consecConcur == "Consecutive") {
-      if (req.session.data.courtCases.length === 1 && req.session.data.appearance.sentences < 1) {
+      if (
+        req.session.data.courtCases.length === 1 &&
+        req.session.data.appearance.sentences < 1
+      ) {
         req.session.data["sentence"]["consecutive-to"] = "none";
-        return res.redirect(`/${prototypeVersion}/court-cases/add-a-sentence/no-other-sentences`);
+        return res.redirect(
+          `/${prototypeVersion}/court-cases/add-a-sentence/no-other-sentences`
+        );
       }
       if (req.session.data["sentence"]["count-number"] == "") {
         req.session.data.appearance["no-count-numbers"] = "true";
-        console.log("No count numbers")
+        console.log("No count numbers");
         if (prototypeVersion >= 20) {
           return res.redirect(
             `/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to`
@@ -1745,7 +1894,7 @@ router.post(
             req.session.data.appearance.sentences[0]["offence-name"];
           return res.redirect(307, `/${prototypeVersion}/persist-sentence`);
         }
-      } 
+      }
       return res.redirect(
         `/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to`
       );
@@ -1773,18 +1922,23 @@ router.post(
         `/${prototypeVersion}/court-cases/add-a-sentence/select-consecutive-case`
       );
     } else if (consecToCase == "no") {
-        if (req.session.data.appearance["no-count-numbers"] == "true" && req.session.data.appearance.sentences.length >= 2){
-          if (req.session.data.sentence["consecutive-concurrent"] == "Consecutive"){
+      if (
+        req.session.data.appearance["no-count-numbers"] == "true" &&
+        req.session.data.appearance.sentences.length >= 2
+      ) {
+        if (
+          req.session.data.sentence["consecutive-concurrent"] == "Consecutive"
+        ) {
           return res.redirect(
             `/${prototypeVersion}/court-cases/add-a-sentence/no-count-numbers-error`
           );
-        } 
-  } else {
-    return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to`
-    );
-  }
-}
+        }
+      } else {
+        return res.redirect(
+          `/${prototypeVersion}/court-cases/add-a-sentence/consecutive-to`
+        );
+      }
+    }
   }
 );
 
@@ -1831,22 +1985,25 @@ router.post(
   }
 );
 
-router.post("/:prototypeVersion/add-overall-warrant-information-complete",
+router.post(
+  "/:prototypeVersion/add-overall-warrant-information-complete",
   function (req, res) {
     const prototypeVersion = req.params.prototypeVersion;
     const route = req.session.data.route;
     var additionalInformationComplete = 1;
-    req.session.data.additionalInformationComplete = additionalInformationComplete;
-    if(route == "appearance") {
-    return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
-    );
-  } else {
-    return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-court-case/task-list`
-    );
+    req.session.data.additionalInformationComplete =
+      additionalInformationComplete;
+    if (route == "appearance") {
+      return res.redirect(
+        `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
+      );
+    } else {
+      return res.redirect(
+        `/${prototypeVersion}/court-cases/add-a-court-case/task-list`
+      );
+    }
   }
-});
+);
 
 router.post(
   "/:prototypeVersion/add-sentence-information-complete",
@@ -1856,9 +2013,11 @@ router.post(
     const route = req.session.data.route;
 
     // Helper: find offences that still need outcome updates
-    const offences = (req.session.data.appearance?.offences) || [];
-    const incompleteOffences = offences.filter(o =>
-      (o?.sentence?.['sentence-type'] == null) && (String(o?.['outcome-changed']) !== 'true')
+    const offences = req.session.data.appearance?.offences || [];
+    const incompleteOffences = offences.filter(
+      (o) =>
+        o?.sentence?.["sentence-type"] == null &&
+        String(o?.["outcome-changed"]) !== "true"
     );
 
     const hasIncomplete = incompleteOffences.length > 0;
@@ -1868,11 +2027,17 @@ router.post(
     if (hasIncomplete) {
       req.session.data.addSentenceInformationError = {
         message: "One or more offence outcomes need updating",
-        count: incompleteOffences.length
+        count: incompleteOffences.length,
       };
+      if (warrantType == "Non-custodial"){
+        return res.redirect(
+        `/${prototypeVersion}/court-cases/record-an-immediate-release/update-offence-outcomes`
+      );
+      } else {
       return res.redirect(
         `/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`
       );
+    }
     }
 
     // --- Existing logic below (with || fixes) ---
@@ -1895,18 +2060,19 @@ router.post(
         );
       } else if (warrantType == "Sentencing") {
         if (req.session.data.appearance["finished-adding-sentences"] == "yes") {
-          req.session.data.addSentenceInformationComplete = addSentenceInformationComplete;
+          req.session.data.addSentenceInformationComplete =
+            addSentenceInformationComplete;
         }
         req.session.data.sentenceAdded = 0;
         req.session.data.sentencesAdded = 1;
 
         if (
-          (req.session.data.appearance["total-sentence-length-years"] !=
-            req.session.data.appearance["overall-sentence-length-years"]) ||
-          (req.session.data.appearance["total-sentence-length-months"] !=
-            req.session.data.appearance["overall-sentence-length-months"]) ||
-          (req.session.data.appearance["total-sentence-length-weeks"] !=
-            req.session.data.appearance["overall-sentence-length-weeks"])
+          req.session.data.appearance["total-sentence-length-years"] !=
+            req.session.data.appearance["overall-sentence-length-years"] ||
+          req.session.data.appearance["total-sentence-length-months"] !=
+            req.session.data.appearance["overall-sentence-length-months"] ||
+          req.session.data.appearance["total-sentence-length-weeks"] !=
+            req.session.data.appearance["overall-sentence-length-weeks"]
         ) {
           return res.redirect(
             `/${prototypeVersion}/court-cases/add-a-court-case/sentence-length-mismatch`
@@ -1925,18 +2091,25 @@ router.post(
         return res.redirect(
           `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
         );
+      } else if (warrantType == "Non-custodial") {
+        req.session.data.addSentenceInformationComplete =
+            addSentenceInformationComplete;
+        return res.redirect(
+          `/${prototypeVersion}/court-cases/record-an-immediate-release/task-list`
+        );
       } else if (warrantType == "Sentencing") {
         if (req.session.data.appearance["finished-adding-offences"] == "yes") {
-          req.session.data.addSentenceInformationComplete = addSentenceInformationComplete;
+          req.session.data.addSentenceInformationComplete =
+            addSentenceInformationComplete;
         }
 
         if (
-          (req.session.data.appearance["total-sentence-length-years"] !=
-            req.session.data.appearance["overall-sentence-length-years"]) ||
-          (req.session.data.appearance["total-sentence-length-months"] !=
-            req.session.data.appearance["overall-sentence-length-months"]) ||
-          (req.session.data.appearance["total-sentence-length-weeks"] !=
-            req.session.data.appearance["overall-sentence-length-weeks"])
+          req.session.data.appearance["total-sentence-length-years"] !=
+            req.session.data.appearance["overall-sentence-length-years"] ||
+          req.session.data.appearance["total-sentence-length-months"] !=
+            req.session.data.appearance["overall-sentence-length-months"] ||
+          req.session.data.appearance["total-sentence-length-weeks"] !=
+            req.session.data.appearance["overall-sentence-length-weeks"]
         ) {
           return res.redirect(
             `/${prototypeVersion}/court-cases/add-a-court-appearance/sentence-length-mismatch`
@@ -1951,7 +2124,6 @@ router.post(
   }
 );
 
-
 router.post("/:prototypeVersion/court-documents-complete", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   var courtDocumentsComplete = 1;
@@ -1960,7 +2132,10 @@ router.post("/:prototypeVersion/court-documents-complete", function (req, res) {
   console.log("Court documents complete: " + courtDocumentsComplete);
   if (route == "new-court-case") {
     res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`);
-  } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`);
+  } else if (route == "non-custodial") {
+    res.redirect(`/${prototypeVersion}/court-cases/record-an-immediate-release/task-list`);
+  }
+  else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`);
 });
 
 router.post("/:prototypeVersion/add-court-document", function (req, res) {
@@ -2191,15 +2366,19 @@ router.get("/:prototypeVersion/terror-related-offence", function (req, res) {
 router.get("/:prototypeVersion/count-number", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   const sentenceIndex = req.session.data.appearance.sentences.length + 1;
-  const overallCaseOutcomeApply = req.session.data.appearance['overall-case-outcome-apply-all']
+  const overallCaseOutcomeApply =
+    req.session.data.appearance["overall-case-outcome-apply-all"];
   const route = req.session.data.route;
   const path = req.session.data.path;
-  const overallConvictionDateApply = req.session.data.appearance["overall-conviction-date-apply-all"]
+  const overallConvictionDateApply =
+    req.session.data.appearance["overall-conviction-date-apply-all"];
   console.log("Path: " + path);
   console.log("SentenceIndex: " + sentenceIndex);
   console.log("Edit: " + req.query.edit);
-  console.log("Overall case outcome apply all" + overallCaseOutcomeApply)
-  console.log("Overall conviction date apply all:  " + overallConvictionDateApply);
+  console.log("Overall case outcome apply all" + overallCaseOutcomeApply);
+  console.log(
+    "Overall conviction date apply all:  " + overallConvictionDateApply
+  );
   if (req.query.postSaveEdit == "true") {
     return res.redirect(307, `/${prototypeVersion}/persist-sentence`);
   }
@@ -2211,7 +2390,7 @@ router.get("/:prototypeVersion/count-number", function (req, res) {
       `/${prototypeVersion}/court-cases/add-a-sentence/conviction-date`
     );
   }
-  if (overallConvictionDateApply == "Yes"){
+  if (overallConvictionDateApply == "Yes") {
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-sentence/sentence-type`
     );
@@ -2438,12 +2617,11 @@ router.get("/:prototypeVersion/merged-cases-select", function (req, res) {
         res.redirect(
           `/${prototypeVersion}/court-cases/add-an-offence/offence-date`
         );
-      } else if (warrantType == "Sentencing" && route == "appearance"){
+      } else if (warrantType == "Sentencing" && route == "appearance") {
         res.redirect(
           `/${prototypeVersion}/court-cases/add-a-sentence/check-answers-additional-information`
         );
-      }
-       else {
+      } else {
         res.redirect(
           `/${prototypeVersion}/court-cases/add-a-sentence/check-answers-additional-information`
         );
@@ -2565,7 +2743,7 @@ router.get("/:prototypeVersion/update-outcome", function (req, res) {
   if (req.query.clearError === "true") {
     req.session.data.addSentenceInformationError = null;
   }
-  
+
   res.redirect(
     `/${prototypeVersion}/court-cases/add-a-court-appearance/change-outcome`
   );
@@ -2576,13 +2754,20 @@ router.get("/:prototypeVersion/add-offences-select", function (req, res) {
   const index = req.query.index;
   req.session.index = index;
   const route = req.session.route;
-  console.log("Route: " + route)
-  const overallCaseOutcomeApply = req.session.data.appearance['overall-case-outcome-apply-all'];
-  console.log("Overall case outcome apply all: " + overallCaseOutcomeApply) 
-  if (overallCaseOutcomeApply == "No"){
-  res.redirect(307, `/${prototypeVersion}/create-offence?route=new-court-case`);
+  console.log("Route: " + route);
+  const overallCaseOutcomeApply =
+    req.session.data.appearance["overall-case-outcome-apply-all"];
+  console.log("Overall case outcome apply all: " + overallCaseOutcomeApply);
+  if (overallCaseOutcomeApply == "No") {
+    res.redirect(
+      307,
+      `/${prototypeVersion}/create-offence?route=new-court-case`
+    );
   } else {
-    res.redirect(307, `/${prototypeVersion}/create-sentence?route=new-court-case`);
+    res.redirect(
+      307,
+      `/${prototypeVersion}/create-sentence?route=new-court-case`
+    );
   }
 });
 
@@ -2597,9 +2782,9 @@ router.get("/:prototypeVersion/update-consec-concurr", function (req, res) {
   req.session.data.sentence = req.session.data.appearance.sentences[index];
   console.log("Sentence:" + req.session.data.sentence["offence-name"]);
   req.session.data.sentenceIndex = index;
-    return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-sentence/consecutive-concurrent`
-    );
+  return res.redirect(
+    `/${prototypeVersion}/court-cases/add-a-sentence/consecutive-concurrent`
+  );
 });
 
 router.get("/:prototypeVersion/launch-prototype", function (req, res) {
@@ -2618,7 +2803,9 @@ router.get("/:prototypeVersion/launch-prototype", function (req, res) {
   req.session.regenerate(function () {
     req.session.data = JSON.parse(JSON.stringify(sessionData));
     req.session.data.prototypeVersion = prototypeVersion;
-    console.log(`Launching prototype version: ${prototypeVersion} with dataset: ${dataset}`);
+    console.log(
+      `Launching prototype version: ${prototypeVersion} with dataset: ${dataset}`
+    );
     res.redirect(`/${prototypeVersion}/court-cases/`);
   });
 });

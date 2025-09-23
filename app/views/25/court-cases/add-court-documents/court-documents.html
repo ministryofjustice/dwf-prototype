@@ -18,11 +18,11 @@
     <!-- <p class="govuk-body" aria-live="polite">1 file uploaded</p> -->
 
     <p class="govuk-body govuk-!-display-none" id="refreshPageProgress"><a href="#" class="govuk-link">Refresh page to update file upload progress</a></p>
-
+     {% if data.appearance['warrant-type'] != "Non-custodial" %}
             <div class="govuk-form-group govuk-!-margin-top-8 govuk-body">
               <a class="govuk-link--no-visited-state" href="upload-document?document-type=sentencing warrant">Upload {% if data.appearance['warrant-type'] == "Sentencing" %}sentencing{% else %}remand{% endif %} warrant</a>
             </div>
-
+      {% endif %}     
       {% if data.appearance['warrant-type'] == "Sentencing" %}
       <hr class="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-4">
       <div class="govuk-form-group">
@@ -32,8 +32,8 @@
             </div>
       {% endif %}
     </dl>
-    <hr class="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-4">
     {% if data.appearance['warrant-type'] == "Sentencing" %}
+    <hr class="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-4">
     <div class="govuk-form-group">
       <div class="govuk-form-group govuk-!-margin-top-6 govuk-body">
         <a class="govuk-link--no-visited-state" href="upload-document?document-type=indictment">Indictment</a>
@@ -42,10 +42,24 @@
     <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
     {% endif %}
     <div class="govuk-form-group">
-      <div class="govuk-form-group govuk-!-margin-top-6 govuk-body">
+      <div class="govuk-form-group govuk-!-margin-top-6 govuk-body {% if data.appearance['warrant-type'] == "Non-custodial" %}govuk-!-margin-top-2{% endif %}">
         <a class="govuk-link--no-visited-state" href="upload-document?document-type=prison court register">Upload prison court register</a>
       </div>
     </div>
+    {% if data.appearance['warrant-type'] == "Non-custodial" %}
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    <div class="govuk-form-group">
+      <div class="govuk-form-group govuk-!-margin-top-6 govuk-body">
+        <a class="govuk-link--no-visited-state" href="upload-document?document-type=prison court register">Upload order of discontinuance</a>
+      </div>
+    </div>
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    <div class="govuk-form-group">
+      <div class="govuk-form-group govuk-!-margin-top-6 govuk-body">
+        <a class="govuk-link--no-visited-state" href="upload-document?document-type=prison court register">Upload bail order</a>
+      </div>
+    </div>
+    {% endif %}
           <div class="govuk-button-group govuk-!-margin-top-8">
             <button type="submit" class="govuk-button" data-module="govuk-button">
              Continue

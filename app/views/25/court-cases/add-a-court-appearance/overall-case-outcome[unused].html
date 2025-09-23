@@ -1,45 +1,31 @@
 {% extends "../template.html" %}
-{% set noBackLink = true %}
 {% block content %}
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="/{{data.prototypeVersion}}/overall-case-outcome?route=appearance" method="post">
-            <div class="govuk-form-group"> 
+                {% if data.edit == 'true' %}
+        <form class="form" action="check-answers" method="post">
+            {% elif data.postSaveEdit == 'true' %}
+            <form class="form" action="/{{data.prototypeVersion}}/persist-appearance" method="post">
+            {% elif data.appearance['warrant-type'] == "Remand" %}
+            <form class="form" action="outcome-apply-all" method="post">
+                {% else %}
+        <form class="form" action="tagged-bail" method="post">
+            {% endif %}
+            <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        {% if data.postSaveEdit == 'true' %}
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Appearance {{ data.appearance['court-case-ref'] }} at {{ data.appearance['court-name'] }} on {{ data.appearance['warrant-date-day'] }}/{{ data.appearance['warrant-date-month'] }}/{{ data.appearance['warrant-date-year'] }}</span>
+                            Edit the overall case outcome
+                        </h1>
+                        {% else %}
                         <h1 class="govuk-fieldset__heading">
                             <span class="govuk-caption-l">Add an appearance</span>
                             Select the overall case outcome
                         </h1>
+                        {% endif %}
                     </legend>
-                    <h2 class="govuk-heading-m govuk-!-margin-top-2">Custodial</h2>
-                    <div class="govuk-radios govuk-!-margin-bottom-6" data-module="govuk-radios">
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="overall-case-outcome" name="appearance[overall-case-outcome]" type="radio" value="Imprisonment" {% if data.appearance['overall-case-outcome'] == 'Imprisonment' %} checked {% endif %}>
-                            <label class="govuk-label govuk-radios__label" for="overall-case-outcome">
-                               Imprisonment
-                            </label>
-                        </div>
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="overall-case-outcome-2" name="appearance[overall-case-outcome]" type="radio" value="Detention and training order (DTO)" {% if data.appearance[overall-case-outcome] == 'Detention and training order (DTO)' %} checked {% endif %}>
-                            <label class="govuk-label govuk-radios__label" for="overall-case-outcome-2">
-                                Detention and training order (DTO)
-                            </label>
-                        </div>
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="overall-case-outcome-3" name="appearance[overall-case-outcome]" type="radio" value="Imprisonment in default of a fine" {% if data.appearance[overall-case-outcome] == 'Imprisonment in default of a fine' %} checked {% endif %}>
-                            <label class="govuk-label govuk-radios__label" for="overall-case-outcome-3">
-                                Imprisonment in default of a fine
-                            </label>
-                        </div>
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="overall-case-outcome-5" name="appearance[overall-case-outcome]" type="radio" value="Remand in Custody (Bail Refused)" {% if data.appearance[overall-case-outcome]== 'Remand in Custody (Bail Refused)' %} checked {% endif %}>
-                            <label class="govuk-label govuk-radios__label" for="overall-case-outcome-5">
-                                Remand in Custody (Bail Refused)
-                            </label>
-                        </div>
-                    </div>
-                    <h2 class="govuk-heading-m">Non-custodial</h2>
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="overall-case-outcome" name="appearance[overall-case-outcome]" type="radio" value="Lie on file" {% if data.appearance['overall-case-outcome'] == 'Lie on file' %} checked {% endif %}>
@@ -65,12 +51,12 @@
                                 Dismissed
                             </label>
                         </div>
-                        <!-- <div class="govuk-radios__item">
+                        <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="overall-case-outcome-5" name="appearance[overall-case-outcome]" type="radio" value="Remand in Custody (Bail Refused)" {% if data.appearance[overall-case-outcome]== 'Remand in Custody (Bail Refused)' %} checked {% endif %}>
                             <label class="govuk-label govuk-radios__label" for="overall-case-outcome-5">
                                 Remand in Custody (Bail Refused)
                             </label>
-                        </div> -->
+                        </div>
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="overall-case-outcome-6" name="appearance[overall-case-outcome]" type="radio" value="No Evidence Offered - Dismissed" {% if data.appearance[overall-case-outcome]== 'No Evidence Offered - Dismissed' %} checked {% endif %}>
                             <label class="govuk-label govuk-radios__label" for="overall-case-outcome-6">
@@ -145,7 +131,6 @@
                 <button type="submit" class="govuk-button" data-module="govuk-button">
                     Continue
                 </button>
-                <a href="court-cases" class="govuk-link govuk-link--no-visited-state">Cancel</a>
             </div>
         </form>
     </div>
