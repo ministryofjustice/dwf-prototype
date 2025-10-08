@@ -3,17 +3,17 @@
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">
-            <span class="govuk-caption-l">Record an immediate release</span>
+            <span class="govuk-caption-l">Add appearance information</span>
             Check your answers
         </h1>
-        <form class="form" action="task-list" method="post">
+        <form class="form" action="/{{data.prototypeVersion}}/persist-appearance?edit=false" method="post">
             <dl class="govuk-summary-list">
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
-                        Court case <br>(last appearance)
+                        Case reference
                     </dt>
                     <dd class="govuk-summary-list__value">
-                       {{ (data.courtCase.appearances | last)['court-case-ref'] }} at {{ (data.courtCase.appearances | last)['court-name'] }} on {{ (data.courtCase.appearances | last)['warrant-date-day'] }}/{{ (data.courtCase.appearances | last)['warrant-date-month'] }}/{{ (data.courtCase.appearances | last)['warrant-date-year'] }}
+                       {{ data.appearance['court-case-ref']}}
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link govuk-link--no-visited-state" href="court-case-reference-number?edit=true">
@@ -23,10 +23,10 @@
                 </div>
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
-                        Reason for immediate release
+                        Location
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['overall-case-outcome'] }}
+                        {{ data['appearance']['court-name'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link govuk-link--no-visited-state" href="reason-for-release?edit=true">
@@ -36,10 +36,10 @@
                 </div>
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
-                        Did Daryl Evans appear in court for this decison?
+                        Appearance date
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['court-decision'] | capitalize }}
+                        {{ data['appearance']['warrant-date-day'] }}/{{ data['appearance']['warrant-date-month'] }}/{{ data['appearance']['warrant-date-year'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link govuk-link--no-visited-state" href="court-name?edit=true">

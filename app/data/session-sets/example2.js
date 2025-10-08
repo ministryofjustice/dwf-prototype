@@ -39,8 +39,6 @@ module.exports = {
                 },
                 {
                     "court-case-ref": "T20252391",
-                    "merged-from-case": "T22059876",
-                    "merged-from-case-date": "05/10/2025",
                     "warrant-type": "Remand",
                     "overall-case-outcome": "Remand in custody",
                     "warrant-date-day": "15",
@@ -70,8 +68,7 @@ module.exports = {
                             "offence-start-date-year": "2025",
                             "offence-code": [ "MD71002" ],
                             "offence-name": "MD71002 - Possession of a controlled drug – Class B – Cannabis",
-                            "outcome": "Remand in custody",
-                            "merged-from": "T20250103 at Sheffield Crown Court"
+                            "outcome": "Remand in custody"
                         },
                         {
                             "offence-start-date-day": "12",
@@ -79,20 +76,16 @@ module.exports = {
                             "offence-start-date-year": "2025",
                             "offence-code": [ "MD71002" ],
                             "offence-name": "MD71002 - Possession of a controlled drug – Class B – Cannabis",
-                            "outcome": "Remand in custody",
-                            "merged-from": "T20250103 at Sheffield Crown Court"
+                            "outcome": "Remand in custody"
                         }
                     ]
                 }
             ]
         },
         {
-            "status": "inactive",
             appearances: [
                 {
                     "court-case-ref": "T20250103",
-                    "merged-with": "T20223256 at Manchester Crown Court (Crown Square)",
-                    "merged-with-case-date": "05/10/2024",
                     "warrant-type": "Sentencing",
                     "overall-case-outcome": "Imprisonment",
                     "overall-conviction-date-day": "20",
@@ -152,10 +145,8 @@ module.exports = {
             ]
         },
         {
-            "source": "NOMIS",
             appearances: [
                 {
-                    "source": "NOMIS",
                     "court-case-ref": "T20250102",
                     "warrant-type": "Sentencing",
                     "overall-case-outcome": "Imprisonment",
@@ -176,7 +167,6 @@ module.exports = {
                     "total-sentence-length-days": "0",
                     "sentences": [
                         {
-                            "source": "NOMIS",
                             "count-number": "1",
                             "conviction-date-day": "12",
                             "conviction-date-month": "02",
@@ -195,7 +185,6 @@ module.exports = {
                             "consecutive-concurrent": "Forthwith"
                         },
                         {
-                            "source": "NOMIS",
                             "count-number": "2",
                             "conviction-date-day": "12",
                             "conviction-date-month": "02",
@@ -573,7 +562,6 @@ module.exports = {
             ]
         },
         {
-            "status" : "inactive",
             "appearances": [{
                     "court-case-ref": "72KJ8492165",
                     "warrant-type": "Remand",
@@ -716,8 +704,6 @@ module.exports = {
                 },
                 {
                     "court-case-ref": "T20223256",
-                    "merged-from-case": "T22029876",
-                    "merged-from-case-date": "05/10/2024",
                     "warrant-type": "Sentencing",
                     "overall-case-outcome": "Imprisonment",
                     "overall-conviction-date-day": "05",
@@ -737,7 +723,6 @@ module.exports = {
                     "total-sentence-length-weeks" : "0",
                     "total-sentence-length-days" : "0",
                     "sentences": [{
-                            "merged-from": "T20250103 at Sheffield Crown Court",
                             "count-number": "1",
                             "conviction-date-day": "20",
                             "conviction-date-month": "03",

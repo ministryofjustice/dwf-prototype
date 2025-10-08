@@ -7,6 +7,7 @@ const govukPrototypeKit = require("govuk-prototype-kit");
 const sessionDataDefaults = require("./data/session-sets/example");
 const emptyData = require("./data/session-sets/empty-data");
 const exampleData = require("./data/session-sets/example");
+const example2Data = require('./data/session-sets/example2')
 const router = govukPrototypeKit.requests.setupRouter();
 
 router.post("/:prototypeVersion/next-court-date-select", function (req, res) {
@@ -368,14 +369,14 @@ router.post("/:prototypeVersion/new-court-case-ref", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   const courtCaseIndex = req.session.data.courtCaseIndex;
   var caseRefSelect = req.session.data.appearance["case-ref-select"];
-  const warrantType = req.session.data.appearance["warrant-type"];
+  const route = req.session.data['route'];
   console.log("Case ref select:" + caseRefSelect);
   if (caseRefSelect.includes("Yes")) {
     req.session.data.appearance["court-case-ref"] =
       req.session.data.courtCases[courtCaseIndex].appearances.at(-1)[
         "court-case-ref"
       ];
-    if (warrantType == "Non-custodial") {
+    if (route == "immediate-release") {
       res.redirect(
         `/${prototypeVersion}/court-cases/record-an-immediate-release/appearance-date`
       );
@@ -390,6 +391,7 @@ router.post("/:prototypeVersion/new-court-name", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   const courtCaseIndex = req.session.data.courtCaseIndex;
   const warrantType = req.session.data.appearance["warrant-type"];
+  const route = req.session.data['route'];
   var newCourtName = req.session.data.appearance["court-name-select"];
   console.log("New court name:" + newCourtName);
   if (newCourtName.includes("Yes")) {
@@ -401,9 +403,9 @@ router.post("/:prototypeVersion/new-court-name", function (req, res) {
       res.redirect(
         `/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers`
       );
-    } else if (warrantType == "Non-custodial") {
+    } else if (route == "immediate-release") {
       res.redirect(
-        `/${prototypeVersion}/court-cases/record-an-immediate-release/check-answers`
+        `/${prototypeVersion}/court-cases/record-an-immediate-release/check-answers-appearance-info`
       );
     } else {
       res.redirect(
@@ -700,9 +702,12 @@ router.get("/:prototypeVersion/create-appearance", function (req, res) {
   delete req.session.data.appearanceIndex;
   delete req.session.data.appearance;
   const courtIndex = req.query.courtIndex;
+  const route = req.query.route;
+  console.log("Route: " + route)
   if (courtIndex !== undefined) {
     req.session.data.courtCase = req.session.data.courtCases[courtIndex];
     req.session.data.courtCaseIndex = courtIndex;
+    console.log("Court case" + req.session.data.courtCase)
   }
   const lastAppearance = req.session.data.courtCase.appearances.at(-1);
   req.session.data.appearance = {
@@ -739,10 +744,16 @@ router.get("/:prototypeVersion/create-appearance", function (req, res) {
     req.session.data.offencesComplete = 0;
     req.session.data.nextCourtAppearanceComplete = "No";
     req.session.data.edit = "false";
-    return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`
+    if (route == "immediate-release"){
+      return res.redirect(
+      `/${prototypeVersion}/court-cases/record-an-immediate-release/reason-for-release`
     );
-  } else {
+    } else
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-court-appearance/warrant-type`
+    );
+  }
+   else {
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-court-appearance/court-case-reference-number`
     );
@@ -875,14 +886,15 @@ router.post("/:prototypeVersion/persist-appearance", function (req, res) {
   }
 
   // ===== EARLY SHORT-CIRCUIT FOR NON-CUSTODIAL =====
-  if (warrantType === "Non-custodial") {
+  if (route === "immediate-release") {
     if (req.query.appearanceComplete === "true") {
-      // Finalise non-custodial flow → confirmation
       return res.redirect(
         `/${prototypeVersion}/court-cases/record-an-immediate-release/confirmation`
       );
     }
-    // Otherwise keep them in the non-custodial task list
+    appearanceDetailsComplete = 1;
+    req.session.data.appearanceDetailsComplete = appearanceDetailsComplete;
+    console.log("Appearance details complete: " + appearanceDetailsComplete);
     return res.redirect(
       `/${prototypeVersion}/court-cases/record-an-immediate-release/task-list`
     );
@@ -1589,7 +1601,7 @@ router.get("/:prototypeVersion/warrant-type-select", function (req, res) {
       );
   } else if (warrantType == "Non-custodial") {
     res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-court-appearance/reason-for-release`
+      `/${prototypeVersion}/court-cases/record-an-immediate-release/task-list `
     );
   }
 });
@@ -2815,6 +2827,20 @@ router.get("/:prototypeVersion/update-consec-concurr", function (req, res) {
   );
 });
 
+router.get("/:prototypeVersion/select-court-case", function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion;
+  const courtIndex = req.session.data.courtIndex;
+  console.log("Court case index: " + courtIndex);
+  const route = req.query.route;
+  req.session.data.route = route;
+  console.log("Route:" + route);
+
+  return res.redirect(
+      307,
+      `/${prototypeVersion}/create-appearance?route=immediate-release&courtIndex=courtIndex`
+    );
+});
+
 router.get("/:prototypeVersion/launch-prototype", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   const dataset = req.query.data || "example";
@@ -2826,6 +2852,9 @@ router.get("/:prototypeVersion/launch-prototype", function (req, res) {
       break;
     case "example":
       sessionData = exampleData;
+      break;
+    case "example2":
+      sessionData = example2Data;
   }
 
   req.session.regenerate(function () {
@@ -2837,5 +2866,8 @@ router.get("/:prototypeVersion/launch-prototype", function (req, res) {
     res.redirect(`/${prototypeVersion}/court-cases/`);
   });
 });
+
+
+
 
 module.exports = router;
