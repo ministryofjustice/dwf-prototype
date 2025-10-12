@@ -35,7 +35,7 @@
                     </p>
                     {% endif %}
                     <button class="govuk-button govuk-button--link govuk-!-margin-bottom-2" data-module="govuk-button"
-                        formaction="/{{data.prototypeVersion}}/create-sentence?route=remand-to-sentence&path=rts-new-offence&edit=false"
+                        formaction="/{{data.prototypeVersion}}/create-sentence?route=immediate-release&path=rts-new-offence&edit=false"
                         method="post">
                         Add an offence
                     </button>
@@ -97,7 +97,7 @@
                                             updating outcome</a>
                                         {% else %}
                                         <a class="govuk-link--no-visited-state"
-                                            href="/{{data.prototypeVersion}}/update-outcome?index={{loop.index0}}&route=non-custodial&edit=false&clearError=true">Update
+                                            href="/{{data.prototypeVersion}}/update-outcome?index={{loop.index0}}&rroute=immediate-release&edit=false&clearError=true">Update
                                             outcome</a>
                                         {% endif %}
                                     </li>
@@ -109,7 +109,7 @@
                                 <ul class="offence-card-actions-list">
                                     <li class="offence-card-action-link">
                                         <a
-                                            href="/{{data.prototypeVersion}}/update-offence?index={{loop.index0}}&route=non-custodial">Edit</a>
+                                            href="/{{data.prototypeVersion}}/update-offence?index={{loop.index0}}&route=immediate-release">Edit</a>
                                     </li>
                                 </ul>
                             </div>
@@ -122,7 +122,7 @@
                     {% endfor %}
                     {% if no_match3 %}
                     <div class="govuk-inset-text govuk-!-margin-top-6">
-                        There are no offences with outcomes that have not been updated
+                        All outcomes have been updated.
                     </div>
                     {% endif %}
 
@@ -191,7 +191,7 @@
                                         updating outcome</a>
                                     {% else %}
                                     <a
-                                        href="/{{data.prototypeVersion}}/update-outcome?index={{loop.index0}}&edit=false&route=non-custodial&clearError=true">Update
+                                        href="/{{data.prototypeVersion}}/update-outcome?index={{loop.index0}}&edit=false&route=immediate-release&clearError=true">Update
                                         outcome</a>
                                     {% endif %}
                                 </li>
@@ -201,7 +201,7 @@
                         <div class="offence-card-actions">
                             <ul class="offence-card-actions-list">
                                 <li class="offence-card-action-link"><a
-                                        href="/{{data.prototypeVersion}}/update-offence?index={{loop.index0}}&route=remand-to-sentence">Edit</a>
+                                        href="/{{data.prototypeVersion}}/update-offence?index={{loop.index0}}&route=immediate-release">Edit</a>
                                 </li>
                             </ul>
                         </div>

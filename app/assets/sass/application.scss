@@ -1241,11 +1241,11 @@ padding: 10px;
 }
 
 .show-toggle.govuk-details[open] > .govuk-details__summary > .govuk-details__summary-text::before {
-  content: "Hide";
+  content: "Hide ";
 }
 
 .show-toggle.govuk-details > .govuk-details__summary > .govuk-details__summary-text::before {
-  content: "Show";
+  content: "Show ";
 }
 
 .filter > .govuk-details__text {

@@ -26,9 +26,9 @@
     <dl class="govuk-summary-list govuk-summary-list--long-key govuk-!-margin-bottom-0">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          {% if data.appearance['warrant-type'] == 'Non-custodial' %}
-          <a class="govuk-link" href="#">prison-court-register.pdf</a>
-          <div class="govuk-body govuk-!-margin-0">Prison court register</div>
+          {% if data.route == 'immediate-release' %}
+          <a class="govuk-link" href="#">order-of-discontinuance.pdf</a>
+          <div class="govuk-body govuk-!-margin-0">Order of discontinuance</div>
           {% elif data.appearance['warrant-type'] == 'Sentencing' %}
           <a class="govuk-link" href="#">sentencing-warrant.pdf</a>
           <div class="govuk-body govuk-!-margin-0">Sentencing warrant</div>
@@ -68,7 +68,7 @@
     </div>
     <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
     {% endif %}
-    {% if data.appearance['warrant-type'] == "Non-custodial" %}
+    {% if data.aroute == "immediate-release" %}
     <div class="govuk-form-group">
       <div class="govuk-form-group govuk-!-margin-top-6 govuk-body">
         <a class="govuk-link--no-visited-state" href="upload-document?document-type=prison court register">Upload order of discontinuance</a>

@@ -10,9 +10,9 @@
             <form class="form"
             action="/{{data.prototypeVersion}}/add-sentence-information?route=edit-appearance&index={{data.index}}"
             method="post">
-            {% elif data.route == "non-custodial" %}
+            {% elif data.route == "immediate-release" %}
             <form class="form"
-                action="/{{data.prototypeVersion}}/add-sentence-information?route=non-custodial&index={{data.index}}"
+                action="/{{data.prototypeVersion}}/add-sentence-information?route=immediate-release&index={{data.index}}"
                 method="post">
             {% else %}
             <form class="form"
@@ -30,7 +30,6 @@
                                 <span class="govuk-caption-l">Update offence outcomes</span>
                                 What is the new outcome for this offence?
                                 {% endif %}
-                                
                             </h1>
                         </legend>
                         {% if data.route != "edit-appearance" %} 
@@ -129,7 +128,7 @@
                         
                         {% else %}
                         <div class="govuk-radios" data-module="govuk-radios" data-govuk-radios-init="">
-                          {% if  data.appearance['warrant-type'] != 'Non-custodial' %}
+                          {% if  data.route != "immediate-release" %}
                             <div class="govuk-radios__item">
                                 <input class="govuk-radios__input" id="outcome-1" name="offence[outcome]" type="radio" value="Imprisonment">
                                 <label class="govuk-label govuk-radios__label" for="outcome-1">

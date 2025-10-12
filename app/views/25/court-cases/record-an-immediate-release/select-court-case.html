@@ -2,7 +2,7 @@
 {% block content %}
 <div class="govuk-grid-row govuk-!-margin-top-4">
   <div class="govuk-grid-column-two-thirds">
-    <form action="/{{ data.prototypeVersion }}/create-appearance" method="get">
+    <form action="/{{ data.prototypeVersion }}/select-court-case" method="get">
       <div class="govuk-form-group">
         <fieldset class="govuk-fieldset">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
@@ -14,7 +14,7 @@
 
           <div class="govuk-radios" data-module="govuk-radios">
             {% if data.courtCases and data.courtCases.length %}
-              {% for courtCase in data.courtCases | reverse %}
+              {% for courtCase in data.courtCases %}
                 {% set idx = loop.revindex0 %}
                 {% set lastAppearance = courtCase.appearances | last %}
                 <div class="govuk-radios__item">

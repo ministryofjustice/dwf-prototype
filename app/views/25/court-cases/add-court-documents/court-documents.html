@@ -18,7 +18,7 @@
     <!-- <p class="govuk-body" aria-live="polite">1 file uploaded</p> -->
 
     <p class="govuk-body govuk-!-display-none" id="refreshPageProgress"><a href="#" class="govuk-link">Refresh page to update file upload progress</a></p>
-     {% if data.appearance['warrant-type'] != "Non-custodial" %}
+     {% if data.route != "immediate-release" %}
             <div class="govuk-form-group govuk-!-margin-top-8 govuk-body">
               <a class="govuk-link--no-visited-state" href="upload-document?document-type=sentencing warrant">Upload {% if data.appearance['warrant-type'] == "Sentencing" %}sentencing{% else %}remand{% endif %} warrant</a>
             </div>
@@ -42,23 +42,27 @@
     <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
     {% endif %}
     <div class="govuk-form-group">
-      <div class="govuk-form-group govuk-!-margin-top-6 govuk-body {% if data.appearance['warrant-type'] == "Non-custodial" %}govuk-!-margin-top-2{% endif %}">
+      <div class="govuk-form-group govuk-!-margin-top-6 govuk-body {% if data.route == "immediate-release" %}govuk-!-margin-top-2{% endif %}">
         <a class="govuk-link--no-visited-state" href="upload-document?document-type=prison court register">Upload prison court register</a>
       </div>
     </div>
-    {% if data.appearance['warrant-type'] == "Non-custodial" %}
+    {% if data.route == "immediate-release" %}
+    {% if data.appearance['overall-case-outcome'] == "Discontinuance" %}
     <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
     <div class="govuk-form-group">
       <div class="govuk-form-group govuk-!-margin-top-6 govuk-body">
-        <a class="govuk-link--no-visited-state" href="upload-document?document-type=prison court register">Upload order of discontinuance</a>
+        <a class="govuk-link--no-visited-state" href="upload-document?document-type=order of discontinuance">Upload order of discontinuance</a>
       </div>
     </div>
+    {% endif %}
+    {% if data.appearance['overall-case-outcome'] == "Bail" %}
     <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
     <div class="govuk-form-group">
       <div class="govuk-form-group govuk-!-margin-top-6 govuk-body">
         <a class="govuk-link--no-visited-state" href="upload-document?document-type=prison court register">Upload bail order</a>
       </div>
     </div>
+    {% endif %}
     {% endif %}
           <div class="govuk-button-group govuk-!-margin-top-8">
             <button type="submit" class="govuk-button" data-module="govuk-button">

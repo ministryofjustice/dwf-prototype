@@ -1856,7 +1856,7 @@ router.post("/:prototypeVersion/add-sentence-information", function (req, res) {
   if (
     (route == "remand-to-sentence" && outcome != "Imprisonment") ||
     (route == "remand-to-sentence" && outcome != "Imprisonment in default") ||
-    route == "non-custodial"
+    route == "immediate-release"
   ) {
     req.session.data.appearance.offences[index]["outcome"] = outcome
     req.session.data.appearance.offences[index]["outcome-changed"] = "true";
@@ -1875,7 +1875,7 @@ router.post("/:prototypeVersion/add-sentence-information", function (req, res) {
     );
   } else if (route == "edit-appearance") {
     return res.redirect(`/${prototypeVersion}/court-cases/edit-appearance`);
-  } else if (route == "non-custodial")
+  } else if (route == "immediate-release")
     res.redirect(
       `/${prototypeVersion}/court-cases/record-an-immediate-release/update-offence-outcomes`
     );
@@ -2069,7 +2069,7 @@ router.post(
         message: "One or more offence outcomes need updating",
         count: incompleteOffences.length,
       };
-      if (warrantType == "Non-custodial"){
+      if (warrantType == "immediate-release"){
         return res.redirect(
         `/${prototypeVersion}/court-cases/record-an-immediate-release/update-offence-outcomes`
       );
@@ -2131,7 +2131,7 @@ router.post(
         return res.redirect(
           `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
         );
-      } else if (warrantType == "Non-custodial") {
+      } else if (route == "immediate-release") {
         req.session.data.addSentenceInformationComplete =
             addSentenceInformationComplete;
         return res.redirect(
@@ -2172,7 +2172,7 @@ router.post("/:prototypeVersion/court-documents-complete", function (req, res) {
   console.log("Court documents complete: " + courtDocumentsComplete);
   if (route == "new-court-case") {
     res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`);
-  } else if (route == "non-custodial") {
+  } else if (route == "immediate-release") {
     res.redirect(`/${prototypeVersion}/court-cases/record-an-immediate-release/task-list`);
   }
   else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`);
@@ -2829,17 +2829,16 @@ router.get("/:prototypeVersion/update-consec-concurr", function (req, res) {
 
 router.get("/:prototypeVersion/select-court-case", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
-  const courtIndex = req.session.data.courtIndex;
-  console.log("Court case index: " + courtIndex);
-  const route = req.query.route;
+  const { courtIndex, route } = req.query;
   req.session.data.route = route;
-  console.log("Route:" + route);
+  req.session.data.courtIndex = courtIndex;
 
   return res.redirect(
-      307,
-      `/${prototypeVersion}/create-appearance?route=immediate-release&courtIndex=courtIndex`
-    );
+    307,
+    `/${prototypeVersion}/create-appearance?route=${route}&courtIndex=${courtIndex}`
+  );
 });
+
 
 router.get("/:prototypeVersion/launch-prototype", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
