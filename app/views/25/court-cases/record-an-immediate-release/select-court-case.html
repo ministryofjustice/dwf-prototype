@@ -15,7 +15,7 @@
           <div class="govuk-radios" data-module="govuk-radios">
             {% if data.courtCases and data.courtCases.length %}
               {% for courtCase in data.courtCases %}
-                {% set idx = loop.revindex0 %}
+                {% set idx = loop.index0 %}
                 {% set lastAppearance = courtCase.appearances | last %}
                 <div class="govuk-radios__item">
                   <input

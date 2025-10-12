@@ -3,7 +3,7 @@
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">
-            <span class="govuk-caption-l">Add appearance information</span>
+            <span class="govuk-caption-l">{% if data.appearance['court-decision']=='Yes' %}Add appearance information{% else %}Add case details{% endif %}</span>
             Check your answers
         </h1>
         <form class="form" action="/{{data.prototypeVersion}}/persist-appearance?edit=false" method="post">
@@ -23,7 +23,7 @@
                 </div>
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
-                        Location
+                        {% if data.appearance['court-decision']=='Yes' %}Location{% else %}Court name{% endif %}
                     </dt>
                     <dd class="govuk-summary-list__value">
                         {{ data['appearance']['court-name'] }}
@@ -36,7 +36,7 @@
                 </div>
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
-                        Appearance date
+                        {% if data.appearance['court-decision']=='Yes' %}Appearance date{% else %}Date of discontinuance{% endif %}
                     </dt>
                     <dd class="govuk-summary-list__value">
                         {{ data['appearance']['warrant-date-day'] }}/{{ data['appearance']['warrant-date-month'] }}/{{ data['appearance']['warrant-date-year'] }}

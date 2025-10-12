@@ -7,7 +7,7 @@
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Add appearance information</span>
+                            <span class="govuk-caption-l">{% if data.appearance['court-decision']=='Yes' %}Add appearance information{% else %}Add case details{% endif %}</span>
                             Is the case reference {{ data.courtCases[data.courtCaseIndex].appearances.at(-1)['court-case-ref'] }}?
                         </h1>
                     </legend>

@@ -377,14 +377,20 @@ router.post("/:prototypeVersion/new-court-case-ref", function (req, res) {
         "court-case-ref"
       ];
     if (route == "immediate-release") {
-      res.redirect(
+      return res.redirect(
         `/${prototypeVersion}/court-cases/record-an-immediate-release/appearance-date`
       );
     } else
-      res.redirect(
+      return res.redirect(
         `/${prototypeVersion}/court-cases/add-a-court-appearance/warrant-date`
       );
-  } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-case-reference-number`);
+  } 
+  if (route == "immediate-release") {
+      return res.redirect(
+        `/${prototypeVersion}/court-cases/record-an-immediate-release/court-case-reference-number`
+      );
+    }
+   else return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-case-reference-number`);
 });
 
 router.post("/:prototypeVersion/new-court-name", function (req, res) {
@@ -400,19 +406,25 @@ router.post("/:prototypeVersion/new-court-name", function (req, res) {
         "next-court-name"
       ];
     if (req.session.data.appearance["overall-case-outcome"] == "Imprisonment") {
-      res.redirect(
+      return res.redirect(
         `/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers`
       );
     } else if (route == "immediate-release") {
-      res.redirect(
+      return res.redirect(
         `/${prototypeVersion}/court-cases/record-an-immediate-release/check-answers-appearance-info`
       );
     } else {
-      res.redirect(
+      return res.redirect(
         `/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`
       );
     }
-  } else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-name`);
+  }
+  if (route == "immediate-release") {
+      return res.redirect(
+        `/${prototypeVersion}/court-cases/record-an-immediate-release/court-name`
+      );
+    }
+   else return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-name`);
 });
 
 router.post("/:prototypeVersion/change-offences-select", function (req, res) {

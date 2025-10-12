@@ -45,6 +45,12 @@ module.exports = {
                     "warrant-date-month": "07",
                     "warrant-date-year": "2025",
                     "court-name": "Leeds Crown Court",
+                    "next-court-date-set": "Yes",
+                    "next-hearing-type": "Court appearance",
+                    "next-court-date-day": "16",
+                    "next-court-date-month": "07",
+                    "next-court-date-year": "2025",
+                    "next-court-name": "Leeds Crown Court",
                     "offences": [
                         {
                             "offence-start-date-day": "20",
