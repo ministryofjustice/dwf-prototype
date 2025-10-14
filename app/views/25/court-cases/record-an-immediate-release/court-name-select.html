@@ -7,8 +7,8 @@
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">{% if data.appearance['court-decision']=='Yes' %}Add appearance information{% else %}Add case details{% endif %}</span>
-                            {% if data.appearance['court-decision']=='Yes' %}Was the appearance at {{ data.courtCase.appearances.at(-1)['next-court-name'] }}?{% else %}Is {{ data.courtCase.appearances.at(-1)['next-court-name'] }} the correct court?{% endif %}
+                            <span class="govuk-caption-l">{% if data.appearance['court-decision']=='yes' %}Add appearance information{% else %}Add case details{% endif %}</span>
+                            {% if data.appearance['court-decision']=='yes' %}Was the appearance at {{ data.courtCase.appearances.at(-1)['next-court-name'] }}?{% else %}Is {{ data.courtCase.appearances.at(-1)['next-court-name'] }} the correct court?{% endif %}
                         </h1>
                     </legend>
                     <div class="govuk-hint">This was the court name for the previous appearance.</div>
