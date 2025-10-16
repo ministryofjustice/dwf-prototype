@@ -414,10 +414,16 @@ router.post("/:prototypeVersion/new-court-name", function (req, res) {
         `/${prototypeVersion}/court-cases/record-an-immediate-release/check-answers-appearance-info`
       );
     } else {
+      if(prototypeVersion => 26){
+        return res.redirect(
+        `/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers`
+      );
+      } else {
       return res.redirect(
         `/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`
       );
     }
+  }
   }
   if (route == "immediate-release") {
       return res.redirect(
@@ -761,9 +767,15 @@ router.get("/:prototypeVersion/create-appearance", function (req, res) {
       `/${prototypeVersion}/court-cases/record-an-immediate-release/reason-for-release`
     );
     } else
+      if(prototypeVersion >= 26){
+        return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`
+    );
+      } else {
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-court-appearance/warrant-type`
     );
+  }
   }
    else {
     return res.redirect(
@@ -898,7 +910,7 @@ router.post("/:prototypeVersion/persist-appearance", function (req, res) {
   }
 
   // ===== EARLY SHORT-CIRCUIT FOR NON-CUSTODIAL =====
-  if (route === "immediate-release") {
+  if (route === "immediate-release" && prototypeVersion == 25) {
     if (req.query.appearanceComplete === "true") {
       return res.redirect(
         `/${prototypeVersion}/court-cases/record-an-immediate-release/confirmation`
@@ -921,7 +933,7 @@ router.post("/:prototypeVersion/persist-appearance", function (req, res) {
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-court-case/confirmation`
     );
-  } else if (route == "appearance") {
+  } else if (route == "appearance" || warrantType == "Non-custodial") {
     appearanceDetailsComplete = 1;
     req.session.data.appearanceDetailsComplete = appearanceDetailsComplete;
     console.log("Appearance details complete: " + appearanceDetailsComplete);
@@ -1613,7 +1625,7 @@ router.get("/:prototypeVersion/warrant-type-select", function (req, res) {
       );
   } else if (warrantType == "Non-custodial") {
     res.redirect(
-      `/${prototypeVersion}/court-cases/record-an-immediate-release/task-list `
+      `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
     );
   }
 });
@@ -2143,11 +2155,17 @@ router.post(
         return res.redirect(
           `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
         );
-      } else if (route == "immediate-release") {
+      } else if (prototypeVersion == 25 && route == "immediate-release") {
         req.session.data.addSentenceInformationComplete =
             addSentenceInformationComplete;
         return res.redirect(
           `/${prototypeVersion}/court-cases/record-an-immediate-release/task-list`
+        );
+      } else if (prototypeVersion > 25 && warrantType == "Non-custodial") {
+        req.session.data.offencesComplete =
+            addSentenceInformationComplete;
+        return res.redirect(
+          `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
         );
       } else if (warrantType == "Sentencing") {
         if (req.session.data.appearance["finished-adding-offences"] == "yes") {
@@ -2184,9 +2202,9 @@ router.post("/:prototypeVersion/court-documents-complete", function (req, res) {
   console.log("Court documents complete: " + courtDocumentsComplete);
   if (route == "new-court-case") {
     res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`);
-  } else if (route == "immediate-release") {
+  } else if (route == "immediate-release" && prototypeVersion == 25) {
     res.redirect(`/${prototypeVersion}/court-cases/record-an-immediate-release/task-list`);
-  }
+  } 
   else res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`);
 });
 
