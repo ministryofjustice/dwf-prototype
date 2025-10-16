@@ -1,0 +1,80 @@
+{% extends "../template.html" %}
+{% block content %}
+<div class="govuk-grid-row govuk-!-margin-top-4">
+  <div class="govuk-grid-column-two-thirds govuk-!-padding-right-8">
+    <form class="form" action="court-documents-uploaded" method="post">
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              {% if data.postSaveEdit == 'true' %}
+              Manage court documents
+              {% else %}
+              Upload court documents
+              {% endif %}
+            </h1>
+          </legend>
+
+    <div id="file-upload-1-hint" class="govuk-hint">
+      Uploading documents is optional. The selected file type should be .PDF under 500MB.
+    </div>
+
+    <p class="govuk-body" aria-live="polite">1 file uploaded</p>
+
+    <p class="govuk-body govuk-!-display-none" id="refreshPageProgress"><a href="#" class="govuk-link">Refresh page to update file upload progress</a></p>
+
+    <dl class="govuk-summary-list govuk-summary-list--long-key govuk-!-margin-bottom-0">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          <a class="govuk-link" href="#">sentencing-warrant.pdf</a>
+          <div class="govuk-body govuk-!-margin-0">Sentencing warrant</div>
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <strong class="govuk-tag govuk-tag--green">
+  Uploaded
+</strong>
+
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link govuk-link--no-visited-state" href="confirm-delete-document">Delete<span class="govuk-visually-hidden"> sentencing-warrant.pdf</span></a>
+        </dd>
+      </div>
+      </dl>
+
+      {% if data.appearance['warrant-type'] == "Sentencing" %}
+      <hr class="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-4">
+
+      <div class="govuk-form-group">
+        <div class="govuk-form-group govuk-!-margin-top-6 govuk-body">
+          <a class="govuk-link--no-visited-state" href="upload-document?document-type=trial record sheet">Upload trial record sheet</a>
+        </div>
+            </div>
+      {% endif %}
+    </dl>
+    <hr class="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-4">
+    {% if data.appearance['warrant-type'] == "Sentencing" %}
+    <div class="govuk-form-group">
+      <div class="govuk-form-group govuk-!-margin-top-6 govuk-body">
+        <a class="govuk-link--no-visited-state" href="upload-document?document-type=indictment">Upload indictment</a>
+      </div>
+    </div>
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    {% endif %}
+    <div class="govuk-form-group">
+      <div class="govuk-form-group govuk-!-margin-top-6 govuk-body">
+        <a class="govuk-link--no-visited-state" href="upload-document?document-type=prison court register">Upload prison court register</a>
+      </div>
+    </div>
+          <div class="govuk-button-group govuk-!-margin-top-8">
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+             Continue
+            </button>
+          </div>
+    </form>
+  </div>
+</div>
+<div class="govuk-grid-column-one-third">
+  {% set showOffences = true %}
+  {% include "includes/templates/appearance-info.njk" %}
+</div>
+{% endblock %}

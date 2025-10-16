@@ -1,0 +1,132 @@
+{% extends "../template.html" %}
+{% block content %}
+<!-- What is the confirmed date -->
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" action="sentence-type" method="post">
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Add sentence information for count {{ data['sentence']['count-number'] }}</span>
+                            Select the sentence outcome
+
+                        </h1>
+                    </legend>
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="sentence-outcome" name="sentence[outcome]" type="radio" value="Sentence outcome 1">
+                            <label class="govuk-label govuk-radios__label" for="sentence-outcome">
+                                Sentence outcome 1
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="sentence-outcome-2" name="sentence[outcome]" type="radio" value="Sentence outcome 2">
+                            <label class="govuk-label govuk-radios__label" for="sentence-outcome-2">
+                                Sentence outcome 2
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="sentence-outcome-3" name="sentence[outcome]" type="radio" value="Sentence outcome 3">
+                            <label class="govuk-label govuk-radios__label" for="sentence-outcome-3">
+                                Sentence outcome 3
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="sentence-outcome-4" name="sentence[outcome]" type="radio" value="Sentence outcome 4">
+                            <label class="govuk-label govuk-radios__label" for="sentence-outcome-4">
+                                Sentence outcome 4
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="sentence-outcome-3
+                        5" name="sentence[outcome]" type="radio" value="Sentence outcome 5">
+                            <label class="govuk-label govuk-radios__label" for="sentence-outcome-5">
+                                Sentence outcome 5
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="sentence-outcome-6" name="sentence[outcome]" type="radio" value="Sentence outcome 6">
+                            <label class="govuk-label govuk-radios__label" for="sentence-outcome-6">
+                                Sentence outcome 6
+                            </label>
+                        </div>
+                        <div class="govuk-radios__divider">or</div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="sentence-outcome-6" name="sentence[outcome]" type="radio" value="lookup-another-outcome">
+                            <label class="govuk-label govuk-radios__label" for="sentence-outcome-6">
+                                Look up a different outcome
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <button class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+    <div class="govuk-grid-column-one-third">
+        <div class="offence-summary">
+            <h2 class="govuk-heading-m govuk-!-margin-top-4">Appearance details</h2>
+            <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
+                <div class="govuk-summary-list__row offences-summary-card-court-details-row">
+                    <dt class="govuk-summary-list__key">
+                        Case reference
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['court-case-ref'] | join }}
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row offences-summary-card-court-details-row">
+                    <dt class="govuk-summary-list__key">
+                        Court name
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['court-name'] }}
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row offences-summary-card-court-details-row">
+                    <dt class="govuk-summary-list__key">
+                        Warrant date
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['warrant-date-day'] }}/{{ data['appearance']['warrant-date-month'] }}/{{ data['appearance']['warrant-date-year'] }}
+                    </dd>
+                </div>
+            </dl>
+            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+            <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-2">Offences</h2>
+            <dl class="govuk-summary-list govuk-summary-list--no-border offences-summary-card-content">
+                <div class="govuk-summary-list__row offences-summary-card-offence-details-row">
+                    <dt class="govuk-summary-list__key">
+                        Offences added
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data.appearance.offences | length }}
+                    </dd>
+                </div>
+            </dl>
+            <details class="govuk-details" data-module="govuk-details">
+                <summary class="govuk-details__summary">
+                    <span class="govuk-details__summary-text">
+                        Show offences
+                    </span>
+                </summary>
+                <div class="govuk-details__text">
+                    <dl class="offences-summary-card-content">
+                        {% for offence in data.appearance.offences %}
+                        <div class="offences-summary-card-row">
+                            <dt class="offences-summary-card-key govuk-!-font-weight-bold">
+                                {{ offence['offence-name'] }}
+                            </dt>
+                            <dd class="offences-summary-card-value govuk-body-s">Committed on {{ offence['offence-start-date-day'] }}/{{ offence['offence-start-date-month'] }}/{{ offence['offence-start-date-year'] }}</dd>
+                        </div>
+                        {% endfor %}
+                    </dl>
+                </div>
+            </details>
+        </div>
+    </div>
+</div>
+{% endblock %}

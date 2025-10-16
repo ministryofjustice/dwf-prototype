@@ -1,0 +1,185 @@
+{% extends "../template.html" %}
+{% set noBackLink = true %}
+{% block content %}
+
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" action="/{{data.prototypeVersion}}/delete-sentence?index={{ data.index }}" method="post">
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        {% if data.route == 'repeat-remand' %}
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Review offences</span>
+                            Are you sure you want to delete this offence?
+                        </h1>
+                        {% else %}
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Add offences</span>
+                            Are you sure you want to delete this offence?
+                        </h1>
+                        {% endif %}
+                    </legend>
+                    <div class="offence-card sentence-card">
+                <div class="offence-card-offence-details">
+                    {% set sentence = data.appearance.sentences[data.index] %}
+                    {% if sentence['count-number'] %}
+                    <span class="govuk-body">Count {{ sentence['count-number'] }}</span>
+                    {% endif %}
+                    <h4 class="govuk-heading-s">{% if data['offence']['offence-code'] %}{{ data['offence']['offence-code'] }} - {% endif %}{{ sentence['offence-name'] }}
+                        {% if sentence['terror-related'] == 'Yes' %}
+                        <br><strong class="govuk-tag govuk-!-margin-top-2">
+                            Terror-related
+                        </strong>
+                        {% endif %}</h4>
+                    <dl class="govuk-summary-list govuk-summary-list--no-border">
+                        {% if sentence['offence-start-date-day'] %}
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Commited on
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                {{ sentence['offence-start-date-day'] }}/{{ sentence['offence-start-date-month'] }}/{{ sentence['offence-start-date-year'] }}
+                                {% if sentence['offence-end-date-day'] > 0 %}
+                                to
+                                {{ sentence['offence-end-date-day'] }}/{{ sentence['offence-end-date-month'] }}/{{ sentence['offence-end-date-year'] }}
+                                {% endif %}
+                            </dd>
+                        </div>
+                        {% endif %}
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Outcome
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                {{ sentence['outcome'] }} {% if sentence['outcome-changed'] == 'true' %} <strong class="govuk-tag govuk-!-font-size-16 govuk-!-margin-left-1">
+                                    Updated
+                                </strong>{% endif %}
+                            </dd>
+                        </div>
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Conviction date
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                {{ sentence['conviction-date-day'] }}/{{ sentence['conviction-date-month'] }}/{{ sentence['conviction-date-year'] }}
+                            </dd>
+                        </div>
+                        {% if sentence['sentence-type'] %}
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Sentence type
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                {{ sentence['sentence-type'] }}
+                            </dd>
+                        </div>
+                        {% endif %}
+                        {% if sentence['sentence-length-years'] %}
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Sentence length
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                {{ sentence['sentence-length-years'] }} years {{ sentence['sentence-length-months'] }} months {{ sentence['sentence-length-weeks'] }} weeks {{ sentence['sentence-length-days'] }} days
+                            </dd>
+                        </div>
+                        {% endif %}
+                        {% if sentence['licence-period-years'] %}
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Licence period
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                {{ sentence['licence-period-years'] }} years {{ sentence['licence-period-months'] }} months {{ sentence['licence-period-weeks'] }} weeks {{ sentence['licence-period-days'] }} days
+                            </dd>
+                        </div>
+                        {% endif %}
+                        {% if sentence['fine-amount'] %}
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Fine amount
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                £{{ sentence['fine-amount'] }}
+                            </dd>
+                        </div>
+                        {% endif %}
+                        {% if sentence['consecutive-concurrent'] %}
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Consecutive or concurrent
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                {% endif %}
+                                {% if (data.appearance['no-count-numbers'] == "true") and (sentence['consecutive-concurrent'] == "Consecutive") and (loop.index > 2) %}
+                                <a href="">Select consecutive offence</a>
+                                {% else %}
+                                {% if sentence['consecutive-concurrent'] == 'Consecutive' %}
+                                    {% if sentence['consecutive-to'] == 'none' %}
+                                        <a class="govuk-link--no-visited-state" href="/{{data.prototypeVersion}}/update-consec-concurr?index={{loop.index0}}&route=update-consec-concurr">Select consecutive or concurrent</a>
+                                    {% else %}
+                                {{ sentence['consecutive-concurrent'] }} to {% if sentence['consecutive-to'] > 0 %} count {% endif %}{{ sentence['consecutive-to'] }}
+                                    {% endif %}
+                                {% else %}
+                                {{ sentence['consecutive-concurrent'] }}
+                                {% endif %}
+                            </dd>
+                        </div>
+                        {% endif %}
+                        {% if sentence['consecutive-from'] %}
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Consecutive from
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                Count {{ sentence['consecutive-from'] }}
+                            </dd>
+                        </div>
+                        {% endif %}
+                        {% if sentence["merged-from"] %}
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Merged from
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ sentence['merged-from'] }}
+                        </dd>
+                    </div>
+                    {% endif %}
+                    </dl>
+                   {% if sentence['status'] == 'draft' %}
+                   <p class="govuk-body govuk-!-margin-top-4 govuk-!-margin-bottom-2"><a href="{{ data.savedURL }}">Continue adding sentence information</a></p>
+                   {% endif %}
+                </div>
+            </div>
+            {% if sentence['consecutive-from'] != null %}
+            <!-- <div class="govuk-warning-text govuk-!-margin-top-6">
+                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                <strong class="govuk-warning-text__text">
+                  <span class="govuk-visually-hidden">Warning</span>
+                  Deleting this sentence will affect the consecutive chain. You will need to reassign consecutive or concurrent for count {{ sentence['consecutive-from'] }}
+                </strong>
+              </div> -->
+  <!-- <div class="govuk-inset-text">
+    Deleting this sentence will break a consecutive sentence chain. Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+  </div> -->
+  
+{% endif %}
+{% if data.appearance['court-case-ref'] == "T20250101" %}
+<div class="govuk-inset-text">
+    Deleting this sentence will also delete adjustments associated with it.
+  </div>
+  {% endif %}
+                </fieldset>
+            </div>
+            <div class="govuk-button-group">
+            <button class="govuk-button govuk-button--warning" data-module="govuk-button">
+                Yes, delete offence
+            </button>
+            <a class="govuk-link" href="#">Cancel and go back</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

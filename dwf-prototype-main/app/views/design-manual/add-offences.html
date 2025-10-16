@@ -1,0 +1,60 @@
+{% extends "includes/layouts/prototype-home-layout.html" %}
+{% set serviceName = "Design manual" %}
+{% set section = "patterns" %}
+{% set activePage = "add-offences-pattern" %}
+{% block content %}
+{% include "includes/manual-top-nav.html" %}
+
+<main class="govuk-main-wrapper-govuk-body">
+  <div class="govuk-width-container govuk-!-margin-top-6">
+    <div class="govuk-grid-row govuk-!-margin-top-6">
+      <div class="govuk-grid-column-one-quarter">
+        {% include "includes/manual-side-nav.html" %}
+      </div>
+      <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-xl">
+          Add offences
+        </h1>
+        <p class="govuk-body-l">
+          Let users add one or more offences in a structured, repeatable flow.
+        </p>
+
+        <h2 class="govuk-heading-m">DWP Design System</h2>
+        <p class="govuk-body">
+          This pattern is similar to the <a href="https://design-system.dwp.gov.uk/patterns/add-another-thing" class="govuk-link">Add another thing</a> pattern in the DWP Design System.
+        </p>
+
+        <h2 class="govuk-heading-l">When to use it</h2>
+        <p class="govuk-body">
+          Use this pattern when users need to add one or more offences to a court appearance.
+        </p>
+        <p class="govuk-body">
+          It helps ensure offence details are entered in a consistent format and can be reviewed before continuing.
+        </p>
+
+        <h2 class="govuk-heading-l">How it works</h2>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>The user is taken through a structured journey to the first offence</li>
+          <li>They are then taken to the <a href="">offence summary page</a> </li>
+          <li>On the summary page, users can:
+            <ul class="govuk-list govuk-list--bullet">
+              <li>add another offence</li>
+              <li>edit an existing offence</li>
+              <li>delete an offence</li>
+              <li>continue to the next task</li>
+            </ul>
+          </li>
+        </ul>
+
+        
+
+        {# Optional: insert a diagram or screenshot if you have one #}
+        {# <p class="govuk-body">You may want to include a flow chart or screenshot showing the journey.</p> #}
+
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock %}

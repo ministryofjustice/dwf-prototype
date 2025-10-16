@@ -1,0 +1,57 @@
+<nav class="moj-side-navigation govuk-!-padding-top-0" aria-label="Side navigation">
+
+  {% if section == 'pages' %}
+    <ul class="moj-side-navigation__list">
+      <li class="moj-side-navigation__item {% if activePage == 'court-cases' %}moj-side-navigation__item--active{% endif %}">
+        <a href="court-cases-page.html">Court cases</a>
+      </li>
+      <li class="moj-side-navigation__item {% if activePage == 'question' %}moj-side-navigation__item--active{% endif %}">
+        <a href="question-page.html">Question page</a>
+      </li>
+      <li class="moj-side-navigation__item {% if activePage == 'add-offences' %}moj-side-navigation__item--active{% endif %}">
+        <a href="add-offences-page.html">Add offences</a>
+      </li>
+    </ul>
+  {% endif %}
+
+  {% if section == 'components' %}
+    <ul class="moj-side-navigation__list">
+      <li class="moj-side-navigation__item {% if activePage == 'offence-card' %}moj-side-navigation__item--active{% endif %}">
+        <a href="offence-card.html">Offence card</a>
+      </li>
+      <li class="moj-side-navigation__item {% if activePage == 'appearance-info' %}moj-side-navigation__item--active{% endif %}">
+        <a href="appearance-information-panel.html">Appearance information panel</a>
+      </li>
+      <li class="moj-side-navigation__item {% if activePage == 'offence-reveal' %}moj-side-navigation__item--active{% endif %}">
+        <a href="offence-reveal.html">Offence reveal</a>
+      </li>
+      <li class="moj-side-navigation__item {% if activePage == 'interruption-card' %}moj-side-navigation__item--active{% endif %}">
+        <a href="interruption-card.html">Interruption card</a>
+      </li>
+      <li class="moj-side-navigation__item {% if activePage == 'autocomplete' %}moj-side-navigation__item--active{% endif %}">
+        <a href="accessible-autocomplete.html">Accessible autocomplete</a>
+      </li>
+      <li class="moj-side-navigation__item {% if activePage == 'radio-with-reveal' %}moj-side-navigation__item--active{% endif %}">
+        <a href="radio-with-reveal.html">Radio with reveal</a>
+      </li>
+    </ul>
+  {% endif %}
+
+  {% if section == 'patterns' %}
+    <ul class="moj-side-navigation__list">
+      <li class="moj-side-navigation__item {% if activePage == 'contextual-question' %}moj-side-navigation__item--active{% endif %}">
+        <a href="contextual-question.html">Contextual question</a>
+      </li>
+      <li class="moj-side-navigation__item {% if activePage == 'task-list' %}moj-side-navigation__item--active{% endif %}">
+        <a href="task-list.html">Task list</a>
+      </li>
+      <li class="moj-side-navigation__item {% if activePage == 'add-offences-pattern' %}moj-side-navigation__item--active{% endif %}">
+        <a href="add-offences.html">Add offences</a>
+      </li>
+      <li class="moj-side-navigation__item {% if activePage == 'empty-state' %}moj-side-navigation__item--active{% endif %}">
+        <a href="empty-state.html">Empty state</a>
+      </li>
+    </ul>
+  {% endif %}
+
+</nav>

@@ -1,0 +1,151 @@
+{% extends "includes/layouts/prototype-home-layout.html" %}
+{% set serviceName = "Design manual" %}
+{% set section = "patterns" %}
+{% set activePage = "task-list" %}
+{% block content %}
+{% include "includes/manual-top-nav.html" %}
+
+<main class="govuk-main-wrapper-govuk-body">
+    <div class="govuk-width-container govuk-!-margin-top-6">
+        <div class="govuk-grid-row govuk-!-margin-top-6">
+            <div class="govuk-grid-column-one-quarter">
+                {% include "includes/manual-side-nav.html" %}
+            </div>
+            <div class="govuk-grid-column-two-thirds">
+
+                <h1 class="govuk-heading-xl">
+                    Task list
+                </h1>
+                <p class="govuk-body-l">A task list breaks up long journeys into manageable sections and shows users
+                    what information is needed at each stage.</p>
+
+                <h2 class="govuk-heading-m">GOV.UK Design System</h2>
+                <p class="govuk-body">Task lists appear in the GOV.UK Design System as the <a
+                        href="https://design-system.service.gov.uk/patterns/complete-multiple-tasks/">complete multiple
+                        tasks pattern</a>.</p>
+
+                <h2 class="govuk-heading-l">When to use it</h2>
+                <p class="govuk-body">This pattern is used in longer or more complex journeys where users need to
+                    complete several steps to provide all required information.</p>
+
+                <p class="govuk-body">A task list helps users:</p>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>understand what information is needed</li>
+                    <li>return to previously completed sections to review or change answers</li>
+                    <li>complete the journey in stages</li>
+                </ul>
+
+                <h2 class="govuk-heading-l">How it works</h2>
+                <p class="govuk-body">The task list is shown at the start of a journey, after the user selects a warrant
+                    type. Each task represents a section of the journey. Users can return to it to view or edit their
+                    answers without navigating back step by step.</p>
+
+                <h3 class="govuk-heading-m">Defining tasks</h3>
+                <p class="govuk-body">Tasks should be specific activities in the overall journey, such as adding
+                    offences or entering warrant information. Task names should clearly describe the activity and
+                    ideally start with a verb, such as "Add offences".</p>
+
+                <p class="govuk-body">Do not group multiple activities into a single task. It is easier for users to
+                    complete shorter, specific tasks than longer tasks with multiple unrelated actions.</p>
+
+                <h3 class="govuk-heading-m">Page title and instructions</h3>
+                <p class="govuk-body">The page title for a task list should be the name of the journey.</p>
+                <p class="govuk-body">Provide brief, clear instructions to help the user understand what they are required to do on this journey and the overall goal the tasks relate to.</p>
+
+                <h3 class="govuk-heading-m">Task status</h3>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>Tasks that are required, and do not depend on answers from other tasks, start with an
+                        "Incomplete" status.</li>
+                    <li>Tasks that are optional are shown with an "Optional" status.</li>
+                    <li>Tasks that require information from other tasks that have not yet been completed have a status
+                        of "Cannot start yet", and the task name is shown as plain text.</li>
+                    <li>When a task is completed, it is shown with a "Completed" status.</li>
+                </ul>
+
+                <div class="example govuk-!-padding-4 govuk-!-margin-top-8">
+                    <div class="govuk-form-group">
+                        <h1 class="govuk-heading-l">
+                            Add a court appearance
+                        </h1>
+
+                        <h2 class="govuk-heading-m">Enter information from a sentencing warrant</h2>
+
+                        <p class="govuk-body">You must enter information exactly as it is written on the warrant.</p>
+                        <ul class="govuk-task-list govuk-!-margin-top-7">
+                            <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                                <div class="govuk-task-list__name-and-hint">
+                                    <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state"
+                                        href="check-answers" aria-describedby="appearance-information-status">
+                                        Add appearance information
+                                    </a>
+                                </div>
+                                <div class="govuk-task-list__status" id="appearance-information-status">
+                                    Completed
+                                </div>
+                            </li>
+
+                            <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                                <div class="govuk-task-list__name-and-hint">
+                                    <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state"
+                                        href="../add-overall-warrant-information/check-answers.html">
+                                        Add overall warrant information
+                                    </a>
+                                </div>
+                                <div class="govuk-task-list__status" id="overall-warrant-information-status">
+                                    Completed
+                                </div>
+                            </li>
+
+                            <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                                <div class="govuk-task-list__name-and-hint">
+                                    <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state"
+                                        href="add-sentence-information?addSentenceInformationStarted=1"
+                                        aria-describedby="offences-and-sentences-status">
+                                        Update offence outcomes
+                                    </a>
+                                </div>
+                                <div class="govuk-task-list__status" id="offences-and-sentences-status">
+                                    <strong class="govuk-tag govuk-tag--blue">
+                                        Incomplete
+                                    </strong>
+                                </div>
+                            </li>
+
+                            <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                                <div class="govuk-task-list__name-and-hint">
+                                    <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state"
+                                        href="next-court-date-select?route=appearance"
+                                        aria-describedby="next-court-appearance-status">
+                                        Add next court appearance
+                                    </a>
+                                </div>
+                                <div class="govuk-task-list__status" id="next-court-appearance-status">
+                                    <strong class="govuk-tag govuk-tag--grey">
+                                        Optional
+                                    </strong>
+                                </div>
+                            </li>
+
+                            <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                                <div class="govuk-task-list__name-and-hint">
+                                    <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state"
+                                        href="court-documents" aria-describedby="court-documents-status">
+                                        Upload court documents
+                                    </a>
+                                </div>
+                                <div class="govuk-task-list__status" id="court-documents-status">
+                                    <strong class="govuk-tag govuk-tag--grey">
+                                        Optional
+                                    </strong>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

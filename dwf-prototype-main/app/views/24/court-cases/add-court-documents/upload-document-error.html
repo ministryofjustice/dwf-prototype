@@ -1,0 +1,61 @@
+{% extends "../template.html" %}
+{% block content %}
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-full">  
+      <div class="govuk-error-summary" data-module="govuk-error-summary">
+        <div role="alert">
+          <h2 class="govuk-error-summary__title">
+            There is a problem
+          </h2>
+          <div class="govuk-error-summary__body">
+            <ul class="govuk-list govuk-error-summary__list">
+              <li>
+                <a href="#çfile-upload-1-error">The PDF must be smaller than 2MB</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" action="court-documents-uploaded" method="post">
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Upload court documents</span>
+                            Upload the {{ data['document-type'] }}
+                        </h1>
+                    </legend>
+                    <div id="file-upload-1-hint" class="govuk-hint govuk-!-margin-top-1 govuk-!-margin-bottom-5">
+                        You can upload .pdf, .jpg, .doc or .docx files.
+                    </div>
+
+
+                    <div class="govuk-form-group govuk-form-group--error">
+                        <label class="govuk-label" for="file-upload-1">
+                          Upload a file
+                        </label>
+                        <p id="file-upload-1-error" class="govuk-error-message">
+                          <span class="govuk-visually-hidden">Error:</span> The PDF must be smaller than 2MB
+                        </p>
+                        <input class="govuk-file-upload govuk-file-upload--error" id="file-upload-1" name="fileUpload1" type="file" aria-describedby="file-upload-1-error">
+                      </div>
+
+                    <div class="govuk-button-group">
+                        <button type="submit" class="govuk-button" data-module="govuk-button">
+                            Continue
+                        </button>
+                    </div>
+                    </fieldset>
+                    </div>
+        </form>
+    </div>
+    <div class="govuk-grid-column-one-third">
+        {% set showOffences = true %}
+        {% include "includes/templates/appearance-info.njk" %}
+    </div>
+</div>
+{% endblock %}

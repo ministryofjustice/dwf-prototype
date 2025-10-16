@@ -1,0 +1,63 @@
+{% extends "includes/layouts/prototype-home-layout.html" %}
+{% set serviceName = "Design manual" %}
+{% set section = "patterns" %}
+{% set activePage = "empty-state" %}
+{% block content %}
+{% include "includes/manual-top-nav.html" %}
+
+<main class="govuk-main-wrapper-govuk-body">
+  <div class="govuk-width-container govuk-!-margin-top-6">
+    <div class="govuk-grid-row govuk-!-margin-top-6">
+      <div class="govuk-grid-column-one-quarter">
+        {% include "includes/manual-side-nav.html" %}
+      </div>
+      <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-xl">
+          Empty state
+        </h1>
+        <p class="govuk-body-l">
+          Use an empty state to show users when there are no records to display and guide them towards the next action.
+        </p>
+
+        <h2 class="govuk-heading-l">When to use it</h2>
+        <p class="govuk-body">Use an empty state when a user visits a page that will eventually display a list of items
+          — such as offences or court cases — but no data exists yet.</p>
+
+        <p class="govuk-body">Empty states help:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>set user expectations</li>
+          <li>maintain a consistent page layout</li>
+          <li>provide a clear next step, such as a link to add the missing item</li>
+        </ul>
+
+        <p class="govuk-body">Use them in journeys where users may return to a page later, so they are not confused by
+          sudden changes or unsure where items might appear.</p>
+
+        <h2 class="govuk-heading-l">How it works</h2>
+
+        <h3 class="govuk-heading-m">Empty state with call to action</h3>
+        <p class="govuk-body">Use standard body text to let the user know no items have been added yet. Include a link or button to add the relevant item.</p>
+
+        <div class="example govuk-!-padding-4">
+          <h1 class="govuk-heading-xl govuk-!-margin-bottom-6">Court cases</h1>
+          <p class="govuk-body">There are no court cases recorded for Daryl Evans.</p>
+          <p class="govuk-body"><a class="govuk-link--no-visited-state"
+              href="/24/create-court-case?route=new-court-case">Add a court case now</a>
+          </p>
+        </div>
+
+        <h3 class="govuk-heading-m govuk-!-margin-top-7">Contextual empty state</h3>
+        <p class="govuk-body">Use <a href="https://design-system.service.gov.uk/components/inset-text/">inset text</a> when items might later appear in a section of the page.</p>
+        <p class="govuk-body">This helps the user understand where information may appear, and prevents confusion when sections appear empty.</p>
+
+        <div class="example govuk-!-padding-4">
+          <div class="govuk-inset-text govuk-!-margin-0">There are no offences with non-custodial outcomes.</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock %}

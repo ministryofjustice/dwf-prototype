@@ -1,0 +1,365 @@
+{% extends "includes/layouts/prototype-home-layout.html" %}
+{% block content %}
+<div class="app-masthead govuk-!-margin-top-0">
+    <div class="govuk-width-container">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                <h1 class="app-masthead__title govuk-heading-xl govuk-!-margin-bottom-3">
+                    {{serviceName}} prototypes
+                </h1>
+                <div class="app-masthead__description">
+                    <p class="govuk-body"></p>
+                </div>
+            </div>
+            <div class="govuk-grid-column-one-third">
+            </div>
+        </div>
+    </div>
+</div>
+<main class="govuk-main-wrapper-govuk-body">
+    <div class="govuk-width-container govuk-!-margin-top-6">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                <a href="index" class="govuk-back-link govuk-!-margin-bottom-7">Back</a>
+                <div class="govuk-warning-text">
+                    <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                    <strong class="govuk-warning-text__text">
+                        Before running a prototype, make sure you <a class="govuk-link--no-visited-state"
+                            href="/manage-prototype/clear-data">clear data</a>.
+                    </strong>
+                </div>
+                <div class="govuk-inset-text">These are old prototypes that are no longer maintained. They might not function as expected and are for reference only.</div>
+                <!-- Version 23 -->
+                <h2 class="govuk-heading-l govuk-!-margin-top-7">Version 23</li></h2>
+                <strong class="govuk-tag govuk-tag--blue govuk-!-margin-bottom-6">
+                    Stable
+                </strong>
+                <h3 class="govuk-heading-m">In this version</h3>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>The New sentencing journey can now accomodate offences that have non-custodial outcomes as well as offences that have custodial outcomes</li>
+                    <li>Users can select to apply the overall case outcome to all offences on a warrant</li>
+                    <li>Improvements made to document upload. The design uses the <a href="https://design.tax.service.gov.uk/hmrc-design-patterns/file-upload">HMRC design pattern</a> for uploading multiple documents from a fixed set.</li>
+                </ul>
+                <a href="/23/launch-prototype?version=23" role="button" draggable="false" class="govuk-button govuk-button--start" data-module="govuk-button">
+                    Version 23
+                    <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+                      <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+                    </svg>
+                  </a>
+                <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+                <!-- Version 22 -->
+                <h2 class="govuk-heading-l govuk-!-margin-top-8">Version 22</h2>
+                <h3 class="govuk-heading-m">In this version</h3>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>Users can now merge offences from exisintg court cases when adding a new case or appearance (merged cases)</li>
+                    <li>Adding check answers page to overall questions at the beginning of Add offences task</li>
+                    <li>Add offences flow adjusted to reflect conventional <a href="https://design-system.dwp.gov.uk/patterns/add-another-thing#how-it-works">Add another thing pattern</a></li>
+                    <li>Add a new offence when editing an existing appearance</li>
+                    <li>Warn users that an offence is 'inactive' when entering an offence code</li>
+                    <li>Ask users to confirm when deleting draft</li>
+                    <li>Iterated and simplified document upload to handle multiple optional documents</li>
+                </ul>
+                <h3 class="govuk-heading-m">Prototype links</h3>
+                <ul class="govuk-list">
+                    <li><a href="/22/launch-prototype?version=22">Version 22</a></li>
+                </ul>
+                <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+                <!-- Version 21 -->
+                <h2 class="govuk-heading-l">Version 21</h2>
+                <h3 class="govuk-heading-m">In this version</h3>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>Merged cases</li>
+                    <li>New grouping of questions in tasks and new task for  "Additional information"</li>
+                    <li>Iterations to save as a draft to implement on all journeys</li>
+                </ul>
+                <h3 class="govuk-heading-m">Prototype links</h3>
+                <ul class="govuk-list">
+                    <li><a href="/21/launch-prototype?version=21">Version 21</a><strong
+                            class="govuk-tag govuk-tag--grey" style="vertical-align: middle; margin-left: 10px;">
+                            Paused
+                        </strong></li>
+                </ul>
+                <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+                <!-- Version 20 -->
+                <h2 class="govuk-heading-l">Version 20</h2>
+                <h3 class="govuk-heading-m">In this version</h3>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>Iterating the way users add consecutive sentences to match the <a href="https://miro.com/app/board/uXjVMvrn1NA=/?moveToWidget=3458764608737888759&cot=14">logic illustrated here</a> so users cannot add more than 1 consecutive sentence without count numbers</li>
+                </ul>
+                <h3 class="govuk-heading-m">Prototype links</h3>
+                <ul class="govuk-list">
+                    <li><a href="/20/launch-prototype?version=20">Version 20</a></li>
+                </ul>
+                <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+                <!-- Version 19 -->
+                <h2 class="govuk-heading-l">Version 19</h2>
+                <h3 class="govuk-heading-m">In this version</h3>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>Iterating the Add offences task to only include information about individual offences</li>
+                    <li>Moved questions about the entire warrant to the Add appearance information task</li>
+                </ul>
+                <h3 class="govuk-heading-m">Prototype links</h3>
+                <ul class="govuk-list">
+                    <li><a href="/19/launch-prototype?version=19">Version 19</a><strong
+                            class="govuk-tag govuk-tag--grey" style="vertical-align: middle; margin-left: 10px;">
+                            Parked
+                        </strong></li>
+                </ul>
+                <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+                <!-- Version 18 -->
+                <h2 class="govuk-heading-l">Version 18</h2>
+                <h3 class="govuk-heading-m">In this version</h3>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>Alternative design of adding consecutive sentences</li>
+                    <li>Iterated, simplified document upload feature</li>
+                </ul>
+                <h3 class="govuk-heading-m">Prototype links</h3>
+                <ul class="govuk-list">
+                    <li><a href="/18/launch-prototype?version=18">Version 18</a><strong
+                            class="govuk-tag govuk-tag--blue" style="vertical-align: middle; margin-left: 10px;">
+                            Stable
+                        </strong></li>
+                </ul>
+                <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+                <!-- Version 17 -->
+                <h2 class="govuk-heading-l">Version 17</h2>
+                <h3 class="govuk-heading-m">In this version</h3>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>Redesign of adding consecutive sentences</li>
+                    <li>Allow users to make an offence consecutive to one on another court case</li>
+                </ul>
+                <h3 class="govuk-heading-m">Prototype links</h3>
+                <ul class="govuk-list">
+                    <li><a href="/17/launch-prototype?version=17">Version 17</a></li>
+                </ul>
+                <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+                <!-- Version 16 -->
+                <h2 class="govuk-heading-l">Version 16</h2>
+                <h3 class="govuk-heading-m">In this version</h3>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>Automatically label relevent terror related offences</li>
+                    <li>Some reordering of journeys</li>
+                    <li>Redesign of remand journeys to bring up to date with sentenceing journeys</li>
+                </ul>
+                <h3 class="govuk-heading-m">Prototype links</h3>
+                <ul class="govuk-list">
+                    <li><a href="/16/launch-prototype?version=16">Version 16</a><strong
+                            class="govuk-tag govuk-tag--green" style="vertical-align: middle; margin-left: 10px;">
+                            Stable
+                        </strong></li>
+                </ul>
+                <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+                <!-- Version 15 -->
+                <h2 class="govuk-heading-l">Version 15</h2>
+                <h3 class="govuk-heading-m">In this version</h3>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>Saved states</li>
+                    <li>Iterations to the court cases page</li>
+                </ul>
+                <h3 class="govuk-heading-m">Prototype links</h3>
+                <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+                <!-- Version 14 -->
+                <h2 class="govuk-heading-l">Version 14</h2>
+                <h3 class="govuk-heading-m">In this version</h3>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>Iterating remand-to-sentence journey following <a
+                            href="https://docs.google.com/presentation/d/1pj8z-e7I5Wpf08RiuI1yw5k58ZI9ouwT5DjOQl5V0YM/edit?pli=1#slide=id.g13cb8a0db7d_0_0">user
+                            research</a></li>
+                    <li>Changes to task list to avoid need to have validation error when a user continues without
+                        completing all tasks</li>
+                    <li>Sentence types, including fines. Logic and routing to collect all relevent information for each
+                        sentence type</li>
+                </ul>
+                <h3 class="govuk-heading-m">Prototype links</h3>
+                <ul class="govuk-list">
+                    <li><a href="/14/launch-prototype?version=14">Version 14</a></li>
+                </ul>
+                <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+                <!-- Version 13 -->
+                <h2 class="govuk-heading-l">Version 13</h2>
+                <h3 class="govuk-heading-m">In this version</h3>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>Sentence length mismatch</li>
+                    <li>Iterating Court cases page a.k.a. 'view'</li>
+                    <li>Edit functionaliy from the Court cases page</li>
+                </ul>
+                <h3 class="govuk-heading-m">Prototype links</h3>
+                <ul class="govuk-list">
+                    <li><a href="/13/launch-prototype?version=13">Version 13</a></li>
+                    <li><a href="/13/court-cases/add-an-offence/outcome">Remand outcomes page</a></li>
+                </ul>
+                <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+                <!-- Version 12 -->
+                <h2 class="govuk-heading-l">Version 12</h2>
+                <h3 class="govuk-heading-m">In this version</h3>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>Iterating the remand to sentence journey</li>
+                    <li>Introducing task lists to all journeys</li>
+                </ul>
+                <h3 class="govuk-heading-m">Prototype links</h3>
+                <ul class="govuk-list">
+                    <li><a href="/v12/launch-prototype/?version=v12">Version 12</a><strong
+                            class="govuk-tag govuk-tag--green" style="vertical-align: middle; margin-left: 10px;">
+                            Ready for UR
+                        </strong></li>
+                </ul>
+                <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+                <!-- Version 11 -->
+                <h2 class="govuk-heading-l">Version 11</h2>
+                <h3 class="govuk-heading-m">In this version</h3>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>Iterating the input of consecutive sentences in the Add sentence journey</li>
+                    <li>New edit sentence/offence mechanism</li>
+                    <li>Iterated remand to sentence journey</li>
+                    <li>New document upload for multuple documents</li>
+                </ul>
+                <h3 class="govuk-heading-m">Prototype links</h3>
+                <ul class="govuk-list">
+                    <li><a href="v11/court-cases/?version=v11">Version 11</a></li>
+                </ul>
+                <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+                <!-- Version 10 -->
+                <h2 class="govuk-heading-l">Version 10</h2>
+                <h3 class="govuk-heading-m">In this version</h3>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>Protyped the initial remand to sentencing journey</li>
+                    <li>Ask the user to enter overall sentence length from a warrant</li>
+                    <li>Early designs to change the way users can edit individual pieces of sentence/offence infromation
+                        from a sentence/offence card</li>
+                </ul>
+                <h3 class="govuk-heading-m">Prototype links</h3>
+                <ul class="govuk-list">
+                    <li><a href="v10/court-cases/?version=v10">Version 10</a><strong class="govuk-tag govuk-tag--grey"
+                            style="vertical-align: middle; margin-left: 10px;">
+                            Parked
+                        </strong></li>
+                </ul>
+                <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+                <!-- Version 9 -->
+                <h2 class="govuk-heading-l">Version 9</h2>
+                <h3 class="govuk-heading-m">In this version</h3>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>Changes to the Court cases page</li>
+                    <li>New detailed view of court cases and appearances</li>
+                    <li>Appearance timeline and list view</li>
+                    <li>Sentencing journey for a new court case</li>
+                    <li>Capture of tagged bail</li>
+                    <li>Capture terror-related offences</li>
+                    <li>Alternative ordering of sentence length time periods</li>
+                    <li>Select consecutive sentences</li>
+                </ul>
+                <h3 class="govuk-heading-m">Prototype links</h3>
+                <ul class="govuk-list">
+                    <li><a href="v9/court-cases/?version=v9">Version 9</a><strong class="govuk-tag govuk-tag--green"
+                            style="vertical-align: middle; margin-left: 10px;">
+                            Ready for UR
+                        </strong></li>
+                </ul>
+                <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+                <!-- Version 8 -->
+                <h2 class="govuk-heading-l">Version 8</h2>
+                <h3 class="govuk-heading-m">In this version</h3>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>Added journey for repeat remand that allows users to change/add offences when adding an
+                        appearance</li>
+                    <li>Confirm delete page added when deleting offences from appearance</li>
+                    <li>Users can select the court listed as the next court date from the last warrant</li>
+                    <li>Imroved conformation messages for adding/editing/deleting offences on the Add appearance and Add
+                        a court case journeys</li>
+                    <li>Added a confirmation page at the end of Add a thing journeys</li>
+                </ul>
+                <h3 class="govuk-heading-m">Prototype links</h3>
+                <div class="govuk-warning-text">
+                    <ul class="govuk-list">
+                        <li><a href="v8/court-cases/">Version 8</a></li>
+                    </ul>
+                    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+                    <!-- Version 7 -->
+                    <h2 class="govuk-heading-l">Version 7</h2>
+                    <h3 class="govuk-heading-m">In this version</h3>
+                    <ul class="govuk-list govuk-list--bullet">
+                        <li>New sequencing of journey for adding a new court case/appearance</li>
+                        <li>Users can now add an apppearance to an existing court case</li>
+                        <li>Restructured court case/appearance/offences</li>
+                        <li>Added functionality to select to apply overall case outcome to all offences</li>
+                        <li>Users can now select the next appearance location or choose to use the same location as the
+                            previous appearance</li>
+                        <li>Iterated offence Add another page to be less visually cluttered and function better</li>
+                        <li>Created Offence card component that can be reused across services</li>
+                    </ul>
+                    <h3 class="govuk-heading-m">Prototype links</h3>
+                    <div class="govuk-warning-text">
+                        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                        <strong class="govuk-warning-text__text">
+                            <span class="govuk-warning-text__assistive">Warning</span>
+                            Before running the prototype, make sure you <a class="govuk-link--no-visited-state"
+                                href="/manage-prototype/clear-data">clear data</a>.
+                        </strong>
+                    </div>
+                    <ul class="govuk-list">
+                        <li><a href="v7/court-cases/">Version 7</a></li>
+                    </ul>
+                    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+                    <!-- Version 6 -->
+                    <h2 class="govuk-heading-l">Version 6</h2>
+                    <h3 class="govuk-heading-m">In this version</h3>
+                    <ul class="govuk-list govuk-list--bullet">
+                        <li>Added hub navigation</li>
+                        <li>Simplified court cases page</li>
+                        <li>Added an 'Actions list' component to be used to show actions available on each page (WIP)
+                        </li>
+                    </ul>
+                    <h3 class="govuk-heading-m">Prototype links</h3>
+                    <ul class="govuk-list">
+                        <li><a href="v6/court-cases/">Version 6</a></li>
+                    </ul>
+                    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+                    <!-- Version 5 -->
+                    <h2 class="govuk-heading-l">Version 5</h2>
+                    <h3 class="govuk-heading-m">In this version</h3>
+                    <h4 class="govuk-heading-s">Standalone court cases hub</h4>
+                    <ul class="govuk-list govuk-list--bullet">
+                        <li>Added new DPS header</li>
+                        <li>Created sub-header/service header</li>
+                        <li>Court cases now include seperate appearances</li>
+                        <li>Iterated the 'Add a court case' journey to include adding first appearance and offences for
+                            remand to court case</li>
+                        <li>New component when adding offences to show progress of the offences added from a warrant so
+                            far</li>
+                        <li>Sorting added to court case list</li>
+                        <li>Redesigned filters to be less prominant on page folowing UR findings</li>
+                        <li>Added functionality in prototype to add and display appearances and multiple offences to
+                            court cases</li>
+                    </ul>
+                    <h3 class="govuk-heading-m">Prototype links</h3>
+                    <ul class="govuk-list">
+                        <li><a href="v5/court-cases-standalone/court-cases-standalone">Version 5</a></li>
+                    </ul>
+                    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+                    <!-- Version 4 -->
+                    <h2 class="govuk-heading-l">Version 4</h2>
+                    <h3 class="govuk-heading-m">In this version</h3>
+                    <h4 class="govuk-heading-s">Standalone court cases hub</h4>
+                    <ul class="govuk-list govuk-list--bullet">
+                        <li>Initial 'Add a court case' journey</li>
+                        <li>Included 'Mini profile' component to show prisoner in context</li>
+                        <li>Added functionality in prototype to add and display multiple court cases</li>
+                    </ul>
+                    <h3 class="govuk-heading-m">Prototype links</h3>
+                    <ul class="govuk-list">
+                        <li><a href="v4/court-cases-standalone/court-cases-standalone">Version 4</a></li>
+                    </ul>
+                    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+                    <!-- Original hub prototypes -->
+                    <h2 class="govuk-heading-l">Hub design sprint prototypes</h2>
+                    <ul class="govuk-list">
+                        <li><a href="v3/overview">Version 3</a></li>
+                        <li><a href="v2/overview">Version 2</a></li>
+                        <li><a href="v1/overview">Version 1</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

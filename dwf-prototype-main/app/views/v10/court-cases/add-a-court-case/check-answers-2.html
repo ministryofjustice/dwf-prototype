@@ -1,0 +1,61 @@
+{% extends "../template.html" %}
+{% block content %}
+<!-- What is the confirmed date -->
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">
+            <span class="govuk-caption-l">Add a court case</span>
+            Check your answers
+        </h1>
+        <h2 class="govuk-heading-m">Next hearing details</h2>
+        <form class="form" action="/v9/persist-appearance?route=add-a-court-case" method="post">
+            <dl class="govuk-summary-list">
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Next hearing date
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['next-court-date-day'] }}/{{ data['appearance']['next-court-date-month'] }}/{{ data['appearance']['next-court-date-year'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="overall-case-outcome">
+                            Change<span class="govuk-visually-hidden"> overall case outcome</span>
+                        </a>
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Next hearing type
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['next-hearing-type'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="overall-case-outcome">
+                            Change<span class="govuk-visually-hidden"> overall case outcome</span>
+                        </a>
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Next hearing location
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['next-court-name'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="overall-case-outcome">
+                            Change<span class="govuk-visually-hidden"> overall case outcome</span>
+                        </a>
+                    </dd>
+                </div>
+            </dl>
+            <h2 class="govuk-heading-m">Now save this court case</h2>
+            <p class="govuk-body">By saving this court case, you are confirming that the details you are providing match the details on the warrant.</p>
+            <button class="govuk-button" data-module="govuk-button">
+                Save and continue
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

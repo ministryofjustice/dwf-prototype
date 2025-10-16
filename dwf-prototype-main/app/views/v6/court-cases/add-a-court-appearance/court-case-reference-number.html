@@ -1,0 +1,27 @@
+{% extends "../template.html" %}
+{% block content %}
+<!-- Back link -->
+<a href="../court-cases-standalone" class="govuk-back-link govuk-!-margin-top-0">Back</a>
+<!-- What is the confirmed date -->
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" action="warrant-date">
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" role="group">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Add an appearance to court case {{ data.courtCaseIndex | int + 1 }}</span>
+                            Enter the court case reference number
+                        </h1>
+                    </legend>
+                    <input class="govuk-input govuk-input--width-20" id="court-case-ref" name="appearance[court-case-ref]" type="text">
+                </fieldset>
+            </div>
+            <p class="govuk-body govuk-!-margin-bottom-6"><a href="">I don't have the court case reference number</a></p>
+            <button class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

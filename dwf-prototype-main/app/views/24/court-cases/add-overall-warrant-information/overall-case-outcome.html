@@ -1,0 +1,52 @@
+{% extends "../template.html" %}
+{% block content %}
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+            <form class="form" action="check-answers" method="post">
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        {% if data.postSaveEdit == 'true' %}
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Appearance {{ data.appearance['court-case-ref'] }} at {{ data.appearance['court-name'] }} on {{ data.appearance['warrant-date-day'] }}/{{ data.appearance['warrant-date-month'] }}/{{ data.appearance['warrant-date-year'] }}</span>
+                            Edit the overall case outcome
+                        </h1>
+                        {% else %}
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Add overall warrant information</span>
+                            Select the overall case outcome
+                        </h1>
+                        {% endif %}
+                    </legend>
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="overall-case-outcome" name="appearance[overall-case-outcome]" type="radio" value="Imprisonment" {% if data.appearance['overall-case-outcome'] == 'Imprisonment' %} checked {% endif %}>
+                            <label class="govuk-label govuk-radios__label" for="overall-case-outcome">
+                               Imprisonment
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="overall-case-outcome-2" name="appearance[overall-case-outcome]" type="radio" value="Detention and training order (DTO)" {% if data.appearance[overall-case-outcome] == 'Detention and training order (DTO)' %} checked {% endif %}>
+                            <label class="govuk-label govuk-radios__label" for="overall-case-outcome-2">
+                                Detention and training order (DTO)
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="overall-case-outcome-3" name="appearance[overall-case-outcome]" type="radio" value="Imprisonment in default of a fine" {% if data.appearance[overall-case-outcome] == 'Imprisonment in default of a fine' %} checked {% endif %}>
+                            <label class="govuk-label govuk-radios__label" for="overall-case-outcome-3">
+                                Imprisonment in default of a fine
+                            </label>
+                        </div>
+                        </div>
+                </fieldset>
+            </div>
+            {% set showCancel = false %}
+            {% include "includes/templates/page-ctas.njk" %}
+        </form>
+    </div>
+    <div class="govuk-grid-column-one-third">
+        {% set showOffences = false %}
+        {% include "includes/templates/appearance-info.njk" %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "../template.html" %}
+{% block content %}
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" action="/{{data.prototypeVersion}}/court-cases/add-a-court-appearance/add-sentence-information?edit=false" method="post">
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        {% if data.route == 'repeat-remand' %}
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Add an appearance to court case</span>
+                            Edit offence details
+                        </h1>
+                        {% elif data.route == 'remand-to-sentence' %}
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Add an appearance to court case</span>
+                            Edit offence details
+                        </h1>
+                        {% else %}
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Add a court case</span>
+                            Edit offence details
+                        </h1>
+                        {% endif %}
+                    </legend>
+                    <div class="offence-card offence-card-edit">
+                        <div class="offence-card-offence-details">
+                            <h4 class="govuk-heading-s offence-name">{{ data.appearance.offences[data.index]['offence-name'] }}</h4>
+                            <div class="offence-name-edit"><a class="govuk-link" href="offence-code?edit=true">Edit<span class="govuk-visually-hidden"> offence name</span></a></div>
+                            <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                <div class="govuk-summary-list__row">
+                                    <dt class="govuk-summary-list__key offence-card-edit-offence-details-key">
+                                        Commited on
+                                    </dt>
+                                    <dd class="govuk-summary-list__value offence-card-edit-offence-details-value">
+                                        {{ data.appearance.offences[data.index]['offence-start-date-day'] }}/{{ data.appearance.offences[data.index]['offence-start-date-month'] }}/{{ data.appearance.offences[data.index]['offence-start-date-year'] }}
+                                    </dd>
+                                    <dd class="govuk-summary-list__actions">
+                                        <a class="govuk-link" href="offence-date?edit=true">Edit<span class="govuk-visually-hidden"> date offence committed on</span></a>
+                                    </dd>
+                                </div>
+                                <div class="govuk-summary-list__row">
+                                    <dt class="govuk-summary-list__key offence-card-edit-offence-details-key">
+                                        Outcome
+                                    </dt>
+                                    <dd class="govuk-summary-list__value offence-card-edit-offence-details-value">
+                                        {{ data.appearance.offences[data.index]['outcome'] }}
+                                    </dd>
+                                    <dd class="govuk-summary-list__actions">
+                                        <a class="govuk-link" href="outcome?edit=true">Edit<span class="govuk-visually-hidden"> offence outcome</span></a>
+                                    </dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <button class="govuk-button" data-module="govuk-button">
+                Accept changes
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
