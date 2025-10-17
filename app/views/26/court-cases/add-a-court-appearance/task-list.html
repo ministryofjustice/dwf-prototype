@@ -1,0 +1,224 @@
+{% extends "../template.html" %}
+{% set noBackLink = true %}
+{% block content %}
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" action="/{{data.prototypeVersion}}/persist-appearance?appearanceComplete=true" method="post">
+            <div class="govuk-form-group">
+                <h1 class="govuk-heading-l">
+                    Add a hearing to a court case
+                </h1>
+                {% if data.appearance['warrant-type'] == "Remand" %}
+                <h2 class="govuk-heading-m">Enter information from a remand warrant</h2>
+                <p class="govuk-body">You must enter information exactly as it is written on the warrant.</p>
+                {% elif data.appearance['warrant-type'] == "Sentencing" %}
+                <h2 class="govuk-heading-m">Enter information from a sentencing warrant</h2>
+                <p class="govuk-body">You must enter information exactly as it is written on the warrant.</p>
+                {% endif %}
+                <ul class="govuk-task-list govuk-!-margin-top-7">
+                    <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                        <div class="govuk-task-list__name-and-hint">
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href={% if data.appearanceDetailsComplete == 1 %}"check-answers"{% else %}"court-case-reference-number-select?appearanceDetailsStarted=1"{% endif %} aria-describedby="appearance-infromation-status">
+                                Add hearing information
+                            </a>
+                        </div>
+                        <div class="govuk-task-list__status" id="appearance-infromation-status">
+                            {% if data.appearanceDetailsComplete == 1 %}
+                            Completed
+                            {% elif data.appearanceDetailsStarted == 1 %}
+                            <strong class="govuk-tag govuk-tag--blue">
+                                Incomplete
+                            </strong>
+                            {% else %}
+                            <strong class="govuk-tag govuk-tag--blue">
+                                Incomplete
+                            </strong>
+                            {% endif %}
+                        </div>
+                    </li>
+                    {% if data.appearance['warrant-type'] == "Remand" %}
+                    <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                        <div class="govuk-task-list__name-and-hint">
+                            {% if data.appearanceDetailsComplete == 1 %}
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="add-sentence-information" aria-describedby="court-documents-status">
+                                Review offences
+                            </a>
+                            {% else %}
+                            Review offences
+                            {% endif %}
+                        </div>
+                        <div class="govuk-task-list__status" id="court-documents-status">
+                            {% if data.appearanceDetailsComplete == 1 %}
+                            {% if data.offencesComplete == 1 %}
+                                Completed
+                            {% else %}
+                            <strong class="govuk-tag govuk-tag--grey">
+                                Optional
+                            </strong>
+                            {% endif %}
+                            {% else %}
+                            <span class="govuk-task-list__status--cannot-start-yet">Cannot start yet</span>
+                            {% endif %}
+                        </div>
+                    </li>
+                    {% endif %}
+                    {% if data.appearance['warrant-type'] == "Sentencing" %}
+                    <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                        <div class="govuk-task-list__name-and-hint">
+                            {% if data.additionalInformationComplete == 1 %}
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="../add-overall-warrant-information/check-answers.html">
+                                Add overall warrant information
+                            </a>
+                            {% elif data.appearanceDetailsComplete == 1 %}
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="../add-overall-warrant-information/overall-sentence-length?additionalInformationStarted=1">
+                                Add overall warrant information
+                            </a>
+                            {% else %}
+                            Add overall warrant information
+                            {% endif %}
+                        </div>
+                        <div class="govuk-task-list__status" id="offences-and-sentences-status">
+                            {% if data.appearanceDetailsComplete == 1 %}
+                             {% if data.additionalInformationComplete == 1 %}
+                             Completed
+                             {% elif data.additionalInformationStarted == 1 %}
+                             <strong class="govuk-tag govuk-tag--blue">
+                                Incomplete
+                            </strong>
+                             {% else %}
+                            <strong class="govuk-tag govuk-tag--blue">
+                                Incomplete
+                            </strong>
+                            {% endif %}
+                            {% else %}
+                            <span class="govuk-task-list__status--cannot-start-yet">Cannot start yet</span>
+                            {% endif %}
+                        </div>
+                    </li>
+                    <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                        <div class="govuk-task-list__name-and-hint">
+                            {% if (data.appearanceDetailsComplete == 1) and (data.additionalInformationComplete == 1) %}
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="add-sentence-information?addSentenceInformationStarted=1" aria-describedby="offences-and-sentences-status">
+                                Update offence outcomes
+                            </a>
+                            {% else %}
+                            Update offence outcomes
+                            {% endif %}
+                        </div>
+                        <div class="govuk-task-list__status" id="offences-and-sentences-status">
+                            {% if (data.appearanceDetailsComplete == 1) and (data.additionalInformationComplete == 1) %}
+                             {% if data.addSentenceInformationComplete == 1 %}
+                             Completed
+                             {% elif data.addSentenceInformationStarted == 1 %}
+                            <strong class="govuk-tag govuk-tag--blue">
+                                Incomplete
+                            </strong>
+                            {% else %}
+                            <strong class="govuk-tag govuk-tag--blue">
+                                Incomplete
+                            </strong>
+                            {% endif %}
+                            {% else %}
+                            <span class="govuk-task-list__status--cannot-start-yet">Cannot start yet</span>
+                            {% endif %}
+                        </div>
+                    </li>
+                    {% endif %}
+                    {% if data.appearance['warrant-type'] == "Non-custodial" %}
+                    <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                        <div class="govuk-task-list__name-and-hint">
+                            {% if data.appearanceDetailsComplete == 1 %}
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="../record-an-immediate-release/update-offence-outcomes" aria-describedby="court-documents-status">
+                                Update offence outcomes
+                            </a>
+                            {% else %}
+                            Update offence outcomes
+                            {% endif %}
+                        </div>
+                        <div class="govuk-task-list__status" id="court-documents-status">
+                            {% if data.appearanceDetailsComplete == 1 %}
+                            {% if data.offencesComplete == 1 %}
+                                Completed
+                            {% else %}
+                            <strong class="govuk-tag govuk-tag--blue">
+                                Incomplete
+                            </strong>
+                            {% endif %}
+                            {% else %}
+                            <span class="govuk-task-list__status--cannot-start-yet">Cannot start yet</span>
+                            {% endif %}
+                        </div>
+                    </li>
+                    {% endif %}
+                    {% if data.appearance['warrant-type'] == "Remand" %}
+                    <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                        <div class="govuk-task-list__name-and-hint">
+                            {% if data.appearanceDetailsComplete == 1 %}
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="next-court-date-select?route=appearance" aria-describedby="next-court-appearance-status">
+                                Next court appearance
+                            </a>
+                            {% else %}
+                            Next court appearance
+                            {% endif %}
+                        </div>
+                        <div class="govuk-task-list__status" id="next-court-appearance-status">
+                            {% if data.appearanceDetailsComplete == 1 %}
+                            {% if data.nextCourtAppearanceComplete == "Yes" %}
+                            Completed
+                            {% else %}
+                            <strong class="govuk-tag govuk-tag--blue">
+                                Incomplete
+                            </strong>
+                            {% endif %}
+                            {% else %}
+                            <span class="govuk-task-list__status--cannot-start-yet">Cannot start yet</span>
+                            {% endif %}
+                        </div>
+                    </li>
+                    {% endif %}
+                    <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                        <div class="govuk-task-list__name-and-hint">
+                            {% if data.appearanceDetailsComplete == 1 %}
+                            {% if data.courtDocumentsComplete == 1 %}
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="../add-court-documents/court-documents" aria-describedby="court-documents-status">
+                                Upload court documents
+                            </a>
+                            {% else %}
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="../add-court-documents/court-documents" aria-describedby="court-documents-status">
+                                Upload court documents
+                            </a>
+                            {% endif %}
+                            {% else %}
+                            Upload court documents
+                            {% endif %}
+                        </div>
+                        <div class="govuk-task-list__status" id="court-documents-status">
+                            {% if data.appearanceDetailsComplete == 1 %}
+                            {% if data.courtDocumentsComplete == 1 %}
+                                Completed
+                            {% else %}
+                            <strong class="govuk-tag govuk-tag--grey">
+                                Optional
+                            </strong>
+                            {% endif %}
+                            {% else %}
+                            <span class="govuk-task-list__status--cannot-start-yet">Cannot start yet</span>
+                            {% endif %}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <h2 class="govuk-heading-m">
+                Finish adding hearing
+            </h2>
+            <!-- <p class="govuk-body">To save a draft of the court case, you must first complete the appearance information.</p> -->
+            <p class="govuk-body">Once every task has been completed, you must  save the information. You will not be able to return to this page, but can edit the details in the Court cases tab.</p  >
+                <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Finish and save
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
