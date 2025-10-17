@@ -1,0 +1,32 @@
+{% extends "includes/layouts/prototype-home-layout.html" %}
+{% set serviceName = "Design manual" %}
+{% set section = "components" %}
+{% block content %}
+{% include "includes/manual-top-nav.html" %}
+
+<main class="govuk-main-wrapper-govuk-body">
+    <div class="govuk-width-container govuk-!-margin-top-6">
+        <div class="govuk-grid-row govuk-!-margin-top-6">
+            <div class="govuk-grid-column-one-quarter">
+                {% include "includes/manual-side-nav.html" %}
+            </div>
+            <div class="govuk-grid-column-two-thirds">
+
+                <h1 class="govuk-heading-xl">
+                    Components
+                </h1>
+                
+                <p class="govuk-body">The Remand and sentencing service uses components from existing government design systems, along with custom components designed to meet specific needs in the service.</p>
+                
+                <h2 class="govuk-heading-l">Existing design systems</h2>
+                <p class="govuk-body">Remand and Sentencing is built primarily using components and patterns from the <a href="">GOV.UK Design System</a> and the <a href="">Ministry of Justice Design System</a>. Some design elements and styles are also drawn from Digital Prison Services.</p>
+                <p class="govuk-body">Where components from these systems are used in specific scenarios, they are documented in this design manual.</p>
+
+                <h2 class="govuk-heading-l">Custom components</h2>
+                <p class="govuk-body">Custom components have been created to meet specific needs in Remand and sentencing where no existing component was suitable.</p>
+                <p class="gocuk-body">These components can be reused by other services facing similar scenarios.</p>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

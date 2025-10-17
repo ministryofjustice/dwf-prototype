@@ -1,88 +1,247 @@
-
 {% extends "includes/layouts/prototype-home-layout.html" %}
+{% set serviceName = "Design manual" %}
+{% set section = "components" %}
+{% set activePage = "offence-card" %}
 {% block content %}
-<div class="app-masthead govuk-!-margin-top-0">
-    <div class="govuk-width-container">
-        <div class="govuk-grid-row">
-            <div class="govuk-grid-column-full">
-                <h1 class="app-masthead__title govuk-heading-xl govuk-!-margin-bottom-6">
-                    {{serviceName}} design manual
-                </h1>
-            </div>
-            <div class="govuk-grid-column-two-thirds">
-                <div class="app-masthead__description">
-                    <p class="govuk-body-l">Design components, patterns and styles used in the Remand and sentencing service.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+{% include "includes/manual-top-nav.html" %}
+
 <main class="govuk-main-wrapper-govuk-body">
     <div class="govuk-width-container govuk-!-margin-top-6">
-        <div class="govuk-grid-row">
-            <div class="govuk-grid-column-full">
-                <div class="govuk-breadcrumbs">
-                    <ol class="govuk-breadcrumbs__list">
-                        <li class="govuk-breadcrumbs__list-item">
-                            <a class="govuk-breadcrumbs__link" href="../design-manual/">Home</a>
-                        </li>
-                    </ol>
-                </div>
-            </div>
-        </div>
         <div class="govuk-grid-row govuk-!-margin-top-6">
             <div class="govuk-grid-column-one-quarter">
-                <nav class="moj-side-navigation govuk-!-padding-top-0" aria-label="Side navigation">
-
-<h4 class="moj-side-navigation__title">Pages</h4>
-<ul class="moj-side-navigation__list">
-  <li class="moj-side-navigation__item"><a href="court-cases-page.html">Court cases</a></li>
-  <li class="moj-side-navigation__item"><a href="question-page.html">Question page</a></li>
-  <li class="moj-side-navigation__item"><a href="add-offences-page.html">Add offences</a></li>
-</ul>
-<h4 class="moj-side-navigation__title">Components</h4>
-<ul class="moj-side-navigation__list">
-  <li class="moj-side-navigation__item moj-side-navigation__item--active"><a href="offence-card.html">Offence card</a></li>
-  <li class="moj-side-navigation__item"><a href="appearance-information-panel.html">Appearance information panel</a></li>
-  <li class="moj-side-navigation__item"><a href="offence-reveal.html">Offence reveal</a></li>
-  <li class="moj-side-navigation__item"><a href="terror-related-tag.html">Terror related tag</a></li>
-  <li class="moj-side-navigation__item"><a href="interruption-card.html">Interruption card</a></li>
-  <li class="moj-side-navigation__item"><a href="accessible-autocomplete.html">Accessible autocomplete</a></li>
-  <li class="moj-side-navigation__item"><a href="radio-with-reveal.html">Radio with reveal</a></li>
-  <li class="moj-side-navigation__item"><a href="empty-state.html">Empty state</a></li>
-</ul>
-<h4 class="moj-side-navigation__title">Patterns</h4>
-<ul class="moj-side-navigation__list">
-  <li class="moj-side-navigation__item"><a href="contextual-question.html">Contextual question</a></li>
-  <li class="moj-side-navigation__item"><a href="task-list.html">Task list</a></li>
-  <li class="moj-side-navigation__item"><a href="add-offences-pattern.html">Add offences</a></li>
-</ul>
-                </nav>
+                {% include "includes/manual-side-nav.html" %}
             </div>
             <div class="govuk-grid-column-two-thirds">
-                <h1 class="govuk-heading-xl">Offence card</h1>
-                <p class="govuk-body">Displays details about offences and sentence information.</p>
+
+                <h1 class="govuk-heading-xl">Offence card <strong class="govuk-tag app-status-tag govuk-tag--turquoise">
+                        Custom component
+                    </strong></h1>
+                <p class="govuk-body-l">Use the offence card to display offence and sentence information in a clear,
+                    structured format.</p>
+
                 <h2 class="govuk-heading-l">When to use it</h2>
-                <ul class="govuk-list govuk-list--bullet">
-                    <li>When users need to review or manage multiple offences in one place</li>
-<li>To present offence details in a clear and structured format</li>
-                </ul>
+                <p class="govuk-body">Use this pattern when users need to review or manage multiple offences or
+                    sentences in one place.</p>
+
+                <h2 class="govuk-heading-l">When not to use it</h2>
+                <p class="govuk-body">Do not use the offence card when the user needs to select an offence or sentence —
+                    for example, in a list of radio buttons.</p>
+
                 <h2 class="govuk-heading-l">How it works</h2>
+
+                <h3 class="govuk-heading-m">Show offence information</h3>
+                <p class="govuk-body">Include basic details such as the offence name, date and outcome.</p>
+                    <div class="example">
+                <div class="offence-card">
+                    <div class="offence-card-offence-details">
+                        <h4 class="govuk-heading-s">CJ88001 – Common assault</h4>
+                        <dl class="govuk-summary-list govuk-summary-list--no-border">
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">Committed on</dt>
+                                <dd class="govuk-summary-list__value">10/02/2025</dd>
+                            </div>
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">Outcome</dt>
+                                <dd class="govuk-summary-list__value">Remand in custody</dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+</div>
+                <h3 class="govuk-heading-m govuk-!-margin-top-7">Show sentence information</h3>
+<div class="example">
+                <div class="offence-card sentence-card">
+                    <div class="offence-card-offence-details">
+                        <span class="govuk-body">Count 2</span>
+                        <h4 class="govuk-heading-s">
+                            CJ88001 – Common assault
+                            <!-- <br><strong class="govuk-tag govuk-!-margin-top-2">Terror-related</strong> -->
+                        </h4>
+                        <dl class="govuk-summary-list govuk-summary-list--no-border">
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">Committed on</dt>
+                                <dd class="govuk-summary-list__value">05/01/2025</dd>
+                            </div>
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">Conviction date</dt>
+                                <dd class="govuk-summary-list__value">14/03/2025</dd>
+                            </div>
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">Sentence type</dt>
+                                <dd class="govuk-summary-list__value">SDS (Standard Determinate Sentence)</dd>
+                            </div>
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">Sentence length</dt>
+                                <dd class="govuk-summary-list__value">0 years 6 months 0 weeks 0 days</dd>
+                            </div>
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">Licence period</dt>
+                                <dd class="govuk-summary-list__value">0 years 6 months 0 weeks 0 days</dd>
+                            </div>
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">Consecutive or concurrent</dt>
+                                <dd class="govuk-summary-list__value">Consecutive to count 1</dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+</div>
+                <h4 class="govuk-heading-m govuk-!-margin-top-7">Show offence or sentence actions</h3>
+                <p class="govuk-body">Let users take actions such as editing offence or sentence information or removing the it
+                    from the appearance.</p>
+<div class="example">
+                <div class="offence-card">
+                    <div class="offence-card-offence-details">
+                        <h4 class="govuk-heading-s">CJ88001 – Common assault</h4>
+                        <dl class="govuk-summary-list govuk-summary-list--no-border">
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">Committed on</dt>
+                                <dd class="govuk-summary-list__value">10/02/2025</dd>
+                            </div>
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">Outcome</dt>
+                                <dd class="govuk-summary-list__value">Remand in custody</dd>
+                            </div>
+                        </dl>
+                    </div>
+                    <div class="offence-card-actions">
+                        <ul class="offence-card-actions-list">
+                            <li class="offence-card-action-link"><a href="#">Edit</a></li>
+                            <li class="offence-card-action-link"><a href="#">Delete</a></li>
+                        </ul>
+                    </div>
+                </div>
+</div>
+<div class="example govuk-!-margin-top-4">
+                 <div class="offence-card sentence-card">
+                    <div class="offence-card-offence-details">
+                        <span class="govuk-body">Count 2</span>
+                        <h4 class="govuk-heading-s">
+                            CJ88001 – Common assault
+                            <!-- <br><strong class="govuk-tag govuk-!-margin-top-2">Terror-related</strong> -->
+                        </h4>
+                        <dl class="govuk-summary-list govuk-summary-list--no-border">
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">Committed on</dt>
+                                <dd class="govuk-summary-list__value">05/01/2025</dd>
+                            </div>
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">Conviction date</dt>
+                                <dd class="govuk-summary-list__value">14/03/2025</dd>
+                            </div>
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">Sentence type</dt>
+                                <dd class="govuk-summary-list__value">SDS (Standard Determinate Sentence)</dd>
+                            </div>
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">Sentence length</dt>
+                                <dd class="govuk-summary-list__value">0 years 6 months 0 weeks 0 days</dd>
+                            </div>
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">Licence period</dt>
+                                <dd class="govuk-summary-list__value">0 years 6 months 0 weeks 0 days</dd>
+                            </div>
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">Consecutive or concurrent</dt>
+                                <dd class="govuk-summary-list__value">Consecutive to count 1</dd>
+                            </div>
+                        </dl>
+                    </div>
+                    <div class="offence-card-actions">
+                        <ul class="offence-card-actions-list">
+                            <li class="offence-card-action-link"><a href="#">Edit</a></li>
+                            <li class="offence-card-action-link"><a href="#">Delete</a></li>
+                        </ul>
+                    </div>
+                </div>
+</div>
+                <h3 class="govuk-heading-m govuk-!-margin-top-7">Show a primary call to action</h3>
+                <p class="govuk-body">If users need to take a specific action as part of their task, show a clear call
+                    to action.</p>
+<div class="example">
+                <div class="offence-card">
+                    <div class="offence-card-offence-details">
+                        <h4 class="govuk-heading-s">CJ88001 – Common assault</h4>
+                        <dl class="govuk-summary-list govuk-summary-list--no-border">
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">Committed on</dt>
+                                <dd class="govuk-summary-list__value">10/02/2025</dd>
+                            </div>
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">Outcome</dt>
+                                <dd class="govuk-summary-list__value">Remand in custody</dd>
+                            </div>
+                        </dl>
+                        <p class="govuk-body govuk-!-margin-top-4 govuk-!-margin-bottom-2">
+                            <a href="#">Update outcome</a>
+                        </p>
+                    </div>
+                    <div class="offence-card-actions">
+                        <ul class="offence-card-actions-list">
+                            <li class="offence-card-action-link"><a href="#">Edit</a></li>
+                            <li class="offence-card-action-link"><a href="#">Delete</a></li>
+                        </ul>
+                    </div>
+                </div>
+</div>
+                 <h3 class="govuk-heading-m govuk-!-margin-top-7">Show missing information</h3>
+                <p class="govuk-body">Sometimes you might need to show where there is missing information on a sentence or offence card.</p>
+                <p class="govuk-body">Show a link to the relevant question so the user can add the missing information.
+The link should take the user to the appropriate question page, and return them to the page with the offence card once the information has been entered.</p>
+<div class="example">
+ <div class="offence-card sentence-card">
+                    <div class="offence-card-offence-details">
+                        <span class="govuk-body">Count 2</span>
+                        <h4 class="govuk-heading-s">
+                            CJ88001 – Common assault
+                            <!-- <br><strong class="govuk-tag govuk-!-margin-top-2">Terror-related</strong> -->
+                        </h4>
+                        <dl class="govuk-summary-list govuk-summary-list--no-border">
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">Committed on</dt>
+                                <dd class="govuk-summary-list__value">05/01/2025</dd>
+                            </div>
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">Conviction date</dt>
+                                <dd class="govuk-summary-list__value">14/03/2025</dd>
+                            </div>
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">Sentence type</dt>
+                                <dd class="govuk-summary-list__value">SDS (Standard Determinate Sentence)</dd>
+                            </div>
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">Sentence length</dt>
+                                <dd class="govuk-summary-list__value">0 years 6 months 0 weeks 0 days</dd>
+                            </div>
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">Licence period</dt>
+                                <dd class="govuk-summary-list__value">0 years 6 months 0 weeks 0 days</dd>
+                            </div>
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">Consecutive or concurrent</dt>
+                                <dd class="govuk-summary-list__value"><a href="#">Select consective or concurrent</a></dd>
+                            </div>
+                        </dl>
+                    </div>
+                    <div class="offence-card-actions">
+                        <ul class="offence-card-actions-list">
+                            <li class="offence-card-action-link"><a href="#">Edit</a></li>
+                            <li class="offence-card-action-link"><a href="#">Delete</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- <h2 class="govuk-heading-l govuk-!-margin-top-8">Research and rationale</h2>
                 <ul class="govuk-list govuk-list--bullet">
-                    <li>Visually separates offences to improve readability</li>
-<li>Organises offence details in a structured, index card-style layout</li>
-<li>Can include actions for individual offences, such as editing or updating the outcome</li>
-<li>Colour indicates the outcome status of the offence:</li>
-<li>Grey – non-custodial or not sentenced</li>
-<li>Purple – custodial outcome (i.e. imprisonment), indicating the offence is ‘activated’</li>
-                </ul>
-                <h2 class="govuk-heading-l">Research &amp; rationale</h2>
-                <ul class="govuk-list govuk-list--bullet">
-                    <li>Helps users scan and manage offence information efficiently</li>
-<li>Ensures offence and sentence details are clearly structured and easy to reference</li>
-                </ul>
+                    <li>Helps users scan and manage offence and sentence information more easily</li>
+                    <li>Keeps related data visually grouped and consistent across the service</li>
+                    <li>Improves readability and reduces cognitive load by clearly separating offences</li>
+                </ul> -->
+
             </div>
         </div>
     </div>
+    </div>
 </main>
+
 {% endblock %}
