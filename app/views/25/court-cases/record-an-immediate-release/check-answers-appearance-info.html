@@ -1,0 +1,59 @@
+{% extends "../template.html" %}
+{% block content %}
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">
+            <span class="govuk-caption-l">{% if data.appearance['court-decision']=='yes' %}Add appearance information{% else %}Add case details{% endif %}</span>
+            Check your answers
+        </h1>
+        <form class="form" action="/{{data.prototypeVersion}}/persist-appearance?edit=false" method="post">
+            <dl class="govuk-summary-list">
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Case reference
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                       {{ data.appearance['court-case-ref']}}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link govuk-link--no-visited-state" href="court-case-reference-number?edit=true">
+                            Edit<span class="govuk-visually-hidden"> case reference number</span>
+                        </a>
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        {% if data.appearance['court-decision']=='yes' %}Location{% else %}Court name{% endif %}
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['court-name'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link govuk-link--no-visited-state" href="reason-for-release?edit=true">
+                            Edit<span class="govuk-visually-hidden"> reason for immediate release</span>
+                        </a>
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        {% if data.appearance['court-decision']=='yes' %}Appearance date{% else %}Date of discontinuance{% endif %}
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['warrant-date-day'] }}/{{ data['appearance']['warrant-date-month'] }}/{{ data['appearance']['warrant-date-year'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link govuk-link--no-visited-state" href="court-name?edit=true">
+                            Edit<span class="govuk-visually-hidden"> court name</span>
+                        </a>
+                    </dd>
+                </div>
+            </dl>
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Confirm and continue
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
