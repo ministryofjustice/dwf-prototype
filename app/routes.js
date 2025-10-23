@@ -791,17 +791,30 @@ router.get("/:prototypeVersion/overall-case-outcome", function (req, res) {
   req.session.data = req.session.data || {};
   req.session.data.appearance = req.session.data.appearance || {};
 
-  const outcome = req.session.data.appearance["overall-case-outcome"];
+  const outcomeRaw = req.session.data.appearance["overall-case-outcome"];
+  const outcome = typeof outcomeRaw === "string" ? outcomeRaw.trim() : outcomeRaw;
 
   if (outcome) {
+    // Outcomes that clearly represent sentencing
     const SENTENCING = new Set([
       "Imprisonment",
       "Detention and training order (DTO)",
       "Imprisonment in default of a fine",
     ]);
 
-    const REMAND = "Remand in Custody (Bail Refused)";
+    // Outcomes that indicate custodial/remand (custody without final sentence)
+    const REMAND = new Set([
+      "Remand in Custody (Bail Refused)",
+      "Remand in custody",
+      "Send to Crown Court for trial",
+      "Convicted awaiting sentence",
+      "Commit to Crown Court for sentence in custody",
+      "Remittal for sentence in custody",
+      "Commit to Crown Court for sentence",
+      "Remittal for trial in custody",
+    ]);
 
+    // Everything else from the Non-custodial section
     const NON_CUSTODIAL = new Set([
       "Lie on file",
       "Community Order",
@@ -818,19 +831,28 @@ router.get("/:prototypeVersion/overall-case-outcome", function (req, res) {
       "Proceedings Stayed",
       "Discharged",
       "Withdrawn - Final",
+      "Not guilty",
+      "Bail",
+      "Suspended imprisonment",
+      "No separate penalty",
+      "Withdrawn",
     ]);
 
     if (SENTENCING.has(outcome)) {
       req.session.data.appearance["warrant-type"] = "Sentencing";
-    } else if (outcome === REMAND) {
+    } else if (REMAND.has(outcome)) {
       req.session.data.appearance["warrant-type"] = "Remand";
     } else if (NON_CUSTODIAL.has(outcome)) {
+      req.session.data.appearance["warrant-type"] = "Non-custodial";
+    } else {
+      // If an unknown value slips through, default to non-custodial to be safe
       req.session.data.appearance["warrant-type"] = "Non-custodial";
     }
   }
 
   return res.redirect(307, `/${prototypeVersion}/warrant-type-select`);
 });
+
 
 router.post("/:prototypeVersion/persist-appearance", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
