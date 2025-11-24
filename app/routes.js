@@ -769,7 +769,7 @@ router.get("/:prototypeVersion/create-appearance", function (req, res) {
     } else
       if(prototypeVersion >= 26){
         return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`
+      `/${prototypeVersion}/court-cases/add-a-court-appearance/warrant-type`
     );
       } else {
     return res.redirect(
@@ -783,7 +783,6 @@ router.get("/:prototypeVersion/create-appearance", function (req, res) {
     );
   }
 });
-
 router.get("/:prototypeVersion/overall-case-outcome", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
 
@@ -795,14 +794,14 @@ router.get("/:prototypeVersion/overall-case-outcome", function (req, res) {
   const outcome = typeof outcomeRaw === "string" ? outcomeRaw.trim() : outcomeRaw;
 
   if (outcome) {
-    // Outcomes that clearly represent sentencing
+    // Sentencing outcomes
     const SENTENCING = new Set([
       "Imprisonment",
       "Detention and training order (DTO)",
       "Imprisonment in default of a fine",
     ]);
 
-    // Outcomes that indicate custodial/remand (custody without final sentence)
+    // Remand outcomes
     const REMAND = new Set([
       "Remand in Custody (Bail Refused)",
       "Remand in custody",
@@ -814,7 +813,7 @@ router.get("/:prototypeVersion/overall-case-outcome", function (req, res) {
       "Remittal for trial in custody",
     ]);
 
-    // Everything else from the Non-custodial section
+    // Non-custodial outcomes
     const NON_CUSTODIAL = new Set([
       "Lie on file",
       "Community Order",
@@ -838,18 +837,39 @@ router.get("/:prototypeVersion/overall-case-outcome", function (req, res) {
       "Withdrawn",
     ]);
 
+    let warrantType = "Non-custodial"; // default
+
     if (SENTENCING.has(outcome)) {
-      req.session.data.appearance["warrant-type"] = "Sentencing";
+      warrantType = "Sentencing";
     } else if (REMAND.has(outcome)) {
-      req.session.data.appearance["warrant-type"] = "Remand";
+      warrantType = "Remand";
     } else if (NON_CUSTODIAL.has(outcome)) {
-      req.session.data.appearance["warrant-type"] = "Non-custodial";
-    } else {
-      // If an unknown value slips through, default to non-custodial to be safe
-      req.session.data.appearance["warrant-type"] = "Non-custodial";
+      warrantType = "Non-custodial";
+    }
+
+    req.session.data.appearance["warrant-type"] = warrantType;
+
+    // ✔ Custom routing for Remand AND Non-custodial
+    if (warrantType === "Remand" || warrantType === "Non-custodial") {
+      const route = req.session.data.route; // ensure this exists in session
+
+      if (route === "appearance") {
+        return res.redirect(
+          `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
+        );
+      } else if (route === "new-court-case") {
+        return res.redirect(
+          `/${prototypeVersion}/court-cases/add-a-court-case/task-list`
+        );
+      } else {
+        return res.redirect(
+          `/${prototypeVersion}/court-cases/add-a-court-case/overall-case-outcome`
+        );
+      }
     }
   }
 
+  // ✔ Sentencing follows existing behaviour
   return res.redirect(307, `/${prototypeVersion}/warrant-type-select`);
 });
 
@@ -1647,7 +1667,7 @@ router.get("/:prototypeVersion/warrant-type-select", function (req, res) {
       );
   } else if (warrantType == "Non-custodial") {
     res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
+      `/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`
     );
   }
 });
