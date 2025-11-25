@@ -13,6 +13,9 @@
             </h1>
           </legend> 
           <div class="govuk-radios" data-module="govuk-radios">
+              <h2 class="govuk-heading-m">
+              Remand
+            </h2>
        <div class="govuk-radios__item">
               <input class="govuk-radios__input" id="overall-case-outcome" name="appearance[overall-case-outcome]" type="radio" value="Commit to Crown Court for trial in custody" {% if data.appearance[overall-case-outcome] == 'Commit to Crown Court for trial in custody' %} checked {% endif %}>
               <label class="govuk-label govuk-radios__label" for="overall-case-outcome">
@@ -72,8 +75,10 @@
               <label class="govuk-label govuk-radios__label" for="overall-case-outcome">
                 Adjourned
               </label>
-            </div>
-            <div class="govuk-radios__divider">or</div>
+            </div> 
+              <h2 class="govuk-heading-m">
+              Non-custodial
+            </h2>
             <div class="govuk-radios__item">
               <input class="govuk-radios__input" id="overall-case-outcome" name="appearance[overall-case-outcome]" type="radio" value="Suspended imprisonment" {% if data.appearance[overall-case-outcome] == 'Suspended imprisonment' %} checked {% endif %}>
               <label class="govuk-label govuk-radios__label" for="overall-case-outcome">
