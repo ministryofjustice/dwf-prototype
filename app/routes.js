@@ -393,6 +393,38 @@ router.post("/:prototypeVersion/new-court-case-ref", function (req, res) {
    else return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-case-reference-number`);
 });
 
+
+//For appeals
+router.post("/:prototypeVersion/new-court-case-appeal-ref", function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion;
+  const courtCaseIndex = req.session.data.courtCaseIndex;
+  var caseRefSelect = req.session.data.appearance["case-ref-select"];
+  const route = req.session.data['route'];
+  console.log("Case ref select:" + caseRefSelect);
+  if (caseRefSelect.includes("Yes")) {
+    req.session.data.appearance["court-case-appeal-ref"] =
+      req.session.data.courtCases[courtCaseIndex].appearances.at(-1)[
+        "court-case-appeal-ref"
+      ];
+    if (route == "immediate-release") {
+      return res.redirect(
+        `/${prototypeVersion}/court-cases/record-an-immediate-release/appearance-date`
+      );
+    } else
+      return res.redirect(
+        `/${prototypeVersion}/court-cases/add-a-court-appeal/warrant-date`
+      );
+  } 
+  if (route == "immediate-release") {
+      return res.redirect(
+        `/${prototypeVersion}/court-cases/record-an-immediate-release/court-case-reference-number`
+      );
+    }
+   else return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appeal/court-case-reference-number`);
+});
+
+
+
 router.post("/:prototypeVersion/new-court-name", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   const courtCaseIndex = req.session.data.courtCaseIndex;
@@ -432,6 +464,8 @@ router.post("/:prototypeVersion/new-court-name", function (req, res) {
     }
    else return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appearance/court-name`);
 });
+
+
 
 router.post("/:prototypeVersion/change-offences-select", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
@@ -783,6 +817,77 @@ router.get("/:prototypeVersion/create-appearance", function (req, res) {
     );
   }
 });
+
+//Add an appeal
+router.get("/:prototypeVersion/create-appeal", function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion;
+  delete req.session.data.appearanceIndex;
+  delete req.session.data.appearance;
+  const courtIndex = req.query.courtIndex;
+  const route = req.query.route;
+  console.log("Route: " + route)
+  if (courtIndex !== undefined) {
+    req.session.data.courtCase = req.session.data.courtCases[courtIndex];
+    req.session.data.courtCaseIndex = courtIndex;
+    console.log("Court case" + req.session.data.courtCase)
+  }
+  const lastAppearance = req.session.data.courtCase.appearances.at(-1);
+  req.session.data.appearance = {
+    offences: lastAppearance.offences,
+    "court-name": lastAppearance["next-court-name"],
+    "warrant-date-day": lastAppearance["next-court-date-day"],
+    "warrant-date-month": lastAppearance["next-court-date-month"],
+    "warrant-date-year": lastAppearance["next-court-date-year"],
+  };
+  if (
+    prototypeVersion == "v8" ||
+    prototypeVersion == "v9" ||
+    prototypeVersion == "v10" ||
+    prototypeVersion == "v11"
+  ) {
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-court-appeal/court-case-reference-number-select`
+    );
+  } else if (
+    prototypeVersion == "v12" ||
+    (prototypeVersion >= 13 && prototypeVersion < 25)
+  ) {
+    req.session.data.appearanceDetailsComplete = 0;
+    req.session.data.courtDocumentsComplete = 0;
+    req.session.data.offencesComplete = 0;
+    req.session.data.nextCourtAppearanceComplete = "No";
+    req.session.data.edit = "false";
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-court-appearance/warrant-type`
+    );
+  } else if (prototypeVersion >= 25) {
+    req.session.data.appearanceDetailsComplete = 0;
+    req.session.data.courtDocumentsComplete = 0;
+    req.session.data.offencesComplete = 0;
+    req.session.data.nextCourtAppearanceComplete = "No";
+    req.session.data.edit = "false";
+    if (route == "immediate-release"){
+      return res.redirect(
+      `/${prototypeVersion}/court-cases/record-an-immediate-release/reason-for-release`
+    );
+    } else
+      if(prototypeVersion >= 26){
+        return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-court-appearance/warrant-type`
+    );
+      } else {
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-court-appearance/warrant-type`
+    );
+  }
+  }
+   else {
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-court-appearance/court-case-reference-number`
+    );
+  }
+});
+
 router.get("/:prototypeVersion/overall-case-outcome", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
 

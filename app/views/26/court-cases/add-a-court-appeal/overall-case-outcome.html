@@ -1,0 +1,57 @@
+{% extends "../template.html" %}
+{% block content %}
+<div class="govuk-grid-row govuk-!-margin-top-4">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="check-answers" method="post">
+      <div class="govuk-form-group"> 
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              <span class="govuk-caption-l">Add a hearing</span>
+              Select the overall case outcome
+            </h1>
+          </legend> 
+          <div class="govuk-radios" data-module="govuk-radios">
+             <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="overall-case-outcome" name="appearance[overall-case-outcome]" type="radio" value="Sentence varied">
+              <label class="govuk-label govuk-radios__label" for="overall-case-outcome">
+                Sentence varied
+              </label>
+            </div>
+       <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="overall-case-outcome" name="appearance[overall-case-outcome]" type="radio" value="Appeal pending">
+              <label class="govuk-label govuk-radios__label" for="overall-case-outcome">
+                Appeal pending
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="overall-case-outcome" name="appearance[overall-case-outcome]" type="radio" value="Appeal dismissed">
+              <label class="govuk-label govuk-radios__label" for="overall-case-outcome">
+               Appeal dismissed
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="overall-case-outcome" name="appearance[overall-case-outcome]" type="radio" value="Conviction quashed">
+              <label class="govuk-label govuk-radios__label" for="overall-case-outcome">
+                Conviction quashed
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="overall-case-outcome" name="appearance[overall-case-outcome]" type="radio" value="Retrial">
+              <label class="govuk-label govuk-radios__label" for="overall-case-outcome">
+               Retrial
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="govuk-button-group">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Continue
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
