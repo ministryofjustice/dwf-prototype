@@ -394,36 +394,19 @@ router.post("/:prototypeVersion/new-court-case-ref", function (req, res) {
 });
 
 
-//For appeals
+
+//Appeals court case selected
 router.post("/:prototypeVersion/new-court-case-appeal-ref", function (req, res) {
-  const prototypeVersion = req.params.prototypeVersion;
-  const courtCaseIndex = req.session.data.courtCaseIndex;
-  var caseRefSelect = req.session.data.appearance["case-ref-select"];
-  const route = req.session.data['route'];
-  console.log("Case ref select:" + caseRefSelect);
-  if (caseRefSelect.includes("Yes")) {
-    req.session.data.appearance["court-case-appeal-ref"] =
-      req.session.data.courtCases[courtCaseIndex].appearances.at(-1)[
-        "court-case-appeal-ref"
-      ];
-    if (route == "immediate-release") {
-      return res.redirect(
-        `/${prototypeVersion}/court-cases/record-an-immediate-release/appearance-date`
-      );
-    } else
-      return res.redirect(
-        `/${prototypeVersion}/court-cases/add-a-court-appeal/warrant-date`
-      );
-  } 
-  if (route == "immediate-release") {
-      return res.redirect(
-        `/${prototypeVersion}/court-cases/record-an-immediate-release/court-case-reference-number`
-      );
+    //this
+    var appealrefselect = req.session.data['appealrefselect']
+   // Check whether the variable matches a condition
+    if (appealrefselect == "Yes"){
+    // Send user to next page
+      res.redirect(`/26/court-cases/add-a-court-appeal/court-case-appeal-reference-number`);
+    } else {
+      res.redirect(`/26/court-cases/add-a-court-appeal/court-case-reference-number`);
     }
-   else return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-appeal/court-case-reference-number`);
-});
-
-
+   })
 
 router.post("/:prototypeVersion/new-court-name", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
