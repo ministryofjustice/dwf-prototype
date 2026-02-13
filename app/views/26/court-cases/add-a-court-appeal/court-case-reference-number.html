@@ -50,7 +50,7 @@
                     </fieldset>
                 </div>
             {% else %}
-            <form class="form" action="warrant-date">
+            <form class="form" action="appeal-date">
                 <div class="govuk-form-group">
                     <fieldset class="govuk-fieldset" role="group">
                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
@@ -80,12 +80,7 @@
             </div>
             </form>
     </div>
-    {% if data.postSaveEdit == 'true' %}
-    <div class="govuk-grid-column-one-third">
-        {% set showOffences = true %}
-        {% include "includes/templates/appearance-info.njk" %}
-      </div>
-      {% endif %}
+   
 </div>
 
 {% endblock %}
