@@ -396,7 +396,7 @@ router.post("/:prototypeVersion/new-court-case-ref", function (req, res) {
 
 
 //Appeals court case selected
-router.post("/:prototypeVersion/new-court-case-appeal-ref", function (req, res) {
+router.post("/new-court-case-appeal-ref", function (req, res) {
     //this
     var appealrefselect = req.session.data['appealrefselect']
    // Check whether the variable matches a condition
