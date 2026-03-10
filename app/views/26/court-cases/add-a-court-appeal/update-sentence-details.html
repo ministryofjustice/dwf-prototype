@@ -1,0 +1,129 @@
+{% extends "../template.html" %}
+{% block content %}
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">
+            <span class="govuk-caption-l">Record appeal</span>
+            Update sentence details
+        </h1>
+        <form class="form" action="/{{data.prototypeVersion}}/persist-appearance?edit=false" method="post">
+            <dl class="govuk-summary-list">
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Count number
+                    </dt>
+                    <dd class="govuk-summary-list__value" >
+                        <a class="govuk-link" href="../add-a-sentence/count-number?edit=true">
+                            Enter count number<span class="govuk-visually-hidden"> Enter count number</span>
+                        </a>
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="court-case-reference-number?edit=true">
+                            Update<span class="govuk-visually-hidden"> case reference number</span>
+                        </a>
+                    </dd>
+                </div>
+
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Committed on
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                {{ data['appearance']['warrant-date-day'] }}/{{ data['appearance']['warrant-date-month'] }}/{{ data['appearance']['warrant-date-year'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="court-case-appeal-reference-number?edit=true">
+                            Update<span class="govuk-visually-hidden"> case reference number</span>
+                        </a>
+                    </dd>
+                </div>
+                                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Outcome
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                          {{ data['appearance']['overall-case-outcome'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="overall-case-outcome?edit=true">
+                            Update<span class="govuk-visually-hidden"> warrant date</span>
+                        </a>
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Conviction date
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                       {{ data['appearance']['overall-conviction-date-day'] }}/{{
+                            data['appearance']['overall-conviction-date-month'] }}/{{
+                            data['appearance']['overall-conviction-date-year'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="court-name?edit=true">
+                            Update<span class="govuk-visually-hidden"> court name</span>
+                        </a>
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Sentence type
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ sentence['sentence-type'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="overall-case-outcome?edit-true">
+                            Update<span class="govuk-visually-hidden"> court name</span>
+                        </a>
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Custodial term
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['overall-case-outcome'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="overall-case-outcome?edit-true">
+                            Update<span class="govuk-visually-hidden"> court name</span>
+                        </a>
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Licence period
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['overall-case-outcome'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="overall-case-outcome?edit-true">
+                            Update<span class="govuk-visually-hidden"> court name</span>
+                        </a>
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Consecutive or concurrent
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data['appearance']['overall-case-outcome'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="overall-case-outcome?edit-true">
+                            Update<span class="govuk-visually-hidden"> court name</span>
+                        </a>
+                    </dd>
+                </div>
+            </dl>
+            <div class="govuk-button-group">
+                    <a href="./task-list" class="govuk-button govuk-button--primary" data-module="govuk-button">
+                        Continue
+                    </a>
+                </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
