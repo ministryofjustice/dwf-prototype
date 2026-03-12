@@ -801,6 +801,7 @@ router.get("/:prototypeVersion/create-appearance", function (req, res) {
   }
 });
 
+
 //Add an appeal
 router.get("/:prototypeVersion/create-appeal", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
@@ -1919,6 +1920,51 @@ router.post("/:prototypeVersion/sentence-length-select", function (req, res) {
     res.redirect(`court-cases/add-a-sentence/sentence-length`);
   } else res.redirect(307, `/${prototypeVersion}/persist-sentence`);
 });
+
+//Appeals outcomes
+router.post("/:prototypeVersion/appeal-outcome-select", function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion;
+  var appealType = req.session.data["appeal"]["appeal-type"];
+
+  if (appealType == "Sentence varied") {
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-cout-appeal/update-sentence-details`
+    );
+  }
+  if (appealType == "Appeal dismissed") {
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-cout-appeal/record-appeal`
+    );
+  }
+  if (appealType == "Appeal pending") {
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-cout-appeal/record-appeal`
+    );
+  }
+  if (appealType == "Conviction quashed") {
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-cout-appeal/record-appeal`
+    );
+  }
+  if (appealType == "Retrail") {
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-cout-appeal/record-appeal`
+    );
+  }
+  if (appealType == "Replaced by another offence") {
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-an-offence/offence-date`
+    );
+  }
+  if (appealType == "Imprisonment in default of a fine") {
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-sentence/term-length`
+    );
+  } else if ((prototypeVersion >= "v11") | (prototypeVersion > 13)) {
+    res.redirect(`court-cases/add-a-sentence/sentence-length`);
+  } else res.redirect(307, `/${prototypeVersion}/persist-appeal`);
+});
+
 
 router.post("/:prototypeVersion/term-length-select", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
