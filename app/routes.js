@@ -815,13 +815,13 @@ router.get("/:prototypeVersion/create-appeal", function (req, res) {
     req.session.data.courtCaseIndex = courtIndex;
     console.log("Court case" + req.session.data.courtCase)
   }
-  const lastAppearance = req.session.data.courtCase.appearances.at(-1);
+  const appealAppearance = req.session.data.courtCase.appearances.at(-1);
   req.session.data.appearance = {
     offences: lastAppearance.offences,
-    "court-name": lastAppearance["next-court-name"],
-    "warrant-date-day": lastAppearance["next-court-date-day"],
-    "warrant-date-month": lastAppearance["next-court-date-month"],
-    "warrant-date-year": lastAppearance["next-court-date-year"],
+    "court-name": appealAppearance["next-court-name"],
+    "warrant-date-day": appealAppearance["next-court-date-day"],
+    "warrant-date-month": appealAppearance["next-court-date-month"],
+    "warrant-date-year": appealAppearance["next-court-date-year"],
   };
   if (
     prototypeVersion == "v8" ||
@@ -1928,27 +1928,27 @@ router.post("/:prototypeVersion/appeal-outcome-select", function (req, res) {
 
   if (appealType == "Sentence varied") {
     return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-cout-appeal/update-sentence-details`
+      `/${prototypeVersion}/court-cases/add-a-court-appeal/update-sentence-details`
     );
   }
   if (appealType == "Appeal dismissed") {
     return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-cout-appeal/record-appeal`
+      `/${prototypeVersion}/court-cases/add-a-court-appeal/record-appeal`
     );
   }
   if (appealType == "Appeal pending") {
     return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-cout-appeal/record-appeal`
+      `/${prototypeVersion}/court-cases/add-a-court-appeal/record-appeal`
     );
   }
   if (appealType == "Conviction quashed") {
     return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-cout-appeal/record-appeal`
+      `/${prototypeVersion}/court-cases/add-a-court-appeal/record-appeal`
     );
   }
-  if (appealType == "Retrail") {
+  if (appealType == "Retrial") {
     return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-cout-appeal/record-appeal`
+      `/${prototypeVersion}/court-cases/add-a-court-appeal/record-appeal`
     );
   }
   if (appealType == "Replaced by another offence") {
@@ -1956,13 +1956,7 @@ router.post("/:prototypeVersion/appeal-outcome-select", function (req, res) {
       `/${prototypeVersion}/court-cases/add-an-offence/offence-date`
     );
   }
-  if (appealType == "Imprisonment in default of a fine") {
-    return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-sentence/term-length`
-    );
-  } else if ((prototypeVersion >= "v11") | (prototypeVersion > 13)) {
-    res.redirect(`court-cases/add-a-sentence/sentence-length`);
-  } else res.redirect(307, `/${prototypeVersion}/persist-appeal`);
+
 });
 
 

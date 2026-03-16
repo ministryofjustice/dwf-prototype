@@ -3,7 +3,7 @@
 <!-- What is the confirmed date -->
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-       <form class="form" action="check-answers" method="post">
+       <form class="form" action="/{{data.prototypeVersion}}/appeal-outcome-select" method="post">
            <div class="govuk-form-group">
                     <fieldset class="govuk-fieldset">
                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
@@ -38,27 +38,26 @@
                                     Appeal dismissed
                             </div>
                             <div class="govuk-radios__item">
-                                <input class="govuk-radios__input" id="appeal-type-3" name="appeal[appeal-type]"
+                                <input class="govuk-radios__input" id="appeal-type-4" name="appeal[appeal-type]"
                                     type="radio" value="Conviction quashed" {% if
-                                    data.appeal['appeal-type']=='Conviction quashed' %}
-                                    checked {% endif %}>
-                                <label class="govuk-label govuk-radios__label" for="appeal-type-3">
+                                    data.appeal['appeal-type']=='Conviction quashed' %} checked {% endif %}>
+                                <label class="govuk-label govuk-radios__label" for="appeal-type-4">
                                     Conviction quashed
                                 </label>
                             </div>
                             <div class="govuk-radios__item">
-                                <input class="govuk-radios__input" id="appeal-type-4" name="appeal[appeal-type]]"
-                                    type="radio" value="Retrail" {% if
-                                    data.appeal['appeal-type']=='Retrail'%} checked {% endif %}>
-                                <label class="govuk-label govuk-radios__label" for="appeal-type-4">
-                                    Retrail
+                                <input class="govuk-radios__input" id="appeal-type-5" name="appeal[appeal-type]"
+                                    type="radio" value="Retrial" {% if
+                                    data.appeal['appeal-type']=='Retrial'%} checked {% endif %}>
+                                <label class="govuk-label govuk-radios__label" for="appeal-type-5">
+                                    Retrial
                                 </label>
                             </div>
                             <div class="govuk-radios__item">
-                                <input class="govuk-radios__input" id="appeal-type-5" name="appeal[appeal-type]"
+                                <input class="govuk-radios__input" id="appeal-type-6" name="appeal[appeal-type]"
                                     type="radio" value="Replaced by another offence" {% if
                                     data.appeal['appeal-type']=='Replaced by another offence' %} checked {% endif %}>
-                                <label class="govuk-label govuk-radios__label" for="appeal-type-5">
+                                <label class="govuk-label govuk-radios__label" for="appeal-type-6">
                                    Replaced by another offence
                                 </label>
                             </div>
