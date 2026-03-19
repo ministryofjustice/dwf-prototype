@@ -6,14 +6,19 @@
         <form class="form" action="/{{data.prototypeVersion}}/persist-appearance?appearanceComplete=true" method="post">
             <div class="govuk-form-group">
                 <h1 class="govuk-heading-l">
-                   Add an appeal
+                    Add a hearing to a court case
                 </h1>
-                 <h2 class="govuk-heading-m">Enter information from a sentencing warrant</h2>
+                {% if data.appearance['warrant-type'] == "Remand" %}
+                <h2 class="govuk-heading-m">Enter information from a remand warrant</h2>
                 <p class="govuk-body">You must enter information exactly as it is written on the warrant.</p>
+                {% elif data.appearance['warrant-type'] == "Sentencing" %}
+                <h2 class="govuk-heading-m">Enter information from a sentencing warrant</h2>
+                <p class="govuk-body">You must enter information exactly as it is written on the warrant.</p>
+                {% endif %}
                 <ul class="govuk-task-list govuk-!-margin-top-7">
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
-                       <div class="govuk-task-list__name-and-hint">
-                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href={% if data.appearanceDetailsComplete == 1 %}"check-answers"{% else %}"court-case-reference-number-select?appearanceDetailsCompleted=1"{% endif %} aria-describedby="appearance-infromation-status">
+                        <div class="govuk-task-list__name-and-hint">
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href={% if data.appearanceDetailsComplete == 1 %}"check-answers"{% else %}"court-case-reference-number-select?appearanceDetailsStarted=1"{% endif %} aria-describedby="appearance-infromation-status">
                                 Add hearing information
                             </a>
                         </div>
@@ -31,39 +36,7 @@
                             {% endif %}
                         </div>
                     </li>
-                    <li class="govuk-task-list__item govuk-task-list__item--with-link">
-                        <div class="govuk-task-list__name-and-hint">
-                            {% if data.additionalInformationComplete == 1 %}
-                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./record-appeal">
-                                Record appeal
-                            </a>
-                            {% elif data.appearanceDetailsComplete == 1 %}
-                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./record-appeal?additionalInformationStarted=1">
-                                Record appeal
-                            </a>
-                            {% else %}
-                            Record appeal
-                            {% endif %}
-                        </div>
-                        <div class="govuk-task-list__status" id="offences-and-sentences-status">
-                            {% if data.appearanceDetailsComplete == 1 %}
-                             {% if data.additionalInformationComplete == 1 %}
-                             Completed
-                             {% elif data.additionalInformationStarted == 1 %}
-                             <strong class="govuk-tag govuk-tag--blue">
-                                Incomplete
-                            </strong>
-                             {% else %}
-                            <strong class="govuk-tag govuk-tag--blue">
-                                Incomplete
-                            </strong>
-                            {% endif %}
-                            {% else %}
-                            <span class="govuk-task-list__status--cannot-start-yet">Cannot start yet</span>
-                            {% endif %}
-                        </div>
-                    </li>
-                   <!-- {% if data.appearance['warrant-type'] == "Remand" %}
+                    {% if data.appearance['warrant-type'] == "Remand" %}
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
                             {% if data.appearanceDetailsComplete == 1 %}
@@ -202,7 +175,7 @@
                             {% endif %}
                         </div>
                     </li>
-                    {% endif %}-->
+                    {% endif %}
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
                             {% if data.appearanceDetailsComplete == 1 %}
@@ -236,10 +209,10 @@
                 </ul>
             </div>
             <h2 class="govuk-heading-m">
-                Finish adding an appeal
+                Finish adding hearing
             </h2>
             <!-- <p class="govuk-body">To save a draft of the court case, you must first complete the appearance information.</p> -->
-            <p class="govuk-body">Once you have finished adding all the information, select ‘Finish and save’. You will not be able to return to this page, but can edit the details in the Court cases tab. </p  >
+            <p class="govuk-body">Once every task has been completed, you must  save the information. You will not be able to return to this page, but can edit the details in the Court cases tab.</p  >
                 <div class="govuk-button-group">
                 <button type="submit" class="govuk-button" data-module="govuk-button">
                     Finish and save
