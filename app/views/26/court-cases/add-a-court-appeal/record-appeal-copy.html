@@ -1,64 +1,16 @@
 {% extends "../template.html" %}
 {% block content %}
-{% set lastAppearance = data.courtCase.appearances | last %}
+
 <div class="govuk-grid-row govuk-!-margin-top-4">    
-{% set err = data.addSentenceInformationError %}
-{% if err %}
-<div class="govuk-grid-column-full">
-  <div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" data-module="govuk-error-summary">
-    <h2 class="govuk-error-summary__title" id="error-summary-title">
-      There is a problem
-    </h2>
-    <div class="govuk-error-summary__body">
-      <ul class="govuk-list govuk-error-summary__list">
-        <li>
-          <a href="#offences-section"> {{ err.message }} </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-  </div>
-{% endif %}
+
     <div class="govuk-grid-column-two-thirds">
         <form class="form" action="/{{data.prototypeVersion}}/add-sentence-information-complete" method="post">
             <h1 class="govuk-heading-l">
                 Record appeal
             </h1>
-            {% if lastAppearance['merged-from-case']  %} 
-            <div class="govuk-inset-text govuk-!-margin-bottom-6">This appearance includes offences from case {{ lastAppearance['merged-from-case'] }} that were merged with this case on {{ lastAppearance['merged-from-case-date'] }}</div>
-             {% endif %}
+            
             <div class="govuk-!-margin-top-6">
-                {% if (data.appearance.offences | length) < 1 %} <p class="govuk-body">There are no offences to show.</p>
-                    {% endif %}
-                {% if data.appearance['warrant-type'] == "Sentencing" %}
-                    <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-top-4">
-                   </dl>
-                    {% endif %}
-                   
-                    {% set offenceCount = 0 %}
-                        {% for offence in data.appearance.offences %}
-                            {% if (offence.sentence['sentence-type'] == null) and (offence['outcome-changed'] != 'true') %}
-                            {% set offenceCount = offenceCount + 1 %}
-                        {% endif %}
-                    {% endfor %}
-                    {% if data.appearance['warrant-type'] == "Sentencing" %}<h2 id="offences-section" class="govuk-heading-m govuk-!-margin-top-8 govuk-!-margin-bottom-6">Offences ({{ offenceCount }})</h2>{% endif %}
-                    {% set no_match3 = true %}
-                    {% for offence in data.appearance.offences %}
-                    {% if (offence.sentence['sentence-type'] == null) and (offence['outcome-changed'] != 'true') %}
-                    {% set no_match3 = false %}
-                    {% set needsUpdate = (offence.sentence['sentence-type'] == null) and (offence['outcome-changed'] != 'true') %}
-
-{% if err and needsUpdate %}
-  <div class="govuk-form-group govuk-form-group--error" id="offence-{{ loop.index0 }}-error">
-    <p class="govuk-error-message govuk-!-margin-bottom-2">
-      <span class="govuk-visually-hidden">Error:</span>
-      Update the offence outcome
-    </p>
-{% endif %}
-{% if data.appearance['warrant-type'] == "Sentencing" %}
-                    <h3 class="govuk-heading-s ">Offences with custodial outcomes</h3>
-                    {% set no_matches = (data.appearance.sentences | length) == 0 %}
-                    {% for sentence in data.appearance.sentences %}
+                <h2 id="offences-section" class="govuk-heading-m govuk-!-margin-top-8 govuk-!-margin-bottom-6">Offences ({{ offenceCount }})</h2>
 <div class="offence-card sentence-card">
   <div class="offence-card-offence-details">
     <h4 class="govuk-heading-s">{{ offence['offence-name'] }}</h4>
@@ -123,26 +75,6 @@
 {% if err and needsUpdate %}
   </div>
 {% endif %}
-                    {% endif %}
-                    {% endfor %}
-                    {% if no_match3 %}
-                    {% if data.appearance['warrant-type'] == "Sentencing" %}
-                    <div class="govuk-inset-text govuk-!-margin-top-2">
-                        There are no offences with outcomes that need updating
-                    </div>
-                    {% else %}
-                    <div class="govuk-inset-text govuk-!-margin-top-6">
-                        There are no offences with outcomes that have not been updated
-                    </div>
-                    {% endif %}
-                    {% endif %}
-                    
-                                {% set updatedCount = (data.appearance.sentences | length) %}
-            {% for offence in data.appearance.offences %}
-              {% if (offence.sentence['sentence-type'] == null) and (offence['outcome-changed'] == 'true') %}
-                {% set updatedCount = updatedCount + 1 %}
-              {% endif %}
-            {% endfor %}
 
             <hr class="govuk-section-break govuk-section-break--l govuk-!-margin-top-8 govuk-section-break--visible">
             <h2 class="govuk-heading-m govuk-!-margin-top-7">Offences with updated outcomes ({{ updatedCount }})</h2>
