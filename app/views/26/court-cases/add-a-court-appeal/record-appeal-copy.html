@@ -10,27 +10,23 @@
             </h1>
             
             <div class="govuk-!-margin-top-6">
-                <h2 id="offences-section" class="govuk-heading-m govuk-!-margin-top-8 govuk-!-margin-bottom-6">Offences ({{ offenceCount }})</h2>
-<div class="offence-card sentence-card">
+                <h2 id="offences-section" class="govuk-heading-m govuk-!-margin-top-8 govuk-!-margin-bottom-6">Offences (2)</h2>
+ <div class="offence-card sentence-card govuk-grid-column-two-thirds">
   <div class="offence-card-offence-details">
-    <h4 class="govuk-heading-s">{{ offence['offence-name'] }}</h4>
+    <h4 class="govuk-heading-s">Offence name</h4>
     <dl class="govuk-summary-list govuk-summary-list--no-border">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">Committed on</dt>
         <dd class="govuk-summary-list__value">
-          {{ offence['offence-start-date-day'] }}/{{ offence['offence-start-date-month'] }}/{{ offence['offence-start-date-year'] }}
-          {% if offence['offence-end-date-day'] > 0 %}
-            to {{ offence['offence-end-date-day'] }}/{{ offence['offence-end-date-month'] }}/{{ offence['offence-end-date-year'] }}
-          {% endif %}
-        </dd>
+          dd/mm/yyy
+            to  dd/mm/yyy
+         </dd>
       </div>
       <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">Committed on</dt>
+        <dt class="govuk-summary-list__key">Conviction date</dt>
         <dd class="govuk-summary-list__value">
-          {{ offence['offence-start-date-day'] }}/{{ offence['offence-start-date-month'] }}/{{ offence['offence-start-date-year'] }}
-          {% if offence['offence-end-date-day'] > 0 %}
-            to {{ offence['offence-end-date-day'] }}/{{ offence['offence-end-date-month'] }}/{{ offence['offence-end-date-year'] }}
-          {% endif %}
+          dd/mm/yyy
+            to  dd/mm/yyy
         </dd>
       </div>
       <div class="govuk-summary-list__row">
@@ -38,7 +34,31 @@
                                         Outcome
                                     </dt>
                                     <dd class="govuk-summary-list__value">
-                                        {{ sentence['outcome'] }}
+                                       Imprisonment
+                                    </dd>
+                                </div>
+                                <div class="govuk-summary-list__row">
+                                    <dt class="govuk-summary-list__key">
+                                        Sentence type
+                                    </dt>
+                                    <dd class="govuk-summary-list__value">
+                                       ORA SDS (Offender rehabilitation act standard determinate sentence)
+                                    </dd>
+                                </div>
+                                <div class="govuk-summary-list__row">
+                                    <dt class="govuk-summary-list__key">
+                                       Sentence length
+                                    </dt>
+                                    <dd class="govuk-summary-list__value">
+                                       0 years 30 months 0 weeks 0 days
+                                    </dd>
+                                </div>
+                                <div class="govuk-summary-list__row">
+                                    <dt class="govuk-summary-list__key">
+                                       Consecutive or concurrent
+                                    </dt>
+                                    <dd class="govuk-summary-list__value">
+                                      Forwith
                                     </dd>
                                 </div>
 
@@ -56,7 +76,82 @@
           {% if offence['status'] == 'draft' %}
             <a class="govuk-link--no-visited-state" href="{{ data.savedURL }}{% if '?' in data.savedURL %}&{% else %}?{% endif %}clearError=true">Continue updating outcome</a>
           {% else %}
-            <a class="govuk-link--no-visited-state" href="/{{data.prototypeVersion}}/update-outcome?index={{loop.index0}}&edit=false&clearError=true">Update outcome</a>
+            <a class="govuk-link--no-visited-state" href="./appeal-case-outcome">Update outcome</a>
+          {% endif %}
+        </li>
+      </ul>
+    {% endif %}
+  </div>
+
+  <div class="offence-card-actions">
+    <ul class="offence-card-actions-list">
+      <li class="offence-card-action-link">
+        <a href="/{{data.prototypeVersion}}/update-offence?index={{loop.index0}}&route=remand-to-sentence">Edit</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="offence-card sentence-card govuk-grid-column-two-thirds">
+  <div class="offence-card-offence-details">
+    <h4 class="govuk-heading-s">Offence name</h4>
+    <dl class="govuk-summary-list govuk-summary-list--no-border">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Committed on</dt>
+        <dd class="govuk-summary-list__value">
+          dd/mm/yyy
+            to  dd/mm/yyy
+         </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Conviction date</dt>
+        <dd class="govuk-summary-list__value">
+          dd/mm/yyy
+            to  dd/mm/yyy
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+                                    <dt class="govuk-summary-list__key">
+                                        Outcome
+                                    </dt>
+                                    <dd class="govuk-summary-list__value">
+                                       Imprisonment
+                                    </dd>
+                                </div>
+                                <div class="govuk-summary-list__row">
+                                    <dt class="govuk-summary-list__key">
+                                        Sentence type
+                                    </dt>
+                                    <dd class="govuk-summary-list__value">
+                                       ORA SDS (Offender rehabilitation act standard determinate sentence)
+                                    </dd>
+                                </div>
+                                <div class="govuk-summary-list__row">
+                                    <dt class="govuk-summary-list__key">
+                                       Sentence length
+                                    </dt>
+                                    <dd class="govuk-summary-list__value">
+                                       0 years 30 months 0 weeks 0 days
+                                    </dd>
+                                </div>
+                                <div class="govuk-summary-list__row">
+                                    <dt class="govuk-summary-list__key">
+                                       Consecutive or concurrent
+                                    </dt>
+                                    <dd class="govuk-summary-list__value">
+                                      Forwith
+                                    </dd>
+                                </div>
+
+     
+    </dl>
+
+    {% if offence['outcome-changed'] != 'true' %}
+      <ul class="govuk-list govuk-!-margin-top-4 govuk-!-margin-bottom-2">
+        <li>
+          {% if offence['status'] == 'draft' %}
+            <a class="govuk-link--no-visited-state" href="{{ data.savedURL }}{% if '?' in data.savedURL %}&{% else %}?{% endif %}clearError=true">Continue updating outcome</a>
+          {% else %}
+            <a class="govuk-link--no-visited-state" href="./appeal-case-outcome">Update outcome</a>
           {% endif %}
         </li>
       </ul>
@@ -238,7 +333,8 @@
                                 {% if offence['status'] == 'draft' %}
                                   <a href="{{data.savedURL}}{% if '?' in data.savedURL %}&{% else %}?{% endif %}clearError=true">Continue updating outcome</a>
                                 {% else %}
-                                  <a href="/{{data.prototypeVersion}}/update-outcome?index={{loop.index0}}&edit=false&clearError=true">Update outcome</a>
+                                 href="./appeal-case-outcome">Update outcome</a>
+                                
                                 {% endif %}
                               </li>
                             </ul>
