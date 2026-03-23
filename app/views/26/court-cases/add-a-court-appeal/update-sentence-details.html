@@ -6,7 +6,9 @@
             <span class="govuk-caption-l">Record appeal</span>
             Update sentence details
         </h1>
+        
         <form class="form" action="/{{data.prototypeVersion}}/persist-appearance?edit=false" method="post">
+           
             <dl class="govuk-summary-list">
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
@@ -58,7 +60,7 @@
                       {{ data['appearance']['warrant-date-day'] }}/{{ data['appearance']['warrant-date-month'] }}/{{ data['appearance']['warrant-date-year'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="../add-a-sentence/conviction-date">
+                        <a class="govuk-link" href="../add-a-sentence/conviction-date?edit=true">
                             Update<span class="govuk-visually-hidden"> court name</span>
                         </a>
                     </dd>
@@ -71,33 +73,20 @@
                         	SDS (Standard Determinate Sentence)
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="../add-a-sentence/sentence-type?edit-true">
+                        <a class="govuk-link" href="sentence-type?edit=true">
                             Update<span class="govuk-visually-hidden"> court name</span>
                         </a>
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
-                        Custodial term
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                       Imprisonment
-                    </dd>
-                    <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="../add-a-sentence/outcome?edit-true">
-                            Update<span class="govuk-visually-hidden"> court name</span>
-                        </a>
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Licence period
+                        Sentence length
                     </dt>
                     <dd class="govuk-summary-list__value">
                        6 years 0 months 0 weeks 0 days
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="../add-a-sentence/sentence-length?edit-true">
+                        <a class="govuk-link" href="sentence-length?edit=true">
                             Update<span class="govuk-visually-hidden"> court name</span>
                         </a>
                     </dd>
@@ -117,7 +106,7 @@
                 </div>
             </dl>
             <div class="govuk-button-group">
-                    <a href="./task-list" class="govuk-button govuk-button--primary" data-module="govuk-button">
+                    <a href="./record-appeal" class="govuk-button govuk-button--primary" data-module="govuk-button">
                         Continue
                     </a>
                 </div>
