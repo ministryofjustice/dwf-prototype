@@ -13,54 +13,28 @@
                 <ul class="govuk-task-list govuk-!-margin-top-7">
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                        <div class="govuk-task-list__name-and-hint">
-                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href={% if data.appearanceDetailsComplete == 1 %}"check-answers"{% else %}"court-case-reference-number-select?appearanceDetailsCompleted=1"{% endif %} aria-describedby="appearance-infromation-status">
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="check-answers">
                                 Add hearing information
                             </a>
                         </div>
                         <div class="govuk-task-list__status" id="appearance-infromation-status">
-                            {% if data.appearanceDetailsComplete == 1 %}
-                            Completed
-                            {% elif data.appearanceDetailsStarted == 1 %}
-                            <strong class="govuk-tag govuk-tag--blue">
-                                Incomplete
-                            </strong>
-                            {% else %}
-                            <strong class="govuk-tag govuk-tag--blue">
-                                Incomplete
-                            </strong>
-                            {% endif %}
-                        </div>
+                           Completed
+                         </div>
                     </li>
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
-                            {% if data.additionalInformationComplete == 1 %}
+                            
                             <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./record-appeal">
                                 Record appeal
                             </a>
-                            {% elif data.appearanceDetailsComplete == 1 %}
-                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./record-appeal?additionalInformationStarted=1">
-                                Record appeal
-                            </a>
-                            {% else %}
-                            Record appeal
-                            {% endif %}
+                            
                         </div>
                         <div class="govuk-task-list__status" id="offences-and-sentences-status">
-                            {% if data.appearanceDetailsComplete == 1 %}
-                             {% if data.additionalInformationComplete == 1 %}
-                             Completed
-                             {% elif data.additionalInformationStarted == 1 %}
-                             <strong class="govuk-tag govuk-tag--blue">
-                                Incomplete
-                            </strong>
-                             {% else %}
-                            <strong class="govuk-tag govuk-tag--blue">
-                                Incomplete
-                            </strong>
-                            {% endif %}
-                            {% else %}
-                            <span class="govuk-task-list__status--cannot-start-yet">Cannot start yet</span>
-                            {% endif %}
+                            
+                           
+                                Completed
+                           
+                             
                         </div>
                     </li>
                    <!-- {% if data.appearance['warrant-type'] == "Remand" %}
@@ -205,32 +179,19 @@
                     {% endif %}-->
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
-                            {% if data.appearanceDetailsComplete == 1 %}
-                            {% if data.courtDocumentsComplete == 1 %}
-                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="../add-court-documents/court-documents" aria-describedby="court-documents-status">
+                            
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="../add-court-documents/upload-appeal-document" aria-describedby="court-documents-status">
                                 Upload court documents
                             </a>
-                            {% else %}
-                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="../add-court-documents/court-documents" aria-describedby="court-documents-status">
-                                Upload court documents
-                            </a>
-                            {% endif %}
-                            {% else %}
-                            Upload court documents
-                            {% endif %}
+                           
+                           
                         </div>
                         <div class="govuk-task-list__status" id="court-documents-status">
-                            {% if data.appearanceDetailsComplete == 1 %}
-                            {% if data.courtDocumentsComplete == 1 %}
-                                Completed
-                            {% else %}
+                           
                             <strong class="govuk-tag govuk-tag--grey">
                                 Optional
                             </strong>
-                            {% endif %}
-                            {% else %}
-                            <span class="govuk-task-list__status--cannot-start-yet">Cannot start yet</span>
-                            {% endif %}
+                         
                         </div>
                     </li>
                 </ul>
@@ -241,7 +202,7 @@
             <!-- <p class="govuk-body">To save a draft of the court case, you must first complete the appearance information.</p> -->
             <p class="govuk-body">Once you have finished adding all the information, select ‘Finish and save’. You will not be able to return to this page, but can edit the details in the Court cases tab. </p  >
                 <div class="govuk-button-group">
-                <button type="submit" disabled aria-disabled="true"  class="govuk-button" data-module="govuk-button">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
                     Finish and save
                 </button>
             </div>

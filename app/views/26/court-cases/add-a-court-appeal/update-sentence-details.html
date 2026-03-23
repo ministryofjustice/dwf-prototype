@@ -32,7 +32,7 @@
                 {{ data['appearance']['warrant-date-day'] }}/{{ data['appearance']['warrant-date-month'] }}/{{ data['appearance']['warrant-date-year'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="court-case-appeal-reference-number?edit=true">
+                        <a class="govuk-link" href="../add-an-offence/offence-date?edit=true">
                             Update<span class="govuk-visually-hidden"> case reference number</span>
                         </a>
                     </dd>
@@ -55,9 +55,7 @@
                         Conviction date
                     </dt>
                     <dd class="govuk-summary-list__value">
-                       {{ data['appearance']['overall-conviction-date-day'] }}/{{
-                            data['appearance']['overall-conviction-date-month'] }}/{{
-                            data['appearance']['overall-conviction-date-year'] }}
+                      {{ data['appearance']['warrant-date-day'] }}/{{ data['appearance']['warrant-date-month'] }}/{{ data['appearance']['warrant-date-year'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link" href="../add-a-sentence/conviction-date">
@@ -70,10 +68,10 @@
                         Sentence type
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ sentence['sentence-type'] }}
+                        	SDS (Standard Determinate Sentence)
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="overall-case-outcome?edit-true">
+                        <a class="govuk-link" href="../add-a-sentence/sentence-type?edit-true">
                             Update<span class="govuk-visually-hidden"> court name</span>
                         </a>
                     </dd>
@@ -83,10 +81,10 @@
                         Custodial term
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['overall-case-outcome'] }}
+                       Imprisonment
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="overall-case-outcome?edit-true">
+                        <a class="govuk-link" href="../add-a-sentence/outcome?edit-true">
                             Update<span class="govuk-visually-hidden"> court name</span>
                         </a>
                     </dd>
@@ -96,10 +94,10 @@
                         Licence period
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['overall-case-outcome'] }}
+                       6 years 0 months 0 weeks 0 days
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="overall-case-outcome?edit-true">
+                        <a class="govuk-link" href="../add-a-sentence/sentence-length?edit-true">
                             Update<span class="govuk-visually-hidden"> court name</span>
                         </a>
                     </dd>
@@ -109,10 +107,10 @@
                         Consecutive or concurrent
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['overall-case-outcome'] }}
+                       Consecutive
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="overall-case-outcome?edit-true">
+                        <a class="govuk-link" href="../add-a-sentence/consecutive-concurrent?editConsecutiveConcurrent=true">
                             Update<span class="govuk-visually-hidden"> court name</span>
                         </a>
                     </dd>
