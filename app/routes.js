@@ -875,6 +875,8 @@ router.get("/:prototypeVersion/create-appeal", function (req, res) {
 router.get("/:prototypeVersion/overall-case-outcome", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
 
+
+
   // Safeguards
   req.session.data = req.session.data || {};
   req.session.data.appearance = req.session.data.appearance || {};
@@ -1922,13 +1924,13 @@ router.post("/:prototypeVersion/sentence-length-select", function (req, res) {
 });
 
 //Appeals outcomes
-router.post("/:prototypeVersion/appeal-outcome-select", function (req, res) {
+router.post("/appeal-outcome-select", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   var appealType = req.session.data["appeal"]["appeal-type"];
 
   if (appealType == "Sentence varied") {
     return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-court-appeal/update-sentence-details`
+      '/26/court-cases/add-a-court-appeal/update-sentence-details'
     );
   }
   if (appealType == "Appeal dismissed") {
@@ -1958,7 +1960,19 @@ router.post("/:prototypeVersion/appeal-outcome-select", function (req, res) {
   }
 
 });
+ 
 
+
+//Record appeal
+router.post("/record-appeal-submit", function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion;
+    var recordappeal = req.session.data['recordappeal']
+    if (recordappeal == "yes"){
+    res.redirect('/26/court-cases/add-a-court-appeal/task-list3')}
+    else {
+    res.redirect('/26/court-cases/add-a-court-appeal/task-list2')
+    }
+  })
 
 router.post("/:prototypeVersion/term-length-select", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;

@@ -4,7 +4,7 @@
 <div class="govuk-grid-row govuk-!-margin-top-4">    
 
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="/{{data.prototypeVersion}}/add-sentence-information-complete" method="post">
+        <form class="form" action="/record-appeal-submit" method="post">
             <h1 class="govuk-heading-l">
                 Record appeal
             </h1>
@@ -60,34 +60,16 @@
                                     </dd>
                                 </div>
 
-      {% if offence["merged-from"] %}
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">Merged from</dt>
-        <dd class="govuk-summary-list__value">{{ offence['merged-from'] }}</dd>
-      </div>
-      {% endif %}
+    
     </dl>
 
-    {% if offence['outcome-changed'] != 'true' %}
+  
       <ul class="govuk-list govuk-!-margin-top-4 govuk-!-margin-bottom-2">
-        <li>
-          {% if offence['status'] == 'draft' %}
-            <a class="govuk-link--no-visited-state" href="{{ data.savedURL }}{% if '?' in data.savedURL %}&{% else %}?{% endif %}clearError=true">Continue updating outcome</a>
-          {% else %}
+     
             <a class="govuk-link--no-visited-state" href="./appeal-case-outcome">Record appeal</a>
-          {% endif %}
-        </li>
-      </ul>
-    {% endif %}
+      
   </div>
 
- <!-- <div class="offence-card-actions">
-    <ul class="offence-card-actions-list">
-      <li class="offence-card-action-link">
-        <a href="/{{data.prototypeVersion}}/update-offence?index={{loop.index0}}&route=remand-to-sentence">Edit</a>
-      </li>
-    </ul>
-  </div>-->
 </div>
 
             <hr class="govuk-section-break govuk-section-break--l govuk-!-margin-top-8 govuk-section-break--visible">
@@ -99,27 +81,36 @@
                     
                   
             </div>
-            <div class="govuk-form-group govuk-!-margin-top-9">
-                <fieldset class="govuk-fieldset">
-                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-                       Have you finished recording all appealed offences?
-                    </legend>
-                    <div class="govuk-radios" data-module="govuk-radios">
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="finished-adding-offences" name="appearance[finished-adding-offences]" type="radio" value="yes">
-                            <label class="govuk-label govuk-radios__label" for="finished-adding-offences">
-                                Yes, I’ve finished
-                            </label>
+            
+            <div class="govuk-form-group">
+                    <fieldset class="govuk-fieldset">
+                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                                Select the outcome of the appeal for this offence
+                            </h1>
+                       </legend>
+                        <div class="govuk-radios" data-module="govuk-radios">
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="recordappeal-1" name="recordappeal"
+                                    type="radio" value="yes">
+                                <label class="govuk-label govuk-radios__label" for="recordappeal-1">
+                                   Yes, I’ve finished
+                                </label>
+                            </div>
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="record-appeal-2" name="recordappeal"
+                                    type="radio" value="no">
+                                <label class="govuk-label govuk-radios__label" for="recordappeal-2">
+                                    No, I’ll come back to it later
+                                </label>
+                            </div>
+                        
+                        
+                          
+                       
                         </div>
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="finished-adding-offences-2" name="appearance[finished-adding-offences]" type="radio" value="no">
-                            <label class="govuk-label govuk-radios__label" for="finished-adding-offences-2">
-                                No, I’ll come back to it later
-                            </label>
-                        </div>
-                    </div>
-                </fieldset>
-            </div>
+                    </fieldset>
+                </div>
+          
             <div class="govuk-button-group">
                 <button type="submit" class="govuk-button" data-module="govuk-button">
                     Continue
