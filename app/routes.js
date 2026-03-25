@@ -1935,27 +1935,27 @@ router.post("/appeal-outcome-select", function (req, res) {
   }
   if (appealType == "Appeal dismissed") {
     return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-court-appeal/record-appeal`
+      '/26/court-cases/add-a-court-appeal/record-appeal'
     );
   }
   if (appealType == "Appeal pending") {
     return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-court-appeal/record-appeal`
+      '/26/court-cases/add-a-court-appeal/record-appeal'
     );
   }
   if (appealType == "Conviction quashed") {
     return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-court-appeal/record-appeal`
+      '/26/court-cases/add-a-court-appeal/record-appeal'
     );
   }
   if (appealType == "Retrial") {
     return res.redirect(
-      `/${prototypeVersion}/court-cases/add-a-court-appeal/record-appeal`
+      '/26/court-cases/add-a-court-appeal/record-appeal'
     );
   }
   if (appealType == "Replaced by another offence") {
     return res.redirect(
-      `/${prototypeVersion}/court-cases/add-an-offence/offence-date`
+      '/26/court-cases/add-an-offence/offence-date'
     );
   }
 
