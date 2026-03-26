@@ -78,12 +78,13 @@
                         </a>
                     </dd>
                 </div>
+               
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Sentence length
                     </dt>
                     <dd class="govuk-summary-list__value">
-                       6 years 0 months 0 weeks 0 days
+                    {{ data['sentence']['sentence-length-years'] }} years {{ data['sentence']['sentence-length-months'] }} months {{ data['sentence']['sentence-length-weeks'] }} weeks  {{ data['sentence']['sentence-length-days'] }} days
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link" href="sentence-length?edit=true">
@@ -91,6 +92,7 @@
                         </a>
                     </dd>
                 </div>
+               
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Consecutive or concurrent

@@ -30,7 +30,7 @@
               <div class="govuk-summary-card">
                 <div class="govuk-summary-card__title-wrapper">
                   <h2 class="govuk-summary-card__title govuk-!-width-two-thirds court-case-name">
-                    T20212345 <span class="govuk-body">at</span> Liverpool Crown Court
+                    T20212345 <span class="govuk-body">at</span>  Liverpool Crown Court
                   </h2>
                   <ul class="govuk-summary-card__actions">
                     <li class="govuk-summary-card__action">
@@ -78,23 +78,23 @@
                       <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">First day in custody</dt>
                         <dd class="govuk-summary-list__value">
-                         4/12/2023
+                         4/12/2023 (Sentencing)
                         </dd>
                       </div>
+                      
                       <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">Overall case outcome</dt>
-                        <dd class="govuk-summary-list__value">
-                           Imprisonment
-                      </dd>
+                         
+                       {{ data['appeal']['appeal-type'] }}
                       </div>
-
-                     
+  
                         <div class="govuk-summary-list__row">
                           <dt class="govuk-summary-list__key">Overall sentence length</dt>
                           <dd class="govuk-summary-list__value">
-                           0 years 38 months 0 weeks 0 days
+                            {{ data['sentence']['sentence-length-years'] }} years {{ data['sentence']['sentence-length-months'] }} months {{ data['sentence']['sentence-length-weeks'] }} weeks {{ data['sentence']['sentence-length-days'] }} days
                           </dd>
                         </div>
+                        
                         <div class="govuk-summary-list__row">
                           <dt class="govuk-summary-list__key">Conviction date</dt>
                           <dd class="govuk-summary-list__value">
@@ -123,7 +123,8 @@
 
                         <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Warrant date</h3>
                         <p class="govuk-body govuk-!-margin-bottom-2">
-                          4/12/2023
+                          4/12/2023 
+                           
                         </p>
 
                         <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Outcome</h3>
