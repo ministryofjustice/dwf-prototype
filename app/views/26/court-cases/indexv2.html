@@ -30,7 +30,7 @@
               <div class="govuk-summary-card">
                 <div class="govuk-summary-card__title-wrapper">
                   <h2 class="govuk-summary-card__title govuk-!-width-two-thirds court-case-name">
-                    T20212345 <span class="govuk-body">at</span> Swansea Crown Court
+                    T20212345 <span class="govuk-body">at</span>  Liverpool Crown Court
                   </h2>
                   <ul class="govuk-summary-card__actions">
                     <li class="govuk-summary-card__action">
@@ -78,21 +78,21 @@
                       <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">First day in custody</dt>
                         <dd class="govuk-summary-list__value">
-                        31/01/2026  (Sentencing)
+                         4/12/2023 (Sentencing)
                         </dd>
                       </div>
                       
                       <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">Overall case outcome</dt>
                         
-                            Imprisonment
+                          {{ data.appearance['overall-case-outcome'] }}
                          
                       </div>
   
                         <div class="govuk-summary-list__row">
                           <dt class="govuk-summary-list__key">Overall sentence length</dt>
                           <dd class="govuk-summary-list__value">
-                             11 years 0 months 0 months 0 days
+                            {{ data['sentence']['sentence-length-years'] }} years {{ data['sentence']['sentence-length-months'] }} months {{ data['sentence']['sentence-length-weeks'] }} weeks {{ data['sentence']['sentence-length-days'] }} days
                           </dd>
                         </div>
                         
@@ -122,22 +122,22 @@
                         <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Case reference</h3>
                         <p class="govuk-body govuk-!-margin-bottom-2">T20212345</p>
 
-                        <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Warrant date</h3>
+                        <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Hearing date</h3>
                         <p class="govuk-body govuk-!-margin-bottom-2">
-                          31/01/2026
+                          4/12/2023 
                            
                         </p>
 
                         <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Outcome</h3>
-                        <p class="govuk-body govuk-!-margin-bottom-2">Imprisonment</p>
+                        <p class="govuk-body govuk-!-margin-bottom-2">Sentence varied</p>
                       </div>
 
                       <div class="govuk-grid-column-two-thirds">
                         <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Location</h3>
-                        <p class="govuk-body govuk-!-margin-bottom-2">Swansea Crown Court</p>
+                        <p class="govuk-body govuk-!-margin-bottom-2">Liverpool Crown Court</p>
 
                         <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Warrant type</h3>
-                        <p class="govuk-body govuk-!-margin-bottom-2">Sentencing</p>
+                        <p class="govuk-body govuk-!-margin-bottom-2">Appeal order</p>
 
                         {% if lastAppearance['overall-case-outcome'] == 'Imprisonment' %}
                           <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Conviction date</h3>
@@ -154,7 +154,9 @@
                               <span class="govuk-details__summary-text">offences (3)</span>
                             </summary>
                             <div class="govuk-details__text">
-                              <div class="offence-card sentence-card">
+                              
+                            
+                                 <div class="offence-card sentence-card">
                                   <div class="offence-card-offence-details">
                                                 <span class="govuk-body">Count 1</span>
                                                 <h4 class="govuk-heading-s">Contrary to section 4(3) of and Schedule 4 to the Misuse of Drugs Act 1971 and section 1(1) of the Criminal Law Act 1977  
@@ -178,7 +180,14 @@
                                                            31/01/2026
                                                         </dd>
                                                     </div>
-                                                    
+                                                    <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                            Appeal outcome
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                            Sentence varied
+                                                        </dd>
+                                                    </div>
                                                     <div class="govuk-summary-list__row">
                                                         <dt class="govuk-summary-list__key">
                                                             Sentence type
@@ -193,7 +202,7 @@
                                                             Sentence length
                                                         </dt>
                                                         <dd class="govuk-summary-list__value">
-                                                            11 years 0 months 0 weeks 0 days
+                                                            8 years 0 months 0 weeks 0 days
                                                         </dd>
                                                     </div>
                                                    
@@ -234,7 +243,14 @@
                                                            31/01/2026
                                                         </dd>
                                                     </div>
-                                                    
+                                                    <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                            Appeal outcome
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                            Appeal dismissed
+                                                        </dd>
+                                                    </div>
                                                     <div class="govuk-summary-list__row">
                                                         <dt class="govuk-summary-list__key">
                                                             Sentence type
@@ -249,7 +265,7 @@
                                                             Sentence length
                                                         </dt>
                                                         <dd class="govuk-summary-list__value">
-                                                            8 years 0 months 0 weeks 0 days
+                                                            11 years 0 months 0 weeks 0 days
                                                         </dd>
                                                     </div>
                                                    
@@ -289,6 +305,14 @@
                                                         </dt>
                                                         <dd class="govuk-summary-list__value">
                                                             31/01/2026
+                                                        </dd>
+                                                    </div>
+                                                    <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                            Conviction quashed
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                            Sentence varied
                                                         </dd>
                                                     </div>
                                                     
@@ -336,7 +360,7 @@
                     <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-top-4">
                     <p class="govuk-body govuk-!-margin-top-6">
                       <a class="govuk-link--no-visited-state govuk-!-font-weight-bold"
-                         href="./court-cases/court-case-detail2">
+                         href="court-case-detail3">
                         {% if (courtCase['source'] == "nomis") or (courtCase['status'] == "inactive") %}
                           View all hearings
                         {% else %}

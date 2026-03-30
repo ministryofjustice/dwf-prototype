@@ -1935,7 +1935,7 @@ router.post("/appeal-outcome-select", function (req, res) {
   }
   if (appealType == "Appeal dismissed") {
     return res.redirect(
-      '/26/court-cases/add-a-court-appeal/record-appeal'
+      '/26/court-cases/add-a-court-appeal/record-appeal-updated2'
     );
   }
   if (appealType == "Appeal pending") {
@@ -1945,7 +1945,7 @@ router.post("/appeal-outcome-select", function (req, res) {
   }
   if (appealType == "Conviction quashed") {
     return res.redirect(
-      '/26/court-cases/add-a-court-appeal/record-appeal'
+      '/26/court-cases/add-a-court-appeal/record-appeal-updated3'
     );
   }
   if (appealType == "Retrial") {
@@ -1973,6 +1973,8 @@ router.post("/record-appeal-submit", function (req, res) {
     res.redirect('/26/court-cases/add-a-court-appeal/task-list2')
     }
   })
+
+
 
 router.post("/:prototypeVersion/term-length-select", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
