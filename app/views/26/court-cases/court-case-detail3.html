@@ -2,7 +2,6 @@
 {% set backLinkTarget = '/' + data.prototypeVersion + '/court-cases/' %}
 {% block content %}
 <!-- Court cases detailed view -->
-{% set lastAppearance = data.courtCases[data.courtCaseIndex].appearances | last %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
         <div class="govuk-grid-row">
@@ -426,6 +425,6 @@
             </div>
         </div>
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-  
+
     </div>
     {% endblock %}
