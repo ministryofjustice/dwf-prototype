@@ -1,0 +1,27 @@
+{% extends "./template.html" %}
+<!-- {% set backLinkTarget = 'court-case-detail' %} -->
+{% set backLinkTarget = '/' + data.prototypeVersion + '/court-cases/appearance-detail' %}
+{% set noBackLink = true %}
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" action="./" method="post">
+            <div class="moj-interruption-card">
+                <div class="moj-interruption-card__content">
+                  <h1 class="govuk-heading-l moj-interruption-card__heading">Are you sure you want to leave this page?</h1>
+                  <div class="govuk-body moj-interruption-card__body">
+                            <p class="govuk-body">Leaving before you have finished adding information for the appearance {{ data['appearance']['court-case-ref'] }} at {{ data['appearance']['court-name'] }} on {{ data['appearance']['warrant-date-day'] }}/{{ data['appearance']['warrant-date-month'] }}/{{ data['appearance']['warrant-date-year'] }}, any information you have entered will be lost.</p>
+                <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-top-6">Are you sure you want to leave?</p>
+                  </div>
+                  <div class="govuk-button-group moj-interruption-card__actions">
+                    <button type="submit" class="govuk-button govuk-button--inverse" data-module="govuk-button">
+                      Yes, leave
+                  </button>
+                    <a class="govuk-link govuk-link--inverse" href="check-answers">Go back</a>
+                  </div>
+                </div>
+              </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

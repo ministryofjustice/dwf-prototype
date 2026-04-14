@@ -731,6 +731,64 @@ router.get("/:prototypeVersion/delete-court-case", function (req, res) {
   res.redirect(`/${prototypeVersion}/court-cases/court-cases-standalone`);
 });
 
+// v27 Quick start entry point with auto-populated data
+router.get("/:prototypeVersion/quick-start-entry", function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion;
+  
+  // Only allow v27
+  if (prototypeVersion !== "27") {
+    return res.redirect(`/${prototypeVersion}/court-cases/confirm-exit`);
+  }
+
+  // Clear existing session data
+  delete req.session.data.courtCaseIndex;
+  delete req.session.data.courtCase;
+  delete req.session.data.appearance;
+
+  // Initialize session structures
+  if (!req.session.data.courtCases) {
+    req.session.data.courtCases = [];
+  }
+
+  // Set entry mode flag for template logic
+  req.session.data.entryMode = "api-pre-populated";
+  
+  // Set route for consistent offence flow
+  req.session.data.route = "new-court-case";
+
+  // Pre-populate with dummy API data
+  req.session.data.warrantType = "Remand";
+  
+  // Initialize court case and appearance objects
+  req.session.data.courtCase = {
+    "court-case-num": req.session.data.courtCases.length,
+    appearances: []
+  };
+
+  req.session.data.appearance = {
+    "warrant-type": "Remand",
+    "court-case-ref": ["CARE-123456"],
+    "warrant-date-day": "01",
+    "warrant-date-month": "04",
+    "warrant-date-year": "2026",
+    "court-name": "Crown Court",
+    "overall-case-outcome-apply-all": "required",
+    offences: []
+  };
+
+  // Add to court cases
+  req.session.data.courtCases.push(req.session.data.courtCase);
+  req.session.data.courtCaseIndex = req.session.data.courtCases.length - 1;
+
+  // Do NOT mark appearance details as complete - show "Partially complete" instead
+  req.session.data.appearanceDetailsComplete = 0;
+  req.session.data.appearanceDetailsStarted = 0;
+  req.session.data.edit = "false";
+
+  // Redirect to task-list
+  return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list?entryMode=api-pre-populated`);
+});
+
 //Add an appearance
 router.get("/:prototypeVersion/create-appearance", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
@@ -1063,6 +1121,10 @@ router.post("/:prototypeVersion/persist-appearance", function (req, res) {
       `/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers`
     );
   } else if (route == "add-a-court-case") {
+    // Mark remand warrant task as viewed for v27
+    if (prototypeVersion === "27" && req.session.data.tasks) {
+      req.session.data.tasks.remandWarrantViewed = true;
+    }
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-court-case/confirmation`
     );
@@ -1079,6 +1141,10 @@ router.post("/:prototypeVersion/persist-appearance", function (req, res) {
       return res.redirect(`/${prototypeVersion}/court-cases/`);
     }
     if (req.query.appearanceComplete == "true") {
+      // Mark remand warrant task as viewed for v27 if in quick-start flow
+      if (prototypeVersion === "27" && req.session.data.tasks && req.session.data.entryMode === "api-pre-populated") {
+        req.session.data.tasks.remandWarrantViewed = true;
+      }
       return res.redirect(
         `/${prototypeVersion}/court-cases/add-a-court-appearance/confirmation`
       );
@@ -3075,11 +3141,63 @@ router.get("/:prototypeVersion/launch-prototype", function (req, res) {
   req.session.regenerate(function () {
     req.session.data = JSON.parse(JSON.stringify(sessionData));
     req.session.data.prototypeVersion = prototypeVersion;
+    
+    // Initialize task tracking for v27
+    if (prototypeVersion === "27") {
+      req.session.data.taskStateSeed = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+      req.session.data.tasks = {
+        remandWarrantViewed: false,
+        newDocumentsCount: 2,  // Currently 2 documents have "New" tag
+        docsViewed: []
+      };
+    }
+    
     console.log(
       `Launching prototype version: ${prototypeVersion} with dataset: ${dataset}`
     );
-    res.redirect(`/${prototypeVersion}/court-cases/`);
+    res.redirect(`/${prototypeVersion}/overview.html`);
   });
+});
+
+// v27 Document viewing - decrements task count and opens the document
+router.get("/:prototypeVersion/mark-document-viewed", function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion;
+  const docId = req.query.docId || "0";
+  const documentPaths = {
+    "0": "/public/documents/remand-warrant-joe-bloggs.pdf",
+    "1": "/public/documents/indictment-court-case-2.pdf",
+  };
+  const fallbackPath = `/${prototypeVersion}/documents.html`;
+  const redirectTarget = documentPaths[docId] || fallbackPath;
+  
+  // Only for v27
+  if (prototypeVersion !== "27") {
+    return res.redirect(fallbackPath);
+  }
+
+  if (!req.session.data.tasks) {
+    req.session.data.tasks = {
+      remandWarrantViewed: false,
+      newDocumentsCount: 0,
+      docsViewed: []
+    };
+  }
+
+  if (!req.session.data.tasks.docsViewed) {
+    req.session.data.tasks.docsViewed = [];
+  }
+
+  const alreadyViewed = req.session.data.tasks.docsViewed.includes(docId);
+  
+  if (!alreadyViewed) {
+    req.session.data.tasks.docsViewed.push(docId);
+
+    if (req.session.data.tasks.newDocumentsCount > 0) {
+      req.session.data.tasks.newDocumentsCount--;
+    }
+  }
+  
+  return res.redirect(redirectTarget);
 });
 
 

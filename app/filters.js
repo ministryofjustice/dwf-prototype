@@ -1,6 +1,34 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
 
+function formatGovukDate(value) {
+    const formatter = new Intl.DateTimeFormat('en-GB', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    })
+
+    if (value === undefined || value === null || value === '') {
+        return ''
+    }
+
+    if (value === 'today') {
+        return formatter.format(new Date())
+    }
+
+    const date = value instanceof Date ? value : new Date(value)
+
+    if (Number.isNaN(date.getTime())) {
+        return value
+    }
+
+    return formatter.format(date)
+}
+
+addFilter('govukDate', function(value) {
+    return formatGovukDate(value)
+})
+
 addFilter('unique', function(arr, field) {
     return [...new Set(arr.map(obj => obj[field]))]
 })
