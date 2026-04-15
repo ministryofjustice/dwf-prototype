@@ -128,12 +128,15 @@ And the notification badge should update or be removed
 
 # Feature: Documents (Unread Documents)
 
-## Scenario: Display unread documents
+Note: Unread documents are **not** represented as task panels in the Things to Do section and do **not** contribute to the Things to Do counter. They are surfaced only via the notification badge on the Documents tab in the service navigation.
+
+## Scenario: Display notification badge when unread documents exist
 
 Given there are unread documents
-When the user views the Things to Do section
-Then a single task panel should be displayed showing the number of unread documents
-And a notification badge should appear on the Documents tab with the unread count
+When the user views the service navigation
+Then a blue notification badge should appear on the Documents tab with the unread count
+And no task panel should be displayed in the Things to Do section for documents
+And the Things to Do counter should not include the document count
 
 ---
 
@@ -143,7 +146,6 @@ Given a document is unread
 When the user clicks on the document link
 Then the document should be marked as read
 And the notification badge count should decrement
-And the Things to Do panel should update the unread count
 
 ---
 
@@ -151,8 +153,7 @@ And the Things to Do panel should update the unread count
 
 Given all documents have been opened
 When the user returns to the landing page
-Then the notification badge should be removed
-And the Things to Do panel should be removed
+Then the notification badge on the Documents tab should be removed
 
 ---
 

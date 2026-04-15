@@ -32,14 +32,20 @@
 {% block head %}
 {% include "includes/head.html" %}<style>
   .notification-badge {
-    display: inline-block;
-    margin-left: 8px;
-    padding: 4px 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 26px;
+    height: 26px;
+    border-radius: 50%;
     background-color: #1d70b8;
     color: white;
     font-weight: bold;
-    border-radius: 3px;
     font-size: 14px;
+    margin-left: 4px;
+    padding: 0 4px;
+    box-sizing: border-box;
+    vertical-align: middle;
   }
 </style><!-- {%- from  "hmrc/components/timeout-dialog/macro.njk" import hmrcTimeoutDialog -%}
 {{ hmrcTimeoutDialog ({
@@ -351,7 +357,7 @@ Court cases and release dates
           <li class="govuk-service-navigation__item{% if documentsActive %} govuk-service-navigation__item--active{% endif %}">
             <a class="govuk-service-navigation__link" href="/{{ data.prototypeVersion }}/documents.html" data-task-document-count="{% if data.tasks and data.tasks.newDocumentsCount %}{{ data.tasks.newDocumentsCount }}{% else %}0{% endif %}"{% if documentsActive %} aria-current="true"{% endif %}>
               Documents
-              {% if data.tasks and data.tasks.newDocumentsCount > 0 %}<span class="moj-notification-badge">{{ data.tasks.newDocumentsCount }}</span>{% endif %}
+              {% if data.tasks and data.tasks.newDocumentsCount > 0 %}<span class="notification-badge">{{ data.tasks.newDocumentsCount }}</span>{% endif %}
             </a>
           </li>
         </ul>

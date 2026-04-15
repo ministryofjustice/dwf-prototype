@@ -102,7 +102,7 @@ var TaskManager = (function() {
     return isNaN(count) ? 0 : count;
   }
 
-  // Count all pending tasks (remand, calculation, documents)
+  // Count all pending tasks (remand, calculation only — documents are not tasks)
   function countPendingTasks() {
     var t = getTasks();
     var count = 0;
@@ -110,8 +110,6 @@ var TaskManager = (function() {
     if (!t.remandWarrantReviewed) count++;
     // Calculation
     if (t.remandWarrantReviewed && !t.calculationPerformed) count++;
-    // Documents
-    if (getDocumentCount() > 0) count++;
     return count;
   }
 
@@ -194,7 +192,7 @@ var TaskManager = (function() {
     var docCount = getDocumentCount();
     if (documentsNav && docCount > 0) {
       var badge = document.createElement('span');
-      badge.className = 'moj-notification-badge';
+      badge.className = 'notification-badge';
       badge.textContent = docCount;
       badge.setAttribute('aria-label', 'Outstanding document tasks');
       documentsNav.appendChild(badge);

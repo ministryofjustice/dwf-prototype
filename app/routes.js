@@ -803,13 +803,13 @@ router.get("/:prototypeVersion/create-appearance", function (req, res) {
     console.log("Court case" + req.session.data.courtCase)
   }
   const lastAppearance = req.session.data.courtCase.appearances.at(-1);
-  req.session.data.appearance = {
+  req.session.data.appearance = lastAppearance ? {
     offences: lastAppearance.offences,
     "court-name": lastAppearance["next-court-name"],
     "warrant-date-day": lastAppearance["next-court-date-day"],
     "warrant-date-month": lastAppearance["next-court-date-month"],
     "warrant-date-year": lastAppearance["next-court-date-year"],
-  };
+  } : { offences: [] };
   if (
     prototypeVersion == "v8" ||
     prototypeVersion == "v9" ||
@@ -3155,7 +3155,11 @@ router.get("/:prototypeVersion/launch-prototype", function (req, res) {
     console.log(
       `Launching prototype version: ${prototypeVersion} with dataset: ${dataset}`
     );
-    res.redirect(`/${prototypeVersion}/overview.html`);
+    if (prototypeVersion === "27") {
+      res.redirect(`/${prototypeVersion}/overview.html`);
+    } else {
+      res.redirect(`/${prototypeVersion}/court-cases/`);
+    }
   });
 });
 
@@ -3165,7 +3169,7 @@ router.get("/:prototypeVersion/mark-document-viewed", function (req, res) {
   const docId = req.query.docId || "0";
   const documentPaths = {
     "0": "/public/documents/remand-warrant-joe-bloggs.pdf",
-    "1": "/public/documents/indictment-court-case-2.pdf",
+    "1": "/public/documents/court-register-city-of-london.pdf",
   };
   const fallbackPath = `/${prototypeVersion}/documents.html`;
   const redirectTarget = documentPaths[docId] || fallbackPath;
