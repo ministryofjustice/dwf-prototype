@@ -129,7 +129,7 @@ var TaskManager = (function() {
     var remandPanels = document.querySelectorAll('article.moj-ticket-panel');
     remandPanels.forEach(function(panel) {
       var link = panel.querySelector('a');
-      if (link && link.textContent.indexOf('Review new remand warrant') !== -1) {
+      if (link && link.textContent.indexOf('Enter information from a remand warrant') !== -1) {
         panel.style.display = t.remandWarrantReviewed ? 'none' : '';
       }
     });

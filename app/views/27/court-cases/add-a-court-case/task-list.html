@@ -17,8 +17,40 @@
                 {% elif data.appearance['warrant-type'] === 'Remand' %}
                     <h2 class="govuk-heading-m">Enter information from a remand warrant</h2>
                     {% endif %}
-                <p class="govuk-body">You must enter information exactly as it is written on the warrant.</p>
+                <p class="govuk-body">The information should match exactly to what is written on the warrant. Some information has been retrieved directly from the court documents.</p>
                 <ul class="govuk-task-list govuk-!-margin-top-7">
+                    <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                        <div class="govuk-task-list__name-and-hint">
+                            {% if data.appearanceDetailsComplete == 1 or isPreloadedRemandJourney %}
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="../add-court-documents/court-documents" aria-describedby="court-documents-status">
+                                View and add documents
+                            </a>
+                            {% else %}
+                            View and add documents
+                            {% endif %}
+                        </div>
+                        <div class="govuk-task-list__status" id="court-documents-status">
+                            {% if isPreloadedRemandJourney %}
+                            {% if preloadedDocumentCount > 0 %}
+                            <strong class="govuk-tag govuk-tag--grey">
+                                {{ preloadedDocumentCount }} new document{% if preloadedDocumentCount != 1 %}s{% endif %}
+                            </strong>
+                            {% else %}
+                            Completed
+                            {% endif %}
+                            {% elif data.appearanceDetailsComplete == 1 %}
+                            {% if data.courtDocumentsComplete == 1 %}
+                                Completed
+                            {% else %}
+                            <strong class="govuk-tag govuk-tag--grey">
+                                Optional
+                            </strong>
+                            {% endif %}
+                            {% else %}
+                            <span class="govuk-task-list__status--cannot-start-yet">Cannot start yet</span>
+                            {% endif %}
+                        </div>
+                    </li>
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
                             <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href={% if data.appearanceDetailsComplete == 1 or data.entryMode == "api-pre-populated" %}"check-answers"{% else %}"court-case-reference-number?appearanceDetailsStarted=1"{% endif %} aria-describedby="appearance-infromation-status">
@@ -30,7 +62,7 @@
                             Completed
                             {% elif data.entryMode == "api-pre-populated" %}
                             <strong class="govuk-tag govuk-tag--blue">
-                                Partially complete
+                                Incomplete
                             </strong>
                             {% elif data.appearanceDetailsStarted == 1 %}
                             <strong class="govuk-tag govuk-tag--blue">
@@ -177,42 +209,6 @@
                         </div>
                     </li>
                     {% endif %}
-                    <li class="govuk-task-list__item govuk-task-list__item--with-link">
-                        <div class="govuk-task-list__name-and-hint">
-                            {% if data.appearanceDetailsComplete == 1 or isPreloadedRemandJourney %}
-                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="../add-court-documents/court-documents" aria-describedby="court-documents-status">
-                                {% if isPreloadedRemandJourney %}
-                                Review court documents
-                                {% else %}
-                                Upload court documents
-                                {% endif %}
-                            </a>
-                            {% else %}
-                            Upload court documents
-                            {% endif %}
-                        </div>
-                        <div class="govuk-task-list__status" id="court-documents-status">
-                            {% if isPreloadedRemandJourney %}
-                            {% if preloadedDocumentCount > 0 %}
-                            <strong class="govuk-tag govuk-tag--grey">
-                                {{ preloadedDocumentCount }} new document{% if preloadedDocumentCount != 1 %}s{% endif %}
-                            </strong>
-                            {% else %}
-                            Completed
-                            {% endif %}
-                            {% elif data.appearanceDetailsComplete == 1 %}
-                            {% if data.courtDocumentsComplete == 1 %}
-                                Completed
-                            {% else %}
-                            <strong class="govuk-tag govuk-tag--grey">
-                                Optional
-                            </strong>
-                            {% endif %}
-                            {% else %}
-                            <span class="govuk-task-list__status--cannot-start-yet">Cannot start yet</span>
-                            {% endif %}
-                        </div>
-                    </li>
                 </ul>
             </div>
             <h2 class="govuk-heading-m">

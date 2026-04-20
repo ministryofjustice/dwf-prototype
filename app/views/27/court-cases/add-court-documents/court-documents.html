@@ -11,84 +11,62 @@
         <fieldset class="govuk-fieldset">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
-              Review court documents
+              View and add documents
             </h1>
           </legend>
 
-          <p class="govuk-body">Two new documents have been added to this remand warrant. Open each document to review it.</p>
+          <div id="file-upload-1-hint" class="govuk-hint">
+            The file type must be a .PDF, JPG, .PNG, .DOC or .DOCX.
+          </div>
 
-          <ul class="govuk-list documents-list govuk-!-margin-bottom-6">
-            <li class="documents-list-item">
-              <div>
-                <h3 class="govuk-heading-s document-title govuk-!-margin-bottom-0" style="display:flex; align-items:center;">
-                  <span>
-                    <a href="/{{ data.prototypeVersion }}/mark-document-viewed?docId=0" class="govuk-link--no-visited-state" target="_blank">Remand warrant</a>
-                    <span class="govuk-body-s" style="color:#484949">PDF 2.2MB</span>
-                  </span>
-                </h3>
+          <dl class="govuk-summary-list govuk-summary-list--long-key govuk-!-margin-bottom-0">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                <a class="govuk-link" href="/{{ data.prototypeVersion }}/mark-document-viewed?docId=0" target="_blank">remandwarrant_example.pdf</a>
+                <div class="govuk-body govuk-!-margin-0">Remand warrant</div>
+                <div class="govuk-body-s govuk-!-margin-0" style="color:#484949">Source: Common Platform</div>
+              </dt>
+              <dd class="govuk-summary-list__value">
+                <strong class="govuk-tag govuk-tag--grey">Retrieved</strong>
+              </dd>
+              <dd class="govuk-summary-list__actions"></dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                <a class="govuk-link" href="/{{ data.prototypeVersion }}/mark-document-viewed?docId=1" target="_blank">PCR Test Example.pdf</a>
+                <div class="govuk-body govuk-!-margin-0">Prison court register</div>
+                <div class="govuk-body-s govuk-!-margin-0" style="color:#484949">Source: Common Platform</div>
+              </dt>
+              <dd class="govuk-summary-list__value">
+                <strong class="govuk-tag govuk-tag--grey">Retrieved</strong>
+              </dd>
+              <dd class="govuk-summary-list__actions"></dd>
+            </div>
+          </dl>
 
-                <div class="govuk-grid-row govuk-!-padding-bottom-2 govuk-!-margin-top-2">
-                  <div class="govuk-grid-column-one-third govuk-!-margin-bottom-0">
-                    <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Case reference</h3>
-                    <p class="govuk-body govuk-!-margin-bottom-0">TB58634RB</p>
-                  </div>
-                  <div class="govuk-grid-column-one-third govuk-!-margin-bottom-0">
-                    <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Court name</h3>
-                    <p class="govuk-body govuk-!-margin-bottom-0">Manchester City Magistrates Court</p>
-                  </div>
-                  <div class="govuk-grid-column-one-third govuk-!-margin-bottom-0">
-                    <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Warrant date</h3>
-                    <p class="govuk-body govuk-!-margin-bottom-0">05/02/2026</p>
-                  </div>
-                  <div class="govuk-grid-column-full govuk-!-margin-bottom-0">
-                    <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Source</h3>
-                    <p class="govuk-body govuk-!-margin-bottom-0">Common Platform</p>
-                    <p class="govuk-body-s govuk-!-margin-bottom-0" style="color:#484949">
-                      File name: Manchester City Magistrates Court; Bloggs FEBRUARY; 2026-02-05; 01EK1123456
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </li>
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
-            <li class="documents-list-item">
-              <div>
-                <h3 class="govuk-heading-s document-title govuk-!-margin-bottom-0" style="display:flex; align-items:center;">
-                  <span>
-                    <a href="/{{ data.prototypeVersion }}/mark-document-viewed?docId=1" class="govuk-link--no-visited-state" target="_blank">Prison court register</a>
-                    <span class="govuk-body-s" style="color:#484949">PDF 2.2MB</span>
-                  </span>
-                </h3>
-
-                <div class="govuk-grid-row govuk-!-padding-bottom-2 govuk-!-margin-top-2">
-                  <div class="govuk-grid-column-one-third govuk-!-margin-bottom-0">
-                    <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Case reference</h3>
-                    <p class="govuk-body govuk-!-margin-bottom-0">TB58634RB</p>
-                  </div>
-                  <div class="govuk-grid-column-one-third govuk-!-margin-bottom-0">
-                    <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Court name</h3>
-                    <p class="govuk-body govuk-!-margin-bottom-0">Manchester City Magistrates Court</p>
-                  </div>
-                  <div class="govuk-grid-column-one-third govuk-!-margin-bottom-0">
-                    <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Warrant date</h3>
-                    <p class="govuk-body govuk-!-margin-bottom-0">05/02/2026</p>
-                  </div>
-                  <div class="govuk-grid-column-full govuk-!-margin-bottom-0">
-                    <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Source</h3>
-                    <p class="govuk-body govuk-!-margin-bottom-0">Common Platform</p>
-                    <p class="govuk-body-s govuk-!-margin-bottom-0" style="color:#484949">
-                      File name: Manchester City Magistrates Court; Bloggs FEBRUARY; 2026-02-05; 059HKT30923
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
+          <div class="govuk-form-group govuk-body">
+            <a class="govuk-link--no-visited-state" href="upload-document?document-type=bail order">Upload bail order</a>
+          </div>
+          <hr class="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-4">
+          <div class="govuk-form-group govuk-body">
+            <a class="govuk-link--no-visited-state" href="upload-document?document-type=suspended imprisonment order">Upload suspended imprisonment order</a>
+          </div>
+          <hr class="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-4">
+          <div class="govuk-form-group govuk-body">
+            <a class="govuk-link--no-visited-state" href="upload-document?document-type=notice of discontinuance">Upload notice of discontinuance</a>
+          </div>
+          <hr class="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-4">
+          <div class="govuk-form-group govuk-body">
+            <a class="govuk-link--no-visited-state" href="upload-document?document-type=community order">Upload community order</a>
+          </div>
 
           <div class="govuk-button-group govuk-!-margin-top-8">
             <button type="submit" class="govuk-button" data-module="govuk-button">
               Continue
             </button>
+            <a class="govuk-link" href="../add-a-court-case/task-list">Cancel</a>
           </div>
         </fieldset>
       </div>
