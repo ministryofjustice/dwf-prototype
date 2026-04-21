@@ -16,29 +16,27 @@
           </legend>
 
           <div id="file-upload-1-hint" class="govuk-hint">
-            The file type must be a .PDF, JPG, .PNG, .DOC or .DOCX.
+            View each document to confirm the details are correct. If anything is inaccurate, exit out of this journey and contact the relevant court to get it corrected. If you upload new documents, the file type must be a .PDF, JPG, .PNG, .DOC or .DOCX.
           </div>
 
           <dl class="govuk-summary-list govuk-summary-list--long-key govuk-!-margin-bottom-0">
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
                 <a class="govuk-link" href="/{{ data.prototypeVersion }}/mark-document-viewed?docId=0" target="_blank">remandwarrant_example.pdf</a>
-                <div class="govuk-body govuk-!-margin-0">Remand warrant</div>
-                <div class="govuk-body-s govuk-!-margin-0" style="color:#484949">Source: Common Platform</div>
+                <div class="govuk-body govuk-!-margin-0">Remand warrant</div> 
               </dt>
               <dd class="govuk-summary-list__value">
-                <strong class="govuk-tag govuk-tag--grey">Retrieved</strong>
+                <strong class="govuk-tag govuk-tag--grey">Common Platform</strong>
               </dd>
               <dd class="govuk-summary-list__actions"></dd>
             </div>
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
                 <a class="govuk-link" href="/{{ data.prototypeVersion }}/mark-document-viewed?docId=1" target="_blank">PCR Test Example.pdf</a>
-                <div class="govuk-body govuk-!-margin-0">Prison court register</div>
-                <div class="govuk-body-s govuk-!-margin-0" style="color:#484949">Source: Common Platform</div>
+                <div class="govuk-body govuk-!-margin-0">Prison court register</div> 
               </dt>
               <dd class="govuk-summary-list__value">
-                <strong class="govuk-tag govuk-tag--grey">Retrieved</strong>
+                <strong class="govuk-tag govuk-tag--grey">Common Platform</strong>
               </dd>
               <dd class="govuk-summary-list__actions"></dd>
             </div>
@@ -47,24 +45,24 @@
           <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
           <div class="govuk-form-group govuk-body">
-            <a class="govuk-link--no-visited-state" href="upload-document?document-type=bail order">Upload bail order</a>
+            <a class="govuk-link--no-visited-state" href="upload-document?document-type=bail order">Upload bail order (optional)</a>
           </div>
           <hr class="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-4">
           <div class="govuk-form-group govuk-body">
-            <a class="govuk-link--no-visited-state" href="upload-document?document-type=suspended imprisonment order">Upload suspended imprisonment order</a>
+            <a class="govuk-link--no-visited-state" href="upload-document?document-type=suspended imprisonment order">Upload suspended imprisonment order (optional)</a>
           </div>
           <hr class="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-4">
           <div class="govuk-form-group govuk-body">
-            <a class="govuk-link--no-visited-state" href="upload-document?document-type=notice of discontinuance">Upload notice of discontinuance</a>
+            <a class="govuk-link--no-visited-state" href="upload-document?document-type=notice of discontinuance">Upload notice of discontinuance (optional)</a>
           </div>
           <hr class="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-4">
           <div class="govuk-form-group govuk-body">
-            <a class="govuk-link--no-visited-state" href="upload-document?document-type=community order">Upload community order</a>
+            <a class="govuk-link--no-visited-state" href="upload-document?document-type=community order">Upload community order (optional)</a>
           </div>
 
           <div class="govuk-button-group govuk-!-margin-top-8">
             <button type="submit" class="govuk-button" data-module="govuk-button">
-              Continue
+              Confirm and continue
             </button>
             <a class="govuk-link" href="../add-a-court-case/task-list">Cancel</a>
           </div>
@@ -136,7 +134,7 @@
     {% endif %}
           <div class="govuk-button-group govuk-!-margin-top-8">
             <button type="submit" class="govuk-button" data-module="govuk-button">
-             Continue
+             Confirm and continue
             </button>
           </div>
     </form>
