@@ -7,6 +7,7 @@ on:
   push:
     branches:
       - "main"
+      - "RASS-2162"
 
 env:
   KUBE_NAMESPACE: ${{ secrets.KUBE_NAMESPACE }} # used in kubernetes-deploy.yaml too
