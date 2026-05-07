@@ -10,8 +10,8 @@ RUN npm install
 
 RUN chown -R appuser:appgroup /app
 
-USER 1017
+EXPOSE 3000
 
-RUN chmod +x start.sh
+USER 2000
 
-CMD ["./start.sh"]
+CMD ["npm", "run", "serve"]
