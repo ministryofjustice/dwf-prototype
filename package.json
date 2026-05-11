@@ -17,8 +17,6 @@
     "accessible-autocomplete": "^3.0.1",
     "govuk-frontend": "^6.1.0",
     "govuk-prototype-kit": "^13.20.0",
-    "hmrc-frontend": "^7.13.0",
-    "home-office-kit": "^1.2.0",
     "jquery": "3.7.1"
   }
 }
