@@ -10,7 +10,7 @@
     "npm": "^10"
   },
   "dependencies": {
-    "@govuk-prototype-kit/common-templates": "2.0.1",
+    "@govuk-prototype-kit/common-templates": "3.0.0",
     "@govuk-prototype-kit/step-by-step": "2.2.3",
     "@govuk-prototype-kit/task-list": "2.0.0",
     "@ministryofjustice/frontend": "5.1.5",
