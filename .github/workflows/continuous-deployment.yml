@@ -7,6 +7,7 @@ on:
   push:
     branches:
       - "main"
+      - "upgrade"
 
 env:
   KUBE_NAMESPACE: ${{ secrets.KUBE_NAMESPACE }} # used in kubernetes-deploy.yaml too
@@ -32,7 +33,7 @@ jobs:
         run: |
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
-          cat kubernetes-deploy-${{ github.ref_name }}.tpl | envsubst > kubernetes-deploy.yaml
+          cat kubernetes-deploy.tpl | envsubst > kubernetes-deploy.yaml
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REPOSITORY: ${{ vars.ECR_REPOSITORY }}
