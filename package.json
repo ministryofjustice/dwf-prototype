@@ -15,6 +15,7 @@
     "@ministryofjustice/frontend": "^9.0.0",
     "@ministryofjustice/hmpps-court-cases-release-dates-design": "5.0.1",
     "accessible-autocomplete": "^3.0.1",
+    "hmrc-frontend": "6.87.0",
     "govuk-frontend": "^6.1.0",
     "govuk-prototype-kit": "^13.20.0",
     "jquery": "3.7.1"
