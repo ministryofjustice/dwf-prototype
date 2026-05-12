@@ -9,6 +9,7 @@ jobs:
       contents: read
       actions: read
       security-events: write
+      id-token: write
     name: Project security Snyk dependency check
     uses: ministryofjustice/hmpps-github-actions/.github/workflows/security_snyk_scan_ecr.yml@v2
     with:
