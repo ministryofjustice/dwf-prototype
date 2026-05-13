@@ -1,0 +1,397 @@
+{% extends "v28/template.html" %}
+{% set calculationHistoryActive = true %}
+
+{% set dateLabels = {
+  CRD: "Conditional release date",
+  LED: "Licence expiry date",
+  SED: "Sentence expiry date",
+  HDCED: "Home detention curfew expiry date",
+  TUSED: "Top-up supervision expiry date",
+  PED: "Parole eligibility date",
+  NPD: "Non-parole date",
+  ARD: "Automatic release date"
+} %}
+
+{% set dateKeys = ["CRD", "LED", "SED", "HDCED", "TUSED", "PED", "NPD", "ARD"] %}
+
+{% block content %}
+<h1 class="govuk-heading-xl">Calculation history</h1>
+
+<div class="govuk-grid-row">
+
+  {# ── LEFT NAV PANE ── #}
+  <div class="govuk-grid-column-one-third">
+
+    {# 1. Jump to calculation #}
+    <form method="get" action="/v28/calculation-history" class="govuk-!-margin-bottom-4">
+      <div class="govuk-form-group govuk-!-margin-bottom-2">
+        <label class="govuk-label govuk-label--s" for="jumpSelect">
+          Jump to a calculation
+        </label>
+        <select class="govuk-select govuk-!-width-full" id="jumpSelect" name="selected">
+          {%- for calc in calcs -%}
+          <option value="{{ loop.index0 }}"{% if loop.index0 === selectedIndex %} selected{% endif %}>{{ calc.date }} — {{ calc.reason | truncate(22, true) }}{% if calc.hasChange %} — Changed{% endif %}</option>
+          {%- endfor -%}
+        </select>
+      </div>
+      <button type="submit" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0">Confirm</button>
+    </form>
+
+    {# 2. Hidden above indicator — combined with below into one nav #}
+
+    {# 3. Select a calculation heading #}
+    <p class="govuk-label govuk-label--s govuk-!-margin-bottom-1">Select a calculation</p>
+
+    {# 4. Window calc rows — MOJ side-navigation structure #}
+    <nav class="moj-side-navigation app-calc-nav" aria-label="Select a calculation">
+      <ul class="moj-side-navigation__list">
+        {%- for calc in windowCalcs %}
+          <li class="moj-side-navigation__item{% if calc.windowIndex === selectedIndex %} moj-side-navigation__item--active{% endif %}">
+            <a href="?selected={{ calc.windowIndex }}"
+               data-calc-index="{{ calc.windowIndex }}"
+               {% if calc.windowIndex === selectedIndex %}aria-current="location"{% endif %}>
+              <span class="app-calc-row__header">
+                <strong class="govuk-body app-calc-row__date">{{ calc.date }}</strong>
+                <span class="app-calc-row__tags">
+                  {% if calc.windowIndex === 0 %}<strong class="govuk-tag">Latest</strong>{% endif %}
+                  {% if calc.hasChange %}<strong class="govuk-tag govuk-tag--turquoise">Dates changed</strong>{% endif %}
+                </span>
+              </span>
+              <span class="govuk-body govuk-!-display-block">{{ calc.reason }}</span>
+              <span class="govuk-body govuk-!-display-block">{{ calc.establishment }}</span>
+            </a>
+          </li>
+        {%- endfor %}
+      </ul>
+    </nav>
+
+    {# 5. Pagination — single nav with prev/next as per GDS block pattern #}
+    {% if hiddenAbove > 0 or hiddenBelow > 0 %}
+      <nav class="govuk-pagination govuk-pagination--block" aria-label="Calculation navigation">
+        {% if hiddenAbove > 0 %}
+          <div class="govuk-pagination__prev">
+            <a class="govuk-link govuk-pagination__link" href="?selected={{ hiddenAbove - 1 }}">
+              <svg class="govuk-pagination__icon govuk-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg" height="13" width="15" focusable="false" aria-hidden="true" viewBox="0 0 15 13">
+                <path d="m6.5938-0.0078125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z"/>
+              </svg>
+              <span class="govuk-pagination__link-title">Newer calculations</span>
+              <span class="govuk-visually-hidden">:</span>
+              <span class="govuk-pagination__link-label">{{ prevPageStart1 }} to {{ hiddenAbove }} of {{ calcs | length }}</span>
+            </a>
+          </div>
+        {% endif %}
+        {% if hiddenBelow > 0 %}
+          <div class="govuk-pagination__next">
+            <a class="govuk-link govuk-pagination__link" href="?selected={{ windowEnd + 1 }}">
+              <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" focusable="false" aria-hidden="true" viewBox="0 0 15 13">
+                <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7246z"/>
+              </svg>
+              <span class="govuk-pagination__link-title">Older calculations</span>
+              <span class="govuk-visually-hidden">:</span>
+              <span class="govuk-pagination__link-label">{{ windowEnd + 2 }} to {{ nextPageEnd1 }} of {{ calcs | length }}</span>
+            </a>
+          </div>
+        {% endif %}
+      </nav>
+    {% endif %}
+
+  </div>
+
+  {# ── RIGHT DETAIL PANEL ── #}
+  <div class="govuk-grid-column-two-thirds" id="calc-detail-panel" aria-live="polite">
+
+    <h2 class="govuk-heading-l" id="calc-detail-heading">Calculation on {{ selected.date }}</h2>
+
+    {# Meta row — three labelled columns #}
+    <div class="govuk-grid-row govuk-!-margin-bottom-2">
+      <div class="govuk-grid-column-one-third">
+        <p class="govuk-body govuk-!-margin-bottom-0">
+          <strong class="govuk-!-display-block">Calculation reason</strong>
+          {{ selected.reason }}
+        </p>
+      </div>
+      <div class="govuk-grid-column-one-third">
+        <p class="govuk-body govuk-!-margin-bottom-0">
+          <strong class="govuk-!-display-block">Establishment</strong>
+          {{ selected.establishment }}
+        </p>
+      </div>
+      <div class="govuk-grid-column-one-third">
+        <p class="govuk-body govuk-!-margin-bottom-0">
+          <strong class="govuk-!-display-block">Source</strong>
+          {{ selected.source }}
+        </p>
+      </div>
+    </div>
+
+    {# What's changed — govuk-inset-text (blue left border) #}
+    {% if selected.hasChange and selected.changed | length %}
+      <div class="govuk-inset-text govuk-!-margin-bottom-4">
+        <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1">What's changed</p>
+        <ul class="govuk-list govuk-list--bullet">{%- for change in selected.changed -%}<li>{{ change }}</li>{%- endfor -%}</ul>
+      </div>
+    {% endif %}
+
+    {# Release dates — grey cards, N/A dates hidden #}
+    <h3 class="govuk-heading-m">Release dates</h3>
+    <div class="app-stat-card-grid govuk-!-margin-bottom-4">
+      {% for key in dateKeys %}
+        {% set dateEntry = selected.dates[key] %}
+        {% if dateEntry.value !== 'N/A' %}
+          <div class="app-stat-card">
+            <p class="govuk-heading-s govuk-!-margin-bottom-1">{{ key }}</p>
+            <p class="app-stat-card__description govuk-hint">{{ dateLabels[key] }}</p>
+            <p class="govuk-body govuk-!-margin-bottom-1">{{ dateEntry.value }}</p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {# Action buttons #}
+    <div class="govuk-button-group govuk-!-margin-bottom-6">
+      <button type="button" class="govuk-button govuk-button--secondary">Print notification slip</button>
+      <button type="button" class="govuk-button govuk-button--secondary">Record a counter check</button>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+    {# Court cases and adjustments — grey stat cards #}
+    <h3 class="govuk-heading-m">Included in this calculation</h3>
+    <div class="app-stat-card-grid app-stat-card-grid--thirds govuk-!-margin-bottom-4">
+      <div class="app-stat-card">
+        <p class="govuk-body govuk-!-margin-bottom-0">Court cases</p>
+        <p class="govuk-heading-m govuk-!-margin-bottom-0">{{ selected.courts }}</p>
+      </div>
+      <div class="app-stat-card">
+        <p class="govuk-body govuk-!-margin-bottom-0">Sentences</p>
+        <p class="govuk-heading-m govuk-!-margin-bottom-0">{{ selected.sentences }}</p>
+      </div>
+      <div class="app-stat-card">
+        <p class="govuk-body govuk-!-margin-bottom-0">Adjustments</p>
+        {% if selected.adjustments.length %}
+          {%- for adj in selected.adjustments -%}<p class="govuk-body-s govuk-!-margin-bottom-0"><strong>{{ adj }}</strong></p>{%- endfor -%}
+        {% else %}
+          <p class="govuk-body-s">None</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <details class="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">View all court case and adjustments information</span>
+      </summary>
+      <div class="govuk-details__text">
+
+        <h3 class="govuk-heading-m">Court cases</h3>
+
+        <h3 class="govuk-heading-s govuk-!-margin-bottom-4">T20250103 at Sheffield Crown Court</h3>
+
+        <div class="offence-card sentence-card govuk-!-margin-bottom-4">
+          <div class="offence-card-offence-details">
+            <span class="govuk-body">Count 1</span>
+            <h4 class="govuk-heading-s govuk-!-margin-bottom-2">AB06001 — Obstruct person acting in execution of the regulations</h4>
+            <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-0">
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Committed on</dt>
+                <dd class="govuk-summary-list__value">1 January 2025</dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Sentence date</dt>
+                <dd class="govuk-summary-list__value">20 March 2025</dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Sentence type</dt>
+                <dd class="govuk-summary-list__value">SDS (Standard Determinate Sentence)</dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Sentence length</dt>
+                <dd class="govuk-summary-list__value">1 year 0 months</dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Consecutive or concurrent</dt>
+                <dd class="govuk-summary-list__value">Forthwith</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="offence-card sentence-card govuk-!-margin-bottom-4">
+          <div class="offence-card-offence-details">
+            <span class="govuk-body">Count 2</span>
+            <h4 class="govuk-heading-s govuk-!-margin-bottom-2">AB13001 — Fail to comply with an animal by-product requirement</h4>
+            <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-0">
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Committed on</dt>
+                <dd class="govuk-summary-list__value">1 January 2025</dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Sentence date</dt>
+                <dd class="govuk-summary-list__value">20 March 2025</dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Sentence type</dt>
+                <dd class="govuk-summary-list__value">SDS (Standard Determinate Sentence)</dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Sentence length</dt>
+                <dd class="govuk-summary-list__value">5 years 0 months</dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Consecutive or concurrent</dt>
+                <dd class="govuk-summary-list__value">Concurrent</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+
+        <h3 class="govuk-heading-s govuk-!-margin-bottom-4">T20250102 at Manchester Crown Court</h3>
+
+        <div class="offence-card sentence-card govuk-!-margin-bottom-4">
+          <div class="offence-card-offence-details">
+            <span class="govuk-body">Count 1</span>
+            <h4 class="govuk-heading-s govuk-!-margin-bottom-2">AB13002 — Intentionally obstruct an authorised person</h4>
+            <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-0">
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Committed on</dt>
+                <dd class="govuk-summary-list__value">30 December 2024</dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Sentence date</dt>
+                <dd class="govuk-summary-list__value">12 February 2025</dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Sentence type</dt>
+                <dd class="govuk-summary-list__value">SDS (Standard Determinate Sentence)</dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Sentence length</dt>
+                <dd class="govuk-summary-list__value">3 years 0 months</dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Consecutive or concurrent</dt>
+                <dd class="govuk-summary-list__value">Forthwith</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="offence-card sentence-card govuk-!-margin-bottom-4">
+          <div class="offence-card-offence-details">
+            <span class="govuk-body">Count 2</span>
+            <h4 class="govuk-heading-s govuk-!-margin-bottom-2">AB13003 — Fail to give to an authorised person information / assistance</h4>
+            <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-0">
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Committed on</dt>
+                <dd class="govuk-summary-list__value">30 December 2024</dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Sentence date</dt>
+                <dd class="govuk-summary-list__value">12 February 2025</dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Sentence type</dt>
+                <dd class="govuk-summary-list__value">SDS (Standard Determinate Sentence)</dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Sentence length</dt>
+                <dd class="govuk-summary-list__value">2 years 0 months</dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Consecutive or concurrent</dt>
+                <dd class="govuk-summary-list__value">Concurrent</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+
+        <h3 class="govuk-heading-m govuk-!-margin-bottom-4">Adjustments</h3>
+
+        <h4 class="govuk-heading-s govuk-!-margin-bottom-2">Deductions</h4>
+
+        <h5 class="govuk-heading-s govuk-!-margin-bottom-1">Remand</h5>
+        <table class="govuk-table govuk-body-s govuk-!-margin-bottom-4">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th class="govuk-table__header" scope="col">Date from</th>
+              <th class="govuk-table__header" scope="col">Date to</th>
+              <th class="govuk-table__header" scope="col">Days</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">12 Jan 2025</td>
+              <td class="govuk-table__cell">22 Feb 2025</td>
+              <td class="govuk-table__cell">42</td>
+            </tr>
+          </tbody>
+          <tfoot class="govuk-table__foot">
+            <tr class="govuk-table__row">
+              <th class="govuk-table__header" scope="row" colspan="2">Total days</th>
+              <td class="govuk-table__cell govuk-!-font-weight-bold">42</td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <h5 class="govuk-heading-s govuk-!-margin-bottom-1">Tagged bail</h5>
+        <table class="govuk-table govuk-body-s govuk-!-margin-bottom-6">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th class="govuk-table__header" scope="col">Court case</th>
+              <th class="govuk-table__header" scope="col">From</th>
+              <th class="govuk-table__header" scope="col">Days</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">T20250103</td>
+              <td class="govuk-table__cell">14 Mar 2025</td>
+              <td class="govuk-table__cell">14</td>
+            </tr>
+          </tbody>
+          <tfoot class="govuk-table__foot">
+            <tr class="govuk-table__row">
+              <th class="govuk-table__header" scope="row" colspan="2">Total days</th>
+              <td class="govuk-table__cell govuk-!-font-weight-bold">14</td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <h4 class="govuk-heading-s govuk-!-margin-bottom-2">Additions</h4>
+
+        <h5 class="govuk-heading-s govuk-!-margin-bottom-1">UAL (Unlawfully at large)</h5>
+        <table class="govuk-table govuk-body-s">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th class="govuk-table__header" scope="col">Date from</th>
+              <th class="govuk-table__header" scope="col">Date to</th>
+              <th class="govuk-table__header" scope="col">Days</th>
+              <th class="govuk-table__header" scope="col">Type</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">05 Apr 2025</td>
+              <td class="govuk-table__cell">18 Apr 2025</td>
+              <td class="govuk-table__cell">14</td>
+              <td class="govuk-table__cell">Standard</td>
+            </tr>
+          </tbody>
+          <tfoot class="govuk-table__foot">
+            <tr class="govuk-table__row">
+              <th class="govuk-table__header" scope="row" colspan="3">Total days</th>
+              <td class="govuk-table__cell govuk-!-font-weight-bold">14</td>
+            </tr>
+          </tfoot>
+        </table>
+
+      </div>
+    </details>
+
+  </div>
+
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<script src="/public/javascripts/v28-calc-history.js"></script>
+{% endblock %}

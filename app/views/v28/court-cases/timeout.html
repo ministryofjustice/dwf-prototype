@@ -1,0 +1,24 @@
+{% extends "./template.html" %}
+{% set backLinkTarget = "task-list.html" %}
+{% set noBackLink = true %}
+{% block content %}
+<div class="govuk-grid-row govuk-!-margin-top-8">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" action="./" method="post">
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" role="group" aria-describedby="passport-issued-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <h1 class="govuk-fieldset__heading">
+                            The appearance information you entered has been deleted
+                        </h1>
+                    </legend>
+                    <p class="govuk-body govuk-!-margin-top-4 govuk-!-margin-bottom-2">Because you have been inactive for 30 minutes, for security, the information was deleted.</p>
+                </fieldset>
+            </div>
+            <button class="govuk-button govuk-!-margin-top-0" data-module="govuk-button">
+                Go to Court cases
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

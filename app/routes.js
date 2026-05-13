@@ -3207,4 +3207,86 @@ router.get("/:prototypeVersion/mark-document-viewed", function (req, res) {
 
 
 
+// ── v28 Calculation History ──────────────────────────────────────────────────
+
+function expandMonths (s) {
+  if (typeof s !== 'string') return s
+  return s
+    .replace(/\bJan\b/g, 'January').replace(/\bFeb\b/g, 'February')
+    .replace(/\bMar\b/g, 'March').replace(/\bApr\b/g, 'April')
+    .replace(/\bJun\b/g, 'June').replace(/\bJul\b/g, 'July')
+    .replace(/\bAug\b/g, 'August').replace(/\bSep\b/g, 'September')
+    .replace(/\bOct\b/g, 'October').replace(/\bNov\b/g, 'November')
+    .replace(/\bDec\b/g, 'December')
+}
+
+const v28Calcs = [
+  { id: 0, date: '12 May 2026', reason: 'Adding more sentences or terms', establishment: 'HMP Brixton', source: 'NOMIS', hasChange: true, changed: ['New sentence: 18 months ABH (Court 2)', 'UAL +14 days added'], courts: 2, sentences: 7, adjustments: ['Remand', 'Tagged bail', 'UAL'], dates: { CRD: { value: '14 Nov 2027', delta: '+14d', direction: 'later' }, LED: { value: '14 May 2028', delta: '+14d', direction: 'later' }, SED: { value: 'N/A', delta: null, direction: null }, HDCED: { value: '02 Aug 2027', delta: '+14d', direction: 'later' }, TUSED: { value: 'N/A', delta: null, direction: null }, PED: { value: '01 Jan 2027', delta: null, direction: null }, NPD: { value: 'N/A', delta: null, direction: null }, ARD: { value: '14 May 2027', delta: null, direction: null } } },
+  { id: 1, date: '28 Mar 2026', reason: 'Recording a recall', establishment: 'HMP Brixton', source: 'NOMIS', hasChange: true, changed: ['CRD earlier by 14 days', 'HDC exclusion adjustment removed'], courts: 2, sentences: 6, adjustments: ['Remand', 'Tagged bail'], dates: { CRD: { value: '31 Oct 2027', delta: '-14d', direction: 'earlier' }, LED: { value: '30 Apr 2028', delta: null, direction: null }, SED: { value: 'N/A', delta: null, direction: null }, HDCED: { value: '19 Jul 2027', delta: '-14d', direction: 'earlier' }, TUSED: { value: 'N/A', delta: null, direction: null }, PED: { value: '01 Jan 2027', delta: null, direction: null }, NPD: { value: 'N/A', delta: null, direction: null }, ARD: { value: '14 May 2027', delta: null, direction: null } } },
+  { id: 2, date: '05 Jan 2026', reason: '14 day check', establishment: 'HMP Brixton', source: 'NOMIS', hasChange: false, changed: [], courts: 2, sentences: 6, adjustments: ['Remand', 'Tagged bail'], dates: { CRD: { value: '14 Nov 2027', delta: null, direction: null }, LED: { value: '14 May 2028', delta: null, direction: null }, SED: { value: 'N/A', delta: null, direction: null }, HDCED: { value: '02 Aug 2027', delta: null, direction: null }, TUSED: { value: 'N/A', delta: null, direction: null }, PED: { value: '01 Jan 2027', delta: null, direction: null }, NPD: { value: 'N/A', delta: null, direction: null }, ARD: { value: '14 May 2027', delta: null, direction: null } } },
+  { id: 3, date: '19 Sep 2025', reason: 'Transfer check', establishment: 'HMP Wandsworth', source: 'Manual', hasChange: false, changed: [], courts: 1, sentences: 5, adjustments: ['Remand'], dates: { CRD: { value: '14 Nov 2027', delta: null, direction: null }, LED: { value: '30 Apr 2028', delta: null, direction: null }, SED: { value: 'N/A', delta: null, direction: null }, HDCED: { value: '02 Aug 2027', delta: null, direction: null }, TUSED: { value: 'N/A', delta: null, direction: null }, PED: { value: '01 Jan 2027', delta: null, direction: null }, NPD: { value: 'N/A', delta: null, direction: null }, ARD: { value: '14 May 2027', delta: null, direction: null } } },
+  { id: 4, date: '14 Jul 2025', reason: 'Appeal decision', establishment: 'HMP Wandsworth', source: 'NOMIS', hasChange: false, changed: [], courts: 1, sentences: 5, adjustments: ['Remand', 'Lawfully at large'], dates: { CRD: { value: '14 Nov 2027', delta: null, direction: null }, LED: { value: '30 Apr 2028', delta: null, direction: null }, SED: { value: 'N/A', delta: null, direction: null }, HDCED: { value: '02 Aug 2027', delta: null, direction: null }, TUSED: { value: 'N/A', delta: null, direction: null }, PED: { value: '01 Jan 2027', delta: null, direction: null }, NPD: { value: 'N/A', delta: null, direction: null }, ARD: { value: '14 May 2027', delta: null, direction: null } } },
+  { id: 5, date: '02 Mar 2025', reason: 'Correcting an earlier sentence', establishment: 'HMP Wandsworth', source: 'Manual', hasChange: false, changed: [], courts: 1, sentences: 5, adjustments: ['Remand'], dates: { CRD: { value: '14 Nov 2027', delta: null, direction: null }, LED: { value: '30 Apr 2028', delta: null, direction: null }, SED: { value: 'N/A', delta: null, direction: null }, HDCED: { value: '02 Aug 2027', delta: null, direction: null }, TUSED: { value: 'N/A', delta: null, direction: null }, PED: { value: '01 Jan 2027', delta: null, direction: null }, NPD: { value: 'N/A', delta: null, direction: null }, ARD: { value: '14 May 2027', delta: null, direction: null } } },
+  { id: 6, date: '10 Nov 2024', reason: 'ADA (Additional days awarded)', establishment: 'HMP Wandsworth', source: 'NOMIS', hasChange: false, changed: [], courts: 1, sentences: 5, adjustments: ['Remand', 'ADA'], dates: { CRD: { value: '14 Nov 2027', delta: null, direction: null }, LED: { value: '30 Apr 2028', delta: null, direction: null }, SED: { value: 'N/A', delta: null, direction: null }, HDCED: { value: '02 Aug 2027', delta: null, direction: null }, TUSED: { value: 'N/A', delta: null, direction: null }, PED: { value: '01 Jan 2027', delta: null, direction: null }, NPD: { value: 'N/A', delta: null, direction: null }, ARD: { value: '14 May 2027', delta: null, direction: null } } },
+  { id: 7, date: '22 Aug 2024', reason: '2 day check', establishment: 'HMP Wandsworth', source: 'NOMIS', hasChange: false, changed: [], courts: 1, sentences: 4, adjustments: ['Remand'], dates: { CRD: { value: '14 Nov 2027', delta: null, direction: null }, LED: { value: '30 Apr 2028', delta: null, direction: null }, SED: { value: 'N/A', delta: null, direction: null }, HDCED: { value: '02 Aug 2027', delta: null, direction: null }, TUSED: { value: 'N/A', delta: null, direction: null }, PED: { value: '01 Jan 2027', delta: null, direction: null }, NPD: { value: 'N/A', delta: null, direction: null }, ARD: { value: '14 May 2027', delta: null, direction: null } } },
+  { id: 8, date: '17 May 2024', reason: 'Error in original calculation', establishment: 'HMP Wandsworth', source: 'NOMIS', hasChange: true, changed: ['SED added — indeterminate sentence ended', 'NPD removed'], courts: 1, sentences: 4, adjustments: ['Remand', 'UAL'], dates: { CRD: { value: '14 Nov 2027', delta: '+30d', direction: 'later' }, LED: { value: '30 Apr 2028', delta: null, direction: null }, SED: { value: '14 Nov 2028', delta: 'new', direction: 'later' }, HDCED: { value: 'N/A', delta: null, direction: null }, TUSED: { value: 'N/A', delta: null, direction: null }, PED: { value: '01 Jan 2027', delta: null, direction: null }, NPD: { value: 'N/A', delta: null, direction: null }, ARD: { value: '14 May 2027', delta: null, direction: null } } },
+  { id: 9, date: '01 Feb 2024', reason: 'Lodged warrant', establishment: 'HMP Belmarsh', source: 'NOMIS', hasChange: false, changed: [], courts: 1, sentences: 4, adjustments: ['Remand', 'Tagged bail'], dates: { CRD: { value: '15 Oct 2027', delta: null, direction: null }, LED: { value: '30 Apr 2028', delta: null, direction: null }, SED: { value: 'N/A', delta: null, direction: null }, HDCED: { value: '02 Aug 2027', delta: null, direction: null }, TUSED: { value: 'N/A', delta: null, direction: null }, PED: { value: '01 Jan 2027', delta: null, direction: null }, NPD: { value: 'N/A', delta: null, direction: null }, ARD: { value: '14 May 2027', delta: null, direction: null } } },
+  { id: 10, date: '09 Oct 2023', reason: 'RADA (Restoration of added days awarded)', establishment: 'HMP Belmarsh', source: 'Manual', hasChange: false, changed: [], courts: 1, sentences: 4, adjustments: ['Remand', 'RADA'], dates: { CRD: { value: '15 Oct 2027', delta: null, direction: null }, LED: { value: '30 Apr 2028', delta: null, direction: null }, SED: { value: 'N/A', delta: null, direction: null }, HDCED: { value: '02 Aug 2027', delta: null, direction: null }, TUSED: { value: 'N/A', delta: null, direction: null }, PED: { value: '01 Jan 2027', delta: null, direction: null }, NPD: { value: 'N/A', delta: null, direction: null }, ARD: { value: '14 May 2027', delta: null, direction: null } } },
+  { id: 11, date: '14 Jun 2023', reason: 'Recording a non-calculated date', establishment: 'HMP Belmarsh', source: 'NOMIS', hasChange: false, changed: [], courts: 1, sentences: 4, adjustments: ['Remand'], dates: { CRD: { value: '15 Oct 2027', delta: null, direction: null }, LED: { value: '30 Apr 2028', delta: null, direction: null }, SED: { value: 'N/A', delta: null, direction: null }, HDCED: { value: '02 Aug 2027', delta: null, direction: null }, TUSED: { value: 'N/A', delta: null, direction: null }, PED: { value: '01 Jan 2027', delta: null, direction: null }, NPD: { value: 'N/A', delta: null, direction: null }, ARD: { value: '14 May 2027', delta: null, direction: null } } },
+  { id: 12, date: '03 Mar 2023', reason: 'Adding more sentences or terms', establishment: 'HMP Belmarsh', source: 'NOMIS', hasChange: true, changed: ['CRD earlier by 30 days', 'New adjustment: RADA \u221230 days'], courts: 1, sentences: 3, adjustments: ['Remand', 'RADA'], dates: { CRD: { value: '15 Oct 2027', delta: '-30d', direction: 'earlier' }, LED: { value: '30 Apr 2028', delta: null, direction: null }, SED: { value: 'N/A', delta: null, direction: null }, HDCED: { value: 'N/A', delta: null, direction: null }, TUSED: { value: 'N/A', delta: null, direction: null }, PED: { value: 'N/A', delta: null, direction: null }, NPD: { value: 'N/A', delta: null, direction: null }, ARD: { value: '14 May 2027', delta: null, direction: null } } },
+  { id: 13, date: '11 Jan 2023', reason: 'Adding more sentences or terms', establishment: 'HMP Belmarsh', source: 'Manual', hasChange: false, changed: [], courts: 1, sentences: 3, adjustments: ['Remand'], dates: { CRD: { value: '14 Nov 2027', delta: null, direction: null }, LED: { value: '30 Apr 2028', delta: null, direction: null }, SED: { value: 'N/A', delta: null, direction: null }, HDCED: { value: 'N/A', delta: null, direction: null }, TUSED: { value: 'N/A', delta: null, direction: null }, PED: { value: 'N/A', delta: null, direction: null }, NPD: { value: 'N/A', delta: null, direction: null }, ARD: { value: '14 May 2027', delta: null, direction: null } } },
+  { id: 14, date: '05 Oct 2022', reason: 'Correcting an earlier sentence', establishment: 'HMP Belmarsh', source: 'NOMIS', hasChange: true, changed: ['CRD later by 14 days'], courts: 1, sentences: 3, adjustments: ['Remand'], dates: { CRD: { value: '14 Nov 2027', delta: '+14d', direction: 'later' }, LED: { value: '30 Apr 2028', delta: null, direction: null }, SED: { value: 'N/A', delta: null, direction: null }, HDCED: { value: 'N/A', delta: null, direction: null }, TUSED: { value: 'N/A', delta: null, direction: null }, PED: { value: 'N/A', delta: null, direction: null }, NPD: { value: 'N/A', delta: null, direction: null }, ARD: { value: '14 May 2027', delta: null, direction: null } } },
+  { id: 15, date: '18 Jul 2022', reason: '14 day check', establishment: 'HMP Belmarsh', source: 'NOMIS', hasChange: false, changed: [], courts: 1, sentences: 3, adjustments: ['Remand'], dates: { CRD: { value: '31 Oct 2027', delta: null, direction: null }, LED: { value: '30 Apr 2028', delta: null, direction: null }, SED: { value: 'N/A', delta: null, direction: null }, HDCED: { value: 'N/A', delta: null, direction: null }, TUSED: { value: 'N/A', delta: null, direction: null }, PED: { value: 'N/A', delta: null, direction: null }, NPD: { value: 'N/A', delta: null, direction: null }, ARD: { value: '14 May 2027', delta: null, direction: null } } },
+  { id: 16, date: '29 Apr 2022', reason: 'ADA (Additional days awarded)', establishment: 'HMP Belmarsh', source: 'NOMIS', hasChange: false, changed: [], courts: 1, sentences: 3, adjustments: ['Remand', 'ADA'], dates: { CRD: { value: '31 Oct 2027', delta: null, direction: null }, LED: { value: '30 Apr 2028', delta: null, direction: null }, SED: { value: 'N/A', delta: null, direction: null }, HDCED: { value: 'N/A', delta: null, direction: null }, TUSED: { value: 'N/A', delta: null, direction: null }, PED: { value: 'N/A', delta: null, direction: null }, NPD: { value: 'N/A', delta: null, direction: null }, ARD: { value: '14 May 2027', delta: null, direction: null } } },
+  { id: 17, date: '11 Feb 2022', reason: 'Error in original calculation', establishment: 'HMP Belmarsh', source: 'Manual', hasChange: true, changed: ['CRD earlier by 7 days', 'HDCED added'], courts: 1, sentences: 3, adjustments: ['Remand'], dates: { CRD: { value: '31 Oct 2027', delta: '-7d', direction: 'earlier' }, LED: { value: '30 Apr 2028', delta: null, direction: null }, SED: { value: 'N/A', delta: null, direction: null }, HDCED: { value: '02 Aug 2027', delta: 'new', direction: 'later' }, TUSED: { value: 'N/A', delta: null, direction: null }, PED: { value: 'N/A', delta: null, direction: null }, NPD: { value: 'N/A', delta: null, direction: null }, ARD: { value: '14 May 2027', delta: null, direction: null } } },
+  { id: 18, date: '22 Oct 2021', reason: 'Transfer check', establishment: 'HMP Manchester', source: 'NOMIS', hasChange: false, changed: [], courts: 1, sentences: 2, adjustments: ['Remand'], dates: { CRD: { value: '07 Nov 2027', delta: null, direction: null }, LED: { value: '30 Apr 2028', delta: null, direction: null }, SED: { value: 'N/A', delta: null, direction: null }, HDCED: { value: 'N/A', delta: null, direction: null }, TUSED: { value: 'N/A', delta: null, direction: null }, PED: { value: 'N/A', delta: null, direction: null }, NPD: { value: 'N/A', delta: null, direction: null }, ARD: { value: '14 May 2027', delta: null, direction: null } } },
+  { id: 19, date: '14 Jun 2021', reason: '2 day check', establishment: 'HMP Manchester', source: 'NOMIS', hasChange: false, changed: [], courts: 1, sentences: 2, adjustments: ['Remand'], dates: { CRD: { value: '07 Nov 2027', delta: null, direction: null }, LED: { value: '30 Apr 2028', delta: null, direction: null }, SED: { value: 'N/A', delta: null, direction: null }, HDCED: { value: 'N/A', delta: null, direction: null }, TUSED: { value: 'N/A', delta: null, direction: null }, PED: { value: 'N/A', delta: null, direction: null }, NPD: { value: 'N/A', delta: null, direction: null }, ARD: { value: '14 May 2027', delta: null, direction: null } } },
+  { id: 20, date: '03 Mar 2021', reason: 'Initial calculation', establishment: 'HMP Manchester', source: 'Manual', hasChange: false, changed: [], courts: 1, sentences: 2, adjustments: ['Remand'], dates: { CRD: { value: '07 Nov 2027', delta: null, direction: null }, LED: { value: '30 Apr 2028', delta: null, direction: null }, SED: { value: 'N/A', delta: null, direction: null }, HDCED: { value: 'N/A', delta: null, direction: null }, TUSED: { value: 'N/A', delta: null, direction: null }, PED: { value: 'N/A', delta: null, direction: null }, NPD: { value: 'N/A', delta: null, direction: null }, ARD: { value: '14 May 2027', delta: null, direction: null } } },
+];
+
+v28Calcs.forEach(c => {
+  c.date = expandMonths(c.date)
+  Object.values(c.dates).forEach(d => { d.value = expandMonths(d.value) })
+})
+
+router.get('/v28/calculation-history', function (req, res) {
+  const PAGE_SIZE = 8;
+  let selectedIndex = parseInt(req.query.selected || '0', 10);
+  if (isNaN(selectedIndex) || selectedIndex < 0) selectedIndex = 0;
+  if (selectedIndex >= v28Calcs.length) selectedIndex = v28Calcs.length - 1;
+
+  const pageNum = Math.floor(selectedIndex / PAGE_SIZE);
+  const start = pageNum * PAGE_SIZE;
+  const end = Math.min(v28Calcs.length - 1, start + PAGE_SIZE - 1);
+
+  const windowCalcs = v28Calcs.slice(start, end + 1).map((c, i) => Object.assign({}, c, { windowIndex: start + i }));
+  const hiddenAbove = start;
+  const hiddenBelow = v28Calcs.length - 1 - end;
+
+  // 1-indexed range of the previous page (for "Newer" label)
+  const prevPageStart1 = Math.max(1, start - PAGE_SIZE + 1);
+  // 1-indexed range of the next page (for "Older" label)
+  const nextPageEnd1 = Math.min(v28Calcs.length, end + PAGE_SIZE + 1);
+
+  res.render('v28/calculation-history.html', {
+    calcs: v28Calcs,
+    windowCalcs,
+    selected: v28Calcs[selectedIndex],
+    selectedIndex,
+    windowEnd: end,
+    hiddenAbove,
+    hiddenBelow,
+    prevPageStart1,
+    nextPageEnd1,
+  });
+});
+
+router.get('/v28/api/calc/:id', function (req, res) {
+  const id = parseInt(req.params.id, 10);
+  const calc = (id >= 0 && id < v28Calcs.length) ? v28Calcs[id] : null;
+  res.json(calc);
+});
+
+// ────────────────────────────────────────────────────────────────────────────
+
 module.exports = router;

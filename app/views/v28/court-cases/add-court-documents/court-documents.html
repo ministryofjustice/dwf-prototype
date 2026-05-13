@@ -1,0 +1,148 @@
+{% extends "../../template.html" %}
+{% set showFullNav = false %}
+{% block content %}
+{% set docsViewed = data.tasks.docsViewed or [] %}
+{% set isPreloadedRemandJourney = data.entryMode == "api-pre-populated" and data.appearance['warrant-type'] == "Remand" %}
+<div class="govuk-grid-row govuk-!-margin-top-4">
+  <div class="govuk-grid-column-two-thirds govuk-!-padding-right-8">
+    {% if isPreloadedRemandJourney %}
+    <form class="form" action="/{{data.prototypeVersion}}/court-documents-complete" method="post">
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              View and add documents
+            </h1>
+          </legend>
+
+          <div id="file-upload-1-hint" class="govuk-hint">
+            View each document to confirm the details are correct. If anything is inaccurate, exit out of this journey and contact the relevant court to get it corrected. If you upload new documents, the file type must be a .PDF, JPG, .PNG, .DOC or .DOCX.
+          </div>
+
+          <dl class="govuk-summary-list govuk-summary-list--long-key govuk-!-margin-bottom-0">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                <a class="govuk-link" href="/{{ data.prototypeVersion }}/mark-document-viewed?docId=0" target="_blank">remandwarrant_example.pdf</a>
+                <div class="govuk-body govuk-!-margin-0">Remand warrant</div> 
+              </dt>
+              <dd class="govuk-summary-list__value">
+                <strong class="govuk-tag govuk-tag--grey">Common Platform</strong>
+              </dd>
+              <dd class="govuk-summary-list__actions"></dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                <a class="govuk-link" href="/{{ data.prototypeVersion }}/mark-document-viewed?docId=1" target="_blank">PCR Test Example.pdf</a>
+                <div class="govuk-body govuk-!-margin-0">Prison court register</div> 
+              </dt>
+              <dd class="govuk-summary-list__value">
+                <strong class="govuk-tag govuk-tag--grey">Common Platform</strong>
+              </dd>
+              <dd class="govuk-summary-list__actions"></dd>
+            </div>
+          </dl>
+
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+          <div class="govuk-form-group govuk-body">
+            <a class="govuk-link--no-visited-state" href="upload-document?document-type=bail order">Upload bail order (optional)</a>
+          </div>
+          <hr class="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-4">
+          <div class="govuk-form-group govuk-body">
+            <a class="govuk-link--no-visited-state" href="upload-document?document-type=suspended imprisonment order">Upload suspended imprisonment order (optional)</a>
+          </div>
+          <hr class="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-4">
+          <div class="govuk-form-group govuk-body">
+            <a class="govuk-link--no-visited-state" href="upload-document?document-type=notice of discontinuance">Upload notice of discontinuance (optional)</a>
+          </div>
+          <hr class="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-4">
+          <div class="govuk-form-group govuk-body">
+            <a class="govuk-link--no-visited-state" href="upload-document?document-type=community order">Upload community order (optional)</a>
+          </div>
+
+          <div class="govuk-button-group govuk-!-margin-top-8">
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+              Confirm and continue
+            </button>
+            <a class="govuk-link" href="../add-a-court-case/task-list">Cancel</a>
+          </div>
+        </fieldset>
+      </div>
+    </form>
+    {% else %}
+    <form class="form" action="court-documents-uploaded" method="post">
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Upload court documents
+            </h1>
+          </legend>
+
+    <div id="file-upload-1-hint" class="govuk-hint">
+      Uploading documents is optional. The selected file type should be .PDF under 500MB.
+    </div>
+
+    <!-- <p class="govuk-body" aria-live="polite">1 file uploaded</p> -->
+
+    <p class="govuk-body govuk-!-display-none" id="refreshPageProgress"><a href="#" class="govuk-link">Refresh page to update file upload progress</a></p>
+     {% if data.route != "immediate-release" %}
+            <div class="govuk-form-group govuk-!-margin-top-8 govuk-body">
+              <a class="govuk-link--no-visited-state" href="upload-document?document-type=sentencing warrant">Upload {% if data.appearance['warrant-type'] == "Sentencing" %}sentencing{% else %}remand{% endif %} warrant</a>
+            </div>
+      {% endif %}     
+      {% if data.appearance['warrant-type'] == "Sentencing" %}
+      <hr class="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-4">
+      <div class="govuk-form-group">
+        <div class="govuk-form-group govuk-!-margin-top-6 govuk-body">
+          <a class="govuk-link--no-visited-state" href="upload-document?document-type=trial record sheet">Upload trial record sheet</a>
+        </div>
+            </div>
+      {% endif %}
+    </dl>
+    {% if data.appearance['warrant-type'] == "Sentencing" %}
+    <hr class="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-4">
+    <div class="govuk-form-group">
+      <div class="govuk-form-group govuk-!-margin-top-6 govuk-body">
+        <a class="govuk-link--no-visited-state" href="upload-document?document-type=indictment">Indictment</a>
+      </div>
+    </div>
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    {% endif %}
+    <div class="govuk-form-group">
+      <div class="govuk-form-group govuk-!-margin-top-6 govuk-body {% if data.route == "immediate-release" %}govuk-!-margin-top-2{% endif %}">
+        <a class="govuk-link--no-visited-state" href="upload-document?document-type=prison court register">Upload prison court register</a>
+      </div>
+    </div>
+    {% if data.route == "immediate-release" %}
+    {% if data.appearance['overall-case-outcome'] == "Discontinuance" %}
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    <div class="govuk-form-group">
+      <div class="govuk-form-group govuk-!-margin-top-6 govuk-body">
+        <a class="govuk-link--no-visited-state" href="upload-document?document-type=order of discontinuance">Upload order of discontinuance</a>
+      </div>
+    </div>
+    {% endif %}
+    {% if data.appearance['overall-case-outcome'] == "Bail" %}
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    <div class="govuk-form-group">
+      <div class="govuk-form-group govuk-!-margin-top-6 govuk-body">
+        <a class="govuk-link--no-visited-state" href="upload-document?document-type=prison court register">Upload bail order</a>
+      </div>
+    </div>
+    {% endif %}
+    {% endif %}
+          <div class="govuk-button-group govuk-!-margin-top-8">
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+             Confirm and continue
+            </button>
+          </div>
+    </form>
+    {% endif %}
+  </div>
+  <div class="govuk-grid-column-one-third">
+    {% set showOffences = true %}
+    {% include "includes/templates/appearance-info.njk" %}
+  </div>
+</div>
+{% endblock %}

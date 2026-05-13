@@ -1,0 +1,105 @@
+// ── Calc nav — MOJ side-navigation overrides ─────────────────────────────
+
+.app-calc-nav.moj-side-navigation {
+  padding-top: 0;
+}
+
+.app-calc-nav .moj-side-navigation__item {
+  border-bottom: 1px solid govuk-colour("mid-grey");
+
+  a,
+  a:link,
+  a:visited {
+    padding: govuk-spacing(1) govuk-spacing(3);
+    padding-left: calc(#{govuk-spacing(3)} - 4px);
+  }
+}
+
+.app-calc-nav .moj-side-navigation__item a .govuk-body {
+  margin-bottom: govuk-spacing(2);
+}
+
+.app-calc-nav .moj-side-navigation__item a .govuk-body:last-child {
+  margin-bottom: 0;
+}
+
+.app-calc-nav .moj-side-navigation__item a:has(.govuk-tag) {
+  padding-top: govuk-spacing(2);
+  padding-bottom: govuk-spacing(2);
+}
+
+.app-calc-nav .moj-side-navigation__item a .app-calc-row__header:has(.govuk-tag) {
+  margin-bottom: govuk-spacing(2);
+}
+
+.app-calc-nav .moj-side-navigation__item a .app-calc-row__header:has(.govuk-tag) .app-calc-row__date {
+  margin-bottom: 0;
+}
+
+// ── Calc row inner content ────────────────────────────────────────────────
+
+.app-calc-row__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: govuk-spacing(1);
+  flex-wrap: wrap;
+  margin-bottom: 0;
+}
+
+.app-calc-row__date {
+  flex: 1;
+  color: govuk-colour("blue");
+  margin-bottom: 0;
+}
+
+.app-calc-nav .moj-side-navigation__item--active .app-calc-row__date {
+  font-weight: bold;
+}
+
+.app-calc-row__tags {
+  display: flex;
+  align-items: center;
+  gap: govuk-spacing(1);
+  flex-shrink: 0;
+}
+
+// ── Nav pagination ────────────────────────────────────────────────────────
+
+.app-calc-pagination {
+  border-top: 1px solid govuk-colour("mid-grey");
+  padding-top: govuk-spacing(3);
+  margin-top: govuk-spacing(2);
+}
+
+// ── Stat / release-date cards ─────────────────────────────────────────────
+
+.app-stat-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: govuk-spacing(2);
+}
+
+.app-stat-card-grid--thirds {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.app-stat-card {
+  background-color: govuk-colour("light-grey");
+  padding: govuk-spacing(3);
+}
+
+.app-stat-card__type {
+  @include govuk-font($size: 16, $weight: bold);
+  margin-bottom: govuk-spacing(1);
+}
+
+.app-stat-card__description {
+  @include govuk-font($size: 16);
+  margin-bottom: govuk-spacing(1);
+}
+
+.app-stat-card__value {
+  @include govuk-font($size: 24, $weight: bold);
+  margin-bottom: govuk-spacing(1);
+}
