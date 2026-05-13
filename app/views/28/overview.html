@@ -1,0 +1,167 @@
+{% extends "28/template.html" %}
+{% set overviewActive = true %}
+{% set noBackLink = true %}
+{% set showFullNav = false %}
+
+{% block content %}
+
+<h1 class="govuk-heading-l govuk-!-margin-top-4 govuk-!-margin-bottom-6">Overview</h1>
+
+<div class="app-overview-stats govuk-!-margin-bottom-6">
+  <div class="app-overview-stat">
+    <p class="govuk-body govuk-!-margin-bottom-0">In this period of custody</p>
+    <span class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-display-block">2 court cases</span>
+    <span class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-display-block">7 sentences</span>
+  </div>
+  <div class="app-overview-stat">
+    <p class="govuk-body govuk-!-margin-bottom-0">Next court hearing</p>
+    <p class="govuk-heading-s govuk-!-margin-bottom-0">11 January 2026</p>
+  </div>
+  <div class="app-overview-stat">
+    <p class="govuk-body govuk-!-margin-bottom-0">Recall being served</p>
+    <p class="govuk-heading-s govuk-!-margin-bottom-0">14-day fixed-term from 13 January 2026</p>
+  </div>
+  <div class="app-overview-stat">
+    <p class="govuk-body govuk-!-margin-bottom-0">Immigration detention</p>
+    <p class="govuk-heading-s govuk-!-margin-bottom-0">No longer of interest</p>
+  </div>
+</div>
+
+<div class="govuk-grid-row app-overview-cards govuk-!-margin-bottom-6">
+  <div class="govuk-grid-column-one-half">
+    <div class="app-overview-card">
+      <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Latest calculation</h2>
+      <p class="govuk-body govuk-!-margin-bottom-3">Adding more sentences or terms on 12 May 2026</p>
+      <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-2">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key govuk-body govuk-!-font-weight-bold">CRD<span class="govuk-hint govuk-!-margin-bottom-0 govuk-!-margin-top-0">Conditional release date</span></dt>
+          <dd class="govuk-summary-list__value govuk-body">14 November 2027</dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key govuk-body govuk-!-font-weight-bold">LED<span class="govuk-hint govuk-!-margin-bottom-0 govuk-!-margin-top-0">Licence expiry date</span></dt>
+          <dd class="govuk-summary-list__value govuk-body">14 May 2028</dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key govuk-body govuk-!-font-weight-bold">HDCED<span class="govuk-hint govuk-!-margin-bottom-0 govuk-!-margin-top-0">Home detention curfew eligibility date</span></dt>
+          <dd class="govuk-summary-list__value govuk-body">2 August 2027</dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key govuk-body govuk-!-font-weight-bold">ARD<span class="govuk-hint govuk-!-margin-bottom-0 govuk-!-margin-top-0">Automatic release date</span></dt>
+          <dd class="govuk-summary-list__value govuk-body">14 May 2027</dd>
+        </div>
+      </dl>
+      <a href="/28/calculation-history" class="govuk-link govuk-body">View details</a>
+    </div>
+  </div>
+  <div class="govuk-grid-column-one-half">
+    <div class="app-overview-card">
+      <h2 class="govuk-heading-m govuk-!-margin-bottom-3">Calculation history</h2>
+      <table class="govuk-table govuk-body govuk-!-margin-bottom-2">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col">Calculation date</th>
+            <th class="govuk-table__header" scope="col">Reason</th>
+            <th class="govuk-table__header" scope="col">Establishment</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell"><a href="/28/calculation-history" class="govuk-link">12 May 2026</a></td>
+            <td class="govuk-table__cell">Adding more sentences or terms</td>
+            <td class="govuk-table__cell">J. Smith at HMP Brixton</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell"><a href="/28/calculation-history" class="govuk-link">28 March 2026</a></td>
+            <td class="govuk-table__cell">Recording a recall</td>
+            <td class="govuk-table__cell">J. Smith at HMP Brixton</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell"><a href="/28/calculation-history" class="govuk-link">5 January 2026</a></td>
+            <td class="govuk-table__cell">14 day check</td>
+            <td class="govuk-table__cell">J. Smith at HMP Brixton</td>
+          </tr>
+        </tbody>
+      </table>
+      <a href="/28/calculation-history" class="govuk-link govuk-body">View calculation history</a>
+    </div>
+  </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-margin-bottom-6">
+
+<h2 class="govuk-heading-m govuk-!-margin-bottom-4">All services</h2>
+<div class="govuk-grid-row govuk-!-margin-bottom-6">
+  <div class="govuk-grid-column-one-half">
+    <hr class="govuk-section-break govuk-section-break--visible">
+    <div class="app-service-link">
+      <a href="/28/adjustments.html" class="govuk-link govuk-body govuk-!-font-weight-bold govuk-link--no-visited-state">Adjustments</a>
+      <svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M1 1L9 8.5L1 16" stroke="#1D70B8" stroke-width="2"/></svg>
+    </div>
+    <hr class="govuk-section-break govuk-section-break--visible">
+    <div class="app-service-link">
+      <a href="/28/release-dates.html" class="govuk-link govuk-body govuk-!-font-weight-bold govuk-link--no-visited-state">Calculate release dates</a>
+      <svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M1 1L9 8.5L1 16" stroke="#1D70B8" stroke-width="2"/></svg>
+    </div>
+    <hr class="govuk-section-break govuk-section-break--visible">
+    <div class="app-service-link">
+      <a href="/28/court-cases/" class="govuk-link govuk-body govuk-!-font-weight-bold govuk-link--no-visited-state">Court cases</a>
+      <svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M1 1L9 8.5L1 16" stroke="#1D70B8" stroke-width="2"/></svg>
+    </div>
+    <hr class="govuk-section-break govuk-section-break--visible">
+  </div>
+  <div class="govuk-grid-column-one-half">
+    <hr class="govuk-section-break govuk-section-break--visible">
+    <div class="app-service-link">
+      <a href="/28/documents.html" class="govuk-link govuk-body govuk-!-font-weight-bold govuk-link--no-visited-state">Documents</a>
+      <svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M1 1L9 8.5L1 16" stroke="#1D70B8" stroke-width="2"/></svg>
+    </div>
+    <hr class="govuk-section-break govuk-section-break--visible">
+    <div class="app-service-link">
+      <a href="/28/immigration.html" class="govuk-link govuk-body govuk-!-font-weight-bold govuk-link--no-visited-state">Immigration detention</a>
+      <svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M1 1L9 8.5L1 16" stroke="#1D70B8" stroke-width="2"/></svg>
+    </div>
+    <hr class="govuk-section-break govuk-section-break--visible">
+    <div class="app-service-link">
+      <a href="/28/recalls.html" class="govuk-link govuk-body govuk-!-font-weight-bold govuk-link--no-visited-state">Recalls</a>
+      <svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M1 1L9 8.5L1 16" stroke="#1D70B8" stroke-width="2"/></svg>
+    </div>
+    <hr class="govuk-section-break govuk-section-break--visible">
+  </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-margin-bottom-6">
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-half">
+    <h2 class="govuk-heading-m">What's new</h2>
+    <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-4">
+    <div class="govuk-!-margin-bottom-4">
+      <p class="govuk-body govuk-!-margin-bottom-0"><a href="#" class="govuk-link govuk-!-font-weight-bold">Court cases service rolled-out to all prisons</a></p>
+      <p class="govuk-body govuk-!-margin-bottom-0">We have rolled out a new service which will allow prisons to record all court information from warrants in DPS.</p>
+    </div>
+    <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-4">
+    <div class="govuk-!-margin-bottom-4">
+      <p class="govuk-body govuk-!-margin-bottom-0"><a href="#" class="govuk-link govuk-!-font-weight-bold">Recalls service rolled-out to all prisons</a></p>
+      <p class="govuk-body govuk-!-margin-bottom-0">We have rolled out a new service which will allow prisons to record recalls in DPS.</p>
+    </div>
+    <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-4">
+    <a href="#" class="govuk-link govuk-body govuk-!-font-weight-bold">All updates</a>
+  </div>
+  <div class="govuk-grid-column-one-half">
+    <h2 class="govuk-heading-m">Get help</h2>
+    <div class="govuk-!-margin-bottom-4">
+      <h3 class="govuk-heading-s">Get support with a calculation</h3>
+      <p class="govuk-body">Email <a href="mailto:omu.specialistsupportteam@justice.gov.uk" class="govuk-link">omu.specialistsupportteam@justice.gov.uk</a>.</p>
+    </div>
+    <div class="govuk-!-margin-bottom-4">
+      <h3 class="govuk-heading-s">Report an issue with the service</h3>
+      <p class="govuk-body">Email <a href="mailto:courtcasesandreleasedates@justice.gov.uk" class="govuk-link">courtcasesandreleasedates@justice.gov.uk</a>.</p>
+    </div>
+    <div class="govuk-!-margin-bottom-4">
+      <h3 class="govuk-heading-s">Help improve the service</h3>
+      <p class="govuk-body">You can help improve the service by <a href="https://court-cases-release-dates-dev.hmpps.service.justice.gov.uk/feedback" target="_blank" rel="noopener noreferrer" class="govuk-link">giving us your feedback (opens in a new tab)</a>.</p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

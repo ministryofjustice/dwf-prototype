@@ -103,7 +103,7 @@
           '<p class="govuk-body govuk-!-margin-bottom-0"><strong class="govuk-!-display-block">Calculation reason</strong>' + escapeHTML(calc.reason) + '</p>' +
         '</div>' +
         '<div class="govuk-grid-column-one-third">' +
-          '<p class="govuk-body govuk-!-margin-bottom-0"><strong class="govuk-!-display-block">Establishment</strong>' + escapeHTML(calc.establishment) + '</p>' +
+          '<p class="govuk-body govuk-!-margin-bottom-0"><strong class="govuk-!-display-block">Establishment</strong>' + escapeHTML(calc.calculator) + ' at ' + escapeHTML(calc.establishment) + '</p>' +
         '</div>' +
         '<div class="govuk-grid-column-one-third">' +
           '<p class="govuk-body govuk-!-margin-bottom-0"><strong class="govuk-!-display-block">Source</strong>' + escapeHTML(calc.source) + '</p>' +
@@ -117,7 +117,7 @@
         '<button type="button" class="govuk-button govuk-button--secondary">Record a counter check</button>' +
       '</div>' +
       '<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">' +
-      '<h3 class="govuk-heading-m">Court cases and adjustments</h3>' +
+      '<h3 class="govuk-heading-m">Included in this calculation</h3>' +
       '<div class="app-stat-card-grid app-stat-card-grid--thirds govuk-!-margin-bottom-4">' +
         '<div class="app-stat-card">' +
           '<p class="govuk-body govuk-!-margin-bottom-0">Court cases</p>' +
@@ -166,7 +166,7 @@
   }
 
   function loadCalc (index, fallbackUrl) {
-    fetch('/v28/api/calc/' + index)
+    fetch('/28/api/calc/' + index)
       .then(function (response) {
         if (!response.ok) throw new Error('Response not OK: ' + response.status)
         return response.json()

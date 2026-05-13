@@ -28,18 +28,25 @@
                             href="/manage-prototype/clear-data">clear data</a>.
                     </strong>
                 </div>
-                <!-- Version 28 - Calculation history context-window UI -->
-                <h2 class="govuk-heading-l govuk-!-margin-top-8">Calculation history viewer</h2>
+                <!-- Version 28 -->
+                <h2 class="govuk-heading-l govuk-!-margin-top-8">Overview redesign + Calculation history viewer</h2>
                 <strong class="govuk-tag govuk-tag--yellow govuk-!-margin-bottom-6">
                     In development
                 </strong>
-                <p class="govuk-body">Adds a context-window navigation UI to the calculation history. A split-pane layout shows a windowed list of calculations on the left (±4 either side of the selected entry) and a release dates detail panel on the right. Includes jump-to select, prev/next change navigation, and a JS fetch enhancement for panel updates without page reload.</p>
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Overview redesign</h3>
+                <p class="govuk-body">New overview landing page matching the updated Figma design. Single-column layout replacing the previous two-column sidebar approach. Sections include a 4-item stats strip (court cases, next hearing, recall, immigration detention), two side-by-side cards (latest calculation summary and calculation history table), an all-services link list, and What's new / Get help panels.</p>
+                <a href="/28/launch-prototype?destination=overview" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-4">
+                    View overview
+                </a>
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Calculation history viewer</h3>
+                <p class="govuk-body">MOJ side-navigation UI with a split-pane layout — paginated list of calculations on the left (8 per page) and a release dates detail panel on the right. Includes jump-to select, prev/next navigation, and a JS fetch enhancement for panel updates without page reload.</p>
                 <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-4">
-                    <li>Calculation reasons drawn from the calc reason screen</li>
-                    <li>Adjustments shown as named types (e.g. Remand, Tagged bail) not a count</li>
+                    <li>21 example calculations across 3 pages</li>
+                    <li>Adjustments broken down by type with per-type tables (Remand, Tagged bail, UAL)</li>
+                    <li>Court case headings condensed to <code>{case-ref} at {court-name}</code> pattern</li>
                     <li>Fully functional without JavaScript</li>
                 </ul>
-                <a href="/v28/calculation-history" role="button" draggable="false" class="govuk-button govuk-!-margin-bottom-2">
+                <a href="/28/launch-prototype?destination=calculation-history" role="button" draggable="false" class="govuk-button govuk-!-margin-bottom-2">
                     View calculation history
                 </a>
 

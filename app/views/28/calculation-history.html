@@ -1,5 +1,5 @@
-{% extends "v28/template.html" %}
-{% set calculationHistoryActive = true %}
+{% extends "28/template.html" %}
+{% set calculateReleaseDatesActive = true %}
 
 {% set dateLabels = {
   CRD: "Conditional release date",
@@ -23,7 +23,7 @@
   <div class="govuk-grid-column-one-third">
 
     {# 1. Jump to calculation #}
-    <form method="get" action="/v28/calculation-history" class="govuk-!-margin-bottom-4">
+    <form method="get" action="/28/calculation-history" class="govuk-!-margin-bottom-4">
       <div class="govuk-form-group govuk-!-margin-bottom-2">
         <label class="govuk-label govuk-label--s" for="jumpSelect">
           Jump to a calculation
@@ -113,7 +113,7 @@
       <div class="govuk-grid-column-one-third">
         <p class="govuk-body govuk-!-margin-bottom-0">
           <strong class="govuk-!-display-block">Establishment</strong>
-          {{ selected.establishment }}
+          {{ selected.calculator }} at {{ selected.establishment }}
         </p>
       </div>
       <div class="govuk-grid-column-one-third">

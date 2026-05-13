@@ -3157,6 +3157,9 @@ router.get("/:prototypeVersion/launch-prototype", function (req, res) {
     );
     if (prototypeVersion === "27") {
       res.redirect(`/${prototypeVersion}/overview.html`);
+    } else if (prototypeVersion === "28") {
+      const destination = req.query.destination || 'overview';
+      res.redirect(`/${prototypeVersion}/${destination}`);
     } else {
       res.redirect(`/${prototypeVersion}/court-cases/`);
     }
@@ -3244,12 +3247,20 @@ const v28Calcs = [
   { id: 20, date: '03 Mar 2021', reason: 'Initial calculation', establishment: 'HMP Manchester', source: 'Manual', hasChange: false, changed: [], courts: 1, sentences: 2, adjustments: ['Remand'], dates: { CRD: { value: '07 Nov 2027', delta: null, direction: null }, LED: { value: '30 Apr 2028', delta: null, direction: null }, SED: { value: 'N/A', delta: null, direction: null }, HDCED: { value: 'N/A', delta: null, direction: null }, TUSED: { value: 'N/A', delta: null, direction: null }, PED: { value: 'N/A', delta: null, direction: null }, NPD: { value: 'N/A', delta: null, direction: null }, ARD: { value: '14 May 2027', delta: null, direction: null } } },
 ];
 
+const v28Calculators = {
+  'HMP Brixton': 'J. Smith',
+  'HMP Wandsworth': 'T. Jones',
+  'HMP Belmarsh': 'M. Brown',
+  'HMP Manchester': 'A. Davies'
+}
+
 v28Calcs.forEach(c => {
   c.date = expandMonths(c.date)
+  c.calculator = v28Calculators[c.establishment] || 'Unknown'
   Object.values(c.dates).forEach(d => { d.value = expandMonths(d.value) })
 })
 
-router.get('/v28/calculation-history', function (req, res) {
+router.get('/28/calculation-history', function (req, res) {
   const PAGE_SIZE = 8;
   let selectedIndex = parseInt(req.query.selected || '0', 10);
   if (isNaN(selectedIndex) || selectedIndex < 0) selectedIndex = 0;
@@ -3268,7 +3279,7 @@ router.get('/v28/calculation-history', function (req, res) {
   // 1-indexed range of the next page (for "Older" label)
   const nextPageEnd1 = Math.min(v28Calcs.length, end + PAGE_SIZE + 1);
 
-  res.render('v28/calculation-history.html', {
+  res.render('28/calculation-history.html', {
     calcs: v28Calcs,
     windowCalcs,
     selected: v28Calcs[selectedIndex],
@@ -3281,7 +3292,7 @@ router.get('/v28/calculation-history', function (req, res) {
   });
 });
 
-router.get('/v28/api/calc/:id', function (req, res) {
+router.get('/28/api/calc/:id', function (req, res) {
   const id = parseInt(req.params.id, 10);
   const calc = (id >= 0 && id < v28Calcs.length) ? v28Calcs[id] : null;
   res.json(calc);

@@ -303,7 +303,7 @@ Court cases and release dates
   <div class="govuk-width-container">
     <div class="govuk-service-navigation__container">
       <span class="govuk-service-navigation__service-name">
-        <a href="/{{ data.prototypeVersion }}/overview.html" class="govuk-service-navigation__link">
+        <a href="/28/overview.html" class="govuk-service-navigation__link">
           Court cases and release dates
         </a>
       </span>
@@ -314,38 +314,38 @@ Court cases and release dates
         </button>
         <ul class="govuk-service-navigation__list" id="navigation">
           <li class="govuk-service-navigation__item{% if overviewActive %} govuk-service-navigation__item--active{% endif %}">
-            <a class="govuk-service-navigation__link" href="/{{ data.prototypeVersion }}/overview.html"{% if overviewActive %} aria-current="true"{% endif %}>
+            <a class="govuk-service-navigation__link" href="/28/overview.html"{% if overviewActive %} aria-current="true"{% endif %}>
               Overview
             </a>
           </li>
           <li class="govuk-service-navigation__item{% if not overviewActive and not documentsActive and not immigrationActive and not adjustmentsActive and not releaseDatesActive and not recallsActive and not calculateReleaseDatesActive %} govuk-service-navigation__item--active{% endif %}">
-            <a class="govuk-service-navigation__link" href="/{{ data.prototypeVersion }}/court-cases/"{% if not overviewActive and not documentsActive and not immigrationActive and not adjustmentsActive and not releaseDatesActive and not recallsActive and not calculateReleaseDatesActive %} aria-current="true"{% endif %}>
+            <a class="govuk-service-navigation__link" href="/28/court-cases/"{% if not overviewActive and not documentsActive and not immigrationActive and not adjustmentsActive and not releaseDatesActive and not recallsActive and not calculateReleaseDatesActive %} aria-current="true"{% endif %}>
               Court cases
               {% if data.tasks and not data.tasks.remandWarrantViewed %}<span class="moj-notification-badge">1</span>{% endif %}
             </a>
           </li>
           <li class="govuk-service-navigation__item{% if adjustmentsActive %} govuk-service-navigation__item--active{% endif %}">
-            <a class="govuk-service-navigation__link" href="/{{ data.prototypeVersion }}/adjustments.html"{% if adjustmentsActive %} aria-current="true"{% endif %}>
+            <a class="govuk-service-navigation__link" href="/28/adjustments.html"{% if adjustmentsActive %} aria-current="true"{% endif %}>
               Adjustments
             </a>
           </li>
           <li class="govuk-service-navigation__item{% if immigrationActive %} govuk-service-navigation__item--active{% endif %}">
-            <a class="govuk-service-navigation__link" href="/{{ data.prototypeVersion }}/immigration.html"{% if immigrationActive %} aria-current="true"{% endif %}>
+            <a class="govuk-service-navigation__link" href="/28/immigration.html"{% if immigrationActive %} aria-current="true"{% endif %}>
               Immigration
             </a>
           </li>
           <li class="govuk-service-navigation__item{% if recallsActive %} govuk-service-navigation__item--active{% endif %}">
-            <a class="govuk-service-navigation__link" href="/{{ data.prototypeVersion }}/recalls.html"{% if recallsActive %} aria-current="true"{% endif %}>
+            <a class="govuk-service-navigation__link" href="/28/recalls.html"{% if recallsActive %} aria-current="true"{% endif %}>
               Recalls
             </a>
           </li>
           <li class="govuk-service-navigation__item{% if releaseDatesActive or calculateReleaseDatesActive %} govuk-service-navigation__item--active{% endif %}">
-            <a class="govuk-service-navigation__link" href="/{{ data.prototypeVersion }}/release-dates.html"{% if releaseDatesActive or calculateReleaseDatesActive %} aria-current="true"{% endif %}>
+            <a class="govuk-service-navigation__link" href="/28/release-dates.html"{% if releaseDatesActive or calculateReleaseDatesActive %} aria-current="true"{% endif %}>
               Release dates
             </a>
           </li>
           <li class="govuk-service-navigation__item{% if documentsActive %} govuk-service-navigation__item--active{% endif %}">
-            <a class="govuk-service-navigation__link" href="/{{ data.prototypeVersion }}/documents.html" data-task-document-count="{% if data.tasks and data.tasks.newDocumentsCount %}{{ data.tasks.newDocumentsCount }}{% else %}0{% endif %}"{% if documentsActive %} aria-current="true"{% endif %}>
+            <a class="govuk-service-navigation__link" href="/28/documents.html" data-task-document-count="{% if data.tasks and data.tasks.newDocumentsCount %}{{ data.tasks.newDocumentsCount }}{% else %}0{% endif %}"{% if documentsActive %} aria-current="true"{% endif %}>
               Documents
               {% if data.tasks and data.tasks.newDocumentsCount > 0 %}<span class="notification-badge">{{ data.tasks.newDocumentsCount }}</span>{% endif %}
             </a>
