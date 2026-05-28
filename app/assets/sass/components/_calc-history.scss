@@ -89,6 +89,17 @@
   padding: govuk-spacing(3);
 }
 
+.app-stat-card--changed {
+  background-color: darken(govuk-colour("light-grey"), 6%);
+}
+
+.app-stat-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: govuk-spacing(1);
+}
+
 .app-stat-card__type {
   @include govuk-font($size: 16, $weight: bold);
   margin-bottom: govuk-spacing(1);

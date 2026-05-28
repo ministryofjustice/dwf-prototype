@@ -86,8 +86,13 @@
     var dateCards = DATE_KEYS.map(function (key) {
       var entry = calc.dates[key] || { value: 'N/A', delta: null, direction: null }
       if (entry.value === 'N/A') return ''
-      return '<div class="app-stat-card">' +
-        '<p class="govuk-heading-s govuk-!-margin-bottom-1">' + key + '</p>' +
+      var changedClass = entry.delta ? ' app-stat-card--changed' : ''
+      var changedTag = entry.delta ? '<strong class="govuk-tag govuk-tag--turquoise">Changed</strong>' : ''
+      return '<div class="app-stat-card' + changedClass + '">' +
+        '<div class="app-stat-card__header">' +
+          '<p class="govuk-heading-s govuk-!-margin-bottom-1">' + key + '</p>' +
+          changedTag +
+        '</div>' +
         '<p class="app-stat-card__description govuk-hint">' + escapeHTML(DATE_LABELS[key]) + '</p>' +
         '<p class="govuk-body govuk-!-margin-bottom-1">' + escapeHTML(entry.value) + '</p>' +
         '</div>'

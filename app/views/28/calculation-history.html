@@ -138,8 +138,11 @@
       {% for key in dateKeys %}
         {% set dateEntry = selected.dates[key] %}
         {% if dateEntry.value !== 'N/A' %}
-          <div class="app-stat-card">
-            <p class="govuk-heading-s govuk-!-margin-bottom-1">{{ key }}</p>
+          <div class="app-stat-card{% if dateEntry.delta %} app-stat-card--changed{% endif %}">
+            <div class="app-stat-card__header">
+              <p class="govuk-heading-s govuk-!-margin-bottom-1">{{ key }}</p>
+              {% if dateEntry.delta %}<strong class="govuk-tag govuk-tag--turquoise">Changed</strong>{% endif %}
+            </div>
             <p class="app-stat-card__description govuk-hint">{{ dateLabels[key] }}</p>
             <p class="govuk-body govuk-!-margin-bottom-1">{{ dateEntry.value }}</p>
           </div>

@@ -1,0 +1,226 @@
+{% extends "28/template.html" %}
+{% set calculateReleaseDatesActive = true %}
+{% set noBackLink = true %}
+
+{% block content %}
+
+<a href="/28/calculation-history-mvp?selected={{ selectedIndex }}" class="govuk-back-link">Back</a>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">
+      <span class="govuk-caption-xl">{{ calc.date }} — {{ calc.reason }}</span>
+      Court cases and adjustments
+    </h1>
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h2 class="govuk-heading-l">Court cases</h2>
+
+    <h3 class="govuk-heading-m govuk-!-margin-bottom-4">T20250103 at Sheffield Crown Court</h3>
+
+    <div class="offence-card sentence-card govuk-!-margin-bottom-4">
+      <div class="offence-card-offence-details">
+        <span class="govuk-body">Count 1</span>
+        <h4 class="govuk-heading-s govuk-!-margin-bottom-2">AB06001 — Obstruct person acting in execution of the regulations</h4>
+        <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-0">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Committed on</dt>
+            <dd class="govuk-summary-list__value">1 January 2025</dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Sentence date</dt>
+            <dd class="govuk-summary-list__value">20 March 2025</dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Sentence type</dt>
+            <dd class="govuk-summary-list__value">SDS (Standard Determinate Sentence)</dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Sentence length</dt>
+            <dd class="govuk-summary-list__value">1 year 0 months</dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Consecutive or concurrent</dt>
+            <dd class="govuk-summary-list__value">Forthwith</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="offence-card sentence-card govuk-!-margin-bottom-4">
+      <div class="offence-card-offence-details">
+        <span class="govuk-body">Count 2</span>
+        <h4 class="govuk-heading-s govuk-!-margin-bottom-2">AB13001 — Fail to comply with an animal by-product requirement</h4>
+        <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-0">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Committed on</dt>
+            <dd class="govuk-summary-list__value">1 January 2025</dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Sentence date</dt>
+            <dd class="govuk-summary-list__value">20 March 2025</dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Sentence type</dt>
+            <dd class="govuk-summary-list__value">SDS (Standard Determinate Sentence)</dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Sentence length</dt>
+            <dd class="govuk-summary-list__value">5 years 0 months</dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Consecutive or concurrent</dt>
+            <dd class="govuk-summary-list__value">Concurrent</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    <h3 class="govuk-heading-m govuk-!-margin-bottom-4">T20250102 at Manchester Crown Court</h3>
+
+    <div class="offence-card sentence-card govuk-!-margin-bottom-4">
+      <div class="offence-card-offence-details">
+        <span class="govuk-body">Count 1</span>
+        <h4 class="govuk-heading-s govuk-!-margin-bottom-2">AB13002 — Intentionally obstruct an authorised person</h4>
+        <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-0">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Committed on</dt>
+            <dd class="govuk-summary-list__value">30 December 2024</dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Sentence date</dt>
+            <dd class="govuk-summary-list__value">12 February 2025</dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Sentence type</dt>
+            <dd class="govuk-summary-list__value">SDS (Standard Determinate Sentence)</dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Sentence length</dt>
+            <dd class="govuk-summary-list__value">3 years 0 months</dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Consecutive or concurrent</dt>
+            <dd class="govuk-summary-list__value">Forthwith</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="offence-card sentence-card govuk-!-margin-bottom-6">
+      <div class="offence-card-offence-details">
+        <span class="govuk-body">Count 2</span>
+        <h4 class="govuk-heading-s govuk-!-margin-bottom-2">AB13003 — Fail to give to an authorised person information / assistance</h4>
+        <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-0">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Committed on</dt>
+            <dd class="govuk-summary-list__value">30 December 2024</dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Sentence date</dt>
+            <dd class="govuk-summary-list__value">12 February 2025</dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Sentence type</dt>
+            <dd class="govuk-summary-list__value">SDS (Standard Determinate Sentence)</dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Sentence length</dt>
+            <dd class="govuk-summary-list__value">2 years 0 months</dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Consecutive or concurrent</dt>
+            <dd class="govuk-summary-list__value">Concurrent</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    <h2 class="govuk-heading-l">Adjustments</h2>
+
+    <h3 class="govuk-heading-m">Deductions</h3>
+
+    <h4 class="govuk-heading-s govuk-!-margin-bottom-2">Remand</h4>
+    <table class="govuk-table govuk-body-s govuk-!-margin-bottom-4">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="col">Date from</th>
+          <th class="govuk-table__header" scope="col">Date to</th>
+          <th class="govuk-table__header" scope="col">Days</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">12 Jan 2025</td>
+          <td class="govuk-table__cell">22 Feb 2025</td>
+          <td class="govuk-table__cell">42</td>
+        </tr>
+      </tbody>
+      <tfoot class="govuk-table__foot">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="row" colspan="2">Total days</th>
+          <td class="govuk-table__cell govuk-!-font-weight-bold">42</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <h4 class="govuk-heading-s govuk-!-margin-bottom-2">Tagged bail</h4>
+    <table class="govuk-table govuk-body-s govuk-!-margin-bottom-6">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="col">Court case</th>
+          <th class="govuk-table__header" scope="col">From</th>
+          <th class="govuk-table__header" scope="col">Days</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">T20250103</td>
+          <td class="govuk-table__cell">14 Mar 2025</td>
+          <td class="govuk-table__cell">14</td>
+        </tr>
+      </tbody>
+      <tfoot class="govuk-table__foot">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="row" colspan="2">Total days</th>
+          <td class="govuk-table__cell govuk-!-font-weight-bold">14</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <h3 class="govuk-heading-m">Additions</h3>
+
+    <h4 class="govuk-heading-s govuk-!-margin-bottom-2">UAL (Unlawfully at large)</h4>
+    <table class="govuk-table govuk-body-s">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="col">Date from</th>
+          <th class="govuk-table__header" scope="col">Date to</th>
+          <th class="govuk-table__header" scope="col">Days</th>
+          <th class="govuk-table__header" scope="col">Type</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">05 Apr 2025</td>
+          <td class="govuk-table__cell">18 Apr 2025</td>
+          <td class="govuk-table__cell">14</td>
+          <td class="govuk-table__cell">Standard</td>
+        </tr>
+      </tbody>
+      <tfoot class="govuk-table__foot">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="row" colspan="3">Total days</th>
+          <td class="govuk-table__cell govuk-!-font-weight-bold">14</td>
+        </tr>
+      </tfoot>
+    </table>
+
+  </div>
+</div>
+
+{% endblock %}

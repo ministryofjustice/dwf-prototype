@@ -1,0 +1,235 @@
+{% extends "28/template.html" %}
+{% set calculateReleaseDatesActive = true %}
+
+{% set dateLabels = {
+  CRD: "Conditional release date",
+  LED: "Licence expiry date",
+  SED: "Sentence expiry date",
+  HDCED: "Home detention curfew eligibility date",
+  TUSED: "Top-up supervision expiry date",
+  PED: "Parole eligibility date",
+  NPD: "Non-parole date",
+  ARD: "Automatic release date"
+} %}
+
+{% set dateKeys = ["CRD", "LED", "SED", "HDCED", "TUSED", "PED", "NPD", "ARD"] %}
+
+{% block content %}
+<h1 class="govuk-heading-xl">Calculation history</h1>
+
+<div class="govuk-grid-row">
+
+  {# ── LEFT NAV PANE ── #}
+  <div class="govuk-grid-column-one-third">
+
+    <p class="govuk-label govuk-label--s govuk-!-margin-bottom-1">Select a calculation</p>
+    <p class="govuk-hint govuk-!-margin-bottom-3">Showing calculations {{ windowStart + 1 }} to {{ windowEnd + 1 }} of {{ calcs | length }}</p>
+
+    <nav class="moj-side-navigation app-calc-nav" aria-label="Select a calculation">
+      <ul class="moj-side-navigation__list">{%- for calc in windowCalcs %}
+          <li class="moj-side-navigation__item{% if calc.windowIndex === selectedIndex %} moj-side-navigation__item--active{% endif %}">
+            <a href="?selected={{ calc.windowIndex }}"
+               data-calc-index="{{ calc.windowIndex }}"
+               {% if calc.windowIndex === selectedIndex %}aria-current="location"{% endif %}>
+              <span class="app-calc-row__header">
+                <strong class="govuk-body app-calc-row__date">{{ calc.date }}</strong>
+                <span class="app-calc-row__tags">
+                  {% if calc.windowIndex === 0 %}<strong class="govuk-tag">Latest</strong>{% endif %}
+                </span>
+              </span>
+              <span class="govuk-body govuk-!-display-block">{{ calc.reason }}</span>
+              <span class="govuk-body govuk-!-display-block">{{ calc.establishment }}</span>
+            </a>
+          </li>
+        {%- endfor %}
+      </ul>
+    </nav>
+
+    {% if hiddenAbove > 0 or hiddenBelow > 0 %}
+      <nav class="govuk-pagination govuk-pagination--block" aria-label="Calculation navigation">
+        {% if hiddenAbove > 0 %}
+          <div class="govuk-pagination__prev">
+            <a class="govuk-link govuk-pagination__link" href="?selected={{ hiddenAbove - 1 }}">
+              <svg class="govuk-pagination__icon govuk-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg" height="13" width="15" focusable="false" aria-hidden="true" viewBox="0 0 15 13">
+                <path d="m6.5938-0.0078125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z"/>
+              </svg>
+              <span class="govuk-pagination__link-title">Newer calculations</span>
+              <span class="govuk-visually-hidden">:</span>
+              <span class="govuk-pagination__link-label">{{ prevPageStart1 }} to {{ hiddenAbove }} of {{ calcs | length }}</span>
+            </a>
+          </div>
+        {% endif %}
+        {% if hiddenBelow > 0 %}
+          <div class="govuk-pagination__next">
+            <a class="govuk-link govuk-pagination__link" href="?selected={{ windowEnd + 1 }}">
+              <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" focusable="false" aria-hidden="true" viewBox="0 0 15 13">
+                <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7246z"/>
+              </svg>
+              <span class="govuk-pagination__link-title">Older calculations</span>
+              <span class="govuk-visually-hidden">:</span>
+              <span class="govuk-pagination__link-label">{{ windowEnd + 2 }} to {{ nextPageEnd1 }} of {{ calcs | length }}</span>
+            </a>
+          </div>
+        {% endif %}
+      </nav>
+    {% endif %}
+
+  </div>
+
+  {# ── RIGHT DETAIL PANEL ── #}
+  <div class="govuk-grid-column-two-thirds" id="calc-detail-panel" aria-live="polite">
+
+    <h2 class="govuk-heading-l" id="calc-detail-heading">Calculation on {{ selected.date }}</h2>
+
+    {# Meta row — 4 columns for CRDS, 3 for NOMIS #}
+    {% set colClass = 'govuk-grid-column-one-quarter' if selected.source !== 'NOMIS' else 'govuk-grid-column-one-third' %}
+    <div class="govuk-grid-row govuk-!-margin-bottom-2">
+      <div class="{{ colClass }}">
+        <p class="govuk-body govuk-!-margin-bottom-0">
+          <strong class="govuk-!-display-block">Calculation reason</strong>
+          {{ selected.reason }}
+        </p>
+      </div>
+      <div class="{{ colClass }}">
+        <p class="govuk-body govuk-!-margin-bottom-0">
+          <strong class="govuk-!-display-block">Establishment</strong>
+          {{ selected.calculator }} at {{ selected.establishment }}
+        </p>
+      </div>
+      <div class="{{ colClass }}">
+        <p class="govuk-body govuk-!-margin-bottom-0">
+          <strong class="govuk-!-display-block">Source</strong>
+          {{ selected.source }}
+        </p>
+      </div>
+      {% if selected.source !== 'NOMIS' %}
+      <div class="{{ colClass }}">
+        <p class="govuk-body govuk-!-margin-bottom-0">
+          <strong class="govuk-!-display-block">Checked by</strong>
+          {% if selected.checkedBy and selected.checkedBy.length %}
+            {% for checker in selected.checkedBy %}
+              <span class="govuk-!-display-block">{{ checker.name }}</span>
+              <span class="govuk-hint govuk-!-margin-bottom-1">{{ checker.date }}</span>
+            {% endfor %}
+          {% else %}
+            Not checked
+          {% endif %}
+        </p>
+      </div>
+      {% endif %}
+    </div>
+
+    {# Manual override notice — not applicable for NOMIS source calcs #}
+    {% if selected.manualOverride and selected.source !== 'NOMIS' %}
+      <div class="govuk-inset-text govuk-!-margin-top-4 govuk-!-margin-bottom-4">
+        This calculation was manually overridden. The reason provided was "{{ selected.manualOverride.reason }}".
+      </div>
+    {% endif %}
+
+    {# Release dates #}
+    <h3 class="govuk-heading-m">Release dates</h3>
+    <div class="app-stat-card-grid govuk-!-margin-bottom-4">
+      {% for key in dateKeys %}
+        {% set dateEntry = selected.dates[key] %}
+        {% if dateEntry.value !== 'N/A' %}
+          <div class="app-stat-card">
+            <div class="app-stat-card__header">
+              <p class="govuk-heading-s govuk-!-margin-bottom-1">{{ key }}</p>
+            </div>
+            <p class="app-stat-card__description govuk-hint">{{ dateLabels[key] }}</p>
+            <p class="govuk-body govuk-!-margin-bottom-1">{{ dateEntry.value }}</p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {# View calculated dates — only for manually overridden CRDS calculations #}
+    {% if selected.manualOverride and selected.source !== 'NOMIS' %}
+      <details class="govuk-details govuk-!-margin-bottom-4">
+        <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text">View calculated dates</span>
+        </summary>
+        <div class="govuk-details__text">
+          <div class="app-stat-card-grid">
+            <div class="app-stat-card">
+              <div class="app-stat-card__header">
+                <p class="govuk-heading-s govuk-!-margin-bottom-1">CRD</p>
+              </div>
+              <p class="app-stat-card__description govuk-hint">Conditional release date</p>
+              <p class="govuk-body govuk-!-margin-bottom-1">14 November 2027</p>
+            </div>
+            <div class="app-stat-card">
+              <div class="app-stat-card__header">
+                <p class="govuk-heading-s govuk-!-margin-bottom-1">LED</p>
+              </div>
+              <p class="app-stat-card__description govuk-hint">Licence expiry date</p>
+              <p class="govuk-body govuk-!-margin-bottom-1">14 May 2028</p>
+            </div>
+            <div class="app-stat-card">
+              <div class="app-stat-card__header">
+                <p class="govuk-heading-s govuk-!-margin-bottom-1">HDCED</p>
+              </div>
+              <p class="app-stat-card__description govuk-hint">Home detention curfew eligibility date</p>
+              <p class="govuk-body govuk-!-margin-bottom-1">2 August 2027</p>
+            </div>
+            <div class="app-stat-card">
+              <div class="app-stat-card__header">
+                <p class="govuk-heading-s govuk-!-margin-bottom-1">PED</p>
+              </div>
+              <p class="app-stat-card__description govuk-hint">Parole eligibility date</p>
+              <p class="govuk-body govuk-!-margin-bottom-1">15 March 2027</p>
+            </div>
+            <div class="app-stat-card">
+              <div class="app-stat-card__header">
+                <p class="govuk-heading-s govuk-!-margin-bottom-1">ARD</p>
+              </div>
+              <p class="app-stat-card__description govuk-hint">Automatic release date</p>
+              <p class="govuk-body govuk-!-margin-bottom-1">30 November 2026</p>
+            </div>
+          </div>
+        </div>
+      </details>
+    {% endif %}
+
+    {# Action buttons — only for the most recent CRDS calculation #}
+    {% if selectedIndex === 0 and selected.source !== 'NOMIS' %}
+      <div class="govuk-button-group govuk-!-margin-bottom-6">
+        <button type="button" class="govuk-button govuk-button--secondary">Print notification slip</button>
+        <button type="button" class="govuk-button govuk-button--secondary">Record a counter check</button>
+      </div>
+    {% endif %}
+
+    {% if selected.source !== 'NOMIS' %}
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+    <h3 class="govuk-heading-m">Included in this calculation</h3>
+    <div class="app-stat-card-grid app-stat-card-grid--thirds govuk-!-margin-bottom-4">
+      <div class="app-stat-card">
+        <p class="govuk-body govuk-!-margin-bottom-0">Court cases</p>
+        <p class="govuk-heading-m govuk-!-margin-bottom-0">{{ selected.courts }}</p>
+      </div>
+      <div class="app-stat-card">
+        <p class="govuk-body govuk-!-margin-bottom-0">Sentences</p>
+        <p class="govuk-heading-m govuk-!-margin-bottom-0">{{ selected.sentences }}</p>
+      </div>
+      <div class="app-stat-card">
+        <p class="govuk-body govuk-!-margin-bottom-0">Adjustments</p>
+        {% if selected.adjustments.length %}
+          {%- for adj in selected.adjustments -%}<p class="govuk-body-s govuk-!-margin-bottom-0"><strong>{{ adj }}</strong></p>{%- endfor -%}
+        {% else %}
+          <p class="govuk-body-s">None</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <a href="/28/calculation-history-mvp-court-cases?selected={{ selectedIndex }}" class="govuk-link govuk-body">View all court cases and adjustments information</a>
+    {% endif %}
+
+  </div>
+
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<script src="/public/javascripts/v28-calc-history-mvp.js?v=2"></script>
+{% endblock %}

@@ -1,7 +1,7 @@
 {% extends "28/template.html" %}
 {% set overviewActive = true %}
 {% set noBackLink = true %}
-{% set showFullNav = false %}
+{% set showFullNav = true %}
 
 {% block content %}
 
@@ -50,7 +50,7 @@
           <dd class="govuk-summary-list__value govuk-body">14 May 2027</dd>
         </div>
       </dl>
-      <a href="/28/calculation-history" class="govuk-link govuk-body">View details</a>
+      <a href="/28/calculation-history-mvp?selected=0" class="govuk-link govuk-body">View details</a>
     </div>
   </div>
   <div class="govuk-grid-column-one-half">
@@ -66,23 +66,23 @@
         </thead>
         <tbody class="govuk-table__body">
           <tr class="govuk-table__row">
-            <td class="govuk-table__cell"><a href="/28/calculation-history" class="govuk-link">12 May 2026</a></td>
+            <td class="govuk-table__cell"><a href="/28/calculation-history-mvp?selected=0" class="govuk-link">12 May 2026</a></td>
             <td class="govuk-table__cell">Adding more sentences or terms</td>
             <td class="govuk-table__cell">J. Smith at HMP Brixton</td>
           </tr>
           <tr class="govuk-table__row">
-            <td class="govuk-table__cell"><a href="/28/calculation-history" class="govuk-link">28 March 2026</a></td>
+            <td class="govuk-table__cell"><a href="/28/calculation-history-mvp?selected=1" class="govuk-link">28 March 2026</a></td>
             <td class="govuk-table__cell">Recording a recall</td>
             <td class="govuk-table__cell">J. Smith at HMP Brixton</td>
           </tr>
           <tr class="govuk-table__row">
-            <td class="govuk-table__cell"><a href="/28/calculation-history" class="govuk-link">5 January 2026</a></td>
+            <td class="govuk-table__cell"><a href="/28/calculation-history-mvp?selected=2" class="govuk-link">5 January 2026</a></td>
             <td class="govuk-table__cell">14 day check</td>
             <td class="govuk-table__cell">J. Smith at HMP Brixton</td>
           </tr>
         </tbody>
       </table>
-      <a href="/28/calculation-history" class="govuk-link govuk-body">View calculation history</a>
+      <a href="/28/calculation-history-mvp" class="govuk-link govuk-body">View calculation history</a>
     </div>
   </div>
 </div>
