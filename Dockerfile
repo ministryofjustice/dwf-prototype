@@ -1,4 +1,4 @@
-FROM node:24.15-bullseye-slim
+FROM node:24.16-bullseye-slim
 
 ENV NODE_ENV=production
 
