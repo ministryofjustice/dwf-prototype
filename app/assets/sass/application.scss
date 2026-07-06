@@ -930,8 +930,8 @@ section {
 
 .to-do-item {
   width: 100%;
-  background: govuk-colour("light-grey");
-  border-left: 10px solid govuk-colour("mid-grey") !important;
+  background: govuk-colour("black", $variant: "tint-95");
+  border-left: 10px solid govuk-colour("black", $variant: "tint-80") !important;
   display: inline-block;
   padding: 20px 15px 0px 15px;
   margin-bottom: 10px;
@@ -963,7 +963,7 @@ section {
 .to-do-hint {
   font-size: 16px;
   margin-top: 0px !important;
-  color: govuk-colour("dark-grey");
+  color: govuk-colour("black", $variant: "tint-25");
 }
 
 .to-do-hint-overdue {
@@ -1016,7 +1016,7 @@ max-width: 100%;
 }
 
 .release-date-highlight {
-  background-color: govuk-colour("light-grey");
+  background-color: govuk-colour("black", $variant: "tint-95");
   display: block;
   padding: 15px ;
   margin-bottom: 15px;

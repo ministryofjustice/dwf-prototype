@@ -1,6 +1,6 @@
 .app-cookie-banner {
   @include govuk-font(16);
-  @include govuk-text-colour;
+  color: govuk-functional-colour(text);
 
   box-sizing: border-box;
   width: 100%;
