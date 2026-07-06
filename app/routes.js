@@ -408,6 +408,32 @@ router.post("/new-court-case-appeal-ref", function (req, res) {
     }
    })
 
+   //breach court case selected
+router.post("/new-court-case-breach-ref", function (req, res) {
+    //this
+    var breachrefselect = req.session.data['breachrefselect']
+   // Check whether the variable matches a condition
+    if (breachrefselect == "Yes"){
+    // Send user to next page
+      res.redirect(`/28/court-cases/add-a-breach/warrant-date`);
+    } else {
+      res.redirect(`/28/court-cases/add-a-breach/court-case-reference-number`);
+    }
+   })
+
+   //breach court case selected
+router.post("/new-court-case-breach", function (req, res) {
+    //this
+    var breachrefselect = req.session.data['breachrefselect']
+   // Check whether the variable matches a condition
+    if (breachrefselect == "Yes"){
+    // Send user to next page
+      res.redirect(`/28/court-cases/add-a-breach/warrant-date2`);
+    } else {
+      res.redirect(`/28/court-cases/add-a-breach/court-case-reference-number`);
+    }
+   })
+
 router.post("/:prototypeVersion/new-court-name", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   const courtCaseIndex = req.session.data.courtCaseIndex;
