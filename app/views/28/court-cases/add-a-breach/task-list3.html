@@ -15,37 +15,37 @@
               <ul class="govuk-task-list govuk-!-margin-top-7">
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                        <div class="govuk-task-list__name-and-hint">
-                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href={% if data.appearanceDetailsComplete == 1 %}"check-answers"{% else %}"court-case-reference-number-select?appearanceDetailsCompleted=1"{% endif %} aria-describedby="appearance-infromation-status">
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="check-answers2">
                                 Add hearing information
                             </a>
                         </div>
                         <div class="govuk-task-list__status" id="appearance-infromation-status">
-                            {% if data.appearanceDetailsComplete == 1 %}
-                            Completed
-                            {% elif data.appearanceDetailsStarted == 1 %}
-                            <strong class="govuk-tag govuk-tag--blue">
-                                Incomplete
-                            </strong>
-                            {% else %}
-                            <strong class="govuk-tag govuk-tag--blue">
-                                Incomplete
-                            </strong>
-                            {% endif %}
+                           
+                            
+                                Completed
+                           
+                          
+                            
                         </div>
                     </li>
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
-                            {% if data.additionalInformationComplete == 1 %}
-                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="../add-overall-warrant-information/check-answers.html">
-                                Add overall warrant information
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="overall-sentence-length">
+                               Add overall warrant information
                             </a>
-                            {% elif data.appearanceDetailsComplete == 1 %}
-                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="../add-overall-warrant-information/overall-sentence-length?additionalInformationStarted=1">
-                                Add overall warrant information
-                            </a>
-                            {% else %}
-                            Add overall warrant information
-                            {% endif %}
+                             </div>
+                        <div class="govuk-task-list__status" id="offences-and-sentences-status">
+                          <strong class="govuk-tag govuk-tag--blue">
+                                Incomplete
+                            </strong>
+                        </div>
+                    </li>
+                    
+                    <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                        <div class="govuk-task-list__name-and-hint">
+                            
+                           Add offences
+                          
                         </div>
                         <div class="govuk-task-list__status" id="offences-and-sentences-status">
                             {% if data.appearanceDetailsComplete == 1 %}
@@ -69,14 +69,14 @@
                         <div class="govuk-task-list__name-and-hint">
                             {% if data.additionalInformationComplete == 1 %}
                             <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./record-appeal">
-                                Add offences
+                               Aggravating factors
                             </a>
                             {% elif data.appearanceDetailsComplete == 1 %}
                             <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./record-appeal?additionalInformationStarted=1">
-                                Add offences
+                               Aggravating factors
                             </a>
                             {% else %}
-                           Add offences
+                           Aggravating factors
                             {% endif %}
                         </div>
                         <div class="govuk-task-list__status" id="offences-and-sentences-status">
