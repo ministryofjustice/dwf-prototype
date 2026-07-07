@@ -1976,6 +1976,16 @@ router.post("/:prototypeVersion/sentence-length-select", function (req, res) {
       `/${prototypeVersion}/court-cases/add-a-sentence/term-length`
     );
   }
+  if (sentenceType == "Detention and Training Order") {
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-breach/term-length`
+    );
+  }
+    if (sentenceType == "ORA Detention and Training Order") {
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-breach/term-length`
+    );
+  }
   if (sentenceType == "Adult discretionary life") {
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-sentence/tariff-length`
@@ -2066,6 +2076,16 @@ router.post("/record-appeal-submit", function (req, res) {
     }
   })
 
+  //adding an offebce for breach hearing
+router.post("/breach-hearing-submit", function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion;
+    var recordappeal = req.session.data['recordappeal']
+    if (recordappeal == "yes"){
+    res.redirect('/26/court-cases/add-a-breach/task-list5')}
+    else {
+    res.redirect('/26/court-cases/add-a-court-appeal/task-list4b')
+    }
+  })
 
 
 router.post("/:prototypeVersion/term-length-select", function (req, res) {

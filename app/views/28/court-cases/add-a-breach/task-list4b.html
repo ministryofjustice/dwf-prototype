@@ -3,41 +3,85 @@
 {% block content %}
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-         <form class="form" action="confirmation" method="post">
+        <form class="form" action="/{{data.prototypeVersion}}/persist-appearance?appearanceComplete=true" method="post">
             <div class="govuk-form-group">
                 <h1 class="govuk-heading-l">
                    Add a breach
                 </h1>
-                 <h2 class="govuk-heading-m">Enter information from the hearing</h2>
+                
+                <h2 class="govuk-heading-m">Enter information from the hearing</h2>
+                
                 <p class="govuk-body">You must enter information exactly as it is written on the hearing.</p>
-                <ul class="govuk-task-list govuk-!-margin-top-7">
+              <ul class="govuk-task-list govuk-!-margin-top-7">
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                        <div class="govuk-task-list__name-and-hint">
-                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="check-answers">
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="check-answers2" aria-describedby="appearance-infromation-status">
                                 Add hearing information
                             </a>
                         </div>
-                        <div class="govuk-task-list__status" id="appearance-infromation-status">
-                           Completed
-                         </div>
+                         <div class="govuk-task-list__status" id="appearance-infromation-status">
+                           
+                            Completed
+                           
+                        </div>
                     </li>
-                   <!--   <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                    <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
-                            
-                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./record-appeal">
-                                Record appeal
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="overall-sentence-length" aria-describedby="appearance-infromation-status">
+                                Add overall warrant information
                             </a>
-                            
+                        </div>
+                       <div class="govuk-task-list__status" id="appearance-infromation-status">
+                           
+                            Completed
+                           
+                        </div>
+                    </li>
+                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                        <div class="govuk-task-list__name-and-hint">
+                          <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="offence-date" aria-describedby="appearance-infromation-status">
+                                Add offences
+                            </a>
                         </div>
                         <div class="govuk-task-list__status" id="offences-and-sentences-status">
-                            
+                          <strong class="govuk-tag govuk-tag--blue">
+                                Incomplete
+                            </strong>   
+                        </div>
+                    </li>
+                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                        <div class="govuk-task-list__name-and-hint">
+                            {% if data.additionalInformationComplete == 1 %}
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./record-appeal">
+                               Aggravating factors
+                            </a>
+                            {% elif data.appearanceDetailsComplete == 1 %}
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./record-appeal?additionalInformationStarted=1">
+                               Aggravating factors
+                            </a>
+                            {% else %}
+                           Aggravating factors
+                            {% endif %}
+                        </div>
+                        <div class="govuk-task-list__status" id="offences-and-sentences-status">
+                            {% if data.appearanceDetailsComplete == 1 %}
+                             {% if data.additionalInformationComplete == 1 %}
+                             Completed
+                             {% elif data.additionalInformationStarted == 1 %}
                              <strong class="govuk-tag govuk-tag--blue">
                                 Incomplete
                             </strong>
-                             
+                             {% else %}
+                            <strong class="govuk-tag govuk-tag--blue">
+                                Incomplete
+                            </strong>
+                            {% endif %}
+                            {% else %}
+                            <span class="govuk-task-list__status--cannot-start-yet">Cannot start yet</span>
+                            {% endif %}
                         </div>
                     </li>
-                  {% if data.appearance['warrant-type'] == "Remand" %}
+                   <!-- {% if data.appearance['warrant-type'] == "Remand" %}
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
                             {% if data.appearanceDetailsComplete == 1 %}
@@ -179,27 +223,41 @@
                     {% endif %}-->
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
-                           
-                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="../add-court-documents/upload-breach-document" aria-describedby="court-documents-status">
+                            {% if data.appearanceDetailsComplete == 1 %}
+                            {% if data.courtDocumentsComplete == 1 %}
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="../add-court-documents/court-documents" aria-describedby="court-documents-status">
                                 Upload court documents
                             </a>
-                            
+                            {% else %}
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="../add-court-documents/court-documents" aria-describedby="court-documents-status">
+                                Upload court documents
+                            </a>
+                            {% endif %}
+                            {% else %}
+                            Upload court documents
+                            {% endif %}
                         </div>
                         <div class="govuk-task-list__status" id="court-documents-status">
-                            
+                            {% if data.appearanceDetailsComplete == 1 %}
+                            {% if data.courtDocumentsComplete == 1 %}
+                                Completed
+                            {% else %}
                             <strong class="govuk-tag govuk-tag--grey">
                                 Optional
                             </strong>
-                            
+                            {% endif %}
+                            {% else %}
+                            <span class="govuk-task-list__status--cannot-start-yet">Cannot start yet</span>
+                            {% endif %}
                         </div>
                     </li>
                 </ul>
             </div>
             <h2 class="govuk-heading-m">
-                Finish adding a breach hearing
+               Finish adding a breach hearing
             </h2>
             <!-- <p class="govuk-body">To save a draft of the court case, you must first complete the appearance information.</p> -->
-            <p class="govuk-body">Once you have finished adding all the information, select ‘Finish and save’. You will not be able to return to this page, but can edit the details in the Court cases tab. </p  >
+            <p class="govuk-body">Once every task has been completed, you must  save the information. You will not be able to return to this page, but can edit the details in the Court cases tab.</p  >
                 <div class="govuk-button-group">
                 <button type="submit" class="govuk-button" data-module="govuk-button">
                     Finish and save

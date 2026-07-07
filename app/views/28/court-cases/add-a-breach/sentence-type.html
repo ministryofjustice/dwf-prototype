@@ -1,0 +1,58 @@
+{% extends "../../template.html" %}
+{% set showFullNav = false %}
+{% block content %}
+<!-- What is the confirmed date -->
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        {% if data.edit == 'true' %}
+        <form class="form" action="/{{data.prototypeVersion}}/persist-sentence?edit=true" method="post">
+            {% else %}
+            <form class="form" action="term-length" method="post">
+                {% endif %}
+                <div class="govuk-form-group">
+                    <fieldset class="govuk-fieldset">
+                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                           
+                                <span class="govuk-caption-l">Add offences</span>
+                               
+                                Select the sentence type
+                            </h1>
+                           
+                        </legend>
+                        <div class="govuk-radios" data-module="govuk-radios">
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="sentence-type-1" name="sentence[sentence-type]"
+                                    type="radio" value="Detention and Training Order)" {% if
+                                    data.sentence['sentence-type']=='Detention and Training Order' %} checked {%
+                                    endif %}>
+                                <label class="govuk-label govuk-radios__label" for="sentence-type-1">
+                                   Detention and Training Order
+                                </label>
+                            </div>
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="sentence-type-2" name="sentence[sentence-type]"
+                                    type="radio" value=" ORA Detention and Training Order" {% if
+                                    data.sentence['sentence-type']=='ORA Detention and Training Order' %} checked {%
+                                    endif %}>
+                                <label class="govuk-label govuk-radios__label" for="sentence-type-2">
+                                   ORA Detention and Training Order
+                                </label>
+                            </div>
+                           
+                           
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="govuk-button-group">
+                    <button type="submit" class="govuk-button" data-module="govuk-button">
+                        Continue
+                    </button>
+                </div>
+            </form>
+    </div>
+    <div class="govuk-grid-column-one-third">
+        {% set showOffences = true %}
+        {% include "includes/templates/appearance-info.njk" %}
+    </div>
+</div>
+{% endblock %}

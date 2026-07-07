@@ -1,0 +1,136 @@
+{% extends "../../template.html" %}
+{% set showFullNav = false %}
+{% set noBackLink = true %}
+{% block content %}
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+           
+            <h1 class="govuk-fieldset__heading">
+                <span class="govuk-caption-l">Add offences</span>
+               You have added 1 offence
+            </h1>
+           
+        </legend>
+        <form class="form" action="breach-hearing-submit" method="post">
+     <a href="/{{data.prototypeVersion}}/create-offence?path=cta" role="button" draggable="false" class="govuk-button govuk-button--link govuk-!-margin-bottom-6 govuk-!-margin-top-2" data-module="govuk-button">
+                Add an offence
+            </a>
+<div class="govuk-!-margin-top-6">
+                <h2 id="offences-section" class="govuk-heading-m govuk-!-margin-top-8 govuk-!-margin-bottom-6">Offences with custodial outcomes</h2>
+ <div class="offence-card sentence-card govuk-grid-column-two-thirds">
+  <div class="offence-card-offence-details">
+    <div class="govuk-body">Count 1</div>
+    <h4 class="govuk-heading-s">Supply a quantity of crack cocaine, a controlled drug of class A </h4>
+    <dl class="govuk-summary-list govuk-summary-list--no-border">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Committed on</dt>
+        <dd class="govuk-summary-list__value">
+         1/08/2025 to 30/09/2025
+         </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Conviction date</dt>
+        <dd class="govuk-summary-list__value">
+          31/01/2026
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+                                    <dt class="govuk-summary-list__key">
+                                        Outcome
+                                    </dt>
+                                    <dd class="govuk-summary-list__value">
+                                       DTO (Detention and Training Order)
+                                    </dd>
+                                </div>
+                                <div class="govuk-summary-list__row">
+                                    <dt class="govuk-summary-list__key">
+                                        Sentence type
+                                    </dt>
+                                    <dd class="govuk-summary-list__value">
+                                       Detention and Training Order
+                                    </dd>
+                                </div>
+                                <div class="govuk-summary-list__row">
+                                    <dt class="govuk-summary-list__key">
+                                       Term length
+                                    </dt>
+                                    <dd class="govuk-summary-list__value">
+                                       11 years 0 months 0 weeks 0 days
+                                    </dd>
+                                </div>
+                                <div class="govuk-summary-list__row">
+                                    <dt class="govuk-summary-list__key">
+                                       Breach due to imprisonable offence
+                                    </dt>
+                                    <dd class="govuk-summary-list__value">
+                                       0 years 3 months 0 weeks 0 days
+                                    </dd>
+                                </div>
+                            <div class="govuk-summary-list__row">
+                                    <dt class="govuk-summary-list__key">
+                                       Consecutive or concurrent
+                                    </dt>
+                                    <dd class="govuk-summary-list__value">
+                                      Concurrent
+                                    </dd>
+                                </div>
+
+    
+    </dl>
+
+  
+      <ul class="govuk-list govuk-!-margin-top-4 govuk-!-margin-bottom-2">
+     
+            
+      
+  </div>
+
+</div>
+
+
+
+
+    <hr class="govuk-section-break govuk-section-break--l govuk-!-margin-top-8 govuk-section-break--visible">
+            <h2 class="govuk-heading-m govuk-!-margin-top-7">Offences with non-custodial outcomes </h2>
+
+            <div class="govuk-inset-text govuk-!-margin-top-2">
+                      There are no offences with an appeal outcome recorded
+                       </div>
+                    
+                  
+            </div>
+
+        
+            <div class="govuk-form-group govuk-!-margin-top-8">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                        Have you finished adding offences?
+                    </legend>
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="finished-adding-offences" name="appearance[finished-adding-offences]" type="radio" value="yes">
+                            <label class="govuk-label govuk-radios__label" for="finished-adding-offences">
+                                Yes, I’ve finished adding offences
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="finished-adding-offences-2" name="appearance[finished-adding-offences]" type="radio" value="no">
+                            <label class="govuk-label govuk-radios__label" for="finished-adding-offences-2">
+                                No, I’ll come back to it later
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+    <div class="govuk-grid-column-one-third">
+        {% set showOffences = false %}
+        {% include "includes/templates/appearance-info.njk" %}
+      </div>
+</div>
+{% endblock %}
