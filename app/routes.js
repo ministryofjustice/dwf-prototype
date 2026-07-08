@@ -2076,14 +2076,14 @@ router.post("/record-appeal-submit", function (req, res) {
     }
   })
 
-  //adding an offebce for breach hearing
+  //adding an offence for breach hearing
 router.post("/breach-hearing-submit", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
     var recordappeal = req.session.data['recordappeal']
     if (recordappeal == "yes"){
-    res.redirect('/26/court-cases/add-a-breach/task-list5')}
+    res.redirect('/28/court-cases/add-a-breach/task-list5')}
     else {
-    res.redirect('/26/court-cases/add-a-court-appeal/task-list4b')
+    res.redirect('/28/court-cases/add-a-breach/task-list4b')
     }
   })
 

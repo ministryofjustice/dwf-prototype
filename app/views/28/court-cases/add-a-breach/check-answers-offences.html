@@ -12,12 +12,31 @@
             </h1>
            
         </legend>
-        <form class="form" action="breach-hearing-submit" method="post">
-     <a href="/{{data.prototypeVersion}}/create-offence?path=cta" role="button" draggable="false" class="govuk-button govuk-button--link govuk-!-margin-bottom-6 govuk-!-margin-top-2" data-module="govuk-button">
+         <dl class="govuk-summary-list">
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Overall sentence length
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ data.appearance['overall-sentence-length-years']}} years {{
+                        data.appearance['overall-sentence-length-months']}} months {{
+                        data.appearance['overall-sentence-length-weeks']}} weeks {{
+                        data.appearance['overall-sentence-length-days']}} days
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="add-overall-warrant-information/overall-sentence-length?postSaveEdit=true">
+                            Edit<span class="govuk-visually-hidden"> overall sentence length</span>
+                        </a>
+                    </dd>
+                </div>
+                
+            </dl>
+        <form class="form" action="/breach-hearing-submit" method="post">
+     <a href="/{{data.prototypeVersion}}/create-offence?path=cta" role="button" draggable="false" class="govuk-button govuk-button--link govuk-!-margin-bottom-6" data-module="govuk-button">
                 Add an offence
             </a>
-<div class="govuk-!-margin-top-6">
-                <h2 id="offences-section" class="govuk-heading-m govuk-!-margin-top-8 govuk-!-margin-bottom-6">Offences with custodial outcomes</h2>
+<div class="govuk-!-margin-top-0">
+                <h2 id="offences-section" class="govuk-heading-m">Offences with custodial outcomes</h2>
  <div class="offence-card sentence-card govuk-grid-column-two-thirds">
   <div class="offence-card-offence-details">
     <div class="govuk-body">Count 1</div>
@@ -95,34 +114,41 @@
             <h2 class="govuk-heading-m govuk-!-margin-top-7">Offences with non-custodial outcomes </h2>
 
             <div class="govuk-inset-text govuk-!-margin-top-2">
-                      There are no offences with an appeal outcome recorded
+                      There are no offences with a breach hearing outcome recorded
                        </div>
                     
                   
             </div>
 
         
-            <div class="govuk-form-group govuk-!-margin-top-8">
-                <fieldset class="govuk-fieldset">
-                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-                        Have you finished adding offences?
-                    </legend>
-                    <div class="govuk-radios" data-module="govuk-radios">
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="finished-adding-offences" name="appearance[finished-adding-offences]" type="radio" value="yes">
-                            <label class="govuk-label govuk-radios__label" for="finished-adding-offences">
-                                Yes, I’ve finished adding offences
-                            </label>
+           <div class="govuk-form-group">
+                    <fieldset class="govuk-fieldset">
+                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                               Have you finished adding offences?
+                            </h1>
+                       </legend>
+                        <div class="govuk-radios" data-module="govuk-radios">
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="recordappeal-1" name="recordappeal"
+                                    type="radio" value="yes">
+                                <label class="govuk-label govuk-radios__label" for="recordappeal-1">
+                                   Yes, I’ve finished
+                                </label>
+                            </div>
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="record-appeal-2" name="recordappeal"
+                                    type="radio" value="no">
+                                <label class="govuk-label govuk-radios__label" for="recordappeal-2">
+                                    No, I’ll come back to it later
+                                </label>
+                            </div>
+                        
+                        
+                          
+                       
                         </div>
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="finished-adding-offences-2" name="appearance[finished-adding-offences]" type="radio" value="no">
-                            <label class="govuk-label govuk-radios__label" for="finished-adding-offences-2">
-                                No, I’ll come back to it later
-                            </label>
-                        </div>
-                    </div>
-                </fieldset>
-            </div>
+                    </fieldset>
+                </div>
             <button type="submit" class="govuk-button" data-module="govuk-button">
                 Continue
             </button>
