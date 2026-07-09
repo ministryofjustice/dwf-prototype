@@ -29,7 +29,7 @@
  <div class="govuk-summary-card">
                 <div class="govuk-summary-card__title-wrapper">
                   <h2 class="govuk-summary-card__title govuk-!-width-two-thirds court-case-name">
-                    062500344418 <span class="govuk-body">at</span>Greater Manchester Magistrates' Court 
+                    062500344418 <span class="govuk-body">at</span> Manchester Magistrates' Court 
                   </h2>
                   <ul class="govuk-summary-card__actions">
                     <li class="govuk-summary-card__action">
@@ -46,7 +46,7 @@
                 </div>
 
          <div class="govuk-summary-card__content">
-                  {% if (courtCase.appearances.length == 1) and (lastAppearance['status'] == 'draft') %}
+             <!--     {% if (courtCase.appearances.length == 1) and (lastAppearance['status'] == 'draft') %}
                     <p class="govuk-body govuk-!-margin-top-2">The appearance information for this court case has been saved as a draft.</p>
                     <p class="govuk-body">
                       <a href="add-a-court-case/task-list?courtCaseIndex={{ courtCaseIndex }}">
@@ -65,7 +65,7 @@
                       <div class="govuk-inset-text govuk-!-margin-top-2">
                         This court case has been merged with {{ courtCase['merged-with'] }}
                       </div>
-                    {% endif %}
+                    {% endif %}-->
 
                     <dl class="govuk-summary-list">
                       <div class="govuk-summary-list__row">
@@ -76,7 +76,9 @@
                       </div>
                      <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">Overall case outcome</dt>
+                        <dd class="govuk-summary-list__value">
                          {{ data.appearance['overall-case-outcome'] }}
+                         </dd>
                      </div>
                     </dl>
 
@@ -96,7 +98,6 @@
                         <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Warrant date</h3>
                         <p class="govuk-body govuk-!-margin-bottom-2">
                          2/09/2024
-                           
                         </p>
 
                         <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Outcome</h3>
@@ -105,7 +106,7 @@
 
                       <div class="govuk-grid-column-two-thirds">
                         <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Location</h3>
-                        <p class="govuk-body govuk-!-margin-bottom-2">Greater Manchester Magistrates' Court </p>
+                        <p class="govuk-body govuk-!-margin-bottom-2">Manchester Magistrates Court </p>
 
                         <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Warrant type</h3>
                         <p class="govuk-body govuk-!-margin-bottom-2">Warrant</p>
