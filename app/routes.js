@@ -2086,7 +2086,16 @@ router.post("/breach-hearing-submit", function (req, res) {
     res.redirect('/28/court-cases/add-a-breach/task-list4b')
     }
   })
-
+  //adding an offence for breach hearing
+router.post("/breach-type-submit", function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion;
+    var breachtype = req.session.data['breachtype']
+    if (breachtype == "yes"){
+    res.redirect('/28/court-cases/add-a-breach/task-list')}
+    else {
+    res.redirect('/28/court-cases/add-a-breach/task-list3')
+    }
+  })
 
 router.post("/:prototypeVersion/term-length-select", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;

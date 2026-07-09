@@ -2,7 +2,7 @@
 {% block content %}
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="/{{data.prototypeVersion}}/warrant-type-select?route=appearance" method="post">
+        <form class="form" action="/breach-type-submit" method="post">
             <div class="govuk-form-group"> 
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
@@ -13,16 +13,16 @@
                     </legend>
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="warrant-type" name="appearance[warrant-type]" type="radio" value="Remand">
-                            <label class="govuk-label govuk-radios__label" for="warrant-type">
+                            <input class="govuk-radios__input" id="breach-type1" name="breachtype" type="radio" value="yes">
+                            <label class="govuk-label govuk-radios__label" for="breach-type1">
                                 A breach of supervision requirements
                             </label>
                             <div class="govuk-hint govuk-radios__hint">
                                 Schedule 12, paragraph 2&3 of Sentencing Act 2020. Previously section 104.
                          </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="warrant-type-2" name="appearance[warrant-type]" type="radio" value="Sentencing">
-                            <label class="govuk-label govuk-radios__label" for="warrant-type-2">
+                            <input class="govuk-radios__input" id="breach-type2" name="breachtype" type="radio" value="no">
+                            <label class="govuk-label govuk-radios__label" for="breach-type2">
                                 A new imprisonable offence committed during supervision
                             </label>
                             <div class="govuk-hint govuk-radios__hint">
@@ -31,13 +31,10 @@
                     </div>
                 </fieldset>
             </div>
-           <div class="govuk-button-group">
-  <a href="task-list" class="govuk-button govuk-button--primary" data-module="govuk-button">
-   Continue</a>
-  <a href="/court-cases" class="govuk-button govuk-button--secondary" data-module="govuk-button">
-   Cancel</a>
-  </div>
-  <a class="govuk-link"  href="#">Cancel</a>
+          <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Continue
+                </button>
         </form>
     </div>
 </div>
