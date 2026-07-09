@@ -26,10 +26,537 @@
             {% if loop.index0 < 5 %}
               {% set lastAppearance = courtCase.appearances | last %}
               {% set courtCaseIndex = loop.index0 %}
-
-              <div class="govuk-summary-card">
+ <div class="govuk-summary-card">
                 <div class="govuk-summary-card__title-wrapper">
-                  <h2 class="govuk-summary-card__title govuk-!-width-two-thirds">
+                  <h2 class="govuk-summary-card__title govuk-!-width-two-thirds court-case-name">
+                    062500344418 <span class="govuk-body">at</span> Manchester Magistrates' Court 
+                  </h2>
+                  <ul class="govuk-summary-card__actions">
+                    <li class="govuk-summary-card__action">
+                      
+                        <a class="govuk-link govuk-link--no-visited-state"
+                           href="add-a-breach/breach-type">
+                          Add breach<span class="govuk-visually-hidden"> to court case</span>
+                          
+                        </a>
+                        
+                 
+                    </li>
+                  </ul>
+                </div>
+
+         <div class="govuk-summary-card__content">
+             <!--     {% if (courtCase.appearances.length == 1) and (lastAppearance['status'] == 'draft') %}
+                    <p class="govuk-body govuk-!-margin-top-2">The appearance information for this court case has been saved as a draft.</p>
+                    <p class="govuk-body">
+                      <a href="add-a-court-case/task-list?courtCaseIndex={{ courtCaseIndex }}">
+                        Continue adding appearance information
+                      </a>
+                    </p>
+                  {% else %}
+                    {% if lastAppearance['merged-from-case'] %}
+                      <div class="govuk-inset-text govuk-!-margin-top-2">
+                        {{ lastAppearance['merged-from-case'] }} was merged with this case
+                        {% if lastAppearance['merged-from-case-date'] %}on {{ lastAppearance['merged-from-case-date'] }}{% endif %}
+                      </div>
+                    {% endif %}
+
+                    {% if (courtCase['status'] == 'inactive') and (courtCase['merged-with']) %}
+                      <div class="govuk-inset-text govuk-!-margin-top-2">
+                        This court case has been merged with {{ courtCase['merged-with'] }}
+                      </div>
+                    {% endif %}-->
+
+                    <dl class="govuk-summary-list">
+                      <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">Case references</dt>
+                        <dd class="govuk-summary-list__value">
+                          062500344418
+                        </dd>
+                      </div>
+                     <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">Overall case outcome</dt>
+                        <dd class="govuk-summary-list__value">
+                         {{ data.appearance['overall-case-outcome'] }}
+                         </dd>
+                     </div>
+                    </dl>
+
+                    <hr class="govuk-section-break govuk-section-break--visible">
+
+                    <div class="govuk-grid-row">
+                      <div class="govuk-grid-column-one-half">
+                        <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-2">Latest hearing</h2>
+                      </div>
+                    </div>
+
+                    <div class="govuk-grid-row govuk-!-padding-bottom-2 govuk-!-margin-top-2">
+                      <div class="govuk-grid-column-one-third">
+                        <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Case reference</h3>
+                        <p class="govuk-body govuk-!-margin-bottom-2">062500344418</p>
+
+                        <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Warrant date</h3>
+                        <p class="govuk-body govuk-!-margin-bottom-2">
+                         2/09/2024
+                        </p>
+
+                        <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Outcome</h3>
+                        <p class="govuk-body govuk-!-margin-bottom-2">Detention and training order (DTO)</p>
+                      </div>
+
+                      <div class="govuk-grid-column-two-thirds">
+                        <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Location</h3>
+                        <p class="govuk-body govuk-!-margin-bottom-2">Manchester Magistrates Court </p>
+
+                        <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Warrant type</h3>
+                        <p class="govuk-body govuk-!-margin-bottom-2">Warrant</p>
+
+                        {% if lastAppearance['overall-case-outcome'] == 'Imprisonment' %}
+                          <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Conviction date</h3>
+                          <p class="govuk-body govuk-!-margin-bottom-2">
+                            {{ lastAppearance['overall-conviction-date-day'] }}/{{ lastAppearance['overall-conviction-date-month'] }}/{{ lastAppearance['overall-conviction-date-year'] }}
+                          </p>
+                        {% endif %}
+                      </div>
+
+                      <div class="govuk-grid-column-full govuk-!-margin-top-4">
+                        
+                          <details class="govuk-details filter white show-toggle govuk-!-margin-top-0">
+                            <summary class="govuk-details__summary">
+                              <span class="govuk-details__summary-text">offences (3)</span>
+                            </summary>
+                            <div class="govuk-details__text">
+                              
+                            
+                                 <div class="offence-card offence-card">
+                                  <div class="offence-card-offence-details">
+                                                <span class="govuk-body">Count 1</span>
+                                                <h4 class="govuk-heading-s">Supply a quantity of crack cocaine, a controlled drug of class A 
+                                                </h4>
+                                                <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                                    <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                            Conviction date
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                           31/01/2026
+                                                        </dd>
+                                                    </div>
+                                                    <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                            Appeal outcome
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                            Sentence varied
+                                                        </dd>
+                                                    </div>
+                                                    
+                                            </div>
+                                </div>
+                                 <div class="offence-card offence-card">
+                                  <div class="offence-card-offence-details">
+                                                <span class="govuk-body">Count 2</span>
+                                                <h4 class="govuk-heading-s">Supply a quantity of diamorphine (heroin), a controlled drug of class A  
+                                                </h4>
+                                                <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                                    <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                            Conviction date
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                           31/01/2026
+                                                        </dd>
+                                                    </div>
+                                                    <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                            Appeal outcome
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                            Appeal dismissed
+                                                        </dd>
+                                                    </div>
+                                                    
+                                            </div>
+                                </div><div class="offence-card offence-card">
+                                  <div class="offence-card-offence-details">
+                                                <span class="govuk-body">Count 3</span>
+                                                <h4 class="govuk-heading-s">Supply a quantity of Cannabis/Cannabis resin, a controlled drug of class B
+                                                </h4>
+                                                <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                                    <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                            Conviction date
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                           31/01/2026
+                                                        </dd>
+                                                    </div>
+                                                    <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                            Appeal outcome
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                            Conviction quashed
+                                                        </dd>
+                                                    </div>
+                                                    
+                                            </div>
+                                </div>
+                                   
+                              
+                             
+                            </div>
+                          </details>
+
+                      
+                      
+                        
+                      </div>
+                    </div>
+
+                    <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-top-4">
+                    <p class="govuk-body govuk-!-margin-top-6">
+                      <a class="govuk-link--no-visited-state govuk-!-font-weight-bold"
+                         href="./court-case-detail3">
+                        
+                          View and edit all hearings
+                        
+                        for this court case (1)
+                      </a>
+                    </p>
+                  {% endif %}
+                </div>
+              </div>
+
+
+      <div class="govuk-summary-card">
+                <div class="govuk-summary-card__title-wrapper">
+                  <h2 class="govuk-summary-card__title govuk-!-width-two-thirds court-case-name">
+                    33JJ1234567 <span class="govuk-body">at</span> Swansea Crown Court
+                  </h2>
+                  <ul class="govuk-summary-card__actions">
+                    <li class="govuk-summary-card__action">
+                      
+                        <a class="govuk-link govuk-link--no-visited-state"
+                           href="add-a-court-appeal/task-list">
+                          Add appeal<span class="govuk-visually-hidden"> to court case</span>
+                          
+                        </a>
+                        
+                 
+                    </li>
+                  </ul>
+                </div>
+
+         <div class="govuk-summary-card__content">
+                  {% if (courtCase.appearances.length == 1) and (lastAppearance['status'] == 'draft') %}
+                    <p class="govuk-body govuk-!-margin-top-2">The appearance information for this court case has been saved as a draft.</p>
+                    <p class="govuk-body">
+                      <a href="add-a-court-case/task-list?courtCaseIndex={{ courtCaseIndex }}">
+                        Continue adding appearance information
+                      </a>
+                    </p>
+                  {% else %}
+                    {% if lastAppearance['merged-from-case'] %}
+                      <div class="govuk-inset-text govuk-!-margin-top-2">
+                        {{ lastAppearance['merged-from-case'] }} was merged with this case
+                        {% if lastAppearance['merged-from-case-date'] %}on {{ lastAppearance['merged-from-case-date'] }}{% endif %}
+                      </div>
+                    {% endif %}
+
+                    {% if (courtCase['status'] == 'inactive') and (courtCase['merged-with']) %}
+                      <div class="govuk-inset-text govuk-!-margin-top-2">
+                        This court case has been merged with {{ courtCase['merged-with'] }}
+                      </div>
+                    {% endif %}
+
+                    <dl class="govuk-summary-list">
+                      <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">Case references</dt>
+                        <dd class="govuk-summary-list__value">
+                          33JJ1234567
+                        </dd>
+                      </div>
+                      <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">First day in custody</dt>
+                        <dd class="govuk-summary-list__value">
+                        31/01/2026  (Sentencing)
+                        </dd>
+                      </div>
+                      
+                      <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">Overall case outcome</dt>
+                        
+                            Imprisonment
+                         
+                      </div>
+  
+                        <div class="govuk-summary-list__row">
+                          <dt class="govuk-summary-list__key">Overall sentence length</dt>
+                          <dd class="govuk-summary-list__value">
+                             11 years 0 months 0 months 0 days
+                          </dd>
+                        </div>
+                        
+                        <div class="govuk-summary-list__row">
+                          <dt class="govuk-summary-list__key">Conviction date</dt>
+                          <dd class="govuk-summary-list__value">
+                          31/01/2026
+                          </dd>
+                        </div>
+                      <div class="govuk-summary-list__row">
+                          <dt class="govuk-summary-list__key">Next hearing</dt>
+                          <dd class="govuk-summary-list__value">No future appearance scheduled</dd>
+                        </div>
+                     
+                    </dl>
+
+                    <hr class="govuk-section-break govuk-section-break--visible">
+
+                    <div class="govuk-grid-row">
+                      <div class="govuk-grid-column-one-half">
+                        <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-2">Latest hearing</h2>
+                      </div>
+                    </div>
+
+                    <div class="govuk-grid-row govuk-!-padding-bottom-2 govuk-!-margin-top-2">
+                      <div class="govuk-grid-column-one-third">
+                        <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Case reference</h3>
+                        <p class="govuk-body govuk-!-margin-bottom-2">33JJ1234567</p>
+
+                        <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Warrant date</h3>
+                        <p class="govuk-body govuk-!-margin-bottom-2">
+                          31/01/2026
+                           
+                        </p>
+
+                        <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Outcome</h3>
+                        <p class="govuk-body govuk-!-margin-bottom-2">Imprisonment</p>
+                      </div>
+
+                      <div class="govuk-grid-column-two-thirds">
+                        <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Location</h3>
+                        <p class="govuk-body govuk-!-margin-bottom-2">Swansea Crown Court</p>
+
+                        <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Warrant type</h3>
+                        <p class="govuk-body govuk-!-margin-bottom-2">Sentencing</p>
+
+                        {% if lastAppearance['overall-case-outcome'] == 'Imprisonment' %}
+                          <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Conviction date</h3>
+                          <p class="govuk-body govuk-!-margin-bottom-2">
+                            {{ lastAppearance['overall-conviction-date-day'] }}/{{ lastAppearance['overall-conviction-date-month'] }}/{{ lastAppearance['overall-conviction-date-year'] }}
+                          </p>
+                        {% endif %}
+                      </div>
+
+                      <div class="govuk-grid-column-full govuk-!-margin-top-4">
+                        
+                          <details class="govuk-details filter white show-toggle govuk-!-margin-top-0">
+                            <summary class="govuk-details__summary">
+                              <span class="govuk-details__summary-text">offences (3)</span>
+                            </summary>
+                            <div class="govuk-details__text">
+                              <div class="offence-card sentence-card">
+                                  <div class="offence-card-offence-details">
+                                                <span class="govuk-body">Count 1</span>
+                                                <h4 class="govuk-heading-s">Supply a quantity of crack cocaine, a controlled drug of class A  
+                                                </h4>
+                                                <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                                   
+                                                    <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                            Commited on
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                            1/08/2025 to 30/09/2025
+                                                        </dd>
+                                                    </div>
+                                                    
+                                                    <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                            Conviction date
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                           31/01/2026
+                                                        </dd>
+                                                    </div>
+                                                    
+                                                    <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                            Sentence type
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                            SDS (Standard Determinate Sentence)
+                                                        </dd>
+                                                    </div>
+                                                    
+                                                    <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                            Sentence length
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                            11 years 0 months 0 weeks 0 days
+                                                        </dd>
+                                                    </div>
+                                                   
+                                                    
+                                                    <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                            Consecutive or concurrent
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                            Consecutive
+                                                        </dd>
+                                                    </div>
+                                                    
+                                                </dl>
+                                            </div>
+                                </div>
+                                 <div class="offence-card sentence-card">
+                                  <div class="offence-card-offence-details">
+                                                <span class="govuk-body">Count 2</span>
+                                                <h4 class="govuk-heading-s">supply a quantity of diamorphine (heroin), a controlled drug of class A  
+                                                </h4>
+                                                <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                                   
+                                                    <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                            Commited on
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                            1/08/2025 to 30/09/2025
+                                                        </dd>
+                                                    </div>
+                                                    
+                                                    <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                            Conviction date
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                           31/01/2026
+                                                        </dd>
+                                                    </div>
+                                                    
+                                                    <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                            Sentence type
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                            SDS (Standard Determinate Sentence)
+                                                        </dd>
+                                                    </div>
+                                                    
+                                                    <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                            Sentence length
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                            8 years 0 months 0 weeks 0 days
+                                                        </dd>
+                                                    </div>
+                                                   
+                                                    
+                                                    <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                            Consecutive or concurrent
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                            Consecutive
+                                                        </dd>
+                                                    </div>
+                                                    
+                                                </dl>
+                                            </div>
+                                </div>
+                                   
+                                 <div class="offence-card sentence-card">
+                                  <div class="offence-card-offence-details">
+                                                <span class="govuk-body">Count 3</span>
+                                                <h4 class="govuk-heading-s">Cupply a quantity of Cannabis/Cannabis resin, a controlled drug of class B
+                                                </h4>
+                                                <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                                   
+                                                    <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                            Commited on
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                             1/08/2025 to 30/09/2025
+                                                        </dd>
+                                                    </div>
+                                                    
+                                                    <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                            Conviction date
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                            31/01/2026
+                                                        </dd>
+                                                    </div>
+                                                    
+                                                    <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                            Sentence type
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                            SDS (Standard Determinate Sentence)
+                                                        </dd>
+                                                    </div>
+                                                    
+                                                    <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                            Sentence length
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                            2 years 0 months 0 weeks 0 days
+                                                        </dd>
+                                                    </div>
+                                                   
+                                                    
+                                                    <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                            Consecutive or concurrent
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                            Consecutive
+                                                        </dd>
+                                                    </div>
+                                                    
+                                                </dl>
+                                            </div>
+                                </div>
+                             
+                            </div>
+                          </details>
+
+                      
+                      
+                        
+                      </div>
+                    </div>
+
+                    <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-top-4">
+                    <p class="govuk-body govuk-!-margin-top-6">
+                      <a class="govuk-link--no-visited-state govuk-!-font-weight-bold"
+                         href="court-case-detail2?courtCaseIndex={{ courtCaseIndex }}">
+                        {% if (courtCase['source'] == "nomis") or (courtCase['status'] == "inactive") %}
+                          View all hearings
+                        {% else %}
+                          View and edit all hearings
+                        {% endif %}
+                        for this court case (1)
+                      </a>
+                    </p>
+                  {% endif %}
+                </div>
+              </div>
+
+
+
+
+                       <div class="govuk-summary-card">
+                <div class="govuk-summary-card__title-wrapper">
+                  <h2 class="govuk-summary-card__title govuk-!-width-two-thirds court-case-name">
                     {{ lastAppearance['court-case-ref'] }} <span class="govuk-body">at</span> {{ lastAppearance['court-name'] }}
                   </h2>
                   <ul class="govuk-summary-card__actions">
@@ -43,14 +570,16 @@
                       {% else %}
                         <a class="govuk-link govuk-link--no-visited-state"
                            href="/{{data.prototypeVersion}}/create-appearance?courtIndex={{ courtCaseIndex }}">
-                          Add appearance<span class="govuk-visually-hidden"> to court case</span>
+                          Add a hearing<span class="govuk-visually-hidden"> to court case</span>
+                          
                         </a>
+                        
                       {% endif %}
                     </li>
                   </ul>
                 </div>
 
-                <div class="govuk-summary-card__content">
+         <div class="govuk-summary-card__content">
                   {% if (courtCase.appearances.length == 1) and (lastAppearance['status'] == 'draft') %}
                     <p class="govuk-body govuk-!-margin-top-2">The appearance information for this court case has been saved as a draft.</p>
                     <p class="govuk-body">
@@ -150,7 +679,7 @@
 
                     <div class="govuk-grid-row">
                       <div class="govuk-grid-column-one-half">
-                        <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-2">Latest appearance</h2>
+                        <h2 class="govuk-heading-m govuk-!-margin-top-6 govuk-!-margin-bottom-2">Latest hearing</h2>
                       </div>
                       <div class="govuk-column-one-half govuk-!-text-align-right govuk-!-padding-right-3">
                         {% for status in lastAppearance['status'] %}
@@ -190,7 +719,7 @@
                         {% endif %}
                       </div>
 
-                      <div class="govuk-grid-column-full govuk-!-margin-top-2">
+                      <div class="govuk-grid-column-full govuk-!-margin-top-4">
                         {% if (lastAppearance.offences) and (lastAppearance.sentences == null) %}
                           <details class="govuk-details filter white show-toggle govuk-!-margin-bottom-0">
                             <summary class="govuk-details__summary">
@@ -229,7 +758,7 @@
                           </details>
 
                         {% elif (lastAppearance.sentences) and (lastAppearance.offences == null) %}
-                          <details class="govuk-details filter white show-toggle govuk-!-margin-bottom-0">
+                          <details class="govuk-details filter white show-toggle govuk-!-margin-top-0">
                             <summary class="govuk-details__summary">
                               <span class="govuk-details__summary-text">offences ({{ lastAppearance.sentences.length }})</span>
                             </summary>
@@ -261,14 +790,14 @@
                       </div>
                     </div>
 
-                    <hr class="govuk-section-break govuk-section-break--visible">
+                    <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-top-4">
                     <p class="govuk-body govuk-!-margin-top-6">
                       <a class="govuk-link--no-visited-state govuk-!-font-weight-bold"
                          href="court-case-detail?courtCaseIndex={{ courtCaseIndex }}">
                         {% if (courtCase['source'] == "nomis") or (courtCase['status'] == "inactive") %}
-                          View all appearances
+                          View all hearings
                         {% else %}
-                          View and edit all appearances
+                          View and edit all hearings
                         {% endif %}
                         for this court case ({% if lastAppearance['status'] == 'draft' %}{{ courtCase.appearances.length - 1 }} and 1 draft{% else %}{{ courtCase.appearances.length }}{% endif %})
                       </a>
@@ -276,6 +805,10 @@
                   {% endif %}
                 </div>
               </div>
+
+
+
+
             {% endif %}
           {% endfor %}
         {% else %}
@@ -322,27 +855,14 @@
     </nav>
     {% endif %}
   </div>
-    <div class="govuk-grid-column-one-third" data-task-column>
-
-       
-      {% include "27/includes/things-to-do.html" %}
- <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-
-    <h3 class="govuk-heading-m">Actions</h3>
-    <ul class="govuk-list actions-list-list" > 
-      <li style="padding: 0px 0px 15px 0px; border-bottom: 0; margin: 0px;"><a href="/{{data.prototypeVersion}}/create-court-case?route=new-court-case" >Add a new court case</a></li>
-      <li style="padding: 0px 0px 15px 0px; border-bottom: 0; margin: 0px;"><a href="record-an-immediate-release/select-court-case">Record an immediate release</a></li>
-      <!-- <li style="padding: 0px 0px 15px 0px; border-bottom: 0; margin: 0px;"><a href="/{{data.prototypeVersion}}/quick-start-entry">[Placeholder CTA - Design To Follow]</a></li> -->
-    </ul>
-    
-        
-    <!-- <div class="actions-list">
+  <div class="govuk-grid-column-one-third">
+    <div class="actions-list">
       <ul class="govuk-list actions-list-list">
         <span class="govuk-heading-m actions-list-header">Actions</span>
         <li><a href="/{{data.prototypeVersion}}/create-court-case?route=new-court-case">Add a new court case</a></li>
-        <li><a href="record-an-immediate-release/select-court-case">Record an immediate release</a></li>
-        <li><a href="/{{data.prototypeVersion}}/quick-start-entry">[Placeholder CTA - Design To Follow]</a></li>
-      </ul> 
-  </div> -->
+        <!-- <li><a href="record-an-immediate-release/select-court-case">Record an immediate release</a></li> -->
+      </ul>
+    </div>
+  </div>
 </div>
 {% endblock %}
