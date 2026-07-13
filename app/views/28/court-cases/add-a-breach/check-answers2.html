@@ -14,7 +14,7 @@
                         Case reference
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        33JJ1234567
+                        432600019000
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link" href="court-case-reference-number?edit=true">
@@ -48,7 +48,19 @@
                         </a>
                     </dd>
                 </div>
-                
+                 <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Overall case outcome
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                {{ data['appearance']['overall-case-outcome'] }}
+                            </dd>
+                             <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="overall-case-outcome2?edit=true">
+                            Edit<span class="govuk-visually-hidden"> overall case outcome</span>
+                        </a>
+                    </dd>
+                        </div>
                 
             </dl>
             <div class="govuk-button-group">
