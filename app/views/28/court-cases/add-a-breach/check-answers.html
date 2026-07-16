@@ -53,10 +53,13 @@
                               Breach term length
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                {{ data['appearance']['overall-case-outcome'] }}
+                               {{ data['sentence']['term-length-years'] }} years {{
+                            data['sentence']['term-length-months'] }} months {{
+                            data['sentence']['term-length-weeks'] }} weeks {{
+                            data['sentence']['term-length-days'] }} days     
                             </dd>
                              <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="overall-case-outcome2?edit=true">
+                        <a class="govuk-link" href="term-length?edit=true">
                             Edit<span class="govuk-visually-hidden"> breach term length</span>
                         </a>
                     </dd>
