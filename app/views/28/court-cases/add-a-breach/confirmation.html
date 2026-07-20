@@ -1,30 +1,26 @@
-{% extends "../../template.html" %}
+    {% extends "../../template.html" %}
 {% set showFullNav = false %}
-{% set noBackLink = true %}
+    {% set noBackLink = true %}
 {% block content %}
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
         <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-6">
             <h1 class="govuk-panel__title govuk-!-font-size-36">
-                Breach hearing successfully saved
+                Breach successfully saved
             </h1>
         </div>
         <div class="govuk-!-margin-top-6">
-            <h2 class="govuk-heading-l">What you must do next</h2> 
-            <div class="govuk-body govuk-!-margin-top-6"><span>As this was a breach of supervision requirements, you must now add a term to the original sentence.</span>
-            </div>
-            </div>
-
-<div class="govuk-button-group">
-  
-  <a class="govuk-link" href="/28/court-cases/court-case-detail">Add a term to the original sentence</a>
-</div>
-<div class="govuk-body govuk-!-margin-top-6"><span>You can also go back to Daryl Evans':</span>
+            <h2 class="govuk-heading-l">What you can do next</h2> 
+            <p class="govuk-body"><a href="notification-slip-mvp.html">Add adjustments</a></p> 
+            <div class="govuk-body govuk-!-margin-top-6"><span>You can also go back to Daryl Evans':</span>
                 <ul class="govuk-list govuk-!-margin-top-2">
-                    <li><a href="../">Court case information</a></li>
+                    <li><a href="../indexv2">Court case information</a></li>
                     <li><a href="">Prisoner profile</a></li>
                 </ul>
             </div> 
+            <div class="govuk-!-margin-top-6">
+                <p class="govuk-body">Or, go to the <a href="../DPS-home"> DPS homepage</a>.</p>
+            </div>
         </div>
     </div>
 </div>

@@ -71,13 +71,28 @@
                       <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">Case references</dt>
                         <dd class="govuk-summary-list__value">
-                          062500344418
+                          432600019000
+                        </dd>
+                      </div>
+                        <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">First day in custody</dt>
+                        <dd class="govuk-summary-list__value">
+                          02/09/2025
                         </dd>
                       </div>
                      <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">Overall case outcome</dt>
                         <dd class="govuk-summary-list__value">
-                         {{ data.appearance['overall-case-outcome'] }}
+                        Detention and training order (DTO)
+                         </dd>
+                     </div>
+                      <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">Breach of supervision requirement</dt>
+                        <dd class="govuk-summary-list__value">
+                          {{ data['sentence']['term-length-years'] }} years {{
+                            data['sentence']['term-length-months'] }} months {{
+                            data['sentence']['term-length-weeks'] }} weeks {{
+                            data['sentence']['term-length-days'] }} days   
                          </dd>
                      </div>
                     </dl>
@@ -95,9 +110,9 @@
                         <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Case reference</h3>
                         <p class="govuk-body govuk-!-margin-bottom-2">062500344418</p>
 
-                        <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Warrant date</h3>
+                        <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Breach hearing date</h3>
                         <p class="govuk-body govuk-!-margin-bottom-2">
-                         2/09/2024
+                         15/07/2026
                         </p>
 
                         <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Outcome</h3>
@@ -109,7 +124,7 @@
                         <p class="govuk-body govuk-!-margin-bottom-2">Manchester Magistrates Court </p>
 
                         <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Warrant type</h3>
-                        <p class="govuk-body govuk-!-margin-bottom-2">Warrant</p>
+                        <p class="govuk-body govuk-!-margin-bottom-2">Breach order</p>
 
                         {% if lastAppearance['overall-case-outcome'] == 'Imprisonment' %}
                           <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Conviction date</h3>
