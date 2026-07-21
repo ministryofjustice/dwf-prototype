@@ -32,7 +32,7 @@
                         </div>
                         <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key">
-                                Hearing date
+                                Breach hearing date
                             </dt>
                             <dd class="govuk-summary-list__value">
                                 {{ data.appearance['warrant-date-day'] }}/{{ data.appearance['warrant-date-month'] }}/{{
@@ -61,14 +61,17 @@
                         </div>
                         <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key">
-                                Overall case outcome
+                                Breach of supervision requirements
                             </dt>
                             <dd class="govuk-summary-list__value">
-                                {{ data.appearance['overall-case-outcome'] }}
+                                 {{ data['sentence']['term-length-years'] }} years {{
+                            data['sentence']['term-length-months'] }} months {{
+                            data['sentence']['term-length-weeks'] }} weeks {{
+                            data['sentence']['term-length-days'] }} days   
                             </dd>
                             <dd class="govuk-summary-list__actions">
                                 <a class="govuk-link govuk-link--no-visited-state"
-                                    href="add-a-court-appearance/overall-case-outcome?postSaveEdit=true">
+                                    href="term-length?postSaveEdit=true">
                                     Edit<span class="govuk-visually-hidden"> overall case outcome</span>
                                 </a>
                             </dd>
@@ -130,66 +133,27 @@
             <div class="govuk-!-margin-top-0">
                 <h2 class="govuk-heading-m govuk-!-margin-top-8">Offences (2)</h2>
                 <h2 id="offences-section" class="govuk-heading-s">Offences with custodial outcomes</h2>
- <div class="offence-card sentence-card govuk-grid-column-two-thirds">
+ <div class="offence-card offence-card">
   <div class="offence-card-offence-details">
     <div class="govuk-body">Count 1</div>
     <h4 class="govuk-heading-s">Possess a controlled drug of Class A - Cocaine </h4>
     <dl class="govuk-summary-list govuk-summary-list--no-border">
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">Committed on</dt>
-        <dd class="govuk-summary-list__value">
-         2/09/2025
-         </dd>
-      </div>
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">Conviction date</dt>
-        <dd class="govuk-summary-list__value">
-        15/07/2026
-        </dd>
-      </div>
-      <div class="govuk-summary-list__row">
-                                    <dt class="govuk-summary-list__key">
-                                        Outcome
-                                    </dt>
-                                    <dd class="govuk-summary-list__value">
-                                       DTO (Detention and Training Order)
-                                    </dd>
-                                </div>
-                                <div class="govuk-summary-list__row">
-                                    <dt class="govuk-summary-list__key">
-                                        Sentence type
-                                    </dt>
-                                    <dd class="govuk-summary-list__value">
-                                       Detention and Training Order
-                                    </dd>
-                                </div>
-                                <div class="govuk-summary-list__row">
-                                    <dt class="govuk-summary-list__key">
-                                       Term length
-                                    </dt>
-                                    <dd class="govuk-summary-list__value">
-                                       0 years 24 months 0 weeks 0 days
-                                    </dd>
-                                </div>
-                                <div class="govuk-summary-list__row">
-                                    <dt class="govuk-summary-list__key">
-                                      Breach of supervision requirements
-                                    </dt>
-                                    <dd class="govuk-summary-list__value">
-                                      <a href="term-length" class="govuk-link govuk-link--no-visited-state">Add term</a>
-                                    </dd>
-                                </div>
-                            <div class="govuk-summary-list__row">
-                                    <dt class="govuk-summary-list__key">
-                                       Consecutive or concurrent
-                                    </dt>
-                                    <dd class="govuk-summary-list__value">
-                                      Forthwith
-                                    </dd>
-                                </div>
-
-    
-    </dl>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                        Committed date
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                          02/09/2025
+                          </dd>
+                         </div>
+                        <div class="govuk-summary-list__row">
+                         <dt class="govuk-summary-list__key">
+                          Outcome
+                          </dt>
+                          <dd class="govuk-summary-list__value">
+                           Detention and training order (DTO)
+                          </dd>
+     </dl>
 
   
       <ul class="govuk-list govuk-!-margin-top-4 govuk-!-margin-bottom-2">
@@ -200,59 +164,27 @@
 
 </div>
 
-<div class="offence-card sentence-card govuk-grid-column-two-thirds">
+<div class="offence-card offence-card">
   <div class="offence-card-offence-details">
     <div class="govuk-body">Count 2</div>
-    <h4 class="govuk-heading-s">Possess knife blade / sharp pointed article in a public place - Criminal Justice Act 1988 </h4>
+    <h4 class="govuk-heading-s">Possess knife blade / sharp pointed article in a public place - Criminal Justice Act 1988</h4>
     <dl class="govuk-summary-list govuk-summary-list--no-border">
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">Committed on</dt>
-        <dd class="govuk-summary-list__value">
-         2/09/2025
-         </dd>
-      </div>
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">Conviction date</dt>
-        <dd class="govuk-summary-list__value">
-        2/09/2025
-        </dd>
-      </div>
-      <div class="govuk-summary-list__row">
-                                    <dt class="govuk-summary-list__key">
-                                        Outcome
-                                    </dt>
-                                    <dd class="govuk-summary-list__value">
-                                       DTO (Detention and Training Order)
-                                    </dd>
-                                </div>
-                                <div class="govuk-summary-list__row">
-                                    <dt class="govuk-summary-list__key">
-                                        Sentence type
-                                    </dt>
-                                    <dd class="govuk-summary-list__value">
-                                       Detention and Training Order
-                                    </dd>
-                                </div>
-                                <div class="govuk-summary-list__row">
-                                    <dt class="govuk-summary-list__key">
-                                       Term length
-                                    </dt>
-                                    <dd class="govuk-summary-list__value">
-                                       0 years 24 months 0 weeks 0 days
-                                    </dd>
-                                </div>
-                              
-                            <div class="govuk-summary-list__row">
-                                    <dt class="govuk-summary-list__key">
-                                       Consecutive or concurrent
-                                    </dt>
-                                    <dd class="govuk-summary-list__value">
-                                      Concurrent
-                                    </dd>
-                                </div>
-
-    
-    </dl>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                        Committed date
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                          02/09/2025
+                          </dd>
+                         </div>
+                        <div class="govuk-summary-list__row">
+                         <dt class="govuk-summary-list__key">
+                          Outcome
+                          </dt>
+                          <dd class="govuk-summary-list__value">
+                           Detention and training order (DTO)
+                          </dd>
+     </dl>
 
   
       <ul class="govuk-list govuk-!-margin-top-4 govuk-!-margin-bottom-2">
