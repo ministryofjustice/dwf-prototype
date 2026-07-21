@@ -2,32 +2,31 @@
 {% block content %}
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        <form class="form" action="/breach-type-submit" method="post">
+        <form class="form" action="/breach-offence-submit" method="post">
             <div class="govuk-form-group"> 
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <h1 class="govuk-fieldset__heading">
-                            <span class="govuk-caption-l">Record a breach </span>
-                            What type of breach are you recording?
+                            <span class="govuk-caption-l">Add hearing information </span>
+                           Is this the correct code for the Detention and Training Order?
                         </h1>
                     </legend>
+                     <div id="search-hint" class="govuk-hint">
+                                   SE2058 Offence during currency of Detention and Training Order committed on 07/07/2025
+                                </div>
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="breach-type1" name="breachtype" type="radio" value="yes">
                             <label class="govuk-label govuk-radios__label" for="breach-type1">
-                                A breach of supervision requirements
+                                Yes
                             </label>
-                            <div class="govuk-hint govuk-radios__hint">
-                                Schedule 12, paragraph 2&3 of Sentencing Act 2020. Previously section 104.
-                         </div>
+                          
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="breach-type2" name="breachtype" type="radio" value="no">
                             <label class="govuk-label govuk-radios__label" for="breach-type2">
-                                A new imprisonable offence committed during supervision
+                               No
                             </label>
-                            <div class="govuk-hint govuk-radios__hint">
-                                Schedule 12, paragraph 4 of Sentencing Act 2020. Previously section 105.
-                        </div>
+                            
                     </div>
                 </fieldset>
             </div>

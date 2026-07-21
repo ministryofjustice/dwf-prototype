@@ -2097,6 +2097,18 @@ router.post("/breach-type-submit", function (req, res) {
     }
   })
 
+    //adding an offence for breach hearing
+router.post("/breach-offence-submit", function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion;
+    var breachtype = req.session.data['breachtype']
+    if (breachtype == "yes"){
+    res.redirect('/28/court-cases/add-a-breach/consecutive-to')}
+    else {
+    res.redirect('/28/court-cases/add-a-breach/offence-name')
+    }
+  })
+
+
 router.post("/:prototypeVersion/term-length-select", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   var sentenceType = req.session.data["sentence"]["sentence-type"];

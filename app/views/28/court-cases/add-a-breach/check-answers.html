@@ -3,7 +3,7 @@
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">
-            <span class="govuk-caption-l">Add appearance information</span>
+            <span class="govuk-caption-l">Add hearing information</span>
             Check your answers
         </h1>
         <form class="form" action="/{{data.prototypeVersion}}/persist-appearance?edit=false" method="post">
@@ -24,7 +24,7 @@
                 </div>
                                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
-                        Hearing date
+                        Hearing date of the breach
                     </dt>
                     <dd class="govuk-summary-list__value">
                         {{ data['appearance']['warrant-date-day'] }}/{{ data['appearance']['warrant-date-month'] }}/{{ data['appearance']['warrant-date-year'] }}
@@ -50,7 +50,7 @@
                 </div>
                  <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key">
-                              Breach term length
+                              Term length of the breach
                             </dt>
                             <dd class="govuk-summary-list__value">
                                {{ data['sentence']['term-length-years'] }} years {{

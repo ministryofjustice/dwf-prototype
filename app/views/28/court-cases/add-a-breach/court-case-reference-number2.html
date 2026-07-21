@@ -11,7 +11,7 @@
                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                             <h1 class="govuk-fieldset__heading">
                                 <span class="govuk-caption-l">Add appearance information</span>
-                                Edit case reference
+                              Edit case reference
                             </h1>
                         </legend>
                         <input class="govuk-input govuk-input--width-10" id="court-case-ref" name="appearance[court-case-ref]" type="text" {% if data.appearance['court-case-ref'] | last !="None" %} value="{{ data.appearance['court-case-ref'] }}" {% endif %}>
@@ -51,7 +51,7 @@
                     </fieldset>
                 </div>
             {% else %}
-            <form class="form" action="warrant-date">
+            <form class="form" action="warrant-date2">
                 <div class="govuk-form-group">
                     <fieldset class="govuk-fieldset" role="group">
                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
