@@ -2100,9 +2100,30 @@ router.post("/breach-type-submit", function (req, res) {
     //adding an offence for breach hearing
 router.post("/breach-offence-submit", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
-    var breachtype = req.session.data['breachtype']
-    if (breachtype == "yes"){
+    var breachoffence = req.session.data['breachoffence']
+    if (breachoffence == "yes"){
+    res.redirect('/28/court-cases/add-a-breach/consecutive-concurrent')}
+    else {
+    res.redirect('/28/court-cases/add-a-breach/offence-name')
+    }
+  })
+    //adding an offence for breach hearing
+router.post("/consecutive-concurrent-submit", function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion;
+    var breachoffence = req.session.data['breachoffence']
+    if (breachoffence == "yes"){
     res.redirect('/28/court-cases/add-a-breach/consecutive-to')}
+    else {
+    res.redirect('/28/court-cases/add-a-breach/check-answers-breach')
+    }
+  })
+
+    //adding an offence for breach hearing
+router.post("/breach-offence-consecutive-to-submit", function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion;
+    var breachconsecutiveto = req.session.data['breachconsecutiveto']
+    if (breachconsecutiveto == "yes"){
+    res.redirect('/28/court-cases/add-a-breach/check-answers-breach')}
     else {
     res.redirect('/28/court-cases/add-a-breach/offence-name')
     }
