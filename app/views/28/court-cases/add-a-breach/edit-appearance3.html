@@ -1,0 +1,283 @@
+{% extends "../../template.html" %}
+{% block content %}
+<div class="govuk-grid-row govuk-!-margin-top-4">
+
+
+    <div class="govuk-grid-column-two-thirds">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+                Edit hearing
+            </h1>
+        </legend>
+
+ 
+
+        <form class="form" action="confirmation-hearing-details" method="post">
+            <div class="govuk-summary-card govuk-!-margin-top-6">
+                <div class="govuk-summary-card__title-wrapper">
+                    <h2 class="govuk-summary-card__title">
+                        Hearing information
+                    </h2>
+                </div>
+                <div class="govuk-summary-card__content">
+                    <dl class="govuk-summary-list">
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Case reference
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                              062600012345
+                            </dd>
+                            <dd class="govuk-summary-list__actions">
+                                <a class="govuk-link govuk-link--no-visited-state"
+                                    href="add-a-court-appearance/court-case-reference-number?postSaveEdit=true">
+                                    Edit<span class="govuk-visually-hidden"> case reference</span>
+                                </a>
+                            </dd>
+                        </div>
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Breach hearing date
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                {{ data.appearance['warrant-date-day'] }}/{{ data.appearance['warrant-date-month'] }}/{{
+                                data.appearance['warrant-date-year'] }}
+                            </dd>
+                            
+                        </div>
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Location
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                {{ data.appearance['court-name'] }}
+                            </dd>
+                            <dd class="govuk-summary-list__actions">
+                                <a class="govuk-link govuk-link--no-visited-state"
+                                    href="add-a-court-appearance/court-name?postSaveEdit=true">
+                                    Edit<span class="govuk-visually-hidden"> court name</span>
+                                </a>
+                            </dd>
+                        </div>
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                               New imprisonable offence committed during supervision
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                {{ data['sentence']['term-length-years1'] }} years {{
+                            data['sentence']['term-length-months1'] }} months {{
+                            data['sentence']['term-length-weeks1'] }} weeks {{
+                            data['sentence']['term-length-days1'] }} days   
+                            </dd>
+                            <dd class="govuk-summary-list__actions">
+                                <a class="govuk-link govuk-link--no-visited-state"
+                                    href="add-a-court-appearance/overall-case-outcome?postSaveEdit=true">
+                                    Edit<span class="govuk-visually-hidden"> overall case outcome</span>
+                                </a>
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+          
+<div class="govuk-summary-card">
+                <div class="govuk-summary-card__title-wrapper">
+                    <h2 class="govuk-summary-card__title">
+                        Court documents
+                    </h2>
+                    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link govuk-link--no-visited-state" href="add-court-documents/court-documents-uploaded?postSaveEdit=true">Manage court documents</a>
+      </li>
+    </ul>
+                </div>
+                <div class="govuk-summary-card__content">
+                    <dl class="govuk-summary-list">
+                        {% if data.appearance['documents'] %}
+                        <div class="govuk-summary-list__row">
+                            <dd class="govuk-summary-list__value">
+                                <a href="{{ asset_path }}documents/order-of-imprisonment-court-case-2.pdf"
+                            class="govuk-link--no-visited-state" target="_blank"><svg
+                                class="moj-timeline__document-icon" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 16 20" width="20" height="16">
+                                <path
+                                    d="M9 7V1.5L14.5 7H9zM2 0C.9 0 0 .9 0 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6l-6-6H2z">
+                                </path>
+                            </svg>{% if data.appearance['warrant-type'] == "Remand" %}Remand warrant{% else %}Sentencing
+                            warrant{% endif %}</a>
+                            </dd>
+                        </div>
+
+                        <div class="govuk-summary-list__row">
+                            <dd class="govuk-summary-list__value">
+                                <a href="{{ asset_path }}documents/order-of-imprisonment-court-case-2.pdf"
+                            class="govuk-link--no-visited-state" target="_blank"><svg
+                                class="moj-timeline__document-icon" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 16 20" width="20" height="16">
+                                <path
+                                    d="M9 7V1.5L14.5 7H9zM2 0C.9 0 0 .9 0 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6l-6-6H2z">
+                                </path>
+                            </svg>Prison court register</a>
+                            </dd>
+                        </div>
+                        {% else %}
+                         <div class="govuk-summary-list__row">
+                            <dd class="govuk-summary-list__value">
+                                There are no documents for this appearance.
+                            </dd>
+                        </div>
+                        {% endif %}
+                    </dl>
+                </div>
+            </div>
+            <div class="govuk-!-margin-top-0">
+                <h2 class="govuk-heading-m govuk-!-margin-top-8">Offences (3)</h2>
+                <h2 id="offences-section" class="govuk-heading-s">Offences with custodial outcomes</h2>
+                
+ <div class="offence-card offence-card">
+  <div class="offence-card-offence-details">
+    <div class="govuk-body">Count 1</div>
+    <h4 class="govuk-heading-s">Possess a controlled drug of Class A - Cocaine </h4>
+    <dl class="govuk-summary-list govuk-summary-list--no-border">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Committed on</dt>
+        <dd class="govuk-summary-list__value">
+         2/09/2025
+         </dd>
+      </div>
+      
+      <div class="govuk-summary-list__row">
+                                    <dt class="govuk-summary-list__key">
+                                        Outcome
+                                    </dt>
+                                    <dd class="govuk-summary-list__value">
+                                       DTO (Detention and Training Order)
+                                    </dd>
+                                </div>
+                                 </dl>
+                    <ul class="govuk-list govuk-!-margin-top-4 govuk-!-margin-bottom-2">
+     
+  </div>
+
+</div>
+
+<div class="offence-card offence-card">
+  <div class="offence-card-offence-details">
+    <div class="govuk-body">Count 2</div>
+    <h4 class="govuk-heading-s">Possess knife blade / sharp pointed article in a public place - Criminal Justice Act 1988 </h4>
+    <dl class="govuk-summary-list govuk-summary-list--no-border">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Committed on</dt>
+        <dd class="govuk-summary-list__value">
+         2/09/2025
+         </dd>
+      </div>
+                    <div class="govuk-summary-list__row">
+                                    <dt class="govuk-summary-list__key">
+                                        Outcome
+                                    </dt>
+                                    <dd class="govuk-summary-list__value">
+                                       DTO (Detention and Training Order)
+                                    </dd>
+                                </div>
+                                
+    </dl>
+
+  
+      <ul class="govuk-list govuk-!-margin-top-4 govuk-!-margin-bottom-2">
+     
+            
+      
+  </div>
+
+</div>
+ <div class="offence-card sentence-card">
+                                  <div class="offence-card-offence-details">
+                                              
+                                                <h4 class="govuk-heading-s">Offence during currency of Detention and Training Order 
+                                                </h4>
+                                                <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                                    <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                            Committed on
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                           15/07/2026
+                                                        </dd>
+                                                    </div>
+                                                    <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                           Outcome
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                            Detention and training order (DTO)
+                                                        </dd>
+                                                    </div>
+                                                      <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                           Sentence type
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                            Detention and training order
+                                                        </dd>
+                                                    </div>
+                                                       <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                           Term length
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                            {{ data['sentence']['term-length-years'] }} years {{
+                            data['sentence']['term-length-months'] }} months {{
+                            data['sentence']['term-length-weeks'] }} weeks {{
+                            data['sentence']['term-length-days'] }} days   
+                                                        </dd>
+                                                    </div>
+                                                       <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                           Consecutive or concurrent
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                           {%if (data.consecutiveconcurrent) %}{{data.consecutiveconcurrent}} {% endif %}
+                                                        </dd>
+                                                    </div>
+                                                       <div class="govuk-summary-list__row">
+                                                        <dt class="govuk-summary-list__key">
+                                                           Consecutive to
+                                                        </dt>
+                                                        <dd class="govuk-summary-list__value">
+                                                            {%if (data.breachconsecutiveto) %}{{data.breachconsecutiveto}} {% endif %}
+                                                        </dd>
+                                                    </div>
+                                                      
+                                                    
+                                            </div>
+                                </div>
+
+    <hr class="govuk-section-break govuk-section-break--l govuk-!-margin-top-8 govuk-section-break--visible">
+            <h2 class="govuk-heading-s govuk-!-margin-top-7">Offences with non-custodial outcomes </h2>
+
+            <div class="govuk-inset-text govuk-!-margin-top-2">
+                      There are no offences with a breach hearing outcome
+                       </div>
+                    
+                  
+            </div>
+            
+    
+         
+            <div class="govuk-button-group govuk-!-margin-top-8">
+               
+                <button class="govuk-button" data-module="govuk-button">
+                    Confirm changes
+                </button>
+                
+                <a href="court-case-detail" class="govuk-link govuk-body govuk-link--no-visited-state">Cancel changes</a>
+            </div>
+        </form>
+    </div>
+    <div class="govuk-grid-column-one-third">
+        <!-- {% set showOffences = false %}
+        {% include "includes/templates/appearance-info.njk" %} -->
+    </div>
+</div>
+{% endblock %}
