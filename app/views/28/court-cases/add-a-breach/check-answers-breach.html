@@ -60,32 +60,63 @@
                             </dd>
                              <dd class="govuk-summary-list__actions">
                         <a class="govuk-link" href="term-length?edit=true">
-                            Edit<span class="govuk-visually-hidden"> breach term length</span>
+                            Edit<span class="govuk-visually-hidden"> term length of the breach</span>
                         </a>
                     </dd>
                         </div>
                  <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
-                        Case reference
+                       Offence date
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        432600019000
+                       {{ data['offence']['offence-start-date-day'] }}/{{
+                            data['offence']['offence-start-date-month'] }}/{{
+                            data['offence']['offence-start-date-year'] }}  
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="court-case-reference-number?edit=true">
-                            Edit<span class="govuk-visually-hidden"> case reference </span>
+                        <a class="govuk-link" href="offence-date?edit=true">
+                            Edit<span class="govuk-visually-hidden"> offence date </span>
                         </a>
                     </dd>
-                </div> <div class="govuk-summary-list__row">
+                </div>
+                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
-                        Case reference
+                   Offence
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        432600019000
+                       Offence during currency of Detention and Training Order
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="court-case-reference-number?edit=true">
-                            Edit<span class="govuk-visually-hidden"> case reference </span>
+                        <a class="govuk-link" href="breach-offence?edit=true">
+                            Edit<span class="govuk-visually-hidden"> offence </span>
+                        </a>
+                    </dd>
+                </div>
+                 <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                       Consecutive or concurrent
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {%if (data.consecutiveconcurrent) %}{{data.consecutiveconcurrent}} {% endif %}
+                      
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="consecutive-concurrent?edit=true">
+                            Edit<span class="govuk-visually-hidden"> consecutive or concurrent </span>
+                        </a>
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                       Consecutive to
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                     {%if (data.breachconsecutiveto) %}{{data.breachconsecutiveto}} {% endif %}
+                      
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="consecutive-to?edit=true">
+                            Edit<span class="govuk-visually-hidden"> consecutive to </span>
                         </a>
                     </dd>
                 </div>

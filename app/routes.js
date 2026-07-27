@@ -2110,8 +2110,8 @@ router.post("/breach-offence-submit", function (req, res) {
     //adding an offence for breach hearing
 router.post("/consecutive-concurrent-submit", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
-    var breachoffence = req.session.data['breachoffence']
-    if (breachoffence == "yes"){
+    var consecutiveconcurrent = req.session.data['consecutiveconcurrent']
+    if (consecutiveconcurrent == "Consecutive"){
     res.redirect('/28/court-cases/add-a-breach/consecutive-to')}
     else {
     res.redirect('/28/court-cases/add-a-breach/check-answers-breach')
@@ -2122,7 +2122,7 @@ router.post("/consecutive-concurrent-submit", function (req, res) {
 router.post("/breach-offence-consecutive-to-submit", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
     var breachconsecutiveto = req.session.data['breachconsecutiveto']
-    if (breachconsecutiveto == "yes"){
+    if (breachconsecutiveto == "Possess a controlled drug of Class A - Cocaine"){
     res.redirect('/28/court-cases/add-a-breach/check-answers-breach')}
     else {
     res.redirect('/28/court-cases/add-a-breach/offence-name')

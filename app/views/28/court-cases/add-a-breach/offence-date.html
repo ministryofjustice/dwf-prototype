@@ -3,16 +3,10 @@
 {% block content %}
 <div class="govuk-grid-row govuk-!-margin-top-4">
     <div class="govuk-grid-column-two-thirds">
-        {% if data.postSaveEdit == 'true' %}
-            <form class="form" action="/{{data.prototypeVersion}}/persist-offence" method="post">
+        {% if data.edit == 'true' %}
+            <form class="form" action="check-answers-breach" method="post">
         {% else %}
-            {% if data.edit == 'true' %}
-                {% if data.route == 'remand-to-sentence' %}
-                    <form class="form" action="/{{data.prototypeVersion}}/persist-offence?edit=true" method="post">
-                {% elif data.route == 'remand-to-sentence' %}
-                    <form class="form" action="outcome" method="post">
-                {% endif %}
-                {% endif %}
+           
             <form class="form" action="breach-offence" method="post">
                 {% endif %}
                 <fieldset class="govuk-fieldset" role="group" aria-describedby="passport-issued-hint">
