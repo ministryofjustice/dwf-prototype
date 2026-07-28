@@ -2104,7 +2104,7 @@ router.post("/breach-offence-submit", function (req, res) {
     if (breachoffence == "yes"){
     res.redirect('/28/court-cases/add-a-breach/consecutive-concurrent')}
     else {
-    res.redirect('/28/court-cases/add-a-breach/offence-name')
+    res.redirect('/28/court-cases/add-a-breach/check-answers-breach')
     }
   })
     //adding an offence for breach hearing
