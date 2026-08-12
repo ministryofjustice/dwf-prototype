@@ -5,7 +5,7 @@ module.exports = {
         {
           "court-case-ref": "T0197214",
           "warrant-type": "Remand",
-          "overall-case-outcome": "Remand in custody",
+          "overall-case-outcome": "Send to Crown Court for trial",
           "next-court-date-set": "Yes",
           "next-hearing-type": "Trial",
           "next-court-date-day": "06",
@@ -35,7 +35,7 @@ module.exports = {
         {
           "court-case-ref": "T20230177",
           "warrant-type": "Remand",
-          "overall-case-outcome": "Remand in custody",
+          "overall-case-outcome": "Send to Crown Court for trial",
           "next-court-date-set": "Yes",
           "next-hearing-type": "Trial",
           "next-court-date-day": "06",
