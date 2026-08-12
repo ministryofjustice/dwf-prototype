@@ -1,0 +1,115 @@
+{% extends "../template.html" %}
+{% block content %}
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        {% if data.edit == 'true' %}
+        <form class="form" action="check-answers" method="post">
+            {% else %}
+        <form class="form" action="outcome-apply-all" method="post">
+            {% endif %}
+            <div class="govuk-form-group"> 
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <h1 class="govuk-fieldset__heading">
+                            <span class="govuk-caption-l">Add appearance information</span>
+                            Select the overall case outcome
+                        </h1>
+                    </legend>
+                    <div class="govuk-radios" data-module="govuk-radios" data-govuk-radios-init="">
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="overallCaseOutcome" name="appearance[overall-case-outcome]" type="radio" value="Commit to Crown Court for trial in custody">
+                          <label class="govuk-label govuk-radios__label" for="overallCaseOutcome">
+                            Commit to Crown Court for trial in custody
+                          </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="overallCaseOutcome-2" name="appearance[overall-case-outcome]" type="radio" value="Remand in custody">
+                          <label class="govuk-label govuk-radios__label" for="overallCaseOutcome-2">
+                            Remand in custody
+                          </label> 
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="overallCaseOutcome-3" name="appearance[overall-case-outcome]" type="radio" value="Send to Crown Court for trial ">
+                          <label class="govuk-label govuk-radios__label" for="overallCaseOutcome-3">
+                            Send to Crown Court for trial 
+                          </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="overallCaseOutcome-4" name="appearance[overall-case-outcome]" type="radio" value="Convicted awaiting sentence">
+                          <label class="govuk-label govuk-radios__label" for="overallCaseOutcome-4">
+                            Convicted awaiting sentence
+                          </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="overallCaseOutcome-5" name="appearance[overall-case-outcome]" type="radio" value="Commit to Crown Court for sentence in custody">
+                          <label class="govuk-label govuk-radios__label" for="overallCaseOutcome-5">
+                            Commit to Crown Court for sentence in custody
+                          </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="overallCaseOutcome-6" name="appearance[overall-case-outcome]" type="radio" value="Guilty">
+                          <label class="govuk-label govuk-radios__label" for="overallCaseOutcome-6">
+                            Guilty
+                          </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="overallCaseOutcome-7" name="appearance[overall-case-outcome]" type="radio" value="Remittal for sentence in custody">
+                          <label class="govuk-label govuk-radios__label" for="overallCaseOutcome-7">
+                            Remittal for sentence in custody
+                          </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="overallCaseOutcome-8" name="appearance[overall-case-outcome]" type="radio" value="Remand on conditional bail">
+                          <label class="govuk-label govuk-radios__label" for="overallCaseOutcome-8">
+                            Remand on conditional bail
+                          </label>
+                          </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="overallCaseOutcome-9" name="appearance[overall-case-outcome]" type="radio" value="Commit to Crown Court for sentence">
+                          <label class="govuk-label govuk-radios__label" for="overallCaseOutcome-9">
+                            Commit to Crown Court for sentence
+                          </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="overallCaseOutcome-10" name="appearance[overall-case-outcome]" type="radio" value="Immigration detainee">
+                          <label class="govuk-label govuk-radios__label" for="overallCaseOutcome-10">
+                            Immigration detainee
+                          </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="overallCaseOutcome-11" name="appearance[overall-case-outcome]" type="radio" value="Adjourned">
+                          <label class="govuk-label govuk-radios__label" for="overallCaseOutcome-11">
+                            Adjourned
+                          </label>
+                          
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="overallCaseOutcome-12" name="appearance[overall-case-outcome]" type="radio" value="Community order">
+                          <label class="govuk-label govuk-radios__label" for="overallCaseOutcome-12">
+                            Community order
+                          </label>
+                          
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="overallCaseOutcome-13" name="appearance[overall-case-outcome]" type="radio" value="Remittal for trial in custody">
+                          <label class="govuk-label govuk-radios__label" for="overallCaseOutcome-13">
+                            Remittal for trial in custody
+                          </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="overallCaseOutcome-14" name="appearance[overall-case-outcome]" type="radio" value="Detention and training order">
+                          <label class="govuk-label govuk-radios__label" for="overallCaseOutcome-14">
+                            Detention and training order
+                          </label>
+                          
+                        </div>
+                      </div>
+                </fieldset>
+            </div>
+            <button class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends "../template.html" %}
+{% block content %}
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">
+            <span class="govuk-caption-l">Record appeal</span>
+            Update sentence details
+        </h1>
+        
+        <form class="form" action="/{{data.prototypeVersion}}/persist-appearance?edit=false" method="post">
+           
+            <dl class="govuk-summary-list">
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Count number
+                    </dt>
+                    <dd class="govuk-summary-list__value" >
+                        
+                           1 <span class="govuk-visually-hidden"> Enter count number</span>
+                     
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="court-case-reference-number?edit=true">
+                            Update<span class="govuk-visually-hidden"> case reference number</span>
+                        </a>
+                    </dd>
+                </div>
+
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Committed on
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                1/08/2025 to 30/09/2025
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="../add-an-offence/offence-date?edit=true">
+                            Update<span class="govuk-visually-hidden"> case reference number</span>
+                        </a>
+                    </dd>
+                </div>
+                                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Outcome
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                          {{ data['appeal']['appeal-type'] }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="overall-case-outcome?edit=true">
+                            Update<span class="govuk-visually-hidden"> warrant date</span>
+                        </a>
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Conviction date
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                       31/01/2026
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="../add-a-sentence/conviction-date?edit=true">
+                            Update<span class="govuk-visually-hidden"> court name</span>
+                        </a>
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Sentence type
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        	SDS (Standard Determinate Sentence)
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="sentence-type?edit=true">
+                            Update<span class="govuk-visually-hidden"> court name</span>
+                        </a>
+                    </dd>
+                </div>
+               
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Sentence length
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                    {{ data['sentence']['sentence-length-years'] }} years {{ data['sentence']['sentence-length-months'] }} months {{ data['sentence']['sentence-length-weeks'] }} weeks  {{ data['sentence']['sentence-length-days'] }} days
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="sentence-length?edit=true">
+                            Update<span class="govuk-visually-hidden"> court name</span>
+                        </a>
+                    </dd>
+                </div>
+               
+            <!--    <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Consecutive or concurrent
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                       Concurrent
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="../add-a-sentence/consecutive-concurrent?editConsecutiveConcurrent=true">
+                            Update<span class="govuk-visually-hidden"> court name</span>
+                        </a>
+                    </dd>
+                </div>-->
+            </dl>
+            <div class="govuk-button-group">
+                    <a href="./record-appeal-updated" class="govuk-button govuk-button--primary" data-module="govuk-button">
+                        Continue
+                    </a>
+                </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

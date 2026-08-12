@@ -1,0 +1,56 @@
+{% extends "../template.html" %}
+{% block content %}
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        {% if data.edit == 'true' %}
+        <form class="form" action="check-answers?edit=false" method="post">
+            {% else %}
+            <form class="form" action="/{{data.prototypeVersion}}/select-court-cases" method="post">
+                {% endif %}
+                <div class="govuk-form-group">
+                    <fieldset class="govuk-fieldset">
+                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                            <h1 class="govuk-fieldset__heading">
+                                <span class="govuk-caption-l">Add a hearing for linked cases for linked cases</span>
+                                Select the cases to link
+                            </h1>
+                        </legend>
+                        <div class="govuk-hint">Select all that apply</div>
+                        <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                    <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+  {% for courtCase in data.courtCases %} 
+      {% set lastAppearance = courtCase.appearances | last %}
+
+      <div class="govuk-checkboxes__item">
+        <input
+          class="govuk-checkboxes__input"
+          id="linked-court-case-{{ loop.index0 }}"
+          name="linkedCourtCaseIndexes"
+          type="checkbox"
+          value="{{ loop.index0 }}"
+        >
+
+        <label
+          class="govuk-label govuk-checkboxes__label"
+          for="linked-court-case-{{ loop.index0 }}"
+        >
+          Case {{ lastAppearance["court-case-ref"] }} at {{ lastAppearance["court-name"] }} on
+          {{ lastAppearance["warrant-date-day"] }}/{{ lastAppearance["warrant-date-month"] }}/{{ lastAppearance["warrant-date-year"] }}
+        </label>
+      </div> 
+  {% endfor %}
+</div>
+                </div>
+                </fieldset>
+    </div>
+    <div class="govuk-button-group">
+        <button class="govuk-button" data-module="govuk-button">
+            Continue
+        </button>
+    </div>
+    </form>
+</div>
+<div class="govuk-grid-column-one-third"> 
+</div>
+</div>
+{% endblock %}

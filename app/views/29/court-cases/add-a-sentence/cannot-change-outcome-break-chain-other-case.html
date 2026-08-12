@@ -1,0 +1,39 @@
+{% extends "../template.html" %}
+{% set noBackLink = true %}
+{% block content %}
+<div class="govuk-grid-row govuk-!-margin-top-8">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" action="/{{data.prototypeVersion}}/delete-sentence?index={{ data.index }}" method="post">
+            <!-- <input type="hidden" name="confirmDeleteSentence" value="Yes"> -->
+                    <div class="govuk-form-group">
+                    <h1 class="govuk-heading-l">
+                        <!-- <span class="govuk-caption-l">Add offences</span> -->
+                        You cannot change the outcome for this sentence
+                    </h1>
+                    <p class="govuk-body govuk-!-width-three-quarters">
+                            Count {{ data['sentence']['count-number'] }}<br>
+                            <strong>{{ data['sentence']['offence-code'] }} {{ data['sentence']['offence-name'] }}</strong><br>
+                            committed on {{ data['sentence']['offence-start-date-day'] }}/{{
+                                data['sentence']['offence-start-date-month'] }}/{{ data['sentence']['offence-start-date-year']
+                                }}
+                                </p>
+                                <p class="govuk-body">The sentence is linked to sentences on other cases, as part of a consecutive chain. Changing the outcome to non-custodial breaks the chain.</p>
+                                <p class="govuk-body">This affects cases:  
+                                    <ul class="govuk-list govuk-list-bullet">
+                                        <li><strong>T202498765</strong> at <strong>Nottingham Crown Court</strong> on <strong>15/12/2024</strong></p></li>
+                                        <li><strong>T202461839</strong> at <strong>Sheffield Crown Court</strong> on <strong>10/12/2024</strong></p></li>
+                                        <li><strong>T202410382</strong> at <strong>Sheffield Crown Court</strong> on <strong>08/12/2024</strong></p></li>
+                                    </ul>
+                                <p class="govuk-body govuk-!-margin-top-6">You will need to update the consecutive details on the other cases before changing the outcome of this sentence.</p>
+                      </fieldset>
+                </div> 
+                <input type="hidden" name="sentence[offence-name]" value="{{ data.sentence['offence-name']}}" />
+                <div class="govuk-button-group">
+                    <button type="submit" class="govuk-button" data-module="govuk-button">
+                        Go back
+                    </button>
+                </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

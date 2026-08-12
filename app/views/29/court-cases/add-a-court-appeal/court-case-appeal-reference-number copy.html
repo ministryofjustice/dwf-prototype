@@ -1,0 +1,46 @@
+{% extends "../template.html" %}
+{% set backLink = true %}
+{% block content %}
+<div class="govuk-grid-row govuk-!-margin-top-4">
+    <div class="govuk-grid-column-two-thirds">
+        {% if data.edit == 'true' %}
+        <form class="form" action="check-answers" method="post">
+            <div class="govuk-form-group">
+                    <fieldset class="govuk-fieldset" role="group">
+                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                            <h1 class="govuk-fieldset__heading">
+                                <span class="govuk-caption-l">Add hearing information</span>
+                                Enter the Criminal Appeal Office reference number
+                            </h1>
+                        </legend>
+                        <input class="govuk-input govuk-input--width-10" id="court-case-ref" name="appearance[court-case-ref]" type="text" {% if data.appearance['court-case-ref'] | last !="None" %} value="{{ data.appearance['court-case-ref'] }}" {% endif %}>
+                    </fieldset>
+                   
+                </div>
+           </form>
+            {% else %}
+            <form class="form" action="warrant-date">
+                <div class="govuk-form-group">
+                    <fieldset class="govuk-fieldset" role="group">
+                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                            <h1 class="govuk-fieldset__heading">
+                                <span class="govuk-caption-l">Add hearing information</span>
+                                Enter the Criminal Appeal Office reference number
+                            </h1>
+                        </legend>
+                        <input class="govuk-input govuk-input--width-10" id="court-case-ref" name="appearance[court-case-ref]" type="text">
+                    </fieldset>
+                    
+                </div>
+                {% endif %}
+                <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Continue
+                </button>
+            </div>
+            </form>
+    </div>
+    
+</div>
+
+{% endblock %}

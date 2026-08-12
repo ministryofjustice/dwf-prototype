@@ -10,53 +10,276 @@ const exampleData = require("./data/session-sets/example");
 const example2Data = require('./data/session-sets/example2')
 const router = govukPrototypeKit.requests.setupRouter();
 
+
+// Shared journey helpers
+// Keep the original route strings intact, but make it easier to send users
+// back to the right journey folder after shared routes like persist-appearance.
+const LINKED_HEARING_ROUTE = "linked-hearing";
+
+function isLinkedHearingRoute(route) {
+  return route === LINKED_HEARING_ROUTE;
+}
+
+function courtCaseJourneyBasePath(prototypeVersion, route) {
+  if (route === LINKED_HEARING_ROUTE) {
+    return `/${prototypeVersion}/court-cases/add-a-linked-court-appearance`;
+  }
+  if (route === "new-court-case" || route === "add-a-court-case") {
+    return `/${prototypeVersion}/court-cases/add-a-court-case`;
+  }
+  return `/${prototypeVersion}/court-cases/add-a-court-appearance`;
+}
+
+function courtCaseJourneyTaskListPath(prototypeVersion, route) {
+  return `${courtCaseJourneyBasePath(prototypeVersion, route)}/task-list`;
+}
+
+function storeLinkedCourtCasesInSession(req, selectedCases) {
+  const cases = req.session.data.courtCases || [];
+  req.session.data.linkedCourtCaseIndexes = selectedCases;
+  req.session.data.linkedCourtCases = selectedCases
+    .map((index) => cases[Number(index)])
+    .filter(Boolean);
+}
+
+function restoreLinkedCourtCaseSnapshots(req) {
+  const data = req.session.data || {};
+  const appearance = data.appearance || {};
+
+  // If snapshots already exist, make sure they exist in both places.
+  if (data.linkedCourtCaseSnapshots?.length) {
+    appearance.linkedCourtCaseSnapshots = data.linkedCourtCaseSnapshots;
+    return data.linkedCourtCaseSnapshots;
+  }
+
+  if (appearance.linkedCourtCaseSnapshots?.length) {
+    data.linkedCourtCaseSnapshots = appearance.linkedCourtCaseSnapshots;
+    return appearance.linkedCourtCaseSnapshots;
+  }
+
+  // Rebuild snapshots from offence/sentence metadata if they were lost.
+  const snapshotsByKey = {};
+  const sourceItems = [
+    ...(appearance.offences || []),
+    ...(appearance.sentences || []),
+  ];
+
+  sourceItems.forEach((item) => {
+    const sourceCourtCaseKey =
+      item.sourceCourtCaseKey ||
+      `${item.linkedCourtCaseIndex}-${item.linkedAppearanceIndex}`;
+
+    if (
+      !sourceCourtCaseKey ||
+      sourceCourtCaseKey.includes("undefined") ||
+      snapshotsByKey[sourceCourtCaseKey]
+    ) {
+      return;
+    }
+
+    const sourceCourtCaseRef = item.sourceCourtCaseRef || item.linkedCourtCaseRef;
+    const sourceCourtName = item.sourceCourtName || item.linkedCourtName;
+
+    snapshotsByKey[sourceCourtCaseKey] = {
+      linkedCourtCaseIndex: String(item.linkedCourtCaseIndex),
+      linkedAppearanceIndex: item.linkedAppearanceIndex,
+      sourceCourtCaseKey,
+      sourceCourtCaseRef,
+      sourceCourtName,
+      sourceCourtCaseHeading: `${sourceCourtCaseRef} heard at ${sourceCourtName}`,
+    };
+  });
+
+  const rebuiltSnapshots = Object.values(snapshotsByKey);
+
+  data.linkedCourtCaseSnapshots = rebuiltSnapshots;
+  appearance.linkedCourtCaseSnapshots = rebuiltSnapshots;
+
+  return rebuiltSnapshots;
+}
+
+function preserveLinkedOffenceMetadata(existingOffence, updatedOffence) {
+  existingOffence = existingOffence || {};
+  updatedOffence = updatedOffence || {};
+
+  return {
+    ...existingOffence,
+    ...updatedOffence,
+
+    // Preserve linked hearing grouping metadata.
+    linkedCourtCaseIndex:
+      updatedOffence.linkedCourtCaseIndex || existingOffence.linkedCourtCaseIndex,
+
+    linkedAppearanceIndex:
+      updatedOffence.linkedAppearanceIndex || existingOffence.linkedAppearanceIndex,
+
+    linkedOffenceIndex:
+      updatedOffence.linkedOffenceIndex || existingOffence.linkedOffenceIndex,
+
+    sourceCourtCaseKey:
+      updatedOffence.sourceCourtCaseKey || existingOffence.sourceCourtCaseKey,
+
+    sourceCourtCaseRef:
+      updatedOffence.sourceCourtCaseRef || existingOffence.sourceCourtCaseRef,
+
+    sourceCourtName:
+      updatedOffence.sourceCourtName || existingOffence.sourceCourtName,
+
+    sourceCourtCaseHeading:
+      updatedOffence.sourceCourtCaseHeading || existingOffence.sourceCourtCaseHeading,
+  };
+}
+
+function cloneData(value) {
+  return JSON.parse(JSON.stringify(value));
+}
+
+function persistLinkedAppearanceToSelectedCourtCases(req) {
+  const data = req.session.data || {};
+  const appearance = data.appearance || {};
+  const courtCases = data.courtCases || [];
+
+  const linkedCourtCaseIndexes =
+    appearance.linkedCourtCaseIndexes ||
+    data.linkedCourtCaseIndexes ||
+    [];
+
+  const linkedCourtCaseSnapshots =
+    appearance.linkedCourtCaseSnapshots ||
+    data.linkedCourtCaseSnapshots ||
+    [];
+
+  if (!linkedCourtCaseIndexes.length) {
+    return appearance;
+  }
+
+  const linkedHearingId =
+    appearance.linkedHearingId ||
+    `linked-hearing-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+
+  const previousCaseRefs = linkedCourtCaseSnapshots
+    .map((snapshot) => snapshot.sourceCourtCaseRef)
+    .filter(Boolean);
+
+  const previousCourtNames = linkedCourtCaseSnapshots
+    .map((snapshot) => snapshot.sourceCourtName)
+    .filter(Boolean);
+
+  const sharedAppearance = {
+    ...appearance,
+
+    linkedHearing: true,
+    linkedHearingId,
+    linkedCourtCaseIndexes,
+    linkedCourtCaseSnapshots,
+
+    linkedPreviousCaseRefs: previousCaseRefs,
+    linkedPreviousCourtNames: previousCourtNames,
+  };
+
+  linkedCourtCaseIndexes.forEach((caseIndex) => {
+    const numericCaseIndex = Number(caseIndex);
+    const courtCase = courtCases[numericCaseIndex];
+
+    if (!courtCase) {
+      return;
+    }
+
+    if (!courtCase.appearances) {
+      courtCase.appearances = [];
+    }
+
+    const sourceSnapshot = linkedCourtCaseSnapshots.find(
+      (snapshot) => String(snapshot.linkedCourtCaseIndex) === String(caseIndex)
+    );
+
+    const appearanceForThisCase = {
+      ...cloneData(sharedAppearance),
+
+      linkedOriginalCourtCaseRef: sourceSnapshot?.sourceCourtCaseRef,
+      linkedOriginalCourtName: sourceSnapshot?.sourceCourtName,
+      linkedOriginalCourtCaseHeading: sourceSnapshot?.sourceCourtCaseHeading,
+    };
+
+    // Store linked details on the court case as well, so landing page cards can access them easily.
+    courtCase.linkedHearing = true;
+    courtCase.linkedHearingId = linkedHearingId;
+    courtCase.linkedOriginalCourtCaseRef = sourceSnapshot?.sourceCourtCaseRef;
+    courtCase.linkedOriginalCourtName = sourceSnapshot?.sourceCourtName;
+    courtCase.linkedPreviousCaseRefs = previousCaseRefs;
+
+    // If this case already has this linked hearing, replace it instead of duplicating it.
+    const existingLinkedAppearanceIndex = courtCase.appearances.findIndex(
+      (existingAppearance) => existingAppearance.linkedHearingId === linkedHearingId
+    );
+
+    if (existingLinkedAppearanceIndex >= 0) {
+      courtCase.appearances[existingLinkedAppearanceIndex] = appearanceForThisCase;
+      return;
+    }
+
+    // The primary selected case may already have had the working appearance pushed
+    // earlier in persist-appearance. Replace that saved appearance rather than appending a duplicate.
+    if (
+      String(numericCaseIndex) === String(data.courtCaseIndex) &&
+      data.appearanceIndex !== undefined &&
+      courtCase.appearances[data.appearanceIndex]
+    ) {
+      courtCase.appearances[data.appearanceIndex] = appearanceForThisCase;
+      return;
+    }
+
+    // All other linked cases get the same linked hearing added as their latest appearance.
+    courtCase.appearances.push(appearanceForThisCase);
+  });
+
+  data.courtCases = courtCases;
+  data.appearance = sharedAppearance;
+
+  return sharedAppearance;
+}
+
 router.post("/:prototypeVersion/next-court-date-select", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   const warrantType = req.session.data.warrantType;
   const route = req.session.data.route;
-  var nextCourtDateSelect =
-    req.session.data["appearance"]["next-court-date-set"];
+  const nextCourtDateSelect = req.session.data["appearance"]["next-court-date-set"];
+  const basePath = courtCaseJourneyBasePath(prototypeVersion, route);
+
   if (prototypeVersion == "v12" || prototypeVersion >= 13) {
-    if (route == "appearance") {
+    if (route == "appearance" || route == LINKED_HEARING_ROUTE) {
       if (nextCourtDateSelect == "Yes") {
-        res.redirect(
-          `/${prototypeVersion}/court-cases/add-a-court-appearance/next-hearing-type-select`
-        );
-      } else {
-        if (warrantType == "Remand") {
-          res.redirect(
-            `/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers-next-appearance`
-          );
-        } else if (warrantType == "Sentencing") {
-          res.redirect(
-            `/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers-next-appearance`
-          );
-        }
+        return res.redirect(`${basePath}/next-hearing-type-select`);
+      }
+
+      if (warrantType == "Remand" || warrantType == "Sentencing") {
+        return res.redirect(`${basePath}/check-answers-next-appearance`);
       }
     } else {
       if (nextCourtDateSelect == "Yes") {
-        res.redirect(
+        return res.redirect(
           `/${prototypeVersion}/court-cases/add-a-court-case/next-hearing-type-select`
         );
-      } else {
-        if (warrantType == "Remand") {
-          res.redirect(
-            `/${prototypeVersion}/court-cases/add-a-court-case/check-answers-next-appearance`
-          );
-        } else if (warrantType == "Sentencing") {
-          req.session.data.nextCourtAppearanceComplete = "Yes";
-          res.redirect(
-            `/${prototypeVersion}/court-cases/add-a-court-case/task-list`
-          );
-        }
+      }
+
+      if (warrantType == "Remand") {
+        return res.redirect(
+          `/${prototypeVersion}/court-cases/add-a-court-case/check-answers-next-appearance`
+        );
+      } else if (warrantType == "Sentencing") {
+        req.session.data.nextCourtAppearanceComplete = "Yes";
+        return res.redirect(
+          `/${prototypeVersion}/court-cases/add-a-court-case/task-list`
+        );
       }
     }
   } else {
     if (nextCourtDateSelect == "Yes") {
-      res.redirect(
+      return res.redirect(
         `/${prototypeVersion}/court-cases/add-a-court-case/next-hearing-type-select`
       );
-    } else res.redirect(307, `/${prototypeVersion}/persist-appearance`);
+    }
+    return res.redirect(307, `/${prototypeVersion}/persist-appearance`);
   }
 });
 
@@ -885,6 +1108,209 @@ router.get("/:prototypeVersion/create-appearance", function (req, res) {
   }
 });
 
+// Add linked hearing
+// This journey lets a user select multiple existing court cases,
+// then add one new linked hearing using offences from all selected cases.
+router.get("/:prototypeVersion/create-linked-hearing", function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion;
+
+  // Clear any active appearance from another journey.
+  // This prevents old single-case/add-appearance data leaking into this journey.
+  delete req.session.data.appearanceIndex;
+  delete req.session.data.appearance;
+
+  // Mark this as the linked hearing journey.
+  // Shared routes use this value to send users back to the linked task list.
+  req.session.data.route = LINKED_HEARING_ROUTE;
+
+  return res.redirect(
+    `/${prototypeVersion}/court-cases/add-a-linked-court-appearance/select-court-cases`
+  );
+});
+
+router.post("/:prototypeVersion/select-court-cases", function (req, res) {
+  const prototypeVersion = req.params.prototypeVersion;
+
+  // Values come from checkboxes named linkedCourtCaseIndexes.
+  let selectedCases = req.session.data.linkedCourtCaseIndexes || [];
+
+  // GOV.UK Prototype Kit stores one selected checkbox as a string,
+  // and multiple selected checkboxes as an array.
+  if (!Array.isArray(selectedCases)) {
+    selectedCases = [selectedCases];
+  }
+
+  // Remove empty values.
+  selectedCases = selectedCases.filter(
+    (caseIndex) => caseIndex !== undefined && caseIndex !== ""
+  );
+
+  // Do not continue if no cases were selected.
+  if (selectedCases.length === 0) {
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-linked-court-appearance/select-court-cases`
+    );
+  }
+
+  // Store selected case indexes for later pages.
+  req.session.data.linkedCourtCaseIndexes = selectedCases;
+
+  // Store selected court case objects for templates that need them.
+  req.session.data.linkedCourtCases = selectedCases
+    .map((caseIndex) => req.session.data.courtCases[Number(caseIndex)])
+    .filter(Boolean);
+
+  // Use the first selected case as the primary case.
+  // This keeps compatibility with existing shared routes that expect:
+  // req.session.data.courtCaseIndex and req.session.data.courtCase.
+  const primaryCaseIndex = Number(selectedCases[0]);
+  const primaryCourtCase = req.session.data.courtCases[primaryCaseIndex];
+  const primaryLastAppearance = primaryCourtCase?.appearances?.at(-1);
+
+  req.session.data.courtCaseIndex = primaryCaseIndex;
+  req.session.data.courtCase = primaryCourtCase;
+
+  // Reinforce this route so shared POST routes do not send the user
+  // back to the standard add-a-court-appearance task list.
+  req.session.data.route = LINKED_HEARING_ROUTE;
+
+  // These arrays become the new working appearance.
+  // The add-sentence-information page reads from data.appearance.offences,
+  // so we flatten offences from all selected cases into that one array.
+  const selectedCaseOffences = [];
+  const selectedCaseSentences = [];
+
+  // This snapshot is important.
+  // It preserves the original case ref and court name from the point of selection.
+  // Later in the journey, the new linked hearing may update all selected court cases,
+  // but this page should still show the original headings so users know what they selected.
+  const linkedCourtCaseSnapshots = [];
+
+  selectedCases.forEach((caseIndex) => {
+    const courtCase = req.session.data.courtCases[Number(caseIndex)];
+
+    if (!courtCase || !courtCase.appearances || courtCase.appearances.length === 0) {
+      return;
+    }
+
+    // Use the latest appearance as the source data for this selected case.
+    const appearanceIndex = courtCase.appearances.length - 1;
+    const latestAppearance = courtCase.appearances[appearanceIndex];
+
+    if (!latestAppearance) {
+      return;
+    }
+
+    // Capture the original display values now.
+    // Do not rely on data.courtCases later for headings, because that data
+    // can be updated as the linked hearing journey progresses.
+    const sourceCourtCaseRef = latestAppearance["court-case-ref"];
+    const sourceCourtName = latestAppearance["court-name"];
+    const sourceCourtCaseKey = `${caseIndex}-${appearanceIndex}`;
+
+    linkedCourtCaseSnapshots.push({
+      linkedCourtCaseIndex: String(caseIndex),
+      linkedAppearanceIndex: appearanceIndex,
+      sourceCourtCaseKey,
+      sourceCourtCaseRef,
+      sourceCourtName,
+      sourceCourtCaseHeading: `${sourceCourtCaseRef} heard at ${sourceCourtName}`,
+    });
+
+    // Some existing appearances may hold offence-like data in offences.
+    // Others, especially sentencing journeys, may have moved offence data into sentences.
+    // For this linked hearing page, we want to surface offence-like records from either.
+    const sourceOffences =
+      latestAppearance.offences && latestAppearance.offences.length > 0
+        ? latestAppearance.offences
+        : latestAppearance.sentences || [];
+
+    // Copy source offences into the new working appearance.
+    // Reset outcome update state so they appear in "Offences with outcomes that need updating".
+    sourceOffences.forEach((offence, offenceIndex) => {
+      selectedCaseOffences.push({
+        ...offence,
+
+        // Ensure template checks like offence.sentence['sentence-type'] do not fail.
+        // Resetting this means the offence appears as needing an outcome update
+        // for the new linked hearing.
+        sentence: {},
+
+        // Reset the update marker for this new linked hearing.
+        "outcome-changed": "false",
+
+        // Source metadata used by the template to group offence cards.
+        linkedCourtCaseIndex: String(caseIndex),
+        linkedAppearanceIndex: appearanceIndex,
+        linkedOffenceIndex: offenceIndex,
+        sourceCourtCaseKey,
+
+        // Original display metadata for this page.
+        sourceCourtCaseRef,
+        sourceCourtName,
+        sourceCourtCaseHeading: `${sourceCourtCaseRef} heard at ${sourceCourtName}`,
+      });
+    });
+
+    // Also copy any existing sentences separately.
+    // These are useful later if the page needs to show custodial outcomes.
+    if (latestAppearance.sentences && latestAppearance.sentences.length > 0) {
+      latestAppearance.sentences.forEach((sentence, sentenceIndex) => {
+        selectedCaseSentences.push({
+          ...sentence,
+          linkedCourtCaseIndex: String(caseIndex),
+          linkedAppearanceIndex: appearanceIndex,
+          linkedSentenceIndex: sentenceIndex,
+          sourceCourtCaseKey,
+          sourceCourtCaseRef,
+          sourceCourtName,
+          sourceCourtCaseHeading: `${sourceCourtCaseRef} heard at ${sourceCourtName}`,
+        });
+      });
+    }
+  });
+
+  // Store the original selected case headings separately from the mutable court case data.
+  req.session.data.linkedCourtCaseSnapshots = linkedCourtCaseSnapshots;
+
+  // Create the working appearance for the linked hearing journey.
+  // This is the object later pages update.
+  req.session.data.appearance = {
+    offences: selectedCaseOffences,
+    sentences: selectedCaseSentences,
+
+    // New hearing details start from the primary selected case.
+    "court-name":
+      primaryLastAppearance?.["next-court-name"] ||
+      primaryLastAppearance?.["court-name"],
+
+    "warrant-date-day": primaryLastAppearance?.["next-court-date-day"],
+    "warrant-date-month": primaryLastAppearance?.["next-court-date-month"],
+    "warrant-date-year": primaryLastAppearance?.["next-court-date-year"],
+
+    // Keep selected cases attached to the working appearance.
+    linkedCourtCaseIndexes: selectedCases,
+    linkedCourtCaseSnapshots,
+  };
+
+  // Reset task-list flags for this new linked hearing.
+  req.session.data.appearanceDetailsComplete = 0;
+  req.session.data.courtDocumentsComplete = 0;
+  req.session.data.offencesComplete = 0;
+  req.session.data.nextCourtAppearanceComplete = "No";
+  req.session.data.edit = "false";
+
+  // Clear any previous validation state from add-sentence-information.
+  delete req.session.data.addSentenceInformationError;
+
+  console.log("Linked selected cases:", selectedCases);
+  console.log("Linked source snapshots:", linkedCourtCaseSnapshots);
+  console.log("Linked offences copied:", selectedCaseOffences.length);
+
+  return res.redirect(
+    `/${prototypeVersion}/court-cases/add-a-linked-court-appearance/warrant-type`
+  );
+});
 
 //Add an appeal
 router.get("/:prototypeVersion/create-appeal", function (req, res) {
@@ -1032,6 +1458,10 @@ router.get("/:prototypeVersion/overall-case-outcome", function (req, res) {
         return res.redirect(
           `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
         );
+      } else if (route === LINKED_HEARING_ROUTE) {
+        return res.redirect(
+          courtCaseJourneyTaskListPath(prototypeVersion, route)
+        );
       } else if (route === "new-court-case") {
         return res.redirect(
           `/${prototypeVersion}/court-cases/add-a-court-case/task-list`
@@ -1047,6 +1477,8 @@ router.get("/:prototypeVersion/overall-case-outcome", function (req, res) {
   // ✔ Sentencing follows existing behaviour
   return res.redirect(307, `/${prototypeVersion}/warrant-type-select`);
 });
+
+
 
 
 router.post("/:prototypeVersion/persist-appearance", function (req, res) {
@@ -1154,7 +1586,40 @@ router.post("/:prototypeVersion/persist-appearance", function (req, res) {
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-court-case/confirmation`
     );
-  } else if (route == "appearance" || warrantType == "Non-custodial") {
+} else if (route == LINKED_HEARING_ROUTE) {
+  appearanceDetailsComplete = 1;
+  req.session.data.appearanceDetailsComplete = appearanceDetailsComplete;
+  req.session.data.route = LINKED_HEARING_ROUTE;
+
+  req.session.data.appearance.linkedCourtCaseIndexes =
+    req.session.data.linkedCourtCaseIndexes || [];
+
+  // Save the linked hearing to every selected court case.
+  // This means every linked court case gets the same latest appearance,
+  // while preserving each case's previous reference for the linked message.
+  req.session.data.appearance = persistLinkedAppearanceToSelectedCourtCases(req);
+
+  console.log("Linked hearing appearance details complete: " + appearanceDetailsComplete);
+
+  if (req.session.data.saveCourtCase == "true") {
+    req.session.data.appearance["status"] = ["draft"];
+
+    // Keep draft linked hearing data in sync across selected cases too.
+    req.session.data.appearance = persistLinkedAppearanceToSelectedCourtCases(req);
+
+    return res.redirect(`/${prototypeVersion}/court-cases/`);
+  }
+
+  if (req.query.appearanceComplete == "true") {
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-linked-court-appearance/confirmation`
+    );
+  }
+
+  return res.redirect(
+    courtCaseJourneyTaskListPath(prototypeVersion, route)
+  );
+}  else if (route == "appearance" || warrantType == "Non-custodial") {
     appearanceDetailsComplete = 1;
     req.session.data.appearanceDetailsComplete = appearanceDetailsComplete;
     console.log("Appearance details complete: " + appearanceDetailsComplete);
@@ -1211,7 +1676,7 @@ router.post("/:prototypeVersion/persist-appearance", function (req, res) {
 
   // Absolute fallback
   return res.redirect(
-    `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
+    courtCaseJourneyTaskListPath(prototypeVersion, route)
   );
 });
 
@@ -1266,61 +1731,113 @@ router.get("/:prototypeVersion/create-offence", function (req, res) {
 
 router.post("/:prototypeVersion/persist-offence", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
-  const route = req.session.data.route;
+
+  // Use the linked return flag if the user entered the outcome update subjourney
+  // from the linked-hearing journey. This prevents an intermediate page from
+  // accidentally sending the user back to the standard appearance journey.
+  const route = req.session.data.returnToLinkedHearing
+    ? LINKED_HEARING_ROUTE
+    : req.session.data.route;
+
   const edit = req.session.data.edit;
   offenceIndex = req.session.data.offenceIndex;
+
   req.session.data.offence["status"] = "complete";
+
   console.log("Offence index:" + offenceIndex);
   console.log("Route: " + route);
   console.log("Edit: " + edit);
+
   if (edit == "true") {
     console.log("Saving edits");
+
+    const existingOffence =
+      req.session.data.appearance.offences[req.session.data.offenceIndex] || {};
+
     req.session.data.appearance.offences[req.session.data.offenceIndex] =
-      req.session.data.offence;
+      preserveLinkedOffenceMetadata(existingOffence, req.session.data.offence);
+
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-an-offence/edit-an-offence`
     );
   }
+
   if (req.session.data.postSaveEdit == "true") {
     req.session.data["change-made"] = req.query.changeMade;
     req.session.data["variable-name"] = req.query.variableName;
     req.session.data["value"] = req.query.value;
+
+    const existingOffence =
+      req.session.data.appearance.offences[req.session.data.offenceIndex] || {};
+
     req.session.data.appearance.offences[req.session.data.offenceIndex] =
-      req.session.data.offence;
+      preserveLinkedOffenceMetadata(existingOffence, req.session.data.offence);
+
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-an-offence/edit-an-offence`
     );
   }
-  if (req.session.data.offenceIndex !== undefined) {
-    req.session.data.appearance.offences[req.session.data.offenceIndex] =
-      req.session.data.offence;
-  } else {
-    if (req.session.data.appearance.offences == undefined) {
-      req.session.data.appearance.offences = [];
-    }
-    req.session.data.appearance.offences.push(req.session.data.offence);
-    req.session.data.offenceIndex =
-      req.session.data.appearance.offences.length - 1;
+
+if (req.session.data.offenceIndex !== undefined) {
+  const existingOffence =
+    req.session.data.appearance.offences[req.session.data.offenceIndex] || {};
+
+  const updatedOffence = {
+    ...req.session.data.offence,
+  };
+
+  // If this outcome update started from the linked hearing journey,
+  // mark the offence as updated so the template moves it from
+  // "Offences with outcomes that need updating" into
+  // "Offences with non-custodial outcomes".
+  if (route == LINKED_HEARING_ROUTE || route == "linked-hearing") {
+    updatedOffence["outcome-changed"] = "true";
+
+    // Keep sentence as an empty object for non-custodial outcomes.
+    // The template checks offence.sentence['sentence-type'] == null.
+    updatedOffence.sentence = updatedOffence.sentence || {};
   }
+
+  // Merge the updated offence back into the original offence.
+  // This prevents the outcome update flow from wiping linked-hearing metadata
+  // such as sourceCourtCaseKey and sourceCourtCaseHeading.
+  req.session.data.appearance.offences[req.session.data.offenceIndex] =
+    preserveLinkedOffenceMetadata(existingOffence, updatedOffence);
+
+  // Keep the working offence in sync with the merged version.
+  req.session.data.offence =
+    req.session.data.appearance.offences[req.session.data.offenceIndex];
+}
   if (route == "repeat-remand") {
-    res.redirect(
+    return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-court-appearance/change-offences`
     );
   } else if (route == "remand-to-sentence") {
     req.session.data.changeMade = 0;
     req.session.data.offenceDeleted = 0;
     req.session.data.offenceAdded = 1;
+
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`
     );
   } else if (route == "edit-appearance") {
-    return res.redirect(`/${prototypeVersion}/court-cases/edit-appearance`);
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/edit-appearance`
+    );
+  } else if (route == LINKED_HEARING_ROUTE || route == "linked-hearing") {
+    restoreLinkedCourtCaseSnapshots(req);
+
+    delete req.session.data.returnToLinkedHearing;
+
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-linked-court-appearance/add-sentence-information?addSentenceInformationStarted=1`
+    );
   } else if (req.session.data.appearance["warrant-type"] == "Sentencing") {
-    res.redirect(
+    return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`
     );
   } else {
-    res.redirect(
+    return res.redirect(
       `/${prototypeVersion}/court-cases/add-an-offence/check-answers`
     );
   }
@@ -1574,10 +2091,23 @@ router.get("/:prototypeVersion/create-sentence", function (req, res) {
 
 router.post("/:prototypeVersion/persist-sentence", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
-  const route = req.session.data.route;
+  const route = req.session.data.returnToLinkedHearing
+    ? LINKED_HEARING_ROUTE
+    : req.session.data.route;
   const edit = req.query.edit || req.body.edit || req.session.data.edit;
-  const sentenceIndex =
-    req.query.sentenceIndex || req.session.data.sentenceIndex;
+let sentenceIndex =
+  req.query.sentenceIndex || req.session.data.sentenceIndex;
+
+// If this sentence came from updating an offence in the linked hearing journey,
+// treat it as a new sentence unless an explicit sentenceIndex was passed.
+if (
+  (route === LINKED_HEARING_ROUTE || route === "linked-hearing") &&
+  req.session.data.newSentence == 1 &&
+  req.query.sentenceIndex === undefined
+) {
+  sentenceIndex = undefined;
+  delete req.session.data.sentenceIndex;
+}
   const path = req.session.data.path;
   req.session.data.newSentence = 0;
 
@@ -1766,6 +2296,21 @@ router.post("/:prototypeVersion/persist-sentence", function (req, res) {
     );
   }
 
+  if (route === LINKED_HEARING_ROUTE || route === "linked-hearing") {
+    req.session.data.sentence = {
+      ...req.session.data.sentence,
+      "outcome-changed": "true",
+    };
+
+    restoreLinkedCourtCaseSnapshots(req);
+
+    delete req.session.data.returnToLinkedHearing;
+
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-linked-court-appearance/add-sentence-information?addSentenceInformationStarted=1`
+    );
+  }
+
   return res.redirect(
     `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`
   );
@@ -1811,48 +2356,75 @@ router.get("/:prototypeVersion/warrant-type-select", function (req, res) {
       res.redirect(
         `/${prototypeVersion}/court-cases/add-a-court-case/task-list`
       );
+
+    } else if (route == "linked-hearing") {
+      res.redirect(
+        `/${prototypeVersion}/court-cases/add-a-linked-court-appearance/task-list`
+      );
     } else {
       res.redirect(
         `/${prototypeVersion}/court-cases/add-a-court-case/overall-case-outcome`
       );
     }
   } else if (warrantType == "Sentencing") {
-    if (prototypeVersion >= 13) {
-      req.session.data.appearance["total-sentence-length-years"] = 0;
-      req.session.data.appearance["total-sentence-length-months"] = 0;
-      req.session.data.appearance["total-sentence-length-weeks"] = 0;
-      req.session.data.appearance["total-sentence-length-days"] = 0;
-      req.session.data.appearance["concurrent-sentences-years"] = 0;
-      req.session.data.appearance["concurrent-sentences-months"] = 0;
-      req.session.data.appearance["concurrent-sentences-weeks"] = 0;
-      req.session.data.appearance["concurrent-sentences-days"] = 0;
-      req.session.data.appearance["overall-case-outcome"] = "Imprisonment";
+  if (prototypeVersion >= 13) {
+    req.session.data.appearance["total-sentence-length-years"] = 0;
+    req.session.data.appearance["total-sentence-length-months"] = 0;
+    req.session.data.appearance["total-sentence-length-weeks"] = 0;
+    req.session.data.appearance["total-sentence-length-days"] = 0;
+    req.session.data.appearance["concurrent-sentences-years"] = 0;
+    req.session.data.appearance["concurrent-sentences-months"] = 0;
+    req.session.data.appearance["concurrent-sentences-weeks"] = 0;
+    req.session.data.appearance["concurrent-sentences-days"] = 0;
+    req.session.data.appearance["overall-case-outcome"] = "Imprisonment";
+  }
+
+  if (route == "appearance") {
+    req.session.data.appearance.sentences = [];
+
+    if (prototypeVersion == "v12" || prototypeVersion >= 13) {
+      res.redirect(
+        `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
+      );
+    } else {
+      res.redirect(
+        `/${prototypeVersion}/court-cases/add-a-court-appearance/tagged-bail`
+      );
     }
-    if (route == "appearance") {
-      req.session.data.appearance.sentences = [];
-      if (prototypeVersion == "v12" || prototypeVersion >= 13) {
-        res.redirect(
-          `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
-        );
-      } else
-        res.redirect(
-          `/${prototypeVersion}/court-cases/add-a-court-appearance/tagged-bail`
-        );
-    } else if (prototypeVersion == "v12" || prototypeVersion >= 13) {
-      if (route == "new-court-case") {
-        res.redirect(
-          `/${prototypeVersion}/court-cases/add-a-court-case/task-list`
-        );
-      }
-    } else
+
+  } else if (route == "linked-hearing") {
+
+    res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-linked-court-appearance/task-list`
+    );
+
+  } else if (route == "new-court-case") {
+
+    if (prototypeVersion == "v12" || prototypeVersion >= 13) {
+      res.redirect(
+        `/${prototypeVersion}/court-cases/add-a-court-case/task-list`
+      );
+    } else {
       res.redirect(
         `/${prototypeVersion}/court-cases/add-a-court-case/tagged-bail`
       );
-  } else if (warrantType == "Non-custodial") {
+    }
+
+  }
+
+} else if (warrantType == "Non-custodial") {
+
+  if (route == "linked-hearing") {
+    res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-linked-court-appearance/task-list`
+    );
+  } else {
     res.redirect(
       `/${prototypeVersion}/court-cases/add-a-court-appearance/overall-case-outcome`
     );
   }
+
+}
 });
 
 router.get("/:prototypeVersion/consecutive-select", function (req, res) {
@@ -2193,58 +2765,122 @@ router.post("/:prototypeVersion/offence-to-sentence", function (req, res) {
 
 router.post("/:prototypeVersion/add-sentence-information", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
-  var index = "";
-  if (req.query.index) {
-    index = req.query.index;
-  } else {
-    index = req.session.data.appearanceIndex;
+
+  // Use the offence index from the URL if present.
+  // Otherwise use the offence index stored by update-outcome.
+  let index = "";
+
+  if (req.query.index !== undefined) {
+    index = Number(req.query.index);
+  } else if (req.session.data.offenceIndex !== undefined) {
+    index = Number(req.session.data.offenceIndex);
   }
-  const outcome = req.session.data["offence"]["outcome"];
-  console.log("Index: " + index);
+
+  const outcome = req.session.data.offence?.["outcome"];
+
+  // Only update the route when one is explicitly supplied.
+  // This prevents linked-hearing being overwritten with undefined.
+  if (req.query.route) {
+    req.session.data.route = req.query.route;
+  }
+
+  const route = req.session.data.returnToLinkedHearing
+    ? LINKED_HEARING_ROUTE
+    : req.session.data.route;
+
+  console.log("Offence index: " + index);
   console.log("Outcome: " + outcome);
-  const route = req.query.route;
-  req.session.data.route = route;
-  console.log("Route:" + route);
-  if (
-    (route == "edit-appearance" && outcome == "Imprisonment") ||
-    (route == "edit-appearance" && outcome == "Imprisonment in default")
-  ) {
-    req.session.data.sentence = req.session.data.offence;
-    req.session.data.forthwithSelected = "Yes";
-  } else if (
-    outcome == "Imprisonment" ||
-    outcome == "Imprisonment in default"
-  ) {
-    req.session.data.sentence = req.session.data.appearance.offences[index];
+  console.log("Route: " + route);
+
+  const existingOffence =
+    req.session.data.appearance?.offences?.[index] || {};
+
+  // If this offence is being updated as part of the linked hearing journey,
+  // preserve all source metadata before doing anything else.
+  if (route == LINKED_HEARING_ROUTE || route == "linked-hearing") {
+    req.session.data.offence = preserveLinkedOffenceMetadata(
+      existingOffence,
+      req.session.data.offence
+    );
+    restoreLinkedCourtCaseSnapshots(req);
   }
+
+if (outcome == "Imprisonment" || outcome == "Imprisonment in default") {
+  req.session.data.sentence = preserveLinkedOffenceMetadata(
+    existingOffence,
+    req.session.data.sentence || req.session.data.offence
+  );
+
+  // This is a new custodial sentence created from an offence outcome update.
+  // Clear sentenceIndex so persist-sentence pushes a new sentence instead of
+  // overwriting the previous custodial outcome.
+  delete req.session.data.sentenceIndex;
+
+  req.session.data.newSentence = 1;
+
+  req.session.data.appearance.offences.splice(index, 1);
+
+  return res.redirect(
+    `/${prototypeVersion}/court-cases/add-a-sentence/count-number`
+  );
+}
+
+  // Non-custodial outcome update. Mark the offence as updated, but preserve linked metadata.
   if (
-    (route == "remand-to-sentence" && outcome != "Imprisonment") ||
-    (route == "remand-to-sentence" && outcome != "Imprisonment in default") ||
-    route == "immediate-release"
+    route == "remand-to-sentence" ||
+    route == "immediate-release" ||
+    route == LINKED_HEARING_ROUTE ||
+    route == "linked-hearing"
   ) {
-    req.session.data.appearance.offences[index]["outcome"] = outcome
-    req.session.data.appearance.offences[index]["outcome-changed"] = "true";
+    if (req.session.data.appearance.offences[index]) {
+      req.session.data.appearance.offences[index] =
+        preserveLinkedOffenceMetadata(existingOffence, {
+          ...req.session.data.appearance.offences[index],
+          ...req.session.data.offence,
+          outcome,
+          "outcome-changed": "true",
+          sentence: req.session.data.appearance.offences[index].sentence || {},
+        });
+    }
   }
-  if (outcome == "Imprisonment") {
+
+  // Custodial outcome. Existing behaviour removes the offence and moves the user
+  // into sentence entry. Preserve the metadata on the sentence object first.
+  if (outcome == "Imprisonment" || outcome == "Imprisonment in default") {
+    req.session.data.sentence = preserveLinkedOffenceMetadata(
+      existingOffence,
+      req.session.data.sentence || req.session.data.offence
+    );
+
     req.session.data.appearance.offences.splice(index, 1);
+
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-sentence/count-number`
     );
-  } else if (route == "edit-appearance") {
-    return res.redirect(307, `/${prototypeVersion}/persist-offence`);
   }
+
+  if (route == LINKED_HEARING_ROUTE || route == "linked-hearing") {
+    restoreLinkedCourtCaseSnapshots(req);
+
+    delete req.session.data.returnToLinkedHearing;
+
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-linked-court-appearance/add-sentence-information?addSentenceInformationStarted=1`
+    );
+  }
+
   if (route == "new-court-case") {
-    res.redirect(
+    return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`
     );
   } else if (route == "edit-appearance") {
     return res.redirect(`/${prototypeVersion}/court-cases/edit-appearance`);
-  } else if (route == "immediate-release")
-    res.redirect(
+  } else if (route == "immediate-release") {
+    return res.redirect(
       `/${prototypeVersion}/court-cases/record-an-immediate-release/update-offence-outcomes`
     );
-  else {
-    res.redirect(
+  } else {
+    return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`
     );
   }
@@ -2401,6 +3037,10 @@ router.post(
       return res.redirect(
         `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
       );
+    } else if (route == LINKED_HEARING_ROUTE) {
+      return res.redirect(
+        courtCaseJourneyTaskListPath(prototypeVersion, route)
+      );
     } else {
       return res.redirect(
         `/${prototypeVersion}/court-cases/add-a-court-case/task-list`
@@ -2413,8 +3053,15 @@ router.post(
   "/:prototypeVersion/add-sentence-information-complete",
   function (req, res) {
     const prototypeVersion = req.params.prototypeVersion;
-    const warrantType = req.session.data.warrantType;
-    const route = req.session.data.route;
+  const warrantType = req.session.data.warrantType;
+
+const route =
+  req.query.route ||
+  (req.session.data.returnToLinkedHearing
+    ? LINKED_HEARING_ROUTE
+    : req.session.data.route);
+
+req.session.data.route = route;
 
     // Helper: find offences that still need outcome updates
     const offences = req.session.data.appearance?.offences || [];
@@ -2437,7 +3084,11 @@ router.post(
         return res.redirect(
         `/${prototypeVersion}/court-cases/record-an-immediate-release/update-offence-outcomes`
       );
-      } else {
+      } else if (route == LINKED_HEARING_ROUTE) {
+      return res.redirect(
+        `/${prototypeVersion}/court-cases/add-a-linked-court-appearance/add-sentence-information`
+      );
+    } else {
       return res.redirect(
         `/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`
       );
@@ -2492,6 +3143,11 @@ router.post(
         if (req.session.data.appearance["finished-adding-offences"] == "yes") {
           req.session.data.offencesComplete = offencesComplete;
         }
+        if (route == LINKED_HEARING_ROUTE) {
+          return res.redirect(
+            courtCaseJourneyTaskListPath(prototypeVersion, route)
+          );
+        }
         return res.redirect(
           `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
         );
@@ -2504,6 +3160,11 @@ router.post(
       } else if (prototypeVersion > 25 && warrantType == "Non-custodial") {
         req.session.data.offencesComplete =
             addSentenceInformationComplete;
+        if (route == LINKED_HEARING_ROUTE) {
+          return res.redirect(
+            courtCaseJourneyTaskListPath(prototypeVersion, route)
+          );
+        }
         return res.redirect(
           `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
         );
@@ -2521,10 +3182,20 @@ router.post(
           req.session.data.appearance["total-sentence-length-weeks"] !=
             req.session.data.appearance["overall-sentence-length-weeks"]
         ) {
+          if (route == LINKED_HEARING_ROUTE) {
+            return res.redirect(
+              `/${prototypeVersion}/court-cases/add-a-linked-court-appearance/sentence-length-mismatch`
+            );
+          }
           return res.redirect(
             `/${prototypeVersion}/court-cases/add-a-court-appearance/sentence-length-mismatch`
           );
         } else {
+          if (route == LINKED_HEARING_ROUTE) {
+            return res.redirect(
+              courtCaseJourneyTaskListPath(prototypeVersion, route)
+            );
+          }
           return res.redirect(
             `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
           );
@@ -2542,6 +3213,8 @@ router.post("/:prototypeVersion/court-documents-complete", function (req, res) {
   console.log("Court documents complete: " + courtDocumentsComplete);
   if (route == "new-court-case") {
     res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list`);
+  } else if (route == LINKED_HEARING_ROUTE) {
+    res.redirect(courtCaseJourneyTaskListPath(prototypeVersion, route));
   } else if (route == "immediate-release" && prototypeVersion == 25) {
     res.redirect(`/${prototypeVersion}/court-cases/record-an-immediate-release/task-list`);
   } 
@@ -2597,6 +3270,17 @@ router.post("/:prototypeVersion/add-court-document", function (req, res) {
       );
     }
   }
+  if (route == LINKED_HEARING_ROUTE) {
+    if (req.session.data.appearance["warrant-type"] == "Sentencing") {
+      return res.redirect(
+        `/${prototypeVersion}/court-cases/add-a-linked-court-appearance/additional-documents`
+      );
+    } else {
+      return res.redirect(
+        `/${prototypeVersion}/court-cases/add-a-linked-court-appearance/court-documents`
+      );
+    }
+  }
   if (req.session.data.appearance["warrant-type"] == "Sentencing") {
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-court-appearance/additional-documents`
@@ -2641,10 +3325,15 @@ router.post(
       res.redirect(
         `/${prototypeVersion}/court-cases/add-a-court-case/task-list`
       );
-    } else
+    } else if (route == LINKED_HEARING_ROUTE) {
       res.redirect(
-        `/${prototypeVersion}/court-cases/add-a-court-case/task-list`
+        courtCaseJourneyTaskListPath(prototypeVersion, route)
       );
+    } else {
+      res.redirect(
+        `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
+      );
+    }
   }
 );
 
@@ -2652,44 +3341,74 @@ router.post(
   "/:prototypeVersion/sentence-length-mismatch-select",
   function (req, res) {
     const prototypeVersion = req.params.prototypeVersion;
-    const route = req.session.data.route;
+
+    const route =
+      req.query.route ||
+      (req.session.data.returnToLinkedHearing
+        ? LINKED_HEARING_ROUTE
+        : req.session.data.route);
+
+    req.session.data.route = route;
+
     const sentenceLengthMismatch =
       req.session.data.appearance["sentence-length-mismatch"];
+
     console.log("Sentence length mismatch: " + sentenceLengthMismatch);
+    console.log("Route: " + route);
+
+    if (route == LINKED_HEARING_ROUTE || route == "linked-hearing") {
+      delete req.session.data.returnToLinkedHearing;
+
+      return res.redirect(
+        courtCaseJourneyTaskListPath(prototypeVersion, LINKED_HEARING_ROUTE)
+      );
+    }
+
     if (prototypeVersion >= 22) {
       if (route == "new-court-case") {
         return res.redirect(
           `/${prototypeVersion}/court-cases/add-a-court-case/task-list`
         );
-      } else if (route == "remand-to-sentence") {
-        res.redirect(
+      }
+
+      if (route == "remand-to-sentence") {
+        return res.redirect(
           `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
         );
       }
-    } else {
-      if (route == "new-court-case") {
-        if (sentenceLengthMismatch == "yes") {
-          return res.redirect(
-            `/${prototypeVersion}/court-cases/add-a-court-case/task-list`
-          );
-        } else {
-          return res.redirect(
-            `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`
-          );
-        }
-      }
-      if (route == "remand-to-sentence") {
-        if (sentenceLengthMismatch == "yes") {
-          return res.redirect(
-            `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
-          );
-        } else {
-          res.redirect(
-            `/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`
-          );
-        }
-      }
+
+      return res.redirect(
+        `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
+      );
     }
+
+    if (route == "new-court-case") {
+      if (sentenceLengthMismatch == "yes") {
+        return res.redirect(
+          `/${prototypeVersion}/court-cases/add-a-court-case/task-list`
+        );
+      }
+
+      return res.redirect(
+        `/${prototypeVersion}/court-cases/add-a-sentence/check-answers`
+      );
+    }
+
+    if (route == "remand-to-sentence") {
+      if (sentenceLengthMismatch == "yes") {
+        return res.redirect(
+          `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
+        );
+      }
+
+      return res.redirect(
+        `/${prototypeVersion}/court-cases/add-a-court-appearance/add-sentence-information`
+      );
+    }
+
+    return res.redirect(
+      `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
+    );
   }
 );
 
@@ -2828,6 +3547,11 @@ router.get("/:prototypeVersion/document-type", function (req, res) {
   console.log("Warrant type: " + warrantType);
   if (warrantType == "Sentencing") {
     req.session.data.appearance["document-type"] = "sentencing warrant";
+    if (route == LINKED_HEARING_ROUTE) {
+      return res.redirect(
+        `/${prototypeVersion}/court-cases/add-a-linked-court-appearance/upload-document`
+      );
+    }
     if (route == "appearance" || route == "remand-to-sentence") {
       return res.redirect(
         `/${prototypeVersion}/court-cases/add-a-court-appearance/upload-document`
@@ -2839,6 +3563,11 @@ router.get("/:prototypeVersion/document-type", function (req, res) {
     }
   } else {
     req.session.data.appearance["document-type"] = "remand warrant";
+    if (route == LINKED_HEARING_ROUTE) {
+      return res.redirect(
+        `/${prototypeVersion}/court-cases/add-a-linked-court-appearance/upload-document`
+      );
+    }
     if (route == "appearance") {
       return res.redirect(
         `/${prototypeVersion}/court-cases/add-a-court-appearance/upload-document`
@@ -2885,6 +3614,11 @@ router.get("/:prototypeVersion/additional-documents", function (req, res) {
         "Additional documents:" +
           req.session.data.appearance["additional-documents-list"]
       );
+      if (route == LINKED_HEARING_ROUTE) {
+        return res.redirect(
+          `/${prototypeVersion}/court-cases/add-a-linked-court-appearance/upload-additional-document`
+        );
+      }
       if (route == "appearance" || route == "remand-to-sentence") {
         return res.redirect(
           `/${prototypeVersion}/court-cases/add-a-court-appearance/upload-additional-document`
@@ -2901,6 +3635,11 @@ router.get("/:prototypeVersion/additional-documents", function (req, res) {
       req.session.data.appearance["doc-index"] =
         req.session.data.appearance["doc-index"] + 1;
       console.log("Doc index:" + req.session.data.appearance["doc-index"]);
+      if (route == LINKED_HEARING_ROUTE) {
+        return res.redirect(
+          `/${prototypeVersion}/court-cases/add-a-linked-court-appearance/upload-additional-document`
+        );
+      }
       if (route == "appearance") {
         return res.redirect(
           `/${prototypeVersion}/court-cases/add-a-court-appearance/upload-additional-document`
@@ -2911,6 +3650,11 @@ router.get("/:prototypeVersion/additional-documents", function (req, res) {
         );
       }
     } else {
+      if (route == LINKED_HEARING_ROUTE) {
+        return res.redirect(
+          `/${prototypeVersion}/court-cases/add-a-linked-court-appearance/court-documents`
+        );
+      }
       if (route == "appearance" || route == "remand-to-sentence") {
         return res.redirect(
           `/${prototypeVersion}/court-cases/add-a-court-appearance/court-documents`
@@ -2922,6 +3666,11 @@ router.get("/:prototypeVersion/additional-documents", function (req, res) {
       }
     }
   } else {
+    if (route == LINKED_HEARING_ROUTE) {
+      return res.redirect(
+        `/${prototypeVersion}/court-cases/add-a-linked-court-appearance/court-documents`
+      );
+    }
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-court-case/court-documents`
     );
@@ -2984,6 +3733,10 @@ router.get(
     if (req.session.data.route == "appearance") {
       res.redirect(
         `/${prototypeVersion}/court-cases/add-a-court-appearance/task-list`
+      );
+    } else if (req.session.data.route == LINKED_HEARING_ROUTE) {
+      res.redirect(
+        courtCaseJourneyTaskListPath(prototypeVersion, req.session.data.route)
       );
     } else {
       res.redirect(
@@ -3145,16 +3898,64 @@ router.post("/:prototypeVersion/select-merged-cases", function (req, res) {
 
 router.get("/:prototypeVersion/update-outcome", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
-  const index = req.query.index;
+  const index = Number(req.query.index);
   const edit = req.query.edit;
+
   req.session.index = index;
   req.session.edit = edit;
-  console.log(req.session.data.appearance.offences[index]);
+  req.session.data.offenceIndex = index; 
+
+// This outcome update is starting from an offence.
+// Clear any previous sentence index so a custodial outcome creates a new sentence
+// instead of overwriting the last sentence that was added.
+delete req.session.data.sentenceIndex;
+delete req.session.data.sentence;
+
+  // Preserve route if passed in. If not passed in, keep whatever is already in session.
+  if (req.query.route) {
+    req.session.data.route = req.query.route;
+  }
+
+  // Keep an explicit flag as well as route. This survives places where older
+  // routes accidentally overwrite route during the outcome update subjourney.
+  if (
+    req.session.data.route == LINKED_HEARING_ROUTE ||
+    req.session.data.route == "linked-hearing"
+  ) {
+    req.session.data.returnToLinkedHearing = true;
+  }
+
+  const existingOffence = req.session.data.appearance?.offences?.[index];
+
+  if (existingOffence) {
+    // Use the selected offence as the working offence.
+    // Do not merge in an old req.session.data.offence from a previous update.
+    req.session.data.offence = {
+      ...existingOffence,
+      sentence: existingOffence.sentence || {},
+    };
+  }
+
+  if (
+    req.session.data.appearance?.linkedCourtCaseSnapshots &&
+    !req.session.data.linkedCourtCaseSnapshots
+  ) {
+    req.session.data.linkedCourtCaseSnapshots =
+      req.session.data.appearance.linkedCourtCaseSnapshots;
+  }
+
   if (req.query.clearError === "true") {
     req.session.data.addSentenceInformationError = null;
   }
 
-  res.redirect(
+  if (
+    req.session.data.route == LINKED_HEARING_ROUTE ||
+    req.session.data.route == "linked-hearing"
+  ) {
+    restoreLinkedCourtCaseSnapshots(req);
+  }
+
+  return res.redirect(
     `/${prototypeVersion}/court-cases/add-a-court-appearance/change-outcome`
   );
 });
@@ -3295,8 +4096,24 @@ router.get("/:prototypeVersion/mark-document-viewed", function (req, res) {
   return res.redirect(redirectTarget);
 });
 
+router.get('/mark-as-new/:id', (req, res) => {
+  const docId = req.params.id;
 
+  if (!req.session.data.tasks) {
+    req.session.data.tasks = {
+      remandWarrantViewed: false,
+      newDocumentsCount: 0,
+      docsViewed: []
+    };
+  }
 
+  req.session.data.tasks.docsViewed =
+    (req.session.data.tasks.docsViewed || []).filter(id => id !== docId);
+
+  req.session.data.tasks.newDocumentsCount++;
+
+  res.redirect('back');
+});
 
 // ── v28 Calculation History ──────────────────────────────────────────────────
 
