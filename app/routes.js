@@ -3184,7 +3184,7 @@ req.session.data.route = route;
         ) {
           if (route == LINKED_HEARING_ROUTE) {
             return res.redirect(
-              `/${prototypeVersion}/court-cases/add-a-linked-court-appearance/sentence-length-mismatch`
+              `/${prototypeVersion}/court-cases/add-a-linked-court-appearance/task-list`
             );
           }
           return res.redirect(
