@@ -980,15 +980,14 @@ router.get("/:prototypeVersion/delete-court-case", function (req, res) {
   res.redirect(`/${prototypeVersion}/court-cases/court-cases-standalone`);
 });
 
-// v27 Quick start entry point with auto-populated data
+// v27 & 30 Quick start entry point with auto-populated data
 router.get("/:prototypeVersion/quick-start-entry", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   
-  // Only allow v27
-  if (prototypeVersion !== "27") {
-    return res.redirect(`/${prototypeVersion}/court-cases/confirm-exit`);
-  }
-
+ // Only allow v27 and v30
+if (prototypeVersion !== "27" && prototypeVersion !== "30") {
+  return res.redirect(`/${prototypeVersion}/court-cases/confirm-exit`);
+}
   // Clear existing session data
   delete req.session.data.courtCaseIndex;
   delete req.session.data.courtCase;
@@ -1580,9 +1579,12 @@ router.post("/:prototypeVersion/persist-appearance", function (req, res) {
     );
   } else if (route == "add-a-court-case") {
     // Mark remand warrant task as viewed for v27
-    if (prototypeVersion === "27" && req.session.data.tasks) {
-      req.session.data.tasks.remandWarrantViewed = true;
-    }
+   if (
+  (prototypeVersion === "27" || prototypeVersion === "30") &&
+  req.session.data.tasks
+) {
+  req.session.data.tasks.remandWarrantViewed = true;
+}
     return res.redirect(
       `/${prototypeVersion}/court-cases/add-a-court-case/confirmation`
     );
@@ -1633,9 +1635,13 @@ router.post("/:prototypeVersion/persist-appearance", function (req, res) {
     }
     if (req.query.appearanceComplete == "true") {
       // Mark remand warrant task as viewed for v27 if in quick-start flow
-      if (prototypeVersion === "27" && req.session.data.tasks && req.session.data.entryMode === "api-pre-populated") {
-        req.session.data.tasks.remandWarrantViewed = true;
-      }
+     if (
+  ["27", "30"].includes(prototypeVersion) &&
+  req.session.data.tasks &&
+  req.session.data.entryMode === "api-pre-populated"
+) {
+  req.session.data.tasks.remandWarrantViewed = true;
+}
       return res.redirect(
         `/${prototypeVersion}/court-cases/add-a-court-appearance/confirmation`
       );
@@ -4031,20 +4037,20 @@ router.get("/:prototypeVersion/launch-prototype", function (req, res) {
     req.session.data = JSON.parse(JSON.stringify(sessionData));
     req.session.data.prototypeVersion = prototypeVersion;
     
-    // Initialize task tracking for v27
-    if (prototypeVersion === "27") {
-      req.session.data.taskStateSeed = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
-      req.session.data.tasks = {
-        remandWarrantViewed: false,
-        newDocumentsCount: 2,  // Currently 2 documents have "New" tag
-        docsViewed: []
-      };
-    }
+// Initialize task tracking for v27 and v30
+if (["27", "30"].includes(prototypeVersion)) {
+  req.session.data.taskStateSeed = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+  req.session.data.tasks = {
+    remandWarrantViewed: false,
+    newDocumentsCount: 2, // Currently 2 documents have "New" tag
+    docsViewed: []
+  };
+}
     
     console.log(
       `Launching prototype version: ${prototypeVersion} with dataset: ${dataset}`
     );
-    if (prototypeVersion === "27") {
+    if (prototypeVersion === "27" || prototypeVersion === "30") {
       res.redirect(`/${prototypeVersion}/overview.html`);
     } else if (prototypeVersion === "28") {
       const destination = req.query.destination || 'overview';
@@ -4066,10 +4072,10 @@ router.get("/:prototypeVersion/mark-document-viewed", function (req, res) {
   const fallbackPath = `/${prototypeVersion}/documents.html`;
   const redirectTarget = documentPaths[docId] || fallbackPath;
   
-  // Only for v27
-  if (prototypeVersion !== "27") {
-    return res.redirect(fallbackPath);
-  }
+// Only for v27 and v30
+if (prototypeVersion !== "27" && prototypeVersion !== "30") {
+  return res.redirect(fallbackPath);
+}
 
   if (!req.session.data.tasks) {
     req.session.data.tasks = {
