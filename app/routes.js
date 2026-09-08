@@ -4077,12 +4077,6 @@ router.get('/:prototypeVersion/documents', (req, res) => {
 
   let documents = []
 
-  /*
-   * Format an ISO date and time as DD/MM/YYYY at HH:MM.
-   *
-   * The original ISO value is retained on dateAdded so that
-   * sorting continues to work reliably.
-   */
   function formatDocumentDateTime(value) {
     if (!value) {
       return 'Not entered'
@@ -4109,10 +4103,7 @@ router.get('/:prototypeVersion/documents', (req, res) => {
     const minutes =
       String(date.getMinutes()).padStart(2, '0')
 
-    return (
-      `${day}/${month}/${year} ` +
-      `at ${hours}:${minutes}`
-    )
+    return `${day}/${month}/${year} at ${hours}:${minutes}`
   }
 
   /*
@@ -4193,69 +4184,74 @@ router.get('/:prototypeVersion/documents', (req, res) => {
   /*
    * Add Court Cases documents.
    */
- courtCases.forEach((courtCase, courtCaseIndex) => {
-  const appearances =
-    courtCase.appearances || []
+  courtCases.forEach(
+    (courtCase, courtCaseIndex) => {
+      const appearances =
+        courtCase.appearances || []
 
-  appearances.forEach(appearance => {
-    const appearanceDocuments =
-      appearance.documents || []
+      appearances.forEach(appearance => {
+        const appearanceDocuments =
+          appearance.documents || []
 
-    appearanceDocuments.forEach(document => {
-      let documentLink =
-        '/public/documents/remand-warrant-joe-bloggs.pdf'
+        appearanceDocuments.forEach(document => {
+          let documentLink =
+            '/public/documents/remand-warrant-joe-bloggs.pdf'
 
-      if (
-        document.documentType ===
-        'Sentencing warrant'
-      ) {
-        documentLink =
-          '/public/documents/sentencing-warrant.pdf'
-      }
+          if (
+            document.documentType ===
+            'Sentencing warrant'
+          ) {
+            documentLink =
+              '/public/documents/sentencing-warrant.pdf'
+          }
 
-      if (
-        document.documentType ===
-        'Prison court register'
-      ) {
-        documentLink =
-          '/public/documents/court-register-city-of-london.pdf'
-      }
+          if (
+            document.documentType ===
+            'Prison court register'
+          ) {
+            documentLink =
+              '/public/documents/court-register-city-of-london.pdf'
+          }
 
-      documents.push({
-        ...document,
+          documents.push({
+            ...document,
 
-        source:
-          document.source || 'Court cases',
+            source:
+              document.source || 'Court cases',
 
-        documentLink,
+            documentLink,
 
-        caseReference:
-          appearance['court-case-ref'] ||
-          'Not entered',
+            caseReference:
+              appearance['court-case-ref'] ||
+              'Not entered',
 
-        courtName:
-          appearance['court-name'],
+            courtName:
+              appearance['court-name'],
 
-        hearingDate:
-          `${appearance['warrant-date-day']}/` +
-          `${appearance['warrant-date-month']}/` +
-          `${appearance['warrant-date-year']}`,
+            hearingDate:
+              `${appearance['warrant-date-day']}/` +
+              `${appearance['warrant-date-month']}/` +
+              `${appearance['warrant-date-year']}`,
 
-        hearingId:
-          appearance.hearingId,
+            hearingId:
+              appearance.hearingId,
 
-        courtCaseIndex,
+            courtCaseIndex,
 
-        dateAddedDisplay:
-          formatDocumentDateTime(
-            document.dateAdded
-          ),
+            dateAddedDisplay:
+              formatDocumentDateTime(
+                document.dateAdded
+              ),
 
-        isCurrentlyNew: false
+            /*
+             * Court Cases documents cannot be new.
+             */
+            isCurrentlyNew: false
+          })
+        })
       })
-    })
-  })
-})
+    }
+  )
 
   /*
    * Add standalone Common Platform documents.
@@ -4280,7 +4276,7 @@ router.get('/:prototypeVersion/documents', (req, res) => {
           ),
 
         /*
-         * Common Platform documents remain New until opened.
+         * Common Platform documents remain new until opened.
          */
         isCurrentlyNew:
           document.isNew === true &&
@@ -4292,7 +4288,8 @@ router.get('/:prototypeVersion/documents', (req, res) => {
   )
 
   /*
-   * Build the Case reference filter options before filtering.
+   * Build Case reference filter options from the complete
+   * list before filtering and pagination.
    */
   const hasDocumentsWithoutCaseReference =
     documents.some(document =>
@@ -4312,10 +4309,11 @@ router.get('/:prototypeVersion/documents', (req, res) => {
             'Not entered'
         )
     )
-  ].sort((firstReference, secondReference) =>
-    firstReference.localeCompare(
-      secondReference
-    )
+  ].sort(
+    (firstReference, secondReference) =>
+      firstReference.localeCompare(
+        secondReference
+      )
   )
 
   /*
@@ -4377,22 +4375,24 @@ router.get('/:prototypeVersion/documents', (req, res) => {
   /*
    * Sort after filtering and before pagination.
    */
-  documents.sort((firstDocument, secondDocument) => {
-    const firstDate =
-      new Date(firstDocument.dateAdded)
+  documents.sort(
+    (firstDocument, secondDocument) => {
+      const firstDate =
+        new Date(firstDocument.dateAdded)
 
-    const secondDate =
-      new Date(secondDocument.dateAdded)
+      const secondDate =
+        new Date(secondDocument.dateAdded)
 
-    if (sort === 'oldest') {
-      return firstDate - secondDate
+      if (sort === 'oldest') {
+        return firstDate - secondDate
+      }
+
+      return secondDate - firstDate
     }
-
-    return secondDate - firstDate
-  })
+  )
 
   /*
-   * Calculate pagination after filtering and sorting.
+   * Calculate pagination.
    */
   const totalDocuments =
     documents.length
@@ -4436,7 +4436,8 @@ router.get('/:prototypeVersion/documents', (req, res) => {
     `/${prototypeVersion}/documents`
 
   /*
-   * Build links that preserve sorting and filters.
+   * Build links that preserve the current page,
+   * filters and sort order.
    */
   function buildDocumentsHref({
     pageValue = currentPage,
@@ -4484,7 +4485,7 @@ router.get('/:prototypeVersion/documents', (req, res) => {
   }
 
   /*
-   * Build Clear filters and selected-filter tag links.
+   * Build Clear filters link.
    */
   const clearFiltersHref =
     buildDocumentsHref({
@@ -4494,7 +4495,12 @@ router.get('/:prototypeVersion/documents', (req, res) => {
       caseReferenceValues: ['all']
     })
 
+  /*
+   * Build the selected Showing filter.
+   */
   const selectedShowingFilter = {
+    value: showing,
+
     label:
       showing === 'new'
         ? 'New documents'
@@ -4507,6 +4513,9 @@ router.get('/:prototypeVersion/documents', (req, res) => {
       })
   }
 
+  /*
+   * Build the selected Case reference filters.
+   */
   const selectedCaseReferenceFilters = []
 
   if (
@@ -4556,7 +4565,7 @@ router.get('/:prototypeVersion/documents', (req, res) => {
   }
 
   /*
-   * Build the GOV.UK pagination items.
+   * Build GOV.UK pagination items.
    */
   const pageNumbers = []
 
@@ -4593,6 +4602,21 @@ router.get('/:prototypeVersion/documents', (req, res) => {
             currentPage + 1
         })
       : null
+
+  console.log(
+    'Documents found:',
+    totalDocuments
+  )
+
+  console.log(
+    'Selected Showing filter:',
+    selectedShowingFilter
+  )
+
+  console.log(
+    'Selected Case reference filters:',
+    selectedCaseReferenceFilters
+  )
 
   res.render(
     `${prototypeVersion}/documents`,
