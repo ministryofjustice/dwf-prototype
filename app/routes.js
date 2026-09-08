@@ -4062,12 +4062,588 @@ if (["27", "30"].includes(prototypeVersion)) {
 });
 
 // v27 Document viewing - decrements task count and opens the document
+router.get('/:prototypeVersion/documents', (req, res) => {
+  const prototypeVersion = req.params.prototypeVersion
+
+  const courtCases =
+    req.session.data.courtCases || []
+
+  const commonPlatformDocuments =
+    req.session.data.commonPlatformDocuments || []
+
+  const docsViewed = (
+    req.session.data.tasks?.docsViewed || []
+  ).map(String)
+
+  let documents = []
+
+  /*
+   * Format an ISO date and time as DD/MM/YYYY at HH:MM.
+   *
+   * The original ISO value is retained on dateAdded so that
+   * sorting continues to work reliably.
+   */
+  function formatDocumentDateTime(value) {
+    if (!value) {
+      return 'Not entered'
+    }
+
+    const date = new Date(value)
+
+    if (Number.isNaN(date.getTime())) {
+      return value
+    }
+
+    const day =
+      String(date.getDate()).padStart(2, '0')
+
+    const month =
+      String(date.getMonth() + 1).padStart(2, '0')
+
+    const year =
+      date.getFullYear()
+
+    const hours =
+      String(date.getHours()).padStart(2, '0')
+
+    const minutes =
+      String(date.getMinutes()).padStart(2, '0')
+
+    return (
+      `${day}/${month}/${year} ` +
+      `at ${hours}:${minutes}`
+    )
+  }
+
+  /*
+   * Read the Showing filter.
+   */
+  const showing =
+    req.query.showing === 'new'
+      ? 'new'
+      : 'all'
+
+  /*
+   * Read and normalise the Case reference filters.
+   */
+  let selectedCaseReferences =
+    req.query.caseReference || []
+
+  if (!Array.isArray(selectedCaseReferences)) {
+    selectedCaseReferences = [
+      selectedCaseReferences
+    ]
+  }
+
+  selectedCaseReferences =
+    selectedCaseReferences
+      .map(caseReference =>
+        String(caseReference).trim()
+      )
+      .filter(caseReference =>
+        caseReference !== '' &&
+        caseReference !== '_unchecked'
+      )
+
+  /*
+   * Select All case references by default.
+   */
+  if (selectedCaseReferences.length === 0) {
+    selectedCaseReferences = ['all']
+  }
+
+  /*
+   * If All case references is submitted alongside another
+   * option, remove All case references.
+   */
+  if (
+    selectedCaseReferences.includes('all') &&
+    selectedCaseReferences.length > 1
+  ) {
+    selectedCaseReferences =
+      selectedCaseReferences.filter(
+        caseReference =>
+          caseReference !== 'all'
+      )
+  }
+
+  /*
+   * Read the active sort order.
+   */
+  const sort =
+    req.query.sort === 'oldest'
+      ? 'oldest'
+      : 'most-recent'
+
+  /*
+   * Read the current page.
+   */
+  const pageSize = 10
+
+  let currentPage =
+    parseInt(req.query.page || '1', 10)
+
+  if (
+    Number.isNaN(currentPage) ||
+    currentPage < 1
+  ) {
+    currentPage = 1
+  }
+
+  /*
+   * Add Court Cases documents.
+   */
+ courtCases.forEach((courtCase, courtCaseIndex) => {
+  const appearances =
+    courtCase.appearances || []
+
+  appearances.forEach(appearance => {
+    const appearanceDocuments =
+      appearance.documents || []
+
+    appearanceDocuments.forEach(document => {
+      let documentLink =
+        '/public/documents/remand-warrant-joe-bloggs.pdf'
+
+      if (
+        document.documentType ===
+        'Sentencing warrant'
+      ) {
+        documentLink =
+          '/public/documents/sentencing-warrant.pdf'
+      }
+
+      if (
+        document.documentType ===
+        'Prison court register'
+      ) {
+        documentLink =
+          '/public/documents/court-register-city-of-london.pdf'
+      }
+
+      documents.push({
+        ...document,
+
+        source:
+          document.source || 'Court cases',
+
+        documentLink,
+
+        caseReference:
+          appearance['court-case-ref'] ||
+          'Not entered',
+
+        courtName:
+          appearance['court-name'],
+
+        hearingDate:
+          `${appearance['warrant-date-day']}/` +
+          `${appearance['warrant-date-month']}/` +
+          `${appearance['warrant-date-year']}`,
+
+        hearingId:
+          appearance.hearingId,
+
+        courtCaseIndex,
+
+        dateAddedDisplay:
+          formatDocumentDateTime(
+            document.dateAdded
+          ),
+
+        isCurrentlyNew: false
+      })
+    })
+  })
+})
+
+  /*
+   * Add standalone Common Platform documents.
+   */
+  documents.push(
+    ...commonPlatformDocuments.map(
+      document => ({
+        ...document,
+
+        source: 'Common Platform',
+
+        caseReference:
+          document.courtCaseRef ||
+          'Not entered',
+
+        courtName:
+          document.courtName,
+
+        dateAddedDisplay:
+          formatDocumentDateTime(
+            document.dateAdded
+          ),
+
+        /*
+         * Common Platform documents remain New until opened.
+         */
+        isCurrentlyNew:
+          document.isNew === true &&
+          !docsViewed.includes(
+            String(document.documentId)
+          )
+      })
+    )
+  )
+
+  /*
+   * Build the Case reference filter options before filtering.
+   */
+  const hasDocumentsWithoutCaseReference =
+    documents.some(document =>
+      document.caseReference ===
+      'Not entered'
+    )
+
+  const caseReferences = [
+    ...new Set(
+      documents
+        .map(document =>
+          document.caseReference
+        )
+        .filter(caseReference =>
+          caseReference &&
+          caseReference !==
+            'Not entered'
+        )
+    )
+  ].sort((firstReference, secondReference) =>
+    firstReference.localeCompare(
+      secondReference
+    )
+  )
+
+  /*
+   * Apply the New documents filter.
+   */
+  if (showing === 'new') {
+    documents = documents.filter(
+      document =>
+        document.source ===
+          'Common Platform' &&
+        document.isCurrentlyNew === true
+    )
+  }
+
+  /*
+   * Apply the Case reference filters.
+   */
+  const allCaseReferencesSelected =
+    selectedCaseReferences.includes('all')
+
+  if (!allCaseReferencesSelected) {
+    const noCaseReferenceSelected =
+      selectedCaseReferences.includes(
+        'no-case-reference'
+      )
+
+    const specificCaseReferences =
+      selectedCaseReferences.filter(
+        caseReference =>
+          caseReference !==
+          'no-case-reference'
+      )
+
+    documents = documents.filter(
+      document => {
+        const documentCaseReference =
+          String(
+            document.caseReference || ''
+          ).trim()
+
+        const matchesNoCaseReference =
+          noCaseReferenceSelected &&
+          documentCaseReference ===
+            'Not entered'
+
+        const matchesSpecificCaseReference =
+          specificCaseReferences.includes(
+            documentCaseReference
+          )
+
+        return (
+          matchesNoCaseReference ||
+          matchesSpecificCaseReference
+        )
+      }
+    )
+  }
+
+  /*
+   * Sort after filtering and before pagination.
+   */
+  documents.sort((firstDocument, secondDocument) => {
+    const firstDate =
+      new Date(firstDocument.dateAdded)
+
+    const secondDate =
+      new Date(secondDocument.dateAdded)
+
+    if (sort === 'oldest') {
+      return firstDate - secondDate
+    }
+
+    return secondDate - firstDate
+  })
+
+  /*
+   * Calculate pagination after filtering and sorting.
+   */
+  const totalDocuments =
+    documents.length
+
+  const totalPages =
+    Math.max(
+      1,
+      Math.ceil(
+        totalDocuments / pageSize
+      )
+    )
+
+  if (currentPage > totalPages) {
+    currentPage = totalPages
+  }
+
+  const pageStartIndex =
+    (currentPage - 1) * pageSize
+
+  const pageEndIndex =
+    pageStartIndex + pageSize
+
+  const paginatedDocuments =
+    documents.slice(
+      pageStartIndex,
+      pageEndIndex
+    )
+
+  const showingFrom =
+    totalDocuments === 0
+      ? 0
+      : pageStartIndex + 1
+
+  const showingTo =
+    Math.min(
+      pageEndIndex,
+      totalDocuments
+    )
+
+  const documentsPath =
+    `/${prototypeVersion}/documents`
+
+  /*
+   * Build links that preserve sorting and filters.
+   */
+  function buildDocumentsHref({
+    pageValue = currentPage,
+    sortValue = sort,
+    showingValue = showing,
+    caseReferenceValues =
+      selectedCaseReferences
+  } = {}) {
+    const query =
+      new URLSearchParams()
+
+    query.set(
+      'page',
+      String(pageValue)
+    )
+
+    query.set(
+      'sort',
+      sortValue
+    )
+
+    query.set(
+      'showing',
+      showingValue
+    )
+
+    const references =
+      caseReferenceValues.length > 0
+        ? caseReferenceValues
+        : ['all']
+
+    references.forEach(
+      caseReference => {
+        query.append(
+          'caseReference',
+          caseReference
+        )
+      }
+    )
+
+    return (
+      `${documentsPath}?` +
+      query.toString()
+    )
+  }
+
+  /*
+   * Build Clear filters and selected-filter tag links.
+   */
+  const clearFiltersHref =
+    buildDocumentsHref({
+      pageValue: 1,
+      sortValue: 'most-recent',
+      showingValue: 'all',
+      caseReferenceValues: ['all']
+    })
+
+  const selectedShowingFilter = {
+    label:
+      showing === 'new'
+        ? 'New documents'
+        : 'All documents',
+
+    removeHref:
+      buildDocumentsHref({
+        pageValue: 1,
+        showingValue: 'all'
+      })
+  }
+
+  const selectedCaseReferenceFilters = []
+
+  if (
+    selectedCaseReferences.includes('all')
+  ) {
+    selectedCaseReferenceFilters.push({
+      value: 'all',
+      label: 'All case references',
+
+      removeHref:
+        buildDocumentsHref({
+          pageValue: 1,
+          caseReferenceValues: ['all']
+        })
+    })
+  } else {
+    selectedCaseReferences.forEach(
+      caseReference => {
+        const remainingCaseReferences =
+          selectedCaseReferences.filter(
+            selectedReference =>
+              selectedReference !==
+              caseReference
+          )
+
+        selectedCaseReferenceFilters.push({
+          value: caseReference,
+
+          label:
+            caseReference ===
+            'no-case-reference'
+              ? 'No case reference'
+              : caseReference,
+
+          removeHref:
+            buildDocumentsHref({
+              pageValue: 1,
+
+              caseReferenceValues:
+                remainingCaseReferences.length > 0
+                  ? remainingCaseReferences
+                  : ['all']
+            })
+        })
+      }
+    )
+  }
+
+  /*
+   * Build the GOV.UK pagination items.
+   */
+  const pageNumbers = []
+
+  for (
+    let pageNumber = 1;
+    pageNumber <= totalPages;
+    pageNumber++
+  ) {
+    pageNumbers.push({
+      number: pageNumber,
+
+      href:
+        buildDocumentsHref({
+          pageValue: pageNumber
+        }),
+
+      current:
+        pageNumber === currentPage
+    })
+  }
+
+  const previousPageHref =
+    currentPage > 1
+      ? buildDocumentsHref({
+          pageValue:
+            currentPage - 1
+        })
+      : null
+
+  const nextPageHref =
+    currentPage < totalPages
+      ? buildDocumentsHref({
+          pageValue:
+            currentPage + 1
+        })
+      : null
+
+  res.render(
+    `${prototypeVersion}/documents`,
+    {
+      /*
+       * Current page of document results.
+       */
+      documents:
+        paginatedDocuments,
+
+      /*
+       * Result count.
+       */
+      totalDocuments,
+      showingFrom,
+      showingTo,
+
+      /*
+       * Pagination.
+       */
+      currentPage,
+      totalPages,
+      pageNumbers,
+      previousPageHref,
+      nextPageHref,
+
+      /*
+       * Filters.
+       */
+      caseReferences,
+      hasDocumentsWithoutCaseReference,
+      selectedCaseReferences,
+      selectedShowingFilter,
+      selectedCaseReferenceFilters,
+      clearFiltersHref,
+      showing,
+
+      /*
+       * Sorting.
+       */
+      sort
+    }
+  )
+})
+
 router.get("/:prototypeVersion/mark-document-viewed", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   const docId = req.query.docId || "0";
   const documentPaths = {
-    "0": "/public/documents/remand-warrant-joe-bloggs.pdf",
-    "1": "/public/documents/court-register-city-of-london.pdf",
+    "cp-001": "/public/documents/remand-warrant-joe-bloggs.pdf",
+    "cp-002": "/public/documents/court-register-city-of-london.pdf", 
   };
   const fallbackPath = `/${prototypeVersion}/documents.html`;
   const redirectTarget = documentPaths[docId] || fallbackPath;
