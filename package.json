@@ -18,5 +18,8 @@
     "govuk-frontend": "^6.3.0",
     "govuk-prototype-kit": "^13.20.2",
     "jquery": "3.7.1"
+  },
+  "overrides": {
+    "immutable": "^4.3.9"
   }
 }
