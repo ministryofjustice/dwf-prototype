@@ -10,13 +10,13 @@
     "npm": "^11"
   },
   "dependencies": {
-    "@govuk-prototype-kit/common-templates": "^3.0.0",
+    "@govuk-prototype-kit/common-templates": "^3.0.1",
     "@govuk-prototype-kit/step-by-step": "^3.0.0",
     "@ministryofjustice/frontend": "^9.0.0",
-    "@ministryofjustice/hmpps-court-cases-release-dates-design": "^5.2.2",
+    "@ministryofjustice/hmpps-court-cases-release-dates-design": "^5.3.0",
     "accessible-autocomplete": "^3.0.1",
-    "govuk-frontend": "^6.3.0",
-    "govuk-prototype-kit": "^13.20.2",
+    "govuk-frontend": "^6.5.1",
+    "govuk-prototype-kit": "^13.20.5",
     "jquery": "3.7.1"
   },
   "overrides": {
