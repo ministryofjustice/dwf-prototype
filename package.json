@@ -20,6 +20,6 @@
     "jquery": "3.7.1"
   },
   "overrides": {
-    "immutable": "^4.3.9"
+    "immutable": "^5.1.9"
   }
 }
