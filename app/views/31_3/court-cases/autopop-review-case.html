@@ -25,7 +25,7 @@
 If the consecutive status of a sentence is changed, check that any linked cases accurately reflect the correct warrant information.
   </div> -->
 {% endif %}
-        <form class="form" action="/{{data.prototypeVersion}}/persist-appearance?route=edit-appearance" method="post">
+        <form class="form" action="/{{data.prototypeVersion}}/court-cases/add-a-court-appearance/confirmation" method="post">
             <p class="govuk-!-width-two-third">We have been able to identify potential hearings based on the documents received, choose a hearing to add or manually enter it.</p>
             <div class="govuk-summary-card govuk-!-margin-top-6">
                 <div class="govuk-summary-card__title-wrapper">
@@ -493,10 +493,10 @@ If the consecutive status of a sentence is changed, check that any linked cases 
                 </button>
                 {% else %}
                 <button class="govuk-button" data-module="govuk-button">
-                    Confirm changes
+                    Confirm and save hearing
                 </button>
                 {% endif %}
-                <a href="court-case-detail" class="govuk-link govuk-body govuk-link--no-visited-state">Cancel changes</a>
+                <a href="court-case-detail" class="govuk-link govuk-body govuk-link--no-visited-state">Cancel </a>
             </div>
         </form>
     </div>
