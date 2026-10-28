@@ -1,0 +1,570 @@
+{% extends "./template.html" %}
+{% set nav = true %}
+{% set noBackLink = true %}
+{% set documentsActive = true %}
+{% block content %}
+<style>
+  /* Expander container */
+  .filter-expander {
+    border-top: 1px solid #b1b4b6;
+    border-bottom: 1px solid #b1b4b6;
+    margin-bottom: -1px;
+    overflow: hidden;
+  }
+
+  .moj-filter__options .filter-expander:first-of-type {
+    border-top: none;
+  }
+
+  /* Button base */
+  .filter-expander__button {
+    position: relative;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: 0;
+    padding: 14px 0 14px 26px;
+    cursor: pointer;
+    color: #0b0c0c;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.25;
+  }
+
+  .govuk-checkboxes__label {
+    max-width: 100%
+  }
+
+  /* Chevron when expanded (no animation) */
+  .filter-expander__button[aria-expanded="true"] {
+    padding: 14px 0 5px 26px;
+  }
+
+  /* Label inside button */
+  .filter-expander__label {
+    display: inline-block;
+    padding: 0;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+  }
+
+  /* Hover */
+  .filter-expander__button:hover .filter-expander__label {
+    border-bottom: 3px solid #0b0c0c;
+  }
+
+  /* Active (while pressing) */
+  .filter-expander__button:active .filter-expander__label {
+    background: #ffdd00;
+    border-bottom: 3px solid #0b0c0c;
+  }
+
+  /* Focus (keyboard / click) */
+  .filter-expander__button:focus-visible .filter-expander__label {
+    background: #ffdd00;
+    border-bottom: 3px solid #0b0c0c;
+    outline: none;
+    /* optional */
+  }
+
+  /* Chevron */
+  .filter-expander__button::before {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: 25px;
+    width: 10px;
+    height: 10px;
+    border-right: 2.5px solid #0b0c0c;
+    border-bottom: 2.5px solid #0b0c0c;
+    transform-origin: center;
+    transform: translateY(-50%) rotate(45deg);
+    /* down */
+  }
+
+  /* Chevron when expanded (no animation) */
+  .filter-expander__button[aria-expanded="true"]::before {
+    transform: translateY(-50%) rotate(-135deg);
+    /* up */
+    top: 30px;
+  }
+
+  /* Content */
+  .filter-expander__content {
+    padding: 0 0 20px 0;
+  }
+
+  .content-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 20px;
+  }
+
+  @media (max-width: 40.0525em) {
+    .content-top {
+      display: block;
+    }
+
+    .content-top>div+div {
+      margin-top: 10px;
+    }
+  }
+</style>
+
+
+
+<!-- Documents -->
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h2 class="govuk-heading-xl">
+      Documents
+    </h2>
+
+  </div>
+</div>
+<!-- <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <div class="action-button-group">
+            <a href="add-documents/document-type"><button class="govuk-button" data-module="govuk-button">
+                    Add a document
+                </button></a>
+        </div>
+    </div>
+</div> -->
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-quarter">
+    <form class="moj-filter" actionnts <input type="hidden" name="sort" value="{{ sort }}" <input type="hidden"
+      name="page" value="1">
+      <div class="moj-filter__header">
+        <div class="moj-filter__header-title">
+          <h2 class="govuk-heading-m">Filter</h2>
+        </div>
+        <div class="moj-filter__header-action">
+        </div>
+      </div>
+      <div class="moj-filter__content">
+
+     <!-- <div class="moj-filter__selected">
+
+  <div class="moj-filter__selected-heading">
+    <div class="moj-filter__heading-title">
+      <h2 class="govuk-heading-m">
+        Selected filters
+      </h2>
+    </div>
+  </div>
+
+
+  <h3 class="govuk-heading-s govuk-!-margin-bottom-0">
+    Showing
+  </h3>
+
+  <ul class="moj-filter-tags">
+    <li>
+      <a href="{{ selectedShowingFilter.removeHref }}">
+        <span class="govuk-visually-hidden">
+          Remove this filter:
+        </span>
+        {{ selectedShowingFilter.label }}
+      </a>
+    </li>
+  </ul>
+
+  <h3 class="govuk-heading-s govuk-!-margin-bottom-0">
+    Case reference
+  </h3>
+
+  <ul class="moj-filter-tags">
+    {% for selectedFilter in selectedCaseReferenceFilters %}
+      <li>
+        <a href="{{ selectedFilter.removeHref }}">
+          <span class="govuk-visually-hidden">
+            Remove this filter:
+          </span>
+          {{ selectedFilter.label }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+
+</div> -->
+
+
+        <div class="moj-filter__options">
+
+          <button class="govuk-button  govuk-!-margin-bottom-4" type="submit">
+            Apply filters
+          </button>
+
+          <div class="govuk-!-margin-bottom-4">
+            <a href="{{ clearFiltersHref }}">
+              Clear filters
+            </a>
+          </div>
+          <fieldset class="govuk-fieldset">
+
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+              Filter
+            </legend>
+
+            <div class="govuk-radios govuk-radios--small govuk-!-margin-bottom-4" data-module="govuk-radios">
+
+              <div class="govuk-radios__item">
+
+                <input class="govuk-radios__input" id="showing-new" name="showing" type="radio" value="new" {% if
+                  showing=="new" %}checked{% endif %}>
+
+                <label class="govuk-label govuk-radios__label" for="showing-new">
+                  New documents
+                </label>
+
+              </div>
+
+              <div class="govuk-radios__item">
+
+                <input class="govuk-radios__input" id="showing-all" name="showing" type="radio" value="all" {% if
+                  showing=="all" %}checked{% endif %}>
+
+                <label class="govuk-label govuk-radios__label" for="showing-all">
+                  All documents
+                </label>
+
+              </div>
+
+            </div>
+
+          </fieldset>
+          <!-- Type -->
+          <fieldset class="govuk-fieldset">
+
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+              Case reference
+            </legend>
+
+            <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="case-reference-all" name="caseReference" type="checkbox"
+                  value="all" {% if "all" in selectedCaseReferences %}checked{% endif %}>
+
+                <label class="govuk-label govuk-checkboxes__label" for="case-reference-all">
+                  All case references
+                </label>
+              </div>
+
+              {% if hasDocumentsWithoutCaseReference %}
+
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="case-reference-none" name="caseReference" type="checkbox"
+                  value="no-case-reference" {% if "no-case-reference" in selectedCaseReferences %}checked{% endif %}>
+
+                <label class="govuk-label govuk-checkboxes__label" for="case-reference-none">
+                  No case reference
+                </label>
+              </div>
+
+              {% endif %}
+
+              <div class="govuk-checkboxes__divider">
+                or
+              </div>
+
+              {% for caseReference in caseReferences %}
+
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="case-reference-{{ loop.index }}" name="caseReference"
+                  type="checkbox" value="{{ caseReference }}" {% if caseReference in selectedCaseReferences %}checked{%
+                  endif %}>
+
+                <label class="govuk-label govuk-checkboxes__label" for="case-reference-{{ loop.index }}">
+                  {{ caseReference }}
+                </label>
+              </div>
+
+              {% endfor %}
+
+            </div>
+
+          </fieldset>
+
+        </div>
+
+      </div>
+    </form>
+  </div>
+  <div class="govuk-grid-column-three-quarters">
+    <div class="content-top govuk-!-margin-bottom-2">
+      <div>
+        <p class="govuk-body govuk-!-margin-bottom-1">
+          <strong>Sort by:</strong>
+
+          {% if sort == "most-recent" %}
+          <span class="govuk-body">Most recent</span>
+          {% else %}
+          <a
+            href="/{{ data.prototypeVersion }}/documents?sort=most-recent&showing={{ showing }}{% for caseReference in selectedCaseReferences %}&caseReference={{ caseReference | urlencode }}{% endfor %}">
+            Most recent
+          </a>
+          {% endif %}
+
+          <span aria-hidden="true"> | </span>
+
+          {% if sort == "oldest" %}
+          <span class="govuk-body">Oldest</span>
+          {% else %}
+          <a
+            href="/{{ data.prototypeVersion }}/documents?sort=oldest&showing={{ showing }}{% for caseReference in selectedCaseReferences %}&caseReference={{ caseReference | urlencode }}{% endfor %}">
+            Oldest
+          </a>
+          {% endif %}
+        </p>
+      </div>
+
+      <div>
+        <span class="govuk-body">
+          Showing
+          <strong>{{ showingFrom }}</strong>
+          to
+          <strong>{{ showingTo }}</strong>
+          of
+          <strong>{{ totalDocuments }}</strong>
+          documents
+        </span>
+      </div>
+    </div>
+
+    {% set docsViewed = data.tasks.docsViewed or [] %}
+
+    {% if totalDocuments == 0 %}
+
+  <p class="govuk-body govuk-!-margin-top-6">
+    There are no documents to show, change the filters to view other documents.
+  </p>
+
+{% else %}
+
+  
+    <ul class="govuk-list documents-list">
+
+      {% for document in documents %}
+
+      {% set isCommonPlatform = document.source == "Common Platform" %}
+      {% set hasBeenViewed = document.documentId in docsViewed %}
+      {% set isNew = isCommonPlatform and document.isNew and not hasBeenViewed %}
+
+      <li class="documents-list-item">
+
+        <div{% if isNew %} style="border-left: solid 8px #1d70b8; padding-left: 10px" {% endif %}>
+
+          <h3 class="govuk-heading-s document-title govuk-!-margin-bottom-0"
+            style="display: flex; align-items: center;">
+
+            <span>
+
+              {% if isCommonPlatform %}
+
+              <a href="/{{ data.prototypeVersion }}/mark-document-viewed?docId={{ document.documentId }}"
+                target="external">
+                {{ document.documentType }}
+              </a>
+
+              {% else %}
+              <a href="{{ document.documentLink }}" target="external">
+                {{ document.documentType }}
+              </a>
+
+
+              {% endif %}
+
+              <span class="govuk-body-s" style="color: #484949; padding-left: 8px;">
+                PDF 2.2MB
+              </span>
+
+            </span>
+
+            {% if isCommonPlatform %}
+
+            {% if isNew %}
+
+            <strong class="govuk-tag" style="margin-left: auto;">
+              New
+            </strong>
+
+            {% else %}
+            <a class="govuk-body govuk-link" style="margin-left: auto; margin-left: auto; margin-bottom: 0px;"
+              href="/mark-as-new/{{ document.documentId }}">
+              Mark as new
+            </a>
+
+
+
+            {% endif %}
+
+            {% endif %}
+
+          </h3>
+
+          <div class="govuk-grid-row govuk-!-padding-bottom-2 govuk-!-margin-top-2">
+
+            <div class="govuk-grid-column-one-third govuk-!-margin-bottom-0">
+
+              <h3 class="govuk-heading-s govuk-!-margin-bottom-0">
+                Case reference
+              </h3>
+
+              <p class="govuk-body govuk-!-margin-bottom-0">
+
+                {% if document.source == "Court cases" and document.caseReference != "Not entered" %}
+
+                <a
+                  href="/{{ data.prototypeVersion }}/court-cases/court-case-detail?courtCaseIndex={{ document.courtCaseIndex }}">{{
+                  document.caseReference }}</a>
+
+                {% else %}
+
+                {{ document.caseReference }}
+
+                {% endif %}
+
+              </p>
+
+              <h3 class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-margin-top-3">
+                Date added
+              </h3>
+
+              <p class="govuk-body govuk-!-margin-bottom-0">
+                {{ document.dateAddedDisplay }}
+              </p>
+
+            </div>
+
+            <div class="govuk-grid-column-one-third govuk-!-margin-bottom-0">
+
+              <h3 class="govuk-heading-s govuk-!-margin-bottom-0">
+                Court name
+              </h3>
+
+              <p class="govuk-body govuk-!-margin-bottom-0">
+                {{ document.courtName }}
+              </p>
+
+              <h3 class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-margin-top-3">
+                Source
+              </h3>
+
+              <p class="govuk-body govuk-!-margin-bottom-0">
+                {{ document.source }}
+              </p>
+
+            </div>
+
+            <div class="govuk-grid-column-one-third govuk-!-margin-bottom-0">
+
+              <h3 class="govuk-heading-s govuk-!-margin-bottom-0">
+                Hearing date
+              </h3>
+
+              <p class="govuk-body govuk-!-margin-bottom-0">
+                {{ document.hearingDate }}
+              </p>
+
+              <h3 class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-margin-top-3">
+                Hearing type
+              </h3>
+
+              <p class="govuk-body govuk-!-margin-bottom-0">
+                {{ document.hearingType }}
+              </p>
+
+            </div>
+
+          </div>
+
+  </div>
+
+  </li>
+
+  {% endfor %}
+
+  </ul>
+
+{% endif %}
+
+  {% if totalPages > 1 %}
+
+  {{ govukPagination({
+  previous: {
+  href: previousPageHref
+  } if previousPageHref else null,
+
+  next: {
+  href: nextPageHref
+  } if nextPageHref else null,
+
+  items: pageNumbers
+  }) }}
+
+  {% endif %}
+
+</div>
+</div>
+
+<script>
+  document.querySelectorAll('.filter-expander__button').forEach(button => {
+    const content = document.getElementById(button.getAttribute('aria-controls'));
+
+    // Initialize hidden content
+    content.hidden = true;
+
+    button.addEventListener('click', () => {
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+
+      // Toggle expanded state
+      button.setAttribute('aria-expanded', !expanded);
+      content.hidden = expanded;
+
+      // Ensure the button keeps focus after click
+      button.focus();
+    });
+  });
+
+  const allCaseReferences =
+    document.getElementById('case-reference-all')
+
+  const otherCaseReferences =
+    document.querySelectorAll(
+      'input[name="caseReference"]:not(#case-reference-all)'
+    )
+
+  if (allCaseReferences) {
+    allCaseReferences.addEventListener('change', function () {
+      if (allCaseReferences.checked) {
+        otherCaseReferences.forEach(function (checkbox) {
+          checkbox.checked = false
+        })
+      }
+    })
+
+    otherCaseReferences.forEach(function (checkbox) {
+      checkbox.addEventListener('change', function () {
+        if (checkbox.checked) {
+          allCaseReferences.checked = false
+        }
+
+        const anyOtherCaseReferenceSelected =
+          Array.from(otherCaseReferences).some(
+            function (otherCheckbox) {
+              return otherCheckbox.checked
+            }
+          )
+
+        if (!anyOtherCaseReferenceSelected) {
+          allCaseReferences.checked = true
+        }
+      })
+    })
+  }
+</script>
+{% endblock %}

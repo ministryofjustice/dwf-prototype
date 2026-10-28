@@ -1,0 +1,311 @@
+{% extends "../template.html" %}
+{% set showFullNav = false %}
+{% set noBackLink = true %}
+{% block content %}
+{% set activeCourtCases = data.courtCases | activeCase %}
+{% set latestCourtCase = activeCourtCases | last if activeCourtCases and activeCourtCases.length else null %}
+{% set latestAppearance = latestCourtCase.appearances | last if latestCourtCase and latestCourtCase.appearances else null %}
+{% set sentences = latestAppearance.sentences or [] if latestAppearance else [] %}
+
+<a href="calculation-reason" class="govuk-back-link">Back</a>
+
+<div class="govuk-grid-row govuk-!-margin-top-6">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">Check sentence and offence information</h1>
+
+        {% if latestAppearance %}
+            <p class="govuk-body">This calculation will include {{ sentences.length }} sentences.</p>
+
+            <h2 class="govuk-heading-m govuk-!-margin-top-6">
+                {{ latestAppearance['court-case-ref'] }} at {{ latestAppearance['court-name'] }} on {{ latestAppearance['warrant-date-day'] }}/{{ latestAppearance['warrant-date-month'] }}/{{ latestAppearance['warrant-date-year'] }}
+            </h2>
+
+            {% if sentences.length > 0 %}
+                {% for sentence in sentences %}
+                    {% if sentence['status'] != 'inactive' %}
+                        <div class="offence-card sentence-card govuk-!-margin-bottom-4">
+                            <div class="offence-card-offence-details">
+                                {% if sentence['count-number'] %}
+                                    <span class="govuk-body">Count {{ sentence['count-number'] }}</span>
+                                {% endif %}
+                                <h3 class="govuk-heading-s govuk-!-margin-bottom-2">
+                                    {{ sentence['offence-name'] }}
+                                    {% if sentence['terror-related'] == 'Yes' %}
+                                        <br>
+                                        <strong class="govuk-tag govuk-!-margin-top-2">Terror-related</strong>
+                                    {% endif %}
+                                </h3>
+                                <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-0">
+                                    {% if sentence['offence-start-date-day'] %}
+                                        <div class="govuk-summary-list__row">
+                                            <dt class="govuk-summary-list__key">Committed on</dt>
+                                            <dd class="govuk-summary-list__value">
+                                                {{ sentence['offence-start-date-day'] }}/{{ sentence['offence-start-date-month'] }}/{{ sentence['offence-start-date-year'] }}
+                                                {% if sentence['offence-end-date-day'] > 0 %}
+                                                    to {{ sentence['offence-end-date-day'] }}/{{ sentence['offence-end-date-month'] }}/{{ sentence['offence-end-date-year'] }}
+                                                {% endif %}
+                                            </dd>
+                                        </div>
+                                    {% endif %}
+                                    {% if sentence['conviction-date-day'] %}
+                                        <div class="govuk-summary-list__row">
+                                            <dt class="govuk-summary-list__key">Conviction date</dt>
+                                            <dd class="govuk-summary-list__value">{{ sentence['conviction-date-day'] }}/{{ sentence['conviction-date-month'] }}/{{ sentence['conviction-date-year'] }}</dd>
+                                        </div>
+                                    {% endif %}
+                                    {% if sentence['sentence-type'] %}
+                                        <div class="govuk-summary-list__row">
+                                            <dt class="govuk-summary-list__key">Sentence type</dt>
+                                            <dd class="govuk-summary-list__value">{{ sentence['sentence-type'] }}</dd>
+                                        </div>
+                                    {% endif %}
+                                    {% if sentence['sentence-length-years'] or sentence['sentence-length-months'] or sentence['sentence-length-weeks'] or sentence['sentence-length-days'] %}
+                                        <div class="govuk-summary-list__row">
+                                            <dt class="govuk-summary-list__key">Sentence length</dt>
+                                            <dd class="govuk-summary-list__value">
+                                                {{ sentence['sentence-length-years'] or 0 }} years
+                                                {{ sentence['sentence-length-months'] or 0 }} months
+                                                {{ sentence['sentence-length-weeks'] or 0 }} weeks
+                                                {{ sentence['sentence-length-days'] or 0 }} days
+                                            </dd>
+                                        </div>
+                                    {% endif %}
+                                    {% if sentence['fine-amount'] %}
+                                        <div class="govuk-summary-list__row">
+                                            <dt class="govuk-summary-list__key">Fine amount</dt>
+                                            <dd class="govuk-summary-list__value">£{{ sentence['fine-amount'] }}</dd>
+                                        </div>
+                                    {% endif %}
+                                    {% if sentence['tariff-length-years'] or sentence['tariff-length-months'] or sentence['tariff-length-weeks'] or sentence['tariff-length-days'] %}
+                                        <div class="govuk-summary-list__row">
+                                            <dt class="govuk-summary-list__key">Tariff length</dt>
+                                            <dd class="govuk-summary-list__value">
+                                                {{ sentence['tariff-length-years'] or 0 }} years
+                                                {{ sentence['tariff-length-months'] or 0 }} months
+                                                {{ sentence['tariff-length-weeks'] or 0 }} weeks
+                                                {{ sentence['tariff-length-days'] or 0 }} days
+                                            </dd>
+                                        </div>
+                                    {% endif %}
+                                    {% if sentence['term-length-years'] or sentence['term-length-months'] or sentence['term-length-weeks'] or sentence['term-length-days'] %}
+                                        <div class="govuk-summary-list__row">
+                                            <dt class="govuk-summary-list__key">Term length</dt>
+                                            <dd class="govuk-summary-list__value">
+                                                {{ sentence['term-length-years'] or 0 }} years
+                                                {{ sentence['term-length-months'] or 0 }} months
+                                                {{ sentence['term-length-weeks'] or 0 }} weeks
+                                                {{ sentence['term-length-days'] or 0 }} days
+                                            </dd>
+                                        </div>
+                                    {% endif %}
+                                    {% if sentence['overall-sentence-length-individual-years'] or sentence['overall-sentence-length-individual-months'] or sentence['overall-sentence-length-individual-weeks'] or sentence['overall-sentence-length-individual-days'] %}
+                                        <div class="govuk-summary-list__row">
+                                            <dt class="govuk-summary-list__key">Overall sentence length</dt>
+                                            <dd class="govuk-summary-list__value">
+                                                {{ sentence['overall-sentence-length-individual-years'] or 0 }} years
+                                                {{ sentence['overall-sentence-length-individual-months'] or 0 }} months
+                                                {{ sentence['overall-sentence-length-individual-weeks'] or 0 }} weeks
+                                                {{ sentence['overall-sentence-length-individual-days'] or 0 }} days
+                                            </dd>
+                                        </div>
+                                    {% endif %}
+                                    {% if sentence['custodial-term-years'] or sentence['custodial-term-months'] or sentence['custodial-term-weeks'] or sentence['custodial-term-days'] %}
+                                        <div class="govuk-summary-list__row">
+                                            <dt class="govuk-summary-list__key">Custodial term</dt>
+                                            <dd class="govuk-summary-list__value">
+                                                {{ sentence['custodial-term-years'] or 0 }} years
+                                                {{ sentence['custodial-term-months'] or 0 }} months
+                                                {{ sentence['custodial-term-weeks'] or 0 }} weeks
+                                                {{ sentence['custodial-term-days'] or 0 }} days
+                                            </dd>
+                                        </div>
+                                    {% endif %}
+                                    {% if sentence['licence-period-years'] or sentence['licence-period-months'] or sentence['licence-period-weeks'] or sentence['licence-period-days'] %}
+                                        <div class="govuk-summary-list__row">
+                                            <dt class="govuk-summary-list__key">Licence period</dt>
+                                            <dd class="govuk-summary-list__value">
+                                                {{ sentence['licence-period-years'] or 0 }} years
+                                                {{ sentence['licence-period-months'] or 0 }} months
+                                                {{ sentence['licence-period-weeks'] or 0 }} weeks
+                                                {{ sentence['licence-period-days'] or 0 }} days
+                                            </dd>
+                                        </div>
+                                    {% endif %}
+                                    {% if sentence['consecutive-concurrent'] %}
+                                        <div class="govuk-summary-list__row">
+                                            <dt class="govuk-summary-list__key">Consecutive or concurrent</dt>
+                                            <dd class="govuk-summary-list__value">
+                                                {{ sentence['consecutive-concurrent'] }}
+                                                {% if sentence['forthwith'] == 'Yes' %}
+                                                    (forthwith)
+                                                {% endif %}
+                                                {% if sentence['consecutive-concurrent'] == 'Consecutive' and sentence['consecutive-to'] %}
+                                                    to offence {{ sentence['consecutive-to'] }}
+                                                {% endif %}
+                                            </dd>
+                                        </div>
+                                    {% endif %}
+                                </dl>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <p class="govuk-body">No sentence information is available for the selected court case.</p>
+            {% endif %}
+        {% else %}
+            <p class="govuk-body">No active court case information is available for this calculation.</p>
+        {% endif %}
+
+        <h2 class="govuk-heading-l govuk-!-margin-top-6">Adjustments</h2>
+        <div class="govuk-tabs govuk-!-margin-top-4" data-module="govuk-tabs">
+            <ul class="govuk-tabs__list" role="tablist">
+                <li class="govuk-tabs__list-item govuk-tabs__list-item--selected" role="presentation">
+                    <a class="govuk-tabs__tab" href="#summary" data-qa="summary-tab-link" id="tab_summary" role="tab" aria-controls="summary" aria-selected="true" tabindex="0">
+                        Summary
+                    </a>
+                </li>
+                <li class="govuk-tabs__list-item" role="presentation">
+                    <a class="govuk-tabs__tab" href="#detailed" data-qa="detailed-tab-link" id="tab_detailed" role="tab" aria-controls="detailed" aria-selected="false" tabindex="-1">
+                        Detailed
+                    </a>
+                </li>
+            </ul>
+            <div class="govuk-tabs__panel" id="summary" role="tabpanel" aria-labelledby="tab_summary">
+                <h3 class="govuk-heading-m govuk-!-margin-bottom-2">Deductions</h3>
+                <table class="govuk-table">
+                    <thead class="govuk-table__head">
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header" scope="col">Adjustment</th>
+                            <th class="govuk-table__header" scope="col">days</th>
+                        </tr>
+                    </thead>
+                    <tbody class="govuk-table__body">
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell">Recall remand</td>
+                            <td class="govuk-table__cell">0</td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell">Remand</td>
+                            <td class="govuk-table__cell">0</td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell">Recall tagged bail</td>
+                            <td class="govuk-table__cell">0</td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell">Tagged bail</td>
+                            <td class="govuk-table__cell">0</td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell">Restore additional days awarded (RADA)</td>
+                            <td class="govuk-table__cell">0</td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell">Unused remand</td>
+                            <td class="govuk-table__cell">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 class="govuk-heading-m govuk-!-margin-bottom-2 govuk-!-margin-top-8">Additions</h3>
+                <table class="govuk-table">
+                    <thead class="govuk-table__head">
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header" scope="col">Adjustment</th>
+                            <th class="govuk-table__header" scope="col">days</th>
+                        </tr>
+                    </thead>
+                    <tbody class="govuk-table__body">
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell">Additional days awarded (ADA)</td>
+                            <td class="govuk-table__cell">0</td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell">Unlawfully at large (UAL)</td>
+                            <td class="govuk-table__cell">
+                                {% if daysBetween != null %}
+                                    {{ daysBetween }}
+                                {% else %}
+                                    0
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="detailed" role="tabpanel" aria-labelledby="tab_detailed">
+                <h3 class="govuk-heading-m govuk-!-margin-bottom-6">Additions</h3>
+                <h4 class="govuk-heading-s govuk-!-margin-bottom-2">UAL (Unlawfully at large)</h4>
+                <table class="govuk-table govuk-!-margin-bottom-8">
+                    <thead class="govuk-table__head">
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header" scope="col">Dates</th>
+                            <th class="govuk-table__header" scope="col">days</th>
+                        </tr>
+                    </thead>
+                    <tbody class="govuk-table__body">
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell">From {{ data['revocation-date-day'] }}/{{ data['revocation-date-month'] }}/{{ data['revocation-date-year'] }} to {{ data['arrest-date-day'] }}/{{ data['arrest-date-month'] }}/{{ data['arrest-date-year'] }}</td>
+                            <td class="govuk-table__cell">1</td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell govuk-!-font-weight-bold govuk-!-text-align-right">Total days</td>
+                            <td class="govuk-table__cell">1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="govuk-inset-text govuk-!-margin-top-6">
+            If you think some information is wrong, you can edit it in NOMIS and <a onclick="location.reload();" href="javascript:void(0);">reload this page</a>.
+        </div>
+
+        <h2 class="govuk-heading-m govuk-!-margin-top-7">Now calculate release dates</h2>
+
+        <div class="govuk-checkboxes govuk-checkboxes--small govuk-!-margin-top-2" data-module="govuk-checkboxes">
+            <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="organisation" name="organisation" type="checkbox" value="hmrc">
+                <label class="govuk-label govuk-checkboxes__label" for="organisation">
+                    Include an Early release scheme eligibility date (ERSED) in this calculation
+                </label>
+                <div class="govuk-hint govuk-checkboxes__hint">Not applicable for terror or terror-related offences</div>
+            </div>
+        </div>
+
+        <div class="govuk-!-margin-top-4">
+            <p class="govuk-body">The release dates will not be saved in NOMIS until you have reviewed the calculation.</p>
+
+            <div class="govuk-button-group">
+                {% if data['toShow'] == 'ualAdded' %}
+                    <form method="post" action="calculation-summary?toShow=calc2Complete">
+                        <button type="submit" data-prevent-double-click="true" class="govuk-button" data-module="govuk-button" data-qa="submitReason">
+                            Calculate release dates
+                        </button>
+                    </form>
+                {% elif data['toDo'] == 'recallsUnsupportedSentences' %}
+                    <form method="post" action="calculation-summary?toShow=unsupportedCalcComplete">
+                        <button type="submit" data-prevent-double-click="true" class="govuk-button" data-module="govuk-button" data-qa="submitReason">
+                            Calculate release dates
+                        </button>
+                    </form>
+                {% else %}
+                    <form method="post" action="calculation-summary?toShow=calcComplete">
+                        <button type="submit" data-prevent-double-click="true" class="govuk-button" data-module="govuk-button" data-qa="submitReason">
+                            Calculate release dates
+                        </button>
+                    </form>
+                {% endif %}
+
+                <form method="post" action="cancel">
+                    <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+                        Cancel
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

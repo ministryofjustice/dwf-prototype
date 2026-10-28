@@ -1,0 +1,723 @@
+{% extends "../template.html" %}
+{% set backLinkTarget = '/' + data.prototypeVersion + '/court-cases/' %}
+{% block content %}
+<!-- Court cases detailed view --> 
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                <h1 class="govuk-heading-l govuk-!-margin-top-4">
+
+                    <span class="govuk-caption-l">Add a hearing</span>
+                    Select the hearing you want to add
+                </h1>
+
+                    <p class="govuk-body">We have been able to identify potential hearings based on the documents received, choose a hearing to add or manually enter it.</p>
+            </div>
+        </div>
+
+        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    
+        <div class="govuk-grid-row govuk-!-margin-top-6">
+            <div class="govuk-grid-column-three-quarters">
+                <h2 class="govuk-heading-m">63GD1757930 at Manchester MC
+                    on 18/10/2024</h2>
+            </div>
+            <div class="govuk-grid-column-one-quarter">
+                <ul class="offence-card-actions-list">
+                    <li class="offence-card-action-link"> <a
+                            href="#">Select this hearing</a> 
+                        </li> 
+                    </li>
+                </ul>
+            </div>  
+        </div> 
+        <div class="govuk-grid-row govuk-!-padding-bottom-2 govuk-!-margin-top-2">
+            <div class="govuk-grid-column-one-third">
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Case reference</h3>
+                <p class="govuk-body govuk-!-margin-bottom-3">63GD1757930</p>
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Warrant date</h3>
+                <p class="govuk-body govuk-!-margin-bottom-3">18/10/2024</p> 
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Conviction date</h3>
+                <p class="govuk-body govuk-!-margin-bottom-2">18/10/2024</p> 
+            </div>
+            <div class="govuk-grid-column-one-third">
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Location</h3>
+                <p class="govuk-body govuk-!-margin-bottom-2">Manchester MC</p>
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Outcome</h3> 
+                <p class="govuk-body govuk-!-margin-bottom-3">Imprisonment</p>
+            </div>
+            <div class="govuk-grid-one-third">
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Next hearing</h3> 
+                <p class="govuk-body govuk-!-margin-bottom-3">No future appearance scheduled</p> 
+
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Court documents</h3>
+                <ul class="govuk-list govuk-list--no--bullet govuk-!-margin-bottom-3">
+                    <li><a href="{{ asset_path }}documents/order-of-imprisonment-court-case-2.pdf"
+                            class="govuk-link--no-visited-state" target="_blank"><svg
+                                class="moj-timeline__document-icon" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 16 20" width="20" height="16">
+                                <path
+                                    d="M9 7V1.5L14.5 7H9zM2 0C.9 0 0 .9 0 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6l-6-6H2z">
+                                </path>
+                            </svg>Sentencing
+                            warrant</a></li> 
+                    <li><a href="{{ asset_path }}documents/order-of-imprisonment-court-case-2.pdf"
+                            class="govuk-link--no-visited-state" target="_blank"><svg
+                                class="moj-timeline__document-icon" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 16 20" width="20" height="16">
+                                <path
+                                    d="M9 7V1.5L14.5 7H9zM2 0C.9 0 0 .9 0 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6l-6-6H2z">
+                                </path>
+                            </svg>Prison court register</a></li> 
+                </ul>
+            </div>
+            <div class="govuk-grid-column-full govuk-!-margin-top-4"> 
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Offences</h3>
+                <details class="govuk-details filter white govuk-!-margin-bottom-0 show-toggle">
+                    <summary class="govuk-details__summary">
+                        <span class="govuk-details__summary-text">
+                            offences (3)
+                        </span>
+                    </summary>
+                    <div class="govuk-details__text"> 
+
+
+                        <div class="offence-card sentence-card govuk-!-width-two-thirds">
+                            <div class="offence-card-offence-details">
+
+                               <span class="govuk-body">Count 1</span>
+                                <h4 class="govuk-heading-s">CL77001 - Use violence to secure entry to premises</h4>
+                             
+                                </h4>
+                                <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Commited on
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                           	05/10/2024
+                                        </dd>
+                                    </div>
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Outcome
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            Imprisonment
+                                        </dd>
+                                    </div> 
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Sentence type
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            SDS (Standard determinate sentence) 
+                                        </dd>
+                                    </div> 
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Sentence length
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            1 year 0 months 0 weeks 0 days
+                                        </dd>
+                                    </div>      
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Consecutive or concurrent
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                           Forthwith
+                                        </dd>
+                                    </div>
+                                </dl>
+                            </div>
+                        </div> 
+
+
+                        <div class="offence-card  sentence-card govuk-!-width-two-thirds">
+                            <div class="offence-card-offence-details">
+
+                               <span class="govuk-body">Count 2</span>
+                                <h4 class="govuk-heading-s">TH68023 - Robbery</h4>
+                             
+                                </h4>
+                                <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Commited on
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                           	05/10/2024
+                                        </dd>
+                                    </div>
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Outcome
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            Imprisonment
+                                        </dd>
+                                    </div> 
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Sentence type
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            SDS (Standard determinate sentence) 
+                                        </dd>
+                                    </div> 
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Sentence length
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            1 year 0 months 0 weeks 0 days
+                                        </dd>
+                                    </div>      
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Consecutive or concurrent
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                           Concurrent to count 1
+                                        </dd>
+                                    </div>
+                                </dl>
+                            </div>
+                        </div> 
+                        
+
+                        <div class="offence-card sentence-card govuk-!-width-two-thirds">
+                            <div class="offence-card-offence-details">
+
+                               <span class="govuk-body">Count 3</span>
+                                <h4 class="govuk-heading-s">TH68023 - Robbery</h4>
+                             
+                                </h4>
+                                <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Commited on
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                           	05/10/2024
+                                        </dd>
+                                    </div>
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Outcome
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            Imprisonment
+                                        </dd>
+                                    </div> 
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Sentence type
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            SDS (Standard determinate sentence) 
+                                        </dd>
+                                    </div> 
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Sentence length
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            1 year 0 months 0 weeks 0 days
+                                        </dd>
+                                    </div>      
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Consecutive or concurrent
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                           Concurrent to count 1
+                                        </dd>
+                                    </div>
+                                </dl>
+                            </div>
+                        </div> 
+                        
+
+                </details>
+                
+            </div>
+        </div>
+        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    
+        <div class="govuk-grid-row govuk-!-margin-top-6">
+            <div class="govuk-grid-column-three-quarters">
+                <h2 class="govuk-heading-m">T20250102 at Leeds Crown Court on 18/10/2024</h2>
+            </div>
+            <div class="govuk-grid-column-one-quarter">
+                <ul class="offence-card-actions-list">
+                    <li class="offence-card-action-link"> <a
+                            href="#">Select this hearing</a> 
+                        </li> 
+                    </li>
+                </ul>
+            </div>  
+        </div> 
+        <div class="govuk-grid-row govuk-!-padding-bottom-2 govuk-!-margin-top-2">
+            <div class="govuk-grid-column-one-third">
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Case reference</h3>
+                <p class="govuk-body govuk-!-margin-bottom-3">T20250102</p>
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Warrant date</h3>
+                <p class="govuk-body govuk-!-margin-bottom-3">18/10/2024</p> 
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Conviction date</h3>
+                <p class="govuk-body govuk-!-margin-bottom-2">18/10/2024</p> 
+            </div>
+            <div class="govuk-grid-column-one-third">
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Location</h3>
+                <p class="govuk-body govuk-!-margin-bottom-2">Leeds Crown Court</p>
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Outcome</h3> 
+                <p class="govuk-body govuk-!-margin-bottom-3">Imprisonment</p>
+            </div>
+            <div class="govuk-grid-one-third">
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Next hearing</h3> 
+                <p class="govuk-body govuk-!-margin-bottom-3">No future appearance scheduled</p> 
+
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Court documents</h3>
+                <ul class="govuk-list govuk-list--no--bullet govuk-!-margin-bottom-3">
+                    <li><a href="{{ asset_path }}documents/order-of-imprisonment-court-case-2.pdf"
+                            class="govuk-link--no-visited-state" target="_blank"><svg
+                                class="moj-timeline__document-icon" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 16 20" width="20" height="16">
+                                <path
+                                    d="M9 7V1.5L14.5 7H9zM2 0C.9 0 0 .9 0 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6l-6-6H2z">
+                                </path>
+                            </svg>Sentencing
+                            warrant</a></li> 
+                    <li><a href="{{ asset_path }}documents/order-of-imprisonment-court-case-2.pdf"
+                            class="govuk-link--no-visited-state" target="_blank"><svg
+                                class="moj-timeline__document-icon" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 16 20" width="20" height="16">
+                                <path
+                                    d="M9 7V1.5L14.5 7H9zM2 0C.9 0 0 .9 0 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6l-6-6H2z">
+                                </path>
+                            </svg>Prison court register</a></li> 
+                </ul>
+            </div>
+            <div class="govuk-grid-column-full govuk-!-margin-top-4"> 
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Offences</h3>
+                <details class="govuk-details filter white govuk-!-margin-bottom-0 show-toggle">
+                    <summary class="govuk-details__summary">
+                        <span class="govuk-details__summary-text">
+                            offences (3)
+                        </span>
+                    </summary>
+                    <div class="govuk-details__text"> 
+
+
+                        <div class="offence-card sentence-card govuk-!-width-two-thirds">
+                            <div class="offence-card-offence-details">
+
+                               <span class="govuk-body">Count 1</span>
+                                <h4 class="govuk-heading-s">CL77001 - Use violence to secure entry to premises</h4>
+                             
+                                </h4>
+                                <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Commited on
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                           	05/10/2024
+                                        </dd>
+                                    </div>
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Outcome
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            Imprisonment
+                                        </dd>
+                                    </div> 
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Sentence type
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            SDS (Standard determinate sentence) 
+                                        </dd>
+                                    </div> 
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Sentence length
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            1 year 0 months 0 weeks 0 days
+                                        </dd>
+                                    </div>      
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Consecutive or concurrent
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                           Forthwith
+                                        </dd>
+                                    </div>
+                                </dl>
+                            </div>
+                        </div> 
+
+
+                        <div class="offence-card  sentence-card govuk-!-width-two-thirds">
+                            <div class="offence-card-offence-details">
+
+                               <span class="govuk-body">Count 2</span>
+                                <h4 class="govuk-heading-s">TH68023 - Robbery</h4>
+                             
+                                </h4>
+                                <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Commited on
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                           	05/10/2024
+                                        </dd>
+                                    </div>
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Outcome
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            Imprisonment
+                                        </dd>
+                                    </div> 
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Sentence type
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            SDS (Standard determinate sentence) 
+                                        </dd>
+                                    </div> 
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Sentence length
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            1 year 0 months 0 weeks 0 days
+                                        </dd>
+                                    </div>      
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Consecutive or concurrent
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                           Concurrent to count 1
+                                        </dd>
+                                    </div>
+                                </dl>
+                            </div>
+                        </div> 
+                        
+
+                        <div class="offence-card sentence-card govuk-!-width-two-thirds">
+                            <div class="offence-card-offence-details">
+
+                               <span class="govuk-body">Count 3</span>
+                                <h4 class="govuk-heading-s">TH68023 - Robbery</h4>
+                             
+                                </h4>
+                                <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Commited on
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                           	05/10/2024
+                                        </dd>
+                                    </div>
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Outcome
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            Imprisonment
+                                        </dd>
+                                    </div> 
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Sentence type
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            SDS (Standard determinate sentence) 
+                                        </dd>
+                                    </div> 
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Sentence length
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            1 year 0 months 0 weeks 0 days
+                                        </dd>
+                                    </div>      
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Consecutive or concurrent
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                           Concurrent to count 1
+                                        </dd>
+                                    </div>
+                                </dl>
+                            </div>
+                        </div> 
+                        
+
+                </details>
+                
+            </div>
+        </div>
+        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    
+        <!-- <div class="govuk-grid-row govuk-!-margin-top-6">
+            <div class="govuk-grid-column-three-quarters">
+                <h2 class="govuk-heading-m">T20250103 at Sheffield Crown Court
+                    on 18/10/2024</h2>
+            </div>
+            <div class="govuk-grid-column-one-quarter">
+                <ul class="offence-card-actions-list">
+                    <li class="offence-card-action-link"> <a
+                            href="#">Select this hearing</a> 
+                        </li> 
+                    </li>
+                </ul>
+            </div>  
+        </div>  -->
+        <!-- <div class="govuk-grid-row govuk-!-padding-bottom-2 govuk-!-margin-top-2">
+            <div class="govuk-grid-column-one-third">
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Case reference</h3>
+                <p class="govuk-body govuk-!-margin-bottom-3">T20250103</p>
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Warrant date</h3>
+                <p class="govuk-body govuk-!-margin-bottom-3">18/10/2024</p> 
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Conviction date</h3>
+                <p class="govuk-body govuk-!-margin-bottom-2">18/10/2024</p> 
+            </div>
+            <div class="govuk-grid-column-one-third">
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Location</h3>
+                <p class="govuk-body govuk-!-margin-bottom-2">Sheffield Crown Court</p>
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Outcome</h3> 
+                <p class="govuk-body govuk-!-margin-bottom-3">Imprisonment</p>
+            </div>
+            <div class="govuk-grid-one-third">
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Next hearing</h3> 
+                <p class="govuk-body govuk-!-margin-bottom-3">No future appearance scheduled</p> 
+
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Court documents</h3>
+                <ul class="govuk-list govuk-list--no--bullet govuk-!-margin-bottom-3">
+                    <li><a href="{{ asset_path }}documents/order-of-imprisonment-court-case-2.pdf"
+                            class="govuk-link--no-visited-state" target="_blank"><svg
+                                class="moj-timeline__document-icon" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 16 20" width="20" height="16">
+                                <path
+                                    d="M9 7V1.5L14.5 7H9zM2 0C.9 0 0 .9 0 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6l-6-6H2z">
+                                </path>
+                            </svg>Sentencing
+                            warrant</a></li> 
+                    <li><a href="{{ asset_path }}documents/order-of-imprisonment-court-case-2.pdf"
+                            class="govuk-link--no-visited-state" target="_blank"><svg
+                                class="moj-timeline__document-icon" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 16 20" width="20" height="16">
+                                <path
+                                    d="M9 7V1.5L14.5 7H9zM2 0C.9 0 0 .9 0 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6l-6-6H2z">
+                                </path>
+                            </svg>Prison court register</a></li> 
+                </ul>
+            </div>
+            <div class="govuk-grid-column-full govuk-!-margin-top-4"> 
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Offences</h3>
+                <details class="govuk-details filter white govuk-!-margin-bottom-0 show-toggle">
+                    <summary class="govuk-details__summary">
+                        <span class="govuk-details__summary-text">
+                            offences (3)
+                        </span>
+                    </summary>
+                    <div class="govuk-details__text"> 
+
+
+                        <div class="offence-card sentence-card govuk-!-width-two-thirds">
+                            <div class="offence-card-offence-details">
+
+                               <span class="govuk-body">Count 1</span>
+                                <h4 class="govuk-heading-s">CL77001 - Use violence to secure entry to premises</h4>
+                             
+                                </h4>
+                                <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Commited on
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                           	05/10/2024
+                                        </dd>
+                                    </div>
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Outcome
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            Imprisonment
+                                        </dd>
+                                    </div> 
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Sentence type
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            SDS (Standard determinate sentence) 
+                                        </dd>
+                                    </div> 
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Sentence length
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            1 year 0 months 0 weeks 0 days
+                                        </dd>
+                                    </div>      
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Consecutive or concurrent
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                           Forthwith
+                                        </dd>
+                                    </div>
+                                </dl>
+                            </div>
+                        </div> 
+
+
+                        <div class="offence-card  sentence-card govuk-!-width-two-thirds">
+                            <div class="offence-card-offence-details">
+
+                               <span class="govuk-body">Count 2</span>
+                                <h4 class="govuk-heading-s">TH68023 - Robbery</h4>
+                             
+                                </h4>
+                                <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Commited on
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                           	05/10/2024
+                                        </dd>
+                                    </div>
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Outcome
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            Imprisonment
+                                        </dd>
+                                    </div> 
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Sentence type
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            SDS (Standard determinate sentence) 
+                                        </dd>
+                                    </div> 
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Sentence length
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            1 year 0 months 0 weeks 0 days
+                                        </dd>
+                                    </div>      
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Consecutive or concurrent
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                           Concurrent to count 1
+                                        </dd>
+                                    </div>
+                                </dl>
+                            </div>
+                        </div> 
+                        
+
+                        <div class="offence-card sentence-card govuk-!-width-two-thirds">
+                            <div class="offence-card-offence-details">
+
+                               <span class="govuk-body">Count 3</span>
+                                <h4 class="govuk-heading-s">TH68023 - Robbery</h4>
+                             
+                                </h4>
+                                <dl class="govuk-summary-list govuk-summary-list--no-border">
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Commited on
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                           	05/10/2024
+                                        </dd>
+                                    </div>
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Outcome
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            Imprisonment
+                                        </dd>
+                                    </div> 
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Sentence type
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            SDS (Standard determinate sentence) 
+                                        </dd>
+                                    </div> 
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Sentence length
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            1 year 0 months 0 weeks 0 days
+                                        </dd>
+                                    </div>      
+                                    <div class="govuk-summary-list__row">
+                                        <dt class="govuk-summary-list__key">
+                                            Consecutive or concurrent
+                                        </dt>
+                                        <dd class="govuk-summary-list__value">
+                                           Concurrent to count 1
+                                        </dd>
+                                    </div>
+                                </dl>
+                            </div>
+                        </div> 
+                        
+
+                </details>
+                
+            </div>
+        </div> -->
+        <!-- <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible"> -->
+
+
+        <p class="govuk-body">or</p>
+        <a class="govuk-body govuk-link" href="#">Continue to manually enter a hearing</a>
+
+
+        <div class="govuk-button-group govuk-!-margin-top-6">
+            <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button ">
+                Cancel
+            </button>
+        </div>
+
+
+    </div>
+    {% endblock %}

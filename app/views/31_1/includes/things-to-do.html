@@ -1,0 +1,41 @@
+{% set taskCount = (0 if data.tasks.remandWarrantViewed else 1) %}
+<h3 class="govuk-heading-m" data-task-heading>Things to do ({{ taskCount }})</h3>
+
+{% if not data.tasks.remandWarrantViewed %}
+<article class="moj-ticket-panel" data-task-panel>
+  <section class="moj-ticket-panel__content moj-ticket-panel__content--blue"
+    style="border-left: 8px solid #b7592a; margin-bottom: 10px;">
+    <a class="govuk-link govuk-body govuk-!-font-weight-bold"
+      href="/{{data.prototypeVersion}}/court-cases/review-documents">
+      Review and add new warrant information
+    </a>
+    <p class="govuk-body govuk-!-margin-top-3">
+      A new sentencing warrant for <b>63GD1757930</b> needs to be reviewed.
+    </p>
+  </section>
+</article>
+
+<article class="moj-ticket-panel" data-task-panel>
+  <section class="moj-ticket-panel__content moj-ticket-panel__content--blue"
+    style="border-left: 8px solid #b7592a; margin-bottom: 10px;">
+    <a class="govuk-link govuk-body govuk-!-font-weight-bold"
+      href="/{{data.prototypeVersion}}/court-cases/#">
+      Review and add new warrant information
+    </a>
+    <p class="govuk-body govuk-!-margin-top-3">
+      A new sentencing warrant for <b>T20250102</b> needs to be reviewed.
+    </p>
+  </section>
+</article>
+{% endif %}
+
+
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+<article class="moj-ticket-panel" id="calculation-task-panel" data-task-panel aria-label="Sub navigation 2" style="display: none;">
+  <section class="moj-ticket-panel__content moj-ticket-panel__content--blue" style="border-left: 8px solid transparent; border-left-color: #b7592a; margin-bottom: 10px;" aria-label="Section 2">
+    <a class="govuk-link govuk-body govuk-!-font-weight-bold" href="/{{data.prototypeVersion}}/calculate-release-dates/calculation-reason">Perform a calculation</a>
+  </section>
+</article>
+
+<p class="govuk-body" data-task-empty-state style="display: none;">There are no tasks to complete.</p>

@@ -973,6 +973,20 @@ router.get("/:prototypeVersion/update-appearance", function (req, res) {
   res.redirect(`/${prototypeVersion}/court-cases/appearance-detail`);
 });
 
+router.get('/:prototypeVersion/autopop-hearing-review', function(req, res) {
+  const prototypeVersion = req.params.prototypeVersion
+
+  req.session.data.courtCaseIndex = 1
+  req.session.data.appearanceIndex = 0
+
+  req.session.data.appearance =
+    req.session.data.courtCases[1].appearances[0]
+
+  return res.redirect(
+    `/${prototypeVersion}/court-cases/autopop-review-case`
+  )
+})
+
 router.get("/:prototypeVersion/delete-court-case", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   const index = req.query.index;
@@ -980,12 +994,12 @@ router.get("/:prototypeVersion/delete-court-case", function (req, res) {
   res.redirect(`/${prototypeVersion}/court-cases/court-cases-standalone`);
 });
 
-// v27 & 30 Quick start entry point with auto-populated data
+// v27 & 30 and 31_1 Quick start entry point with auto-populated data
 router.get("/:prototypeVersion/quick-start-entry", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
   
- // Only allow v27 and v30
-if (prototypeVersion !== "27" && prototypeVersion !== "30") {
+ // Only allow v27 and v30 and v31_1
+if (prototypeVersion !== "27" && prototypeVersion !== "30" && prototypeVersion !== "31_1" && prototypeVersion !== "31_2" && prototypeVersion !== "31_3") {
   return res.redirect(`/${prototypeVersion}/court-cases/confirm-exit`);
 }
   // Clear existing session data
@@ -1578,9 +1592,9 @@ router.post("/:prototypeVersion/persist-appearance", function (req, res) {
       `/${prototypeVersion}/court-cases/add-a-court-appearance/check-answers`
     );
   } else if (route == "add-a-court-case") {
-    // Mark remand warrant task as viewed for v27
+    // Mark remand warrant task as viewed for v27, 30 and 31_1
    if (
-  (prototypeVersion === "27" || prototypeVersion === "30") &&
+  (prototypeVersion === "27" || prototypeVersion === "30" || prototypeVersion === "31_1" || prototypeVersion === "31_2" || prototypeVersion === "31_3") &&
   req.session.data.tasks
 ) {
   req.session.data.tasks.remandWarrantViewed = true;
@@ -1636,7 +1650,7 @@ router.post("/:prototypeVersion/persist-appearance", function (req, res) {
     if (req.query.appearanceComplete == "true") {
       // Mark remand warrant task as viewed for v27 if in quick-start flow
      if (
-  ["27", "30"].includes(prototypeVersion) &&
+  ["27", "30", "31_1", "31_2", "31_3"].includes(prototypeVersion) &&
   req.session.data.tasks &&
   req.session.data.entryMode === "api-pre-populated"
 ) {
@@ -4037,12 +4051,12 @@ router.get("/:prototypeVersion/launch-prototype", function (req, res) {
     req.session.data = JSON.parse(JSON.stringify(sessionData));
     req.session.data.prototypeVersion = prototypeVersion;
     
-// Initialize task tracking for v27 and v30
-if (["27", "30"].includes(prototypeVersion)) {
+// Initialize task tracking for v27 and v30 and v31_1
+if (["27", "30", "31_1", "31_2", "31_3"].includes(prototypeVersion)) {
   req.session.data.taskStateSeed = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
   req.session.data.tasks = {
     remandWarrantViewed: false,
-    newDocumentsCount: 2, // Currently 2 documents have "New" tag
+    newDocumentsCount: 4, // Currently 2 documents have "New" tag
     docsViewed: []
   };
 }
@@ -4050,7 +4064,7 @@ if (["27", "30"].includes(prototypeVersion)) {
     console.log(
       `Launching prototype version: ${prototypeVersion} with dataset: ${dataset}`
     );
-    if (prototypeVersion === "27" || prototypeVersion === "30") {
+    if (prototypeVersion === "27" || prototypeVersion === "30" || prototypeVersion === "31_1" || prototypeVersion === "31_2"|| prototypeVersion === "31_3") {
       res.redirect(`/${prototypeVersion}/overview.html`);
     } else if (prototypeVersion === "28") {
       const destination = req.query.destination || 'overview';
@@ -4672,15 +4686,15 @@ router.get("/:prototypeVersion/mark-document-viewed", function (req, res) {
   const fallbackPath = `/${prototypeVersion}/documents.html`;
   const redirectTarget = documentPaths[docId] || fallbackPath;
   
-// Only for v27 and v30
-if (prototypeVersion !== "27" && prototypeVersion !== "30") {
+// Only for v27 and v30 and v31_1
+if (prototypeVersion !== "27" && prototypeVersion !== "30" && prototypeVersion !== "31_1" && prototypeVersion !== "31_2" && prototypeVersion !== "31_3") {
   return res.redirect(fallbackPath);
 }
 
   if (!req.session.data.tasks) {
     req.session.data.tasks = {
       remandWarrantViewed: false,
-      newDocumentsCount: 0,
+      newDocumentsCount: 4,
       docsViewed: []
     };
   }
@@ -4708,7 +4722,7 @@ router.get('/mark-as-new/:id', (req, res) => {
   if (!req.session.data.tasks) {
     req.session.data.tasks = {
       remandWarrantViewed: false,
-      newDocumentsCount: 0,
+      newDocumentsCount: 4,
       docsViewed: []
     };
   }

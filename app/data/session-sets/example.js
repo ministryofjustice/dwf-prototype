@@ -142,6 +142,8 @@ module.exports = {
         {
             "hearingId": "hearing-003",
 
+            "hidden": true,
+
             "court-case-ref": "T20250103",
             "warrant-type": "Sentencing",
             "overall-case-outcome": "Imprisonment",
@@ -786,6 +788,7 @@ module.exports = {
                 }
             ]
         }
+        
     ]
 },
        {
@@ -1590,12 +1593,12 @@ module.exports = {
     commonPlatformDocuments: [
   {
     documentId: "cp-001",
-    documentType: "Remand warrant",
-    hearingType: "First hearing",
+    documentType: "Sentencing warrant",
+    hearingType: "Sentencing",
     source: "Common Platform",
 
-    courtCaseRef: "CP20260908",
-    courtName: "Liverpool Magistrates' Court",
+    courtCaseRef: "63GD1757930",
+    courtName: "Manchester Crown Court",
 
     hearingDate: "08/09/2026",
     dateAdded: "2026-09-08T09:15",
@@ -1608,11 +1611,44 @@ module.exports = {
   {
     documentId: "cp-002",
     documentType: "Prison court register",
-    hearingType: "First hearing",
+    hearingType: "Sentencing",
     source: "Common Platform",
 
-    courtCaseRef: "CP20260908",
-    courtName: "Liverpool Magistrates' Court",
+    courtCaseRef: "63GD1757930",
+    courtName: "Manchester Crown Court",
+
+    hearingDate: "08/09/2026",
+    dateAdded: "2026-09-08T09:15",
+
+    isNew: true,
+
+    documentLink: "/public/documents/court-register-city-of-london.pdf"
+  },
+  {
+    documentId: "cp-003",
+    documentType: "Sentencing warrant",
+    hearingType: "Sentencing",
+    source: "Common Platform",
+
+    courtCaseRef: "T20250102",
+    courtName: "Leeds Crown Court ",
+
+    hearingDate: "08/09/2026",
+    dateAdded: "2026-09-08T09:15",
+
+    isNew: true,
+
+    documentLink: "/public/documents/remand-warrant-joe-bloggs.pdf"
+  },
+
+  {
+    documentId: "cp-004",
+    documentType: "Prison court register",
+    hearingType: "Sentencing",
+    source: "Common Platform",
+
+    courtCaseRef: "T20250102",
+    courtName: "Leeds Crown Court",
 
     hearingDate: "08/09/2026",
     dateAdded: "2026-09-08T09:15",

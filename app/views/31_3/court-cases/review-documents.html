@@ -1,0 +1,90 @@
+{% extends "../template.html" %}
+{% set showFullNav = false %}
+{% set noBackLink = true %}
+{% set isPreloadedRemandJourney = data.entryMode == "api-pre-populated" and data.appearance['warrant-type'] === 'Remand' %}
+{% set preloadedDocumentCount = 2 if isPreloadedRemandJourney else (data.tasks.newDocumentsCount or 0) %}
+{% block content %}
+<div class="govuk-grid-row govuk-!-margin-top-8">
+    <div class="govuk-grid-column-two-thirds">
+
+       <form action="/{{data.prototypeVersion}}/autopop-hearing-review" method="post">
+            <div class="govuk-form-group">
+                <h1 class="govuk-heading-l">
+                    Review new documents and choose how you want to add information
+                </h1>
+              
+                <p class="govuk-body">A new sentencing warrant for <b>T20250103</b> has been added from Common Platform.</p>
+                <p class="govuk-body">Some information has been added for you.</p>
+
+                <h2 class="govuk-heading-s">
+                   The following documents have been added:
+                </h2>
+
+                <table class="govuk-table"> 
+                <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                    <th scope="col" class="govuk-table__header">Document</th>
+                    <th scope="col" class="govuk-table__header">Hearing date</th>
+                    <th scope="col" class="govuk-table__header">Hearing type</th>
+                    </tr>
+                </thead>
+                <tbody class="govuk-table__body">
+                    <tr class="govuk-table__row">
+                    <td class="govuk-table__cell"><a class="govuk-link" href="#">Sentencingwarrant_example.pdf</a></td>
+                    <td class="govuk-table__cell">11/10/2025</td>
+                    <td class="govuk-table__cell">Sentencing warrant</td>
+                    </tr>
+                    <tr class="govuk-table__row"> 
+                    <td class="govuk-table__cell"><a class="govuk-link" href="#">PCR_example.pdf</a></td>
+                    <td class="govuk-table__cell">11/10/2025</td>
+                    <td class="govuk-table__cell">Prison court register</td>
+                    </tr> 
+                </tbody>
+                </table>
+
+                <p class="govuk-body">Before continuing, we need to know how information from this warrant should be added. </p>
+
+                <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                    <h1 class="govuk-fieldset__heading">
+                        How you want to add this sentencing warrant?
+                    </h1>
+                    </legend>
+                    <div class="govuk-radios" data-module="govuk-radios">
+                    <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="autoPopAction" name="autoPopAction" type="radio" value="addHearing">
+                        <label class="govuk-label govuk-radios__label" for="autoPopAction">
+                        Add a new hearing to an existing court case
+                        </label>
+                    </div>
+                    <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="autoPopAction-2" name="autoPopAction" type="radio" value="addCourtCase">
+                        <label class="govuk-label govuk-radios__label" for="autoPopAction-2">
+                        Add a new court case
+                        </label>
+                    </div>
+                    <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="autoPopAction-3" name="autoPopAction" type="radio" value="Cancel">
+                        <label class="govuk-label govuk-radios__label" for="autoPopAction-3">
+                        Nothing, this document has been actioned
+                        </label>
+                    </div> 
+                    </div>
+                </fieldset>
+                </div>
+ 
+            </div>
+           
+            <div class="govuk-button-group govuk-!-margin-top-6">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Continue
+                </button>
+                <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="/{{data.prototypeVersion}}/save-court-case" method="post">
+                Cancel
+            </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

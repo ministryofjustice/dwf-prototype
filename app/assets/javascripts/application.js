@@ -32,7 +32,8 @@ var TaskManager = (function() {
   var STORAGE_KEY = 'dwfTasks';
   var SEED_STORAGE_KEY = 'dwfTaskSeed';
   var defaultTasks = {
-    remandWarrantReviewed: false,
+    remandWarrant1Reviewed: false,
+    remandWarrant2Reviewed: false,
     calculationPerformed: false,
     courtCaseAdded: false
   };
@@ -103,15 +104,25 @@ var TaskManager = (function() {
   }
 
   // Count all pending tasks (remand, calculation only — documents are not tasks)
-  function countPendingTasks() {
-    var t = getTasks();
-    var count = 0;
-    // Remand
-    if (!t.remandWarrantReviewed) count++;
-    // Calculation
-    if (t.remandWarrantReviewed && !t.calculationPerformed) count++;
-    return count;
-  }
+function countPendingTasks() {
+  var version = window.location.pathname.split('/')[1];
+
+ if (
+  ['31_1', '31_3'].includes(version) &&
+  !getTasks().remandWarrantReviewed
+) {
+  return 2;
+}
+
+  var t = getTasks();
+  var count = 0;
+
+  if (!t.remandWarrantReviewed) count++;
+
+  if (t.remandWarrantReviewed && !t.calculationPerformed) count++;
+
+  return count;
+}
 
   // Update all Things to do headings
   function updateTaskHeadings() {
@@ -165,14 +176,28 @@ var TaskManager = (function() {
     var courtNav = Array.from(document.querySelectorAll('a.govuk-service-navigation__link')).find(function(link) {
       return link.getAttribute('href') && link.getAttribute('href').endsWith('/court-cases/');
     });
-    if (courtNav && !t.remandWarrantReviewed) {
-      var badge = document.createElement('span');
-      badge.className = 'moj-notification-badge';
-      badge.textContent = '1';
-      badge.setAttribute('aria-label', 'Outstanding court case task');
-      courtNav.appendChild(badge);
-    }
+    console.log(window.location.pathname);
+console.log(window.location.pathname.split('/')[1]);
+console.log('courtNav', courtNav);
+console.log('remand reviewed', t.remandWarrantReviewed);
+console.log('path', window.location.pathname);
+if (
+  courtNav &&
+  !t.remandWarrantReviewed &&
+  window.location.pathname.indexOf('/31_2/') === -1
+) {
+  var badge = document.createElement('span');
+  badge.className = 'moj-notification-badge';
 
+badge.textContent =
+  (
+    window.location.pathname.indexOf('/31_1/') !== -1 ||
+    window.location.pathname.indexOf('/31_3/') !== -1
+  ) ? '2' : '1';
+
+  badge.setAttribute('aria-label', 'Outstanding court case task');
+  courtNav.appendChild(badge);
+}
     // Release dates badge: only if calculation task is outstanding, match exact tab
     var releaseNav = Array.from(document.querySelectorAll('a.govuk-service-navigation__link')).find(function(link) {
       return link.getAttribute('href') && link.getAttribute('href').endsWith('/release-dates.html');
@@ -190,6 +215,11 @@ var TaskManager = (function() {
       return link.getAttribute('href') && link.getAttribute('href').endsWith('/documents.html');
     });
     var docCount = getDocumentCount();
+ 
+console.log('documentsNav', documentsNav);
+console.log('docCount', docCount);
+console.log('condition', !!documentsNav && docCount > 0);
+
     if (documentsNav && docCount > 0) {
       var badge = document.createElement('span');
       badge.className = 'notification-badge';
@@ -198,6 +228,8 @@ var TaskManager = (function() {
       documentsNav.appendChild(badge);
     }
   }
+
+  
 
   // Update all UI
   function updateUI() {
