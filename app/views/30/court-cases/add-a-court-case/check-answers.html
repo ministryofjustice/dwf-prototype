@@ -27,7 +27,7 @@
                         Court case reference
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ data['appearance']['court-case-ref'] | last }}
+                        {{ data['appearance']['court-case-ref'] }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link" href="court-case-reference-number?edit=true">
@@ -67,39 +67,29 @@
                         Overall case outcome
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {% if data['appearance']['overall-case-outcome'] == undefined or data['appearance']['overall-case-outcome'] == "" %}
-                        <a class="govuk-link" href="overall-case-outcome.html">Enter overall case outcome</a>
-                        {% else %}
+                      
                         {{ data['appearance']['overall-case-outcome'] }}
-                        {% endif %}
+                  
                     </dd>
-                    <dd class="govuk-summary-list__actions">
-                        {% if data['appearance']['overall-case-outcome'] != undefined and data['appearance']['overall-case-outcome'] != "" %}
+                    <dd class="govuk-summary-list__actions"> 
                         <a class="govuk-link" href="overall-case-outcome.html">
                             Edit<span class="govuk-visually-hidden"> overall case outcome</span>
-                        </a>
-                        {% endif %}
+                        </a> 
                     </dd>
                 </div>
-                <div class="govuk-summary-list__row">
+                <!-- <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Does this outcome apply to all offences on the warrant?
                     </dt>
-                    <dd class="govuk-summary-list__value">
-                        {% if data['appearance']['overall-case-outcome-apply-all'] == "required" %}
-                        <a class="govuk-link" href="outcome-apply-all.html">Answer this question</a>
-                        {% else %}
-                        {{ data['appearance']['overall-case-outcome-apply-all'] }}
-                        {% endif %}
+                    <dd class="govuk-summary-list__value"> 
+                        {{ data['appearance']['overall-case-outcome-apply-all'] }} 
                     </dd>
-                    <dd class="govuk-summary-list__actions">
-                        {% if data['appearance']['overall-case-outcome-apply-all'] != "required" %}
+                    <dd class="govuk-summary-list__actions"> 
                         <a class="govuk-link" href="outcome-apply-all.html">
                             Edit<span class="govuk-visually-hidden"> outcome apply all</span>
-                        </a>
-                        {% endif %}
+                        </a> 
                     </dd>
-                </div>
+                </div> -->
                 {% endif %}
             </dl>
             <button class="govuk-button" data-module="govuk-button">

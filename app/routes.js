@@ -1028,14 +1028,82 @@ if (prototypeVersion !== "27" && prototypeVersion !== "30" && prototypeVersion !
   };
 
   req.session.data.appearance = {
-    "warrant-type": "Remand",
-    "court-case-ref": ["CARE-123456"],
-    "warrant-date-day": "01",
-    "warrant-date-month": "04",
-    "warrant-date-year": "2026",
-    "court-name": "Crown Court",
-    "overall-case-outcome-apply-all": "required",
-    offences: []
+    "hearingId": "hearing-010",
+
+            "court-case-ref": "63GD1757930",
+            "warrant-type": "Remand",
+            "overall-case-outcome": "Remanded in custody",
+            "next-court-date-set": "Yes",
+            "next-hearing-type": "Court appearance",
+            "warrant-date-day": "18",
+            "warrant-date-month": "10",
+            "warrant-date-year": "2024",
+            "court-name": "Manchester MC",
+            "next-court-date-day": "24",
+            "next-court-date-month": "10",
+            "next-court-date-year": "2024",
+            "next-court-time": "11:00",
+            "next-court-name": "Manchester Crown Court",
+
+            "documents": [
+                {
+                    "documentId": "doc-019",
+                    "documentType": "Remand warrant",
+                    "hearingType": "Bail hearing",
+                    "source": "Court cases",
+                    "dateAdded": "2024-10-19T09:00",
+                    "isNew": false,
+                    "documentLink": "/documents/remand-warrant.pdf"
+                },
+                {
+                    "documentId": "doc-020",
+                    "documentType": "Prison court register",
+                    "hearingType": "Bail hearing",
+                    "source": "Court cases",
+                    "dateAdded": "2024-10-19T09:00",
+                    "isNew": false,
+                    "documentLink": "/documents/prison-court-register.pdf"
+                }
+            ],
+
+            "offences": [
+                {
+                    "offence-start-date-day": "05",
+                    "offence-start-date-month": "10",
+                    "offence-start-date-year": "2024",
+                    "offence-end-date-day": "",
+                    "offence-end-date-month": "",
+                    "offence-end-date-year": "",
+                    "offence-code": ["CL77001"],
+                    "offence-name": "CL77001 - Use violence to secure entry to premises",
+                    "outcome": "Remanded in custody",
+                    "status": ""
+                },
+                {
+                    "offence-start-date-day": "05",
+                    "offence-start-date-month": "10",
+                    "offence-start-date-year": "2024",
+                    "offence-end-date-day": "",
+                    "offence-end-date-month": "",
+                    "offence-end-date-year": "",
+                    "offence-code": ["TH68023"],
+                    "offence-name": "TH68023 - Robbery",
+                    "outcome": "Remanded in custody",
+                    "status": ""
+                },
+                {
+                    "offence-start-date-day": "05",
+                    "offence-start-date-month": "10",
+                    "offence-start-date-year": "2024",
+                    "offence-end-date-day": "",
+                    "offence-end-date-month": "",
+                    "offence-end-date-year": "",
+                    "offence-code": ["CJ88001"],
+                    "offence-name": "CJ88001 - Common assault",
+                    "outcome": "Remanded in custody",
+                    "status": ""
+                }
+            ]
   };
 
   // Add to court cases
@@ -1047,7 +1115,7 @@ if (prototypeVersion !== "27" && prototypeVersion !== "30" && prototypeVersion !
   req.session.data.appearanceDetailsStarted = 0;
   req.session.data.edit = "false";
 
-  // Redirect to task-list
+  // Redirect to check document screen
   return res.redirect(`/${prototypeVersion}/court-cases/add-a-court-case/task-list?entryMode=api-pre-populated`);
 });
 
