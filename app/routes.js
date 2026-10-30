@@ -1019,7 +1019,7 @@ if (prototypeVersion !== "27" && prototypeVersion !== "30" && prototypeVersion !
   req.session.data.route = "new-court-case";
 
   // Pre-populate with dummy API data
-  req.session.data.warrantType = "Remand";
+  req.session.data.warrantType = "Sentencing";
   
   // Initialize court case and appearance objects
   req.session.data.courtCase = {
@@ -1028,80 +1028,86 @@ if (prototypeVersion !== "27" && prototypeVersion !== "30" && prototypeVersion !
   };
 
   req.session.data.appearance = {
-    "hearingId": "hearing-010",
+     "hearingId": "hearing-003",
 
-            "court-case-ref": "63GD1757930",
-            "warrant-type": "Remand",
-            "overall-case-outcome": "Remanded in custody",
-            "next-court-date-set": "Yes",
-            "next-hearing-type": "Court appearance",
-            "warrant-date-day": "18",
-            "warrant-date-month": "10",
-            "warrant-date-year": "2024",
-            "court-name": "Manchester MC",
-            "next-court-date-day": "24",
-            "next-court-date-month": "10",
-            "next-court-date-year": "2024",
-            "next-court-time": "11:00",
-            "next-court-name": "Manchester Crown Court",
+            "hidden": true,
+
+            "court-case-ref": "T20250103",
+            "warrant-type": "Sentencing",
+            "overall-case-outcome": "Imprisonment",
+            "overall-conviction-date-day": "20",
+            "overall-conviction-date-month": "03",
+            "overall-conviction-date-year": "2025",
+            "warrant-date-day": "20",
+            "warrant-date-month": "03",
+            "warrant-date-year": "2025",
+            "court-name": "Sheffield Crown Court",
+            "overall-sentence-length-years": "6",
+            "overall-sentence-length-months": "0",
+            "overall-sentence-length-weeks": "0",
+            "overall-sentence-length-days": "0",
+            "total-sentence-length-years": "6",
+            "total-sentence-length-months": "0",
+            "total-sentence-length-weeks": "0",
+            "total-sentence-length-days": "0",
 
             "documents": [
                 {
-                    "documentId": "doc-019",
-                    "documentType": "Remand warrant",
-                    "hearingType": "Bail hearing",
+                    "documentId": "doc-005",
+                    "documentType": "Sentencing warrant",
+                    "hearingType": "Trial",
                     "source": "Court cases",
-                    "dateAdded": "2024-10-19T09:00",
-                    "isNew": false,
-                    "documentLink": "/documents/remand-warrant.pdf"
+                    "dateAdded": "2025-03-21T09:00",
+                    "isNew": true,
+                    "documentLink": "/documents/sentencing-warrant.pdf"
                 },
                 {
-                    "documentId": "doc-020",
+                    "documentId": "doc-006",
                     "documentType": "Prison court register",
-                    "hearingType": "Bail hearing",
+                    "hearingType": "Trial",
                     "source": "Court cases",
-                    "dateAdded": "2024-10-19T09:00",
-                    "isNew": false,
+                    "dateAdded": "2025-03-21T09:00",
+                    "isNew": true,
                     "documentLink": "/documents/prison-court-register.pdf"
                 }
             ],
 
-            "offences": [
+            "sentences": [
                 {
-                    "offence-start-date-day": "05",
-                    "offence-start-date-month": "10",
-                    "offence-start-date-year": "2024",
-                    "offence-end-date-day": "",
-                    "offence-end-date-month": "",
-                    "offence-end-date-year": "",
-                    "offence-code": ["CL77001"],
-                    "offence-name": "CL77001 - Use violence to secure entry to premises",
-                    "outcome": "Remanded in custody",
-                    "status": ""
+                    "count-number": "1",
+                    "conviction-date-day": "20",
+                    "conviction-date-month": "03",
+                    "conviction-date-year": "2025",
+                    "offence-start-date-day": "01",
+                    "offence-start-date-month": "01",
+                    "offence-start-date-year": "2025",
+                    "offence-code": [ "AB06001" ],
+                    "offence-name": "AB06001 - Obstruct person acting in execution of the regulations",
+                    "outcome": "Imprisonment",
+                    "sentence-type": "SDS (Standard Determinate Sentence)",
+                    "sentence-length-years": "1",
+                    "sentence-length-months": "0",
+                    "sentence-length-weeks": "0",
+                    "sentence-length-days": "0",
+                    "consecutive-concurrent": "Forthwith"
                 },
                 {
-                    "offence-start-date-day": "05",
-                    "offence-start-date-month": "10",
-                    "offence-start-date-year": "2024",
-                    "offence-end-date-day": "",
-                    "offence-end-date-month": "",
-                    "offence-end-date-year": "",
-                    "offence-code": ["TH68023"],
-                    "offence-name": "TH68023 - Robbery",
-                    "outcome": "Remanded in custody",
-                    "status": ""
-                },
-                {
-                    "offence-start-date-day": "05",
-                    "offence-start-date-month": "10",
-                    "offence-start-date-year": "2024",
-                    "offence-end-date-day": "",
-                    "offence-end-date-month": "",
-                    "offence-end-date-year": "",
-                    "offence-code": ["CJ88001"],
-                    "offence-name": "CJ88001 - Common assault",
-                    "outcome": "Remanded in custody",
-                    "status": ""
+                    "count-number": "2",
+                    "conviction-date-day": "20",
+                    "conviction-date-month": "03",
+                    "conviction-date-year": "2025",
+                    "offence-start-date-day": "01",
+                    "offence-start-date-month": "01",
+                    "offence-start-date-year": "2025",
+                    "offence-code": [ "AB13001" ],
+                    "offence-name": "AB13001 - Fail to comply with an animal by-product requirement",
+                    "outcome": "Imprisonment",
+                    "sentence-type": "SDS (Standard Determinate Sentence)",
+                    "sentence-length-years": "5",
+                    "sentence-length-months": "0",
+                    "sentence-length-weeks": "0",
+                    "sentence-length-days": "0",
+                    "consecutive-concurrent": "Concurrent"
                 }
             ]
   };

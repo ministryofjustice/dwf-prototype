@@ -168,7 +168,7 @@ module.exports = {
                     "documentId": "doc-005",
                     "documentType": "Sentencing warrant",
                     "hearingType": "Trial",
-                    "source": "Court cases",
+                    "source": "Common Platform",
                     "dateAdded": "2025-03-21T09:00",
                     "isNew": false,
                     "documentLink": "/documents/sentencing-warrant.pdf"
@@ -177,7 +177,7 @@ module.exports = {
                     "documentId": "doc-006",
                     "documentType": "Prison court register",
                     "hearingType": "Trial",
-                    "source": "Court cases",
+                    "source": "Common Platform",
                     "dateAdded": "2025-03-21T09:00",
                     "isNew": false,
                     "documentLink": "/documents/prison-court-register.pdf"

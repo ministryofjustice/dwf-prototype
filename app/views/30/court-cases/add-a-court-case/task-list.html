@@ -1,8 +1,15 @@
 {% extends "../../template.html" %}
 {% set showFullNav = false %}
 {% set noBackLink = true %}
-{% set isPreloadedRemandJourney = data.entryMode == "api-pre-populated" and data.appearance['warrant-type'] === 'Remand' %}
-{% set preloadedDocumentCount = 2 if isPreloadedRemandJourney else (data.tasks.newDocumentsCount or 0) %}
+{% set isPreloadedJourney =
+  data.entryMode == "api-pre-populated"
+%}
+
+{% if data.appearance['warrant-type'] == 'Sentencing' %}
+  {% set preloadedDocumentCount = 2 %}
+{% elif data.appearance['warrant-type'] == 'Remand' %}
+  {% set preloadedDocumentCount = 2 %}
+{% endif %}
 {% block content %}
 <div class="govuk-grid-row govuk-!-margin-top-8">
     <div class="govuk-grid-column-two-thirds">
@@ -11,6 +18,7 @@
                 <h1 class="govuk-heading-l">
                     Add court case
                 </h1>
+                
                 {% if data.appearance['warrant-type'] === 'Sentencing' %}
                     <h2 class="govuk-heading-m">Enter information from a sentencing warrant</h2>
 
@@ -72,7 +80,9 @@
                             </strong>
                             {% endif %}
                             {% else %}
-                            <span class="govuk-task-list__status--cannot-start-yet">Cannot start yet</span>
+                              <strong class="govuk-tag govuk-tag--blue">
+                                For review
+                            </strong>
                             {% endif %}
                         </div>
                     </li>
@@ -94,7 +104,7 @@
                             </a>
                             {% endif %}
                             {% else %}
-                                <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="../add-a-sentence/offence-date.html?addOffencesStarted=1">
+                                <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="../add-a-sentence/check-answers">
                                     Add offences
                                 </a>
                             {% endif %}
@@ -116,7 +126,9 @@
                             </strong>
                             {% endif %}
                             {% else %}
-                            <span class="govuk-task-list__status--cannot-start-yet">Cannot start yet</span>
+                              <strong class="govuk-tag govuk-tag--blue">
+                                For review
+                            </strong>
                             {% endif %}
                         </div>
                     </li>   
@@ -184,7 +196,7 @@
 
                     <li class="govuk-task-list__item govuk-task-list__item--with-link">
                         <div class="govuk-task-list__name-and-hint">
-                            {% if data.appearanceDetailsComplete == 1 or isPreloadedRemandJourney %}
+                            {% if data.appearanceDetailsComplete == 1 or isPreloadedJourney %}
                             <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="../add-court-documents/court-documents" aria-describedby="court-documents-status">
                                 View and add documents
                             </a>
@@ -193,7 +205,7 @@
                             {% endif %}
                         </div>
                         <div class="govuk-task-list__status" id="court-documents-status">
-                            {% if isPreloadedRemandJourney %}
+                            {% if isPreloadedJourney %}
                             {% if preloadedDocumentCount > 0 %}
                             <strong class="govuk-tag govuk-tag--grey">
                                 {{ preloadedDocumentCount }} new document{% if preloadedDocumentCount != 1 %}s{% endif %}
