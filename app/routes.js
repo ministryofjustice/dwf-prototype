@@ -1027,90 +1027,81 @@ if (prototypeVersion !== "27" && prototypeVersion !== "30" && prototypeVersion !
     appearances: []
   };
 
-  req.session.data.appearance = {
-     "hearingId": "hearing-003",
+  req.session.data.appearance =    {
+                    "hearingId": "hearing-003",
+                    "hidden": true,
 
-            "hidden": true,
+                    "court-case-ref": "T20250103",
+                    "warrant-type": "Remand",
+                    "overall-case-outcome": "Remanded in custody",
 
-            "court-case-ref": "T20250103",
-            "warrant-type": "Sentencing",
-            "overall-case-outcome": "Imprisonment",
-            "overall-conviction-date-day": "20",
-            "overall-conviction-date-month": "03",
-            "overall-conviction-date-year": "2025",
-            "warrant-date-day": "20",
-            "warrant-date-month": "03",
-            "warrant-date-year": "2025",
-            "court-name": "Sheffield Crown Court",
-            "overall-sentence-length-years": "6",
-            "overall-sentence-length-months": "0",
-            "overall-sentence-length-weeks": "0",
-            "overall-sentence-length-days": "0",
-            "total-sentence-length-years": "6",
-            "total-sentence-length-months": "0",
-            "total-sentence-length-weeks": "0",
-            "total-sentence-length-days": "0",
+                    "next-court-date-set": "Yes",
+                    "next-hearing-type": "Court appearance",
+ 
 
-            "documents": [
-                {
-                    "documentId": "doc-005",
-                    "documentType": "Sentencing warrant",
-                    "hearingType": "Trial",
-                    "source": "Court cases",
-                    "dateAdded": "2025-03-21T09:00",
-                    "isNew": true,
-                    "documentLink": "/documents/sentencing-warrant.pdf"
-                },
-                {
-                    "documentId": "doc-006",
-                    "documentType": "Prison court register",
-                    "hearingType": "Trial",
-                    "source": "Court cases",
-                    "dateAdded": "2025-03-21T09:00",
-                    "isNew": true,
-                    "documentLink": "/documents/prison-court-register.pdf"
-                }
-            ],
+                    "warrant-date-day": "29",
+                    "warrant-date-month": "10",
+                    "warrant-date-year": "2026",
 
-            "sentences": [
-                {
-                    "count-number": "1",
-                    "conviction-date-day": "20",
-                    "conviction-date-month": "03",
-                    "conviction-date-year": "2025",
-                    "offence-start-date-day": "01",
-                    "offence-start-date-month": "01",
-                    "offence-start-date-year": "2025",
-                    "offence-code": [ "AB06001" ],
-                    "offence-name": "AB06001 - Obstruct person acting in execution of the regulations",
-                    "outcome": "Imprisonment",
-                    "sentence-type": "SDS (Standard Determinate Sentence)",
-                    "sentence-length-years": "1",
-                    "sentence-length-months": "0",
-                    "sentence-length-weeks": "0",
-                    "sentence-length-days": "0",
-                    "consecutive-concurrent": "Forthwith"
-                },
-                {
-                    "count-number": "2",
-                    "conviction-date-day": "20",
-                    "conviction-date-month": "03",
-                    "conviction-date-year": "2025",
-                    "offence-start-date-day": "01",
-                    "offence-start-date-month": "01",
-                    "offence-start-date-year": "2025",
-                    "offence-code": [ "AB13001" ],
-                    "offence-name": "AB13001 - Fail to comply with an animal by-product requirement",
-                    "outcome": "Imprisonment",
-                    "sentence-type": "SDS (Standard Determinate Sentence)",
-                    "sentence-length-years": "5",
-                    "sentence-length-months": "0",
-                    "sentence-length-weeks": "0",
-                    "sentence-length-days": "0",
-                    "consecutive-concurrent": "Concurrent"
-                }
-            ]
-  };
+                    "court-name": "Sheffield Crown Court",
+
+                    "next-court-date-day": "12",
+                    "next-court-date-month": "11",
+                    "next-court-date-year": "2026",
+                    "next-court-time": "11:00",
+                    "next-court-name": "Sheffield Crown Court",
+ 
+
+                    "documents": [
+                        {
+                            "documentId": "doc-005",
+                            "documentType": "Remand warrant",
+                            "hearingType": "Bail hearing",
+                            "source": "Common Platform",
+                            "dateAdded": "2025-03-21T09:00",
+                            "isNew": false,
+                            "documentLink": "/documents/remand-warrant.pdf"
+                        },
+                        {
+                            "documentId": "doc-006",
+                            "documentType": "Prison court register",
+                            "hearingType": "Bail hearing",
+                            "source": "Common Platform",
+                            "dateAdded": "2025-03-21T09:00",
+                            "isNew": false,
+                            "documentLink": "/documents/prison-court-register.pdf"
+                        }
+                    ],
+
+                    "offences": [
+                        {
+                            "offence-start-date-day": "01",
+                            "offence-start-date-month": "01",
+                            "offence-start-date-year": "2026",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": ["AB06001"],
+                            "offence-name": "AB06001 - Obstruct person acting in execution of the regulations",
+                            "outcome": "Remanded in custody",
+                            "status": ""
+                        },
+                        {
+                            "offence-start-date-day": "01",
+                            "offence-start-date-month": "01",
+                            "offence-start-date-year": "2026",
+                            "offence-end-date-day": "",
+                            "offence-end-date-month": "",
+                            "offence-end-date-year": "",
+                            "offence-code": ["AB13001"],
+                            "offence-name": "AB13001 - Fail to comply with an animal by-product requirement",
+                            "outcome": "Remanded in custody",
+                            "status": ""
+                        }
+                    ],
+
+                    "sentences": []
+                };
 
   // Add to court cases
   req.session.data.courtCases.push(req.session.data.courtCase);
