@@ -350,6 +350,8 @@
 
       {% for document in documents %}
 
+      {% if not document.hidden %}
+
       {% set isCommonPlatform = document.source == "Common Platform" %}
       {% set hasBeenViewed = document.documentId in docsViewed %}
       {% set isNew = isCommonPlatform and document.isNew and not hasBeenViewed %}
@@ -486,6 +488,7 @@
 
   </li>
 
+  {% endif %}
   {% endfor %}
 
   </ul>

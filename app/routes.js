@@ -1060,7 +1060,7 @@ if (prototypeVersion !== "27" && prototypeVersion !== "30" && prototypeVersion !
                             "source": "Common Platform",
                             "dateAdded": "2025-03-21T09:00",
                             "isNew": false,
-                            "documentLink": "/documents/remand-warrant.pdf"
+                            "documentLink": "/public/documents/Remand-Warrant-Evans-Daryl-103.pdf"
                         },
                         {
                             "documentId": "doc-006",
@@ -1069,8 +1069,8 @@ if (prototypeVersion !== "27" && prototypeVersion !== "30" && prototypeVersion !
                             "source": "Common Platform",
                             "dateAdded": "2025-03-21T09:00",
                             "isNew": false,
-                            "documentLink": "/documents/prison-court-register.pdf"
-                        }
+                            "documentLink": "/public/documents/Evans_Remand_PCR_T20250103.pdf"
+                            }
                     ],
 
                     "offences": [
@@ -4263,74 +4263,52 @@ router.get('/:prototypeVersion/documents', (req, res) => {
   /*
    * Add Court Cases documents.
    */
-  courtCases.forEach(
-    (courtCase, courtCaseIndex) => {
-      const appearances =
-        courtCase.appearances || []
+  courtCases.forEach((courtCase, courtCaseIndex) => {
+  const appearances = courtCase.appearances || [];
 
-      appearances.forEach(appearance => {
-        const appearanceDocuments =
-          appearance.documents || []
+  appearances.forEach(appearance => {
+    const appearanceDocuments = appearance.documents || [];
 
-        appearanceDocuments.forEach(document => {
-          let documentLink =
-            '/public/documents/remand-warrant-joe-bloggs.pdf'
+    appearanceDocuments.forEach(document => {
 
-          if (
-            document.documentType ===
-            'Sentencing warrant'
-          ) {
-            documentLink =
-              '/public/documents/sentencing-warrant.pdf'
-          }
+      documents.push({
+        ...document,
 
-          if (
-            document.documentType ===
-            'Prison court register'
-          ) {
-            documentLink =
-              '/public/documents/court-register-city-of-london.pdf'
-          }
+        source: document.source || 'Court cases',
 
-          documents.push({
-            ...document,
+        documentLink: document.documentLink,
 
-            source:
-              document.source || 'Court cases',
+        caseReference:
+          appearance['court-case-ref'] || 'Not entered',
 
-            documentLink,
+        courtName:
+          appearance['court-name'],
 
-            caseReference:
-              appearance['court-case-ref'] ||
-              'Not entered',
+        hearingType:
+          document.hearingType,
 
-            courtName:
-              appearance['court-name'],
+        hearingId:
+          appearance.hearingId,
 
-            hearingDate:
-              `${appearance['warrant-date-day']}/` +
-              `${appearance['warrant-date-month']}/` +
-              `${appearance['warrant-date-year']}`,
+        hearingDate:
+          `${appearance['warrant-date-day']}/` +
+          `${appearance['warrant-date-month']}/` +
+          `${appearance['warrant-date-year']}`,
 
-            hearingId:
-              appearance.hearingId,
+        courtCaseIndex,
 
-            courtCaseIndex,
+        dateAddedDisplay:
+          formatDocumentDateTime(document.dateAdded),
 
-            dateAddedDisplay:
-              formatDocumentDateTime(
-                document.dateAdded
-              ),
+        /*
+         * Court Cases documents cannot be new.
+         */
+        isCurrentlyNew: false
+      });
 
-            /*
-             * Court Cases documents cannot be new.
-             */
-            isCurrentlyNew: false
-          })
-        })
-      })
-    }
-  )
+    });
+  });
+});
 
   /*
    * Add standalone Common Platform documents.
@@ -4743,18 +4721,18 @@ router.get('/:prototypeVersion/documents', (req, res) => {
 
 router.get("/:prototypeVersion/mark-document-viewed", function (req, res) {
   const prototypeVersion = req.params.prototypeVersion;
-  const docId = req.query.docId || "0";
-  const documentPaths = {
-    "cp-001": "/public/documents/remand-warrant-joe-bloggs.pdf",
-    "cp-002": "/public/documents/court-register-city-of-london.pdf", 
-  };
-  const fallbackPath = `/${prototypeVersion}/documents.html`;
-  const redirectTarget = documentPaths[docId] || fallbackPath;
-  
-// Only for v27 and v30 and v31_1
-if (prototypeVersion !== "27" && prototypeVersion !== "30" && prototypeVersion !== "31_1" && prototypeVersion !== "31_2" && prototypeVersion !== "31_3") {
-  return res.redirect(fallbackPath);
-}
+  const docId = req.query.docId || "";
+
+  // Only for v27, v30, v31_1, v31_2 and v31_3
+  if (
+    prototypeVersion !== "27" &&
+    prototypeVersion !== "30" &&
+    prototypeVersion !== "31_1" &&
+    prototypeVersion !== "31_2" &&
+    prototypeVersion !== "31_3"
+  ) {
+    return res.redirect(`/${prototypeVersion}/documents.html`);
+  }
 
   if (!req.session.data.tasks) {
     req.session.data.tasks = {
@@ -4768,8 +4746,9 @@ if (prototypeVersion !== "27" && prototypeVersion !== "30" && prototypeVersion !
     req.session.data.tasks.docsViewed = [];
   }
 
-  const alreadyViewed = req.session.data.tasks.docsViewed.includes(docId);
-  
+  const alreadyViewed =
+    req.session.data.tasks.docsViewed.includes(docId);
+
   if (!alreadyViewed) {
     req.session.data.tasks.docsViewed.push(docId);
 
@@ -4777,9 +4756,36 @@ if (prototypeVersion !== "27" && prototypeVersion !== "30" && prototypeVersion !
       req.session.data.tasks.newDocumentsCount--;
     }
   }
-  
-  return res.redirect(redirectTarget);
+
+  // First look in appearance documents
+  let document = null;
+
+  if (
+    req.session.data.appearance &&
+    req.session.data.appearance.documents
+  ) {
+    document = req.session.data.appearance.documents.find(
+      doc => doc.documentId === docId
+    );
+  }
+
+  // Then look in Common Platform documents
+  if (
+    !document &&
+    req.session.data.commonPlatformDocuments
+  ) {
+    document = req.session.data.commonPlatformDocuments.find(
+      doc => doc.documentId === docId
+    );
+  }
+
+  if (!document || !document.documentLink) {
+    return res.redirect(`/${prototypeVersion}/documents.html`);
+  }
+
+  return res.redirect(document.documentLink);
 });
+
 
 router.get('/mark-as-new/:id', (req, res) => {
   const docId = req.params.id;

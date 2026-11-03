@@ -13,6 +13,11 @@
             <h1 class="govuk-fieldset__heading">
               View and add documents
             </h1>
+
+            <p>Case ref: {{ data.appearance['court-case-ref'] }}</p>
+
+ 
+
           </legend>
 
           <div id="file-upload-1-hint" class="govuk-hint">
@@ -20,37 +25,25 @@
           </div>
 
           <dl class="govuk-summary-list govuk-summary-list--long-key govuk-!-margin-bottom-0">
-{% for document in data.appearance.documents %}
-<div class="govuk-summary-list__row">
-  <dt class="govuk-summary-list__key">
-    <a class="govuk-link"
-       href="/{{ data.prototypeVersion }}/mark-document-viewed?docId={{ loop.index0 }}"
-       target="_blank">
+            {% for document in data.appearance.documents %}
+            <div class="govuk-summary-list__row">
+              <dd class="govuk-summary-list__value">
+                <a href="{{ document.documentLink }}"
+                  class="govuk-link--no-visited-state"
+                  target="_blank">
 
-      {% if document.documentType == "Sentencing warrant" %}
-        sentencing-warrant.pdf
-      {% elif document.documentType == "Remand warrant" %}
-        remand-warrant.pdf
-      {% else %}
-        {{ document.documentType }}.pdf
-      {% endif %}
+                  {{ document.documentType }}
 
-    </a>
+                </a>
+              </dd>
 
-    <div class="govuk-body govuk-!-margin-0">
-      {{ document.documentType }}
-    </div>
-  </dt>
-
-  <dd class="govuk-summary-list__value">
-    <strong class="govuk-tag govuk-tag--grey">
-      {{ document.source }}
-    </strong>
-  </dd>
-
-  <dd class="govuk-summary-list__actions"></dd>
-</div>
-{% endfor %}
+              <dd class="govuk-summary-list__value">
+                <strong class="govuk-tag govuk-tag--grey">
+                  {{ document.source }}
+                </strong>
+              </dd>
+            </div>
+            {% endfor %}
           </dl>
 
           <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">

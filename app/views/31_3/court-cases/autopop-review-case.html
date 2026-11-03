@@ -221,40 +221,53 @@ If the consecutive status of a sentence is changed, check that any linked cases 
                 </div>
                 <div class="govuk-summary-card__content">
                     <dl class="govuk-summary-list">
-                        {% if data.appearance['documents'] %}
-                        <div class="govuk-summary-list__row">
-                            <dd class="govuk-summary-list__value">
-                                <a href="{{ asset_path }}documents/order-of-imprisonment-court-case-2.pdf"
-                            class="govuk-link--no-visited-state" target="_blank"><svg
-                                class="moj-timeline__document-icon" xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 16 20" width="20" height="16">
-                                <path
-                                    d="M9 7V1.5L14.5 7H9zM2 0C.9 0 0 .9 0 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6l-6-6H2z">
-                                </path>
-                            </svg>{% if data.appearance['warrant-type'] == "Remand" %}Remand warrant{% else %}Sentencing
-                            warrant{% endif %}</a>
-                            </dd>
-                        </div>
+                       {% if data.appearance.documents and data.appearance.documents.length %}
 
-                        <div class="govuk-summary-list__row">
-                            <dd class="govuk-summary-list__value">
-                                <a href="{{ asset_path }}documents/order-of-imprisonment-court-case-2.pdf"
-                            class="govuk-link--no-visited-state" target="_blank"><svg
-                                class="moj-timeline__document-icon" xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 16 20" width="20" height="16">
-                                <path
-                                    d="M9 7V1.5L14.5 7H9zM2 0C.9 0 0 .9 0 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6l-6-6H2z">
-                                </path>
-                            </svg>Prison court register</a>
-                            </dd>
-                        </div>
-                        {% else %}
-                         <div class="govuk-summary-list__row">
-                            <dd class="govuk-summary-list__value">
-                                There are no documents for this appearance.
-                            </dd>
+                    {% for document in data.appearance.documents %}
+
+                    <div class="govuk-summary-list__row">
+                        <dd class="govuk-summary-list__value">
+
+                        <a
+                            href="{{ document.documentLink }}"
+                            class="govuk-link--no-visited-state"
+                            target="_blank">
+
+                            <svg
+                            class="moj-timeline__document-icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 16 20"
+                            width="20"
+                            height="16">
+
+                            <path d="M9 7V1.5L14.5 7H9zM2 0C.9 0 0 .9 0 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6l-6-6H2z">
+                            </path>
+                            </svg>
+
+                            {{ document.documentType }}
+
+                        </a>
+
+                        {% if document.source %}
+                        <div class="govuk-hint govuk-!-margin-top-1">
+                            {{ document.source }}
                         </div>
                         {% endif %}
+
+                        </dd>
+                    </div>
+
+                    {% endfor %}
+
+                    {% else %}
+
+  <div class="govuk-summary-list__row">
+    <dd class="govuk-summary-list__value">
+      There are no documents for this appearance.
+    </dd>
+  </div>
+
+{% endif %}
                     </dl>
                 </div>
             </div>

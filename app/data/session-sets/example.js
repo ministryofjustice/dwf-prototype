@@ -174,7 +174,7 @@ module.exports = {
                             "source": "Common Platform",
                             "dateAdded": "2025-03-21T09:00",
                             "isNew": false,
-                            "documentLink": "/documents/remand-warrant.pdf"
+                            "documentLink": "/public/documents/Remand-Warrant-Evans-Daryl-103.pdf"
                         },
                         {
                             "documentId": "doc-006",
@@ -183,7 +183,7 @@ module.exports = {
                             "source": "Common Platform",
                             "dateAdded": "2025-03-21T09:00",
                             "isNew": false,
-                            "documentLink": "/documents/prison-court-register.pdf"
+                            "documentLink": "/public/documents/Evans_Remand_PCR_T20250103.pdf"
                         }
                     ],
 
@@ -418,7 +418,7 @@ module.exports = {
                             "source": "Court cases",
                             "dateAdded": "2024-10-12T09:00",
                             "isNew": false,
-                            "documentLink": "/documents/remand-warrant.pdf"
+                            "documentLink": "/public/documents/Remand-Warrant-Evans-Daryl-930.pdf"
                         },
                         {
                             "documentId": "doc-012",
@@ -427,7 +427,7 @@ module.exports = {
                             "source": "Court cases",
                             "dateAdded": "2024-10-12T09:00",
                             "isNew": false,
-                            "documentLink": "/documents/prison-court-register.pdf"
+                            "documentLink": "/public/documents/Evans_Remand_PCR_930.pdf"
                         }
                     ],
 
@@ -496,7 +496,7 @@ module.exports = {
                             "source": "Court cases",
                             "dateAdded": "2024-10-15T09:00",
                             "isNew": false,
-                            "documentLink": "/documents/remand-warrant.pdf"
+                            "documentLink": "/public/documents/Remand-Warrant-Evans-Daryl-930.pdf"
                         },
                         {
                             "documentId": "doc-014",
@@ -505,7 +505,7 @@ module.exports = {
                             "source": "Court cases",
                             "dateAdded": "2024-10-15T09:00",
                             "isNew": false,
-                            "documentLink": "/documents/prison-court-register.pdf"
+                            "documentLink": "/public/documents/Evans_Remand_PCR_930.pdf"
                         }
                     ],
 
@@ -574,7 +574,7 @@ module.exports = {
                             "source": "Court cases",
                             "dateAdded": "2024-10-16T09:00",
                             "isNew": false,
-                            "documentLink": "/documents/remand-warrant.pdf"
+                            "documentLink": "/public/documents/Remand-Warrant-Evans-Daryl-930.pdf"
                         },
                         {
                             "documentId": "doc-016",
@@ -583,7 +583,7 @@ module.exports = {
                             "source": "Court cases",
                             "dateAdded": "2024-10-16T09:00",
                             "isNew": false,
-                            "documentLink": "/documents/prison-court-register.pdf"
+                            "documentLink": "/public/documents/Evans_Remand_PCR_930.pdf"
                         }
                     ],
 
@@ -652,7 +652,7 @@ module.exports = {
                             "source": "Court cases",
                             "dateAdded": "2024-10-18T09:00",
                             "isNew": false,
-                            "documentLink": "/documents/remand-warrant.pdf"
+                            "documentLink": "/public/documents/Remand-Warrant-Evans-Daryl-930.pdf"
                         },
                         {
                             "documentId": "doc-018",
@@ -661,7 +661,7 @@ module.exports = {
                             "source": "Court cases",
                             "dateAdded": "2024-10-18T09:00",
                             "isNew": false,
-                            "documentLink": "/documents/prison-court-register.pdf"
+                            "documentLink": "/public/documents/Evans_Remand_PCR_930.pdf"
                         }
                     ],
 
@@ -730,7 +730,7 @@ module.exports = {
                             "source": "Court cases",
                             "dateAdded": "2024-10-19T09:00",
                             "isNew": false,
-                            "documentLink": "/documents/remand-warrant.pdf"
+                            "documentLink": "/public/documents/Remand-Warrant-Evans-Daryl-930.pdf"
                         },
                         {
                             "documentId": "doc-020",
@@ -739,7 +739,7 @@ module.exports = {
                             "source": "Court cases",
                             "dateAdded": "2024-10-19T09:00",
                             "isNew": false,
-                            "documentLink": "/documents/prison-court-register.pdf"
+                            "documentLink": "/public/documents/Evans_Remand_PCR_930.pdf"
                         }
                     ],
 
@@ -1595,11 +1595,11 @@ module.exports = {
             courtName: "Manchester Crown Court",
 
             hearingDate: "24/10/2026",
-            dateAdded: "2026-09-08T09:15",
+            dateAdded: "2026-10-24T09:15",
 
             isNew: true,
 
-            documentLink: "/public/documents/#"
+            documentLink: "/public/documents/Evans-Warrant-for-Custodial-Sentence-930.pdf"
         },
 
         {
@@ -1612,11 +1612,11 @@ module.exports = {
             courtName: "Manchester Crown Court",
 
             hearingDate: "24/10/2026",
-            dateAdded: "2026-09-08T09:15",
+            dateAdded: "2026-10-24T09:15",
 
             isNew: true,
 
-            documentLink: "/public/documents/#"
+            documentLink: "/public/documents/Evans_Sentencing_PCR_930.pdf"
         },
         {
             documentId: "cp-003",
@@ -1650,6 +1650,40 @@ module.exports = {
             isNew: true,
 
             documentLink: "#"
+        },
+        {
+        documentId: "cp-005",
+        documentType: "Remand warrant",
+        hearingType: "Remand",
+        source: "Common Platform",
+
+        courtCaseRef: "T20250103",
+        courtName: "Sheffield Crown Court",
+
+        hearingDate: "29/10/2026",
+        dateAdded: "2026-10-29T09:15",
+
+        isNew: true,
+        hidden: true,
+
+        documentLink: "/public/documents/Remand-Warrant-Evans-Daryl-103.pdf"
+        },
+        {
+        documentId: "cp-006",
+        documentType: "Prison court register",
+        hearingType: "Remand",
+        source: "Common Platform",
+
+        courtCaseRef: "T20250103",
+        courtName: "Sheffield Crown Court",
+
+        hearingDate: "29/10/2026",
+        dateAdded: "2026-10-29T09:15",
+
+        isNew: true,
+        hidden: true,
+
+        documentLink: "/public/documents/Evans_Remand_PCR_T20250103.pdf"
         }
     ]
 };
