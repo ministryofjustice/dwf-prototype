@@ -396,7 +396,7 @@ module.exports = {
                 {
                     "hearingId": "hearing-006",
 
-                    "court-case-ref": "63GD1757930",
+                    "court-case-ref": "63GD1757930-1",
                     "warrant-type": "Remand",
                     "overall-case-outcome": "Remanded in custody",
                     "next-court-date-set": "Yes",
@@ -474,7 +474,7 @@ module.exports = {
                 {
                     "hearingId": "hearing-007",
 
-                    "court-case-ref": "63GD1757930",
+                    "court-case-ref": "63GD1757930-1",
                     "warrant-type": "Remand",
                     "overall-case-outcome": "Remanded in custody",
                     "next-court-date-set": "Yes",
@@ -552,7 +552,7 @@ module.exports = {
                 {
                     "hearingId": "hearing-008",
 
-                    "court-case-ref": "63GD1757930",
+                    "court-case-ref": "63GD1757930-1",
                     "warrant-type": "Remand",
                     "overall-case-outcome": "Remanded in custody",
                     "next-court-date-set": "Yes",
@@ -629,8 +629,7 @@ module.exports = {
 
                 {
                     "hearingId": "hearing-009",
-
-                    "court-case-ref": "63GD1757930",
+                    "court-case-ref": "63GD1757930-1",
                     "warrant-type": "Remand",
                     "overall-case-outcome": "Remanded in custody",
                     "next-court-date-set": "Yes",
@@ -708,7 +707,7 @@ module.exports = {
                 {
                     "hearingId": "hearing-010",
 
-                    "court-case-ref": "63GD1757930",
+                    "court-case-ref": "63GD1757930-1",
                     "warrant-type": "Remand",
                     "overall-case-outcome": "Remanded in custody",
                     "next-court-date-set": "Yes",
