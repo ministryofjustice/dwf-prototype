@@ -1,14 +1,15 @@
 {% set taskCount = (0 if data.tasks.remandWarrantViewed else 1) %}
-<!-- <h3 class="govuk-heading-m" data-task-heading>Things to do ({{ taskCount }})</h3> -->
+<h3 class="govuk-heading-m" data-task-heading>Things to do ({{ taskCount }})</h3>
 
 {% if not data.tasks.remandWarrantViewed %}
+
 
    <article class="moj-ticket-panel" aria-label="Sub navigation 1">
 
                 <section class="moj-ticket-panel__content moj-ticket-panel__content--grey" aria-label="Section 1">
                 <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Enter information from a new remand warrant</h2>
                 <p class="govuk-body">A new remand warrant for <b>T20250103</b> has been added from Common Platform. Review and add information from the remand warrant. </p>
-                <a class="govuk-button govuk-!-margin-bottom-1" data-module="govuk-button" href="calculate-release-dates/calculation-reason">
+                <a class="govuk-button govuk-!-margin-bottom-1" data-module="govuk-button" href="/{{data.prototypeVersion}}/court-cases/review-documents">
                     Review remand warrant
                 </a>
                 </section>
