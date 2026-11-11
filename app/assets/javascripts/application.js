@@ -111,7 +111,7 @@ function countPendingTasks() {
   ['31_1', '31_3'].includes(version) &&
   !getTasks().remandWarrantReviewed
 ) {
-  return 2;
+  return 1;
 }
 
   var t = getTasks();
@@ -191,8 +191,7 @@ if (
 
 badge.textContent =
   (
-    window.location.pathname.indexOf('/31_1/') !== -1 ||
-    window.location.pathname.indexOf('/31_3/') !== -1
+    window.location.pathname.indexOf('/31_1/') !== -1  
   ) ? '2' : '1';
 
   badge.setAttribute('aria-label', 'Outstanding court case task');

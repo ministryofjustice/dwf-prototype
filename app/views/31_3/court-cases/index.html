@@ -9,24 +9,36 @@
   </div>
 </div>
 
+
+{% set visibleCourtCases = 0 %}
+
+{% for courtCase in data.courtCases %}
+  {% set lastAppearance = courtCase.appearances | last %}
+  {% if not lastAppearance.hidden %}
+    {% set visibleCourtCases = visibleCourtCases + 1 %}
+  {% endif %}
+{% endfor %}
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    {% if data.courtCases | length %}
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-full govuk-!-margin-bottom-0">
           <div class="govuk-!-margin-bottom-4" data-task-column>
           {% include "../includes/things-to-do.html" %}
           </div>
+
+    {% if visibleCourtCases > 0 %}
           <p class="govuk-body">Showing <strong>1</strong> to <strong>5</strong> of <strong>{{ data.courtCases.length }}</strong> court cases</p>
+        
+    {% endif %}
         </div>
       </div>
-    {% endif %}
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-full">
             
 
-        {% if data.courtCases | length %}
+    {% if visibleCourtCases > 0 %}
           {% for courtCase in data.courtCases %}
             {% if loop.index0 < 5 %}
               {% set lastAppearance = courtCase.appearances | last %}
@@ -296,7 +308,8 @@
         {% endif %}
       </div>
     </div>
-    {% if data.courtCases.length > 0 %}
+  
+    {% if visibleCourtCases > 0 %}
     <nav class="govuk-pagination govuk-!-margin-top-6" role="navigation" aria-label="Pagination">
         <ul class="govuk-pagination__list">
             <li class="govuk-pagination__item govuk-pagination__item--current">

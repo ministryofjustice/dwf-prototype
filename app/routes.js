@@ -1058,7 +1058,7 @@ if (prototypeVersion !== "27" && prototypeVersion !== "30" && prototypeVersion !
                             "documentType": "Remand warrant",
                             "hearingType": "Bail hearing",
                             "source": "Common Platform",
-                            "dateAdded": "2025-03-21T09:00",
+                            "dateAdded": "2025-10-29T09:00",
                             "isNew": false,
                             "documentLink": "/public/documents/Remand-Warrant-Evans-Daryl-103.pdf"
                         },
@@ -1067,7 +1067,7 @@ if (prototypeVersion !== "27" && prototypeVersion !== "30" && prototypeVersion !
                             "documentType": "Prison court register",
                             "hearingType": "Bail hearing",
                             "source": "Common Platform",
-                            "dateAdded": "2025-03-21T09:00",
+                            "dateAdded": "2025-10-29T09:00",
                             "isNew": false,
                             "documentLink": "/public/documents/Evans_Remand_PCR_T20250103.pdf"
                             }
@@ -4121,7 +4121,7 @@ if (["27", "30", "31_1", "31_2", "31_3"].includes(prototypeVersion)) {
   req.session.data.taskStateSeed = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
   req.session.data.tasks = {
     remandWarrantViewed: false,
-    newDocumentsCount: 4, // Currently 2 documents have "New" tag
+    newDocumentsCount: 2, // Currently 2 documents have "New" tag
     docsViewed: []
   };
 }
@@ -4737,7 +4737,7 @@ router.get("/:prototypeVersion/mark-document-viewed", function (req, res) {
   if (!req.session.data.tasks) {
     req.session.data.tasks = {
       remandWarrantViewed: false,
-      newDocumentsCount: 4,
+      newDocumentsCount: 2,
       docsViewed: []
     };
   }
@@ -4793,7 +4793,7 @@ router.get('/mark-as-new/:id', (req, res) => {
   if (!req.session.data.tasks) {
     req.session.data.tasks = {
       remandWarrantViewed: false,
-      newDocumentsCount: 4,
+      newDocumentsCount: 2,
       docsViewed: []
     };
   }
