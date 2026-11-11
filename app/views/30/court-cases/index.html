@@ -22,10 +22,13 @@
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-full">
+     
         {% if data.courtCases | length %}
           {% for courtCase in data.courtCases %}
             {% if loop.index0 < 5 %}
               {% set lastAppearance = courtCase.appearances | last %}
+
+              {% if not lastAppearance.hidden %}
               {% set courtCaseIndex = loop.index0 %}
 
               <div class="govuk-summary-card">
@@ -277,6 +280,7 @@
                   {% endif %}
                 </div>
               </div>
+            {% endif %}
             {% endif %}
           {% endfor %}
         {% else %}
