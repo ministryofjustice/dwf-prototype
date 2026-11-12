@@ -976,11 +976,18 @@ router.get("/:prototypeVersion/update-appearance", function (req, res) {
 router.get('/:prototypeVersion/autopop-hearing-review', function(req, res) {
   const prototypeVersion = req.params.prototypeVersion
 
-  req.session.data.courtCaseIndex = 1
-  req.session.data.appearanceIndex = 0
+const courtCaseIndex =
+  req.session.data.courtCases.length - 1;
 
-  req.session.data.appearance =
-    req.session.data.courtCases[1].appearances[0]
+req.session.data.courtCaseIndex =
+  courtCaseIndex;
+
+req.session.data.appearanceIndex = 0;
+
+req.session.data.appearance =
+  req.session.data.courtCases[courtCaseIndex]
+    .appearances[0];
+
 
   return res.redirect(
     `/${prototypeVersion}/court-cases/autopop-review-case`
@@ -1103,9 +1110,17 @@ if (prototypeVersion !== "27" && prototypeVersion !== "30" && prototypeVersion !
                     "sentences": []
                 };
 
-  // Add to court cases
-  req.session.data.courtCases.push(req.session.data.courtCase);
-  req.session.data.courtCaseIndex = req.session.data.courtCases.length - 1;
+req.session.data.courtCase.appearances.push(
+  req.session.data.appearance
+);
+
+// Add to court cases
+req.session.data.courtCases.push(
+  req.session.data.courtCase
+);
+
+req.session.data.courtCaseIndex =
+  req.session.data.courtCases.length - 1;
 
   // Do NOT mark appearance details as complete - show "Partially complete" instead
   req.session.data.appearanceDetailsComplete = 0;
